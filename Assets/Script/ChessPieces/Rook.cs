@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Rook : ChessPiece
 {
+
     public override List<Vector2Int> GetMovableCoordinates()
     {
         List<Vector2Int> movableCoordinates = new List<Vector2Int>();

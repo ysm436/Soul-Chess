@@ -37,12 +37,13 @@ public class ChessBoard : MonoBehaviour
     {
 
         //디버깅용
-        Debug.Log(timer);
-        if (timer > 1 && debugindex < DebugCoordinates.Count)
+        if (timer > 1)
         {
             DebugPiece.Move(DebugCoordinates[debugindex]);
             SetPositionByCoordinate(DebugPiece);
             debugindex++;
+            if (debugindex >= DebugCoordinates.Count)
+                debugindex = 0;
             timer = 0;
         }
         timer += Time.deltaTime;
