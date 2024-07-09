@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///     체스 기물의 기본 클래스
+/// </summary>
 abstract public class ChessPiece : MonoBehaviour
 {
     protected ChessData _chessData;
@@ -18,7 +21,10 @@ abstract public class ChessPiece : MonoBehaviour
         Rook,
         Pawn
     }
-    public enum PieceColor { White, Black }
+    public enum PieceColor
+    {
+        White, Black
+    }
 
 
     public PieceType pieceType;
@@ -35,6 +41,7 @@ abstract public class ChessPiece : MonoBehaviour
             Debug.Log(v);
         }
     }
+
     /// <summary>
     ///     해당 기물이 이동할 수 있는 좌표를 반환하는 함수 
     /// </summary>

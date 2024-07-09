@@ -45,12 +45,14 @@ public class Quene : ChessPiece
                 }
                 else
                 {
+                    //해당 칸에 적 기물이 있을 경우 이동 가능
                     if (blockingPiece.pieceColor != this.pieceColor)
                     {
                         movableCoordinates.Add(targetCoordinate);
                     }
                     break;
                 }
+                //targetCoordinate를 direction 방향으로 한칸씩 이동
                 targetCoordinate += direction;
             }
         }
