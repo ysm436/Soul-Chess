@@ -10,10 +10,9 @@ public class Knight : ChessPiece
 
         ChessPiece blockingPiece;
         Vector2Int targetCoordinate;
-        Vector2Int baseCoordinate = coordinate; //기존 위치 저장
 
         //나이트의 현재 위치로부터 이동 가능한 좌표
-        Vector2Int[] targetPositions = {
+        Vector2Int[] possibleCoordinates = {
             Vector2Int.up*2 + Vector2Int.left,
             Vector2Int.up*2 + Vector2Int.right,
             Vector2Int.right*2 + Vector2Int.up,
@@ -25,10 +24,10 @@ public class Knight : ChessPiece
             };
 
         //각 좌표가 이동할 수 있는 칸인지 검사
-        foreach (Vector2Int position in targetPositions)
+        foreach (Vector2Int possibleCoordinate in possibleCoordinates)
         {
             //현재 좌표에서 이동 가능한 좌표로 targetCoordinate 값 설정
-            targetCoordinate = baseCoordinate + position;
+            targetCoordinate = coordinate + possibleCoordinate;
 
             // targetCoordinate가 체스판 안인지 체크
             if (_chessData.IsValidCoordinate(targetCoordinate))
