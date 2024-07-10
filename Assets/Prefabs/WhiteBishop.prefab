@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f875b2fe172164ea37abc04540e5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coordinate: {x: 4, y: 4}
+  coordinate: {x: 0, y: 0}
   pieceType: 2
   pieceColor: 0
   attackDamage: 5
