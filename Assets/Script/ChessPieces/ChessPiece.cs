@@ -34,14 +34,6 @@ abstract public class ChessPiece : MonoBehaviour
     public int max_HP = 5;
     public int current_HP = 5;
 
-    private void Start()
-    {
-        foreach (var v in GetMovableCoordinates())
-        {
-            Debug.Log(v);
-        }
-    }
-
     /// <summary>
     ///     해당 기물이 이동할 수 있는 좌표를 반환하는 함수 
     /// </summary>
