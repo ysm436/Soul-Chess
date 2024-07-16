@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
+  isAlive: 0
   pieceType: 4
   pieceColor: 0
-  attackDamage: 5
-  max_HP: 5
-  current_HP: 5
+  attackDamage: 10
+  max_HP: 10

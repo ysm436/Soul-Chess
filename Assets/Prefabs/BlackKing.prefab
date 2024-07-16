@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5954609769523367539}
   - component: {fileID: 3572765736270606872}
-  - component: {fileID: 200357043479895921}
+  - component: {fileID: 7421589679604356431}
   m_Layer: 0
-  m_Name: WhiteKnight
+  m_Name: BlackKing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 1913470231
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 63973db352cfc1e42859bc12762f6269, type: 3}
+  m_Sprite: {fileID: 21300000, guid: feaa50326ad7eb245af7251a027d1ce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &200357043479895921
+--- !u!114 &7421589679604356431
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,12 +94,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 791631163023233955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abc10b2eb0e11c846b36d11d9d519eb0, type: 3}
+  m_Script: {fileID: 11500000, guid: f1b021b1aab983b49949e714dfc5e507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
-  isAlive: 0
-  pieceType: 3
-  pieceColor: 0
+  pieceType: 0
+  pieceColor: 1
   attackDamage: 10
   max_HP: 10
+  current_HP: 5
