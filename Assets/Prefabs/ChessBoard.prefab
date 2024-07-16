@@ -5203,8 +5203,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chessData:
     pieceObjects: []
+  bottomPlayerColor: 0
   basePosition: {x: -7.5, y: -3.5}
-  DebugPiece: {fileID: 0}
+  boardSquareSample: {fileID: 5036848621774920484, guid: 83ef73db5a9c2834fbbed1a254fda44d, type: 3}
+  blackBoardSquareSprites: []
+  whiteBoardSquareSprites: []
 --- !u!1 &8648712926450880847
 GameObject:
   m_ObjectHideFlags: 0

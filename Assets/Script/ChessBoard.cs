@@ -5,16 +5,16 @@ using UnityEngine;
 public class ChessBoard : MonoBehaviour
 {
     [SerializeField]
-    ChessData chessData;
+    public ChessData chessData;
+    [SerializeField]
+    ChessPiece.PieceColor bottomPlayerColor;
 
     public Vector2 basePosition;
 
+    public GameObject boardSquareSample;
+    public List<Sprite> blackBoardSquareSprites = new List<Sprite>();
+    public List<Sprite> whiteBoardSquareSprites = new List<Sprite>();
 
-    //디버깅용
-    public ChessPiece DebugPiece;
-    private List<Vector2Int> DebugCoordinates;
-    int debugindex = 0;
-    float timer = 0;
 
     private void Awake()
     {
@@ -23,36 +23,39 @@ public class ChessBoard : MonoBehaviour
             chessData.TryAddPiece(piece);
 
             piece.chessData = chessData;
-            SetPositionByCoordinate(piece);
+            SetPiecePositionByCoordinate(piece);
         }
-    }
 
-    private void Start()
-    {
-        //디버깅용
-        DebugCoordinates = DebugPiece.GetMovableCoordinates();
-    }
-
-    private void Update()
-    {
-
-        //디버깅용
-        if (timer > 1)
+        for (int i = 0; i < 8; i++)
         {
-            DebugPiece.Move(DebugCoordinates[debugindex]);
-            SetPositionByCoordinate(DebugPiece);
-            debugindex++;
-            if (debugindex >= DebugCoordinates.Count)
-                debugindex = 0;
-            timer = 0;
+            for (int j = 0; j < 8; j++)
+            {
+                chessData.boardSquares[j, i] = Instantiate<GameObject>(boardSquareSample, new Vector2(j, i) + basePosition, Quaternion.identity, transform).GetComponent<BoardSquare>();
+
+                if ((i + j) % 2 == 0)
+                    chessData.boardSquares[j, i].SetBoardSquare(j, i, blackBoardSquareSprites[Random.Range(0, blackBoardSquareSprites.Count)]);
+                else
+                    chessData.boardSquares[j, i].SetBoardSquare(j, i, whiteBoardSquareSprites[Random.Range(0, whiteBoardSquareSprites.Count)]);
+            }
         }
-        timer += Time.deltaTime;
     }
 
-    private void SetPositionByCoordinate(ChessPiece chessPiece)
+    public BoardSquare GetBoardSquare(Vector2Int coordinate)
+    {
+        return chessData.boardSquares[coordinate.x, coordinate.y];
+    }
+
+    public void SetPiecePositionByCoordinate(ChessPiece chessPiece)
     {
         chessPiece.transform.position = (Vector2)chessPiece.coordinate + basePosition;
     }
+    public void KillPiece(ChessPiece targetPiece)
+    {
+        chessData.graveyard.Add(targetPiece);
+        chessData.pieceObjects.Remove(targetPiece);
 
+        targetPiece.coordinate = Vector2Int.right * (chessData.graveyard.Count - 1) + Vector2Int.down;
+        SetPiecePositionByCoordinate(targetPiece);
+    }
 
 }
