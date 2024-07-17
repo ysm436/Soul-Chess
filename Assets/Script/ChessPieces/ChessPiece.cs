@@ -54,7 +54,7 @@ abstract public class ChessPiece : MonoBehaviour
     ///     Vector2Int 리스트 형태로 이동할 수 있는 모든 좌표를 반환
     /// </returns>
     abstract public List<Vector2Int> GetMovableCoordinates();
-    public void Move(Vector2Int targetCoordinate)
+    virtual public void Move(Vector2Int targetCoordinate)
     {
         coordinate = targetCoordinate;
     }
@@ -65,7 +65,7 @@ abstract public class ChessPiece : MonoBehaviour
     /// <returns>target is killed</returns>
     public bool Attack(ChessPiece targetPiece)
     {
-        targetPiece.current_HP -= attackDamage;
+        targetPiece.HP -= attackDamage;
         if (!targetPiece.isAlive)
             return true;
 
