@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
-  isAlive: 0
+  isAlive: 1
   pieceType: 2
   pieceColor: 1
   attackDamage: 10

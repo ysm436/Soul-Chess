@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5954609769523367539}
   - component: {fileID: 3572765736270606872}
-  - component: {fileID: 1204250401167620467}
+  - component: {fileID: -6858769460858049831}
   m_Layer: 0
-  m_Name: WhiteQueen
+  m_Name: WhitePawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 1913470231
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 8a4a2cf583a36134894fd92af93ff3b7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f5cd829c3903f644ad5f5415d5a7571, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1204250401167620467
+--- !u!114 &-6858769460858049831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,12 +94,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 791631163023233955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdf463afbe506fd42a2b8948980a2348, type: 3}
+  m_Script: {fileID: 11500000, guid: 2059e6bea71e8c94884692bddc552d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   isAlive: 1
-  pieceType: 1
+  pieceType: 5
   pieceColor: 0
   attackDamage: 10
   max_HP: 10
