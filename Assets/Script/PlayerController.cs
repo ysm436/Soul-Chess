@@ -12,11 +12,18 @@ public class PlayerController : MonoBehaviour
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
     bool isUsingCard = false;
 
-    private void Start()
+    private void OnEnable()
     {
         foreach (var s in chessBoard.chessData.boardSquares)
         {
             s.OnClick = OnClickBoardSquare;
+        }
+    }
+    private void OnDisnable()
+    {
+        foreach (var s in chessBoard.chessData.boardSquares)
+        {
+            s.OnClick = null;
         }
     }
 

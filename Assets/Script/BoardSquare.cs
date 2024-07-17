@@ -7,7 +7,7 @@ using Unity.Collections;
 
 public class BoardSquare : MonoBehaviour
 {
-    static readonly Color movableColor = Color.yellow;
+    static readonly Color movableColor = Color.red;
 
     public Vector2Int coordinate;
 
