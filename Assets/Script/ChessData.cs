@@ -11,8 +11,11 @@ using UnityEngine;
 public class ChessData
 {
     static readonly int BOARD_SIZE = 8;
+
+    public BoardSquare[,] boardSquares = new BoardSquare[8, 8];
     [SerializeField]
-    public List<ChessPiece> pieceObjects;// = new List<ChessPiece>();
+    public List<ChessPiece> pieceObjects = new List<ChessPiece>();
+    public List<ChessPiece> graveyard = new List<ChessPiece>();
 
     public bool TryAddPiece(ChessPiece piece)
     {
@@ -36,7 +39,13 @@ public class ChessData
 
         return true;
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="targetCoordinate"></param>
+    /// <returns>
+    ///     ChessPiece in coordniate (nullable)
+    /// </returns>
     public ChessPiece GetPiece(Vector2Int targetCoordinate)
     {
         return pieceObjects.FirstOrDefault(obj => obj.coordinate == targetCoordinate);
