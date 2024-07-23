@@ -8,14 +8,17 @@ using UnityEngine;
 ///     좌표는 백색 측 기준
 /// </summary>
 [System.Serializable]
-public class ChessData
+public class GameData
 {
-    static readonly int BOARD_SIZE = 8;
+    static public readonly int BOARD_SIZE = 8;
 
-    public BoardSquare[,] boardSquares = new BoardSquare[8, 8];
+    public BoardSquare[,] boardSquares = new BoardSquare[BOARD_SIZE, BOARD_SIZE];
     [SerializeField]
     public List<ChessPiece> pieceObjects = new List<ChessPiece>();
     public List<ChessPiece> graveyard = new List<ChessPiece>();
+
+    public PlayerData playerWhite;
+    public PlayerData playerBlack;
 
     public bool TryAddPiece(ChessPiece piece)
     {
@@ -49,9 +52,5 @@ public class ChessData
     public ChessPiece GetPiece(Vector2Int targetCoordinate)
     {
         return pieceObjects.FirstOrDefault(obj => obj.coordinate == targetCoordinate);
-    }
-    public void MoveFormTo(Vector2Int startCoordinate, Vector2Int targetCoordinate)
-    {
-
     }
 }

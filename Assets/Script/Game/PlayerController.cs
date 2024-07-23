@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public ChessPiece.PieceColor playerColor;
-    public ChessBoard chessBoard;
+    public GameBoard gameBoard;
 
     ChessPiece chosenPiece = null;
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
@@ -14,14 +14,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (var s in chessBoard.chessData.boardSquares)
+        foreach (var s in gameBoard.gameData.boardSquares)
         {
             s.OnClick = OnClickBoardSquare;
         }
     }
     private void OnDisnable()
     {
-        foreach (var s in chessBoard.chessData.boardSquares)
+        foreach (var s in gameBoard.gameData.boardSquares)
         {
             s.OnClick = null;
         }
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnClickBoardSquare(Vector2Int coordinate)
     {
-        ChessPiece targetPiece = chessBoard.chessData.GetPiece(coordinate);
+        ChessPiece targetPiece = gameBoard.gameData.GetPiece(coordinate);
 
         if (isUsingCard)
         {
@@ -61,13 +61,13 @@ public class PlayerController : MonoBehaviour
                         {
                             if (chosenPiece.Attack(targetPiece))
                             {
-                                chessBoard.KillPiece(targetPiece);
+                                gameBoard.KillPiece(targetPiece);
                                 chosenPiece.Move(coordinate);
-                                chessBoard.SetPiecePositionByCoordinate(chosenPiece);
+                                gameBoard.chessBoard.SetPiecePositionByCoordinate(chosenPiece);
                             }
                             else if (!chosenPiece.isAlive)
                             {
-                                chessBoard.KillPiece(chosenPiece);
+                                gameBoard.KillPiece(chosenPiece);
                             }
 
                             chosenPiece = null;
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
                     if (IsMovableCoordniate(coordinate))
                     {
                         chosenPiece.Move(coordinate);
-                        chessBoard.SetPiecePositionByCoordinate(chosenPiece);
+                        gameBoard.chessBoard.SetPiecePositionByCoordinate(chosenPiece);
                     }
                     chosenPiece = null;
                     ClearMovableCoordniates();
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         movableCoordinates.AddRange(targetPiece.GetMovableCoordinates());
         foreach (var c in movableCoordinates)
         {
-            chessBoard.GetBoardSquare(c).ismMovable = true;
+            gameBoard.GetBoardSquare(c).ismMovable = true;
         }
 
         chosenPiece = targetPiece;
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     void ClearMovableCoordniates()
     {
         movableCoordinates.Clear();
-        foreach (var sq in chessBoard.chessData.boardSquares)
+        foreach (var sq in gameBoard.gameData.boardSquares)
         {
             sq.ismMovable = false;
         }

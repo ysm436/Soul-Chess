@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1822202645157409802}
   - component: {fileID: 7007506939373905152}
-  - component: {fileID: 5581298163737177755}
+  - component: {fileID: 5739378138855264178}
   m_Layer: 0
   m_Name: ChessBoard
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5581298163737177755
+--- !u!114 &5739378138855264178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,14 +94,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8540303194573910200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b1464a3476d9b6409b3f459335d71c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 29c32a2439bfc6941956521df1088098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chessData:
-    pieceObjects: []
-    graveyard: []
-  bottomPlayerColor: 0
-  basePosition: {x: -7.5, y: -3.5}
+  basePosition: {x: -1, y: -3.5}
   boardSquareSample: {fileID: 5036848621774920484, guid: 83ef73db5a9c2834fbbed1a254fda44d, type: 3}
   blackBoardSquareSprites:
   - {fileID: 21300000, guid: edc8a02128854254da50760cf1530179, type: 3}

@@ -6,21 +6,24 @@ using UnityEngine;
 /// <summary>
 ///     체스 기물의 기본 클래스
 /// </summary>
-abstract public class ChessPiece : MonoBehaviour
+abstract public class ChessPiece : TargetableObject
 {
-    protected ChessData _chessData;
-    public ChessData chessData { set { _chessData = value; } }
+    protected GameData _chessData;
+    public GameData chessData { set { _chessData = value; } }
     public Vector2Int coordinate;
     public bool isAlive;
 
+    public SoulCard soul;
+
+    [Flags]
     public enum PieceType
     {
-        King,
-        Quene,
-        Bishop,
-        Knight,
-        Rook,
-        Pawn
+        Pawn = 0b00_0001,
+        Knight = 0b00_0010,
+        Bishop = 0b00_0100,
+        Rook = 0b00_1000,
+        Quene = 0b01_0000,
+        King = 0b10_0000,
     }
     [Serializable]
     public enum PieceColor
