@@ -1,16 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class GameBoard : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
+
     [HideInInspector]
     public GameData gameData;
     public ChessPiece.PieceColor bottomPlayerColor;
     public ChessBoard chessBoard;
+    public GameObject cardBoard;
+
+    public PlayerController whiteController;
 
     private void Awake()
     {
+
+        //singleton
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+
         foreach (ChessPiece piece in GetComponentsInChildren<ChessPiece>())
         {
             gameData.TryAddPiece(piece);
@@ -35,4 +54,23 @@ public class GameBoard : MonoBehaviour
         chessBoard.SetPiecePositionByCoordinate(targetPiece);
     }
 
+    Card showedCard = null;
+    float cardSize = 1.5f;
+    public void ShowCard(Card card)
+    {
+        if (showedCard != null)
+            HideCard();
+
+        showedCard = Instantiate(card, cardBoard.transform.position, Quaternion.identity);
+        showedCard.GetComponent<Collider2D>().enabled = false;
+        showedCard.GetComponent<SortingGroup>().sortingOrder = -1;
+        showedCard.transform.localScale = new Vector3(1f, 1f, 0f) * cardSize;
+    }
+    public void HideCard()
+    {
+        if (showedCard == null)
+            return;
+
+        Destroy(showedCard.gameObject);
+    }
 }

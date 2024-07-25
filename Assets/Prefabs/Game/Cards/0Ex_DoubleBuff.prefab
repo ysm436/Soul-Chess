@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8425526005325261540
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 7409594672954006879}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: cardName
+      value: DoubleBuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: description
+      value: Choose two pieces and give them 10 HP and 10 AD
+      objectReference: {fileID: 0}
+    - target: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_Name
+      value: _Example_DoubleBuff
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7409594672954006879}
+  m_SourcePrefab: {fileID: 100100000, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+--- !u!1 &893838343237515588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+  m_PrefabInstance: {fileID: 8425526005325261540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7409594672954006879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893838343237515588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9490f3a009f8f42b6c035d3c95d8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTypes:
+  - targetType: 0
+    targetPieceType: -1
+    targetPieceColor: 0
+  - targetType: 0
+    targetPieceType: -1
+    targetPieceColor: 0
+  buffHP: 10
+  buffAD: 10

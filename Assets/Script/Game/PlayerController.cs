@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public ChessPiece.PieceColor playerColor;
-    public GameBoard gameBoard;
+    public GameManager gameBoard;
 
     ChessPiece chosenPiece = null;
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
-    bool isUsingCard = false;
+
+    private Card UsingCard = null;
+    public bool isUsingCard = false;
+    List<TargetableObject> targetableObjects = new List<TargetableObject>();
 
     private void OnEnable()
     {
@@ -33,7 +37,25 @@ public class PlayerController : MonoBehaviour
 
         if (isUsingCard)
         {
+            if (targetableObjects.Contains(targetPiece))
+            {
+                if (UsingCard.effect.SetTarget(targetPiece))
+                {
+                    UseCardEffect();
+                }
+                else
+                {
+                    targetableObjects = UsingCard.effect.GetTargetType().GetTargetList();
 
+                    if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
+                    {
+                        foreach (var obj in targetableObjects)
+                        {
+                            GameManager.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = true;
+                        }
+                    }
+                }
+            }
         }
         else
         {
@@ -96,7 +118,7 @@ public class PlayerController : MonoBehaviour
         movableCoordinates.AddRange(targetPiece.GetMovableCoordinates());
         foreach (var c in movableCoordinates)
         {
-            gameBoard.GetBoardSquare(c).ismMovable = true;
+            gameBoard.GetBoardSquare(c).isMovable = true;
         }
 
         chosenPiece = targetPiece;
@@ -106,7 +128,7 @@ public class PlayerController : MonoBehaviour
         movableCoordinates.Clear();
         foreach (var sq in gameBoard.gameData.boardSquares)
         {
-            sq.ismMovable = false;
+            sq.isMovable = false;
         }
     }
     bool IsMovableCoordniate(Vector2Int coordinate)
@@ -116,5 +138,48 @@ public class PlayerController : MonoBehaviour
     bool IsMyPiece(ChessPiece chessPiece)
     {
         return chessPiece.pieceColor == playerColor;
+    }
+
+    public void UseCard(Card card)
+    {
+        UsingCard = card;
+        isUsingCard = true;
+
+        if (!card.effect.isTargeting)
+        {
+            UseCardEffect();
+            return;
+        }
+
+
+        ClearMovableCoordniates();
+        targetableObjects = UsingCard.effect.GetTargetType().GetTargetList();
+
+        if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
+        {
+            foreach (var obj in targetableObjects)
+            {
+                GameManager.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = true;
+            }
+        }
+
+        GameManager.instance.ShowCard(card);
+    }
+    public void UseCardEffect()
+    {
+        UsingCard.effect.EffectAction();
+
+        UsingCard.Destroy();
+        UsingCard = null;
+        isUsingCard = false;
+
+        foreach (var obj in targetableObjects)
+        {
+            if (obj is ChessPiece)
+                GameManager.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = false;
+        }
+        targetableObjects.Clear();
+
+        GameManager.instance.HideCard();
     }
 }

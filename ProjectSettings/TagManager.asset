@@ -41,9 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: GameBoard
+    uniqueID: 4266102953
+    locked: 0
   - name: ChessBoard
     uniqueID: 3582244469
     locked: 0
   - name: ChessPieces
     uniqueID: 1913470231
+    locked: 0
+  - name: CardBoard
+    uniqueID: 2561719631
+    locked: 0
+  - name: Card
+    uniqueID: 3999383507
     locked: 0

@@ -8,16 +8,31 @@ using Unity.Collections;
 public class BoardSquare : MonoBehaviour
 {
     static readonly Color movableColor = Color.red;
+    static readonly Color targetableColor = Color.red;
 
     public Vector2Int coordinate;
 
-    public bool ismMovable
+    public bool isMovable
     {
         set
         {
             if (value)
             {
                 spriteRenderer.color = movableColor;
+            }
+            else
+            {
+                spriteRenderer.color = Color.white;
+            }
+        }
+    }
+    public bool isTargetable
+    {
+        set
+        {
+            if (value)
+            {
+                spriteRenderer.color = targetableColor;
             }
             else
             {
