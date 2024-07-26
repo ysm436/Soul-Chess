@@ -23,7 +23,6 @@ public class Execution : Effect
 
             if(!(target as ChessPiece).isAlive)
             {
-                GameManager.instance.GetBoardSquare((target as ChessPiece).coordinate).isTargetable = false;
                 GameManager.instance.KillPiece(target as ChessPiece);
             }
         }
