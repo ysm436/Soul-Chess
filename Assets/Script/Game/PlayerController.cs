@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
         {
             if (targetableObjects.Contains(targetPiece))
             {
+                ClearTargetableObjects();
                 if (UsingCard.effect.SetTarget(targetPiece))
                 {
                     UseCardEffect();
@@ -49,10 +50,8 @@ public class PlayerController : MonoBehaviour
 
                     if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
                     {
-                        foreach (var obj in targetableObjects)
-                        {
-                            GameManager.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = true;
-                        }
+
+                        SetTargetableObjects(true);
                     }
                 }
             }
@@ -128,7 +127,7 @@ public class PlayerController : MonoBehaviour
         movableCoordinates.Clear();
         foreach (var sq in gameBoard.gameData.boardSquares)
         {
-            sq.isMovable = false;
+            sq.isTargetable = false;
         }
     }
     bool IsMovableCoordniate(Vector2Int coordinate)
@@ -140,6 +139,20 @@ public class PlayerController : MonoBehaviour
         return chessPiece.pieceColor == playerColor;
     }
 
+    void ClearTargetableObjects()
+    {
+        targetableObjects.Clear();
+        foreach (var sq in gameBoard.gameData.boardSquares)
+        {
+            sq.isMovable = false;
+        }
+    }
+    void SetTargetableObjects(bool isTargetable)
+    {
+        foreach (var obj in targetableObjects)
+            if (obj is ChessPiece)
+                GameManager.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = isTargetable;
+    }
     public void UseCard(Card card)
     {
         UsingCard = card;
@@ -157,10 +170,7 @@ public class PlayerController : MonoBehaviour
 
         if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
         {
-            foreach (var obj in targetableObjects)
-            {
-                GameManager.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = true;
-            }
+            SetTargetableObjects(true);
         }
 
         GameManager.instance.ShowCard(card);
@@ -172,13 +182,6 @@ public class PlayerController : MonoBehaviour
         UsingCard.Destroy();
         UsingCard = null;
         isUsingCard = false;
-
-        foreach (var obj in targetableObjects)
-        {
-            if (obj is ChessPiece)
-                GameManager.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = false;
-        }
-        targetableObjects.Clear();
 
         GameManager.instance.HideCard();
     }
