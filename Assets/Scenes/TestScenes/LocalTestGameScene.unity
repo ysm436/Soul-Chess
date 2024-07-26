@@ -2314,6 +2314,8 @@ MonoBehaviour:
   deck: []
   hand:
   - {fileID: 90797455826848939, guid: fc33ddca6bc40df4db6a584de32b9753, type: 3}
+  - {fileID: 7999116808895538166, guid: dc7cfa248f3e2994ab4c060628f9ed56, type: 3}
+  - {fileID: 7999116808895538166, guid: dc7cfa248f3e2994ab4c060628f9ed56, type: 3}
 --- !u!4 &1707751552
 Transform:
   m_ObjectHideFlags: 0
