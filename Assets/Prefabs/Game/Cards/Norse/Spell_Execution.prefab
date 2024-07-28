@@ -61,9 +61,13 @@ PrefabInstance:
       value: Choose one piece and 30 damage to it. If target's health is 60 or below,
         give 60 damage instead.
       objectReference: {fileID: 0}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: illustration
+      value: 
+      objectReference: {fileID: 21300000, guid: 74e9a57c376078e49bf560f3c021baf5, type: 3}
     - target: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Name
-      value: Execution_Spell
+      value: Spell_Execution
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

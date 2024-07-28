@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Name
-      value: _SoulCard_Poseidon
+      value: Soul_Poseidon
       objectReference: {fileID: 0}
     - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: AD
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Poseidon
   cost: 7
-  illustration: {fileID: 21300000, guid: e2432675228fa944784b3088686b1838, type: 3}
+  illustration: {fileID: 21300000, guid: cb8a0f9f049edde48a875ba0bcc43995, type: 3}
   description: 'Advent: deal 25 damage to all enemies'
   effect: {fileID: 1801876415810563218}
   pieceRestriction: 8
