@@ -23,6 +23,18 @@ public abstract class Effect : MonoBehaviour
     public abstract void EffectAction();
 
     public bool isTargeting { get { return targetTypes.Count > 0; } }
+    public bool isAvailable
+    {
+        get
+        {
+            foreach (var t in targetTypes)
+            {
+                if (t.GetTargetList().Count == 0)
+                    return false;
+            }
+            return true;
+        }
+    }
 
     /// <summary>
     /// 
