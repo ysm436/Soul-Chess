@@ -33,7 +33,7 @@ public class DeckTester : MonoBehaviour
     {
         for (int i = 0; i < player.hand.Count; i++)
         {
-            player.hand[i].transform.position = new Vector3(0.5f * i - 8, -4, 0);
+            player.hand[i].transform.position = new Vector3(0.5f * i - 8, -4, -0.1f * i);
         }
     }
 }
