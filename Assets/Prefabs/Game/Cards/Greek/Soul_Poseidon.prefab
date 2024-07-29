@@ -136,5 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTypes:
   - targetType: 0
-    targetPieceType: 0
+    targetPieceType: 8
+    isOpponent: 0
+    isFriendly: 1
     targetPieceColor: 0

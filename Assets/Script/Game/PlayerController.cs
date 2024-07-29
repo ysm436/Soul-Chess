@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public ChessPiece.PieceColor playerColor;
+    public GameManager.PlayerColor playerColor;
     public GameManager gameBoard;
 
     ChessPiece chosenPiece = null;
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    targetableObjects = UsingCard.effect.GetTargetType().GetTargetList();
+                    targetableObjects = UsingCard.effect.GetTargetType().GetTargetList(playerColor);
 
                     if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
                     {
@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
 
         ClearMovableCoordniates();
-        targetableObjects = UsingCard.effect.GetTargetType().GetTargetList();
+        targetableObjects = UsingCard.effect.GetTargetType().GetTargetList(playerColor);
 
         if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
         {

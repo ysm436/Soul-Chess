@@ -24,7 +24,7 @@ abstract public class ChessPiece : TargetableObject
     public bool isAlive;
     private SoulCard soul = null;
     public PieceType pieceType;
-    public PieceColor pieceColor;
+    public GameManager.PlayerColor pieceColor;
 
     public int AD
     {
@@ -143,11 +143,6 @@ abstract public class ChessPiece : TargetableObject
         Rook = 0b00_1000,
         Quene = 0b01_0000,
         King = 0b10_0000
-    }
-    [Serializable]
-    public enum PieceColor
-    {
-        White, Black
     }
 }
 

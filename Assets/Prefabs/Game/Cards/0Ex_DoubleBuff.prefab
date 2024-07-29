@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Name
-      value: _Example_DoubleBuff
+      value: 0Ex_DoubleBuff
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -92,9 +92,13 @@ MonoBehaviour:
   targetTypes:
   - targetType: 0
     targetPieceType: -1
+    isOpponent: 0
+    isFriendly: 0
     targetPieceColor: 0
   - targetType: 0
     targetPieceType: -1
+    isOpponent: 0
+    isFriendly: 1
     targetPieceColor: 0
   buffHP: 10
   buffAD: 10
