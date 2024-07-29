@@ -166,6 +166,13 @@ public class PlayerController : MonoBehaviour
 
 
         ClearMovableCoordniates();
+
+        if (!card.effect.isAvailable)
+        {
+            UsingCard = null;
+            isUsingCard = false;
+            return;
+        }
         targetableObjects = UsingCard.effect.GetTargetType().GetTargetList(playerColor);
 
         if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
