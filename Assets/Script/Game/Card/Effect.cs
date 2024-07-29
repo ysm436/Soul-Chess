@@ -53,13 +53,18 @@ public abstract class Effect : MonoBehaviour
     {
         public TargetType targetType;
         public ChessPiece.PieceType targetPieceType;
-        public ChessPiece.PieceColor targetPieceColor;
-        public List<TargetableObject> GetTargetList()
+        public bool isOpponent;
+        public bool isFriendly;
+        public List<TargetableObject> GetTargetList(GameManager.PlayerColor playerColor)
         {
             switch (targetType)
             {
                 case TargetType.Piece:
-                    return GameManager.instance.gameData.pieceObjects.Where<ChessPiece>(obj => (obj.pieceType & targetPieceType) != 0 && obj.pieceColor == targetPieceColor).Cast<TargetableObject>().ToList();
+                    return GameManager.instance.gameData.pieceObjects.Where<ChessPiece>(
+                        obj => (
+                            (obj.pieceType & targetPieceType) != 0)
+                            && (obj.pieceColor == playerColor ? isFriendly : isOpponent)
+                        ).Cast<TargetableObject>().ToList();
                 default:
                     return new List<TargetableObject>();
             }

@@ -24,7 +24,7 @@ abstract public class ChessPiece : TargetableObject
     public bool isAlive;
     private SoulCard soul = null;
     public PieceType pieceType;
-    public PieceColor pieceColor;
+    public GameManager.PlayerColor pieceColor;
 
     public int AD
     {
@@ -43,8 +43,10 @@ abstract public class ChessPiece : TargetableObject
         set
         {
             _currentHP = value < _maxHP ? value : _maxHP;
-            isAlive = _currentHP > 0;
-            pieceObject.HPText.text = _currentHP.ToString();
+            if (_currentHP > 0)
+                pieceObject.HPText.text = _currentHP.ToString();
+            else
+                OnKilled();
         }
         get { return _currentHP; }
     }
@@ -111,6 +113,13 @@ abstract public class ChessPiece : TargetableObject
         return false;
     }
 
+    public void OnKilled()
+    {
+        isAlive = false;
+        pieceObject.HPText.text = "0";
+        GameManager.instance.KillPiece(this);
+    }
+
     public void SetSoul(SoulCard targetSoul)
     {
         if (soul != null)
@@ -143,11 +152,6 @@ abstract public class ChessPiece : TargetableObject
         Rook = 0b00_1000,
         Quene = 0b01_0000,
         King = 0b10_0000
-    }
-    [Serializable]
-    public enum PieceColor
-    {
-        White, Black
     }
 }
 

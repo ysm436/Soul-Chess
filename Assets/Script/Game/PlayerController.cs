@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public ChessPiece.PieceColor playerColor;
+    public GameManager.PlayerColor playerColor;
     public GameManager gameBoard;
 
     ChessPiece chosenPiece = null;
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    targetableObjects = UsingCard.effect.GetTargetType().GetTargetList();
+                    targetableObjects = UsingCard.effect.GetTargetType().GetTargetList(playerColor);
 
                     if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
                     {
@@ -173,8 +173,7 @@ public class PlayerController : MonoBehaviour
             isUsingCard = false;
             return;
         }
-
-        targetableObjects = UsingCard.effect.GetTargetType().GetTargetList();
+        targetableObjects = UsingCard.effect.GetTargetType().GetTargetList(playerColor);
 
         if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
         {
@@ -192,5 +191,12 @@ public class PlayerController : MonoBehaviour
         isUsingCard = false;
 
         GameManager.instance.HideCard();
+    }
+    /// <summary>
+    ///     아직 구현 안됐습니다.
+    /// </summary>
+    public void Draw()
+    {
+
     }
 }

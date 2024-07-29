@@ -20,11 +20,12 @@ public class Execution : Effect
             {
                 (target as ChessPiece).HP -= basicAD;
             }
-
-            if(!(target as ChessPiece).isAlive)
-            {
-                GameManager.instance.KillPiece(target as ChessPiece);
-            }
+            /*
+                        if(!(target as ChessPiece).isAlive)
+                        {
+                            GameManager.instance.KillPiece(target as ChessPiece);
+                        }
+            */
         }
     }
 

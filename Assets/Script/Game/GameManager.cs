@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public GameData gameData;
-    public ChessPiece.PieceColor bottomPlayerColor;
+    public GameManager.PlayerColor bottomPlayerColor;
     public ChessBoard chessBoard;
     public GameObject cardBoard;
 
@@ -72,5 +72,11 @@ public class GameManager : MonoBehaviour
             return;
 
         Destroy(showedCard.gameObject);
+    }
+
+    [System.Serializable]
+    public enum PlayerColor
+    {
+        White, Black
     }
 }
