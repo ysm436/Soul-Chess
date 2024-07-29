@@ -43,8 +43,10 @@ abstract public class ChessPiece : TargetableObject
         set
         {
             _currentHP = value < _maxHP ? value : _maxHP;
-            isAlive = _currentHP > 0;
-            pieceObject.HPText.text = _currentHP.ToString();
+            if (_currentHP > 0)
+                pieceObject.HPText.text = _currentHP.ToString();
+            else
+                OnKilled();
         }
         get { return _currentHP; }
     }
@@ -109,6 +111,13 @@ abstract public class ChessPiece : TargetableObject
 
         HP -= targetPiece.attackDamage;
         return false;
+    }
+
+    public void OnKilled()
+    {
+        isAlive = false;
+        pieceObject.HPText.text = "0";
+        GameManager.instance.KillPiece(this);
     }
 
     public void SetSoul(SoulCard targetSoul)

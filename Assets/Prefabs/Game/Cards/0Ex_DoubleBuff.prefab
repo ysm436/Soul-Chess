@@ -93,12 +93,10 @@ MonoBehaviour:
   - targetType: 0
     targetPieceType: -1
     isOpponent: 0
-    isFriendly: 0
-    targetPieceColor: 0
+    isFriendly: 1
   - targetType: 0
     targetPieceType: -1
     isOpponent: 0
     isFriendly: 1
-    targetPieceColor: 0
   buffHP: 10
   buffAD: 10
