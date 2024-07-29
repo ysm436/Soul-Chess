@@ -185,4 +185,11 @@ public class PlayerController : MonoBehaviour
 
         GameManager.instance.HideCard();
     }
+    /// <summary>
+    ///     아직 구현 안됐습니다.
+    /// </summary>
+    public void Draw()
+    {
+
+    }
 }
