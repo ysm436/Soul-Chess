@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectPoseidon : Effect
+public class EffectPoseidon : TargetingEffect
 {
     public Action<ChessPiece> infuse;
 

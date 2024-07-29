@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
     private Card UsingCard = null;
+    private TargetingEffect targetingEffect;
     public bool isUsingCard = false;
     List<TargetableObject> targetableObjects = new List<TargetableObject>();
 
@@ -40,15 +41,15 @@ public class PlayerController : MonoBehaviour
             if (targetableObjects.Contains(targetPiece))
             {
                 ClearTargetableObjects();
-                if (UsingCard.effect.SetTarget(targetPiece))
+                if (targetingEffect.SetTarget(targetPiece))
                 {
                     UseCardEffect();
                 }
                 else
                 {
-                    targetableObjects = UsingCard.effect.GetTargetType().GetTargetList(playerColor);
+                    targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
-                    if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
+                    if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
                     {
 
                         SetTargetableObjects(true);
@@ -158,24 +159,29 @@ public class PlayerController : MonoBehaviour
         UsingCard = card;
         isUsingCard = true;
 
-        if (!card.effect.isTargeting)
+        if (!(card.effect is TargetingEffect))
         {
             UseCardEffect();
             return;
+        }
+        else
+        {
+            targetingEffect = card.effect as TargetingEffect;
         }
 
 
         ClearMovableCoordniates();
 
-        if (!card.effect.isAvailable)
+        if (!targetingEffect.isAvailable(playerColor))
         {
             UsingCard = null;
             isUsingCard = false;
             return;
         }
-        targetableObjects = UsingCard.effect.GetTargetType().GetTargetList(playerColor);
 
-        if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
+        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
+
+        if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
         {
             SetTargetableObjects(true);
         }
@@ -189,6 +195,8 @@ public class PlayerController : MonoBehaviour
         UsingCard.Destroy();
         UsingCard = null;
         isUsingCard = false;
+
+        targetingEffect = null;
 
         GameManager.instance.HideCard();
     }

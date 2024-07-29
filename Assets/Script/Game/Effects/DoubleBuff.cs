@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultiBuff : Effect
+public class MultiBuff : TargetingEffect
 {
     public int buffHP;
     public int buffAD;
