@@ -29,6 +29,9 @@ public class LocalController : MonoBehaviour
 
             whiteController.enabled = false;
             blackController.enabled = true;
+
+            whiteController.TurnEnd();
+            blackController.OnOpponentTurnEnd();
         }
         else
         {
@@ -36,6 +39,9 @@ public class LocalController : MonoBehaviour
 
             blackController.enabled = false;
             whiteController.enabled = true;
+
+            blackController.TurnEnd();
+            whiteController.OnOpponentTurnEnd();
         }
     }
 

@@ -65,6 +65,10 @@ PrefabInstance:
       propertyPath: illustration
       value: 
       objectReference: {fileID: 21300000, guid: 74e9a57c376078e49bf560f3c021baf5, type: 3}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: EffectOnCardUsed
+      value: 
+      objectReference: {fileID: -3397328758503862818}
     - target: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Name
       value: Spell_Execution
@@ -99,7 +103,6 @@ MonoBehaviour:
     targetPieceType: -1
     isOpponent: 1
     isFriendly: 0
-    targetPieceColor: 1
   basicAD: 30
   insteadAD: 60
   standardHP: 60

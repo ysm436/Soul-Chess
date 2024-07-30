@@ -12,7 +12,7 @@ public abstract class TargetingEffect : Effect
     ///     효과의 대상으로 지정가능한 조건, 여러개의 대상을 지정하는 것을 고려해 만들었으며 각 카드 사용시 targetTypes 조건에 해당되는 오브젝트들이 targets에 저장됨
     /// </summary>
     [SerializeField]
-    public List<EffectTarget> targetTypes;
+    public List<EffectTarget> targetTypes = new List<EffectTarget>();
     protected List<TargetableObject> targets = new List<TargetableObject>();
 
     public EffectTarget GetTargetType()
@@ -44,6 +44,13 @@ public abstract class TargetingEffect : Effect
     [Serializable]
     public class EffectTarget
     {
+        public EffectTarget(TargetType targetType, ChessPiece.PieceType targetPieceType, bool isOpponent, bool isFriendly)
+        {
+            this.targetType = targetType;
+            this.targetPieceType = targetPieceType;
+            this.isOpponent = isOpponent;
+            this.isFriendly = isFriendly;
+        }
         public TargetType targetType;
         public ChessPiece.PieceType targetPieceType;
         public bool isOpponent;

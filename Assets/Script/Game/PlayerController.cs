@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class PlayerController : MonoBehaviour
     private TargetingEffect targetingEffect;
     public bool isUsingCard = false;
     List<TargetableObject> targetableObjects = new List<TargetableObject>();
+
+    public Action OnMyDraw;
+    //    public Action OnOpponentDraw;
+    public Action OnMyTurnEnd;
+    public Action OnOpponentTurnEnd;
 
     private void OnEnable()
     {
@@ -159,14 +165,14 @@ public class PlayerController : MonoBehaviour
         UsingCard = card;
         isUsingCard = true;
 
-        if (!(card.effect is TargetingEffect))
+        if (!(card.EffectOnCardUsed is TargetingEffect))
         {
             UseCardEffect();
             return;
         }
         else
         {
-            targetingEffect = card.effect as TargetingEffect;
+            targetingEffect = card.EffectOnCardUsed as TargetingEffect;
         }
 
 
@@ -190,7 +196,7 @@ public class PlayerController : MonoBehaviour
     }
     public void UseCardEffect()
     {
-        UsingCard.effect.EffectAction();
+        UsingCard.EffectOnCardUsed.EffectAction();
 
         UsingCard.Destroy();
         UsingCard = null;
@@ -205,6 +211,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Draw()
     {
-
+        OnMyDraw?.Invoke();
+    }
+    public void TurnEnd()
+    {
+        Draw();
+        OnMyTurnEnd?.Invoke();
     }
 }

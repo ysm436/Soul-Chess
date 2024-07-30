@@ -20,12 +20,6 @@ public class Execution : TargetingEffect
             {
                 (target as ChessPiece).HP -= basicAD;
             }
-            /*
-                        if(!(target as ChessPiece).isAlive)
-                        {
-                            GameManager.instance.KillPiece(target as ChessPiece);
-                        }
-            */
         }
     }
 

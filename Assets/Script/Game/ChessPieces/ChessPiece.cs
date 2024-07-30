@@ -46,7 +46,7 @@ abstract public class ChessPiece : TargetableObject
             if (_currentHP > 0)
                 pieceObject.HPText.text = _currentHP.ToString();
             else
-                OnKilled();
+                Kill();
         }
         get { return _currentHP; }
     }
@@ -75,6 +75,14 @@ abstract public class ChessPiece : TargetableObject
 
     private PieceObject pieceObject;
 
+    public Action<ChessPiece> OnKill;
+    public Action<ChessPiece> OnKilled; //유언
+    public Action<ChessPiece> OnStartAttack;
+    public Action<ChessPiece> OnEndAttack;
+    public Action<ChessPiece, int> OnAttacked;
+    //public Action OnGetMovableCoordinate;
+    public Action<Vector2Int> OnMove;
+
     private void Awake()
     {
         _currentHP = _maxHP;
@@ -96,6 +104,8 @@ abstract public class ChessPiece : TargetableObject
     abstract public List<Vector2Int> GetMovableCoordinates();
     virtual public void Move(Vector2Int targetCoordinate)
     {
+        OnMove?.Invoke(targetCoordinate);
+
         coordinate = targetCoordinate;
     }
     /// <summary>
@@ -105,16 +115,37 @@ abstract public class ChessPiece : TargetableObject
     /// <returns>target is killed</returns>
     public bool Attack(ChessPiece targetPiece)
     {
-        targetPiece.HP -= attackDamage;
+        OnStartAttack?.Invoke(targetPiece);
+
+        targetPiece.Attacked(this, attackDamage);
         if (!targetPiece.isAlive)
+        {
+            OnKill?.Invoke(targetPiece);
             return true;
+        }
 
         HP -= targetPiece.attackDamage;
+
+        OnEndAttack?.Invoke(targetPiece);
+
         return false;
     }
-
-    public void OnKilled()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> isAlive </returns>
+    public bool Attacked(ChessPiece chessPiece, int damage)
     {
+        OnAttacked?.Invoke(chessPiece, damage);
+
+        HP -= damage;
+        return isAlive;
+    }
+
+    public void Kill()
+    {
+        OnKilled?.Invoke(this);
+
         isAlive = false;
         pieceObject.HPText.text = "0";
         GameManager.instance.KillPiece(this);
@@ -126,6 +157,7 @@ abstract public class ChessPiece : TargetableObject
             RemoveSoul();
 
         soul = targetSoul;
+        targetSoul.InfusedPiece = this;
 
         maxHP += soul.HP;
         AD += soul.AD;

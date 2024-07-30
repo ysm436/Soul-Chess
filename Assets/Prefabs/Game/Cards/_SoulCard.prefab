@@ -563,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2026877158094313868, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
       propertyPath: m_Name
-      value: SoulCard
+      value: _SoulCard
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7296888130200308405, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
@@ -630,10 +630,11 @@ MonoBehaviour:
   cost: 3
   illustration: {fileID: 21300000, guid: 8df697752e372394a8f47915eb3294fd, type: 3}
   description: Soul Test Description
-  effect: {fileID: 7687191347765106377}
+  EffectOnCardUsed: {fileID: 0}
   pieceRestriction: -1
   AD: 10
   HP: 10
+  InfusedPiece: {fileID: 0}
 --- !u!114 &7687191347765106377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,4 +650,5 @@ MonoBehaviour:
   targetTypes:
   - targetType: 0
     targetPieceType: 0
-    targetPieceColor: 0
+    isOpponent: 0
+    isFriendly: 1
