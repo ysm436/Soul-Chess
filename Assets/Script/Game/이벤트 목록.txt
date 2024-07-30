@@ -1,0 +1,19 @@
+사용 가능한 이벤트 목록
+
+PlayerController
+    public Action OnMyDraw;
+    public Action OnOpponentDraw;
+    public Action OnMyTurnEnd;
+    public Action OnOpponentTurnEnd;
+
+SoulCard
+    public Action<ChessPiece> OnInfuse; //강림
+
+ChessPiece
+    public Action<ChessPiece> OnKill;
+    public Action<ChessPiece> OnKilled; //유언
+    public Action<ChessPiece> OnStartAttack;
+    public Action<ChessPiece> OnEndAttack;
+    public Action<ChessPiece, int> OnAttacked;
+    public Action OnSpellAttacked;
+    public Action<Vector2Int> OnMove;

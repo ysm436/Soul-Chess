@@ -7,8 +7,8 @@ using UnityEngine.Rendering;
 [Serializable]
 public class PlayerData
 {
-    public int soulOrbs;
-    public int soulEssence;
+    public int soulOrbs; // 자원 최대치
+    public int soulEssence; // 현재 자원량
 
     public List<Card> deck;
     public List<Card> hand;
@@ -21,5 +21,13 @@ public class PlayerData
             hand[i].gameObject.GetComponent<SortingGroup>().sortingOrder = i;
 
         OnGetCard.Invoke();
+    }
+
+    public int spellDamageIncrease = 0;
+    public int spellDamageCoefficient = 1;
+
+    public void SpellAttack(ChessPiece targetPiece, int damage)
+    {
+        targetPiece.SpellAttacked((damage + spellDamageIncrease) * spellDamageCoefficient);
     }
 }

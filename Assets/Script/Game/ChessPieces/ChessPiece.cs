@@ -80,6 +80,7 @@ abstract public class ChessPiece : TargetableObject
     public Action<ChessPiece> OnStartAttack;
     public Action<ChessPiece> OnEndAttack;
     public Action<ChessPiece, int> OnAttacked;
+    public Action OnSpellAttacked;
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
 
@@ -137,6 +138,13 @@ abstract public class ChessPiece : TargetableObject
     public bool Attacked(ChessPiece chessPiece, int damage)
     {
         OnAttacked?.Invoke(chessPiece, damage);
+
+        HP -= damage;
+        return isAlive;
+    }
+    public bool SpellAttacked(int damage)
+    {
+        OnSpellAttacked?.Invoke();
 
         HP -= damage;
         return isAlive;
