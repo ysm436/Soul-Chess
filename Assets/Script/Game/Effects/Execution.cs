@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Execution : Effect
+public class Execution : TargetingEffect
 {
     public int basicAD;
     public int insteadAD;
@@ -20,12 +20,6 @@ public class Execution : Effect
             {
                 (target as ChessPiece).HP -= basicAD;
             }
-            /*
-                        if(!(target as ChessPiece).isAlive)
-                        {
-                            GameManager.instance.KillPiece(target as ChessPiece);
-                        }
-            */
         }
     }
 

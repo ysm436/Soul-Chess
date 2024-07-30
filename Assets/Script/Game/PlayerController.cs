@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,8 +14,14 @@ public class PlayerController : MonoBehaviour
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
     private Card UsingCard = null;
+    private TargetingEffect targetingEffect;
     public bool isUsingCard = false;
     List<TargetableObject> targetableObjects = new List<TargetableObject>();
+
+    public Action OnMyDraw;
+    //    public Action OnOpponentDraw;
+    public Action OnMyTurnEnd;
+    public Action OnOpponentTurnEnd;
 
     private void OnEnable()
     {
@@ -40,15 +47,15 @@ public class PlayerController : MonoBehaviour
             if (targetableObjects.Contains(targetPiece))
             {
                 ClearTargetableObjects();
-                if (UsingCard.effect.SetTarget(targetPiece))
+                if (targetingEffect.SetTarget(targetPiece))
                 {
                     UseCardEffect();
                 }
                 else
                 {
-                    targetableObjects = UsingCard.effect.GetTargetType().GetTargetList(playerColor);
+                    targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
-                    if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
+                    if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
                     {
 
                         SetTargetableObjects(true);
@@ -158,24 +165,29 @@ public class PlayerController : MonoBehaviour
         UsingCard = card;
         isUsingCard = true;
 
-        if (!card.effect.isTargeting)
+        if (!(card.EffectOnCardUsed is TargetingEffect))
         {
             UseCardEffect();
             return;
+        }
+        else
+        {
+            targetingEffect = card.EffectOnCardUsed as TargetingEffect;
         }
 
 
         ClearMovableCoordniates();
 
-        if (!card.effect.isAvailable)
+        if (!targetingEffect.isAvailable(playerColor))
         {
             UsingCard = null;
             isUsingCard = false;
             return;
         }
-        targetableObjects = UsingCard.effect.GetTargetType().GetTargetList(playerColor);
 
-        if (UsingCard.effect.GetTargetType().targetType == Effect.TargetType.Piece)
+        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
+
+        if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
         {
             SetTargetableObjects(true);
         }
@@ -184,11 +196,13 @@ public class PlayerController : MonoBehaviour
     }
     public void UseCardEffect()
     {
-        UsingCard.effect.EffectAction();
+        UsingCard.EffectOnCardUsed.EffectAction();
 
         UsingCard.Destroy();
         UsingCard = null;
         isUsingCard = false;
+
+        targetingEffect = null;
 
         GameManager.instance.HideCard();
     }
@@ -197,6 +211,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Draw()
     {
-
+        OnMyDraw?.Invoke();
+    }
+    public void TurnEnd()
+    {
+        Draw();
+        OnMyTurnEnd?.Invoke();
     }
 }

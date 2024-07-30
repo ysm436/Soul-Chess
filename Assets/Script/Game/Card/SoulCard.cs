@@ -15,6 +15,12 @@ public class SoulCard : Card
     public ChessPiece.PieceType pieceRestriction;
     public int AD;
     public int HP;
+
+    [HideInInspector]
+    public ChessPiece InfusedPiece;
+
+    public Action<ChessPiece> OnInfuse; //강림
+
     override protected void Awake()
     {
         base.Awake();
@@ -24,10 +30,12 @@ public class SoulCard : Card
         soulCardObject.HPText.text = HP.ToString();
         soulCardObject.PieceRestrictionText.text = pieceRestriction.ToString();
 
-        if (effect is Infusion)
+        if (EffectOnCardUsed is Infusion)
         {
-            (effect as Infusion).infuse += Infuse;
-            (effect as Infusion).targetTypes[0].targetPieceType = pieceRestriction;
+            (EffectOnCardUsed as Infusion).infuse += Infuse;
+            (EffectOnCardUsed as Infusion).targetTypes[0].targetPieceType = pieceRestriction;
+
+            Debug.Log((EffectOnCardUsed as Infusion).targetTypes[0].targetPieceType);
         }
     }
 
@@ -35,6 +43,7 @@ public class SoulCard : Card
     public void Infuse(ChessPiece targetPiece)
     {
         targetPiece.SetSoul(this);
-        //targetPiece
+
+        OnInfuse?.Invoke(targetPiece);
     }
 }

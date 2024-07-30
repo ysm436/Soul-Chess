@@ -14,7 +14,7 @@ public class Card : TargetableObject
     public Sprite illustration;
     [Multiline]
     public string description;
-    public Effect effect;
+    public Effect EffectOnCardUsed;
 
     protected virtual void Awake()
     {
@@ -48,7 +48,12 @@ public class Card : TargetableObject
         if (!GameManager.instance.whiteController.isUsingCard)
         {
             if (transform.position.y > 0)
-                GameManager.instance.whiteController.UseCard(this);
+            {
+                if (!TryUse())
+                {
+                    //카드 원위치
+                }
+            }
         }
         else
         {
@@ -59,6 +64,13 @@ public class Card : TargetableObject
     public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public virtual bool TryUse()
+    {
+        GameManager.instance.whiteController.UseCard(this);
+
+        return true;
     }
 
     //public abstract void Use();

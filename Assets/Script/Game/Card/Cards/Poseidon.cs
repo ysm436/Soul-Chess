@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Poseidon : SoulCard
 {
-    override protected void Awake()
+    protected override void Awake()
     {
         base.Awake();
+        gameObject.GetComponent<SoulCard>().OnInfuse += SoulEffect;
+    }
 
-        if (effect is EffectPoseidon)
+    public void SoulEffect(ChessPiece chessPiece)
+    {
+        List<ChessPiece> pieceList = GameManager.instance.gameData.pieceObjects;
+        for (int i = pieceList.Count - 1; i >= 0; i--)
         {
-            (effect as EffectPoseidon).infuse += Infuse;
-            (effect as EffectPoseidon).targetTypes[0].targetPieceType = pieceRestriction;
+            if (pieceList[i] != gameObject.GetComponent<SoulCard>().InfusedPiece)
+            {
+                pieceList[i].HP -= 25;
+            }
         }
     }
 }
