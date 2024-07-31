@@ -215,7 +215,6 @@ public class PlayerController : MonoBehaviour
     }
     public void TurnEnd()
     {
-        Draw();
         OnMyTurnEnd?.Invoke();
     }
 }
