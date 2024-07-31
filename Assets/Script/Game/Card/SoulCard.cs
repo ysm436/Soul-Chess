@@ -34,8 +34,6 @@ public class SoulCard : Card
         {
             (EffectOnCardUsed as Infusion).infuse += Infuse;
             (EffectOnCardUsed as Infusion).targetTypes[0].targetPieceType = pieceRestriction;
-
-            Debug.Log((EffectOnCardUsed as Infusion).targetTypes[0].targetPieceType);
         }
     }
 
