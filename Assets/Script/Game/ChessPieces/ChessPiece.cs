@@ -30,7 +30,11 @@ abstract public class ChessPiece : TargetableObject
     {
         set
         {
-            attackDamage = value;
+            if (value < 0)
+                attackDamage = 0;
+            else
+                attackDamage = value;
+
             pieceObject.ADText.text = attackDamage.ToString();
         }
         get { return attackDamage; }
