@@ -22,7 +22,13 @@ abstract public class ChessPiece : TargetableObject
 
     public Vector2Int coordinate;
     public bool isAlive;
-    private SoulCard soul = null;
+    public SoulCard soul
+    {
+        set { _soul = value; }
+        get { return _soul; }
+    }
+
+    private SoulCard _soul = null;
     public PieceType pieceType;
     public GameManager.PlayerColor pieceColor;
 
