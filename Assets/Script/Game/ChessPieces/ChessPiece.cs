@@ -168,8 +168,7 @@ abstract public class ChessPiece : TargetableObject
         if (soul != null)
             RemoveSoul();
 
-        soul = Instantiate<GameObject>(targetSoul.gameObject, this.transform).GetComponent<SoulCard>();
-        soul.gameObject.SetActive(false);
+        soul = targetSoul;
 
         targetSoul.InfusedPiece = this;
 

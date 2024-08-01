@@ -198,7 +198,8 @@ public class PlayerController : MonoBehaviour
     {
         UsingCard.EffectOnCardUsed.EffectAction();
 
-        UsingCard.Destroy();
+        if (!(UsingCard is SoulCard))
+            UsingCard.Destroy();
         UsingCard = null;
         isUsingCard = false;
 
