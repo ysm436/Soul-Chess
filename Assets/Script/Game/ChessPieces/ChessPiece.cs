@@ -175,6 +175,9 @@ abstract public class ChessPiece : TargetableObject
             RemoveSoul();
 
         soul = targetSoul;
+        soul.transform.SetParent(transform);
+        soul.transform.localPosition = Vector3.zero;
+        soul.gameObject.SetActive(false);
 
         targetSoul.InfusedPiece = this;
 
