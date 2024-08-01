@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+// TODO: PlayerColor GameData로 옮기기
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
     [HideInInspector]
     public GameData gameData;
-    public GameManager.PlayerColor bottomPlayerColor;
+    public GameManager.PlayerColor playerColor;
     public ChessBoard chessBoard;
     public GameObject cardBoard;
 
@@ -28,10 +30,11 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
+            return;
         }
 
 
-        foreach (ChessPiece piece in GetComponentsInChildren<ChessPiece>())
+        foreach (ChessPiece piece in chessBoard.GetComponentsInChildren<ChessPiece>())
         {
             gameData.TryAddPiece(piece);
 

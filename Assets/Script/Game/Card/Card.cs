@@ -12,8 +12,10 @@ public class Card : TargetableObject
     public string cardName;
     public int cost;
     public Sprite illustration;
+    public Sprite back;
     [Multiline]
     public string description;
+
     public Effect EffectOnCardUsed;
 
     protected virtual void Awake()
@@ -24,6 +26,9 @@ public class Card : TargetableObject
         cardObject.costText.text = cost.ToString();
         cardObject.spriteRenderer.sprite = illustration;
         cardObject.descriptionText.text = description;
+        cardObject.backSpriteRenderer.sprite = back;
+
+
     }
     private void OnMouseEnter()
     {
@@ -71,6 +76,16 @@ public class Card : TargetableObject
         GameManager.instance.whiteController.UseCard(this);
 
         return true;
+    }
+
+    public void FlipFront()
+    {
+        cardObject.backSpriteRenderer.sortingOrder = -1;
+    }
+    public void FlipBack()
+    {
+        cardObject.backSpriteRenderer.sortingOrder = 0;
+
     }
 
     //public abstract void Use();

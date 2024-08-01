@@ -24,6 +24,7 @@ public class DeckTester : MonoBehaviour
         foreach (Card card in hand)
         {
             g = Instantiate(card.gameObject);
+            g.GetComponent<Card>().FlipFront();
             player.GetCard(g.GetComponent<Card>());
         }
     }

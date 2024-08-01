@@ -629,6 +629,7 @@ MonoBehaviour:
   cardName: Test Soul
   cost: 3
   illustration: {fileID: 21300000, guid: 8df697752e372394a8f47915eb3294fd, type: 3}
+  back: {fileID: 21300000, guid: 6995a100b2974674db52c4a15d575dc2, type: 3}
   description: Soul Test Description
   EffectOnCardUsed: {fileID: 0}
   pieceRestriction: -1
