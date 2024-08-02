@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour
                         {
                             if (chosenPiece.Attack(targetPiece))
                             {
-                                gameBoard.KillPiece(targetPiece);
                                 chosenPiece.Move(coordinate);
                                 gameBoard.chessBoard.SetPiecePositionByCoordinate(chosenPiece);
                             }

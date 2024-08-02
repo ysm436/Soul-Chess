@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DonQuixote : SoulCard
 {
+    public int standardAD;
+    public int extraAD;
     private bool extraAttack = false;
     protected override void Awake()
     {
@@ -19,9 +21,9 @@ public class DonQuixote : SoulCard
 
     public void StartAttackEffect(ChessPiece chessPiece)
     {
-        if(chessPiece.AD >= 100)
+        if(chessPiece.AD >= standardAD)
         {
-            this.InfusedPiece.AD += 40;
+            this.InfusedPiece.AD += extraAD;
             extraAttack = true;
         }
     }
@@ -30,7 +32,7 @@ public class DonQuixote : SoulCard
     {
         if(extraAttack)
         {
-            this.InfusedPiece.AD -= 40;
+            this.InfusedPiece.AD -= extraAD;
             extraAttack = false;
         }
     }
