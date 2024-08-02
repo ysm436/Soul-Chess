@@ -97,6 +97,6 @@ MonoBehaviour:
     \uBD80\uC5EC\uD569\uB2C8\uB2E4"
   EffectOnCardUsed: {fileID: 1532323068371667677}
   pieceRestriction: 20
-  AD: 40
-  HP: 40
+  _AD: 40
+  _HP: 40
   InfusedPiece: {fileID: 0}

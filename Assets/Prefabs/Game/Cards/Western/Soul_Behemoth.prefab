@@ -85,8 +85,8 @@ MonoBehaviour:
     \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 5415071180265959741}
   pieceRestriction: 8
-  AD: 70
-  HP: 70
+  _AD: 70
+  _HP: 70
   InfusedPiece: {fileID: 0}
 --- !u!114 &5415071180265959741 stripped
 MonoBehaviour:

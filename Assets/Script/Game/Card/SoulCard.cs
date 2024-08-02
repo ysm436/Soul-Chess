@@ -13,8 +13,31 @@ public class SoulCard : Card
     /// 
     [Header("SoulData")]
     public ChessPiece.PieceType pieceRestriction;
-    public int AD;
-    public int HP;
+    public int AD
+    {
+        set
+        {
+            if (InfusedPiece != null)
+                InfusedPiece.AD += value - _AD;
+            _AD = value;
+        }
+        get { return _AD; }
+    }
+    [SerializeField]
+    private int _AD;
+
+    public int HP
+    {
+        set
+        {
+            if (InfusedPiece != null)
+                InfusedPiece.maxHP += value - _HP;
+            _HP = value;
+        }
+        get { return _HP; }
+    }
+    [SerializeField]
+    private int _HP;
 
     [HideInInspector]
     public ChessPiece InfusedPiece;

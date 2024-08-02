@@ -7,7 +7,7 @@ public class Behemoth : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        gameObject.GetComponent<SoulCard>().OnInfuse += SoulEffect;
+        OnInfuse += SoulEffect;
     }
 
     public void SoulEffect(ChessPiece chessPiece)
@@ -17,9 +17,7 @@ public class Behemoth : SoulCard
 
     public void SoulEffect2(ChessPiece piece)
     {
-        piece.maxHP += 10;
-        piece.AD += 10;
-        piece.soul.HP += 10;
-        piece.soul.AD += 10;
+        HP += 10;
+        AD += 10;
     }
 }

@@ -128,6 +128,6 @@ MonoBehaviour:
     25\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.\n"
   EffectOnCardUsed: {fileID: 391618131688367025}
   pieceRestriction: 8
-  AD: 55
-  HP: 55
+  _AD: 55
+  _HP: 55
   InfusedPiece: {fileID: 0}

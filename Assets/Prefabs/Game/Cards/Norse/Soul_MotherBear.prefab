@@ -103,6 +103,6 @@ MonoBehaviour:
   description: "\uAE30\uBB3C: \uB8E9/\uD3F0"
   EffectOnCardUsed: {fileID: 4355344996031333222}
   pieceRestriction: 9
-  AD: 35
-  HP: 50
+  _AD: 35
+  _HP: 50
   InfusedPiece: {fileID: 0}
