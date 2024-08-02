@@ -58,8 +58,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: description
-      value: Choose one piece and 30 damage to it. If target's health is 60 or below,
-        give 60 damage instead.
+      value: "\uAE30\uBB3C\uC5D0\uAC8C \uD53C\uD574\uB97C 30\uC90D\uB2C8\uB2E4. \uAE30\uBB3C\uC758
+        \uCCB4\uB825\uC774 60\uC774\uD558\uBA74, 60\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: illustration
