@@ -25,12 +25,11 @@ public class DeckTester : MonoBehaviour
         {
             g = Instantiate(card.gameObject);
             g.GetComponent<Card>().FlipFront();
-            player.GetCard(g.GetComponent<Card>());
+            player.TryAddCardInHand(g.GetComponent<Card>());
         }
     }
 
-
-    public void UpdateHand()
+    public void UpdateHand(Card card)
     {
         for (int i = 0; i < player.hand.Count; i++)
         {
