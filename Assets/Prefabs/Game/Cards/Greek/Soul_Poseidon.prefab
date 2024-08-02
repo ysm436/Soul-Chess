@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: "\uD3EC\uC138\uC774\uB3C8"
-  cost: 7
+  _cost: 7
   illustration: {fileID: 21300000, guid: cb8a0f9f049edde48a875ba0bcc43995, type: 3}
   description: "\uAE30\uBB3C: \uB8E9\n\uBC30\uCE58:\n\uBAA8\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C
     25\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.\n"

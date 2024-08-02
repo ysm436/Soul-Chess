@@ -123,12 +123,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: "\uAC00\uC815\uC758 \uC2E0, \uD504\uB9AC\uADF8"
-  cost: 7
+  _cost: 7
   illustration: {fileID: 0}
   description: "\uB0B4 \uD134 \uB3D9\uC548, \uC0C1\uB300 \uAE30\uBB3C\uB4E4\uC758
     \uACF5\uACA9\uB825\uC774 20 \uAC10\uC18C\uD569\uB2C8\uB2E4"
   EffectOnCardUsed: {fileID: 1231344544525149533}
   pieceRestriction: 16
-  AD: 30
-  HP: 30
+  _AD: 30
+  _HP: 30
   InfusedPiece: {fileID: 0}
+  decreaseAmount: 20

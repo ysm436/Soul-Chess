@@ -212,6 +212,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Draw()
     {
+        Debug.Log("Draw");
         OnMyDraw?.Invoke();
     }
     public void TurnEnd()

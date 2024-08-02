@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: "\uBAA8\uB974\uAC74 \uB974 \uD398\uC774"
-  cost: 4
+  _cost: 4
   illustration: {fileID: 0}
   description: "\uAE30\uBB3C: \uD038/\uBE44\uC20D\n\uB0B4 \uD134\uC774 \uB05D\uB0A0
     \uB54C, \uBB34\uC791\uC704 \uC544\uAD70 \uAE30\uBB3C\uC758 \uCCB4\uB825\uC744

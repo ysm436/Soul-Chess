@@ -90,13 +90,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: "\uD1A0\uB974"
-  cost: 8
+  _cost: 8
   illustration: {fileID: 0}
   description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uBB34\uC791\uC704 \uC801
     \uAE30\uBB3C\uC5D0\uAC8C \uB0B4 \uACF5\uACA9\uB825\uB9CC\uD07C \uD53C\uD574\uB97C
     \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 88144215726592661}
   pieceRestriction: 8
-  AD: 40
-  HP: 80
+  _AD: 40
+  _HP: 80
   InfusedPiece: {fileID: 0}

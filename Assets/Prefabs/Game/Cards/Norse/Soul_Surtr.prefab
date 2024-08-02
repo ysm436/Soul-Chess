@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: "\uC218\uB974\uD2B8"
-  cost: 40
+  _cost: 40
   illustration: {fileID: 0}
   description: "\uD134\uC774 \uC885\uB8CC\uB420 \uB54C \uB9C8\uB2E4, \uBE44\uC6A9\uC774
     1 \uC904\uC5B4\uB4ED\uB2C8\uB2E4.\r\n\uAC15\uB9BC : \u2018\uBAA8\uB4E0\u2019
@@ -145,6 +145,6 @@ MonoBehaviour:
     \uB54C, \uC774 \uAE30\uBB3C\uC740 \uD30C\uAD34\uB429\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 3791512780746967578}
   pieceRestriction: -1
-  AD: 150
-  HP: 150
+  _AD: 150
+  _HP: 150
   InfusedPiece: {fileID: 0}

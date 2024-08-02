@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class Card : TargetableObject
@@ -10,7 +11,17 @@ public class Card : TargetableObject
 
     [Header("CardData")]
     public string cardName;
-    public int cost;
+    public int cost
+    {
+        set
+        {
+            _cost = value;
+            cardObject.costText.text = value.ToString();
+        }
+        get { return _cost; }
+    }
+    [SerializeField]
+    private int _cost;
     public Sprite illustration;
     [Multiline]
     public string description;
