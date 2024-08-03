@@ -129,17 +129,21 @@ abstract public class ChessPiece : TargetableObject
         OnStartAttack?.Invoke(targetPiece);
 
         targetPiece.Attacked(this, attackDamage);
+
+        bool targetIsKilled = !targetPiece.isAlive;
         if (!targetPiece.isAlive)
         {
             OnKill?.Invoke(targetPiece);
-            return true;
+        }
+        else
+        {
+            HP -= targetPiece.attackDamage;
         }
 
-        HP -= targetPiece.attackDamage;
 
         OnEndAttack?.Invoke(targetPiece);
 
-        return false;
+        return targetIsKilled;
     }
     /// <summary>
     /// 

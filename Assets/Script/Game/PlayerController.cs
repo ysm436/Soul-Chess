@@ -89,13 +89,13 @@ public class PlayerController : MonoBehaviour
                         {
                             if (chosenPiece.Attack(targetPiece))
                             {
-                                gameBoard.KillPiece(targetPiece);
                                 chosenPiece.Move(coordinate);
                                 gameBoard.chessBoard.SetPiecePositionByCoordinate(chosenPiece);
                             }
                             else if (!chosenPiece.isAlive)
                             {
-                                gameBoard.KillPiece(chosenPiece);
+                                //이벤트 메커니즘 수정하면서 다시 체크해볼게요
+                                //gameBoard.KillPiece(chosenPiece);
                             }
 
                             chosenPiece = null;
