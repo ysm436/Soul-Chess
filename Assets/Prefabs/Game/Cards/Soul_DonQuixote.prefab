@@ -52,14 +52,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soul_DonQuixote
       objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].isOpponent
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].targetPieceType
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
     m_RemovedGameObjects: []

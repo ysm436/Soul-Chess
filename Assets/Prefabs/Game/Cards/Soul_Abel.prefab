@@ -52,30 +52,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soul_Abel
       objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].isFriendly
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].isOpponent
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[1].isFriendly
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].targetPieceType
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[1].targetPieceType
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
     m_RemovedGameObjects: []
@@ -121,6 +97,6 @@ MonoBehaviour:
     \uCC98\uCE58\uD569\uB2C8\uB2E4. "
   EffectOnCardUsed: {fileID: 1942988319355413372}
   pieceRestriction: 4
-  AD: 0
-  HP: 0
+  AD: 30
+  HP: 50
   InfusedPiece: {fileID: 0}

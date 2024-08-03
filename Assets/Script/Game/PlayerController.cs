@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
                             }
                             else if (!chosenPiece.isAlive)
                             {
-                                gameBoard.KillPiece(chosenPiece);
+                                //gameBoard.KillPiece(chosenPiece);
                             }
 
                             chosenPiece = null;

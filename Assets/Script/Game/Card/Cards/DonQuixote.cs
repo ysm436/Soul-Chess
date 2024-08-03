@@ -21,7 +21,7 @@ public class DonQuixote : SoulCard
 
     public void StartAttackEffect(ChessPiece chessPiece)
     {
-        if(chessPiece.AD >= standardAD)
+        if (chessPiece.AD >= standardAD)
         {
             this.InfusedPiece.AD += extraAD;
             extraAttack = true;
@@ -30,7 +30,7 @@ public class DonQuixote : SoulCard
 
     public void EndAttackEffect(ChessPiece chessPiece)
     {
-        if(extraAttack)
+        if (extraAttack)
         {
             this.InfusedPiece.AD -= extraAD;
             extraAttack = false;
