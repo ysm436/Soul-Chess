@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
                             }
                             else if (!chosenPiece.isAlive)
                             {
+                                //이벤트 메커니즘 수정하면서 다시 체크해볼게요
                                 //gameBoard.KillPiece(chosenPiece);
                             }
 

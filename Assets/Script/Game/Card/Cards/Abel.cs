@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO 이벤트 시스템 수정 후 재수정
+
 public class Abel : SoulCard
 {
     ChessPiece recent;
