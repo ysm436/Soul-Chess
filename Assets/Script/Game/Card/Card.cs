@@ -79,9 +79,13 @@ public class Card : TargetableObject
 
     public virtual bool TryUse()
     {
-        GameManager.instance.whiteController.UseCard(this);
-
-        return true;
+        if (GameManager.instance.CurrentPlayerData().soulEssence >= cost)
+        {
+            //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
+            GameManager.instance.CurrentPlayerController().UseCard(this);
+            return true;
+        }
+        return false;
     }
 
     //public abstract void Use();
