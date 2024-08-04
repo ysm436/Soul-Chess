@@ -18,6 +18,8 @@ public class Card : TargetableObject
 
     public Effect EffectOnCardUsed;
 
+    public bool isFlipped { get; private set; }
+
     protected virtual void Awake()
     {
         cardObject = GetComponent<CardObject>();
@@ -27,22 +29,20 @@ public class Card : TargetableObject
         cardObject.spriteRenderer.sprite = illustration;
         cardObject.descriptionText.text = description;
         cardObject.backSpriteRenderer.sprite = back;
-
-
     }
     private void OnMouseEnter()
     {
-        if (!GameManager.instance.whiteController.isUsingCard)
+        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped)
             GameManager.instance.ShowCard(this);
     }
     private void OnMouseExit()
     {
-        if (!GameManager.instance.whiteController.isUsingCard)
+        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped)
             GameManager.instance.HideCard();
     }
     private void OnMouseDrag()
     {
-        if (!GameManager.instance.whiteController.isUsingCard)
+        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped)
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
@@ -50,13 +50,18 @@ public class Card : TargetableObject
     }
     private void OnMouseUp()
     {
-        if (!GameManager.instance.whiteController.isUsingCard)
+        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped)
         {
             if (transform.position.y > 0)
             {
                 if (!TryUse())
                 {
                     //카드 원위치
+                    GameManager.instance.gameData.playerWhite.UpdateHandPosition();
+                }
+                else
+                {
+                    GameManager.instance.gameData.playerWhite.TryRemoveCardInHand(this);
                 }
             }
         }
@@ -81,11 +86,13 @@ public class Card : TargetableObject
     public void FlipFront()
     {
         cardObject.backSpriteRenderer.sortingOrder = -1;
+        isFlipped = false;
+
     }
     public void FlipBack()
     {
         cardObject.backSpriteRenderer.sortingOrder = 0;
-
+        isFlipped = true;
     }
 
     //public abstract void Use();

@@ -11,8 +11,8 @@ public class PlayerData
     public int soulOrbs; // 자원 최대치
     public int soulEssence; // 현재 자원량
 
-    public int maxCardCount = 8;    //최대 손패
-    public int mulliganCount = 4;   //첫 손패
+    public int maxHandCardCount = 8;    //최대 손패
+    public int mulliganHandCount = 4;   //첫 손패
 
     public List<Card> deck;
     public List<Card> hand;
@@ -23,13 +23,17 @@ public class PlayerData
     // 게임 시작시 호출
     public void Initialize()
     {
-        deckPosition = new Vector2(-8f, 4f);
+        deckPosition = new Vector2(8f, -2.5f);
 
         foreach (Card card in deck)
         {
             card.FlipBack();
             card.transform.position = deckPosition;
         }
+
+        ShuffleDeck();
+
+        Mulligan();
     }
 
     // 드로우
@@ -41,8 +45,8 @@ public class PlayerData
         }
         else
         {
-            Card card = deck[Random.Range(0, deck.Count)];
-            deck.Remove(card);
+            Card card = deck[deck.Count - 1];
+            deck.RemoveAt(deck.Count - 1);
             card.FlipFront();
 
             if (IsHandFull())
@@ -59,10 +63,10 @@ public class PlayerData
 
     private bool IsHandFull()
     {
-        return hand.Count >= maxCardCount;
+        return hand.Count >= maxHandCardCount;
     }
 
-    private void UpdateHandPosition()
+    public void UpdateHandPosition()
     {
         for (int i = 0; i < hand.Count; i++)
         {
@@ -90,7 +94,6 @@ public class PlayerData
 
         if (index != -1)
         {
-            DestroyCard(hand[index]);
             hand.Remove(cardInstance);
             return true;
         }
@@ -122,6 +125,7 @@ public class PlayerData
     public void GetCard(Card cardInstance)
     {
         hand.Add(cardInstance);
+        cardInstance.FlipFront();
         cardInstance.GetComponent<SortingGroup>().sortingOrder = hand.Count - 1;
 
         UpdateHandPosition();
@@ -133,6 +137,45 @@ public class PlayerData
     {
         cardInstance.Destroy();
     }
+
+    public void ShuffleDeck()
+    {
+        for (int i = 0; i < deck.Count; i++)
+        {
+            int j = Random.Range(i, deck.Count);
+            Card tmp = deck[i];
+            deck[i] = deck[j];
+            deck[j] = tmp;
+        }
+    }
+
+    private void Mulligan()
+    {
+        for (int i = 0; i <  mulliganHandCount; i++)
+        {
+            DrawCard();
+        }
+
+        foreach (Card card in hand)
+        {
+            //card.isMulligan = true;
+        }
+    }
+
+    public void ChangeMulligan(Card cardInstance)
+    {
+        int index = Random.Range(0, deck.Count + 1);
+        deck.Insert(index, cardInstance);
+        cardInstance.FlipBack();
+        cardInstance.transform.position = deckPosition;
+        //cardInstance.isMulligan = false;
+
+        TryRemoveCardInHand(cardInstance);
+
+        DrawCard();
+    }
+
+
 
     public int spellDamageIncrease = 0;
     public int spellDamageCoefficient = 1;
