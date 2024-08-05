@@ -206,6 +206,86 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3942774322492686617, guid: 5774fd488f14e6b4396382217fb55d10, type: 3}
   m_PrefabInstance: {fileID: 27941302}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &252833834
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 463008058}
+    m_Modifications:
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8799467538424568598, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_Name
+      value: WhiteSoulOrb
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3176916607182412570, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 6c164027602fd41459ade190044e02be, type: 3}
+--- !u!114 &252833835 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6293375645755760837, guid: 6c164027602fd41459ade190044e02be, type: 3}
+  m_PrefabInstance: {fileID: 252833834}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c371e07879a45944b455a0d95866948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &252833836 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+  m_PrefabInstance: {fileID: 252833834}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &430605365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -388,6 +468,8 @@ Transform:
   m_Children:
   - {fileID: 625501410}
   - {fileID: 1635301581}
+  - {fileID: 252833836}
+  - {fileID: 1335561087}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &463008059
@@ -634,6 +716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerColor: 0
   gameBoard: {fileID: 1132824878}
+  soulOrb: {fileID: 252833835}
   isUsingCard: 0
 --- !u!4 &625501410
 Transform:
@@ -1572,7 +1655,9 @@ MonoBehaviour:
   bottomPlayerColor: 0
   chessBoard: {fileID: 1628251987148721090}
   cardBoard: {fileID: 1951553768}
+  pieceInfo: {fileID: 1594983728884485668, guid: 6f09fd129a154794e8cebcd82ef9b00a, type: 3}
   whiteController: {fileID: 625501409}
+  isShowingPieceInfo: 0
 --- !u!1001 &1184252153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1817,6 +1902,86 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3942774322492686617, guid: 72a9fbc4160515844976c18efb43c442, type: 3}
   m_PrefabInstance: {fileID: 1218359108}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1335561086
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 463008058}
+    m_Modifications:
+    - target: {fileID: -6293375645755760837, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: playerColor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8799467538424568598, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_Name
+      value: BlackSoulOrb
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3176916607182412570, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 6c164027602fd41459ade190044e02be, type: 3}
+--- !u!4 &1335561087 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
+  m_PrefabInstance: {fileID: 1335561086}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1335561088 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6293375645755760837, guid: 6c164027602fd41459ade190044e02be, type: 3}
+  m_PrefabInstance: {fileID: 1335561086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c371e07879a45944b455a0d95866948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1387144019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,6 +2402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerColor: 1
   gameBoard: {fileID: 1132824878}
+  soulOrb: {fileID: 1335561088}
   isUsingCard: 0
 --- !u!4 &1635301581
 Transform:
