@@ -100,6 +100,8 @@ MonoBehaviour:
   cardName: "\uC5B4\uBBF8 \uACF0"
   _cost: 4
   illustration: {fileID: 0}
+  reigon: 1
+  rarity: 0
   description: "\uAE30\uBB3C: \uB8E9/\uD3F0"
   EffectOnCardUsed: {fileID: 4355344996031333222}
   pieceRestriction: 9

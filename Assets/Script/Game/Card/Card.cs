@@ -23,6 +23,8 @@ public class Card : TargetableObject
     [SerializeField]
     private int _cost;
     public Sprite illustration;
+    public Reigon reigon;
+    public Rarity rarity;
     [Multiline]
     public string description;
     public Effect EffectOnCardUsed;
@@ -85,4 +87,18 @@ public class Card : TargetableObject
     }
 
     //public abstract void Use();
+
+    public enum Reigon
+    {
+        Greek,
+        Norse,
+        Western
+    }   
+
+    public enum Rarity
+    {
+        Common,
+        Legendary,
+        Mythical
+    }
 }

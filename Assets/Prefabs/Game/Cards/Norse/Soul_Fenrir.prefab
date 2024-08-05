@@ -92,6 +92,8 @@ MonoBehaviour:
   cardName: "\uD39C\uB9AC\uB974"
   _cost: 9
   illustration: {fileID: 0}
+  reigon: 1
+  rarity: 1
   description: "\uC774 \uAE30\uBB3C\uC774 \uACF5\uACA9\uD558\uC5EC \uC801 \uAE30\uBB3C\uC744
     \uCC98\uCE58\uD560 \uB54C \uB9C8\uB2E4 +20/+20\uC744 \uC5BB\uC2B5\uB2C8\uB2E4"
   EffectOnCardUsed: {fileID: 1138779223185715711}
