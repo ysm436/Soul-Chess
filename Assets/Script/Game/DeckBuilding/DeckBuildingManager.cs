@@ -1,26 +1,23 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DeckBuildingManager : MonoBehaviour
 {
     private List<GameObject> AllCardList = new List<GameObject>();
     private List<GameObject> DisplayCardList = new List<GameObject>();
 
+
     public Transform DynamicDisplay;
     public GameObject display_prefab;
 
-    bool soul = true;
-    bool spell = true;
+    private DeckBuildingSceneUI deckBuildingSceneUI;
 
     private void Awake()
     {
+        deckBuildingSceneUI = GetComponent<DeckBuildingSceneUI>();
         FindAllCard();
         MakeDisplayCard();
     }
@@ -66,7 +63,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().CardType == "SpellCard")
+                if(!card.activeSelf && card.GetComponent<CardForDeckBuilding>().CardType == "SpellCard")
                 {
                     card.SetActive(true);
                 }
@@ -76,7 +73,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().CardType == "SpellCard")
+                if(card.activeSelf && card.GetComponent<CardForDeckBuilding>().CardType == "SpellCard")
                 {
                     card.SetActive(false);
                 }
@@ -90,7 +87,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().CardType == "SoulCard")
+                if(!card.activeSelf && card.GetComponent<CardForDeckBuilding>().CardType == "SoulCard")
                 {
                     card.SetActive(true);
                 }
@@ -100,7 +97,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().CardType == "SoulCard")
+                if(card.activeSelf && card.GetComponent<CardForDeckBuilding>().CardType == "SoulCard")
                 {
                     card.SetActive(false);
                 }
@@ -114,7 +111,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Reigon == "Greek")
+                if(!card.activeSelf && card.GetComponent<CardForDeckBuilding>().Reigon == "Greek")
                 {
                     card.SetActive(true);
                 }
@@ -124,7 +121,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Reigon == "Greek")
+                if(card.activeSelf && card.GetComponent<CardForDeckBuilding>().Reigon == "Greek")
                 {
                     card.SetActive(false);
                 }
@@ -138,7 +135,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Reigon == "Western")
+                if(!card.activeSelf && card.GetComponent<CardForDeckBuilding>().Reigon == "Western")
                 {
                     card.SetActive(true);
                 }
@@ -148,7 +145,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Reigon == "Western")
+                if(card.activeSelf && card.GetComponent<CardForDeckBuilding>().Reigon == "Western")
                 {
                     card.SetActive(false);
                 }
@@ -162,7 +159,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Reigon == "Norse")
+                if(!card.activeSelf && card.GetComponent<CardForDeckBuilding>().Reigon == "Norse")
                 {
                     card.SetActive(true);
                 }
@@ -172,7 +169,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Reigon == "Norse")
+                if(card.activeSelf && card.GetComponent<CardForDeckBuilding>().Reigon == "Norse")
                 {
                     card.SetActive(false);
                 }
@@ -185,7 +182,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Rarity == "Common")
+                if(!card.activeSelf && card.GetComponent<CardForDeckBuilding>().Rarity == "Common")
                 {
                     card.SetActive(true);
                 }
@@ -195,7 +192,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Rarity == "Common")
+                if(card.activeSelf && card.GetComponent<CardForDeckBuilding>().Rarity == "Common")
                 {
                     card.SetActive(false);
                 }
@@ -208,7 +205,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Rarity == "Legendary")
+                if(!card.activeSelf && card.GetComponent<CardForDeckBuilding>().Rarity == "Legendary")
                 {
                     card.SetActive(true);
                 }
@@ -218,7 +215,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Rarity == "Legendary")
+                if(card.activeSelf && card.GetComponent<CardForDeckBuilding>().Rarity == "Legendary")
                 {
                     card.SetActive(false);
                 }
@@ -231,7 +228,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Rarity == "Mythical")
+                if(!card.activeSelf && card.GetComponent<CardForDeckBuilding>().Rarity == "Mythical")
                 {
                     card.SetActive(true);
                 }
@@ -241,7 +238,7 @@ public class DeckBuildingManager : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<CardInfoForDeckBuilding>().Rarity == "Mythical")
+                if(card.activeSelf && card.GetComponent<CardForDeckBuilding>().Rarity == "Mythical")
                 {
                     card.SetActive(false);
                 }
@@ -252,6 +249,7 @@ public class DeckBuildingManager : MonoBehaviour
     // 카드들을 화면에 나타냅니다.
     private void MakeDisplayCard()
     {
+        int index = 0;
         foreach (var card in AllCardList)
         {
             GameObject newDisplay = Instantiate(display_prefab, DynamicDisplay);
@@ -260,8 +258,9 @@ public class DeckBuildingManager : MonoBehaviour
             TextMeshProUGUI[] texts = newDisplay.GetComponentsInChildren<TextMeshProUGUI>();
 
             Card cardinfo = card.GetComponent<Card>();
-            CardInfoForDeckBuilding DisplayCard = newDisplay.GetComponent<CardInfoForDeckBuilding>();
+            CardForDeckBuilding DisplayCard = newDisplay.GetComponent<CardForDeckBuilding>();
 
+            DisplayCard.cardindex = index++;
             DisplayCard.CardName = cardinfo.cardName;
             DisplayCard.Cost = cardinfo.cost;
             DisplayCard.Reigon = cardinfo.reigon.ToString();
@@ -284,5 +283,7 @@ public class DeckBuildingManager : MonoBehaviour
             DisplayCardList.Add(newDisplay);
         }
     }
+
+    
 
 }

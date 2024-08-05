@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 699316848449856855}
   - component: {fileID: 1400208298636460439}
   - component: {fileID: 9096240186614809129}
+  - component: {fileID: -6630783157775228239}
   - component: {fileID: -5632672100843226547}
   m_Layer: 0
   m_Name: DisplayCard
@@ -156,6 +157,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &-6630783157775228239
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026877158094313868}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &-5632672100843226547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +181,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb30fe40e08f0d4cbc255cda89e44b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardName: 
+  Cost: 0
+  CardType: 
+  Reigon: 
+  ChessPiece: 
+  Rarity: 
+  parentDragtoDeck: {fileID: 0}
+  parentDragtoView: {fileID: 0}
 --- !u!1 &5700644636403966947
 GameObject:
   m_ObjectHideFlags: 0
