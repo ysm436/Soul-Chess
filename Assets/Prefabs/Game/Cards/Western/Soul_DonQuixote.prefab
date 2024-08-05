@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8052767433709974904
+--- !u!1001 &6200641261614424647
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -50,39 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Name
-      value: Soul_Poseidon
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: AD
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: HP
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: cost
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: cardName
-      value: Poseidon
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: description
-      value: 'Advent: deal 25 damage to all enemies'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: illustration
-      value: 
-      objectReference: {fileID: 21300000, guid: cb8a0f9f049edde48a875ba0bcc43995, type: 3}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: EffectOnCardUsed
-      value: 
-      objectReference: {fileID: 391618131688367025}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: pieceRestriction
-      value: 8
+      value: Soul_DonQuixote
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
@@ -90,45 +58,46 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      insertIndex: 6
-      addedObject: {fileID: 1292469394887977406}
+      insertIndex: -1
+      addedObject: {fileID: 7433252666421529211}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!114 &391618131688367025 stripped
+--- !u!114 &4369469849057277070 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 8052767433709974904}
+  m_PrefabInstance: {fileID: 6200641261614424647}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8071162094226948297}
+  m_GameObject: {fileID: 5318381834173372406}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8071162094226948297 stripped
+--- !u!1 &5318381834173372406 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 8052767433709974904}
+  m_PrefabInstance: {fileID: 6200641261614424647}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1292469394887977406
+--- !u!114 &7433252666421529211
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8071162094226948297}
+  m_GameObject: {fileID: 5318381834173372406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 596391799992f8646846d8c078579754, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ef52074e405624c8179dc11910aa14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: "\uD3EC\uC138\uC774\uB3C8"
-  _cost: 7
-  illustration: {fileID: 21300000, guid: cb8a0f9f049edde48a875ba0bcc43995, type: 3}
-  back: {fileID: 21300000, guid: 6995a100b2974674db52c4a15d575dc2, type: 3}
-  description: "\uAE30\uBB3C: \uB8E9\n\uBC30\uCE58:\n\uBAA8\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C
-    25\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.\n"
-  EffectOnCardUsed: {fileID: 391618131688367025}
-  pieceRestriction: 8
-  _AD: 55
-  _HP: 55
+  cardName: "\uB3C8\uD0A4\uD638\uD14C"
+  _cost: 5
+  illustration: {fileID: 21300000, guid: 8df697752e372394a8f47915eb3294fd, type: 3}
+  description: "\uACF5\uACA9\uB825\uC774 100\uC774\uC0C1\uC778 \uAE30\uBB3C\uC744
+    \uACF5\uACA9\uD560 \uB54C 40\uC758 \uCD94\uAC00 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: 4369469849057277070}
+  pieceRestriction: 2
+  _AD: 20
+  _HP: 60
   InfusedPiece: {fileID: 0}
+  standardAD: 100
+  extraAD: 40

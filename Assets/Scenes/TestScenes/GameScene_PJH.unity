@@ -1560,11 +1560,15 @@ MonoBehaviour:
       soulEssence: 0
       deck: []
       hand: []
+      spellDamageIncrease: 0
+      spellDamageCoefficient: 1
     playerBlack:
       soulOrbs: 0
       soulEssence: 0
       deck: []
       hand: []
+      spellDamageIncrease: 0
+      spellDamageCoefficient: 1
   bottomPlayerColor: 0
   chessBoard: {fileID: 1628251987148721090}
   cardBoard: {fileID: 1951553768}
@@ -2315,6 +2319,10 @@ MonoBehaviour:
   hand:
   - {fileID: 90797455826848939, guid: fc33ddca6bc40df4db6a584de32b9753, type: 3}
   - {fileID: 1292469394887977406, guid: 69acd9f53abcc974da0de5adf88dba59, type: 3}
+  - {fileID: 3604200065000529882, guid: 69c628af0606ded408e60e35428eab89, type: 3}
+  - {fileID: 6592858290932310892, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+  - {fileID: -542098215232420279, guid: a624a3c6dfec07e4e96e01a10fa19a1d, type: 3}
+  - {fileID: -8018143768630719333, guid: d7ad69c35265ccd4ea5664162fca2c34, type: 3}
 --- !u!4 &1707751552
 Transform:
   m_ObjectHideFlags: 0

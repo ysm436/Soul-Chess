@@ -22,7 +22,13 @@ abstract public class ChessPiece : TargetableObject
 
     public Vector2Int coordinate;
     public bool isAlive;
-    private SoulCard soul = null;
+    public SoulCard soul
+    {
+        set { _soul = value; }
+        get { return _soul; }
+    }
+
+    private SoulCard _soul = null;
     public PieceType pieceType;
     public GameManager.PlayerColor pieceColor;
 
@@ -123,17 +129,21 @@ abstract public class ChessPiece : TargetableObject
         OnStartAttack?.Invoke(targetPiece);
 
         targetPiece.Attacked(this, attackDamage);
+
+        bool targetIsKilled = !targetPiece.isAlive;
         if (!targetPiece.isAlive)
         {
             OnKill?.Invoke(targetPiece);
-            return true;
+        }
+        else
+        {
+            HP -= targetPiece.attackDamage;
         }
 
-        HP -= targetPiece.attackDamage;
 
         OnEndAttack?.Invoke(targetPiece);
 
-        return false;
+        return targetIsKilled;
     }
     /// <summary>
     /// 
@@ -168,7 +178,9 @@ abstract public class ChessPiece : TargetableObject
         if (soul != null)
             RemoveSoul();
 
-        soul = Instantiate<GameObject>(targetSoul.gameObject, this.transform).GetComponent<SoulCard>();
+        soul = targetSoul;
+        soul.transform.SetParent(transform);
+        soul.transform.localPosition = Vector3.zero;
         soul.gameObject.SetActive(false);
 
         targetSoul.InfusedPiece = this;
