@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameManager.PlayerColor playerColor;
     public GameManager gameBoard;
+    public SoulOrb soulOrb; //코스트 프리팹
 
     ChessPiece chosenPiece = null;
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
@@ -197,6 +198,7 @@ public class PlayerController : MonoBehaviour
     public void UseCardEffect()
     {
         UsingCard.EffectOnCardUsed.EffectAction();
+        GameManager.instance.CurrentPlayerData().soulEssence -= UsingCard.cost;
 
         if (!(UsingCard is SoulCard))
             UsingCard.Destroy();
@@ -218,5 +220,18 @@ public class PlayerController : MonoBehaviour
     public void TurnEnd()
     {
         OnMyTurnEnd?.Invoke();
+        //턴 종료 시 상대 코스트 회복
+        if (playerColor == GameManager.PlayerColor.White)
+        {
+            if (GameManager.instance.gameData.playerBlack.soulOrbs < 10)
+                GameManager.instance.gameData.playerBlack.soulOrbs++;
+            GameManager.instance.gameData.playerBlack.soulEssence = GameManager.instance.gameData.playerBlack.soulOrbs;
+        }
+        else
+        {
+            if (GameManager.instance.gameData.playerWhite.soulOrbs < 10)
+                GameManager.instance.gameData.playerWhite.soulOrbs++;
+            GameManager.instance.gameData.playerWhite.soulEssence = GameManager.instance.gameData.playerWhite.soulOrbs;
+        }
     }
 }
