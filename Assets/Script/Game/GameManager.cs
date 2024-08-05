@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public ChessBoard chessBoard;
     public GameObject cardBoard;
     public PieceInfo pieceInfo; //기물 정보 프리팹
+    public GameObject myDeckObject;
 
     public PlayerController whiteController;
 
@@ -114,6 +115,12 @@ public class GameManager : MonoBehaviour
     {
         if (whiteController.enabled) return whiteController;
         else return null; //blackController
+    }
+
+    public void AddCardInDeckObject(Card card)
+    {
+        card.FlipBack();
+        card.transform.position = myDeckObject.transform.position;
     }
 
     [System.Serializable]

@@ -27,8 +27,7 @@ public class PlayerData
 
         foreach (Card card in deck)
         {
-            card.FlipBack();
-            card.transform.position = deckPosition;
+            GameManager.instance.AddCardInDeckObject(card);
         }
 
         ShuffleDeck();
