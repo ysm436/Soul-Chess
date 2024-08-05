@@ -56,3 +56,6 @@ TagManager:
   - name: Card
     uniqueID: 3999383507
     locked: 0
+  - name: Deck
+    uniqueID: 3085121659
+    locked: 0
