@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
@@ -83,8 +82,6 @@ abstract public class ChessPiece : TargetableObject
     [SerializeField]
     private int _maxHP;
 
-    //악세서리
-    private PieceAccessory accessory = null;
 
     private PieceObject pieceObject;
 
@@ -186,12 +183,6 @@ abstract public class ChessPiece : TargetableObject
         soul.transform.localPosition = Vector3.zero;
         soul.gameObject.SetActive(false);
 
-        //악세서리 오브젝트를 기물에 자식으로 생성
-        if (soul.accessory != null)
-        {
-            accessory = Instantiate(soul.accessory, transform.position, Quaternion.identity);
-            accessory.transform.SetParent(transform);
-        }
         targetSoul.InfusedPiece = this;
 
         maxHP += soul.HP;

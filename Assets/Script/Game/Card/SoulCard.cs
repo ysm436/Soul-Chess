@@ -39,9 +39,6 @@ public class SoulCard : Card
     [SerializeField]
     private int _HP;
 
-    //영혼카드 프리팹마다 대응하는 악세서리 프리팹 인스펙터에 지정 필요
-    public PieceAccessory accessory;
-
     [HideInInspector]
     public ChessPiece InfusedPiece;
 

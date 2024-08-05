@@ -89,7 +89,6 @@ MonoBehaviour:
   pieceRestriction: 20
   _AD: 20
   _HP: 30
-  accessory: {fileID: 6792036558972093160, guid: e442eaa8a519b4f43bb1d7c9c421a2e2, type: 3}
   InfusedPiece: {fileID: 0}
 --- !u!114 &8465317945174799330 stripped
 MonoBehaviour:

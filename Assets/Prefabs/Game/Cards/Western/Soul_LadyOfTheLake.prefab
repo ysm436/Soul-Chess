@@ -100,5 +100,4 @@ MonoBehaviour:
   pieceRestriction: 20
   _AD: 40
   _HP: 40
-  accessory: {fileID: 4166747416282027478, guid: 9393d6577a23d1344baba662ba1e6077, type: 3}
   InfusedPiece: {fileID: 0}
