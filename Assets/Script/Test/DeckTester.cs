@@ -33,12 +33,9 @@ public class DeckTester : MonoBehaviour
 
         foreach (Card card in deck)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                instantiatedCard = Instantiate(card, deckAnchor);
-                instantiatedCard.FlipBack();
-                player.deck.Add(instantiatedCard);
-            }
+            instantiatedCard = Instantiate(card, deckAnchor);
+            instantiatedCard.FlipBack();
+            player.deck.Add(instantiatedCard);
         }
 
         gameBoard.whiteController.OnOpponentTurnEnd += () => player.DrawCard();
@@ -46,6 +43,8 @@ public class DeckTester : MonoBehaviour
         player.OnGetCard += (card) => card.transform.SetParent(handAnchor);
 
         player.Initialize();
+
+        //player.Mulligan();
     }
 
     private void Update()

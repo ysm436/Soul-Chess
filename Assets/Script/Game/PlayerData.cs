@@ -32,8 +32,6 @@ public class PlayerData
         }
 
         ShuffleDeck();
-
-        Mulligan();
     }
 
     // 드로우
@@ -151,7 +149,7 @@ public class PlayerData
 
     private void Mulligan()
     {
-        for (int i = 0; i <  mulliganHandCount; i++)
+        for (int i = 0; i < mulliganHandCount; i++)
         {
             DrawCard();
         }
