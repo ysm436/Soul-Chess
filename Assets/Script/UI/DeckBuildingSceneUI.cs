@@ -9,7 +9,6 @@ public class DeckBuildingSceneUI : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button newDeckButton;
     [SerializeField] private Button cancelButton;
-    //덱 구성 후 저장 버튼 (추후 기능 추가 대비)
     [SerializeField] private Button saveButton;
     [SerializeField] public Button deckloadButton;
     [SerializeField] public GameObject deckListPanel;
@@ -18,11 +17,11 @@ public class DeckBuildingSceneUI : MonoBehaviour
 
     private void Awake()
     {
-        enableDeckListPanel();
+        CancelButtonFunction();
         quitButton.onClick.AddListener(LoadMainScene);
-        newDeckButton.onClick.AddListener(enableNewDeckPanel);
-        cancelButton.onClick.AddListener(enableDeckListPanel);
-        saveButton.onClick.AddListener(saveDeck);
+        newDeckButton.onClick.AddListener(NewDeckButtonFunction);
+        cancelButton.onClick.AddListener(CancelButtonFunction);
+        saveButton.onClick.AddListener(saveButtonFunction);
 
         deckinfo = newDeckPanel.GetComponent<DeckManager>();
     }
@@ -32,13 +31,17 @@ public class DeckBuildingSceneUI : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
-    private void enableDeckListPanel()
+    private void CancelButtonFunction()
     {
+        deckinfo.DeckCancel();
+        deckinfo.TempDeckReset();
+        GetComponent<DeckBuildingManager>().ReloadDisplayCard();
+
         deckListPanel.SetActive(true);
         newDeckPanel.SetActive(false);
     }
 
-    private void enableNewDeckPanel()
+    private void NewDeckButtonFunction()
     {
         deckinfo.newDeckSignal = true;
 
@@ -46,10 +49,11 @@ public class DeckBuildingSceneUI : MonoBehaviour
         newDeckPanel.SetActive(true);
     }
 
-    private void saveDeck()
+    private void saveButtonFunction()
     {
         deckinfo.DeckSave(deckinfo.loaded_deck_index);
         deckinfo.TempDeckReset();
+        GetComponent<DeckBuildingManager>().ReloadDisplayCard();
 
         deckListPanel.SetActive(true);
         newDeckPanel.SetActive(false);

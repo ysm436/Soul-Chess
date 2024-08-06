@@ -600,8 +600,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2136815246}
-        m_TargetAssemblyTypeName: DeckBuildingManager, Assembly-CSharp
+      - m_Target: {fileID: 2136815247}
+        m_TargetAssemblyTypeName: CardFilter, Assembly-CSharp
         m_MethodName: LegendaryToggle
         m_Mode: 0
         m_Arguments:
@@ -852,8 +852,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2136815246}
-        m_TargetAssemblyTypeName: DeckBuildingManager, Assembly-CSharp
+      - m_Target: {fileID: 2136815247}
+        m_TargetAssemblyTypeName: CardFilter, Assembly-CSharp
         m_MethodName: SpellToggle
         m_Mode: 0
         m_Arguments:
@@ -2966,8 +2966,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2136815246}
-        m_TargetAssemblyTypeName: DeckBuildingManager, Assembly-CSharp
+      - m_Target: {fileID: 2136815247}
+        m_TargetAssemblyTypeName: CardFilter, Assembly-CSharp
         m_MethodName: NorseToggle
         m_Mode: 0
         m_Arguments:
@@ -3498,8 +3498,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2136815246}
-        m_TargetAssemblyTypeName: DeckBuildingManager, Assembly-CSharp
+      - m_Target: {fileID: 2136815247}
+        m_TargetAssemblyTypeName: CardFilter, Assembly-CSharp
         m_MethodName: CommonToggle
         m_Mode: 0
         m_Arguments:
@@ -4074,8 +4074,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2136815246}
-        m_TargetAssemblyTypeName: DeckBuildingManager, Assembly-CSharp
+      - m_Target: {fileID: 2136815247}
+        m_TargetAssemblyTypeName: CardFilter, Assembly-CSharp
         m_MethodName: WesternToggle
         m_Mode: 0
         m_Arguments:
@@ -4847,8 +4847,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2136815246}
-        m_TargetAssemblyTypeName: DeckBuildingManager, Assembly-CSharp
+      - m_Target: {fileID: 2136815247}
+        m_TargetAssemblyTypeName: CardFilter, Assembly-CSharp
         m_MethodName: MythicalToggle
         m_Mode: 0
         m_Arguments:
@@ -6336,7 +6336,6 @@ MonoBehaviour:
   DeckSlot: {fileID: 1038093889}
   Simple_Card: {fileID: 6001099817276724710, guid: 9e5b7d6f1948cc1468eec3124c4e7c37, type: 3}
   Simple_Deck: {fileID: 560925474644689047, guid: 18691da86d211a94eb8c4cca58649375, type: 3}
-  TrashCan: {fileID: 475217772}
   newDeckSignal: 0
   TempDeck: []
 --- !u!1 &1485814816
@@ -6631,6 +6630,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546786667}
   m_CullTransparentMesh: 1
+--- !u!1 &1551673596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1551673597}
+  m_Layer: 5
+  m_Name: DisplayStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1551673597
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551673596}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2136815242}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1603886459
 GameObject:
   m_ObjectHideFlags: 0
@@ -7607,8 +7641,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2136815246}
-        m_TargetAssemblyTypeName: DeckBuildingManager, Assembly-CSharp
+      - m_Target: {fileID: 2136815247}
+        m_TargetAssemblyTypeName: CardFilter, Assembly-CSharp
         m_MethodName: GreekToggle
         m_Mode: 0
         m_Arguments:
@@ -7874,7 +7908,7 @@ GameObject:
   - component: {fileID: 2101250961}
   - component: {fileID: 2101250962}
   m_Layer: 5
-  m_Name: Content
+  m_Name: Display_Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8022,8 +8056,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2136815246}
-        m_TargetAssemblyTypeName: DeckBuildingManager, Assembly-CSharp
+      - m_Target: {fileID: 2136815247}
+        m_TargetAssemblyTypeName: CardFilter, Assembly-CSharp
         m_MethodName: SoulToggle
         m_Mode: 0
         m_Arguments:
@@ -8174,6 +8208,7 @@ GameObject:
   - component: {fileID: 2136815243}
   - component: {fileID: 2136815245}
   - component: {fileID: 2136815246}
+  - component: {fileID: 2136815247}
   m_Layer: 5
   m_Name: DeckBuildingSceneUI
   m_TagString: Untagged
@@ -8199,6 +8234,7 @@ RectTransform:
   - {fileID: 728272013}
   - {fileID: 1484079168}
   - {fileID: 669552239}
+  - {fileID: 1551673597}
   - {fileID: 475217773}
   m_Father: {fileID: 435900719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8277,8 +8313,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0c8fd3d89ab194ab8761f27fdc597e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisplayCardList: []
   DynamicDisplay: {fileID: 2101250960}
+  DisplayStorage: {fileID: 1551673597}
+  TrashCan: {fileID: 475217773}
   display_prefab: {fileID: 2026877158094313868, guid: 8b65eb25faf3d0141b456f416066173a, type: 3}
+--- !u!114 &2136815247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136815241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fededaa0cc96f6748a8b8751c551aa25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

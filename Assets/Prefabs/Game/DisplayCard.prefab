@@ -181,14 +181,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb30fe40e08f0d4cbc255cda89e44b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardindex: 0
   CardName: 
   Cost: 0
   CardType: 
   Reigon: 
   ChessPiece: 
   Rarity: 
-  parentDragtoDeck: {fileID: 0}
-  parentDragtoView: {fileID: 0}
+  quantity: 2
 --- !u!1 &5700644636403966947
 GameObject:
   m_ObjectHideFlags: 0

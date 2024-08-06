@@ -4,9 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardForDeckBuilding : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public int cardindex;
+    public int quantity;
     public string CardName;
     public int Cost;
     public string CardType;
