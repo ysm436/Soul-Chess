@@ -12,7 +12,6 @@ public class DeckInfo : MonoBehaviour
 
     private void Awake()
     {
-        DeckNameText.text = deck_index.ToString();
         LoadDeckButton.onClick.AddListener(LoadDeck);
     }
 

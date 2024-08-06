@@ -40,7 +40,7 @@ public class DeckBuildingSceneUI : MonoBehaviour
 
     private void enableNewDeckPanel()
     {
-        deckinfo.deck_index = deckinfo.DeckList.Count;
+        deckinfo.newDeckSignal = true;
 
         deckListPanel.SetActive(false);
         newDeckPanel.SetActive(true);
@@ -48,8 +48,8 @@ public class DeckBuildingSceneUI : MonoBehaviour
 
     private void saveDeck()
     {
-        deckinfo.DeckSave(deckinfo.deck_index);
-        deckinfo.DeckReset();
+        deckinfo.DeckSave(deckinfo.loaded_deck_index);
+        deckinfo.TempDeckReset();
 
         deckListPanel.SetActive(true);
         newDeckPanel.SetActive(false);

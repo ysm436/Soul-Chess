@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,12 +8,14 @@ using UnityEngine.UI;
 
 public class DeckManager : MonoBehaviour, IDropHandler
 {
-    public int deck_index = -1;
+    public int deck_length = -1;
+    public int loaded_deck_index = 0;
     public RectTransform CardSlot;
     public RectTransform DeckSlot;
     public GameObject Simple_Card;
     public GameObject Simple_Deck;
     public GameObject TrashCan;
+    public bool newDeckSignal = false;
     public List<GameObject> TempDeck = new List<GameObject>();
     public List<List<GameObject>> DeckList = new List<List<GameObject>>();
 
@@ -37,7 +40,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     }
 
     //TODO 조금 더 가볍게 만들 수 있다면 그렇게 만들기
-    public void DeckReset() 
+    public void TempDeckReset()
     {
         for(int i = CardSlot.childCount; i > 0; i--)
         {
@@ -47,29 +50,31 @@ public class DeckManager : MonoBehaviour, IDropHandler
         }
     }
 
-    public void DeckSave(int deck_index)
+    public void DeckSave(int loaded_deck_index)
     {
         List<GameObject> newDeck = TempDeck.ToList();
         
-        if(deck_index == DeckList.Count) // 덱 생성 시
+        if(newDeckSignal) // 덱 생성 시
         {
+            deck_length++;
             DeckList.Add(newDeck);
             GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
             DeckInfo newDeckInfo = newDeckDisplay.GetComponent<DeckInfo>();
-            newDeckInfo.deck_index = deck_index;
+            newDeckInfo.deck_index = deck_length;
             TempDeck.Clear();
+            newDeckSignal = false;
         }
         else // 덱 수정 시
         {
-            DeckList.RemoveAt(deck_index);
-            DeckList.Insert(deck_index, newDeck);
+            DeckList.RemoveAt(loaded_deck_index);
+            DeckList.Insert(loaded_deck_index, newDeck);
             TempDeck.Clear();
         }
     }
 
     public void DeckLoad(int index)
     {
-        Debug.Log(DeckList[index].Count);
+        loaded_deck_index = index;
         foreach (var card in DeckList[index])
         {
             GameObject indeck = Instantiate(Simple_Card, CardSlot);
