@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class ChessBoard : MonoBehaviour
 {
-    public Vector2 basePosition;
+    public Vector2 basePosition
+    {
+        get
+        {
+            return transform.position + new Vector3(0.5f, 0.5f, 0);
+        }
+    }
     public GameObject boardSquareSample;
 
 

@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        chessBoard.SetBoardSquares(gameData);
 
         foreach (ChessPiece piece in chessBoard.GetComponentsInChildren<ChessPiece>())
         {
@@ -44,7 +45,6 @@ public class GameManager : MonoBehaviour
             chessBoard.SetPiecePositionByCoordinate(piece);
         }
 
-        chessBoard.SetBoardSquares(gameData);
 
         //코스트 초기화(선공이 1, 후공이 0, 턴 종료 시 상대방 코스트 증가)
         gameData.playerBlack.soulOrbs = gameData.playerBlack.soulEssence = 0;
