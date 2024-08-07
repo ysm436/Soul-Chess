@@ -64,7 +64,7 @@ public abstract class TargetingEffect : Effect
                         obj => (
                             (obj.pieceType & targetPieceType) != 0)
                             && (obj.pieceColor == playerColor ? isFriendly : isOpponent)
-                        // 여기에 조건 추가하시면 될 것 같습니다.
+                            && obj.pieceType != ChessPiece.PieceType.King
                         ).Cast<TargetableObject>().ToList();
                 default:
                     return new List<TargetableObject>();
