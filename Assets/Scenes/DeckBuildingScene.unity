@@ -280,7 +280,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 22134718}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1484079171}
+        m_TargetAssemblyTypeName: DeckManager, Assembly-CSharp
+        m_MethodName: DeckDataSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &22134718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,7 +1007,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 1f223abdfec106146b482f4dda3ce5dc, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -1857,6 +1869,67 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &433449893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 433449895}
+  - component: {fileID: 433449894}
+  - component: {fileID: 433449896}
+  m_Layer: 0
+  m_Name: DeckDB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &433449894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433449893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62107e4db79c69148bf0d41d86c7e20f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeckNameList: []
+--- !u!4 &433449895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433449893}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 908.2052, y: 551.43164, z: 0.6285663}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &433449896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433449893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee3a0c9125497340a980144bab45f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardindex: 0
+  cardNameText: {fileID: 0}
+  cost: {fileID: 0}
 --- !u!1 &435900715
 GameObject:
   m_ObjectHideFlags: 0
@@ -5016,8 +5089,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter new deck name...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1f223abdfec106146b482f4dda3ce5dc, type: 2}
+  m_sharedMaterial: {fileID: -4786860882074376051, guid: 1f223abdfec106146b482f4dda3ce5dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5284,8 +5357,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1f223abdfec106146b482f4dda3ce5dc, type: 2}
+  m_sharedMaterial: {fileID: -4786860882074376051, guid: 1f223abdfec106146b482f4dda3ce5dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6338,6 +6411,8 @@ MonoBehaviour:
   Simple_Deck: {fileID: 560925474644689047, guid: 18691da86d211a94eb8c4cca58649375, type: 3}
   newDeckSignal: 0
   TempDeck: []
+  DeckNameList: []
+  deckname: {fileID: 177664598}
 --- !u!1 &1485814816
 GameObject:
   m_ObjectHideFlags: 0
@@ -8313,6 +8388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0c8fd3d89ab194ab8761f27fdc597e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllCardList: []
   DisplayCardList: []
   quantity_setting: 2
   DynamicDisplay: {fileID: 2101250960}
@@ -8338,3 +8414,4 @@ SceneRoots:
   - {fileID: 392628337}
   - {fileID: 435900719}
   - {fileID: 685364438}
+  - {fileID: 433449895}

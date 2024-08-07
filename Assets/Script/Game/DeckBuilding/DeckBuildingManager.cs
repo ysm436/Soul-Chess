@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class DeckBuildingManager : MonoBehaviour
 {
-    private List<GameObject> AllCardList = new List<GameObject>();
+    public List<GameObject> AllCardList = new List<GameObject>();
     public List<GameObject> DisplayCardList = new List<GameObject>();
     
     public int quantity_setting;

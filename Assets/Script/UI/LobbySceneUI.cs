@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class LobbySceneUI : MonoBehaviour
 {
 
-    [SerializeField] private GameObject PanelName;
+    [SerializeField] private GameObject DeckSelectPanel;
+    [SerializeField] private GameObject DeckSelectButton;
+
+    [SerializeField] private Transform DeckDisplay;
 
     public void ExitButton()
     {
@@ -21,17 +24,34 @@ public class LobbySceneUI : MonoBehaviour
 
     public void OpenDeckButton()
     {
-        if (PanelName != null)
+        List<List<int>> decklist = DeckData.instance.DeckList;
+        List<string> decknamelist = DeckData.instance.DeckNameList;
+
+        if (DeckSelectPanel != null)
         {
-            PanelName.SetActive(true);
+            DeckSelectPanel.SetActive(true);
+
+            if (DeckData.instance)
+            {
+                for (int i = 0; i < decklist.Count; i++)
+                {
+                    if(decklist[i] != null)
+                    {
+                        GameObject deckselectbutton = Instantiate(DeckSelectButton, DeckDisplay);
+                        DeckSelectButton buttoninfo = deckselectbutton.GetComponent<DeckSelectButton>();
+                        buttoninfo.deckname.text = decknamelist[i];
+                        buttoninfo.deck_index = i;
+                    }
+                }
+            }
         }
     }
 
     public void CloseDeckButton()
     {
-        if (PanelName != null)
+        if (DeckSelectPanel != null)
         {
-            PanelName.SetActive(false);
+            DeckSelectPanel.SetActive(false);
         }
     }
 
