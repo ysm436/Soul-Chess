@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LobbySceneUI : MonoBehaviour
 {
+    public int SelectedDeckIndex = 0;
 
     [SerializeField] private GameObject DeckSelectPanel;
     [SerializeField] private GameObject DeckSelectButton;
-
     [SerializeField] private Transform DeckDisplay;
-
+    [SerializeField] private Transform TrashCan;
+    [SerializeField] private TextMeshProUGUI SelectedDeckInfo;
+    private List<List<int>> decklist;
+    private List<string> decknamelist;
+    
     public void ExitButton()
     {
         SceneManager.LoadScene("MatchingScene");
@@ -24,8 +28,8 @@ public class LobbySceneUI : MonoBehaviour
 
     public void OpenDeckButton()
     {
-        List<List<int>> decklist = DeckData.instance.DeckList;
-        List<string> decknamelist = DeckData.instance.DeckNameList;
+        decklist = DeckData.instance.DeckList;
+        decknamelist = DeckData.instance.DeckNameList;
 
         if (DeckSelectPanel != null)
         {
@@ -53,6 +57,14 @@ public class LobbySceneUI : MonoBehaviour
         {
             DeckSelectPanel.SetActive(false);
         }
+        
+        for(int i = DeckDisplay.childCount; i > 0; i--)
+        {
+            Transform deck = DeckDisplay.GetChild(i - 1);
+            Destroy(deck.gameObject);
+        }
+
+        SelectedDeckInfo.text = "Selected Deck Name : " + decknamelist[SelectedDeckIndex];
     }
 
 }

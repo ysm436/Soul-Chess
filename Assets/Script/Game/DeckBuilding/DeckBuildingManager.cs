@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,11 +8,11 @@ public class DeckBuildingManager : MonoBehaviour
     public List<GameObject> AllCardList = new List<GameObject>();
     public List<GameObject> DisplayCardList = new List<GameObject>();
     
-    public int quantity_setting;
+    [SerializeField] private int quantity_setting;
 
-    public Transform DynamicDisplay;
-    public Transform DisplayStorage; // 카드가 덱에 들어가 표시되는 카드가 0개가 되었을 때 저장되는 창고
-    public Transform TrashCan;
+    [SerializeField] private Transform DynamicDisplay;
+    public Transform DisplayStorage; // 디스플레이 카드가 덱에 들어가 남아있는 카드의 개수가 0개가 되었을 때 저장되는 창고
+    public Transform TrashCan; // 더 이상 쓰지 않는 object를 넣어두는 쓰레기통
     public GameObject display_prefab;
 
     private void Awake()
@@ -68,8 +66,8 @@ public class DeckBuildingManager : MonoBehaviour
         }
     }
 
-    
-    public void AddDisplayCard(int card_index, int quantity) // 여기서 수량 0개면 생성해서 넣고, 수량 1개 이상이면 quantity값만 추가하도록 가능?
+    //디스플레이 object를 생성합니다.
+    public void AddDisplayCard(int card_index, int quantity)
     {
         GameObject card = AllCardList[card_index];
 
@@ -105,6 +103,7 @@ public class DeckBuildingManager : MonoBehaviour
         DisplayCardList.Add(newDisplay);
     }
     
+    //디스플레이될 카드들을 재설정 합니다.
     public void ReloadDisplayCard()
     {
         foreach (var display_card in DisplayCardList)

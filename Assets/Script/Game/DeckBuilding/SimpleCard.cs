@@ -25,14 +25,14 @@ public class SimpleCard : MonoBehaviour, IPointerClickHandler
                 }
             }
 
-            if (find_index != -1) // display에 남아있는 카드가 0개
+            if (find_index != -1) // 디스플레이에 남아있는 카드가 0개일 경우
             {
                 Transform find_card = dbm.DisplayStorage.GetChild(find_index);
                 dbm.AddDisplayCard(cardindex, 1);
                 find_card.SetParent(dbm.TrashCan);
                 find_card.gameObject.SetActive(false);
             }
-            else // display에 카드가 남아있음
+            else // 디스플레이에 카드가 남아있을 경우
             {
                 foreach (var display in dbm.DisplayCardList)
                 {

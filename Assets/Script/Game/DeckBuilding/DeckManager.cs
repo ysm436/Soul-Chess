@@ -6,20 +6,23 @@ using UnityEngine.EventSystems;
 
 public class DeckManager : MonoBehaviour, IDropHandler
 {
-    public int deck_length = -1;
+    private int deck_length = -1;
     public int loaded_deck_index = 0;
-    public RectTransform CardSlot;
-    public RectTransform DeckSlot;
-    public GameObject Simple_Card;
-    public GameObject Simple_Deck;
+
+    [SerializeField] private RectTransform CardSlot;
+    [SerializeField] private RectTransform DeckSlot;
+    [SerializeField] private GameObject Simple_Card;
+    [SerializeField] private GameObject Simple_Deck;
+    [SerializeField] private TMP_InputField deckname;
     
     public bool newDeckSignal = false;
     public List<GameObject> TempDeck = new List<GameObject>();
-    public List<List<int>> DeckList = new List<List<int>>();
-    public List<string> DeckNameList = new List<string>();
+    private List<List<int>> DeckList = new List<List<int>>();
+    private List<string> DeckNameList = new List<string>();
 
-    [SerializeField] private TMP_InputField deckname;
+    private DeckBuildingManager dbm;
 
+    //덱 데이터로부터 덱 리스트와 이름 파일을 불러옵니다.
     public void Awake()
     {        
         if (DeckData.instance.DeckList != null)
@@ -39,10 +42,11 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 }
             }
         }
-        //로드할 때 덱 리스트에서 널값인 애들은 빼고 로드
-        Debug.Log(DeckList.Count);
+
+        dbm = GetComponentInParent<DeckBuildingManager>();
     }
 
+    //디스플레이된 카드를 덱에 넣으려고 할 때
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;
@@ -59,12 +63,12 @@ public class DeckManager : MonoBehaviour, IDropHandler
             indeck_info.cost.text = CardInfo.Cost.ToString();
             CardInfo.quantity--;
 
-            Transform displaystorage = GetComponentInParent<DeckBuildingManager>().DisplayStorage;
+            Transform displaystorage = dbm.DisplayStorage;
 
-            //카드가 한장 남으면 없애기
+            //덱에 더 이상 카드가 들어갈 수 없을 때 디스플레이에서 없애버립니다.
             if (CardInfo.quantity <= 0)
             {
-                GetComponentInParent<DeckBuildingManager>().DisplayCardList.Remove(dropped);
+                dbm.DisplayCardList.Remove(dropped);
                 dropped.transform.SetParent(displaystorage);
                 dropped.SetActive(false);
             }
@@ -73,10 +77,11 @@ public class DeckManager : MonoBehaviour, IDropHandler
         }
     }
 
-    //TODO 조금 더 가볍게 만들 수 있다면 그렇게 만들기
+    //TempDeck을 초기화 합니다.
+    //TODO 더 효율적으로 바꿀 수 있다면 좋을 것 같습니다.
     public void TempDeckReset()
     {
-        Transform trashcan = GetComponentInParent<DeckBuildingManager>().TrashCan;
+        Transform trashcan = dbm.TrashCan;
         
         for(int i = CardSlot.childCount; i > 0; i--)
         {
@@ -86,12 +91,12 @@ public class DeckManager : MonoBehaviour, IDropHandler
         }
     }
 
-    //newDeck의 card_index만 뽑아서 저장하도록 하기
+    //덱 생성 / 수정 후 저장
     public void DeckSave(int loaded_deck_index)
     {
         List<int> newDeck = MakeCardindexDeckList(TempDeck);
 
-        if(newDeckSignal) // 덱 생성 시
+        if(newDeckSignal) // 덱 새로 생성 시
         {
             deck_length++;
             DeckList.Add(newDeck);
@@ -102,33 +107,35 @@ public class DeckManager : MonoBehaviour, IDropHandler
             DeckNameList.Add(deckname.text);
             TempDeck.Clear();
             newDeckSignal = false;
-            Debug.Log(DeckList.Count);
         }
         else // 덱 수정 시
         {
             DeckList.RemoveAt(loaded_deck_index);
             DeckList.Insert(loaded_deck_index, newDeck);
             TempDeck.Clear();
+            DeckNameList[loaded_deck_index] = deckname.text;
         }
+
+        deckname.text = "";
     }
 
+    // 덱 생성 / 수정 취소
     public void DeckCancel()
     {
         newDeckSignal = false;
         TempDeck.Clear();
+        deckname.text = "";
     }
 
-    //덱이 card index만으로 로드될 수 있도록 처리
+    //덱 로드
     public void DeckLoad(int deck_index)
     {
         loaded_deck_index = deck_index;
 
         List<GameObject> Loaded_deck = MakeGameobjectDeckList(loaded_deck_index);
         TempDeck = Loaded_deck.ToList();
-        
-        DeckBuildingManager dbm = GetComponentInParent<DeckBuildingManager>();
 
-        //이거 이중 for문이라 문제가 생길 수 있다.
+        //TODO 이중 for문이라 조금 더 효율적으로 바꿀 수 있으면 좋을 것 같습니다.
         foreach (var card in TempDeck)
         {
             int card_index = card.GetComponent<SimpleCard>().cardindex;
@@ -150,11 +157,14 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 }
             }
         }
+
+        deckname.text = DeckNameList[loaded_deck_index];
     }   
 
+    //덱 로드를 위해 index를 통해 gameobject 리스트로 변환
     public List<GameObject> MakeGameobjectDeckList(int deck_index)
     {
-        List<GameObject> allcardlist = GetComponentInParent<DeckBuildingManager>().AllCardList;
+        List<GameObject> allcardlist = dbm.AllCardList;
         List<GameObject> GameobjectList = new List<GameObject>();
 
         foreach (var card_index in DeckList[deck_index])
@@ -173,6 +183,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         return GameobjectList;
     }
 
+    //덱 리스트 저장을 위해 gameobject에서 카드 index만 뽑아 int 리스트로 변환
     public List<int> MakeCardindexDeckList(List<GameObject> gameobjectlist)
     {
         List<int> cardindexList = new List<int>();
@@ -185,9 +196,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
         return cardindexList;
     }
 
+    //quit 버튼을 누르면 덱의 데이터를 저장합니다.
     public void DeckDataSave()
     {
-        Debug.Log("??");
         DeckData.instance.DeckList = DeckList.ToList();
         DeckData.instance.DeckNameList = DeckNameList.ToList();
     }

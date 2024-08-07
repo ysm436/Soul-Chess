@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -33,7 +32,7 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         newDeckPanel = this.GetComponentInParent<DeckBuildingSceneUI>().newDeckPanel;
         Originposition = transform.position;
 
-        if (newDeckPanel.activeSelf) // 새로운 덱을 만들 때
+        if (newDeckPanel.activeSelf) // 새로운 덱을 만들 때에만 드래그 가능
         {
             previousParent = transform.parent;
 

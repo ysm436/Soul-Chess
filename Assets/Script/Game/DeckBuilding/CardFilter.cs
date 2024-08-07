@@ -6,11 +6,10 @@ public class CardFilter : MonoBehaviour
 {
     // 필터에 맞게 카드들을 분류합니다.
 
+    // 소울 카드 토글
     public void SoulToggle(bool soul)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
-
-        Debug.Log(DisplayCardList.Count);
 
         if (soul)
         {
@@ -33,6 +32,8 @@ public class CardFilter : MonoBehaviour
             }
         }
     }
+
+    //스펠 카드 토글
     public void SpellToggle(bool spell)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
@@ -59,6 +60,7 @@ public class CardFilter : MonoBehaviour
         }
     }
 
+    //그리스 지역 토글
     public void GreekToggle(bool greek)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
@@ -85,6 +87,7 @@ public class CardFilter : MonoBehaviour
         }
     }
 
+    //서유럽 지역 토글
     public void WesternToggle(bool western)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
@@ -111,6 +114,7 @@ public class CardFilter : MonoBehaviour
         }
     }
 
+    //북유럽 지역 토글
     public void NorseToggle(bool norse)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
@@ -136,6 +140,8 @@ public class CardFilter : MonoBehaviour
             }
         }
     }
+    
+    //일반 등급 토글
     public void CommonToggle(bool common)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
@@ -161,6 +167,8 @@ public class CardFilter : MonoBehaviour
             }
         }
     }
+
+    //전설 등급 토글
     public void LegendaryToggle(bool legendary)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
@@ -186,6 +194,8 @@ public class CardFilter : MonoBehaviour
             }
         }
     }
+
+    //신화 등급 토글
     public void MythicalToggle(bool mythical)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;

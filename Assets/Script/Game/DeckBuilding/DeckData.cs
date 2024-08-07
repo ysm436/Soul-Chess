@@ -5,7 +5,6 @@ using UnityEngine;
 public class DeckData : MonoBehaviour
 {
     public static DeckData instance;
-    private DeckManager deckmanager;
     public List<List<int>> DeckList;
     public List<string> DeckNameList;
 
@@ -21,7 +20,5 @@ public class DeckData : MonoBehaviour
         {
             Destroy(gameObject);
         }
- 
-        deckmanager = GameObject.Find("Canvas").GetComponentInChildren<DeckManager>();
     }
 }
