@@ -78,7 +78,7 @@ public class SoulCard : Card
 
         if (accessorySprite == null)
         {
-            Debug.Log(name + " has no sprite correspond to piece type " + targetPiece.pieceType);
+            Debug.Log(cardName + " has no sprite correspond to piece type " + targetPiece.pieceType);
         }
 
         targetPiece.SetSoul(this, accessorySprite);

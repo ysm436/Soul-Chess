@@ -396,13 +396,13 @@ MonoBehaviour:
   CardBoard: {fileID: 141907799}
   gameBoard: {fileID: 369323391}
   hand:
-  - {fileID: 7433252666421529211, guid: fc310b2ab5a30de4298b4aea18a015f4, type: 3}
-  - {fileID: 1292469394887977406, guid: 69acd9f53abcc974da0de5adf88dba59, type: 3}
+  - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
   deck:
   - {fileID: 4824830457768495894, guid: dc0e4c5991c664d4aaaad1229ca79999, type: 3}
   - {fileID: -2815551797691118998, guid: 2d9947a9ca0af554ebef3f3b895f3d78, type: 3}
   - {fileID: 3604200065000529882, guid: 69c628af0606ded408e60e35428eab89, type: 3}
   - {fileID: 599667399022218461, guid: ff82128eca4e7994fb3e11360893a803, type: 3}
+  - {fileID: 90797455826848939, guid: fc33ddca6bc40df4db6a584de32b9753, type: 3}
 --- !u!4 &84976152
 Transform:
   m_ObjectHideFlags: 0
