@@ -9,9 +9,11 @@ public class DeckBuildingManager : MonoBehaviour
 {
     private List<GameObject> AllCardList = new List<GameObject>();
     public List<GameObject> DisplayCardList = new List<GameObject>();
+    
+    public int quantity_setting;
 
     public Transform DynamicDisplay;
-    public Transform DisplayStorage;
+    public Transform DisplayStorage; // 카드가 덱에 들어가 표시되는 카드가 0개가 되었을 때 저장되는 창고
     public Transform TrashCan;
     public GameObject display_prefab;
 
@@ -61,12 +63,13 @@ public class DeckBuildingManager : MonoBehaviour
         int index = 0;
         foreach (var card in AllCardList)
         {
-            AddDisplayCard(index);
+            AddDisplayCard(index, quantity_setting);
             index++;
         }
     }
 
-    public void AddDisplayCard(int card_index)
+    
+    public void AddDisplayCard(int card_index, int quantity) // 여기서 수량 0개면 생성해서 넣고, 수량 1개 이상이면 quantity값만 추가하도록 가능?
     {
         GameObject card = AllCardList[card_index];
 
@@ -84,6 +87,7 @@ public class DeckBuildingManager : MonoBehaviour
         DisplayCard.Reigon = cardinfo.reigon.ToString();
         //DisplayCard.CardName = cardinfo.cardName;
         DisplayCard.Rarity = cardinfo.rarity.ToString();
+        DisplayCard.quantity = quantity;
 
         if (card.GetComponent<SpellCard>())
         {
@@ -105,15 +109,15 @@ public class DeckBuildingManager : MonoBehaviour
     {
         foreach (var display_card in DisplayCardList)
         {
-            display_card.GetComponent<DisplayCard>().quantity = 2; // 나중에 플레이어 정보랑 연결해야 함
+            display_card.GetComponent<DisplayCard>().quantity = quantity_setting;
         }
 
         for(int i = DisplayStorage.childCount; i > 0; i--)
         {
             Transform card = DisplayStorage.GetChild(i - 1);
-            card.GetComponent<DisplayCard>().quantity = 2;
-            card.SetParent(DynamicDisplay);
-            card.gameObject.SetActive(true);
+            AddDisplayCard(card.gameObject.GetComponent<DisplayCard>().cardindex, quantity_setting);
+            card.SetParent(TrashCan);
+            card.gameObject.SetActive(false);
         }
     }
 }

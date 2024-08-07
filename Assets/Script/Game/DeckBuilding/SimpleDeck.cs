@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DeckInfo : MonoBehaviour
+public class SimpleDeck : MonoBehaviour
 {
     public int deck_index;
     public TextMeshProUGUI DeckNameText;

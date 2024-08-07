@@ -8314,6 +8314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayCardList: []
+  quantity_setting: 2
   DynamicDisplay: {fileID: 2101250960}
   DisplayStorage: {fileID: 1551673597}
   TrashCan: {fileID: 475217773}

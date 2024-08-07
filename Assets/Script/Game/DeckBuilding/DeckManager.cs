@@ -24,7 +24,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         if (CardInfo)
         {
             GameObject indeck = Instantiate(Simple_Card, CardSlot);
-            CardInDeck indeck_info = indeck.GetComponent<CardInDeck>();
+            SimpleCard indeck_info = indeck.GetComponent<SimpleCard>();
 
             indeck.name = dropped.name.Replace("display", "deck");
             indeck_info.cardindex = CardInfo.cardindex;
@@ -68,7 +68,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
             deck_length++;
             DeckList.Add(newDeck);
             GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
-            DeckInfo newDeckInfo = newDeckDisplay.GetComponent<DeckInfo>();
+            SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
             newDeckInfo.deck_index = deck_length;
             TempDeck.Clear();
             newDeckSignal = false;
@@ -83,6 +83,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
     public void DeckCancel()
     {
+        newDeckSignal = false;
         TempDeck.Clear();
     }
 
@@ -92,16 +93,40 @@ public class DeckManager : MonoBehaviour, IDropHandler
         foreach (var card in DeckList[loaded_deck_index])
         {
             GameObject indeck = Instantiate(Simple_Card, CardSlot);
-            CardInDeck indeck_info = indeck.GetComponent<CardInDeck>();
+            SimpleCard indeck_info = indeck.GetComponent<SimpleCard>();
 
-            CardInDeck original_info = card.GetComponent<CardInDeck>();
+            SimpleCard original_info = card.GetComponent<SimpleCard>();
 
             indeck_info.cardindex = original_info.cardindex;
             indeck_info.cardNameText.text = original_info.cardNameText.text;
             indeck_info.cost.text = original_info.cost.text;
+            TempDeck.Add(indeck);
         }
+        
+        DeckBuildingManager dbm = GetComponentInParent<DeckBuildingManager>();
 
-        TempDeck = DeckList[loaded_deck_index].ToList();
+        //이거 이중 for문이라 문제가 생길 수 있다.
+        foreach (var card in TempDeck)
+        {
+            int card_index = card.GetComponent<SimpleCard>().cardindex;
+
+            foreach (var display in dbm.DisplayCardList)
+            {
+                DisplayCard displaycardinfo = display.GetComponent<DisplayCard>();
+                if (displaycardinfo.cardindex == card_index)
+                {
+                    displaycardinfo.quantity -= 1;
+
+                    if(displaycardinfo.quantity <= 0)
+                    {
+                        dbm.DisplayCardList.Remove(display);
+                        display.transform.SetParent(dbm.DisplayStorage);
+                        display.gameObject.SetActive(false);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
 }
