@@ -103,3 +103,5 @@ MonoBehaviour:
     targetPieceType: 31
     isOpponent: 1
     isFriendly: 0
+  isPositiveEffect: 0
+  isNegativeEffect: 1

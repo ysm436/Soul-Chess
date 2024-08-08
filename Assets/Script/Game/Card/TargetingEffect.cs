@@ -15,6 +15,12 @@ public abstract class TargetingEffect : Effect
     public List<EffectTarget> targetTypes = new List<EffectTarget>();
     protected List<TargetableObject> targets = new List<TargetableObject>();
 
+    [SerializeField] private bool isPositiveEffect;
+    public bool IsPositiveEffect { get => isPositiveEffect; }
+
+    [SerializeField] private bool isNegativeEffect;
+    public bool IsNegativeEffect { get => isNegativeEffect; }
+
     public EffectTarget GetTargetType()
     {
         return targetTypes[targets.Count];

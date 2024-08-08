@@ -84,6 +84,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3791512780746967578}
     - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: isPositiveEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: targetTypes.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -145,7 +149,9 @@ MonoBehaviour:
     \uCE74\uB4DC\uB97C \uD30C\uAD34\uD569\uB2C8\uB2E4. \uB0B4 \uD134\uC774 \uB05D\uB0A0
     \uB54C, \uC774 \uAE30\uBB3C\uC740 \uD30C\uAD34\uB429\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 3791512780746967578}
+  isInSelection: 0
   pieceRestriction: -1
   _AD: 150
   _HP: 150
+  accessorySpriteList: []
   InfusedPiece: {fileID: 0}

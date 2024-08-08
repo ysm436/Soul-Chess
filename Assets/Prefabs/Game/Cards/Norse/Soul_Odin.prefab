@@ -53,6 +53,10 @@ PrefabInstance:
       value: Soul_Odin
       objectReference: {fileID: 0}
     - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: isPositiveEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: targetTypes.Array.data[0].targetPieceType
       value: 32
       objectReference: {fileID: 0}
