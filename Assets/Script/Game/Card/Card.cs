@@ -31,6 +31,8 @@ public class Card : TargetableObject
 
     public bool isFlipped { get; private set; }
 
+    [HideInInspector] public bool isInSelection;
+
     protected virtual void Awake()
     {
         cardObject = GetComponent<CardObject>();
@@ -43,17 +45,17 @@ public class Card : TargetableObject
     }
     private void OnMouseEnter()
     {
-        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped)
+        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
             GameManager.instance.ShowCard(this);
     }
     private void OnMouseExit()
     {
-        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped)
+        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
             GameManager.instance.HideCard();
     }
     private void OnMouseDrag()
     {
-        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped)
+        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
@@ -61,7 +63,7 @@ public class Card : TargetableObject
     }
     private void OnMouseUp()
     {
-        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped)
+        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
         {
             if (transform.position.y > 0)
             {

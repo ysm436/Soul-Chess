@@ -83,10 +83,10 @@ abstract public class ChessPiece : TargetableObject
     [SerializeField]
     private int _maxHP;
 
-    //악세서리
-    private PieceAccessory accessory = null;
-
     private PieceObject pieceObject;
+    private SpriteRenderer spriteRenderer;
+
+    private Sprite defaultSprite;
 
     public Action<ChessPiece> OnKill;
     public Action<ChessPiece> OnKilled; //유언
@@ -104,6 +104,9 @@ abstract public class ChessPiece : TargetableObject
         baseAD = attackDamage;
 
         pieceObject = GetComponent<PieceObject>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        defaultSprite = spriteRenderer.sprite;
 
         pieceObject.HPText.text = _currentHP.ToString();
         pieceObject.ADText.text = attackDamage.ToString();
@@ -176,7 +179,7 @@ abstract public class ChessPiece : TargetableObject
         GameManager.instance.KillPiece(this);
     }
 
-    public void SetSoul(SoulCard targetSoul)
+    public void SetSoul(SoulCard targetSoul, Sprite sprite)
     {
         if (soul != null)
             RemoveSoul();
@@ -186,12 +189,8 @@ abstract public class ChessPiece : TargetableObject
         soul.transform.localPosition = Vector3.zero;
         soul.gameObject.SetActive(false);
 
-        //악세서리 오브젝트를 기물에 자식으로 생성
-        if (soul.accessory != null)
-        {
-            accessory = Instantiate(soul.accessory, transform.position, Quaternion.identity);
-            accessory.transform.SetParent(transform);
-        }
+        spriteRenderer.sprite = sprite;
+
         targetSoul.InfusedPiece = this;
 
         maxHP += soul.HP;
@@ -204,6 +203,8 @@ abstract public class ChessPiece : TargetableObject
 
         maxHP -= soul.HP;
         AD -= soul.AD;
+
+        spriteRenderer.sprite = defaultSprite;
 
         Destroy(soul);
         soul = null;

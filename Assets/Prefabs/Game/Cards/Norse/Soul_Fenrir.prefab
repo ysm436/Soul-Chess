@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soul_Fenrir
       objectReference: {fileID: 0}
+    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: isPositiveEffect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
     m_RemovedGameObjects: []
@@ -96,7 +100,9 @@ MonoBehaviour:
   description: "\uC774 \uAE30\uBB3C\uC774 \uACF5\uACA9\uD558\uC5EC \uC801 \uAE30\uBB3C\uC744
     \uCC98\uCE58\uD560 \uB54C \uB9C8\uB2E4 +20/+20\uC744 \uC5BB\uC2B5\uB2C8\uB2E4"
   EffectOnCardUsed: {fileID: 1138779223185715711}
+  isInSelection: 0
   pieceRestriction: 8
   _AD: 80
   _HP: 80
+  accessorySpriteList: []
   InfusedPiece: {fileID: 0}
