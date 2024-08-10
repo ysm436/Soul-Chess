@@ -11,6 +11,7 @@ public class SoulCard : Card
     private struct AccessorySprite
     {
         public ChessPiece.PieceType pieceType;
+        public GameManager.PlayerColor pieceColor;
         public Sprite sprite;
     }
 
@@ -74,7 +75,7 @@ public class SoulCard : Card
 
     public void Infuse(ChessPiece targetPiece)
     {
-        Sprite accessorySprite = accessorySpriteList.FirstOrDefault(data => data.pieceType == targetPiece.pieceType).sprite;
+        Sprite accessorySprite = accessorySpriteList.FirstOrDefault(data => (data.pieceType == targetPiece.pieceType) && (data.pieceColor == targetPiece.pieceColor)).sprite;
 
         if (accessorySprite == null)
         {
