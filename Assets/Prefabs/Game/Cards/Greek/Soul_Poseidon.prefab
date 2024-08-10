@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: pieceRestriction
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: isPositiveEffect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
     m_RemovedGameObjects: []
@@ -128,7 +132,9 @@ MonoBehaviour:
   description: "\uAE30\uBB3C: \uB8E9\n\uBC30\uCE58:\n\uBAA8\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C
     25\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.\n"
   EffectOnCardUsed: {fileID: 391618131688367025}
+  isInSelection: 0
   pieceRestriction: 8
   _AD: 55
   _HP: 55
+  accessorySpriteList: []
   InfusedPiece: {fileID: 0}

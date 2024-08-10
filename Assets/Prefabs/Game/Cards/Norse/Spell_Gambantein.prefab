@@ -54,54 +54,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: _cost
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: cardName
-      value: "\uD53C\uC758 \uB3C5\uC218\uB9AC"
+      value: "\uAC10\uBC18\uD14C\uC778"
       objectReference: {fileID: 0}
     - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: description
-      value: "\uAE30\uBB3C\uC744 \uCC98\uCE58\uD569\uB2C8\uB2E4. \uCE74\uB4DC\uB97C
-        \uD55C \uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
+      value: "\uAC8C\uC784\uC774 \uB05D\uB0A0 \uB54C \uAE4C\uC9C0, \uC0C1\uB300\uC758
+        \uD328\uB97C \uBCFC \uC218 \uC788\uAC8C \uB429\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: EffectOnCardUsed
       value: 
-      objectReference: {fileID: -8662909460837558927}
+      objectReference: {fileID: 0}
     - target: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Name
-      value: Spell_BloodEagle
+      value: Spell_Gambantein
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -8662909460837558927}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
---- !u!1 &4078594222576986540 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
-  m_PrefabInstance: {fileID: 4616442128809638412}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-8662909460837558927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4078594222576986540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a6b10d48b5ced24faaf61588b37205f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTypes:
-  - targetType: 0
-    targetPieceType: 31
-    isOpponent: 1
-    isFriendly: 0
-  isPositiveEffect: 0
-  isNegativeEffect: 1

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6787007120244481235
+--- !u!1001 &7305861583260526390
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -50,58 +50,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Name
-      value: Soul_Surtr
+      value: Soul_Odin
       objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: AD
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: HP
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: cost
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: cardName
-      value: "\uC218\uB974\uD2B8"
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: description
-      value: "\uD134\uC774 \uC885\uB8CC\uB420 \uB54C \uB9C8\uB2E4, \uBE44\uC6A9\uC774
-        1 \uC904\uC5B4\uB4ED\uB2C8\uB2E4.\r\n\uAC15\uB9BC : \u2018\uBAA8\uB4E0\u2019
-        \uCE74\uB4DC\uB97C \uD30C\uAD34\uD569\uB2C8\uB2E4. \uB0B4 \uD134\uC774 \uB05D\uB0A0
-        \uB54C, \uC774 \uAE30\uBB3C\uC740 \uD30C\uAD34\uB429\uB2C8\uB2E4."
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: illustration
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: EffectOnCardUsed
-      value: 
-      objectReference: {fileID: 3791512780746967578}
     - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: isPositiveEffect
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].targetType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[1].isFriendly
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[1].targetType
-      value: 1
+      propertyPath: targetTypes.Array.data[0].targetPieceType
+      value: 32
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
@@ -110,48 +67,50 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: 6
-      addedObject: {fileID: 599667399022218461}
+      addedObject: {fileID: 9197931309180194723}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!114 &3791512780746967578 stripped
+--- !u!114 &1138779223185715711 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 6787007120244481235}
+  m_PrefabInstance: {fileID: 7305861583260526390}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4752389962783730018}
+  m_GameObject: {fileID: 8836071399338119815}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4752389962783730018 stripped
+--- !u!1 &8836071399338119815 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 6787007120244481235}
+  m_PrefabInstance: {fileID: 7305861583260526390}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &599667399022218461
+--- !u!114 &9197931309180194723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4752389962783730018}
+  m_GameObject: {fileID: 8836071399338119815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab095e7e6da4ba04c87c7b90e3e85470, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a418a5cc05e87a4781f71731300142b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: "\uC218\uB974\uD2B8"
-  _cost: 40
-  illustration: {fileID: 0}
+  cardName: "\uC624\uB518"
+  _cost: 10
+  illustration: {fileID: 21300000, guid: feaa50326ad7eb245af7251a027d1ce7, type: 3}
   back: {fileID: 21300000, guid: 6995a100b2974674db52c4a15d575dc2, type: 3}
-  description: "\uD134\uC774 \uC885\uB8CC\uB420 \uB54C \uB9C8\uB2E4, \uBE44\uC6A9\uC774
-    1 \uC904\uC5B4\uB4ED\uB2C8\uB2E4.\r\n\uAC15\uB9BC : \u2018\uBAA8\uB4E0\u2019
-    \uCE74\uB4DC\uB97C \uD30C\uAD34\uD569\uB2C8\uB2E4. \uB0B4 \uD134\uC774 \uB05D\uB0A0
-    \uB54C, \uC774 \uAE30\uBB3C\uC740 \uD30C\uAD34\uB429\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 3791512780746967578}
+  description: "\uAC15\uB9BC : 3\uAC00\uC9C0 \uBCF4\uBB3C \uC911 \uD558\uB098\uB97C
+    \uC120\uD0DD\uD574 \uB0B4 \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: 1138779223185715711}
   isInSelection: 0
-  pieceRestriction: -1
-  _AD: 150
-  _HP: 150
+  pieceRestriction: 32
+  _AD: 45
+  _HP: 45
   accessorySpriteList: []
   InfusedPiece: {fileID: 0}
+  selectionCardPrefabList:
+  - {fileID: 4078594222576986540, guid: f878d194de68cb5429a9e66131e1c1ef, type: 3}
+  - {fileID: 4078594222576986540, guid: bd68a39ebb17f3241a700a8383bac0da, type: 3}
+  - {fileID: 4078594222576986540, guid: cd934e036722b684387070d012a41272, type: 3}

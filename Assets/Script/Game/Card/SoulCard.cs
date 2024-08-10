@@ -4,8 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using System.Linq;
 public class SoulCard : Card
 {
+    [Serializable]      // 하나의 PieceType에 하나의 Sprite가 선택되도록 설정되어야 함
+    private struct AccessorySprite
+    {
+        public ChessPiece.PieceType pieceType;
+        public GameManager.PlayerColor pieceColor;
+        public Sprite sprite;
+    }
+
     SoulCardObject soulCardObject;
     /// <summary>
     /// presented by sum of ChessPiece.PieceType
@@ -39,8 +48,8 @@ public class SoulCard : Card
     [SerializeField]
     private int _HP;
 
-    //영혼카드 프리팹마다 대응하는 악세서리 프리팹 인스펙터에 지정 필요
-    public PieceAccessory accessory;
+    [SerializeField]
+    private List<AccessorySprite> accessorySpriteList;
 
     [HideInInspector]
     public ChessPiece InfusedPiece;
@@ -66,8 +75,16 @@ public class SoulCard : Card
 
     public void Infuse(ChessPiece targetPiece)
     {
-        targetPiece.SetSoul(this);
+        Sprite accessorySprite = accessorySpriteList.FirstOrDefault(data => (data.pieceType == targetPiece.pieceType) && (data.pieceColor == targetPiece.pieceColor)).sprite;
+
+        if (accessorySprite == null)
+        {
+            Debug.Log(cardName + " has no sprite correspond to piece type " + targetPiece.pieceType);
+        }
+
+        targetPiece.SetSoul(this, accessorySprite);
 
         OnInfuse?.Invoke(targetPiece);
     }
+
 }

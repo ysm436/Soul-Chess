@@ -15,7 +15,7 @@ public class Thor : SoulCard
     {
         List<ChessPiece> enemyPieceList = GameManager.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameManager.instance.whiteController.playerColor).ToList();
 
-        if (enemyPieceList.Count == 0) 
+        if (enemyPieceList.Count == 0)
             return;
 
         enemyPieceList[Random.Range(0, enemyPieceList.Count)].HP -= InfusedPiece.AD;
