@@ -5,8 +5,10 @@ using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-public class Card : TargetableObject
+public abstract class Card : TargetableObject
 {
+    //abstract protected int CardID { get; }
+
     private CardObject cardObject;
 
     [Header("CardData")]
@@ -135,4 +137,11 @@ public class Card : TargetableObject
         Soul,
         Spell
     }
+
+
+    //Card Dictionary<CardName, CardID>
+    public static Dictionary<string, int> cardIdDict = new Dictionary<string, int>(){
+        {"오딘", 0},
+        {"프리그", 1}
+    };
 }

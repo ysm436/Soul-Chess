@@ -11,14 +11,14 @@ public class DeckData : MonoBehaviour
     private void Awake()
     {
         var obj = FindObjectsOfType<DeckData>();
-        if (obj.Length == 1)
-        {
+        if (obj.Length == 1)
+        {
             instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+            DontDestroyOnLoad(gameObject);
+        }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }
