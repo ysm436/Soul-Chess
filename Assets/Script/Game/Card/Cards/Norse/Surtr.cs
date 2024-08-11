@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Surtr : SoulCard
 {
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();
         // �ڽ�Ʈ ����: ī�� ���� �ñ⿡ ���� �޶��� �ʿ� ����
         GameBoard.instance.myController.OnMyTurnEnd += DecreaseCost;
 

@@ -7,9 +7,10 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager instance;
 
-
+    public bool isHost;
     public GameBoard gameBoard; //Used only in GameScene
 
+    public List<Card> currentDeck;
 
     //private Deck deckList;
 

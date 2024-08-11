@@ -24,8 +24,11 @@ public class GameBoard : MonoBehaviour
     public PieceInfo pieceInfo; //기물 정보 프리팹
     public GameObject myDeckObject;
 
-    public PlayerController myController;
-    public PlayerController opponentController;
+    public PlayerController whiteController;
+    public PlayerController blackController;
+
+    public PlayerController myController { get => playerColor == PlayerColor.White ? whiteController : blackController; }
+    public PlayerController opponentController { get => playerColor == PlayerColor.White ? blackController : whiteController; }
 
     public bool isActivePlayer
     {
@@ -38,7 +41,6 @@ public class GameBoard : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            GameManager.instance.gameBoard = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -47,8 +49,16 @@ public class GameBoard : MonoBehaviour
             return;
         }
 
+        //플레이어 색상(선공) 지정
+        if (GameManager.instance.isHost)
+            playerColor = PlayerColor.White;
+        else
+            playerColor = PlayerColor.Black;
+
+        //체스 판 세팅
         chessBoard.SetBoardSquares(gameData);
 
+        //체스 말 두기
         foreach (ChessPiece piece in chessBoard.GetComponentsInChildren<ChessPiece>())
         {
             gameData.TryAddPiece(piece);
