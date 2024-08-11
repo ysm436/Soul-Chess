@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
@@ -82,8 +83,10 @@ abstract public class ChessPiece : TargetableObject
     [SerializeField]
     private int _maxHP;
 
-
     private PieceObject pieceObject;
+    private SpriteRenderer spriteRenderer;
+
+    private Sprite defaultSprite;
 
     public Action<ChessPiece> OnKill;
     public Action<ChessPiece> OnKilled; //유언
@@ -101,6 +104,9 @@ abstract public class ChessPiece : TargetableObject
         baseAD = attackDamage;
 
         pieceObject = GetComponent<PieceObject>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        defaultSprite = spriteRenderer.sprite;
 
         pieceObject.HPText.text = _currentHP.ToString();
         pieceObject.ADText.text = attackDamage.ToString();
@@ -173,7 +179,7 @@ abstract public class ChessPiece : TargetableObject
         GameManager.instance.KillPiece(this);
     }
 
-    public void SetSoul(SoulCard targetSoul)
+    public void SetSoul(SoulCard targetSoul, Sprite sprite)
     {
         if (soul != null)
             RemoveSoul();
@@ -182,6 +188,8 @@ abstract public class ChessPiece : TargetableObject
         soul.transform.SetParent(transform);
         soul.transform.localPosition = Vector3.zero;
         soul.gameObject.SetActive(false);
+
+        spriteRenderer.sprite = sprite;
 
         targetSoul.InfusedPiece = this;
 
@@ -195,6 +203,8 @@ abstract public class ChessPiece : TargetableObject
 
         maxHP -= soul.HP;
         AD -= soul.AD;
+
+        spriteRenderer.sprite = defaultSprite;
 
         Destroy(soul);
         soul = null;

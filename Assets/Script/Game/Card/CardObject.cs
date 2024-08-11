@@ -9,4 +9,5 @@ public class CardObject : MonoBehaviour
     public TextMeshPro costText;
     public SpriteRenderer spriteRenderer;
     public TextMeshPro descriptionText;
+    public SpriteRenderer backSpriteRenderer;
 }

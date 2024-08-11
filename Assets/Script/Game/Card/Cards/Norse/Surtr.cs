@@ -8,7 +8,7 @@ public class Surtr : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        // ÄÚ½ºÆ® °¨¼Ò: Ä«µå »ý¼º ½Ã±â¿¡ µû¶ó ´Þ¶óÁú ÇÊ¿ä ÀÖÀ½
+        // ï¿½Ú½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½: Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã±â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¶ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameManager.instance.whiteController.OnMyTurnEnd += DecreaseCost;
 
         OnInfuse += (chessPiece) => GameManager.instance.whiteController.OnMyTurnEnd -= DecreaseCost;
@@ -28,7 +28,7 @@ public class Surtr : SoulCard
         GameManager.instance.gameData.playerBlack.hand.Clear();
         GameManager.instance.gameData.playerBlack.deck.Clear();
 
-        // InstantiateµÈ Ä«µåµµ »èÁ¦ ÇÊ¿ä
+        // Instantiateï¿½ï¿½ Ä«ï¿½åµµ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
     }
 
     private void DestroyInfusedPiece()

@@ -38,6 +38,10 @@ public class Pawn : ChessPiece
                 {
                     movableCoordinates.Add(targetCoordinate);
                 }
+                else
+                {
+                    break;
+                }
             }
 
             //첫 이동이 아닐 경우 break

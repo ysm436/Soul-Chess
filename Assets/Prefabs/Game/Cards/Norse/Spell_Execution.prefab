@@ -111,6 +111,8 @@ MonoBehaviour:
     targetPieceType: -1
     isOpponent: 1
     isFriendly: 0
+  isPositiveEffect: 0
+  isNegativeEffect: 1
   basicAD: 30
   insteadAD: 60
   standardHP: 60

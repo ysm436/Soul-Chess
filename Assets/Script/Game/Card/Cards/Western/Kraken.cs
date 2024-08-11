@@ -23,13 +23,13 @@ public class Kraken : SoulCard
     public void OnkilledEffect(ChessPiece chessPiece)
     {
         List<ChessPiece> targets = GameManager.instance.gameData.pieceObjects.Where(obj => obj.pieceColor != GameManager.instance.whiteController.playerColor).ToList();
-        
-        for(int i = 0; i < repeat; i++)
+
+        for (int i = 0; i < repeat; i++)
         {
             int ran = Random.Range(0, targets.Count);
             targets[ran].HP -= damage;
 
-            if(!targets[ran].isAlive)
+            if (!targets[ran].isAlive)
                 targets.Remove(targets[ran]);
         }
     }

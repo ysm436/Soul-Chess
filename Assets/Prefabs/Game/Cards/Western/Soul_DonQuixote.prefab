@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soul_DonQuixote
       objectReference: {fileID: 0}
+    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: isPositiveEffect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
     m_RemovedGameObjects: []
@@ -92,14 +96,17 @@ MonoBehaviour:
   cardName: "\uB3C8\uD0A4\uD638\uD14C"
   _cost: 5
   illustration: {fileID: 21300000, guid: 8df697752e372394a8f47915eb3294fd, type: 3}
+  back: {fileID: 21300000, guid: 6995a100b2974674db52c4a15d575dc2, type: 3}
   reigon: 2
   rarity: 1
   description: "\uACF5\uACA9\uB825\uC774 100\uC774\uC0C1\uC778 \uAE30\uBB3C\uC744
     \uACF5\uACA9\uD560 \uB54C 40\uC758 \uCD94\uAC00 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 4369469849057277070}
+  isInSelection: 0
   pieceRestriction: 2
   _AD: 20
   _HP: 60
+  accessorySpriteList: []
   InfusedPiece: {fileID: 0}
   standardAD: 100
   extraAD: 40

@@ -10,30 +10,61 @@ public class DeckTester : MonoBehaviour
 
     PlayerData player;
 
-    public List<Card> deck;
     public List<Card> hand;
+    public List<Card> deck;
 
     private void Start()
     {
-        GameObject g;
+        Card instantiatedCard;
 
         player = gameBoard.gameData.playerWhite;
-        player.deck = deck;
-        player.OnGetCard += UpdateHand;
+        player.hand = new();
+        player.deck = new();
+
+        var deckAnchor = new GameObject("Deck").transform;
+
+        var handAnchor = new GameObject("Hand").transform;
 
         foreach (Card card in hand)
         {
-            g = Instantiate(card.gameObject);
-            player.GetCard(g.GetComponent<Card>());
+            instantiatedCard = Instantiate(card, handAnchor);
+            player.TryAddCardInHand(instantiatedCard);
         }
+
+        foreach (Card card in deck)
+        {
+            instantiatedCard = Instantiate(card, deckAnchor);
+            instantiatedCard.FlipBack();
+            player.deck.Add(instantiatedCard);
+        }
+
+        gameBoard.whiteController.OnOpponentTurnEnd += () => player.DrawCard();
+
+        player.OnGetCard += (card) => card.transform.SetParent(handAnchor);
+
+        player.Initialize();
+
+        //player.Mulligan();
     }
 
-
-    public void UpdateHand()
+    private void Update()
     {
-        for (int i = 0; i < player.hand.Count; i++)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            player.hand[i].transform.position = new Vector3(0.5f * i - 8, -4, -0.1f * i);
+            player.RemoveHandCards();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Debug.Log("Try to Remove First Card in Hand");
+            bool result = player.TryRemoveCardInHand(player.hand[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            bool result = player.TryAddCardInHand(Instantiate(deck[0]));
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            player.RemoveDeckCards();
         }
     }
 }

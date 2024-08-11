@@ -92,6 +92,7 @@ MonoBehaviour:
   cardName: "\uD638\uC218\uC758 \uC5EC\uC778"
   _cost: 6
   illustration: {fileID: 0}
+  back: {fileID: 21300000, guid: 6995a100b2974674db52c4a15d575dc2, type: 3}
   reigon: 2
   rarity: 2
   description: "\uAE30\uBB3C: \uD038/\uBE44\uC20D\n\uB0B4 \uD134\uC774 \uB05D\uB0A0
@@ -101,4 +102,5 @@ MonoBehaviour:
   pieceRestriction: 20
   _AD: 40
   _HP: 40
+  accessory: {fileID: 4166747416282027478, guid: 9393d6577a23d1344baba662ba1e6077, type: 3}
   InfusedPiece: {fileID: 0}
