@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnClickBoardSquare(Vector2Int coordinate)
     {
-        if (!GameBoard.instance.isActivePlayer)
+        if (!GameBoard.instance.isActivePlayer && !GameBoard.instance.isDebugMode)
             return;
 
         ChessPiece targetPiece = gameBoard.gameData.GetPiece(coordinate);

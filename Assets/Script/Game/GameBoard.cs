@@ -10,8 +10,14 @@ public class GameBoard : MonoBehaviour
 {
     public static GameBoard instance = null;
 
+    [Header("DebugMode")]
+    public bool isDebugMode;
+
+
     [HideInInspector]
     public GameData gameData;
+
+    [Header("GameData")]
     public GameBoard.PlayerColor playerColor;
     public ChessBoard chessBoard;
     public GameObject cardBoard;
