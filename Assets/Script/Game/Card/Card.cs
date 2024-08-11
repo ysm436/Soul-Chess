@@ -93,12 +93,18 @@ public class Card : TargetableObject
         Greek,
         Norse,
         Western
-    }   
+    }
 
     public enum Rarity
     {
         Common,
         Legendary,
         Mythical
+    }
+
+    public enum Type
+    {
+        Soul,
+        Spell
     }
 }

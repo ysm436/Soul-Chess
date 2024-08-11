@@ -15,7 +15,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<DisplayCard>().CardType == "SoulCard")
+                if (!card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Soul)
                 {
                     card.SetActive(true);
                 }
@@ -25,7 +25,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<DisplayCard>().CardType == "SoulCard")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Soul)
                 {
                     card.SetActive(false);
                 }
@@ -42,7 +42,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<DisplayCard>().CardType == "SpellCard")
+                if (!card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Spell)
                 {
                     card.SetActive(true);
                 }
@@ -52,7 +52,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<DisplayCard>().CardType == "SpellCard")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Spell)
                 {
                     card.SetActive(false);
                 }
@@ -69,7 +69,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Greek")
+                if (!card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Greek")
                 {
                     card.SetActive(true);
                 }
@@ -79,7 +79,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Greek")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Greek")
                 {
                     card.SetActive(false);
                 }
@@ -96,7 +96,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Western")
+                if (!card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Western")
                 {
                     card.SetActive(true);
                 }
@@ -106,7 +106,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Western")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Western")
                 {
                     card.SetActive(false);
                 }
@@ -123,7 +123,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Norse")
+                if (!card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Norse")
                 {
                     card.SetActive(true);
                 }
@@ -133,14 +133,14 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Norse")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Norse")
                 {
                     card.SetActive(false);
                 }
             }
         }
     }
-    
+
     //일반 등급 토글
     public void CommonToggle(bool common)
     {
@@ -150,7 +150,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Common")
+                if (!card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Common")
                 {
                     card.SetActive(true);
                 }
@@ -160,7 +160,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Common")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Common")
                 {
                     card.SetActive(false);
                 }
@@ -177,7 +177,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Legendary")
+                if (!card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Legendary")
                 {
                     card.SetActive(true);
                 }
@@ -187,7 +187,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Legendary")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Legendary")
                 {
                     card.SetActive(false);
                 }
@@ -204,7 +204,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(!card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Mythical")
+                if (!card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Mythical")
                 {
                     card.SetActive(true);
                 }
@@ -214,7 +214,7 @@ public class CardFilter : MonoBehaviour
         {
             foreach (var card in DisplayCardList)
             {
-                if(card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Mythical")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Mythical")
                 {
                     card.SetActive(false);
                 }

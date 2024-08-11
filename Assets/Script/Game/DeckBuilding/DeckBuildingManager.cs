@@ -7,7 +7,7 @@ public class DeckBuildingManager : MonoBehaviour
 {
     public List<GameObject> AllCardList = new List<GameObject>();
     public List<GameObject> DisplayCardList = new List<GameObject>();
-    
+
     [SerializeField] private int quantity_setting;
 
     [SerializeField] private Transform DynamicDisplay;
@@ -24,8 +24,8 @@ public class DeckBuildingManager : MonoBehaviour
     // Greek, Norse, Western 폴더 내 존재하는 모든 카드를 찾습니다.
     private void FindAllCard()
     {
-        string[] GUIDs = AssetDatabase.FindAssets("t: prefab", new[] {"Assets/Prefabs/Game/Cards/Greek"});
-        
+        string[] GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Greek" });
+
         for (int i = 0; i < GUIDs.Length; i++)
         {
             string guid = GUIDs[i];
@@ -34,8 +34,8 @@ public class DeckBuildingManager : MonoBehaviour
             AllCardList.Add(asset);
         }
 
-        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] {"Assets/Prefabs/Game/Cards/Norse"});
-        
+        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Norse" });
+
         for (int i = 0; i < GUIDs.Length; i++)
         {
             string guid = GUIDs[i];
@@ -44,8 +44,8 @@ public class DeckBuildingManager : MonoBehaviour
             AllCardList.Add(asset);
         }
 
-        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] {"Assets/Prefabs/Game/Cards/Western"});
-        
+        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Western" });
+
         for (int i = 0; i < GUIDs.Length; i++)
         {
             string guid = GUIDs[i];
@@ -73,8 +73,8 @@ public class DeckBuildingManager : MonoBehaviour
 
         GameObject newDisplay = Instantiate(display_prefab, DynamicDisplay);
         newDisplay.name = card.name + "_display";
-            
-        TextMeshProUGUI[] texts = newDisplay.GetComponentsInChildren<TextMeshProUGUI>();
+
+        //TextMeshProUGUI[] texts = newDisplay.GetComponentsInChildren<TextMeshProUGUI>();
 
         Card cardinfo = card.GetComponent<Card>();
         DisplayCard DisplayCard = newDisplay.GetComponent<DisplayCard>();
@@ -82,27 +82,35 @@ public class DeckBuildingManager : MonoBehaviour
         DisplayCard.cardindex = card_index;
         DisplayCard.CardName = cardinfo.cardName;
         DisplayCard.Cost = cardinfo.cost;
+        DisplayCard.Description = cardinfo.description;
         DisplayCard.Reigon = cardinfo.reigon.ToString();
-        //DisplayCard.CardName = cardinfo.cardName;
         DisplayCard.Rarity = cardinfo.rarity.ToString();
         DisplayCard.quantity = quantity;
 
+        if (cardinfo is SoulCard)
+        {
+            DisplayCard.HP = (cardinfo as SoulCard).HP;
+            DisplayCard.AD = (cardinfo as SoulCard).AD;
+
+        }
+
+
         if (card.GetComponent<SpellCard>())
         {
-            DisplayCard.CardType = "SpellCard";
+            DisplayCard.CardType = Card.Type.Spell;
         }
         else
         {
-            DisplayCard.CardType = "SoulCard";
+            DisplayCard.CardType = Card.Type.Soul;
         }
-            
-        texts[0].text = DisplayCard.CardName;
-        texts[1].text = DisplayCard.Cost.ToString();
-        texts[2].text = cardinfo.description;
+
+        //texts[0].text = DisplayCard.CardName;
+        //texts[1].text = DisplayCard.Cost.ToString();
+        //texts[2].text = cardinfo.description;
 
         DisplayCardList.Add(newDisplay);
     }
-    
+
     //디스플레이될 카드들을 재설정 합니다.
     public void ReloadDisplayCard()
     {
@@ -111,7 +119,7 @@ public class DeckBuildingManager : MonoBehaviour
             display_card.GetComponent<DisplayCard>().quantity = quantity_setting;
         }
 
-        for(int i = DisplayStorage.childCount; i > 0; i--)
+        for (int i = DisplayStorage.childCount; i > 0; i--)
         {
             Transform card = DisplayStorage.GetChild(i - 1);
             AddDisplayCard(card.gameObject.GetComponent<DisplayCard>().cardindex, quantity_setting);
