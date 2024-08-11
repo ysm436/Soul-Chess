@@ -27,7 +27,7 @@ public class PlayerData
 
         foreach (Card card in deck)
         {
-            GameManager.instance.AddCardInDeckObject(card);
+            GameBoard.instance.AddCardInDeckObject(card);
         }
 
         ShuffleDeck();

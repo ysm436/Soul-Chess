@@ -16,7 +16,7 @@ public class Pawn : ChessPiece
         Vector2Int direction;
 
 
-        if (pieceColor == GameManager.PlayerColor.White)
+        if (pieceColor == GameBoard.PlayerColor.White)
             direction = Vector2Int.up;
         else
             direction = Vector2Int.down;

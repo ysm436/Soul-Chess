@@ -9,11 +9,11 @@ public class Surtr : SoulCard
     {
         base.Awake();
         // �ڽ�Ʈ ����: ī�� ���� �ñ⿡ ���� �޶��� �ʿ� ����
-        GameManager.instance.whiteController.OnMyTurnEnd += DecreaseCost;
+        GameBoard.instance.whiteController.OnMyTurnEnd += DecreaseCost;
 
-        OnInfuse += (chessPiece) => GameManager.instance.whiteController.OnMyTurnEnd -= DecreaseCost;
+        OnInfuse += (chessPiece) => GameBoard.instance.whiteController.OnMyTurnEnd -= DecreaseCost;
         OnInfuse += DestroyAllCards;
-        OnInfuse += (chessPiece) => GameManager.instance.whiteController.OnMyTurnEnd += DestroyInfusedPiece;
+        OnInfuse += (chessPiece) => GameBoard.instance.whiteController.OnMyTurnEnd += DestroyInfusedPiece;
     }
 
     private void DecreaseCost()
@@ -23,10 +23,10 @@ public class Surtr : SoulCard
 
     private void DestroyAllCards(ChessPiece chessPiece)
     {
-        GameManager.instance.gameData.playerWhite.hand.Clear();
-        GameManager.instance.gameData.playerWhite.deck.Clear();
-        GameManager.instance.gameData.playerBlack.hand.Clear();
-        GameManager.instance.gameData.playerBlack.deck.Clear();
+        GameBoard.instance.gameData.playerWhite.hand.Clear();
+        GameBoard.instance.gameData.playerWhite.deck.Clear();
+        GameBoard.instance.gameData.playerBlack.hand.Clear();
+        GameBoard.instance.gameData.playerBlack.deck.Clear();
 
         // Instantiate�� ī�嵵 ���� �ʿ�
     }

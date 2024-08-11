@@ -58,20 +58,20 @@ public class BoardSquare : MonoBehaviour
     private void OnMouseUp()
     {
         _onClick.Invoke(coordinate);
-        if (GameManager.instance.gameData.GetPiece(coordinate))
-            GameManager.instance.ShowPieceInfo(GameManager.instance.gameData.GetPiece(coordinate));
+        if (GameBoard.instance.gameData.GetPiece(coordinate))
+            GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
     }
     private void OnMouseEnter()
     {
         //카드 사용 중인지 체크해서 그 때는 기물 정보 표시 X
         //BlackController 없어서 검정 턴에는 기물 위에 올리면 오류
-        if (GameManager.instance.gameData.GetPiece(coordinate) && (!GameManager.instance.CurrentPlayerController().isUsingCard))
-            GameManager.instance.ShowPieceInfo(GameManager.instance.gameData.GetPiece(coordinate));
+        if (GameBoard.instance.gameData.GetPiece(coordinate) && (!GameBoard.instance.CurrentPlayerController().isUsingCard))
+            GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
     }
     private void OnMouseExit()
     {
-        if (GameManager.instance.isShowingPieceInfo)
-            GameManager.instance.HidePieceInfo();
+        if (GameBoard.instance.isShowingPieceInfo)
+            GameBoard.instance.HidePieceInfo();
     }
 
     public BoardSquare(Vector2Int coordinate, Sprite sprite)

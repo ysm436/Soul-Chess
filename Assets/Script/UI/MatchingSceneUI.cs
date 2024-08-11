@@ -11,17 +11,7 @@ public class MatchingSceneUI : MonoBehaviour
 
     private void Awake()
     {
-        quitButton.onClick.AddListener(LoadMainScene);
-        enterButton.onClick.AddListener(LoadLobbyScene);
-    }
-
-    private void LoadMainScene()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
-
-    private void LoadLobbyScene()
-    {
-        SceneManager.LoadScene("LobbyScene");
+        quitButton.onClick.AddListener(GameManager.instance.LoadMainScene);
+        enterButton.onClick.AddListener(GameManager.instance.LoadLobbyScene);
     }
 }

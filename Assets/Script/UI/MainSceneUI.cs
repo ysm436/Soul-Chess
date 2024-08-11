@@ -12,19 +12,9 @@ public class MainSceneUI : MonoBehaviour
 
     private void Awake()
     {
-        matchingButton.onClick.AddListener(LoadMatchingScene);
-        deckBuildingButton.onClick.AddListener(LoadDeckBuildingScene);
+        matchingButton.onClick.AddListener(GameManager.instance.LoadMatchingScene);
+        deckBuildingButton.onClick.AddListener(GameManager.instance.LoadDeckBuildingScene);
         quitButton.onClick.AddListener(QuitGame);
-    }
-
-    private void LoadMatchingScene()
-    {
-        SceneManager.LoadScene("MatchingScene");
-    }
-
-    private void LoadDeckBuildingScene()
-    {
-        SceneManager.LoadScene("DeckBuildingScene");
     }
 
     private void QuitGame()

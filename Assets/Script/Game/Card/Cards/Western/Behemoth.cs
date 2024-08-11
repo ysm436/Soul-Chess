@@ -12,7 +12,7 @@ public class Behemoth : SoulCard
 
     public void SoulEffect(ChessPiece chessPiece)
     {
-        GameManager.instance.whiteController.OnMyTurnEnd += () => SoulEffect2(InfusedPiece);
+        GameBoard.instance.whiteController.OnMyTurnEnd += () => SoulEffect2(InfusedPiece);
     }
 
     public void SoulEffect2(ChessPiece piece)

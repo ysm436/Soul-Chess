@@ -6,13 +6,13 @@ using UnityEngine.Rendering;
 
 // TODO: PlayerColor GameData로 옮기기
 
-public class GameManager : MonoBehaviour
+public class GameBoard : MonoBehaviour
 {
-    public static GameManager instance = null;
+    public static GameBoard instance = null;
 
     [HideInInspector]
     public GameData gameData;
-    public GameManager.PlayerColor playerColor;
+    public GameBoard.PlayerColor playerColor;
     public ChessBoard chessBoard;
     public GameObject cardBoard;
     public PieceInfo pieceInfo; //기물 정보 프리팹
@@ -22,11 +22,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
         //singleton
         if (instance == null)
         {
             instance = this;
+            GameManager.instance.gameBoard = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else

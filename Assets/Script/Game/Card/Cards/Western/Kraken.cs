@@ -22,7 +22,7 @@ public class Kraken : SoulCard
 
     public void OnkilledEffect(ChessPiece chessPiece)
     {
-        List<ChessPiece> targets = GameManager.instance.gameData.pieceObjects.Where(obj => obj.pieceColor != GameManager.instance.whiteController.playerColor).ToList();
+        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor != GameBoard.instance.whiteController.playerColor).ToList();
 
         for (int i = 0; i < repeat; i++)
         {

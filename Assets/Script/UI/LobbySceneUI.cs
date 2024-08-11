@@ -18,12 +18,12 @@ public class LobbySceneUI : MonoBehaviour
     
     public void ExitButton()
     {
-        SceneManager.LoadScene("MatchingScene");
+        GameManager.instance.LoadMatchingScene();
     }
 
     public void StartButton()
     {
-        SceneManager.LoadScene("GameScene");
+        GameManager.instance.LoadGameScene();
     }
 
     public void OpenDeckButton()

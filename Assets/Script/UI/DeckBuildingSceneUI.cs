@@ -18,7 +18,7 @@ public class DeckBuildingSceneUI : MonoBehaviour
     private void Awake()
     {
         CancelButtonFunction();
-        quitButton.onClick.AddListener(LoadMainScene);
+        quitButton.onClick.AddListener(GameManager.instance.LoadMainScene);
         newDeckButton.onClick.AddListener(NewDeckButtonFunction);
         cancelButton.onClick.AddListener(CancelButtonFunction);
         saveButton.onClick.AddListener(saveButtonFunction);

@@ -11,7 +11,7 @@ public abstract class SoulCard : Card
     private struct AccessorySprite
     {
         public ChessPiece.PieceType pieceType;
-        public GameManager.PlayerColor pieceColor;
+        public GameBoard.PlayerColor pieceColor;
         public Sprite sprite;
     }
 

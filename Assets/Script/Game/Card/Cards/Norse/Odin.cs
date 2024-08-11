@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Odin : SoulCard
 {
-    [SerializeField] private List<GameObject> selectionCardPrefabList;        //±Ã´Ï¸£, µå¶ó¿ìÇÁ´Ï¸£, °¨¹ÝÅ×ÀÎ ¼øÀ¸·Î ÀÖ¾î¾ß ÇÔ (Ä«µå ÇÁ¸®ÆÕ)
+    [SerializeField] private List<GameObject> selectionCardPrefabList;        //ï¿½Ã´Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½ï¿½ (Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 
     private List<GameObject> selectionCardInstanceList;
 
@@ -39,6 +39,6 @@ public class Odin : SoulCard
     {
         Card selectedCard = selectionCardInstanceList[selectionNumber].GetComponent<Card>();
         selectedCard.isInSelection = false;
-        GameManager.instance.gameData.playerWhite.TryAddCardInHand(selectedCard);
+        GameBoard.instance.gameData.playerWhite.TryAddCardInHand(selectedCard);
     }
 }
