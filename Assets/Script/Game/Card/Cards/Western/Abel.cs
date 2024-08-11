@@ -19,8 +19,8 @@ public class Abel : SoulCard
     {
         chessPiece.OnAttacked += OnAttackedEffect;
         chessPiece.OnKilled += OnkilledEffect;
-        GameBoard.instance.whiteController.OnMyDraw += MyTurnSignal;
-        GameBoard.instance.whiteController.OnMyTurnEnd += NotMyTurnSignal;
+        GameBoard.instance.myController.OnMyDraw += MyTurnSignal;
+        GameBoard.instance.myController.OnMyTurnEnd += NotMyTurnSignal;
     }
 
     public void MyTurnSignal()

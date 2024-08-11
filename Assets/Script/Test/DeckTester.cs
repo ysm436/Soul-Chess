@@ -38,7 +38,7 @@ public class DeckTester : MonoBehaviour
             player.deck.Add(instantiatedCard);
         }
 
-        gameBoard.whiteController.OnOpponentTurnEnd += () => player.DrawCard();
+        gameBoard.myController.OnOpponentTurnEnd += () => player.DrawCard();
 
         player.OnGetCard += (card) => card.transform.SetParent(handAnchor);
 

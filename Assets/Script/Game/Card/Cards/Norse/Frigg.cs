@@ -11,13 +11,13 @@ public class Frigg : SoulCard
     {
         base.Awake();
         OnInfuse += (ChessPiece chessPiece) => DecreaseEnemyPiecesAD();
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.whiteController.OnOpponentTurnEnd += DecreaseEnemyPiecesAD;
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.whiteController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
+        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnOpponentTurnEnd += DecreaseEnemyPiecesAD;
+        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
     }
 
     private void IncreaseEnemyPiecesAD()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.whiteController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
 
         foreach (ChessPiece piece in enemyPieceList)
         {
@@ -27,7 +27,7 @@ public class Frigg : SoulCard
 
     private void DecreaseEnemyPiecesAD()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.whiteController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
 
         foreach (ChessPiece piece in enemyPieceList)
         {

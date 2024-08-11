@@ -13,7 +13,7 @@ public class LadyOfTheLake : SoulCard
     public void SoulEffect(ChessPiece chessPiece)
     {
         //강림 시 OnMyTurnEnd에 함수 추가
-        GameBoard.instance.whiteController.OnMyTurnEnd += () => SoulEffect2(InfusedPiece);
+        GameBoard.instance.myController.OnMyTurnEnd += () => SoulEffect2(InfusedPiece);
     }
 
     public void SoulEffect2(ChessPiece piece) //턴 종료 시마다 호출될 텐데
