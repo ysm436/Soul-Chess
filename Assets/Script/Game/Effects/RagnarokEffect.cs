@@ -6,7 +6,7 @@ public class RagnarokEffect : Effect
 {
     public override void EffectAction()
     {
-        List<ChessPiece> pieceList = GameManager.instance.gameData.pieceObjects;
+        List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects;
 
         for (int i = pieceList.Count - 1; i >= 0; i--)
         {

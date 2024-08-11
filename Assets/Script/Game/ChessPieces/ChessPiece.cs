@@ -31,7 +31,7 @@ abstract public class ChessPiece : TargetableObject
 
     private SoulCard _soul = null;
     public PieceType pieceType;
-    public GameManager.PlayerColor pieceColor;
+    public GameBoard.PlayerColor pieceColor;
 
     public int AD
     {
@@ -176,7 +176,7 @@ abstract public class ChessPiece : TargetableObject
 
         isAlive = false;
         pieceObject.HPText.text = "0";
-        GameManager.instance.KillPiece(this);
+        GameBoard.instance.KillPiece(this);
     }
 
     public void SetSoul(SoulCard targetSoul, Sprite sprite)

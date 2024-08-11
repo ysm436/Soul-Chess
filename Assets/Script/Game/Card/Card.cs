@@ -45,17 +45,17 @@ public class Card : TargetableObject
     }
     private void OnMouseEnter()
     {
-        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
-            GameManager.instance.ShowCard(this);
+        if (!GameBoard.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
+            GameBoard.instance.ShowCard(this);
     }
     private void OnMouseExit()
     {
-        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
-            GameManager.instance.HideCard();
+        if (!GameBoard.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
+            GameBoard.instance.HideCard();
     }
     private void OnMouseDrag()
     {
-        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
+        if (!GameBoard.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
@@ -63,18 +63,18 @@ public class Card : TargetableObject
     }
     private void OnMouseUp()
     {
-        if (!GameManager.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
+        if (!GameBoard.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
         {
             if (transform.position.y > 0)
             {
                 if (!TryUse())
                 {
                     //카드 원위치
-                    GameManager.instance.gameData.playerWhite.UpdateHandPosition();
+                    GameBoard.instance.gameData.playerWhite.UpdateHandPosition();
                 }
                 else
                 {
-                    GameManager.instance.gameData.playerWhite.TryRemoveCardInHand(this);
+                    GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
                 }
             }
         }
@@ -91,10 +91,10 @@ public class Card : TargetableObject
 
     public virtual bool TryUse()
     {
-        if (GameManager.instance.CurrentPlayerData().soulEssence >= cost)
+        if (GameBoard.instance.CurrentPlayerData().soulEssence >= cost)
         {
             //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
-            GameManager.instance.CurrentPlayerController().UseCard(this);
+            GameBoard.instance.CurrentPlayerController().UseCard(this);
             return true;
         }
         return false;

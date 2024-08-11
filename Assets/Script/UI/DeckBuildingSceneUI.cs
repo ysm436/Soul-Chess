@@ -18,14 +18,9 @@ public class DeckBuildingSceneUI : MonoBehaviour
     private void Awake()
     {
         enableDeckListPanel();
-        quitButton.onClick.AddListener(LoadMainScene);
+        quitButton.onClick.AddListener(GameManager.instance.LoadMainScene);
         newDeckButton.onClick.AddListener(enableNewDeckPanel);
         cancelButton.onClick.AddListener(enableDeckListPanel);
-    }
-
-    private void LoadMainScene()
-    {
-        SceneManager.LoadScene("MainScene");
     }
 
     private void enableDeckListPanel()

@@ -25,7 +25,7 @@ public abstract class TargetingEffect : Effect
     {
         return targetTypes[targets.Count];
     }
-    public bool isAvailable(GameManager.PlayerColor playerColor)
+    public bool isAvailable(GameBoard.PlayerColor playerColor)
     {
         foreach (var t in targetTypes)
         {
@@ -61,12 +61,12 @@ public abstract class TargetingEffect : Effect
         public ChessPiece.PieceType targetPieceType;
         public bool isOpponent;
         public bool isFriendly;
-        public List<TargetableObject> GetTargetList(GameManager.PlayerColor playerColor)
+        public List<TargetableObject> GetTargetList(GameBoard.PlayerColor playerColor)
         {
             switch (targetType)
             {
                 case TargetType.Piece:
-                    return GameManager.instance.gameData.pieceObjects.Where<ChessPiece>(
+                    return GameBoard.instance.gameData.pieceObjects.Where<ChessPiece>(
                         obj => (
                             (obj.pieceType & targetPieceType) != 0)
                             && (obj.pieceColor == playerColor ? isFriendly : isOpponent)

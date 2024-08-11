@@ -8,12 +8,12 @@ public class Thor : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        OnInfuse += (ChessPiece chessPiece) => GameManager.instance.whiteController.OnMyTurnEnd += AttackRandomEnemyPiece;
+        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.whiteController.OnMyTurnEnd += AttackRandomEnemyPiece;
     }
 
     private void AttackRandomEnemyPiece()
     {
-        List<ChessPiece> enemyPieceList = GameManager.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameManager.instance.whiteController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.whiteController.playerColor).ToList();
 
         if (enemyPieceList.Count == 0)
             return;

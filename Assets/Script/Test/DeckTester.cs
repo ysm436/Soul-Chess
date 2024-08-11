@@ -6,7 +6,7 @@ using UnityEngine;
 public class DeckTester : MonoBehaviour
 {
     public GameObject CardBoard;
-    public GameManager gameBoard;
+    public GameBoard gameBoard;
 
     PlayerData player;
 
