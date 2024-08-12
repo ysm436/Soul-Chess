@@ -31,7 +31,13 @@ public class LocalController : MonoBehaviour
             blackController.enabled = true;
 
             whiteController.TurnEnd();
-            blackController.OnOpponentTurnEnd?.Invoke();
+            blackController.OpponentTurnEnd();
+
+            blackController.TurnStart();
+            whiteController.OpponentTurnStart();
+
+            blackController.Draw();
+            whiteController.OpponentDraw();
         }
         else
         {
@@ -41,7 +47,13 @@ public class LocalController : MonoBehaviour
             whiteController.enabled = true;
 
             blackController.TurnEnd();
-            whiteController.OnOpponentTurnEnd?.Invoke();
+            whiteController.OpponentTurnEnd();
+
+            whiteController.TurnStart();
+            blackController.OpponentTurnStart();
+
+            whiteController.Draw();
+            blackController.OpponentDraw();
         }
     }
 
