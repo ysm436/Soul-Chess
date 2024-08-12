@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     ChessPiece chosenPiece = null;
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
+    private int movableCount = 1;
+
     private Card UsingCard = null;
     private TargetingEffect targetingEffect;
     public bool isUsingCard = false;
@@ -31,6 +33,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+    }
+    private void Start()
+    {
+        OnOpponentTurnEnd += () => movableCount = 1;
     }
     private void OnEnable()
     {
@@ -75,7 +81,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else
+        else if (movableCount > 0)
         {
             if (chosenPiece == null)//선택된 (아군)기물이 없을 때
             {
@@ -146,6 +152,8 @@ public class PlayerController : MonoBehaviour
             srcPiece.Move(dst_coordinate);
             gameBoard.chessBoard.SetPiecePositionByCoordinate(srcPiece);
         }
+
+        movableCount--;
     }
     void SetChosenPiece(ChessPiece targetPiece)
     {
