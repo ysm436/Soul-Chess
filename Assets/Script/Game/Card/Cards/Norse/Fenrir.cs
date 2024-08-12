@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Fenrir : SoulCard
 {
+    protected override int CardID => Card.cardIdDict["펜리르"];
+
     private int IncreaseAmountAD = 20;
     private int IncreaseAmountHP = 20;
 

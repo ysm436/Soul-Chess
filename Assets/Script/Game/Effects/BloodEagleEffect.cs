@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BloodEagle : TargetingEffect
+public class BloodEagleEffect : TargetingEffect
 {
     public override void EffectAction()
     {

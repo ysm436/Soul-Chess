@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -14,6 +15,7 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         get { return _CardName; }
         set
         {
+            _CardName = value;
             CardNameTMP.text = value;
         }
     }
@@ -23,6 +25,7 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         get { return _Cost; }
         set
         {
+            _Cost = value;
             CardCostTMP.text = value.ToString();
         }
     }
@@ -32,6 +35,7 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         get { return _HP; }
         set
         {
+            _HP = value;
             CardHPTMP.text = value.ToString();
         }
     }
@@ -41,6 +45,7 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         get { return _AD; }
         set
         {
+            _AD = value;
             CardADTMP.text = value.ToString();
         }
     }

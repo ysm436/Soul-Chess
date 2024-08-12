@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Surtr : SoulCard
 {
+    protected override int CardID => Card.cardIdDict["수르트"];
+
     protected override void Awake()
     {
         base.Awake();

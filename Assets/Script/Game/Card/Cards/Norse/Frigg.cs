@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Frigg : SoulCard
 {
-    //protected override int CardID => Card.cardIdDict["프리그"];
+    protected override int CardID => Card.cardIdDict["프리그"];
 
     public int decreaseAmount = 20;
 

@@ -5,5 +5,7 @@ using UnityEngine;
 public class Deck
 {
     static readonly int CARD_LIMIT = 30;
-    List<int> cards = new();
+    //public int index;
+    public string deckname;
+    public List<int> cards = new List<int>();
 }

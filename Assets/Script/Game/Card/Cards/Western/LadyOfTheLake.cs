@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LadyOfTheLake : SoulCard
 {
+    protected override int CardID => Card.cardIdDict["호수의 여인"];
+
     protected override void Awake()
     {
         base.Awake();

@@ -13,9 +13,7 @@ public class LobbySceneUI : MonoBehaviour
     [SerializeField] private Transform DeckDisplay;
     [SerializeField] private Transform TrashCan;
     [SerializeField] private TextMeshProUGUI SelectedDeckInfo;
-    private List<List<int>> decklist;
-    private List<string> decknamelist;
-    
+
     public void ExitButton()
     {
         GameManager.instance.LoadMatchingScene();
@@ -28,22 +26,19 @@ public class LobbySceneUI : MonoBehaviour
 
     public void OpenDeckButton()
     {
-        decklist = DeckData.instance.DeckList;
-        decknamelist = DeckData.instance.DeckNameList;
-
         if (DeckSelectPanel != null)
         {
             DeckSelectPanel.SetActive(true);
 
-            if (DeckData.instance)
+            if (GameManager.instance.deckList.Count > 0)
             {
-                for (int i = 0; i < decklist.Count; i++)
+                for (int i = 0; i < GameManager.instance.deckList.Count; i++)
                 {
-                    if(decklist[i] != null)
+                    if(GameManager.instance.deckList[i] != null)
                     {
                         GameObject deckselectbutton = Instantiate(DeckSelectButton, DeckDisplay);
                         DeckSelectButton buttoninfo = deckselectbutton.GetComponent<DeckSelectButton>();
-                        buttoninfo.deckname.text = decknamelist[i];
+                        buttoninfo.deckname.text = GameManager.instance.deckList[i].deckname;
                         buttoninfo.deck_index = i;
                     }
                 }
@@ -64,7 +59,7 @@ public class LobbySceneUI : MonoBehaviour
             Destroy(deck.gameObject);
         }
 
-        SelectedDeckInfo.text = "Selected Deck Name : " + decknamelist[SelectedDeckIndex];
+        SelectedDeckInfo.text = "Selected Deck Name : " + GameManager.instance.deckList[SelectedDeckIndex].deckname;
     }
 
 }

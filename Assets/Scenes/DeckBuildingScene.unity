@@ -1869,67 +1869,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &433449893
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 433449895}
-  - component: {fileID: 433449894}
-  - component: {fileID: 433449896}
-  m_Layer: 0
-  m_Name: DeckDB
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &433449894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433449893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62107e4db79c69148bf0d41d86c7e20f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DeckNameList: []
---- !u!4 &433449895
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433449893}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 908.2052, y: 551.43164, z: 0.6285663}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &433449896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433449893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aee3a0c9125497340a980144bab45f13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardindex: 0
-  cardNameText: {fileID: 0}
-  cost: {fileID: 0}
 --- !u!1 &435900715
 GameObject:
   m_ObjectHideFlags: 0
@@ -4220,7 +4159,7 @@ MonoBehaviour:
   m_text: Add New Deck
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1f223abdfec106146b482f4dda3ce5dc, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -4786860882074376051, guid: 1f223abdfec106146b482f4dda3ce5dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4283,7 +4222,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &870626389
@@ -6473,11 +6412,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loaded_deck_index: 0
+  trashcan: {fileID: 475217773}
   CardSlot: {fileID: 1781645681}
   DeckSlot: {fileID: 1038093889}
   Simple_Card: {fileID: 6001099817276724710, guid: 9e5b7d6f1948cc1468eec3124c4e7c37, type: 3}
   Simple_Deck: {fileID: 560925474644689047, guid: 18691da86d211a94eb8c4cca58649375, type: 3}
-  deckname: {fileID: 177664598}
+  deckname_inputfield: {fileID: 177664598}
   newDeckSignal: 0
   TempDeck: []
 --- !u!1 &1485814816
@@ -8457,6 +8397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllCardList: []
   DisplayCardList: []
+  max_card_index: 48
   quantity_setting: 2
   DynamicDisplay: {fileID: 2101250960}
   DisplayStorage: {fileID: 1551673597}
@@ -8481,5 +8422,4 @@ SceneRoots:
   - {fileID: 392628337}
   - {fileID: 435900719}
   - {fileID: 685364438}
-  - {fileID: 433449895}
   - {fileID: 965457445}

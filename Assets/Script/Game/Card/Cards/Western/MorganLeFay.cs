@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MorganLeFay : SoulCard
 {
+    protected override int CardID => Card.cardIdDict["모르건 르 페이"];
+
     protected override void Awake()
     {
         base.Awake();

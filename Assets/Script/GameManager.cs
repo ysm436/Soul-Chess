@@ -9,9 +9,7 @@ public class GameManager : MonoBehaviour
 
 
     public GameBoard gameBoard; //Used only in GameScene
-
-
-    //private Deck deckList;
+    public List<Deck> deckList = new List<Deck>();
 
     private void Awake()
     {

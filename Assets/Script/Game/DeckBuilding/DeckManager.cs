@@ -9,36 +9,33 @@ public class DeckManager : MonoBehaviour, IDropHandler
     private int deck_length = -1;
     public int loaded_deck_index = 0;
 
+    [SerializeField] private RectTransform trashcan;
     [SerializeField] private RectTransform CardSlot;
     [SerializeField] private RectTransform DeckSlot;
     [SerializeField] private GameObject Simple_Card;
     [SerializeField] private GameObject Simple_Deck;
-    [SerializeField] private TMP_InputField deckname;
+    [SerializeField] private TMP_InputField deckname_inputfield;
     
     public bool newDeckSignal = false;
     public List<GameObject> TempDeck = new List<GameObject>();
-    private List<List<int>> DeckList = new List<List<int>>();
-    private List<string> DeckNameList = new List<string>();
 
     private DeckBuildingManager dbm;
 
     //덱 데이터로부터 덱 리스트와 이름 파일을 불러옵니다.
     public void Awake()
-    {        
-        if (DeckData.instance.DeckList != null)
+    {
+        List<Deck> decklist = GameManager.instance.deckList.ToList();
+        if (decklist != null)
         {
-            DeckList = DeckData.instance.DeckList.ToList();
-            DeckNameList = DeckData.instance.DeckNameList.ToList();
-
-            for(int i = 0; i < DeckList.Count; i++)
+            for(int i = 0; i < decklist.Count; i++)
             {
-                if(DeckList[i] != null)
+                if(decklist[i] != null)
                 {
                     deck_length++;
                     GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
                     SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
                     newDeckInfo.deck_index = i;
-                    newDeckInfo.DeckNameText.text = DeckNameList[i];
+                    newDeckInfo.DeckNameText.text = decklist[i].deckname;
                 }
             }
         }
@@ -80,9 +77,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     //TempDeck을 초기화 합니다.
     //TODO 더 효율적으로 바꿀 수 있다면 좋을 것 같습니다.
     public void TempDeckReset()
-    {
-        Transform trashcan = dbm.TrashCan;
-        
+    {   
         for(int i = CardSlot.childCount; i > 0; i--)
         {
             Transform card = CardSlot.GetChild(i - 1);
@@ -94,29 +89,36 @@ public class DeckManager : MonoBehaviour, IDropHandler
     //덱 생성 / 수정 후 저장
     public void DeckSave(int loaded_deck_index)
     {
-        List<int> newDeck = MakeCardindexDeckList(TempDeck);
+        List<int> newDeckcards = MakeCardindexDeckList(TempDeck);
 
         if(newDeckSignal) // 덱 새로 생성 시
         {
             deck_length++;
-            DeckList.Add(newDeck);
+
+            Deck newdeck = new Deck
+            {
+                deckname = deckname_inputfield.text,
+                cards = newDeckcards
+            };
+            GameManager.instance.deckList.Add(newdeck);
+
             GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
             SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
+            newDeckInfo.DeckNameText.text = newdeck.deckname;
             newDeckInfo.deck_index = deck_length;
-            newDeckInfo.DeckNameText.text = deckname.text;
-            DeckNameList.Add(deckname.text);
+            
             TempDeck.Clear();
             newDeckSignal = false;
         }
         else // 덱 수정 시
         {
-            DeckList.RemoveAt(loaded_deck_index);
-            DeckList.Insert(loaded_deck_index, newDeck);
+            Deck loaded_deck = GameManager.instance.deckList[loaded_deck_index];
+            loaded_deck.deckname = deckname_inputfield.text;
+            loaded_deck.cards = newDeckcards;
             TempDeck.Clear();
-            DeckNameList[loaded_deck_index] = deckname.text;
         }
 
-        deckname.text = "";
+        deckname_inputfield.text = "";
     }
 
     // 덱 생성 / 수정 취소
@@ -124,7 +126,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     {
         newDeckSignal = false;
         TempDeck.Clear();
-        deckname.text = "";
+        deckname_inputfield.text = "";
     }
 
     //덱 로드
@@ -157,8 +159,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 }
             }
         }
-
-        deckname.text = DeckNameList[loaded_deck_index];
+        deckname_inputfield.text = GameManager.instance.deckList[deck_index].deckname;
     }   
 
     //덱 로드를 위해 index를 통해 gameobject 리스트로 변환
@@ -167,7 +168,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         List<GameObject> allcardlist = dbm.AllCardList;
         List<GameObject> GameobjectList = new List<GameObject>();
 
-        foreach (var card_index in DeckList[deck_index])
+        foreach (var card_index in GameManager.instance.deckList[deck_index].cards)
         {
             Card cardinfo = allcardlist[card_index].GetComponent<Card>();
             GameObject indeck = Instantiate(Simple_Card, CardSlot);
@@ -194,12 +195,5 @@ public class DeckManager : MonoBehaviour, IDropHandler
         }
 
         return cardindexList;
-    }
-
-    //quit 버튼을 누르면 덱의 데이터를 저장합니다.
-    public void DeckDataSave()
-    {
-        DeckData.instance.DeckList = DeckList.ToList();
-        DeckData.instance.DeckNameList = DeckNameList.ToList();
     }
 }

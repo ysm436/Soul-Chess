@@ -7,7 +7,7 @@ using UnityEngine;
 
 public abstract class Card : TargetableObject
 {
-    //abstract protected int CardID { get; }
+    abstract protected int CardID { get; }
 
     private CardObject cardObject;
 
@@ -142,6 +142,21 @@ public abstract class Card : TargetableObject
     //Card Dictionary<CardName, CardID>
     public static Dictionary<string, int> cardIdDict = new Dictionary<string, int>(){
         {"오딘", 0},
-        {"프리그", 1}
+        {"프리그", 1},
+        {"토르", 3},
+        {"수르트", 8},
+        {"라그나로크", 9},
+        {"펜리르", 10},
+        {"피의 독수리", 11},
+        {"처형", 16},
+        {"어미 곰", 19},
+        {"포세이돈", 21},
+        {"페르세우스", 29},
+        {"모르건 르 페이", 37},
+        {"호수의 여인", 38},
+        {"베헤모스", 39},
+        {"아벨", 42},
+        {"돈키호테", 44},
+        {"크라켄", 48}
     };
 }
