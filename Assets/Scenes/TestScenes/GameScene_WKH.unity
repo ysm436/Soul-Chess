@@ -155,7 +155,7 @@ MonoBehaviour:
   gameBoard: {fileID: 1683396308}
   soulOrb: {fileID: 1354575176}
   isUsingCard: 0
-  isMyTurn: 1
+  _isMyTurn: 0
 --- !u!4 &96209571
 Transform:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
   gameBoard: {fileID: 1683396308}
   soulOrb: {fileID: 1859173220}
   isUsingCard: 0
-  isMyTurn: 0
+  _isMyTurn: 0
 --- !u!4 &211787240
 Transform:
   m_ObjectHideFlags: 0
@@ -1556,6 +1556,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -179862710205357861, guid: 5774fd488f14e6b4396382217fb55d10, type: 3}
+      propertyPath: _maxHP
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: -179862710205357861, guid: 5774fd488f14e6b4396382217fb55d10, type: 3}
+      propertyPath: attackDamage
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: -179862710205357861, guid: 5774fd488f14e6b4396382217fb55d10, type: 3}
       propertyPath: coordinate.y
       value: 6
       objectReference: {fileID: 0}
@@ -2063,13 +2071,15 @@ MonoBehaviour:
   CardBoard: {fileID: 518841780}
   gameBoard: {fileID: 1683396308}
   hand:
-  - {fileID: 7433252666421529211, guid: fc310b2ab5a30de4298b4aea18a015f4, type: 3}
-  - {fileID: 1292469394887977406, guid: 69acd9f53abcc974da0de5adf88dba59, type: 3}
+  - {fileID: -542098215232420279, guid: a624a3c6dfec07e4e96e01a10fa19a1d, type: 3}
+  - {fileID: -2815551797691118998, guid: 2d9947a9ca0af554ebef3f3b895f3d78, type: 3}
   deck:
   - {fileID: 4824830457768495894, guid: dc0e4c5991c664d4aaaad1229ca79999, type: 3}
-  - {fileID: -2815551797691118998, guid: 2d9947a9ca0af554ebef3f3b895f3d78, type: 3}
-  - {fileID: 3604200065000529882, guid: 69c628af0606ded408e60e35428eab89, type: 3}
+  - {fileID: 6842244014742130878, guid: ce404b57a1b095e4bbcfbec40f372c12, type: 3}
+  - {fileID: 6592858290932310892, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
   - {fileID: 599667399022218461, guid: ff82128eca4e7994fb3e11360893a803, type: 3}
+  - {fileID: -1208510047847783411, guid: 97d03e24daf82ae4486ae6ceec8dfdeb, type: 3}
+  - {fileID: 7433252666421529211, guid: fc310b2ab5a30de4298b4aea18a015f4, type: 3}
 --- !u!4 &1323045556
 Transform:
   m_ObjectHideFlags: 0
@@ -3247,7 +3257,8 @@ MonoBehaviour:
   cardBoard: {fileID: 518841780}
   pieceInfo: {fileID: 1594983728884485668, guid: 6f09fd129a154794e8cebcd82ef9b00a, type: 3}
   myDeckObject: {fileID: 1840355138}
-  whiteController: {fileID: 96209570}
+  myController: {fileID: 96209570}
+  opponentController: {fileID: 211787239}
   isShowingPieceInfo: 0
 --- !u!4 &1683396309
 Transform:

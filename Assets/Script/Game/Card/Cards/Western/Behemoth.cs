@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Behemoth : SoulCard
 {
+    private int buffedHP;
+    private int buffedAD;
+
     protected override void Awake()
     {
         base.Awake();
@@ -12,12 +15,28 @@ public class Behemoth : SoulCard
 
     public void SoulEffect(ChessPiece chessPiece)
     {
-        GameBoard.instance.myController.OnMyTurnEnd += () => SoulEffect2(InfusedPiece);
+        buffedHP = 0;
+        buffedAD = 0;
+
+        GameBoard.instance.myController.OnMyTurnEnd += SoulEffect2;
+
+        chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
-    public void SoulEffect2(ChessPiece piece)
+    public void SoulEffect2()
     {
-        HP += 10;
-        AD += 10;
+        InfusedPiece.maxHP += 10;
+        InfusedPiece.AD += 10;
+
+        buffedHP += 10;
+        buffedAD += 10;
+    }
+
+    private void RemoveEffect()
+    {
+        InfusedPiece.maxHP -= buffedHP;
+        InfusedPiece.AD -= buffedAD;
+
+        GameBoard.instance.myController.OnMyTurnEnd -= SoulEffect2;
     }
 }

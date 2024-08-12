@@ -97,6 +97,8 @@ abstract public class ChessPiece : TargetableObject
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
 
+    public Action OnSoulRemoved;
+
     private void Awake()
     {
         _currentHP = _maxHP;
@@ -173,6 +175,7 @@ abstract public class ChessPiece : TargetableObject
     public void Kill()
     {
         OnKilled?.Invoke(this);
+        RemoveSoul();
 
         isAlive = false;
         pieceObject.HPText.text = "0";
@@ -205,6 +208,9 @@ abstract public class ChessPiece : TargetableObject
         AD -= soul.AD;
 
         spriteRenderer.sprite = defaultSprite;
+
+        OnSoulRemoved?.Invoke();
+        OnSoulRemoved = null;
 
         Destroy(soul);
         soul = null;

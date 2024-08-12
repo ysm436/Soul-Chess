@@ -10,13 +10,15 @@ public class DonQuixote : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        gameObject.GetComponent<SoulCard>().OnInfuse += InfuseEffect;
+        OnInfuse += InfuseEffect;
     }
 
     public void InfuseEffect(ChessPiece chessPiece)
     {
         chessPiece.OnStartAttack += StartAttackEffect;
         chessPiece.OnEndAttack += EndAttackEffect;
+
+        chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public void StartAttackEffect(ChessPiece chessPiece)
@@ -35,5 +37,11 @@ public class DonQuixote : SoulCard
             this.InfusedPiece.AD -= extraAD;
             extraAttack = false;
         }
+    }
+
+    private void RemoveEffect()
+    {
+        InfusedPiece.OnStartAttack -= StartAttackEffect;
+        InfusedPiece.OnEndAttack -= EndAttackEffect;
     }
 }

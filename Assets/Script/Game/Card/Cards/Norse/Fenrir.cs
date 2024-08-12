@@ -12,11 +12,17 @@ public class Fenrir : SoulCard
     {
         base.Awake();
         OnInfuse += (ChessPiece chessPiece) => chessPiece.OnKill += IncreaseStat;
+        OnInfuse += (ChessPiece chessPiece) => chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
     private void IncreaseStat(ChessPiece chessPiece)
     {
         InfusedPiece.AD += IncreaseAmountAD;
         InfusedPiece.maxHP += IncreaseAmountHP;
+    }
+
+    private void RemoveEffect()
+    {
+        InfusedPiece.OnKill -= IncreaseStat;
     }
 }

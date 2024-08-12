@@ -8,7 +8,7 @@ public class Poseidon : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        gameObject.GetComponent<SoulCard>().OnInfuse += SoulEffect;
+        OnInfuse += SoulEffect;
     }
 
     public void SoulEffect(ChessPiece chessPiece)
