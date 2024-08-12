@@ -31,6 +31,7 @@ public class PlayerData
         }
 
         ShuffleDeck();
+        Mulligan();
     }
 
     // 드로우

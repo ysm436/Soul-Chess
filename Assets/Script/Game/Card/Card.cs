@@ -70,11 +70,11 @@ public class Card : TargetableObject
                 if (!TryUse())
                 {
                     //카드 원위치
-                    GameBoard.instance.gameData.playerWhite.UpdateHandPosition();
+                    GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
                 }
                 else
                 {
-                    GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
+                    GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
                 }
             }
         }

@@ -1,19 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class LocalController : MonoBehaviour
 {
+    PhotonView photonView;
+
     SpriteRenderer spriteRenderer;
     public Sprite whiteButton;
     public Sprite blackButton;
     public PlayerController whiteController;
     public PlayerController blackController;
+    public SoulOrb mySoulOrb;
+    public SoulOrb opponentSoulrOrb;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = whiteButton;
+
+        photonView = GetComponent<PhotonView>();
+
+        if (GameManager.instance.isHost)
+        {
+            mySoulOrb.playerColor = GameBoard.PlayerColor.White;
+            opponentSoulrOrb.playerColor = GameBoard.PlayerColor.Black;
+            whiteController.soulOrb = mySoulOrb;
+            blackController.soulOrb = opponentSoulrOrb;
+        }
+        else
+        {
+            mySoulOrb.playerColor = GameBoard.PlayerColor.Black;
+            opponentSoulrOrb.playerColor = GameBoard.PlayerColor.White;
+            blackController.soulOrb = mySoulOrb;
+            whiteController.soulOrb = opponentSoulrOrb;
+        }
+
     }
     private void Start()
     {
@@ -22,6 +45,13 @@ public class LocalController : MonoBehaviour
     }
 
     private void OnMouseUp()
+    {
+        if (GameBoard.instance.isActivePlayer)
+            photonView.RPC("OnTurnEndClicked", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void OnTurnEndClicked()
     {
         if (whiteController.enabled)
         {

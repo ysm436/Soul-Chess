@@ -55,6 +55,9 @@ public class GameBoard : MonoBehaviour
         else
             playerColor = PlayerColor.Black;
 
+        //덱 초기화
+        //gameData.myPlayerData.deck = GameManager.instance.currentDeck;
+
         //체스 판 세팅
         chessBoard.SetBoardSquares(gameData);
 

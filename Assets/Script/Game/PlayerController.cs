@@ -4,9 +4,13 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using Photon.Pun;
+using Photon.Pun.Demo.Cockpit;
 
 public class PlayerController : MonoBehaviour
 {
+    private PhotonView photonView;
+
     public GameBoard.PlayerColor playerColor;
     public GameBoard gameBoard;
     public SoulOrb soulOrb; //코스트 프리팹
@@ -24,6 +28,10 @@ public class PlayerController : MonoBehaviour
     public Action OnMyTurnEnd;
     public Action OnOpponentTurnEnd;
 
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
     private void OnEnable()
     {
         foreach (var s in gameBoard.gameData.boardSquares)
@@ -91,16 +99,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (IsMovableCoordniate(coordinate))
                         {
-                            if (chosenPiece.Attack(targetPiece))
-                            {
-                                chosenPiece.Move(coordinate);
-                                gameBoard.chessBoard.SetPiecePositionByCoordinate(chosenPiece);
-                            }
-                            else if (!chosenPiece.isAlive)
-                            {
-                                //이벤트 메커니즘 수정하면서 다시 체크해볼게요
-                                //gameBoard.KillPiece(chosenPiece);
-                            }
+                            photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
 
                             chosenPiece = null;
                             ClearMovableCoordniates();
@@ -111,8 +110,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (IsMovableCoordniate(coordinate))
                     {
-                        chosenPiece.Move(coordinate);
-                        gameBoard.chessBoard.SetPiecePositionByCoordinate(chosenPiece);
+                        photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
                     }
                     chosenPiece = null;
                     ClearMovableCoordniates();
@@ -121,6 +119,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [PunRPC]
+    private void MovePiece(int src_x, int src_y, int dst_x, int dst_y, bool isAttack)
+    {
+        Vector2Int dst_coordinate = new Vector2Int(dst_x, dst_y);
+        Vector2Int src_coordinate = new Vector2Int(src_x, src_y);
+
+        ChessPiece srcPiece = GameBoard.instance.gameData.GetPiece(src_coordinate);
+
+        if (isAttack)
+        {
+            ChessPiece dstPiece = GameBoard.instance.gameData.GetPiece(dst_coordinate);
+            if (srcPiece.Attack(dstPiece))
+            {
+                srcPiece.Move(dst_coordinate);
+                gameBoard.chessBoard.SetPiecePositionByCoordinate(srcPiece);
+            }
+            else if (!srcPiece.isAlive)
+            {
+                //이벤트 메커니즘 수정하면서 다시 체크해볼게요
+                //gameBoard.KillPiece(srcPiece);
+            }
+        }
+        else
+        {
+            srcPiece.Move(dst_coordinate);
+            gameBoard.chessBoard.SetPiecePositionByCoordinate(srcPiece);
+        }
+    }
     void SetChosenPiece(ChessPiece targetPiece)
     {
         ClearMovableCoordniates();
