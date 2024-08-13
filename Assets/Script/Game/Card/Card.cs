@@ -9,6 +9,8 @@ public class Card : TargetableObject
 {
     private CardObject cardObject;
 
+    protected Predicate<ChessPiece> targetCondition = null;
+
     [Header("CardData")]
     public string cardName;
     public int cost
@@ -97,7 +99,7 @@ public class Card : TargetableObject
             return false;
 
         //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
-        GameBoard.instance.CurrentPlayerController().UseCard(this);
+        GameBoard.instance.CurrentPlayerController().UseCard(this, targetCondition);
         return true;
     }
 

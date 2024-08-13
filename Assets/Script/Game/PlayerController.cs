@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
             if (obj is ChessPiece)
                 GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = isTargetable;
     }
-    public void UseCard(Card card)
+    public void UseCard(Card card, Predicate<ChessPiece> tartgetCondition = null)
     {
         UsingCard = card;
         isUsingCard = true;
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
+        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor, tartgetCondition);
 
         if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
         {
