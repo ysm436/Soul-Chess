@@ -27,9 +27,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
         List<Deck> decklist = GameManager.instance.deckList.ToList();
         if (decklist != null)
         {
-            for(int i = 0; i < decklist.Count; i++)
+            for (int i = 0; i < decklist.Count; i++)
             {
-                if(decklist[i] != null)
+                if (decklist[i] != null)
                 {
                     deck_length++;
                     GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
@@ -53,6 +53,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         {
             GameObject indeck = Instantiate(Simple_Card, CardSlot);
             SimpleCard indeck_info = indeck.GetComponent<SimpleCard>();
+            int card_order = 0;
 
             indeck.name = dropped.name.Replace("display", "deck");
             indeck_info.cardindex = CardInfo.cardindex;
@@ -60,6 +61,16 @@ public class DeckManager : MonoBehaviour, IDropHandler
             indeck_info.cost.text = CardInfo.Cost.ToString();
             CardInfo.quantity--;
 
+            // 코스트가 낮을 수록 앞으로 가게끔
+            for (; card_order < CardSlot.childCount - 1; card_order++)
+            {
+                if(int.Parse(CardSlot.GetChild(card_order).GetComponent<SimpleCard>().cost.text) > CardInfo.Cost)
+                {
+                    indeck.transform.SetSiblingIndex(card_order);
+                    break;
+                }
+            }
+            
             Transform displaystorage = dbm.DisplayStorage;
 
             //덱에 더 이상 카드가 들어갈 수 없을 때 디스플레이에서 없애버립니다.
@@ -70,7 +81,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 dropped.SetActive(false);
             }
 
-            TempDeck.Add(indeck);
+            TempDeck.Insert(card_order, indeck);
         }
     }
 

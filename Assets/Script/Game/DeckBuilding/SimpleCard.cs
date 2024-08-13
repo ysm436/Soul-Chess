@@ -13,7 +13,7 @@ public class SimpleCard : MonoBehaviour, IPointerClickHandler
         DeckBuildingManager dbm = GetComponentInParent<DeckBuildingManager>();
         int find_index = -1;
 
-        if(eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             for (int i = dbm.DisplayStorage.childCount; i > 0; i--)
             {
