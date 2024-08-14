@@ -24,14 +24,14 @@ public class MorganLeFay : SoulCard
             if (GameBoard.instance.gameData.pieceObjects[i].pieceColor == piece.pieceColor)
             {
                 //체력이 깎여있는 아군만 pieceList에 추가해서 그 중에서 무작위 회복
-                if (GameBoard.instance.gameData.pieceObjects[i].HP != GameBoard.instance.gameData.pieceObjects[i].maxHP)
+                if (GameBoard.instance.gameData.pieceObjects[i].GetHP != GameBoard.instance.gameData.pieceObjects[i].maxHP)
                     pieceList.Add(GameBoard.instance.gameData.pieceObjects[i]);
             }
         }
         if (pieceList.Count > 0)
         {
             int temp = Random.Range(0, pieceList.Count);
-            pieceList[temp].HP = pieceList[temp].maxHP;
+            pieceList[temp].AddHP(pieceList[temp].maxHP - pieceList[temp].GetHP);
         }
     }
 }

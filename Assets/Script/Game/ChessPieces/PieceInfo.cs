@@ -26,7 +26,7 @@ public class PieceInfo : MonoBehaviour
             default : pieceTypeText = "오류"; break;
         }
 
-        temp = "종류 : " + pieceTypeText + "\nHP : " + chessPiece.HP + " / " + chessPiece.maxHP;
+        temp = "종류 : " + pieceTypeText + "\nHP : " + chessPiece.GetHP + " / " + chessPiece.maxHP;
         if (chessPiece.soul != null) temp += "(+" + chessPiece.soul.HP + ")";
         temp += "\nAD : " + chessPiece.AD;
         if (chessPiece.soul != null) temp += "(+" + chessPiece.soul.AD + ")";

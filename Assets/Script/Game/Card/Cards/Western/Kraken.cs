@@ -27,7 +27,7 @@ public class Kraken : SoulCard
         for (int i = 0; i < repeat; i++)
         {
             int ran = Random.Range(0, targets.Count);
-            targets[ran].HP -= damage;
+            targets[ran].MinusHP(damage);
 
             if (!targets[ran].isAlive)
                 targets.Remove(targets[ran]);

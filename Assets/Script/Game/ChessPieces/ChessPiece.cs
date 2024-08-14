@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // TODO: RemoveSoul에 영혼 묘지 적용?
@@ -49,7 +50,54 @@ abstract public class ChessPiece : TargetableObject
     [SerializeField]
     private int attackDamage;
 
-    public int HP
+    // 키워드 우선순위: 면역, 도발, 보호막, 방어력
+    // isTauntAttack은 도발이 연쇄적으로 작동하지 않도록 함
+    public void MinusHP(int value, bool isTauntAttack = false)
+    {
+        if (GetKeyword(Keyword.type.Immunity) == 1)
+            return;
+
+        if (!isTauntAttack)
+        {
+            ChessPiece tauntPiece = GetTauntPieceAround();
+            if (tauntPiece != null)
+            {
+                tauntPiece.MinusHP(value, true);
+                return;
+            }
+        }
+
+        if (GetKeyword(Keyword.type.Shield) == 1)
+        {
+            keywordDictionary[Keyword.type.Shield] = 0;
+            return;
+        }
+
+        if (GetKeyword(Keyword.type.Defense) > 0)
+        {
+            if (value < GetKeyword(Keyword.type.Defense))       //피해량보다 방어력이 클 경우
+                return;
+            value -= keywordDictionary[Keyword.type.Defense];
+        }
+
+        _currentHP -= value;
+
+        if (_currentHP > 0)
+            pieceObject.HPText.text = _currentHP.ToString();
+        else
+            Kill();
+    }
+
+    public void AddHP(int value)
+    {
+        _currentHP += value;
+        if (_currentHP > maxHP) _currentHP = maxHP;
+
+        pieceObject.HPText.text = _currentHP.ToString();
+    }
+
+    public int GetHP { get => _currentHP; }
+    /*public int HP 
     {
         set
         {
@@ -60,7 +108,7 @@ abstract public class ChessPiece : TargetableObject
                 Kill();
         }
         get { return _currentHP; }
-    }
+    }*/
     private int _currentHP;
     public int maxHP
     {
@@ -97,6 +145,8 @@ abstract public class ChessPiece : TargetableObject
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
 
+    private Dictionary<Keyword.type, int> keywordDictionary;    // 1 true, 0 false (방어력은 N)
+
     private void Awake()
     {
         _currentHP = _maxHP;
@@ -110,6 +160,8 @@ abstract public class ChessPiece : TargetableObject
 
         pieceObject.HPText.text = _currentHP.ToString();
         pieceObject.ADText.text = attackDamage.ToString();
+
+        keywordDictionary = new();
     }
 
     /// <summary>
@@ -143,7 +195,7 @@ abstract public class ChessPiece : TargetableObject
         }
         else
         {
-            HP -= targetPiece.attackDamage;
+            MinusHP(targetPiece.attackDamage);
         }
 
 
@@ -151,6 +203,15 @@ abstract public class ChessPiece : TargetableObject
 
         return targetIsKilled;
     }
+
+    public bool Attacked(int damage, bool isTauntAttack)
+    {
+        //OnAttacked?.Invoke(damage);
+
+        MinusHP(damage);
+        return isAlive;
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -159,14 +220,14 @@ abstract public class ChessPiece : TargetableObject
     {
         OnAttacked?.Invoke(chessPiece, damage);
 
-        HP -= damage;
+        MinusHP(damage);
         return isAlive;
     }
     public bool SpellAttacked(int damage)
     {
         OnSpellAttacked?.Invoke();
 
-        HP -= damage;
+        MinusHP(damage);
         return isAlive;
     }
 
@@ -209,6 +270,82 @@ abstract public class ChessPiece : TargetableObject
         Destroy(soul);
         soul = null;
     }
+
+    //n은 방어력 지정할 때만 사용, 방어력 수치 나타냄
+    public void SetKeyword(Keyword.type keywordType, int n = 1)
+    {
+        if (keywordDictionary.ContainsKey(keywordType))
+        {
+            keywordDictionary[keywordType] = n;
+        }
+        else
+        {
+            keywordDictionary.Add(keywordType, n);
+        }
+    }
+
+    public int GetKeyword(Keyword.type keywordType)
+    {
+        if (keywordDictionary.ContainsKey(keywordType))
+        {
+            return keywordDictionary[keywordType];
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    // 주변에 도발 기물이 2개 이상일 경우 가장 마지막으로 도발 부여받은 기물 선택
+    private ChessPiece GetTauntPieceAround()
+    {
+        List<Vector2Int> resultCoordinates = new()
+        {
+            coordinate + Vector2Int.up,
+            coordinate + Vector2Int.up + Vector2Int.right,
+            coordinate + Vector2Int.up + Vector2Int.left,
+            coordinate + Vector2Int.down,
+            coordinate + Vector2Int.down + Vector2Int.right,
+            coordinate + Vector2Int.down + Vector2Int.left,
+            coordinate + Vector2Int.right,
+            coordinate + Vector2Int.left,
+        };
+
+        for (int i = resultCoordinates.Count - 1; i >= 0; i--)
+        {
+            Vector2Int currentCoordinate = resultCoordinates[i];
+
+            if (!_chessData.IsValidCoordinate(currentCoordinate))
+            {
+                resultCoordinates.RemoveAt(i);
+                continue;
+            }
+
+            if (_chessData.GetPiece(currentCoordinate) == null)
+            {
+                resultCoordinates.RemoveAt(i);
+            }
+            else
+            {
+                if (_chessData.GetPiece(resultCoordinates[i]).pieceColor != pieceColor)
+                {
+                    resultCoordinates.RemoveAt(i);
+                }
+            }
+        }
+
+        foreach (Vector2Int coordinate in resultCoordinates)
+        {
+            if (_chessData.GetPiece(coordinate).GetKeyword(Keyword.type.Taunt) == 1)
+            {
+                return _chessData.GetPiece(coordinate);
+            }
+        }
+
+        // 주변에 도발 기물이 없는 경우 null 반환
+        return null;
+    }
+    
 
     [Flags]
     public enum PieceType

@@ -18,7 +18,7 @@ public class Poseidon : SoulCard
         {
             if (pieceList[i] != gameObject.GetComponent<SoulCard>().InfusedPiece)
             {
-                pieceList[i].HP -= 25;
+                pieceList[i].MinusHP(25);
             }
         }
     }

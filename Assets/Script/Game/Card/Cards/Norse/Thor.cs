@@ -18,6 +18,6 @@ public class Thor : SoulCard
         if (enemyPieceList.Count == 0)
             return;
 
-        enemyPieceList[Random.Range(0, enemyPieceList.Count)].HP -= InfusedPiece.AD;
+        enemyPieceList[Random.Range(0, enemyPieceList.Count)].MinusHP(InfusedPiece.AD);
     }
 }
