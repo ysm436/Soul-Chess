@@ -5,6 +5,8 @@ using UnityEngine;
 public class CardFilter : MonoBehaviour
 {
     // 필터에 맞게 카드들을 분류합니다.
+    // 토글이 꺼지면, 활성화되어 있는 카드만 끄면 됨
+    // 토글이 켜지면, 꺼져있는 카드 중 어떻게 할지 생각중
 
     // 소울 카드 토글
     public void SoulToggle(bool soul)

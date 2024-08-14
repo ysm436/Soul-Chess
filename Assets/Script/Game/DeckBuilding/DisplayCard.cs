@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
-using Unity.VisualScripting.Dependencies.NCalc;
 
 public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -71,6 +70,7 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private Vector3 Originposition;
 
     private Transform previousParent;
+    private int previousDisplayIndex;
     private GameObject newDeckPanel;
 
     private void Awake()
@@ -94,12 +94,13 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        newDeckPanel = this.GetComponentInParent<DeckBuildingSceneUI>().newDeckPanel;
+        newDeckPanel = GetComponentInParent<DeckBuildingSceneUI>().newDeckPanel;
         Originposition = transform.position;
 
         if (newDeckPanel.activeSelf) // 새로운 덱을 만들 때에만 드래그 가능
         {
             previousParent = transform.parent;
+            previousDisplayIndex = transform.GetSiblingIndex();
 
             transform.SetParent(canvas);
             transform.SetAsLastSibling();
@@ -121,6 +122,7 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             {
                 transform.position = Originposition;
                 transform.SetParent(previousParent);
+                transform.SetSiblingIndex(previousDisplayIndex);
             }
         }
         else

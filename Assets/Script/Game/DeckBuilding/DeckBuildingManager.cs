@@ -11,7 +11,7 @@ public class DeckBuildingManager : MonoBehaviour
     [SerializeField] private int max_card_index;
     [SerializeField] private int quantity_setting;
 
-    [SerializeField] private Transform DynamicDisplay;
+    public Transform DynamicDisplay;
     public Transform DisplayStorage; // 디스플레이 카드가 덱에 들어가 남아있는 카드의 개수가 0개가 되었을 때 저장되는 창고
     public Transform TrashCan; // 더 이상 쓰지 않는 object를 넣어두는 쓰레기통
     public GameObject display_prefab;
@@ -98,7 +98,6 @@ public class DeckBuildingManager : MonoBehaviour
         {
             DisplayCard.HP = (cardinfo as SoulCard).HP;
             DisplayCard.AD = (cardinfo as SoulCard).AD;
-
         }
 
         if (card.GetComponent<SpellCard>())

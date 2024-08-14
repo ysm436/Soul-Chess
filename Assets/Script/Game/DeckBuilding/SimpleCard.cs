@@ -29,6 +29,18 @@ public class SimpleCard : MonoBehaviour, IPointerClickHandler
             {
                 Transform find_card = dbm.DisplayStorage.GetChild(find_index);
                 dbm.AddDisplayCard(cardindex, 1);
+
+                Transform displayslot = dbm.DynamicDisplay; // 원래 자리로 돌아가도록 -> 여기서는 index 순
+                Transform added_display = displayslot.GetChild(displayslot.childCount - 1);
+                for (int card_order = 0; card_order < displayslot.childCount - 1; card_order++)
+                {
+                    if (displayslot.GetChild(card_order).GetComponent<DisplayCard>().cardindex > added_display.GetComponent<DisplayCard>().cardindex)
+                    {
+                        added_display.SetSiblingIndex(card_order);
+                        break;
+                    }
+                }
+
                 find_card.SetParent(dbm.TrashCan);
                 find_card.gameObject.SetActive(false);
             }
