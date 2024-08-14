@@ -31,6 +31,14 @@ public class Fenrir : SoulCard
         buffedHP += IncreaseAmountHP;
     }
 
+    public override void AddEffect()
+    {
+        InfusedPiece.maxHP += buffedHP;
+        InfusedPiece.AD += buffedAD;
+
+        InfusedPiece.OnKill += IncreaseStat;
+    }
+
     public override void RemoveEffect()
     {
         InfusedPiece.maxHP -= buffedHP;

@@ -22,6 +22,11 @@ public class Thor : SoulCard
         enemyPieceList[Random.Range(0, enemyPieceList.Count)].HP -= InfusedPiece.AD;
     }
 
+    public override void AddEffect()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd += AttackRandomEnemyPiece;
+    }
+
     public override void RemoveEffect()
     {
         GameBoard.instance.myController.OnMyTurnEnd -= AttackRandomEnemyPiece;

@@ -53,6 +53,13 @@ public class Frigg : SoulCard
         }
     }
 
+    public override void AddEffect()
+    {
+        DecreaseEnemyPiecesAD();
+        GameBoard.instance.myController.OnMyTurnStart += DecreaseEnemyPiecesAD;
+        GameBoard.instance.myController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
+    }
+
     public override void RemoveEffect()
     {
         IncreaseEnemyPiecesAD();

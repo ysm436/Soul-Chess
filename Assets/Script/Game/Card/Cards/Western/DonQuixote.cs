@@ -39,6 +39,12 @@ public class DonQuixote : SoulCard
         }
     }
 
+    public override void AddEffect()
+    {
+        InfusedPiece.OnStartAttack += StartAttackEffect;
+        InfusedPiece.OnEndAttack += EndAttackEffect;
+    }
+
     public override void RemoveEffect()
     {
         InfusedPiece.OnStartAttack -= StartAttackEffect;

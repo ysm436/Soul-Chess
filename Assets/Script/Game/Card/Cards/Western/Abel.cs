@@ -35,6 +35,12 @@ public class Abel : SoulCard
         }
     }
 
+    public override void AddEffect()
+    {
+        InfusedPiece.OnAttacked += OnAttackedEffect;
+        InfusedPiece.OnKilled += OnKilledEffect;
+    }
+
     public override void RemoveEffect()
     {
         InfusedPiece.OnAttacked -= OnAttackedEffect;

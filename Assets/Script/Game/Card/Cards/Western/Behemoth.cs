@@ -32,6 +32,14 @@ public class Behemoth : SoulCard
         buffedAD += 10;
     }
 
+    public override void AddEffect()
+    {
+        InfusedPiece.maxHP += buffedHP;
+        InfusedPiece.AD += buffedAD;
+
+        GameBoard.instance.myController.OnMyTurnEnd += SoulEffect2;
+    }
+
     public override void RemoveEffect()
     {
         InfusedPiece.maxHP -= buffedHP;

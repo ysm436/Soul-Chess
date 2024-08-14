@@ -36,6 +36,11 @@ public class Kraken : SoulCard
         }
     }
 
+    public override void AddEffect()
+    {
+        InfusedPiece.OnKilled += OnKilledEffect;
+    }
+
     public override void RemoveEffect()
     {
         InfusedPiece.OnKilled -= OnKilledEffect;
