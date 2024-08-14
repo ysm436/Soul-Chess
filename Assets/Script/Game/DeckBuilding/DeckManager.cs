@@ -23,7 +23,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
     //덱 데이터로부터 덱 리스트와 이름 파일을 불러옵니다.
     public void Awake()
-    {
+    {   
         List<Deck> decklist = GameManager.instance.deckList.ToList();
         if (decklist != null)
         {

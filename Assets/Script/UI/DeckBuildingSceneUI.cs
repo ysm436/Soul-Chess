@@ -54,6 +54,7 @@ public class DeckBuildingSceneUI : MonoBehaviour
         deckinfo.DeckSave(deckinfo.loaded_deck_index);
         deckinfo.TempDeckReset();
         GetComponent<DeckBuildingManager>().ReloadDisplayCard();
+        GameManager.instance.SaveDeckData();
 
         deckListPanel.SetActive(true);
         newDeckPanel.SetActive(false);

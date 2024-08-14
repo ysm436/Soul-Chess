@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Deck
+[Serializable] public class Deck
 {
     static readonly int CARD_LIMIT = 30;
     //public int index;
