@@ -37,7 +37,7 @@ public class MorganLeFay : SoulCard
         }
     }
 
-    private void RemoveEffect()
+    public override void RemoveEffect()
     {
         GameBoard.instance.myController.OnMyTurnEnd -= SoulEffect2;
     }

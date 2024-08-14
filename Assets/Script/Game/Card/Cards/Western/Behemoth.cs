@@ -32,7 +32,7 @@ public class Behemoth : SoulCard
         buffedAD += 10;
     }
 
-    private void RemoveEffect()
+    public override void RemoveEffect()
     {
         InfusedPiece.maxHP -= buffedHP;
         InfusedPiece.AD -= buffedAD;

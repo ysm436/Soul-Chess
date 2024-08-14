@@ -53,7 +53,7 @@ public class Frigg : SoulCard
         }
     }
 
-    private void RemoveEffect()
+    public override void RemoveEffect()
     {
         IncreaseEnemyPiecesAD();
         GameBoard.instance.myController.OnMyTurnStart -= DecreaseEnemyPiecesAD;

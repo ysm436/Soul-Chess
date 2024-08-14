@@ -35,7 +35,7 @@ public class Abel : SoulCard
         }
     }
 
-    private void RemoveEffect()
+    public override void RemoveEffect()
     {
         InfusedPiece.OnAttacked -= OnAttackedEffect;
         InfusedPiece.OnKilled -= OnKilledEffect;

@@ -49,7 +49,7 @@ public class Surtr : SoulCard
         InfusedPiece.Kill();
     }
 
-    private void RemoveEffect()
+    public override void RemoveEffect()
     {
         GameBoard.instance.myController.OnMyTurnEnd -= DestroyInfusedPiece;
     }

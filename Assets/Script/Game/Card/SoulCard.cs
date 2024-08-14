@@ -87,4 +87,9 @@ public class SoulCard : Card
         OnInfuse?.Invoke(targetPiece);
     }
 
+
+    public virtual void RemoveEffect()
+    {
+
+    }
 }

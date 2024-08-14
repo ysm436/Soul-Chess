@@ -32,7 +32,7 @@ public class LadyOfTheLake : SoulCard
         pieceList[temp].AD += 20;
     }
 
-    private void RemoveEffect()
+    public override void RemoveEffect()
     {
         GameBoard.instance.myController.OnMyTurnEnd -= SoulEffect2;
     }
