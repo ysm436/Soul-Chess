@@ -18,7 +18,15 @@ public class GameBoard : MonoBehaviour
     public PieceInfo pieceInfo; //기물 정보 프리팹
     public GameObject myDeckObject;
 
-    public PlayerController whiteController;
+    public PlayerController myController;
+    public PlayerController opponentController;
+
+    public Action<ChessPiece> OnPieceKilled;
+
+    public bool isActivePlayer
+    {
+        get => myController.enabled;
+    }
 
     private void Awake()
     {
@@ -57,6 +65,8 @@ public class GameBoard : MonoBehaviour
     }
     public void KillPiece(ChessPiece targetPiece)
     {
+        OnPieceKilled?.Invoke(targetPiece);
+
         gameData.graveyard.Add(targetPiece);
         gameData.pieceObjects.Remove(targetPiece);
 
@@ -108,13 +118,17 @@ public class GameBoard : MonoBehaviour
     //현재 턴 진행 중인 Enabled 플레이어 데이터 접근
     public PlayerData CurrentPlayerData()
     {
-        if (whiteController.enabled) return gameData.playerWhite;
-        else return gameData.playerBlack;
+        if (isActivePlayer)
+            return playerColor == PlayerColor.White ? gameData.playerWhite : gameData.playerBlack;
+        else
+            return playerColor == PlayerColor.White ? gameData.playerBlack : gameData.playerWhite;
     }
     public PlayerController CurrentPlayerController()
     {
-        if (whiteController.enabled) return whiteController;
-        else return null; //blackController
+        if (isActivePlayer)
+            return myController;
+        else
+            return opponentController;
     }
 
     public void AddCardInDeckObject(Card card)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,31 +11,52 @@ public class Surtr : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        // �ڽ�Ʈ ����: ī�� ���� �ñ⿡ ���� �޶��� �ʿ� ����
-        GameBoard.instance.whiteController.OnMyTurnEnd += DecreaseCost;
 
-        OnInfuse += (chessPiece) => GameBoard.instance.whiteController.OnMyTurnEnd -= DecreaseCost;
+        GameBoard.instance.myController.OnMyTurnEnd += DecreaseCost;
+        GameBoard.instance.opponentController.OnMyTurnEnd += DecreaseCost;
+
+        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnEnd -= DecreaseCost;
+        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.opponentController.OnMyTurnEnd -= DecreaseCost;
+
         OnInfuse += DestroyAllCards;
-        OnInfuse += (chessPiece) => GameBoard.instance.whiteController.OnMyTurnEnd += DestroyInfusedPiece;
+        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnEnd += DestroyInfusedPiece;
+
+        OnInfuse += (ChessPiece chessPiece) => chessPiece.OnSoulRemoved += RemoveEffect;
+    }
+
+    private void OnDisable()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd -= DecreaseCost;
+        GameBoard.instance.opponentController.OnMyTurnEnd -= DecreaseCost;
     }
 
     private void DecreaseCost()
     {
-        cost--;
+        if (cost > 0)
+        {
+            cost--;
+        }
     }
 
     private void DestroyAllCards(ChessPiece chessPiece)
     {
-        GameBoard.instance.gameData.playerWhite.hand.Clear();
-        GameBoard.instance.gameData.playerWhite.deck.Clear();
-        GameBoard.instance.gameData.playerBlack.hand.Clear();
-        GameBoard.instance.gameData.playerBlack.deck.Clear();
-
-        // Instantiate�� ī�嵵 ���� �ʿ�
+        GameBoard.instance.gameData.playerWhite.RemoveHandCards();
+        GameBoard.instance.gameData.playerWhite.RemoveDeckCards();
+        GameBoard.instance.gameData.playerBlack.RemoveHandCards();
+        GameBoard.instance.gameData.playerBlack.RemoveDeckCards();
     }
 
     private void DestroyInfusedPiece()
     {
         InfusedPiece.Kill();
+    }
+
+    public override void AddEffect()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd += DestroyInfusedPiece;
+    }
+    public override void RemoveEffect()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd -= DestroyInfusedPiece;
     }
 }

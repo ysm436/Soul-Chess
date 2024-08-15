@@ -14,26 +14,37 @@ public class Kraken : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        gameObject.GetComponent<SoulCard>().OnInfuse += InfuseEffect;
+        OnInfuse += InfuseEffect;
     }
 
     public void InfuseEffect(ChessPiece chessPiece)
     {
-        chessPiece.OnKilled += OnkilledEffect;
+        chessPiece.OnKilled += OnKilledEffect;
+
+        chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
-    public void OnkilledEffect(ChessPiece chessPiece)
+    public void OnKilledEffect(ChessPiece chessPiece)
     {
-        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor != GameBoard.instance.whiteController.playerColor).ToList();
+        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor != GameBoard.instance.myController.playerColor).ToList();
 
         for (int i = 0; i < repeat; i++)
         {
             int ran = Random.Range(0, targets.Count);
-            targets[ran].HP -= damage;
+            targets[ran].MinusHP(damage);
 
             if (!targets[ran].isAlive)
                 targets.Remove(targets[ran]);
         }
     }
 
+    public override void AddEffect()
+    {
+        InfusedPiece.OnKilled += OnKilledEffect;
+    }
+
+    public override void RemoveEffect()
+    {
+        InfusedPiece.OnKilled -= OnKilledEffect;
+    }
 }

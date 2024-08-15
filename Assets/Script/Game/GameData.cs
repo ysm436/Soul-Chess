@@ -20,6 +20,12 @@ public class GameData
     public PlayerData playerWhite;
     public PlayerData playerBlack;
 
+    public int tauntNumber          // 도발 부여 순서 전달
+    {
+        get => _tauntNumber++;
+    }
+    private int _tauntNumber = 0;
+
     public bool TryAddPiece(ChessPiece piece)
     {
         if (pieceObjects.Any(obj => obj.coordinate == piece.coordinate))

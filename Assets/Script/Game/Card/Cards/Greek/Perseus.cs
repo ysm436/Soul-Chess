@@ -67,5 +67,15 @@ public class Perseus : SoulCard
     private void StunChessPiece(ChessPiece chessPiece)
     {
         // ���� �ʿ�
-    } 
+    }
+
+    public override void AddEffect()
+    {
+
+    }
+
+    public override void RemoveEffect()
+    {
+
+    }
 }

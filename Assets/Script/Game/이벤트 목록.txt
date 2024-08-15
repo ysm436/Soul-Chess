@@ -1,6 +1,8 @@
 사용 가능한 이벤트 목록
 
 PlayerController
+    public Action OnMyTurnStart;
+    public Action OnOpponentTurnStart;
     public Action OnMyDraw;
     public Action OnOpponentDraw;
     public Action OnMyTurnEnd;
@@ -17,3 +19,6 @@ ChessPiece
     public Action<ChessPiece, int> OnAttacked;
     public Action OnSpellAttacked;
     public Action<Vector2Int> OnMove;
+
+GameBoard
+    public Action<ChessPiece> OnPieceKilled;

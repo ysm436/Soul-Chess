@@ -11,6 +11,8 @@ public abstract class Card : TargetableObject
 
     private CardObject cardObject;
 
+    protected Predicate<ChessPiece> targetCondition = null;
+
     [Header("CardData")]
     public string cardName;
     public int cost
@@ -49,17 +51,17 @@ public abstract class Card : TargetableObject
     }
     private void OnMouseEnter()
     {
-        if (!GameBoard.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
             GameBoard.instance.ShowCard(this);
     }
     private void OnMouseExit()
     {
-        if (!GameBoard.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
             GameBoard.instance.HideCard();
     }
     private void OnMouseDrag()
     {
-        if (!GameBoard.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
@@ -67,7 +69,7 @@ public abstract class Card : TargetableObject
     }
     private void OnMouseUp()
     {
-        if (!GameBoard.instance.whiteController.isUsingCard && !isFlipped && !isInSelection)
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             if (transform.position.y > 0)
             {
@@ -95,13 +97,14 @@ public abstract class Card : TargetableObject
 
     public virtual bool TryUse()
     {
-        if (GameBoard.instance.CurrentPlayerData().soulEssence >= cost)
-        {
-            //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
-            GameBoard.instance.CurrentPlayerController().UseCard(this);
-            return true;
-        }
-        return false;
+        if (!GameBoard.instance.isActivePlayer)
+            return false;
+        if (GameBoard.instance.CurrentPlayerData().soulEssence < cost)
+            return false;
+
+        //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
+        GameBoard.instance.CurrentPlayerController().UseCard(this, targetCondition);
+        return true;
     }
 
     public void FlipFront()

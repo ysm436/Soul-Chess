@@ -11,6 +11,6 @@ public class BloodEagleEffect : TargetingEffect
             (target as ChessPiece).Kill();
         }
 
-        GameBoard.instance.whiteController.Draw();
+        GameBoard.instance.myController.Draw();
     }
 }

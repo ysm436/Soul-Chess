@@ -10,16 +10,27 @@ public class Thor : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.whiteController.OnMyTurnEnd += AttackRandomEnemyPiece;
+        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnEnd += AttackRandomEnemyPiece;
+        OnInfuse += (ChessPiece chessPiece) => chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
     private void AttackRandomEnemyPiece()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.whiteController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
 
         if (enemyPieceList.Count == 0)
             return;
 
-        enemyPieceList[Random.Range(0, enemyPieceList.Count)].HP -= InfusedPiece.AD;
+        enemyPieceList[Random.Range(0, enemyPieceList.Count)].MinusHP(InfusedPiece.AD);
+    }
+
+    public override void AddEffect()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd += AttackRandomEnemyPiece;
+    }
+
+    public override void RemoveEffect()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd -= AttackRandomEnemyPiece;
     }
 }
