@@ -131,7 +131,8 @@ abstract public class ChessPiece : TargetableObject
     [SerializeField]
     private int _maxHP;
 
-    protected int moveCount;
+    protected int _moveCount;
+    public int moveCount { get => _moveCount; set => _moveCount = value; }
 
     private PieceObject pieceObject;
     private SpriteRenderer spriteRenderer;
@@ -147,7 +148,7 @@ abstract public class ChessPiece : TargetableObject
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
 
-    public Buff buff;
+    public Buff buff = null;
     private Dictionary<Keyword.Type, int> keywordDictionary;    // 1 true, 0 false (방어력은 N)
 
     private int _tauntNumber;
@@ -177,7 +178,8 @@ abstract public class ChessPiece : TargetableObject
 
         isSoulSet = false;
 
-        buff = new Buff();
+        if (buff == null) 
+            buff = new Buff();
     }
 
     /// <summary>
@@ -418,19 +420,35 @@ abstract public class ChessPiece : TargetableObject
 
     public void RemoveBuff()        // RemoveSoul과 침묵 키워드에서만 호출
     {
-        _currentHP -= buff.buffedHP;
-        if (_currentHP <= 0) _currentHP = 1;
-        
-        attackDamage -= buff.buffedAD;
-        if (attackDamage < 0) attackDamage = 0;
+        foreach (Buff.BuffInfo buffInfo in buff.buffList)
+        {
+            if (!buffInfo.isRemovableByEffect) continue;
 
-        moveCount -= buff.buffedMoveCount;
-        if (moveCount < 1) moveCount = 1;
+            Buff.BuffType buffType = buffInfo.buffType;
+            
+            if (buffType == Buff.BuffType.AD)
+            {
+                attackDamage -= buffInfo.value;
+                if (attackDamage < 0) attackDamage = 0;
+            }
+            else if (buffType == Buff.BuffType.HP)
+            {
+                _currentHP -= buffInfo.value;
+                if (_currentHP <= 0) _currentHP = 1;
+            }
+            else if (buffType == Buff.BuffType.MoveCount)
+            {
+                moveCount -= buffInfo.value;
+                if (moveCount < 1) moveCount = 1;
+            }
 
-        buff.Clear();
+            // buffType == Buff.BuffType.Description인 경우는 OnSoulRemoved 통해 구현
+        }
 
         pieceObject.HPText.text = _currentHP.ToString();
         pieceObject.ADText.text = attackDamage.ToString();
+
+        buff.ClearBuffList();
     }
     
 

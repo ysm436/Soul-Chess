@@ -30,8 +30,38 @@ public class PieceInfo : MonoBehaviour
         if (chessPiece.soul != null) temp += "(+" + chessPiece.soul.HP + ")";
         temp += "\nAD : " + chessPiece.AD;
         if (chessPiece.soul != null) temp += "(+" + chessPiece.soul.AD + ")";
-        if (chessPiece.soul != null) temp += "\n \n[부여된 영혼]\n" + chessPiece.soul.cardName;
-        //TODO : 버프/디버프 기능 완성 후 BuffText/DebuffText 조합 필요
+        if (chessPiece.soul != null) temp += "\n부여된 영혼 :" + chessPiece.soul.cardName;
+
+        //Buff Text
+        temp += "\n[버프 목록]\n";
+        foreach (Buff.BuffInfo buffInfo in chessPiece.buff.buffList)
+        {
+            string buffText;
+            string currentSourceName = buffInfo.sourceName;
+            string currentValue = buffInfo.value > 0 ? "+" + buffInfo.value.ToString() : buffInfo.value.ToString();
+            string currentDescription = buffInfo.description;
+            switch (buffInfo.buffType)
+            {
+                case Buff.BuffType.HP:
+                    buffText = $"{currentSourceName} : HP {currentValue}";
+                    break;
+                case Buff.BuffType.AD:
+                    buffText = $"{currentSourceName} : AD {currentValue}";
+                    break;
+                case Buff.BuffType.MoveCount:
+                    buffText = $"'{currentSourceName} : 이동 횟수 {currentValue}";
+                    break;
+                case Buff.BuffType.Description:
+                    buffText = currentDescription;
+                    break;
+                default:
+                    buffText = "";
+                    break;
+            }
+            buffText += "\n";
+
+            temp += buffText;
+        }
 
         infoText.text = temp;
     }
