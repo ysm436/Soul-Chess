@@ -18,5 +18,8 @@ public class Fenrir : SoulCard
     {
         InfusedPiece.AD += IncreaseAmountAD;
         InfusedPiece.maxHP += IncreaseAmountHP;
+
+        chessPiece.buff.buffedAD += IncreaseAmountAD;
+        chessPiece.buff.buffedHP += IncreaseAmountHP;
     }
 }

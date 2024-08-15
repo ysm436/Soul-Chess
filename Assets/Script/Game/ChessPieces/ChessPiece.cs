@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
@@ -131,6 +131,8 @@ abstract public class ChessPiece : TargetableObject
     [SerializeField]
     private int _maxHP;
 
+    protected int moveCount;
+
     private PieceObject pieceObject;
     private SpriteRenderer spriteRenderer;
 
@@ -145,6 +147,7 @@ abstract public class ChessPiece : TargetableObject
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
 
+    public Buff buff;
     private Dictionary<Keyword.Type, int> keywordDictionary;    // 1 true, 0 false (방어력은 N)
 
     private int _tauntNumber;
@@ -173,6 +176,8 @@ abstract public class ChessPiece : TargetableObject
         }
 
         isSoulSet = false;
+
+        buff = new Buff();
     }
 
     /// <summary>
@@ -276,6 +281,8 @@ abstract public class ChessPiece : TargetableObject
         maxHP -= soul.HP;
         AD -= soul.AD;
 
+        RemoveBuff();
+
         spriteRenderer.sprite = defaultSprite;
 
         Destroy(soul);
@@ -307,7 +314,7 @@ abstract public class ChessPiece : TargetableObject
             if (soul != null)
             {
                 //soul.RemoveEffect();
-                //Remove Buff
+                RemoveBuff();
             }
         }
         else if (keywordType == Keyword.Type.Rush)
@@ -407,6 +414,23 @@ abstract public class ChessPiece : TargetableObject
 
             return tauntPiece;
         }
+    }
+
+    public void RemoveBuff()        // RemoveSoul과 침묵 키워드에서만 호출
+    {
+        _currentHP -= buff.buffedHP;
+        if (_currentHP <= 0) _currentHP = 1;
+        
+        attackDamage -= buff.buffedAD;
+        if (attackDamage < 0) attackDamage = 0;
+
+        moveCount -= buff.buffedMoveCount;
+        if (moveCount < 1) moveCount = 1;
+
+        buff.Clear();
+
+        pieceObject.HPText.text = _currentHP.ToString();
+        pieceObject.ADText.text = attackDamage.ToString();
     }
     
 
