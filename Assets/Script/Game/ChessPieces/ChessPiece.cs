@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.Mathematics;
 using UnityEngine;
 
 // TODO: RemoveSoul에 영혼 묘지 적용?
@@ -136,8 +137,9 @@ abstract public class ChessPiece : TargetableObject
 
     private PieceObject pieceObject;
     private SpriteRenderer spriteRenderer;
-
-    private Sprite defaultSprite;
+    private SpriteRenderer accessory = null;
+    [SerializeField]
+    SpriteRenderer accessoryPrefab;
 
     public Action<ChessPiece> OnKill;
     public Action<ChessPiece> OnKilled; //유언
@@ -166,8 +168,6 @@ abstract public class ChessPiece : TargetableObject
 
         pieceObject = GetComponent<PieceObject>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        defaultSprite = spriteRenderer.sprite;
 
         pieceObject.HPText.text = _currentHP.ToString();
         pieceObject.ADText.text = attackDamage.ToString();
@@ -269,7 +269,13 @@ abstract public class ChessPiece : TargetableObject
         soul.transform.localPosition = Vector3.zero;
         soul.gameObject.SetActive(false);
 
-        spriteRenderer.sprite = sprite;
+        //악세서리 생성
+        if (accessory == null)
+        {
+            accessory = Instantiate(accessoryPrefab, this.transform.position, Quaternion.identity);
+            accessory.transform.SetParent(this.transform);
+            accessory.sprite = sprite;
+        }
 
         targetSoul.InfusedPiece = this;
 
@@ -288,7 +294,16 @@ abstract public class ChessPiece : TargetableObject
 
         RemoveBuff();
 
-        spriteRenderer.sprite = defaultSprite;
+		//구버전 코드
+        //spriteRenderer.sprite = defaultSprite;
+        
+        
+        //악세서리 제거
+        if (accessory != null)
+        {
+            Destroy(accessory);
+            accessory = null;
+        }
 
         OnSoulRemoved?.Invoke();
         OnSoulRemoved = null;

@@ -48,6 +48,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2248146768899822163, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_fontSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248146768899822163, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Name
       value: Soul_Surtr
@@ -83,6 +91,10 @@ PrefabInstance:
       propertyPath: EffectOnCardUsed
       value: 
       objectReference: {fileID: 3791512780746967578}
+    - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 02986a37bd49c624da7ca5aa21fa7b08, type: 3}
     - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: isPositiveEffect
       value: 1
@@ -142,8 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: "\uC218\uB974\uD2B8"
   _cost: 40
-  illustration: {fileID: 0}
-  back: {fileID: 21300000, guid: 6995a100b2974674db52c4a15d575dc2, type: 3}
+  illustration: {fileID: 21300000, guid: b99d196adcb299842bd3550de8b3bdf2, type: 3}
+  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 1
   description: "\uD134\uC774 \uC885\uB8CC\uB420 \uB54C \uB9C8\uB2E4, \uBE44\uC6A9\uC774
@@ -155,5 +167,41 @@ MonoBehaviour:
   pieceRestriction: -1
   _AD: 150
   _HP: 150
-  accessorySpriteList: []
+  accessorySpriteList:
+  - pieceType: 1
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 2
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 8
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 4
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 16
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 32
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 1
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 4
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 2
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 8
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 16
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
+  - pieceType: 32
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: f8a592989d089e44ead028275ec72af3, type: 3}
   InfusedPiece: {fileID: 0}

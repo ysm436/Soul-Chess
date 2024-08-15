@@ -95,8 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: "\uD1A0\uB974"
   _cost: 8
-  illustration: {fileID: 0}
-  back: {fileID: 21300000, guid: 6995a100b2974674db52c4a15d575dc2, type: 3}
+  illustration: {fileID: 21300000, guid: 4c47b1203c3245c41b52d8fdf4e1f7a8, type: 3}
+  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 2
   description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uBB34\uC791\uC704 \uC801
@@ -107,5 +107,11 @@ MonoBehaviour:
   pieceRestriction: 8
   _AD: 40
   _HP: 80
-  accessorySpriteList: []
+  accessorySpriteList:
+  - pieceType: 8
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 2cc150a9c502e1d4da5d6c8cfce19202, type: 3}
+  - pieceType: 8
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 2cc150a9c502e1d4da5d6c8cfce19202, type: 3}
   InfusedPiece: {fileID: 0}

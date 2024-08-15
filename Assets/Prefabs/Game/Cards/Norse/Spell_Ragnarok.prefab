@@ -83,8 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: "\uB77C\uADF8\uB098\uB85C\uD06C"
   _cost: 10
-  illustration: {fileID: 21300000, guid: feaa50326ad7eb245af7251a027d1ce7, type: 3}
-  back: {fileID: 21300000, guid: 6995a100b2974674db52c4a15d575dc2, type: 3}
+  illustration: {fileID: 21300000, guid: 21cea68c4e9ae064dbbc6a7e5d9d64d6, type: 3}
+  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 1
   description: "\uD0B9\uACFC \uD038\uC744 \uC81C\uC678\uD55C \uBAA8\uB4E0 \uAE30\uBB3C\uC744
