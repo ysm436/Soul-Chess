@@ -8,7 +8,7 @@ public class Poseidon : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        gameObject.GetComponent<SoulCard>().OnInfuse += SoulEffect;
+        OnInfuse += SoulEffect;
     }
 
     public void SoulEffect(ChessPiece chessPiece)
@@ -21,5 +21,15 @@ public class Poseidon : SoulCard
                 pieceList[i].MinusHP(25);
             }
         }
+    }
+
+    public override void AddEffect()
+    {
+
+    }
+
+    public override void RemoveEffect()
+    {
+
     }
 }

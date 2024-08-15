@@ -7,30 +7,19 @@ using UnityEngine;
 public class Abel : SoulCard
 {
     ChessPiece recent;
-    private bool myturn = true;
 
     protected override void Awake()
     {
         base.Awake();
-        gameObject.GetComponent<SoulCard>().OnInfuse += InfuseEffect;
+        OnInfuse += InfuseEffect;
     }
 
     public void InfuseEffect(ChessPiece chessPiece)
     {
         chessPiece.OnAttacked += OnAttackedEffect;
-        chessPiece.OnKilled += OnkilledEffect;
-        GameBoard.instance.myController.OnMyDraw += MyTurnSignal;
-        GameBoard.instance.myController.OnMyTurnEnd += NotMyTurnSignal;
-    }
+        chessPiece.OnKilled += OnKilledEffect;
 
-    public void MyTurnSignal()
-    {
-        myturn = true;
-    }
-
-    public void NotMyTurnSignal()
-    {
-        myturn = false;
+        chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public void OnAttackedEffect(ChessPiece chessPiece, int damamge)
@@ -38,12 +27,23 @@ public class Abel : SoulCard
         recent = chessPiece;
     }
 
-    public void OnkilledEffect(ChessPiece chessPiece)
+    public void OnKilledEffect(ChessPiece chessPiece)
     {
-        if (myturn)
+        if (!GameBoard.instance.myController.isMyTurn)
         {
             recent.Kill();
         }
     }
 
+    public override void AddEffect()
+    {
+        InfusedPiece.OnAttacked += OnAttackedEffect;
+        InfusedPiece.OnKilled += OnKilledEffect;
+    }
+
+    public override void RemoveEffect()
+    {
+        InfusedPiece.OnAttacked -= OnAttackedEffect;
+        InfusedPiece.OnKilled -= OnKilledEffect;
+    }
 }

@@ -147,7 +147,8 @@ abstract public class ChessPiece : TargetableObject
     public Action OnSpellAttacked;
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
-
+    public Action OnSoulRemoved;
+    
     public Buff buff = null;
     private Dictionary<Keyword.Type, int> keywordDictionary;    // 1 true, 0 false (방어력은 N)
 
@@ -155,6 +156,7 @@ abstract public class ChessPiece : TargetableObject
     public int tauntNumber { get => _tauntNumber; }
 
     protected bool isSoulSet;
+
 
     private void Awake()
     {
@@ -246,6 +248,7 @@ abstract public class ChessPiece : TargetableObject
     public void Kill()
     {
         OnKilled?.Invoke(this);
+        RemoveSoul();
 
         isAlive = false;
         pieceObject.HPText.text = "0";
@@ -286,6 +289,9 @@ abstract public class ChessPiece : TargetableObject
         RemoveBuff();
 
         spriteRenderer.sprite = defaultSprite;
+
+        OnSoulRemoved?.Invoke();
+        OnSoulRemoved = null;
 
         Destroy(soul);
         soul = null;

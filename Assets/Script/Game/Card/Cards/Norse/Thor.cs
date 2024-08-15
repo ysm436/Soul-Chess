@@ -9,6 +9,7 @@ public class Thor : SoulCard
     {
         base.Awake();
         OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnEnd += AttackRandomEnemyPiece;
+        OnInfuse += (ChessPiece chessPiece) => chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
     private void AttackRandomEnemyPiece()
@@ -19,5 +20,15 @@ public class Thor : SoulCard
             return;
 
         enemyPieceList[Random.Range(0, enemyPieceList.Count)].MinusHP(InfusedPiece.AD);
+    }
+
+    public override void AddEffect()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd += AttackRandomEnemyPiece;
+    }
+
+    public override void RemoveEffect()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd -= AttackRandomEnemyPiece;
     }
 }
