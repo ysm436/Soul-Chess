@@ -54,7 +54,7 @@ abstract public class ChessPiece : TargetableObject
     // isTauntAttack은 도발이 연쇄적으로 작동하지 않도록 함
     public void MinusHP(int value, bool isTauntAttack = false)
     {
-        if (GetKeyword(Keyword.type.Immunity) == 1)
+        if (GetKeyword(Keyword.Type.Immunity) == 1)
             return;
 
         if (!isTauntAttack)
@@ -67,17 +67,17 @@ abstract public class ChessPiece : TargetableObject
             }
         }
 
-        if (GetKeyword(Keyword.type.Shield) == 1)
+        if (GetKeyword(Keyword.Type.Shield) == 1)
         {
-            keywordDictionary[Keyword.type.Shield] = 0;
+            keywordDictionary[Keyword.Type.Shield] = 0;
             return;
         }
 
-        if (GetKeyword(Keyword.type.Defense) > 0)
+        if (GetKeyword(Keyword.Type.Defense) > 0)
         {
-            if (value < GetKeyword(Keyword.type.Defense))       //피해량보다 방어력이 클 경우
+            if (value < GetKeyword(Keyword.Type.Defense))       //피해량보다 방어력이 클 경우
                 return;
-            value -= keywordDictionary[Keyword.type.Defense];
+            value -= keywordDictionary[Keyword.Type.Defense];
         }
 
         _currentHP -= value;
@@ -145,7 +145,12 @@ abstract public class ChessPiece : TargetableObject
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
 
-    private Dictionary<Keyword.type, int> keywordDictionary;    // 1 true, 0 false (방어력은 N)
+    private Dictionary<Keyword.Type, int> keywordDictionary;    // 1 true, 0 false (방어력은 N)
+
+    private int _tauntNumber;
+    public int tauntNumber { get => _tauntNumber; }
+
+    protected bool isSoulSet;
 
     private void Awake()
     {
@@ -162,6 +167,12 @@ abstract public class ChessPiece : TargetableObject
         pieceObject.ADText.text = attackDamage.ToString();
 
         keywordDictionary = new();
+        foreach (Keyword.Type keywordType in Keyword.AllKeywords)
+        {
+            keywordDictionary.Add(keywordType, 0);
+        }
+
+        isSoulSet = false;
     }
 
     /// <summary>
@@ -176,6 +187,8 @@ abstract public class ChessPiece : TargetableObject
         OnMove?.Invoke(targetCoordinate);
 
         coordinate = targetCoordinate;
+
+        SetKeyword(Keyword.Type.Stealth, 0);
     }
     /// <summary>
     /// 
@@ -202,14 +215,6 @@ abstract public class ChessPiece : TargetableObject
         OnEndAttack?.Invoke(targetPiece);
 
         return targetIsKilled;
-    }
-
-    public bool Attacked(int damage, bool isTauntAttack)
-    {
-        //OnAttacked?.Invoke(damage);
-
-        MinusHP(damage);
-        return isAlive;
     }
 
     /// <summary>
@@ -245,6 +250,10 @@ abstract public class ChessPiece : TargetableObject
         if (soul != null)
             RemoveSoul();
 
+        isSoulSet = true;              // 영혼이 부여된 턴에는 이동 불가
+        GameBoard.instance.myController.OnMyTurnEnd += MakeIsSoulSetFalse;
+
+
         soul = targetSoul;
         soul.transform.SetParent(transform);
         soul.transform.localPosition = Vector3.zero;
@@ -256,7 +265,9 @@ abstract public class ChessPiece : TargetableObject
 
         maxHP += soul.HP;
         AD += soul.AD;
+
     }
+
     public void RemoveSoul()
     {
         if (soul == null)
@@ -272,34 +283,69 @@ abstract public class ChessPiece : TargetableObject
     }
 
     //n은 방어력 지정할 때만 사용, 방어력 수치 나타냄
-    public void SetKeyword(Keyword.type keywordType, int n = 1)
+    public void SetKeyword(Keyword.Type keywordType, int n = 1) 
     {
-        if (keywordDictionary.ContainsKey(keywordType))
+        keywordDictionary[keywordType] = n;
+        
+        if (keywordType == Keyword.Type.Taunt)
         {
-            keywordDictionary[keywordType] = n;
+            _tauntNumber = GameBoard.instance.gameData.tauntNumber;          //도발 부여 순서 저장
         }
-        else
+        else if (keywordType == Keyword.Type.Stun)
         {
-            keywordDictionary.Add(keywordType, n);
+            GameBoard.instance.myController.OnMyTurnEnd += Unstun;
+        }
+        else if (keywordType == Keyword.Type.Restraint)
+        {
+            if (soul != null)
+            {
+                //soul.RemoveEffect();
+            }
+        }
+        else if (keywordType == Keyword.Type.Silence)
+        {
+            if (soul != null)
+            {
+                //soul.RemoveEffect();
+                //Remove Buff
+            }
+        }
+        else if (keywordType == Keyword.Type.Rush)
+        {
+            MakeIsSoulSetFalse();
+        }
+    } 
+
+    public int GetKeyword(Keyword.Type keywordType) => keywordDictionary[keywordType];
+
+    // 영혼 부여 시 그 턴 이동 제한
+    private void MakeIsSoulSetFalse()
+    {
+        isSoulSet = false;
+        GameBoard.instance.myController.OnMyTurnEnd -= MakeIsSoulSetFalse;
+    }
+
+    // 스턴 해제 (턴 종료 시 호출)
+    public void Unstun()
+    {
+        SetKeyword(Keyword.Type.Stun, 0);
+        GameBoard.instance.myController.OnMyTurnEnd -= Unstun;
+    }
+
+    // 구속 해제
+    public void Unrestraint()
+    {
+        SetKeyword(Keyword.Type.Restraint, 0);
+
+        if (soul != null)
+        {
+            //soul.AddEffect();
         }
     }
 
-    public int GetKeyword(Keyword.type keywordType)
-    {
-        if (keywordDictionary.ContainsKey(keywordType))
-        {
-            return keywordDictionary[keywordType];
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
-    // 주변에 도발 기물이 2개 이상일 경우 가장 마지막으로 도발 부여받은 기물 선택
     private ChessPiece GetTauntPieceAround()
     {
-        List<Vector2Int> resultCoordinates = new()
+        List<Vector2Int> aroundCoordinates = new()
         {
             coordinate + Vector2Int.up,
             coordinate + Vector2Int.up + Vector2Int.right,
@@ -311,39 +357,56 @@ abstract public class ChessPiece : TargetableObject
             coordinate + Vector2Int.left,
         };
 
-        for (int i = resultCoordinates.Count - 1; i >= 0; i--)
+        for (int i = aroundCoordinates.Count - 1; i >= 0; i--)
         {
-            Vector2Int currentCoordinate = resultCoordinates[i];
+            Vector2Int currentCoordinate = aroundCoordinates[i];
+
 
             if (!_chessData.IsValidCoordinate(currentCoordinate))
             {
-                resultCoordinates.RemoveAt(i);
+                aroundCoordinates.RemoveAt(i);
                 continue;
             }
-
             if (_chessData.GetPiece(currentCoordinate) == null)
             {
-                resultCoordinates.RemoveAt(i);
+                aroundCoordinates.RemoveAt(i);
+                continue;
             }
             else
             {
-                if (_chessData.GetPiece(resultCoordinates[i]).pieceColor != pieceColor)
+                if (_chessData.GetPiece(currentCoordinate).pieceColor != pieceColor)
                 {
-                    resultCoordinates.RemoveAt(i);
+                    aroundCoordinates.RemoveAt(i);
+                    continue;
                 }
             }
-        }
-
-        foreach (Vector2Int coordinate in resultCoordinates)
-        {
-            if (_chessData.GetPiece(coordinate).GetKeyword(Keyword.type.Taunt) == 1)
+            if (_chessData.GetPiece(currentCoordinate).GetKeyword(Keyword.Type.Taunt) != 1)
             {
-                return _chessData.GetPiece(coordinate);
+                aroundCoordinates.RemoveAt(i);
+                continue;
             }
         }
 
-        // 주변에 도발 기물이 없는 경우 null 반환
-        return null;
+        if (aroundCoordinates.Count == 0)   // 주변에 도발 기물이 없는 경우
+            return null;
+        else                                // 주변에 도발 기물이 1개 이상인 경우 가장 마지막으로 도발 부여받은 기물 선택
+        {
+            ChessPiece tauntPiece = _chessData.GetPiece(aroundCoordinates[0]);
+            int maxTauntNumber = tauntPiece.tauntNumber;
+
+            foreach (Vector2Int coordinate in aroundCoordinates)
+            {
+                ChessPiece currentPiece = _chessData.GetPiece(coordinate);
+
+                if (currentPiece.tauntNumber > maxTauntNumber)
+                {
+                    tauntPiece = currentPiece;
+                    maxTauntNumber = currentPiece.tauntNumber;
+                }
+            }
+
+            return tauntPiece;
+        }
     }
     
 

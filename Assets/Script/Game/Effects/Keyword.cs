@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Keyword : Effect
 {
-    public enum type
+    public enum Type
     {
         Defense,        // 방어력
         Immunity,       // 면역
@@ -16,6 +18,8 @@ public class Keyword : Effect
         Silence,        // 침묵
         Rush            // 돌진
     }
+
+    public static Type[] AllKeywords { get => Enum.GetValues(typeof(Type)).Cast<Type>().ToArray(); }
 
     public override void EffectAction()
     {
