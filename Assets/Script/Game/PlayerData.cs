@@ -23,7 +23,7 @@ public class PlayerData
     // 게임 시작시 호출
     public void Initialize()
     {
-        deckPosition = new Vector2(8f, -2.5f);
+        deckPosition = new Vector2(7.6f, -2.3f); //UI에 맞게 좌표수정
 
         foreach (Card card in deck)
         {
@@ -67,7 +67,7 @@ public class PlayerData
     {
         for (int i = 0; i < hand.Count; i++)
         {
-            hand[i].transform.position = new Vector3(0.5f * i - 8, -4, -0.1f * i);
+            hand[i].transform.position = new Vector3(0.5f * i - 8, -3.75f, -0.1f * i); //UI에 맞게 좌표수정
         }
     }
 

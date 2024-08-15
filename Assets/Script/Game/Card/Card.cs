@@ -111,7 +111,7 @@ public class Card : TargetableObject
     }
     public void FlipBack()
     {
-        cardObject.backSpriteRenderer.sortingOrder = 0;
+        cardObject.backSpriteRenderer.sortingOrder = 1; //뒷면이 어떤 경우에도 완전히 카드 덮도록 정렬 순서 조정
         isFlipped = true;
     }
 

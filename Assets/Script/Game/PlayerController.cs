@@ -61,8 +61,8 @@ public class PlayerController : MonoBehaviour
 
                     if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
                     {
-
-                        SetTargetableObjects(true);
+                        //타겟 효과가 부정적인지 파라미터 전달
+                        SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
                     }
                 }
             }
@@ -138,7 +138,8 @@ public class PlayerController : MonoBehaviour
         movableCoordinates.Clear();
         foreach (var sq in gameBoard.gameData.boardSquares)
         {
-            sq.isTargetable = false;
+            sq.isNegativeTargetable = false;
+            sq.isPositiveTargetable = false;
         }
     }
     bool IsMovableCoordniate(Vector2Int coordinate)
@@ -158,11 +159,15 @@ public class PlayerController : MonoBehaviour
             sq.isMovable = false;
         }
     }
-    void SetTargetableObjects(bool isTargetable)
+    void SetTargetableObjects(bool isTargetable, bool isNegativeEffect)
     {
         foreach (var obj in targetableObjects)
-            if (obj is ChessPiece)
-                GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = isTargetable;
+            if (obj is ChessPiece && isTargetable)
+            {
+                //타겟 효과가 부정적인지 체크
+                if (isNegativeEffect) GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isNegativeTargetable = true;
+                else GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isPositiveTargetable = true;
+            }
     }
     public void UseCard(Card card, Predicate<ChessPiece> tartgetCondition = null)
     {
@@ -193,7 +198,8 @@ public class PlayerController : MonoBehaviour
 
         if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
         {
-            SetTargetableObjects(true);
+            //타겟 효과가 부정적인지 파라미터 전달
+            SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
         }
 
         GameBoard.instance.ShowCard(card);

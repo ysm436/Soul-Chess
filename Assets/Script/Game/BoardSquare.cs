@@ -7,9 +7,7 @@ using Unity.Collections;
 
 public class BoardSquare : MonoBehaviour
 {
-    static readonly Color movableColor = Color.red;
-    static readonly Color targetableColor = Color.red;
-
+    public BoardSquareOutline outline; //외곽선 프리팹
     public Vector2Int coordinate;
 
     public bool isMovable
@@ -18,25 +16,39 @@ public class BoardSquare : MonoBehaviour
         {
             if (value)
             {
-                spriteRenderer.color = movableColor;
+                outline.changeOutline(BoardSquareOutline.TargetableStates.movable);
             }
             else
             {
-                spriteRenderer.color = Color.white;
+                outline.changeOutline(BoardSquareOutline.TargetableStates.none);
             }
         }
     }
-    public bool isTargetable
+    public bool isNegativeTargetable //부정적 효과 타겟은 빨간색 외곽선
     {
         set
         {
             if (value)
             {
-                spriteRenderer.color = targetableColor;
+                outline.changeOutline(BoardSquareOutline.TargetableStates.negative);
             }
             else
             {
-                spriteRenderer.color = Color.white;
+                outline.changeOutline(BoardSquareOutline.TargetableStates.none);
+            }
+        }
+    }
+    public bool isPositiveTargetable //긍정적 효과 타겟은 초록색 외곽선
+    {
+        set
+        {
+            if (value)
+            {
+                outline.changeOutline(BoardSquareOutline.TargetableStates.positive);
+            }
+            else
+            {
+                outline.changeOutline(BoardSquareOutline.TargetableStates.none);
             }
         }
     }
