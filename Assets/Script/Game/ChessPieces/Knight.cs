@@ -47,7 +47,8 @@ public class Knight : ChessPiece
                     //해당 칸에 적 기물이 있을 경우 이동 가능
                     if (blockingPiece.pieceColor != this.pieceColor)
                     {
-                        movableCoordinates.Add(targetCoordinate);
+                        if (blockingPiece.GetKeyword(Keyword.Type.Stealth) != 1)
+                            movableCoordinates.Add(targetCoordinate);
                     }
                 }
             }
