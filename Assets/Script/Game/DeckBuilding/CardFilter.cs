@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class CardFilter : MonoBehaviour
 {
-    // 필터에 맞게 카드들을 분류합니다.
-    // 토글이 꺼지면, 활성화되어 있는 카드만 끄면 됨
-    // 토글이 켜지면, 꺼져있는 카드 중 어떻게 할지 생각중
+    private bool Soul = true;
+    private bool Spell = true;
+    private bool Greek = true;
+    private bool Western = true;
+    private bool Norse = true;
+    private bool Common = true;
+    private bool Legendary = true;
+    private bool Mythical = true;
 
     // 소울 카드 토글
     public void SoulToggle(bool soul)
@@ -15,16 +20,12 @@ public class CardFilter : MonoBehaviour
 
         if (soul)
         {
-            foreach (var card in DisplayCardList)
-            {
-                if (!card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Soul)
-                {
-                    card.SetActive(true);
-                }
-            }
+            Soul = true;
+            ForOnToggle();
         }
         else
         {
+            Soul = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Soul)
@@ -42,16 +43,12 @@ public class CardFilter : MonoBehaviour
 
         if (spell)
         {
-            foreach (var card in DisplayCardList)
-            {
-                if (!card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Spell)
-                {
-                    card.SetActive(true);
-                }
-            }
+            Spell = true;
+            ForOnToggle();
         }
         else
         {
+            Spell = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Spell)
@@ -69,16 +66,12 @@ public class CardFilter : MonoBehaviour
 
         if (greek)
         {
-            foreach (var card in DisplayCardList)
-            {
-                if (!card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Greek")
-                {
-                    card.SetActive(true);
-                }
-            }
+            Greek = true;
+            ForOnToggle();
         }
         else
         {
+            Greek = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Greek")
@@ -96,16 +89,12 @@ public class CardFilter : MonoBehaviour
 
         if (western)
         {
-            foreach (var card in DisplayCardList)
-            {
-                if (!card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Western")
-                {
-                    card.SetActive(true);
-                }
-            }
+            Western = true;
+            ForOnToggle();
         }
         else
         {
+            Western = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Western")
@@ -123,16 +112,12 @@ public class CardFilter : MonoBehaviour
 
         if (norse)
         {
-            foreach (var card in DisplayCardList)
-            {
-                if (!card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Norse")
-                {
-                    card.SetActive(true);
-                }
-            }
+            Norse = true;
+            ForOnToggle();
         }
         else
         {
+            Norse = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Norse")
@@ -150,16 +135,12 @@ public class CardFilter : MonoBehaviour
 
         if (common)
         {
-            foreach (var card in DisplayCardList)
-            {
-                if (!card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Common")
-                {
-                    card.SetActive(true);
-                }
-            }
+            Common = true;
+            ForOnToggle();
         }
         else
         {
+            Common = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Common")
@@ -177,16 +158,12 @@ public class CardFilter : MonoBehaviour
 
         if (legendary)
         {
-            foreach (var card in DisplayCardList)
-            {
-                if (!card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Legendary")
-                {
-                    card.SetActive(true);
-                }
-            }
+            Legendary = true;
+            ForOnToggle();
         }
         else
         {
+            Legendary = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Legendary")
@@ -204,22 +181,68 @@ public class CardFilter : MonoBehaviour
 
         if (mythical)
         {
-            foreach (var card in DisplayCardList)
-            {
-                if (!card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Mythical")
-                {
-                    card.SetActive(true);
-                }
-            }
+            Mythical = true;
+            ForOnToggle();
         }
         else
         {
+            Mythical = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Mythical")
                 {
                     card.SetActive(false);
                 }
+            }
+        }
+    }
+
+    void ForOnToggle()
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+        
+        foreach (var card in DisplayCardList)
+        {
+            DisplayCard cardinfo = card.GetComponent<DisplayCard>();
+
+            if (!card.activeSelf)
+            {   
+                if (cardinfo.CardType == Card.Type.Soul)
+                {
+                    if (!Soul) continue; 
+                }
+                else
+                {
+                    if (!Spell) continue;
+                }
+
+                if (cardinfo.Reigon == "Greek")
+                {
+                    if (!Greek) continue;
+                }
+                else if (cardinfo.Reigon == "Western")
+                {
+                    if (!Western) continue;
+                }
+                else
+                {
+                    if (!Norse) continue;
+                }
+
+                if (cardinfo.Rarity == "Common")
+                {
+                    if (!Common) continue;
+                }
+                else if (cardinfo.Rarity == "Legendary")
+                {
+                    if (!Legendary) continue;
+                }
+                else
+                {
+                    if (!Mythical) continue;
+                }
+
+                card.SetActive(true);
             }
         }
     }
