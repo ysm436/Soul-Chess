@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 using Unity.Collections;
+using UnityEngine.EventSystems;
 
 public class BoardSquare : MonoBehaviour
 {
@@ -69,21 +70,26 @@ public class BoardSquare : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        _onClick.Invoke(coordinate);
-        if (GameBoard.instance.gameData.GetPiece(coordinate))
-            GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+        {
+            _onClick.Invoke(coordinate);
+            if (GameBoard.instance.gameData.GetPiece(coordinate))
+                GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
+        }
     }
     private void OnMouseEnter()
     {
         //카드 사용 중인지 체크해서 그 때는 기물 정보 표시 X
         //BlackController 없어서 검정 턴에는 기물 위에 올리면 오류
-        if (GameBoard.instance.gameData.GetPiece(coordinate) && (!GameBoard.instance.CurrentPlayerController().isUsingCard))
-            GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+            if (GameBoard.instance.gameData.GetPiece(coordinate) && (!GameBoard.instance.CurrentPlayerController().isUsingCard))
+                GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
     }
     private void OnMouseExit()
     {
-        if (GameBoard.instance.isShowingPieceInfo)
-            GameBoard.instance.HidePieceInfo();
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+            if (GameBoard.instance.isShowingPieceInfo)
+                GameBoard.instance.HidePieceInfo();
     }
 
     public BoardSquare(Vector2Int coordinate, Sprite sprite)

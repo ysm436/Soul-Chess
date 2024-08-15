@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Card : TargetableObject
 {
@@ -47,39 +48,43 @@ public class Card : TargetableObject
     }
     private void OnMouseEnter()
     {
-        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
-            GameBoard.instance.ShowCard(this);
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+            if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+                GameBoard.instance.ShowCard(this);
     }
     private void OnMouseExit()
     {
-        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
-            GameBoard.instance.HideCard();
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+            if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+                GameBoard.instance.HideCard();
     }
     private void OnMouseDrag()
     {
-        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
-        {
-            Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
-        }
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+            if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+            {
+                Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
+            }
     }
     private void OnMouseUp()
     {
-        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
-        {
-            if (transform.position.y > 0)
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+            if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
             {
-                if (!TryUse())
+                if (transform.position.y > 0)
                 {
-                    //카드 원위치
-                    GameBoard.instance.gameData.playerWhite.UpdateHandPosition();
-                }
-                else
-                {
-                    GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
+                    if (!TryUse())
+                    {
+                        //카드 원위치
+                        GameBoard.instance.gameData.playerWhite.UpdateHandPosition();
+                    }
+                    else
+                    {
+                        GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
+                    }
                 }
             }
-        }
         else
         {
             //이 카드가 효과의 대상으로 선택되었을 때 코드

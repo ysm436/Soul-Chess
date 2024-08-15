@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LocalController : MonoBehaviour
 {
@@ -23,26 +24,27 @@ public class LocalController : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (whiteController.enabled)
-        {
-            spriteRenderer.sprite = blackButton;
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+            if (whiteController.enabled)
+            {
+                spriteRenderer.sprite = blackButton;
 
-            whiteController.enabled = false;
-            blackController.enabled = true;
+                whiteController.enabled = false;
+                blackController.enabled = true;
 
-            whiteController.TurnEnd();
-            blackController.OnOpponentTurnEnd?.Invoke();
-        }
-        else
-        {
-            spriteRenderer.sprite = whiteButton;
+                whiteController.TurnEnd();
+                blackController.OnOpponentTurnEnd?.Invoke();
+            }
+            else
+            {
+                spriteRenderer.sprite = whiteButton;
 
-            blackController.enabled = false;
-            whiteController.enabled = true;
+                blackController.enabled = false;
+                whiteController.enabled = true;
 
-            blackController.TurnEnd();
-            whiteController.OnOpponentTurnEnd?.Invoke();
-        }
+                blackController.TurnEnd();
+                whiteController.OnOpponentTurnEnd?.Invoke();
+            }
     }
 
 }
