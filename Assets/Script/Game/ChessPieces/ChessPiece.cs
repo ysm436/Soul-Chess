@@ -148,7 +148,7 @@ abstract public class ChessPiece : TargetableObject
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
     public Action OnSoulRemoved;
-    
+
     public Buff buff = null;
     private Dictionary<Keyword.Type, int> keywordDictionary;    // 1 true, 0 false (방어력은 N)
 
@@ -180,7 +180,7 @@ abstract public class ChessPiece : TargetableObject
 
         isSoulSet = false;
 
-        if (buff == null) 
+        if (buff == null)
             buff = new Buff();
     }
 
@@ -298,10 +298,10 @@ abstract public class ChessPiece : TargetableObject
     }
 
     //n은 방어력 지정할 때만 사용, 방어력 수치 나타냄
-    public void SetKeyword(Keyword.Type keywordType, int n = 1) 
+    public void SetKeyword(Keyword.Type keywordType, int n = 1)
     {
         keywordDictionary[keywordType] = n;
-        
+
         if (keywordType == Keyword.Type.Taunt)
         {
             _tauntNumber = GameBoard.instance.gameData.tauntNumber;          //도발 부여 순서 저장
@@ -314,14 +314,14 @@ abstract public class ChessPiece : TargetableObject
         {
             if (soul != null)
             {
-                //soul.RemoveEffect();
+                soul.RemoveEffect();
             }
         }
         else if (keywordType == Keyword.Type.Silence)
         {
             if (soul != null)
             {
-                //soul.RemoveEffect();
+                soul.RemoveEffect();
                 RemoveBuff();
             }
         }
@@ -329,7 +329,7 @@ abstract public class ChessPiece : TargetableObject
         {
             MakeIsSoulSetFalse();
         }
-    } 
+    }
 
     public int GetKeyword(Keyword.Type keywordType) => keywordDictionary[keywordType];
 
@@ -354,7 +354,7 @@ abstract public class ChessPiece : TargetableObject
 
         if (soul != null)
         {
-            //soul.AddEffect();
+            soul.AddEffect();
         }
     }
 
@@ -431,7 +431,7 @@ abstract public class ChessPiece : TargetableObject
             if (!buffInfo.isRemovableByEffect) continue;
 
             Buff.BuffType buffType = buffInfo.buffType;
-            
+
             if (buffType == Buff.BuffType.AD)
             {
                 attackDamage -= buffInfo.value;
@@ -456,7 +456,7 @@ abstract public class ChessPiece : TargetableObject
 
         buff.ClearBuffList();
     }
-    
+
 
     [Flags]
     public enum PieceType
