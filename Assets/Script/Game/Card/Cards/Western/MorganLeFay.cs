@@ -7,21 +7,23 @@ public class MorganLeFay : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        gameObject.GetComponent<SoulCard>().OnInfuse += SoulEffect;
+        OnInfuse += SoulEffect;
     }
 
     public void SoulEffect(ChessPiece chessPiece)
     {
         //강림 시 OnMyTurnEnd에 함수 추가
-        GameBoard.instance.myController.OnMyTurnEnd += () => SoulEffect2(InfusedPiece);
+        GameBoard.instance.myController.OnMyTurnEnd += SoulEffect2;
+
+        chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
-    public void SoulEffect2(ChessPiece piece) //턴 종료 시마다 호출되는 함수인데
+    public void SoulEffect2() //턴 종료 시마다 호출되는 함수인데
     {
         List<ChessPiece> pieceList = new List<ChessPiece>();
         for (int i = GameBoard.instance.gameData.pieceObjects.Count - 1; i >= 0; i--)
         {
-            if (GameBoard.instance.gameData.pieceObjects[i].pieceColor == piece.pieceColor)
+            if (GameBoard.instance.gameData.pieceObjects[i].pieceColor == GameBoard.instance.myController.playerColor)
             {
                 //체력이 깎여있는 아군만 pieceList에 추가해서 그 중에서 무작위 회복
                 if (GameBoard.instance.gameData.pieceObjects[i].HP != GameBoard.instance.gameData.pieceObjects[i].maxHP)
@@ -33,5 +35,14 @@ public class MorganLeFay : SoulCard
             int temp = Random.Range(0, pieceList.Count);
             pieceList[temp].HP = pieceList[temp].maxHP;
         }
+    }
+
+    public override void AddEffect()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd += SoulEffect2;
+    }
+    public override void RemoveEffect()
+    {
+        GameBoard.instance.myController.OnMyTurnEnd -= SoulEffect2;
     }
 }
