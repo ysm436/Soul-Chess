@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Behemoth : SoulCard
 {
+    protected override int CardID => Card.cardIdDict["베헤모스"];
     private int buffedHP;
     private int buffedAD;
 

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Thor : SoulCard
 {
+    protected override int CardID => Card.cardIdDict["토르"];
+
     protected override void Awake()
     {
         base.Awake();

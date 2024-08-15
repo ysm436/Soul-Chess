@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Execution : TargetingEffect
+public class ExecutionEffect : TargetingEffect
 {
     public int basicAD;
     public int insteadAD;

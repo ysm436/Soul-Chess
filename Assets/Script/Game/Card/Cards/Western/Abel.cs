@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Abel : SoulCard
 {
+    protected override int CardID => Card.cardIdDict["아벨"];
     ChessPiece recent;
 
     protected override void Awake()
