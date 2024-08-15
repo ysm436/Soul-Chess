@@ -22,4 +22,14 @@ public class Poseidon : SoulCard
             }
         }
     }
+
+    public override void AddEffect()
+    {
+
+    }
+
+    public override void RemoveEffect()
+    {
+
+    }
 }

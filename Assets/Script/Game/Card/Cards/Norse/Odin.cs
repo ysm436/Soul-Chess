@@ -41,4 +41,14 @@ public class Odin : SoulCard
         selectedCard.isInSelection = false;
         GameBoard.instance.gameData.playerWhite.TryAddCardInHand(selectedCard);
     }
+
+    public override void AddEffect()
+    {
+
+    }
+
+    public override void RemoveEffect()
+    {
+
+    }
 }
