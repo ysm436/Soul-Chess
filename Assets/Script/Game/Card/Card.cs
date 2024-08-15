@@ -105,12 +105,14 @@ public class Card : TargetableObject
 
     public void FlipFront()
     {
+        cardObject.backSpriteRenderer.transform.localScale = new Vector3(0.8f, 0.8f, 1);
         cardObject.backSpriteRenderer.sortingOrder = -1;
         isFlipped = false;
 
     }
     public void FlipBack()
     {
+        cardObject.backSpriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         cardObject.backSpriteRenderer.sortingOrder = 1; //뒷면이 어떤 경우에도 완전히 카드 덮도록 정렬 순서 조정
         isFlipped = true;
     }
