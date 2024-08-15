@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public GameBoard gameBoard; //Used only in GameScene
     public List<Deck> deckList = new List<Deck>();
+    public Deck selectedDeck = null;
 
     [Serializable]
     public class Data

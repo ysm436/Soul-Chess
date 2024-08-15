@@ -21,7 +21,13 @@ public class LobbySceneUI : MonoBehaviour
 
     public void StartButton()
     {
-        GameManager.instance.LoadGameScene();
+        if (SelectedDeckIndex == -1)
+            Debug.Log("선택된 덱이 없습니다.");
+        else
+        {
+            GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
+            GameManager.instance.LoadGameScene();
+        }
     }
 
     public void OpenDeckButton()
@@ -34,7 +40,7 @@ public class LobbySceneUI : MonoBehaviour
             {
                 for (int i = 0; i < GameManager.instance.deckList.Count; i++)
                 {
-                    if(GameManager.instance.deckList[i] != null)
+                    if (GameManager.instance.deckList[i] != null)
                     {
                         GameObject deckselectbutton = Instantiate(DeckSelectButton, DeckDisplay);
                         DeckSelectButton buttoninfo = deckselectbutton.GetComponent<DeckSelectButton>();
@@ -52,8 +58,8 @@ public class LobbySceneUI : MonoBehaviour
         {
             DeckSelectPanel.SetActive(false);
         }
-        
-        for(int i = DeckDisplay.childCount; i > 0; i--)
+
+        for (int i = DeckDisplay.childCount; i > 0; i--)
         {
             Transform deck = DeckDisplay.GetChild(i - 1);
             Destroy(deck.gameObject);

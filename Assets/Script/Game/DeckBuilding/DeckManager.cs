@@ -15,7 +15,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     [SerializeField] private GameObject Simple_Card;
     [SerializeField] private GameObject Simple_Deck;
     [SerializeField] private TMP_InputField deckname_inputfield;
-    
+
     public bool newDeckSignal = false;
     public List<GameObject> TempDeck = new List<GameObject>();
 
@@ -23,7 +23,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
     //덱 데이터로부터 덱 리스트와 이름 파일을 불러옵니다.
     public void Awake()
-    {   
+    {
         List<Deck> decklist = GameManager.instance.deckList.ToList();
         if (decklist != null)
         {
@@ -64,13 +64,13 @@ public class DeckManager : MonoBehaviour, IDropHandler
             // 코스트가 낮을 수록 앞으로 가게끔
             for (; card_order < CardSlot.childCount - 1; card_order++)
             {
-                if(int.Parse(CardSlot.GetChild(card_order).GetComponent<SimpleCard>().cost.text) > CardInfo.Cost)
+                if (int.Parse(CardSlot.GetChild(card_order).GetComponent<SimpleCard>().cost.text) > CardInfo.Cost)
                 {
                     indeck.transform.SetSiblingIndex(card_order);
                     break;
                 }
             }
-            
+
             Transform displaystorage = dbm.DisplayStorage;
 
             //덱에 더 이상 카드가 들어갈 수 없을 때 디스플레이에서 없애버립니다.
@@ -88,8 +88,8 @@ public class DeckManager : MonoBehaviour, IDropHandler
     //TempDeck을 초기화 합니다.
     //TODO 더 효율적으로 바꿀 수 있다면 좋을 것 같습니다.
     public void TempDeckReset()
-    {   
-        for(int i = CardSlot.childCount; i > 0; i--)
+    {
+        for (int i = CardSlot.childCount; i > 0; i--)
         {
             Transform card = CardSlot.GetChild(i - 1);
             card.SetParent(trashcan);
@@ -102,7 +102,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     {
         List<int> newDeckcards = MakeCardindexDeckList(TempDeck);
 
-        if(newDeckSignal) // 덱 새로 생성 시
+        if (newDeckSignal) // 덱 새로 생성 시
         {
             deck_length++;
 
@@ -117,7 +117,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
             SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
             newDeckInfo.DeckNameText.text = newdeck.deckname;
             newDeckInfo.deck_index = deck_length;
-            
+
             TempDeck.Clear();
             newDeckSignal = false;
         }
@@ -171,7 +171,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
             }
         }
         deckname_inputfield.text = GameManager.instance.deckList[deck_index].deckname;
-    }   
+    }
 
     //덱 로드를 위해 index를 통해 gameobject 리스트로 변환
     public List<GameObject> MakeGameobjectDeckList(int deck_index)
