@@ -19,6 +19,13 @@ public class PlayerController : MonoBehaviour
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
     private int movableCount = 1;
+    public bool TurnEndPossible
+    {
+        get
+        {
+            return (movableCount <= 0) || !(GameBoard.instance.gameData.pieceObjects.Any(obj => (obj.GetMovableCoordinates().Count >= 1 && obj.pieceColor == playerColor)));
+        }
+    }
 
     private Card UsingCard = null;
     private TargetingEffect targetingEffect;

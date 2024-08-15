@@ -46,6 +46,14 @@ public class LocalController : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (GameBoard.instance.myController.TurnEndPossible)
+            TurnEnd();
+        else
+            Debug.Log("Please Move Any Chess Piece at least Once");
+    }
+
+    public void TurnEnd()
+    {
         if (GameBoard.instance.isActivePlayer)
             photonView.RPC("OnTurnEndClicked", RpcTarget.All);
     }

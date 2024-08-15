@@ -77,6 +77,11 @@ public class Card : TargetableObject
                     GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
                 }
             }
+            else
+            {
+
+                GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
+            }
         }
         else
         {
