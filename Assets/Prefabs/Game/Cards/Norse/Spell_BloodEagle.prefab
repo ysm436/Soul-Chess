@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: "\uD53C\uC758 \uB3C5\uC218\uB9AC"
-  _cost: 11
+  _cost: 6
   illustration: {fileID: 21300000, guid: 749c55d55e11b97459c6ce6a4693cc53, type: 3}
   back: {fileID: 0}
   reigon: 1
