@@ -65,6 +65,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -3397328758503862818}
     - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: reigon
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: cardName
       value: "\uCC98\uD615"
       objectReference: {fileID: 0}
@@ -85,10 +89,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell_Execution
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4354718478632122283}
     - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       insertIndex: -1
       addedObject: {fileID: -3397328758503862818}
@@ -98,6 +106,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
   m_PrefabInstance: {fileID: 1922327682532033977}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4354718478632122283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072776399790609945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b09fb3ccc56db47bf553d653f8e18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardName: "\uCC98\uD615"
+  _cost: 4
+  illustration: {fileID: 21300000, guid: 74e9a57c376078e49bf560f3c021baf5, type: 3}
+  back: {fileID: 0}
+  reigon: 1
+  rarity: 0
+  description: "\uAE30\uBB3C\uC5D0\uAC8C \uD53C\uD574\uB97C 30\uC90D\uB2C8\uB2E4.
+    \uAE30\uBB3C\uC758 \uCCB4\uB825\uC774 60\uC774\uD558\uBA74, 60\uC758 \uD53C\uD574\uB97C
+    \uC90D\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: -3397328758503862818}
+  isInSelection: 0
 --- !u!114 &-3397328758503862818
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -86,6 +86,8 @@ MonoBehaviour:
   _cost: 8
   illustration: {fileID: 21300000, guid: 27d4a556ffa3e5845a2c78f2ac16f2bc, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  reigon: 2
+  rarity: 1
   description: "\uC720\uC5B8 : \uBB34\uC791\uC704 \uC801 \uAE30\uBB3C\uC5D0\uAC8C
     \uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4. 8\uBC88 \uBC18\uBCF5\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 9152973176935855565}

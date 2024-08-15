@@ -21,6 +21,8 @@ public class GameBoard : MonoBehaviour
     public PlayerController myController;
     public PlayerController opponentController;
 
+    public Action<ChessPiece> OnPieceKilled;
+
     public bool isActivePlayer
     {
         get => myController.enabled;
@@ -63,6 +65,8 @@ public class GameBoard : MonoBehaviour
     }
     public void KillPiece(ChessPiece targetPiece)
     {
+        OnPieceKilled?.Invoke(targetPiece);
+
         gameData.graveyard.Add(targetPiece);
         gameData.pieceObjects.Remove(targetPiece);
 

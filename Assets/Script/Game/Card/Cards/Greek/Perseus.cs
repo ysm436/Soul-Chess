@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class Perseus : SoulCard
 {
-    [SerializeField] private List<GameObject> selectionPrefabList;        // ¸ÞµÎ»çÀÇ ¸Ó¸®, Æä°¡¼ö½º, ÇÏµ¥½ºÀÇ Åõ±¸ ¼øÀ¸·Î ÀÖ¾î¾ß ÇÔ
+    protected override int CardID => Card.cardIdDict["íŽ˜ë¥´ì„¸ìš°ìŠ¤"];
+
+    [SerializeField] private List<GameObject> selectionPrefabList;        // ï¿½ÞµÎ»ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½, ï¿½ä°¡ï¿½ï¿½ï¿½ï¿½, ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½ï¿½
 
     private List<GameObject> selectionInstanceList;
 
-    // ¾î¶² È¿°ú°¡ ¼±ÅÃµÇ¾ú´ÂÁö ÀúÀå, ÀÌÈÄ ¿µÈ¥ Á¦°Å ¹× ±×¿¡ µû¸¥ ÀÌº¥Æ® Á¦°ÅµÉ ¶§ »ç¿ë
-    // ¸ÞµÎ»çÀÇ ¸Ó¸®: 0, Æä°¡¼ö½º: 1, ÇÏµ¥½ºÀÇ Åõ±¸: 2
+    // ï¿½î¶² È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÃµÇ¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½Åµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
+    // ï¿½ÞµÎ»ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½: 0, ï¿½ä°¡ï¿½ï¿½ï¿½ï¿½: 1, ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: 2
     public int selectionNumber { get; private set; }    
     
     protected override void Awake()
@@ -48,15 +50,15 @@ public class Perseus : SoulCard
     {
         this.selectionNumber = selectionNumber;
 
-        if (selectionNumber == 0)           // ¸ÞµÎ»çÀÇ ¸Ó¸® È¿°ú
+        if (selectionNumber == 0)           // ï¿½ÞµÎ»ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ È¿ï¿½ï¿½
         {
             //InfusedPiece.OnEndAttack += StunChessPiece;
         }
-        else if (selectionNumber == 1)      // Æä°¡¼ö½º È¿°ú
+        else if (selectionNumber == 1)      // ï¿½ä°¡ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½
         {
             
         }
-        else                                // ÇÏµ¥½ºÀÇ Åõ±¸ È¿°ú
+        else                                // ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½
         {
 
         }
@@ -64,6 +66,16 @@ public class Perseus : SoulCard
 
     private void StunChessPiece(ChessPiece chessPiece)
     {
-        // ±¸Çö ÇÊ¿ä
-    } 
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
+    }
+
+    public override void AddEffect()
+    {
+
+    }
+
+    public override void RemoveEffect()
+    {
+
+    }
 }
