@@ -6,7 +6,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class Card : TargetableObject
+public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
     abstract protected int CardID { get; }
 
@@ -50,49 +50,41 @@ public abstract class Card : TargetableObject
         cardObject.descriptionText.text = description;
         cardObject.backSpriteRenderer.sprite = back;
     }
-    private void OnMouseEnter()
+
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        if (EventSystem.current.IsPointerOverGameObject() == false)
-            if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
-                GameBoard.instance.ShowCard(this);
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+            GameBoard.instance.ShowCard(this);
     }
-    private void OnMouseExit()
+    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
-        if (EventSystem.current.IsPointerOverGameObject() == false)
-            if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
-                GameBoard.instance.HideCard();
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+            GameBoard.instance.HideCard();
     }
-    private void OnMouseDrag()
+    public void OnDrag(PointerEventData eventData)
     {
-        if (EventSystem.current.IsPointerOverGameObject() == false)
-            if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+        {
+            Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
+        }
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+        {
+            if (transform.position.y > 0)
             {
-                Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
-            }
-    }
-    private void OnMouseUp()
-    {
-        if (EventSystem.current.IsPointerOverGameObject() == false)
-            if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
-            {
-                if (transform.position.y > 0)
+                if (!TryUse())
                 {
-                    if (!TryUse())
-                    {
-                        //카드 원위치
-                        GameBoard.instance.gameData.playerWhite.UpdateHandPosition();
-                    }
-                    else
-                    {
-                        GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
-                    }
+                    //카드 원위치
+                    GameBoard.instance.gameData.playerWhite.UpdateHandPosition();
+                }
+                else
+                {
+                    GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
                 }
             }
-        else
-        {
-            //이 카드가 효과의 대상으로 선택되었을 때 코드
-
         }
     }
     public void Destroy()

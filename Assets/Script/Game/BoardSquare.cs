@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using Unity.Collections;
 using UnityEngine.EventSystems;
 
-public class BoardSquare : MonoBehaviour
+public class BoardSquare : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public BoardSquareOutline outline; //외곽선 프리팹
     public Vector2Int coordinate;
@@ -68,28 +68,23 @@ public class BoardSquare : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    private void OnMouseUp()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (EventSystem.current.IsPointerOverGameObject() == false)
-        {
-            _onClick.Invoke(coordinate);
-            if (GameBoard.instance.gameData.GetPiece(coordinate))
-                GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
-        }
+        _onClick.Invoke(coordinate);
+        if (GameBoard.instance.gameData.GetPiece(coordinate))
+            GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
     }
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         //카드 사용 중인지 체크해서 그 때는 기물 정보 표시 X
-        //BlackController 없어서 검정 턴에는 기물 위에 올리면 오류
-        if (EventSystem.current.IsPointerOverGameObject() == false)
-            if (GameBoard.instance.gameData.GetPiece(coordinate) && (!GameBoard.instance.CurrentPlayerController().isUsingCard))
-                GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
+        if (GameBoard.instance.gameData.GetPiece(coordinate) && (!GameBoard.instance.CurrentPlayerController().isUsingCard))
+            GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
     }
-    private void OnMouseExit()
+
+    public void OnPointerExit(PointerEventData eventData)
     {
-        if (EventSystem.current.IsPointerOverGameObject() == false)
-            if (GameBoard.instance.isShowingPieceInfo)
-                GameBoard.instance.HidePieceInfo();
+        if (GameBoard.instance.isShowingPieceInfo)
+            GameBoard.instance.HidePieceInfo();
     }
 
     public BoardSquare(Vector2Int coordinate, Sprite sprite)

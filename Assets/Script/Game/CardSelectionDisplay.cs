@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardSelectionDisplay : MonoBehaviour
+public class CardSelectionDisplay : MonoBehaviour, IPointerClickHandler
 {
     [HideInInspector] public int selectionNumber;                       //0���� ����
     [HideInInspector] public List<GameObject> selectionObjectList;
@@ -14,13 +14,10 @@ public class CardSelectionDisplay : MonoBehaviour
     private readonly Vector2 firstPostion = new Vector2(-1.6f, 0f);
     private readonly float gapBetweenSelection = 3.45f;
 
-    private void OnMouseUp()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (EventSystem.current.IsPointerOverGameObject() == false)
-        {
-            OnSelected?.Invoke(selectionNumber);
-            DestroyOtherSelectionObject();
-        }
+        OnSelected?.Invoke(selectionNumber);
+        DestroyOtherSelectionObject();
     }
 
     public void Initialize()
@@ -31,7 +28,7 @@ public class CardSelectionDisplay : MonoBehaviour
 
     private void DestroyOtherSelectionObject()
     {
-        for (int i = 0;  i < selectionObjectList.Count; i++)
+        for (int i = 0; i < selectionObjectList.Count; i++)
         {
             if (i == selectionNumber) continue;
 
