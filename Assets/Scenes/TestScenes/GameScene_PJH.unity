@@ -715,8 +715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b67f8aaf4ec06e5418ad0c5786a7c7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whiteButton: {fileID: 21300000, guid: 28d3e7d3d20d2004aa0289ff19cdcadb, type: 3}
-  blackButton: {fileID: 21300000, guid: edc8a02128854254da50760cf1530179, type: 3}
+  whiteButton: {fileID: 21300000, guid: d29a55eb319c80d4f97f14e2cb7fc557, type: 3}
+  blackButton: {fileID: 21300000, guid: cb034b0aa814fc141b5bb00c92d5b13b, type: 3}
   whiteController: {fileID: 625501409}
   blackController: {fileID: 1635301580}
 --- !u!212 &463008057
@@ -760,12 +760,12 @@ SpriteRenderer:
   m_SortingLayerID: -1733247665
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ff989cee5b6d94d4ba45591eb22ad709, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d29a55eb319c80d4f97f14e2cb7fc557, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10.2, y: 9.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -826,8 +826,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.02, y: 0.994}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.99609375, y: 0.9707031}
+    newSize: {x: 10.2, y: 9.94}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
