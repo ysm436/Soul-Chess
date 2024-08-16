@@ -6,5 +6,5 @@ public class SoulCardObject : MonoBehaviour
 {
     public TextMeshPro ADText;
     public TextMeshPro HPText;
-    public TextMeshPro PieceRestrictionText;
+    public SoulCardPieceRestriction PieceRestrictionIcon; //기물제한 텍스트에서 프리팹으로 변경
 }

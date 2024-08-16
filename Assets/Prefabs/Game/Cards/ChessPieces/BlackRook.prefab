@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3548190948742146796
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 543308849717537781, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 968582994924105864, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466843408537430139, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989693991274690654, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581011222737220574, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e2432675228fa944784b3088686b1838, type: 3}
+    - target: {fileID: 5581011222737220574, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372488193520614636, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_Name
+      value: BlackRook
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687402029158514929, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7372488193520614636, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8771360765114331950}
+  m_SourcePrefab: {fileID: 100100000, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+--- !u!1 &6299940136839190016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7372488193520614636, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+  m_PrefabInstance: {fileID: 3548190948742146796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8771360765114331950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6299940136839190016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707cd5a5e1c613d45abe0d8ddb6c0c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coordinate: {x: 0, y: 0}
+  isAlive: 1
+  pieceType: 8
+  pieceColor: 1
+  attackDamage: 10
+  _maxHP: 10
+  accessoryPrefab: {fileID: 1089044075087322650, guid: 07ba29d40d13cee4aa1ca3b1f53c962e, type: 3}
+  effectIconPrefab: {fileID: -1691133565048959338, guid: b246cdbf7f39f4e4b929e93e6327e386, type: 3}
+  buff: {fileID: 0}

@@ -30,6 +30,8 @@ public class GameBoard : MonoBehaviour
     public PlayerController myController { get => playerColor == PlayerColor.White ? whiteController : blackController; }
     public PlayerController opponentController { get => playerColor == PlayerColor.White ? blackController : whiteController; }
 
+    public Action<ChessPiece> OnPieceKilled;
+
     public bool isActivePlayer
     {
         get => myController.enabled;
@@ -82,6 +84,8 @@ public class GameBoard : MonoBehaviour
     }
     public void KillPiece(ChessPiece targetPiece)
     {
+        OnPieceKilled?.Invoke(targetPiece);
+
         gameData.graveyard.Add(targetPiece);
         gameData.pieceObjects.Remove(targetPiece);
 

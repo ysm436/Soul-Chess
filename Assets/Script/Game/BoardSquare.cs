@@ -4,12 +4,11 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 using Unity.Collections;
+using UnityEngine.EventSystems;
 
-public class BoardSquare : MonoBehaviour
+public class BoardSquare : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    static readonly Color movableColor = Color.red;
-    static readonly Color targetableColor = Color.red;
-
+    public BoardSquareOutline outline; //외곽선 프리팹
     public Vector2Int coordinate;
 
     public bool isMovable
@@ -18,25 +17,39 @@ public class BoardSquare : MonoBehaviour
         {
             if (value)
             {
-                spriteRenderer.color = movableColor;
+                outline.changeOutline(BoardSquareOutline.TargetableStates.movable);
             }
             else
             {
-                spriteRenderer.color = Color.white;
+                outline.changeOutline(BoardSquareOutline.TargetableStates.none);
             }
         }
     }
-    public bool isTargetable
+    public bool isNegativeTargetable //부정적 효과 타겟은 빨간색 외곽선
     {
         set
         {
             if (value)
             {
-                spriteRenderer.color = targetableColor;
+                outline.changeOutline(BoardSquareOutline.TargetableStates.negative);
             }
             else
             {
-                spriteRenderer.color = Color.white;
+                outline.changeOutline(BoardSquareOutline.TargetableStates.none);
+            }
+        }
+    }
+    public bool isPositiveTargetable //긍정적 효과 타겟은 초록색 외곽선
+    {
+        set
+        {
+            if (value)
+            {
+                outline.changeOutline(BoardSquareOutline.TargetableStates.positive);
+            }
+            else
+            {
+                outline.changeOutline(BoardSquareOutline.TargetableStates.none);
             }
         }
     }
@@ -55,20 +68,20 @@ public class BoardSquare : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    private void OnMouseUp()
+    public void OnPointerClick(PointerEventData eventData)
     {
         _onClick.Invoke(coordinate);
         if (GameBoard.instance.gameData.GetPiece(coordinate))
             GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
     }
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         //카드 사용 중인지 체크해서 그 때는 기물 정보 표시 X
-        //BlackController 없어서 검정 턴에는 기물 위에 올리면 오류
         if (GameBoard.instance.gameData.GetPiece(coordinate) && (!GameBoard.instance.CurrentPlayerController().isUsingCard))
             GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));
     }
-    private void OnMouseExit()
+
+    public void OnPointerExit(PointerEventData eventData)
     {
         if (GameBoard.instance.isShowingPieceInfo)
             GameBoard.instance.HidePieceInfo();

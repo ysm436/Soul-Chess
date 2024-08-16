@@ -37,34 +37,10 @@ public class DeckTester : MonoBehaviour
             instantiatedCard.FlipBack();
             player.deck.Add(instantiatedCard);
         }
-
-        gameBoard.myController.OnOpponentTurnEnd += () => player.DrawCard();
-
         player.OnGetCard += (card) => card.transform.SetParent(handAnchor);
 
         player.Initialize();
 
         //player.Mulligan();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            player.RemoveHandCards();
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Debug.Log("Try to Remove First Card in Hand");
-            bool result = player.TryRemoveCardInHand(player.hand[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            bool result = player.TryAddCardInHand(Instantiate(deck[0]));
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            player.RemoveDeckCards();
-        }
     }
 }

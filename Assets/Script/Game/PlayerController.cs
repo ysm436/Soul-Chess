@@ -32,10 +32,17 @@ public class PlayerController : MonoBehaviour
     public bool isUsingCard = false;
     List<TargetableObject> targetableObjects = new List<TargetableObject>();
 
+    public Action OnMyTurnStart;
+    public Action OnOpponentTurnStart;
+
     public Action OnMyDraw;
-    //    public Action OnOpponentDraw;
+    public Action OnOpponentDraw;
+
     public Action OnMyTurnEnd;
     public Action OnOpponentTurnEnd;
+
+    [SerializeField] private bool _isMyTurn;
+    public bool isMyTurn { get => _isMyTurn; }
 
     private void Awake()
     {
@@ -82,8 +89,8 @@ public class PlayerController : MonoBehaviour
 
                     if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
                     {
-
-                        SetTargetableObjects(true);
+                        //타겟 효과가 부정적인지 파라미터 전달
+                        SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
                     }
                 }
             }
@@ -179,7 +186,8 @@ public class PlayerController : MonoBehaviour
         movableCoordinates.Clear();
         foreach (var sq in gameBoard.gameData.boardSquares)
         {
-            sq.isTargetable = false;
+            sq.isNegativeTargetable = false;
+            sq.isPositiveTargetable = false;
         }
     }
     bool IsMovableCoordniate(Vector2Int coordinate)
@@ -199,13 +207,17 @@ public class PlayerController : MonoBehaviour
             sq.isMovable = false;
         }
     }
-    void SetTargetableObjects(bool isTargetable)
+    void SetTargetableObjects(bool isTargetable, bool isNegativeEffect)
     {
         foreach (var obj in targetableObjects)
-            if (obj is ChessPiece)
-                GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isTargetable = isTargetable;
+            if (obj is ChessPiece && isTargetable)
+            {
+                //타겟 효과가 부정적인지 체크
+                if (isNegativeEffect) GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isNegativeTargetable = true;
+                else GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isPositiveTargetable = true;
+            }
     }
-    public void UseCard(Card card)
+    public void UseCard(Card card, Predicate<ChessPiece> tartgetCondition = null)
     {
         UsingCard = card;
         isUsingCard = true;
@@ -230,11 +242,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
+        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor, tartgetCondition);
 
         if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
         {
-            SetTargetableObjects(true);
+            //타겟 효과가 부정적인지 파라미터 전달
+            SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
         }
 
         GameBoard.instance.ShowCard(card);
@@ -253,14 +266,36 @@ public class PlayerController : MonoBehaviour
 
         GameBoard.instance.HideCard();
     }
-    /// <summary>
-    ///     아직 구현 안됐습니다.
-    /// </summary>
+
+    public void TurnStart()
+    {
+        _isMyTurn = true;
+        OnMyTurnStart?.Invoke();
+    }
+
+    public void OpponentTurnStart()
+    {
+        OnOpponentTurnStart?.Invoke();
+    }
+
     public void Draw()
     {
-        Debug.Log("Draw");
+        if (playerColor == GameBoard.PlayerColor.White)
+        {
+            GameBoard.instance.gameData.playerWhite.DrawCard();
+        }
+        else
+        {
+            GameBoard.instance.gameData.playerBlack.DrawCard();
+        }
         OnMyDraw?.Invoke();
     }
+
+    public void OpponentDraw()
+    {
+        OnOpponentDraw?.Invoke();
+    }
+
     public void TurnEnd()
     {
         OnMyTurnEnd?.Invoke();
@@ -277,5 +312,10 @@ public class PlayerController : MonoBehaviour
                 GameBoard.instance.gameData.playerWhite.soulOrbs++;
             GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;
         }
+    }
+
+    public void OpponentTurnEnd()
+    {
+        OnOpponentTurnEnd?.Invoke();
     }
 }

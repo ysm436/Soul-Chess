@@ -2,18 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CardSelectionDisplay : MonoBehaviour
+public class CardSelectionDisplay : MonoBehaviour, IPointerClickHandler
 {
-    [HideInInspector] public int selectionNumber;                       //0ºÎÅÍ ½ÃÀÛ
+    [HideInInspector] public int selectionNumber;                       //0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [HideInInspector] public List<GameObject> selectionObjectList;
 
-    public Action<int> OnSelected;                                      //int ¸Å°³º¯¼ö: ¼±ÅÃµÈ °ÍÀÇ selectionNumber
+    public Action<int> OnSelected;                                      //int ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ï¿½ï¿½ selectionNumber
 
     private readonly Vector2 firstPostion = new Vector2(-1.6f, 0f);
     private readonly float gapBetweenSelection = 3.45f;
 
-    private void OnMouseUp()
+    public void OnPointerClick(PointerEventData eventData)
     {
         OnSelected?.Invoke(selectionNumber);
         DestroyOtherSelectionObject();
@@ -27,7 +28,7 @@ public class CardSelectionDisplay : MonoBehaviour
 
     private void DestroyOtherSelectionObject()
     {
-        for (int i = 0;  i < selectionObjectList.Count; i++)
+        for (int i = 0; i < selectionObjectList.Count; i++)
         {
             if (i == selectionNumber) continue;
 

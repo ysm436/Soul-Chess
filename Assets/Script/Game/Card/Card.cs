@@ -4,10 +4,15 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Card : TargetableObject
+public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
+    abstract protected int CardID { get; }
+
     private CardObject cardObject;
+
+    protected Predicate<ChessPiece> targetCondition = null;
 
     [Header("CardData")]
     public string cardName;
@@ -24,6 +29,8 @@ public class Card : TargetableObject
     private int _cost;
     public Sprite illustration;
     public Sprite back;
+    public Reigon reigon;
+    public Rarity rarity;
     [Multiline]
     public string description;
 
@@ -43,17 +50,18 @@ public class Card : TargetableObject
         cardObject.descriptionText.text = description;
         cardObject.backSpriteRenderer.sprite = back;
     }
-    private void OnMouseEnter()
+
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
             GameBoard.instance.ShowCard(this);
     }
-    private void OnMouseExit()
+    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
             GameBoard.instance.HideCard();
     }
-    private void OnMouseDrag()
+    public void OnDrag(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
@@ -61,7 +69,7 @@ public class Card : TargetableObject
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
         }
     }
-    private void OnMouseUp()
+    public void OnEndDrag(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
@@ -83,11 +91,6 @@ public class Card : TargetableObject
                 GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
             }
         }
-        else
-        {
-            //이 카드가 효과의 대상으로 선택되었을 때 코드
-
-        }
     }
     public void Destroy()
     {
@@ -102,21 +105,65 @@ public class Card : TargetableObject
             return false;
 
         //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
-        GameBoard.instance.CurrentPlayerController().UseCard(this);
+        GameBoard.instance.CurrentPlayerController().UseCard(this, targetCondition);
         return true;
     }
 
     public void FlipFront()
     {
+        cardObject.backSpriteRenderer.transform.localScale = new Vector3(0.8f, 0.8f, 1);
         cardObject.backSpriteRenderer.sortingOrder = -1;
         isFlipped = false;
 
     }
     public void FlipBack()
     {
-        cardObject.backSpriteRenderer.sortingOrder = 0;
+        cardObject.backSpriteRenderer.transform.localScale = new Vector3(1, 1, 1);
+        cardObject.backSpriteRenderer.sortingOrder = 1; //뒷면이 어떤 경우에도 완전히 카드 덮도록 정렬 순서 조정
         isFlipped = true;
     }
 
     //public abstract void Use();
+
+    public enum Reigon
+    {
+        Greek,
+        Norse,
+        Western
+    }
+
+    public enum Rarity
+    {
+        Common,
+        Legendary,
+        Mythical
+    }
+
+    public enum Type
+    {
+        Soul,
+        Spell
+    }
+
+
+    //Card Dictionary<CardName, CardID>
+    public static Dictionary<string, int> cardIdDict = new Dictionary<string, int>(){
+        {"오딘", 0},
+        {"프리그", 1},
+        {"토르", 3},
+        {"수르트", 8},
+        {"라그나로크", 9},
+        {"펜리르", 10},
+        {"피의 독수리", 11},
+        {"처형", 16},
+        {"어미 곰", 19},
+        {"포세이돈", 21},
+        {"페르세우스", 29},
+        {"모르건 르 페이", 37},
+        {"호수의 여인", 38},
+        {"베헤모스", 39},
+        {"아벨", 42},
+        {"돈키호테", 44},
+        {"크라켄", 48}
+    };
 }

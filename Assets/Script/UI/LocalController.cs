@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class LocalController : MonoBehaviour
+public class LocalController : MonoBehaviour, IPointerClickHandler
 {
     PhotonView photonView;
 
@@ -44,7 +45,7 @@ public class LocalController : MonoBehaviour
         blackController.enabled = false;
     }
 
-    private void OnMouseUp()
+    void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
     {
         if (GameBoard.instance.myController.TurnEndPossible)
             TurnEnd();
@@ -69,7 +70,13 @@ public class LocalController : MonoBehaviour
             blackController.enabled = true;
 
             whiteController.TurnEnd();
-            blackController.OnOpponentTurnEnd?.Invoke();
+            blackController.OpponentTurnEnd();
+
+            blackController.TurnStart();
+            whiteController.OpponentTurnStart();
+
+            blackController.Draw();
+            whiteController.OpponentDraw();
         }
         else
         {
@@ -79,8 +86,13 @@ public class LocalController : MonoBehaviour
             whiteController.enabled = true;
 
             blackController.TurnEnd();
-            whiteController.OnOpponentTurnEnd?.Invoke();
+            whiteController.OpponentTurnEnd();
+
+            whiteController.TurnStart();
+            blackController.OpponentTurnStart();
+
+            whiteController.Draw();
+            blackController.OpponentDraw();
         }
     }
-
 }

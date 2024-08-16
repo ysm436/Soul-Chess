@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 
@@ -61,7 +62,7 @@ public abstract class TargetingEffect : Effect
         public ChessPiece.PieceType targetPieceType;
         public bool isOpponent;
         public bool isFriendly;
-        public List<TargetableObject> GetTargetList(GameBoard.PlayerColor playerColor)
+        public List<TargetableObject> GetTargetList(GameBoard.PlayerColor playerColor, Predicate<ChessPiece> condition = null)
         {
             switch (targetType)
             {
@@ -70,8 +71,9 @@ public abstract class TargetingEffect : Effect
                         obj => (
                             (obj.pieceType & targetPieceType) != 0)
                             && (obj.pieceColor == playerColor ? isFriendly : isOpponent)
-                            && (obj.pieceColor == playerColor || obj.pieceType != ChessPiece.PieceType.King)
-                        ).Cast<TargetableObject>().ToList();
+                            && (obj.pieceColor == playerColor || (obj.pieceType != ChessPiece.PieceType.King && obj.GetKeyword(Keyword.Type.Stealth) != 1))
+                            && (condition == null ? true : condition(obj)
+                        )).Cast<TargetableObject>().ToList();
                 default:
                     return new List<TargetableObject>();
             }

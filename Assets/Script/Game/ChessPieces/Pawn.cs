@@ -9,6 +9,8 @@ public class Pawn : ChessPiece
     {
         List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
+        if (GetKeyword(Keyword.Type.Stun) == 1 || GetKeyword(Keyword.Type.Restraint) == 1 || isSoulSet) return movableCoordinates;
+
         ChessPiece blockingPiece;
         Vector2Int targetCoordinate;
 
@@ -62,7 +64,8 @@ public class Pawn : ChessPiece
                 //해당 칸에 위치한 기물이 상대 기물 경우 이동 가능
                 if (blockingPiece != null)
                     if (blockingPiece.pieceColor != pieceColor)
-                        movableCoordinates.Add(targetCoordinate);
+                        if (blockingPiece.GetKeyword(Keyword.Type.Stealth) != 1)
+                            movableCoordinates.Add(targetCoordinate);
             }
         }
 
