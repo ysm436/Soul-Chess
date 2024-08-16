@@ -140,6 +140,9 @@ abstract public class ChessPiece : TargetableObject
     private SpriteRenderer accessory = null;
     [SerializeField]
     SpriteRenderer accessoryPrefab;
+    private PieceEffectIcon effectIcon = null;
+    [SerializeField]
+    PieceEffectIcon effectIconPrefab;
 
     public Action<ChessPiece> OnKill;
     public Action<ChessPiece> OnKilled; //유언
@@ -182,6 +185,13 @@ abstract public class ChessPiece : TargetableObject
 
         if (buff == null)
             buff = new Buff();
+
+        if (effectIcon == null)
+        {
+            effectIcon = Instantiate(effectIconPrefab, transform.position, Quaternion.identity);
+            effectIcon.transform.SetParent(transform);
+            effectIcon.piece = this;
+        }
     }
 
     /// <summary>
@@ -316,6 +326,9 @@ abstract public class ChessPiece : TargetableObject
     public void SetKeyword(Keyword.Type keywordType, int n = 1)
     {
         keywordDictionary[keywordType] = n;
+
+        //버프 및 디버프 아이콘 스프라이트 설정 (우선순위는 Enum 값이 작을수록 높음)
+        effectIcon.SetIconSprite();
 
         if (keywordType == Keyword.Type.Taunt)
         {

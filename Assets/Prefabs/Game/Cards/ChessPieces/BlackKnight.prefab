@@ -48,6 +48,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 968582994924105864, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466843408537430139, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989693991274690654, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5581011222737220574, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -59,6 +71,10 @@ PrefabInstance:
     - target: {fileID: 7372488193520614636, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
       propertyPath: m_Name
       value: BlackKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687402029158514929, guid: c66862e99c4f1994d9051ff74a025899, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -89,6 +105,8 @@ MonoBehaviour:
   isAlive: 1
   pieceType: 2
   pieceColor: 1
-  accessoryPrefab: {fileID: 1089044075087322650, guid: 07ba29d40d13cee4aa1ca3b1f53c962e, type: 3}
   attackDamage: 10
   _maxHP: 10
+  accessoryPrefab: {fileID: 1089044075087322650, guid: 07ba29d40d13cee4aa1ca3b1f53c962e, type: 3}
+  effectIconPrefab: {fileID: -1691133565048959338, guid: b246cdbf7f39f4e4b929e93e6327e386, type: 3}
+  buff: {fileID: 0}
