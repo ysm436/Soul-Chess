@@ -638,6 +638,7 @@ MonoBehaviour:
   gameBoard: {fileID: 1132824878}
   soulOrb: {fileID: 1630490354}
   isUsingCard: 0
+  _isMyTurn: 0
 --- !u!4 &625501410
 Transform:
   m_ObjectHideFlags: 0
@@ -2508,6 +2509,7 @@ MonoBehaviour:
   gameBoard: {fileID: 1132824878}
   soulOrb: {fileID: 2008510124}
   isUsingCard: 0
+  _isMyTurn: 0
 --- !u!4 &1635301581
 Transform:
   m_ObjectHideFlags: 0
@@ -2595,11 +2597,8 @@ MonoBehaviour:
   - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
   - {fileID: 599667399022218461, guid: ff82128eca4e7994fb3e11360893a803, type: 3}
   - {fileID: 6842244014742130878, guid: ce404b57a1b095e4bbcfbec40f372c12, type: 3}
-  - {fileID: 3872828656488504387, guid: c9617f8a99bf0d546be6bbe1811ac0e2, type: 3}
-  - {fileID: 3872828656488504387, guid: bd68a39ebb17f3241a700a8383bac0da, type: 3}
-  - {fileID: 7999116808895538166, guid: dc7cfa248f3e2994ab4c060628f9ed56, type: 3}
-  - {fileID: 3872828656488504387, guid: cd934e036722b684387070d012a41272, type: 3}
-  - {fileID: 3872828656488504387, guid: f878d194de68cb5429a9e66131e1c1ef, type: 3}
+  - {fileID: 3001871606239782894, guid: c9617f8a99bf0d546be6bbe1811ac0e2, type: 3}
+  - {fileID: 4354718478632122283, guid: dc7cfa248f3e2994ab4c060628f9ed56, type: 3}
   - {fileID: 6701591295210432181, guid: 44af0aea009005a43b6d3df9e4c112a1, type: 3}
   - {fileID: -1208510047847783411, guid: 97d03e24daf82ae4486ae6ceec8dfdeb, type: 3}
   - {fileID: 6592858290932310892, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
