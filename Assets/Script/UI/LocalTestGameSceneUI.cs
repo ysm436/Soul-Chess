@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LocalController : MonoBehaviour
 {
@@ -23,38 +24,38 @@ public class LocalController : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (whiteController.enabled)
-        {
-            spriteRenderer.sprite = blackButton;
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+            if (whiteController.enabled)
+            {
+                spriteRenderer.sprite = blackButton;
 
-            whiteController.enabled = false;
-            blackController.enabled = true;
+                whiteController.enabled = false;
+                blackController.enabled = true;
 
-            whiteController.TurnEnd();
-            blackController.OpponentTurnEnd();
+                whiteController.TurnEnd();
+                blackController.OpponentTurnEnd();
 
-            blackController.TurnStart();
-            whiteController.OpponentTurnStart();
+                blackController.TurnStart();
+                whiteController.OpponentTurnStart();
 
-            blackController.Draw();
-            whiteController.OpponentDraw();
+                blackController.Draw();
+                whiteController.OpponentDraw();
+            }
+            else
+            {
+                spriteRenderer.sprite = whiteButton;
+
+                blackController.enabled = false;
+                whiteController.enabled = true;
+
+                blackController.TurnEnd();
+                whiteController.OpponentTurnEnd();
+
+                whiteController.TurnStart();
+                blackController.OpponentTurnStart();
+
+                whiteController.Draw();
+                blackController.OpponentDraw();
+            }
         }
-        else
-        {
-            spriteRenderer.sprite = whiteButton;
-
-            blackController.enabled = false;
-            whiteController.enabled = true;
-
-            blackController.TurnEnd();
-            whiteController.OpponentTurnEnd();
-
-            whiteController.TurnStart();
-            blackController.OpponentTurnStart();
-
-            whiteController.Draw();
-            blackController.OpponentDraw();
-        }
-    }
-
 }
