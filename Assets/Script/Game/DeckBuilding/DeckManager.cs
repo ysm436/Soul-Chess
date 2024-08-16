@@ -176,7 +176,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     //덱 로드를 위해 index를 통해 gameobject 리스트로 변환
     public List<GameObject> MakeGameobjectDeckList(int deck_index)
     {
-        List<GameObject> allcardlist = dbm.AllCardList;
+        List<GameObject> allcardlist = GameManager.instance.AllCards.ToList();
         List<GameObject> GameobjectList = new List<GameObject>();
 
         foreach (var card_index in GameManager.instance.deckList[deck_index].cards)

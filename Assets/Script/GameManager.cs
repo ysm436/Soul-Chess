@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 
 public class GameManager : MonoBehaviour
@@ -14,6 +16,9 @@ public class GameManager : MonoBehaviour
     public GameBoard gameBoard; //Used only in GameScene
     public List<Deck> deckList = new List<Deck>();
     public Deck selectedDeck = null;
+
+    [HideInInspector]
+    public GameObject[] AllCards;
 
     [Serializable]
     public class Data
@@ -38,6 +43,10 @@ public class GameManager : MonoBehaviour
         LoadDeckData();
     }
 
+    private void Start()
+    {
+        FindAllCards();
+    }
 
     // Update is called once per frame
     void Update()
@@ -105,5 +114,51 @@ public class GameManager : MonoBehaviour
                 instance.deckList = tempdata.DeckData;
             }
         }
+    }
+    // Greek, Norse, Western 폴더 내 존재하는 모든 카드를 찾습니다.
+    private void FindAllCards()
+    {
+        int max_card_index = Card.cardIdDict.Values.Max();
+
+        string[] GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Greek" });
+
+        for (int i = 0; i < GUIDs.Length; i++)
+        {
+            string guid = GUIDs[i];
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
+            AllCards[Card.cardIdDict[asset.GetComponent<Card>().cardName]] = asset;
+        }
+
+        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Norse" });
+
+        for (int i = 0; i < GUIDs.Length; i++)
+        {
+            string guid = GUIDs[i];
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
+            AllCards[Card.cardIdDict[asset.GetComponent<Card>().cardName]] = asset;
+        }
+
+        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Western" });
+
+        for (int i = 0; i < GUIDs.Length; i++)
+        {
+            string guid = GUIDs[i];
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
+            AllCards[Card.cardIdDict[asset.GetComponent<Card>().cardName]] = asset;
+        }
+    }
+    public List<Card> GetCardListFrom(Deck deck)
+    {
+        List<Card> cards = new();
+
+        foreach (int index in deck.cards)
+        {
+            cards.Add(AllCards[index].GetComponent<Card>());
+        }
+
+        return cards;
     }
 }

@@ -29,7 +29,7 @@ public class DeckHandController : MonoBehaviour
         //            player.TryAddCardInHand(instantiatedCard);
         //        }
 
-        foreach (Card card in GameManager.instance.currentDeck)
+        foreach (Card card in GameManager.instance.GetCardListFrom(GameManager.instance.selectedDeck))
         {
             instantiatedCard = Instantiate(card, deckAnchor);
             instantiatedCard.FlipBack();
