@@ -51,18 +51,20 @@ public abstract class TargetingEffect : Effect
     [Serializable]
     public class EffectTarget
     {
-        public EffectTarget(TargetType targetType, ChessPiece.PieceType targetPieceType, bool isOpponent, bool isFriendly)
+        public EffectTarget(TargetType targetType, ChessPiece.PieceType targetPieceType, bool isOpponent, bool isFriendly, Predicate<ChessPiece> condition = null)
         {
             this.targetType = targetType;
             this.targetPieceType = targetPieceType;
             this.isOpponent = isOpponent;
             this.isFriendly = isFriendly;
+            this.condition = condition;
         }
         public TargetType targetType;
         public ChessPiece.PieceType targetPieceType;
         public bool isOpponent;
         public bool isFriendly;
-        public List<TargetableObject> GetTargetList(GameBoard.PlayerColor playerColor, Predicate<ChessPiece> condition = null)
+        Predicate<ChessPiece> condition;
+        public List<TargetableObject> GetTargetList(GameBoard.PlayerColor playerColor)
         {
             switch (targetType)
             {

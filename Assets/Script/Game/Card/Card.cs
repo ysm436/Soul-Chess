@@ -12,8 +12,6 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
     private CardObject cardObject;
 
-    protected Predicate<ChessPiece> targetCondition = null;
-
     [Header("CardData")]
     public string cardName;
     public int cost
@@ -59,7 +57,9 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+        {
             GameBoard.instance.HideCard();
+        }
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -100,7 +100,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
             return false;
 
         //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
-        GameBoard.instance.CurrentPlayerController().UseCard(this, targetCondition);
+        GameBoard.instance.CurrentPlayerController().UseCard(this);
         return true;
     }
 
