@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class LocalController : MonoBehaviour
+public class LocalController : MonoBehaviour, IPointerClickHandler
 {
     SpriteRenderer spriteRenderer;
     public Sprite whiteButton;
@@ -21,7 +22,7 @@ public class LocalController : MonoBehaviour
         blackController.enabled = false;
     }
 
-    private void OnMouseUp()
+    void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
     {
         if (whiteController.enabled)
         {
@@ -56,5 +57,4 @@ public class LocalController : MonoBehaviour
             blackController.OpponentDraw();
         }
     }
-
 }

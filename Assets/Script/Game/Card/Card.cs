@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public abstract class Card : TargetableObject
+public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
     abstract protected int CardID { get; }
 
@@ -49,17 +50,18 @@ public abstract class Card : TargetableObject
         cardObject.descriptionText.text = description;
         cardObject.backSpriteRenderer.sprite = back;
     }
-    private void OnMouseEnter()
+
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
             GameBoard.instance.ShowCard(this);
     }
-    private void OnMouseExit()
+    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
             GameBoard.instance.HideCard();
     }
-    private void OnMouseDrag()
+    public void OnDrag(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
@@ -67,7 +69,7 @@ public abstract class Card : TargetableObject
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
         }
     }
-    private void OnMouseUp()
+    public void OnEndDrag(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
@@ -83,11 +85,6 @@ public abstract class Card : TargetableObject
                     GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
                 }
             }
-        }
-        else
-        {
-            //이 카드가 효과의 대상으로 선택되었을 때 코드
-
         }
     }
     public void Destroy()
