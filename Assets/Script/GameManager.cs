@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
     private void FindAllCards()
     {
         int max_card_index = Card.cardIdDict.Values.Max();
+        AllCards = new GameObject[max_card_index + 1];
 
         string[] GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Greek" });
 

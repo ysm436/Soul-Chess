@@ -25,7 +25,6 @@ public class LobbySceneUI : MonoBehaviour
             Debug.Log("선택된 덱이 없습니다.");
         else
         {
-            GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
             GameManager.instance.LoadGameScene();
         }
     }
@@ -66,6 +65,8 @@ public class LobbySceneUI : MonoBehaviour
         }
 
         SelectedDeckInfo.text = "Selected Deck Name : " + GameManager.instance.deckList[SelectedDeckIndex].deckname;
+
+        GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
     }
 
 }
