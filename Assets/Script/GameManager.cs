@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
 
 public class GameManager : MonoBehaviour
@@ -121,34 +120,14 @@ public class GameManager : MonoBehaviour
         int max_card_index = Card.cardIdDict.Values.Max();
         AllCards = new GameObject[max_card_index + 1];
 
-        string[] GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Greek" });
+        List<GameObject> AllCardObjectsList = new();
+        AllCardObjectsList.AddRange(Resources.LoadAll<GameObject>("Greek"));
+        AllCardObjectsList.AddRange(Resources.LoadAll<GameObject>("Norse"));
+        AllCardObjectsList.AddRange(Resources.LoadAll<GameObject>("Western"));
 
-        for (int i = 0; i < GUIDs.Length; i++)
+        foreach (var g in AllCardObjectsList)
         {
-            string guid = GUIDs[i];
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-            AllCards[Card.cardIdDict[asset.GetComponent<Card>().cardName]] = asset;
-        }
-
-        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Norse" });
-
-        for (int i = 0; i < GUIDs.Length; i++)
-        {
-            string guid = GUIDs[i];
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-            AllCards[Card.cardIdDict[asset.GetComponent<Card>().cardName]] = asset;
-        }
-
-        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Western" });
-
-        for (int i = 0; i < GUIDs.Length; i++)
-        {
-            string guid = GUIDs[i];
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-            AllCards[Card.cardIdDict[asset.GetComponent<Card>().cardName]] = asset;
+            AllCards[Card.cardIdDict[g.GetComponent<Card>().cardName]] = g;
         }
     }
     public List<Card> GetCardListFrom(Deck deck)
