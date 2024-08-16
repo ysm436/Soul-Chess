@@ -24,22 +24,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     //덱 데이터로부터 덱 리스트와 이름 파일을 불러옵니다.
     public void Awake()
     {
-        List<Deck> decklist = GameManager.instance.deckList.ToList();
-        if (decklist != null)
-        {
-            for (int i = 0; i < decklist.Count; i++)
-            {
-                if (decklist[i] != null)
-                {
-                    deck_length++;
-                    GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
-                    SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
-                    newDeckInfo.deck_index = i;
-                    newDeckInfo.DeckNameText.text = decklist[i].deckname;
-                }
-            }
-        }
-
+        DeckListLoad();
         dbm = GetComponentInParent<DeckBuildingManager>();
     }
 
@@ -127,6 +112,12 @@ public class DeckManager : MonoBehaviour, IDropHandler
             loaded_deck.deckname = deckname_inputfield.text;
             loaded_deck.cards = newDeckcards;
             TempDeck.Clear();
+
+            for (int i = 0; i < DeckSlot.childCount; i++)
+            {
+                Destroy(DeckSlot.GetChild(i).gameObject);
+            }
+            DeckListLoad();
         }
 
         deckname_inputfield.text = "";
@@ -206,5 +197,25 @@ public class DeckManager : MonoBehaviour, IDropHandler
         }
 
         return cardindexList;
+    }
+
+    private void DeckListLoad()
+    {
+        deck_length = -1;
+        List<Deck> decklist = GameManager.instance.deckList.ToList();
+        if (decklist != null)
+        {
+            for (int i = 0; i < decklist.Count; i++)
+            {
+                if (decklist[i] != null)
+                {
+                    deck_length++;
+                    GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
+                    SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
+                    newDeckInfo.deck_index = i;
+                    newDeckInfo.DeckNameText.text = decklist[i].deckname;
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CardFilter : MonoBehaviour
 {
@@ -12,6 +13,39 @@ public class CardFilter : MonoBehaviour
     private bool Common = true;
     private bool Legendary = true;
     private bool Mythical = true;
+    [SerializeField] TMP_InputField searchinputfield;
+    private void Awake()
+    {
+        searchinputfield.onValueChanged.AddListener(SearchCard);
+    }
+
+    public void SearchCard(string searchtext)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        foreach (var card in DisplayCardList)
+        {
+            string cardname = card.GetComponent<DisplayCard>().CardName;
+            int cardnamelength = cardname.Length;
+            int searchlength = searchtext.Length;
+
+            if (cardnamelength >= searchtext.Length)
+            {
+                for (int i = 0; i <= cardnamelength - searchlength; i++)
+                {
+                    if (searchtext.ToLower() == cardname.Substring(i, searchlength).ToLower())
+                    {
+                        card.SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        card.SetActive(false);
+                    }
+                }
+            }
+        }
+    }
 
     // 소울 카드 토글
     public void SoulToggle(bool soul)

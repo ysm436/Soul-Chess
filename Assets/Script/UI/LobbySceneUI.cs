@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class LobbySceneUI : MonoBehaviour
 {
-    public int SelectedDeckIndex = 0;
+    public int SelectedDeckIndex = -1;
 
     [SerializeField] private GameObject DeckSelectPanel;
     [SerializeField] private GameObject DeckSelectButton;
@@ -65,7 +65,14 @@ public class LobbySceneUI : MonoBehaviour
             Destroy(deck.gameObject);
         }
 
-        SelectedDeckInfo.text = "Selected Deck Name : " + GameManager.instance.deckList[SelectedDeckIndex].deckname;
+        if (SelectedDeckIndex == -1)
+        {
+            SelectedDeckInfo.text = "덱을 선택해 주세요.";
+        }
+        else
+        {
+            SelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckname + ">";
+        }
     }
 
 }
