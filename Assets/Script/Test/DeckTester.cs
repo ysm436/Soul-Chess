@@ -43,25 +43,4 @@ public class DeckTester : MonoBehaviour
 
         //player.Mulligan();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            player.RemoveHandCards();
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Debug.Log("Try to Remove First Card in Hand");
-            bool result = player.TryRemoveCardInHand(player.hand[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            bool result = player.TryAddCardInHand(Instantiate(deck[0]));
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            player.RemoveDeckCards();
-        }
-    }
 }
