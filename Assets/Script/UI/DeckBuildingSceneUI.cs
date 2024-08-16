@@ -9,28 +9,61 @@ public class DeckBuildingSceneUI : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button newDeckButton;
     [SerializeField] private Button cancelButton;
-    //덱 구성 후 저장 버튼 (추후 기능 추가 대비)
-    //[SerializeField] private Button saveButton;
-
-    [SerializeField] private GameObject deckListPanel;
-    [SerializeField] private GameObject newDeckPanel;
+    [SerializeField] private Button saveButton;
+    [SerializeField] public Button deckloadButton;
+    [SerializeField] public GameObject deckListPanel;
+    [SerializeField] public GameObject newDeckPanel;
+    public DeckManager deckinfo;
 
     private void Awake()
     {
-        enableDeckListPanel();
+        CancelButtonFunction();
         quitButton.onClick.AddListener(GameManager.instance.LoadMainScene);
-        newDeckButton.onClick.AddListener(enableNewDeckPanel);
-        cancelButton.onClick.AddListener(enableDeckListPanel);
+        newDeckButton.onClick.AddListener(NewDeckButtonFunction);
+        cancelButton.onClick.AddListener(CancelButtonFunction);
+        saveButton.onClick.AddListener(saveButtonFunction);
+
+        deckinfo = newDeckPanel.GetComponent<DeckManager>();
     }
 
-    private void enableDeckListPanel()
+    private void LoadMainScene()
     {
+        SceneManager.LoadScene("MainScene");
+    }
+
+    private void CancelButtonFunction()
+    {
+        deckinfo.DeckCancel();
+        deckinfo.TempDeckReset();
+        GetComponent<DeckBuildingManager>().ReloadDisplayCard();
+
         deckListPanel.SetActive(true);
         newDeckPanel.SetActive(false);
     }
 
-    private void enableNewDeckPanel()
+    private void NewDeckButtonFunction()
     {
+        deckinfo.newDeckSignal = true;
+
+        deckListPanel.SetActive(false);
+        newDeckPanel.SetActive(true);
+    }
+
+    private void saveButtonFunction()
+    {
+        deckinfo.DeckSave(deckinfo.loaded_deck_index);
+        deckinfo.TempDeckReset();
+        GetComponent<DeckBuildingManager>().ReloadDisplayCard();
+        GameManager.instance.SaveDeckData();
+
+        deckListPanel.SetActive(true);
+        newDeckPanel.SetActive(false);
+    }
+
+    public void LoadDeck(int deck_index)
+    {
+        deckinfo.DeckLoad(deck_index);
+
         deckListPanel.SetActive(false);
         newDeckPanel.SetActive(true);
     }

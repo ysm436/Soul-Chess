@@ -6,7 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using System.Linq;
 using Unity.Mathematics;
-public class SoulCard : Card
+public abstract class SoulCard : Card
 {
     [Serializable]      // 하나의 PieceType에 하나의 Sprite가 선택되도록 설정되어야 함
     private struct AccessorySprite
@@ -124,4 +124,7 @@ public class SoulCard : Card
         OnInfuse?.Invoke(targetPiece);
     }
 
+    public abstract void AddEffect();
+
+    public abstract void RemoveEffect();
 }

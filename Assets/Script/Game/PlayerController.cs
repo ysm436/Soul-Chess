@@ -19,10 +19,17 @@ public class PlayerController : MonoBehaviour
     public bool isUsingCard = false;
     List<TargetableObject> targetableObjects = new List<TargetableObject>();
 
+    public Action OnMyTurnStart;
+    public Action OnOpponentTurnStart;
+
     public Action OnMyDraw;
-    //    public Action OnOpponentDraw;
+    public Action OnOpponentDraw;
+
     public Action OnMyTurnEnd;
     public Action OnOpponentTurnEnd;
+
+    [SerializeField] private bool _isMyTurn;
+    public bool isMyTurn { get => _isMyTurn; }
 
     private void OnEnable()
     {
@@ -218,14 +225,36 @@ public class PlayerController : MonoBehaviour
 
         GameBoard.instance.HideCard();
     }
-    /// <summary>
-    ///     아직 구현 안됐습니다.
-    /// </summary>
+
+    public void TurnStart()
+    {
+        _isMyTurn = true;
+        OnMyTurnStart?.Invoke();
+    }
+
+    public void OpponentTurnStart()
+    {
+        OnOpponentTurnStart?.Invoke();
+    }
+
     public void Draw()
     {
-        Debug.Log("Draw");
+        if (playerColor == GameBoard.PlayerColor.White)
+        {
+            GameBoard.instance.gameData.playerWhite.DrawCard();
+        }
+        else
+        {
+            GameBoard.instance.gameData.playerBlack.DrawCard();
+        }
         OnMyDraw?.Invoke();
     }
+
+    public void OpponentDraw()
+    {
+        OnOpponentDraw?.Invoke();
+    }
+
     public void TurnEnd()
     {
         OnMyTurnEnd?.Invoke();
@@ -242,5 +271,10 @@ public class PlayerController : MonoBehaviour
                 GameBoard.instance.gameData.playerWhite.soulOrbs++;
             GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;
         }
+    }
+
+    public void OpponentTurnEnd()
+    {
+        OnOpponentTurnEnd?.Invoke();
     }
 }

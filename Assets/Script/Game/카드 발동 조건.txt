@@ -1,0 +1,27 @@
+카드 발동 조건
+    (내/상대) 턴이 끝날 때
+    => PlayerController의 OnMyTurnEnd, OnOpponentTurnEnd
+
+    (내/상대)턴이 시작될 때
+    => PlayerController의 OnMyTurnStart, OnOpponentTurnStart
+
+    이 기물이 적을 공격하여 처치했을 때
+    => ChessPiece의 OnKill
+
+    (적/내) 기물이 처치되면            
+    => GameBoard의 OnPieceKilled (매개변수 ChessPiece 통해 적 기물인지, 내 기물인지 확인)
+
+    상대 턴에 / 내 턴에                       
+    => GameBoard의 CurrentPlayerController의 IsMyTurn 통해 검사
+
+    (내/상대)가 카드를 뽑을 때
+    => PlayerController의 OnMyDraw, OnOpponentDraw
+
+    (적/내) 기물에게 피해를 받은       
+    => GameData의 PieceObjects 받아와 적, 아군 구분 후 (HP < maxHP)이면 발동
+
+    내 기물에게 영혼이 부여되어 있다면 
+    => 선택된 기물 ChessPiece의 soul이 null이 아니면 발동
+
+    카드를 낼 때                       
+    => 소울 카드: OnInfuse 활용 / 마법 카드: TargetingEffect의 EffectAction 활용

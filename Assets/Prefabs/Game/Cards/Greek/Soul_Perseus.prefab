@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soul_Perseus
       objectReference: {fileID: 0}
+    - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 02986a37bd49c624da7ca5aa21fa7b08, type: 3}
     - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: isPositiveEffect
       value: 1
@@ -86,16 +90,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2f49ec71bca3543b7ebe5425d601a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: 
-  _cost: 0
+  cardName: "\uD398\uB974\uC138\uC6B0\uC2A4"
+  _cost: 4
   illustration: {fileID: 0}
   back: {fileID: 0}
-  description: 
+  reigon: 0
+  rarity: 1
+  description: "[\uAC15\uB9BC]\n3\uAC00\uC9C0 \uBCF4\uBB3C \uC911 \uD558\uB098\uB97C
+    \uC120\uD0DD\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 0}
   isInSelection: 0
-  pieceRestriction: 0
-  _AD: 0
-  _HP: 0
+  pieceRestriction: 2
+  _AD: 35
+  _HP: 35
   accessorySpriteList: []
   InfusedPiece: {fileID: 0}
   selectionPrefabList: []

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Execution : TargetingEffect
+public class ExecutionEffect : TargetingEffect
 {
     public int basicAD;
     public int insteadAD;
@@ -12,13 +12,13 @@ public class Execution : TargetingEffect
     {
         foreach (var target in targets)
         {
-            if ((target as ChessPiece).HP < standardHP)
+            if ((target as ChessPiece).GetHP < standardHP)
             {
-                (target as ChessPiece).HP -= insteadAD;
+                (target as ChessPiece).MinusHP(insteadAD);
             }
             else
             {
-                (target as ChessPiece).HP -= basicAD;
+                (target as ChessPiece).MinusHP(basicAD);
             }
         }
     }

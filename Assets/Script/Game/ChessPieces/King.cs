@@ -11,6 +11,8 @@ public class King : ChessPiece
     {
         List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
+        if (GetKeyword(Keyword.Type.Stun) == 1 || GetKeyword(Keyword.Type.Restraint) == 1 || isSoulSet) return movableCoordinates;
+
         ChessPiece blockingPiece;
         Vector2Int targetCoordinate;
 
@@ -48,7 +50,8 @@ public class King : ChessPiece
                     //해당 칸에 적 기물이 있을 경우 이동 가능
                     if (blockingPiece.pieceColor != this.pieceColor)
                     {
-                        movableCoordinates.Add(targetCoordinate);
+                        if (blockingPiece.GetKeyword(Keyword.Type.Stealth) != 1)
+                            movableCoordinates.Add(targetCoordinate);
                     }
                 }
             }
