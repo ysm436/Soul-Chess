@@ -5,8 +5,6 @@ using UnityEngine;
 public class Behemoth : SoulCard
 {
     protected override int CardID => Card.cardIdDict["베헤모스"];
-    private int buffedHP;
-    private int buffedAD;
 
     protected override void Awake()
     {
@@ -16,9 +14,6 @@ public class Behemoth : SoulCard
 
     public void SoulEffect(ChessPiece chessPiece)
     {
-        buffedHP = 0;
-        buffedAD = 0;
-
         GameBoard.instance.myController.OnMyTurnEnd += SoulEffect2;
 
         chessPiece.OnSoulRemoved += RemoveEffect;
@@ -29,23 +24,17 @@ public class Behemoth : SoulCard
         InfusedPiece.maxHP += 10;
         InfusedPiece.AD += 10;
 
-        buffedHP += 10;
-        buffedAD += 10;
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, 10, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, 10, true);
     }
 
     public override void AddEffect()
     {
-        InfusedPiece.maxHP += buffedHP;
-        InfusedPiece.AD += buffedAD;
-
         GameBoard.instance.myController.OnMyTurnEnd += SoulEffect2;
     }
 
     public override void RemoveEffect()
     {
-        InfusedPiece.maxHP -= buffedHP;
-        InfusedPiece.AD -= buffedAD;
-
         GameBoard.instance.myController.OnMyTurnEnd -= SoulEffect2;
     }
 }

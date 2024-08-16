@@ -2075,11 +2075,9 @@ MonoBehaviour:
   - {fileID: -2815551797691118998, guid: 2d9947a9ca0af554ebef3f3b895f3d78, type: 3}
   deck:
   - {fileID: 4824830457768495894, guid: dc0e4c5991c664d4aaaad1229ca79999, type: 3}
-  - {fileID: 6842244014742130878, guid: ce404b57a1b095e4bbcfbec40f372c12, type: 3}
+  - {fileID: 4824830457768495894, guid: dc0e4c5991c664d4aaaad1229ca79999, type: 3}
   - {fileID: 6592858290932310892, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
-  - {fileID: 599667399022218461, guid: ff82128eca4e7994fb3e11360893a803, type: 3}
-  - {fileID: -1208510047847783411, guid: 97d03e24daf82ae4486ae6ceec8dfdeb, type: 3}
-  - {fileID: 7433252666421529211, guid: fc310b2ab5a30de4298b4aea18a015f4, type: 3}
+  - {fileID: 6842244014742130878, guid: ce404b57a1b095e4bbcfbec40f372c12, type: 3}
 --- !u!4 &1323045556
 Transform:
   m_ObjectHideFlags: 0
