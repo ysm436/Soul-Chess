@@ -10,9 +10,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
 {
     private int deck_length = -1;
     public int loaded_deck_index = 0;
-    private int local_card_count = 0;
-    private int[] local_chesspieces = new int[6]{0, 0, 0, 0, 0, 0};
-    private int[] local_rarities = new int[3]{0, 0, 0};
+    public int local_card_count = 0;
+    public int[] local_chesspieces = new int[6]{0, 0, 0, 0, 0, 0};
+    public int[] local_rarities = new int[3]{0, 0, 0};
 
     [SerializeField] private RectTransform trashcan;
     [SerializeField] private RectTransform CardSlot;
@@ -261,10 +261,24 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
     private bool TryInputCard(DisplayCard cardinfo)
     {
+        int duplicate_quantity = 0;
         bool error_signal = false;
+
+        foreach (var card in TempDeck)
+        {
+            if (cardinfo.cardindex == card.GetComponent<SimpleCard>().cardindex)
+            {
+                duplicate_quantity += 1;
+            }
+        }
 
         if (cardinfo.Rarity == Card.Rarity.Mythical)
         {
+            if (duplicate_quantity >= 1)
+            {
+                error_signal = true;
+            }
+
             if (local_rarities[2] == 3)
             {
                 error_signal = true;
@@ -272,7 +286,19 @@ public class DeckManager : MonoBehaviour, IDropHandler
         }
         else if (cardinfo.Rarity == Card.Rarity.Legendary)
         {
+            if (duplicate_quantity >= 1)
+            {
+                error_signal = true;
+            }
+
             if (local_rarities[1] == 9)
+            {
+                error_signal = true;
+            }
+        }
+        else
+        {
+            if (duplicate_quantity >= 2)
             {
                 error_signal = true;
             }
