@@ -305,10 +305,10 @@ abstract public class ChessPiece : TargetableObject
         if (soul == null)
             return;
 
+        RemoveBuff();
+
         maxHP -= soul.HP;
         AD -= soul.AD;
-
-        RemoveBuff();
 
 		//구버전 코드
         //spriteRenderer.sprite = defaultSprite;
@@ -343,7 +343,8 @@ abstract public class ChessPiece : TargetableObject
         }
         else if (keywordType == Keyword.Type.Stun)
         {
-            GameBoard.instance.myController.OnMyTurnEnd += Unstun;
+            //효과 발동 시점의 색깔 턴이 한번 더 돌아와야 스턴 해제
+            GameBoard.instance.CurrentPlayerController().OnMyTurnStart += Unstun;
         }
         else if (keywordType == Keyword.Type.Restraint)
         {
