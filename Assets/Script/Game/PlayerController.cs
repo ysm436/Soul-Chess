@@ -177,8 +177,11 @@ public class PlayerController : MonoBehaviour
                 else GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isPositiveTargetable = true;
             }
     }
-    public void UseCard(Card card)
+    public bool UseCard(Card card)
     {
+        if (GameBoard.instance.CurrentPlayerData().soulEssence < card.cost)
+            return false;
+
         usingCard = card;
         isUsingCard = true;
 
@@ -186,6 +189,22 @@ public class PlayerController : MonoBehaviour
         {
             if (!isInfusing)
             {
+                if (!(usingCard as SoulCard).infusion.isAvailable(playerColor))
+                {
+                    usingCard = null;
+                    isUsingCard = false;
+                    return false;
+                }
+                else if (usingCard.EffectOnCardUsed is TargetingEffect)
+                {
+                    if (!(usingCard.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor))
+                    {
+                        usingCard = null;
+                        isUsingCard = false;
+                        return false;
+                    }
+                }
+
                 isInfusing = true;
 
                 targetingEffect = (usingCard as SoulCard).infusion;
@@ -197,6 +216,12 @@ public class PlayerController : MonoBehaviour
 
                 if (usingCard.EffectOnCardUsed is TargetingEffect)
                 {
+                    if (!(usingCard.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor))
+                    {
+                        usingCard = null;
+                        isUsingCard = false;
+                        return false;
+                    }
                     targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
                     ActiveTargeting();
                 }
@@ -218,17 +243,13 @@ public class PlayerController : MonoBehaviour
                 UseCardEffect();
             }
         }
+
+
+        return true;
     }
     private void ActiveTargeting()
     {
         ClearMovableCoordniates();
-
-        if (!targetingEffect.isAvailable(playerColor))
-        {
-            usingCard = null;
-            isUsingCard = false;
-            return;
-        }
 
         targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 

@@ -100,8 +100,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
             return false;
 
         //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
-        GameBoard.instance.CurrentPlayerController().UseCard(this);
-        return true;
+        return GameBoard.instance.CurrentPlayerController().UseCard(this);
     }
 
     public void FlipFront()
