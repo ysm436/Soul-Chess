@@ -13,6 +13,8 @@ public class CardFilter : MonoBehaviour
     private bool Common = true;
     private bool Legendary = true;
     private bool Mythical = true;
+    private bool king = true;
+
     [SerializeField] TMP_InputField searchinputfield;
     private void Awake()
     {
@@ -108,7 +110,7 @@ public class CardFilter : MonoBehaviour
             Greek = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Greek")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Greek)
                 {
                     card.SetActive(false);
                 }
@@ -131,7 +133,7 @@ public class CardFilter : MonoBehaviour
             Western = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Western")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Western)
                 {
                     card.SetActive(false);
                 }
@@ -154,7 +156,7 @@ public class CardFilter : MonoBehaviour
             Norse = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Norse")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Norse)
                 {
                     card.SetActive(false);
                 }
@@ -177,7 +179,7 @@ public class CardFilter : MonoBehaviour
             Common = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Common")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Common)
                 {
                     card.SetActive(false);
                 }
@@ -200,7 +202,7 @@ public class CardFilter : MonoBehaviour
             Legendary = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Legendary")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Legendary)
                 {
                     card.SetActive(false);
                 }
@@ -223,13 +225,35 @@ public class CardFilter : MonoBehaviour
             Mythical = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Mythical")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Mythical)
                 {
                     card.SetActive(false);
                 }
             }
         }
     }
+
+/*     public void KingToggle(bool king_on)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (king_on)
+        {
+            king = true;
+            ForOnToggle();
+        }
+        else
+        {
+            king = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().ChessPiece.HasFlag(ChessPiece.PieceType.King))
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    } */
 
     void ForOnToggle()
     {
@@ -250,11 +274,11 @@ public class CardFilter : MonoBehaviour
                     if (!Spell) continue;
                 }
 
-                if (cardinfo.Reigon == "Greek")
+                if (cardinfo.Reigon == Card.Reigon.Greek)
                 {
                     if (!Greek) continue;
                 }
-                else if (cardinfo.Reigon == "Western")
+                else if (cardinfo.Reigon == Card.Reigon.Western)
                 {
                     if (!Western) continue;
                 }
@@ -263,11 +287,11 @@ public class CardFilter : MonoBehaviour
                     if (!Norse) continue;
                 }
 
-                if (cardinfo.Rarity == "Common")
+                if (cardinfo.Rarity == Card.Rarity.Common)
                 {
                     if (!Common) continue;
                 }
-                else if (cardinfo.Rarity == "Legendary")
+                else if (cardinfo.Rarity == Card.Rarity.Legendary)
                 {
                     if (!Legendary) continue;
                 }
@@ -275,6 +299,11 @@ public class CardFilter : MonoBehaviour
                 {
                     if (!Mythical) continue;
                 }
+
+/*                 if (cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.King))
+                {
+                    if (!king) continue;
+                } */
 
                 card.SetActive(true);
             }

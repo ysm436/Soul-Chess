@@ -90,8 +90,8 @@ public class DeckBuildingManager : MonoBehaviour
         DisplayCard.CardName = cardinfo.cardName;
         DisplayCard.Cost = cardinfo.cost;
         DisplayCard.Description = cardinfo.description;
-        DisplayCard.Reigon = cardinfo.reigon.ToString();
-        DisplayCard.Rarity = cardinfo.rarity.ToString();
+        DisplayCard.Reigon = cardinfo.reigon;
+        DisplayCard.Rarity = cardinfo.rarity;
         DisplayCard.quantity = quantity;
 
         if (cardinfo is SoulCard)
@@ -103,10 +103,12 @@ public class DeckBuildingManager : MonoBehaviour
         if (card.GetComponent<SpellCard>())
         {
             DisplayCard.CardType = Card.Type.Spell;
+            DisplayCard.ChessPiece = ChessPiece.PieceType.None;
         }
         else
         {
             DisplayCard.CardType = Card.Type.Soul;
+            DisplayCard.ChessPiece = card.GetComponent<SoulCard>().pieceRestriction;
         }
 
         //texts[0].text = DisplayCard.CardName;

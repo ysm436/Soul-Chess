@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,6 +10,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
 {
     private int deck_length = -1;
     public int loaded_deck_index = 0;
+    private int local_card_count = 0;
+    private int[] local_chesspieces = new int[6]{0, 0, 0, 0, 0, 0};
+    private int[] local_rarities = new int[3]{0, 0, 0};
 
     [SerializeField] private RectTransform trashcan;
     [SerializeField] private RectTransform CardSlot;
@@ -36,37 +41,41 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
         if (CardInfo)
         {
-            GameObject indeck = Instantiate(Simple_Card, CardSlot);
-            SimpleCard indeck_info = indeck.GetComponent<SimpleCard>();
-            int card_order = 0;
-
-            indeck.name = dropped.name.Replace("display", "deck");
-            indeck_info.cardindex = CardInfo.cardindex;
-            indeck_info.cardNameText.text = CardInfo.CardName;
-            indeck_info.cost.text = CardInfo.Cost.ToString();
-            CardInfo.quantity--;
-
-            // 코스트가 낮을 수록 앞으로 가게끔
-            for (; card_order < CardSlot.childCount - 1; card_order++)
+            if (!TryInputCard(CardInfo)) //제한을 초과하지 않는 경우
             {
-                if (int.Parse(CardSlot.GetChild(card_order).GetComponent<SimpleCard>().cost.text) > CardInfo.Cost)
+                GameObject indeck = Instantiate(Simple_Card, CardSlot);
+                SimpleCard indeck_info = indeck.GetComponent<SimpleCard>();
+                int card_order = 0;
+
+                indeck.name = dropped.name.Replace("display", "deck");
+                indeck_info.cardindex = CardInfo.cardindex;
+                indeck_info.cardNameText.text = CardInfo.CardName;
+                indeck_info.cost.text = CardInfo.Cost.ToString();
+                CardInfo.quantity--;
+
+                // 코스트가 낮을 수록 앞으로 가게끔
+                for (; card_order < CardSlot.childCount - 1; card_order++)
                 {
-                    indeck.transform.SetSiblingIndex(card_order);
-                    break;
+                    if (int.Parse(CardSlot.GetChild(card_order).GetComponent<SimpleCard>().cost.text) > CardInfo.Cost)
+                    {
+                        indeck.transform.SetSiblingIndex(card_order);
+                        break;
+                    }
                 }
+
+                Transform displaystorage = dbm.DisplayStorage;
+
+                //덱에 더 이상 카드가 들어갈 수 없을 때 디스플레이에서 없애버립니다.
+                if (CardInfo.quantity <= 0)
+                {
+                    dbm.DisplayCardList.Remove(dropped);
+                    dropped.transform.SetParent(displaystorage);
+                    dropped.SetActive(false);
+                }
+
+                AddCardInfoInDeck(CardInfo);
+                TempDeck.Insert(card_order, indeck);
             }
-
-            Transform displaystorage = dbm.DisplayStorage;
-
-            //덱에 더 이상 카드가 들어갈 수 없을 때 디스플레이에서 없애버립니다.
-            if (CardInfo.quantity <= 0)
-            {
-                dbm.DisplayCardList.Remove(dropped);
-                dropped.transform.SetParent(displaystorage);
-                dropped.SetActive(false);
-            }
-
-            TempDeck.Insert(card_order, indeck);
         }
     }
 
@@ -94,6 +103,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
             Deck newdeck = new Deck
             {
                 deckname = deckname_inputfield.text,
+                card_count = local_card_count,
+                chesspieces = (int[])local_chesspieces.Clone(),
+                Rarities = (int[])local_rarities.Clone(),
                 cards = newDeckcards
             };
             GameManager.instance.deckList.Add(newdeck);
@@ -118,8 +130,10 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 Destroy(DeckSlot.GetChild(i).gameObject);
             }
             DeckListLoad();
+            DeckInfoSave();
         }
 
+        LocalDeckInfoReset();
         deckname_inputfield.text = "";
     }
 
@@ -128,6 +142,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     {
         newDeckSignal = false;
         TempDeck.Clear();
+        LocalDeckInfoReset();
         deckname_inputfield.text = "";
     }
 
@@ -161,6 +176,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 }
             }
         }
+        LocalDeckInfoLoad();
         deckname_inputfield.text = GameManager.instance.deckList[deck_index].deckname;
     }
 
@@ -216,6 +232,120 @@ public class DeckManager : MonoBehaviour, IDropHandler
                     newDeckInfo.DeckNameText.text = decklist[i].deckname;
                 }
             }
+        }
+    }
+
+    private void LocalDeckInfoReset()
+    {
+        local_card_count = 0;
+        Array.Clear(local_chesspieces, 0, local_chesspieces.Length);
+        Array.Clear(local_rarities, 0, local_rarities.Length);
+    }
+
+    private void LocalDeckInfoLoad()
+    {
+        Deck loaded_deck = GameManager.instance.deckList[loaded_deck_index];
+
+        local_card_count = loaded_deck.card_count;
+        local_chesspieces = (int[])loaded_deck.chesspieces.Clone();
+        local_rarities = (int[])loaded_deck.Rarities.Clone();
+    }
+    private void DeckInfoSave()
+    {
+        Deck loaded_deck = GameManager.instance.deckList[loaded_deck_index];
+
+        loaded_deck.card_count = local_card_count;
+        loaded_deck.chesspieces = (int[])local_chesspieces.Clone();
+        loaded_deck.Rarities = (int[])local_rarities.Clone();
+    }
+
+    private bool TryInputCard(DisplayCard cardinfo)
+    {
+        bool error_signal = false;
+
+        if (cardinfo.Rarity == Card.Rarity.Mythical)
+        {
+            if (local_rarities[2] == 3)
+            {
+                error_signal = true;
+            }
+        }
+        else if (cardinfo.Rarity == Card.Rarity.Legendary)
+        {
+            if (local_rarities[1] == 9)
+            {
+                error_signal = true;
+            }
+        }
+
+        return error_signal;
+    }
+
+    private void AddCardInfoInDeck(DisplayCard cardinfo)
+    {
+        local_card_count += 1;
+
+        List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();
+        foreach (ChessPiece.PieceType piecetype in Enum.GetValues(typeof(ChessPiece.PieceType)))
+        {
+            if (piecetype != ChessPiece.PieceType.None && cardinfo.ChessPiece.HasFlag(piecetype))
+            {
+                includedTypes.Add(piecetype);
+            }
+        }
+
+        foreach (var piecetype in includedTypes)
+        {
+            switch (piecetype)
+            {
+                case ChessPiece.PieceType.Pawn : local_chesspieces[0] += 1; break;
+                case ChessPiece.PieceType.Knight : local_chesspieces[1] += 1; break;
+                case ChessPiece.PieceType.Bishop : local_chesspieces[2] += 1; break;
+                case ChessPiece.PieceType.Rook : local_chesspieces[3] += 1; break;
+                case ChessPiece.PieceType.Quene : local_chesspieces[4] += 1; break;
+                case ChessPiece.PieceType.King : local_chesspieces[5] += 1; break;
+            }
+        }
+
+        switch (cardinfo.Rarity)
+        {
+            case Card.Rarity.Common : local_rarities[0] += 1; break;
+            case Card.Rarity.Legendary : local_rarities[1] += 1; break;
+            case Card.Rarity.Mythical : local_rarities[2] += 1; break;
+        }
+    }
+
+    public void RemoveCardInfoInDeck(DisplayCard cardinfo)
+    {
+        local_card_count -= 1;
+
+        List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();
+        foreach (ChessPiece.PieceType piecetype in Enum.GetValues(typeof(ChessPiece.PieceType)))
+        {
+            if (piecetype != ChessPiece.PieceType.None && cardinfo.ChessPiece.HasFlag(piecetype))
+            {
+                includedTypes.Add(piecetype);
+            }
+        }
+
+        foreach (var piecetype in includedTypes)
+        {
+            switch (piecetype)
+            {
+                case ChessPiece.PieceType.Pawn : local_chesspieces[0] -= 1; break;
+                case ChessPiece.PieceType.Knight : local_chesspieces[1] -= 1; break;
+                case ChessPiece.PieceType.Bishop : local_chesspieces[2] -= 1; break;
+                case ChessPiece.PieceType.Rook : local_chesspieces[3] -= 1; break;
+                case ChessPiece.PieceType.Quene : local_chesspieces[4] -= 1; break;
+                case ChessPiece.PieceType.King : local_chesspieces[5] -= 1; break;
+            }
+        }
+
+        switch (cardinfo.Rarity)
+        {
+            case Card.Rarity.Common : local_rarities[0] -= 1; break;
+            case Card.Rarity.Legendary : local_rarities[1] -= 1; break;
+            case Card.Rarity.Mythical : local_rarities[2] -= 1; break;
         }
     }
 }

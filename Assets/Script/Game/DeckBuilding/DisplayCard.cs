@@ -49,9 +49,9 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
     }
     public Card.Type CardType;
-    public string Reigon;
-    public string ChessPiece;
-    public string Rarity;
+    public Card.Reigon Reigon;
+    public ChessPiece.PieceType ChessPiece;
+    public Card.Rarity Rarity;
     public string Description
     {
         set { CardDescriptionTMP.text = value; }
