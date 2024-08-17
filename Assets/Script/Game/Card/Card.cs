@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 
 public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
+    [HideInInspector]
+    public bool isMine;
     abstract protected int CardID { get; }
     public int GetCardID { get => CardID; }
 
@@ -64,6 +66,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isMine) return;
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -72,6 +76,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isMine) return;
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             if (transform.position.y > 0)

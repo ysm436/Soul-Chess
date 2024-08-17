@@ -119,7 +119,10 @@ public class PlayerData
     public void GetCard(Card cardInstance)
     {
         hand.Add(cardInstance);
-        cardInstance.FlipFront();
+        if (cardInstance.isMine)
+            cardInstance.FlipFront();
+        else
+            cardInstance.FlipBack();
         cardInstance.GetComponent<SortingGroup>().sortingOrder = hand.Count - 1;
 
         UpdateHandPosition();

@@ -40,6 +40,7 @@ public class DeckHandController : MonoBehaviour
 
         foreach (Card card in GameManager.instance.GetCardListFrom(GameManager.instance.selectedDeck.cards))
         {
+            card.isMine = true;
             instantiatedCard = Instantiate(card, deckAnchor);
             instantiatedCard.FlipBack();
             player.deck.Add(instantiatedCard);
@@ -72,6 +73,7 @@ public class DeckHandController : MonoBehaviour
 
         foreach (Card card in GameManager.instance.GetCardListFrom(deckData.ToList<int>()))
         {
+            card.isMine = false;
             instantiatedCard = Instantiate(card, deckAnchor);
             instantiatedCard.FlipBack();
             GameBoard.instance.gameData.opponentPlayerData.deck.Add(instantiatedCard);
@@ -79,6 +81,7 @@ public class DeckHandController : MonoBehaviour
 
         foreach (Card card in GameManager.instance.GetCardListFrom(handData.ToList<int>()))
         {
+            card.isMine = false;
             instantiatedCard = Instantiate(card, handAnchor);
             GameBoard.instance.gameData.opponentPlayerData.TryAddCardInHand(instantiatedCard);
         }
