@@ -55,6 +55,8 @@ public abstract class SoulCard : Card
     [HideInInspector]
     public ChessPiece InfusedPiece;
 
+    public Infusion infusion { get => _infusion; }
+    private Infusion _infusion;
     public Action<ChessPiece> OnInfuse; //강림
 
     override protected void Awake()
@@ -64,10 +66,10 @@ public abstract class SoulCard : Card
 
         soulCardObject.ADText.text = AD.ToString();
         soulCardObject.HPText.text = HP.ToString();
-        
+
         //기물 제한 아이콘 생성 후 위치 정렬
         List<SoulCardPieceRestriction> icons = new List<SoulCardPieceRestriction>();
-        foreach(ChessPiece.PieceType value in Enum.GetValues(typeof(ChessPiece.PieceType)))
+        foreach (ChessPiece.PieceType value in Enum.GetValues(typeof(ChessPiece.PieceType)))
         {
             if (pieceRestriction.HasFlag(value) && (value != ChessPiece.PieceType.None))
             {
@@ -86,27 +88,23 @@ public abstract class SoulCard : Card
                 int temp = icons.Count / 2;
                 for (int i = temp - 1; i >= 0; i--)
                 {
-                    icons[i].transform.localPosition = new Vector3(-0.08f - i*0.16f, -1.175f, 0);
-                    icons[icons.Count-1 - i].transform.localPosition = new Vector3(0.08f + i*0.16f, -1.175f, 0);
+                    icons[i].transform.localPosition = new Vector3(-0.08f - i * 0.16f, -1.175f, 0);
+                    icons[icons.Count - 1 - i].transform.localPosition = new Vector3(0.08f + i * 0.16f, -1.175f, 0);
                 }
             }
             else //아이콘이 홀수 개
             {
                 int temp = icons.Count / 2;
-                icons[temp].transform.localPosition = new Vector3(0,  -1.175f, 0);
+                icons[temp].transform.localPosition = new Vector3(0, -1.175f, 0);
                 for (int i = temp - 1; i >= 0; i--)
                 {
-                    icons[i].transform.localPosition = new Vector3(-0.16f*i, -1.175f, 0);
-                    icons[icons.Count-1 - i].transform.localPosition = new Vector3(i*0.16f, -1.175f, 0);
+                    icons[i].transform.localPosition = new Vector3(-0.16f * i, -1.175f, 0);
+                    icons[icons.Count - 1 - i].transform.localPosition = new Vector3(i * 0.16f, -1.175f, 0);
                 }
             }
         }
-
-        if (EffectOnCardUsed is Infusion)
-        {
-            (EffectOnCardUsed as Infusion).infuse += Infuse;
-            (EffectOnCardUsed as Infusion).targetTypes[0].targetPieceType = pieceRestriction;
-        }
+        _infusion = new Infusion(pieceRestriction);
+        _infusion.infuse += Infuse;
     }
 
 

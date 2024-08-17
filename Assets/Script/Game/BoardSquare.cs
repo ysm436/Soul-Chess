@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using Unity.Collections;
 using UnityEngine.EventSystems;
 
-public class BoardSquare : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class BoardSquare : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     public BoardSquareOutline outline; //외곽선 프리팹
     public Vector2Int coordinate;
@@ -68,7 +68,7 @@ public class BoardSquare : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         _onClick.Invoke(coordinate);
         if (GameBoard.instance.gameData.GetPiece(coordinate))

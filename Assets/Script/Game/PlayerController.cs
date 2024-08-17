@@ -14,9 +14,10 @@ public class PlayerController : MonoBehaviour
     ChessPiece chosenPiece = null;
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
-    private Card UsingCard = null;
+    private Card usingCard = null;
     private TargetingEffect targetingEffect;
     public bool isUsingCard = false;
+    private bool isInfusing = false;
     List<TargetableObject> targetableObjects = new List<TargetableObject>();
 
     public Action OnMyTurnStart;
@@ -176,53 +177,93 @@ public class PlayerController : MonoBehaviour
                 else GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isPositiveTargetable = true;
             }
     }
-    public void UseCard(Card card, Predicate<ChessPiece> tartgetCondition = null)
+    public void UseCard(Card card)
     {
-        UsingCard = card;
+        usingCard = card;
         isUsingCard = true;
 
-        if (!(card.EffectOnCardUsed is TargetingEffect))
+        if (usingCard is SoulCard)
         {
-            UseCardEffect();
-            return;
+            if (!isInfusing)
+            {
+                isInfusing = true;
+
+                targetingEffect = (usingCard as SoulCard).infusion;
+                ActiveTargeting();
+            }
+            else
+            {
+                isInfusing = false;
+
+                if (usingCard.EffectOnCardUsed is TargetingEffect)
+                {
+                    targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
+                    ActiveTargeting();
+                }
+                else
+                {
+                    UseCardEffect();
+                }
+            }
         }
         else
         {
-            targetingEffect = card.EffectOnCardUsed as TargetingEffect;
+            if (card.EffectOnCardUsed is TargetingEffect)
+            {
+                targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
+                ActiveTargeting();
+            }
+            else
+            {
+                UseCardEffect();
+            }
         }
-
-
+    }
+    private void ActiveTargeting()
+    {
         ClearMovableCoordniates();
 
         if (!targetingEffect.isAvailable(playerColor))
         {
-            UsingCard = null;
+            usingCard = null;
             isUsingCard = false;
             return;
         }
 
-        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor, tartgetCondition);
+        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
         if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
         {
             //타겟 효과가 부정적인지 파라미터 전달
             SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
         }
-
-        GameBoard.instance.ShowCard(card);
     }
     public void UseCardEffect()
     {
-        UsingCard.EffectOnCardUsed.EffectAction();
-        GameBoard.instance.CurrentPlayerData().soulEssence -= UsingCard.cost;
+        if (isInfusing)
+        {
+            targetingEffect.EffectAction();// same as (usingCard as SoulCard).infusion.EffectAction();
+            if (usingCard.EffectOnCardUsed != null)
+            {
+                targetingEffect = null;
+                UseCard(usingCard);
+                return;
+            }
+            isInfusing = false;
+        }
+        else
+        {
+            usingCard.EffectOnCardUsed.EffectAction();
+        }
 
-        if (!(UsingCard is SoulCard))
-            UsingCard.Destroy();
-        UsingCard = null;
+        GameBoard.instance.CurrentPlayerData().soulEssence -= usingCard.cost;
+
+        if (!(usingCard is SoulCard))
+            usingCard.Destroy();
+        usingCard = null;
         isUsingCard = false;
 
         targetingEffect = null;
-
         GameBoard.instance.HideCard();
     }
 
