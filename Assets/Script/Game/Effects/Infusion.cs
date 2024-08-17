@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Infusion : TargetingEffect
 {
+    public Infusion(ChessPiece.PieceType pieceRestriction)
+    {
+        targetTypes.Add(new EffectTarget(TargetType.Piece, pieceRestriction, false, true));
+    }
     public Action<ChessPiece> infuse;
     public override void EffectAction()
     {

@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.Mathematics;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 // TODO: RemoveSoul에 영혼 묘지 적용?
 
@@ -140,6 +141,9 @@ abstract public class ChessPiece : TargetableObject
     private SpriteRenderer accessory = null;
     [SerializeField]
     SpriteRenderer accessoryPrefab;
+    private PieceEffectIcon effectIcon = null;
+    [SerializeField]
+    PieceEffectIcon effectIconPrefab;
 
     public Action<ChessPiece> OnKill;
     public Action<ChessPiece> OnKilled; //유언
@@ -182,6 +186,13 @@ abstract public class ChessPiece : TargetableObject
 
         if (buff == null)
             buff = new Buff();
+
+        if (effectIcon == null)
+        {
+            effectIcon = Instantiate(effectIconPrefab, transform.position, Quaternion.identity);
+            effectIcon.transform.SetParent(transform);
+            effectIcon.piece = this;
+        }
     }
 
     /// <summary>
@@ -193,11 +204,11 @@ abstract public class ChessPiece : TargetableObject
     abstract public List<Vector2Int> GetMovableCoordinates();
     virtual public void Move(Vector2Int targetCoordinate)
     {
+        SetKeyword(Keyword.Type.Stealth, 0);
+
         OnMove?.Invoke(targetCoordinate);
 
         coordinate = targetCoordinate;
-
-        SetKeyword(Keyword.Type.Stealth, 0);
     }
     /// <summary>
     /// 
@@ -260,9 +271,10 @@ abstract public class ChessPiece : TargetableObject
         if (soul != null)
             RemoveSoul();
 
-        isSoulSet = true;              // 영혼이 부여된 턴에는 이동 불가
+        isSoulSet = true;                                       // 영혼이 부여된 턴에는 이동 불가
         GameBoard.instance.myController.OnMyTurnEnd += MakeIsSoulSetFalse;
 
+        SetKeyword(Keyword.Type.Silence, 0);                    // 영혼 부여 시 침묵 초기화
 
         soul = targetSoul;
         soul.transform.SetParent(transform);
@@ -282,6 +294,10 @@ abstract public class ChessPiece : TargetableObject
         maxHP += soul.HP;
         AD += soul.AD;
 
+        if (GetKeyword(Keyword.Type.Restraint) == 1)            // 구속된 기물의 영혼 교체할 때 구속 유지
+        {
+            soul.RemoveEffect();
+        }
     }
 
     public void RemoveSoul()
@@ -289,10 +305,10 @@ abstract public class ChessPiece : TargetableObject
         if (soul == null)
             return;
 
+        RemoveBuff();
+
         maxHP -= soul.HP;
         AD -= soul.AD;
-
-        RemoveBuff();
 
 		//구버전 코드
         //spriteRenderer.sprite = defaultSprite;
@@ -312,10 +328,14 @@ abstract public class ChessPiece : TargetableObject
         soul = null;
     }
 
-    //n은 방어력 지정할 때만 사용, 방어력 수치 나타냄
+    // n = 1: 활성화 / n = 0: 비활성화
+    // 예외) 방어력 n >= 1: 활성화 및 방어력 수치 나타냄 / n = 0: 비활성화
     public void SetKeyword(Keyword.Type keywordType, int n = 1)
     {
         keywordDictionary[keywordType] = n;
+
+        //버프 및 디버프 아이콘 스프라이트 설정 (우선순위는 Enum 값이 작을수록 높음)
+        effectIcon.SetIconSprite();
 
         if (keywordType == Keyword.Type.Taunt)
         {
@@ -323,7 +343,8 @@ abstract public class ChessPiece : TargetableObject
         }
         else if (keywordType == Keyword.Type.Stun)
         {
-            GameBoard.instance.myController.OnMyTurnEnd += Unstun;
+            //효과 발동 시점의 색깔 턴이 한번 더 돌아와야 스턴 해제
+            GameBoard.instance.CurrentPlayerController().OnMyTurnStart += Unstun;
         }
         else if (keywordType == Keyword.Type.Restraint)
         {
@@ -367,7 +388,7 @@ abstract public class ChessPiece : TargetableObject
     {
         SetKeyword(Keyword.Type.Restraint, 0);
 
-        if (soul != null)
+        if (soul != null && GetKeyword(Keyword.Type.Silence) != 1)      // 기물이 침묵 상태가 아니어야 함
         {
             soul.AddEffect();
         }
@@ -449,13 +470,15 @@ abstract public class ChessPiece : TargetableObject
 
             if (buffType == Buff.BuffType.AD)
             {
-                attackDamage -= buffInfo.value;
+                attackDamage -= buffInfo.value;                 // 버프 제거 시 공격력이 1 아래로 떨어지지 않음
                 if (attackDamage < 0) attackDamage = 0;
             }
             else if (buffType == Buff.BuffType.HP)
             {
-                _currentHP -= buffInfo.value;
-                if (_currentHP <= 0) _currentHP = 1;
+                int newMaxHP = _maxHP - buffInfo.value;         // 버프 제거 시 체력이 1 아래로 떨어지지 않음
+                if (newMaxHP <= 0) newMaxHP = 1;
+
+                maxHP = newMaxHP;
             }
             else if (buffType == Buff.BuffType.MoveCount)
             {
