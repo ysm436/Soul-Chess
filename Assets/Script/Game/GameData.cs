@@ -18,6 +18,7 @@ public class GameData
     public List<ChessPiece> graveyard = new List<ChessPiece>();
 
     public PlayerData myPlayerData { get => GameBoard.instance.playerColor == GameBoard.PlayerColor.White ? playerWhite : playerBlack; }
+    public PlayerData opponentPlayerData { get => GameBoard.instance.playerColor == GameBoard.PlayerColor.White ? playerBlack : playerWhite; }
     public PlayerData playerWhite;
     public PlayerData playerBlack;
 

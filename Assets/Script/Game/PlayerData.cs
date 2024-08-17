@@ -25,11 +25,6 @@ public class PlayerData
     {
         deckPosition = new Vector2(7.6f, -2.3f); //UI에 맞게 좌표수정
 
-        foreach (Card card in deck)
-        {
-            GameBoard.instance.AddCardInDeckObject(card);
-        }
-
         ShuffleDeck();
         Mulligan();
     }
@@ -63,15 +58,16 @@ public class PlayerData
     {
         return hand.Count >= maxHandCardCount;
     }
-
-    public void UpdateHandPosition()
-    {
-        for (int i = 0; i < hand.Count; i++)
+    public Action UpdateHandPosition;
+    /*
+        public void UpdateHandPosition()
         {
-            hand[i].transform.position = new Vector3(0.5f * i - 8, -3.75f, -0.1f * i); //UI에 맞게 좌표수정
+            for (int i = 0; i < hand.Count; i++)
+            {
+                hand[i].transform.position = new Vector3(0.5f * i - 8, -3.75f, -0.1f * i); //UI에 맞게 좌표수정
+            }
         }
-    }
-
+    */
     public bool TryAddCardInHand(Card cardInstance)
     {
         if (IsHandFull())

@@ -10,7 +10,7 @@ public class MainSceneUI : MonoBehaviour
     [SerializeField] private Button deckBuildingButton;
     [SerializeField] private Button quitButton;
 
-    private void Awake()
+    private void Start()
     {
         matchingButton.onClick.AddListener(GameManager.instance.LoadMatchingScene);
         deckBuildingButton.onClick.AddListener(GameManager.instance.LoadDeckBuildingScene);

@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
     abstract protected int CardID { get; }
+    public int GetCardID { get => CardID; }
 
     private CardObject cardObject;
 
@@ -145,6 +146,16 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         Spell
     }
 
+
+    static public int[] GetCardIDArray(List<Card> cards)
+    {
+        int[] cardIDArray = new int[cards.Count];
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cardIDArray[i] = cards[i].GetCardID;
+        }
+        return cardIDArray;
+    }
 
     //Card Dictionary<CardName, CardID>
     public static Dictionary<string, int> cardIdDict = new Dictionary<string, int>(){

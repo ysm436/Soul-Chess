@@ -130,11 +130,11 @@ public class GameManager : MonoBehaviour
             AllCards[Card.cardIdDict[g.GetComponent<Card>().cardName]] = g;
         }
     }
-    public List<Card> GetCardListFrom(Deck deck)
+    public List<Card> GetCardListFrom(List<int> deck)
     {
         List<Card> cards = new();
 
-        foreach (int index in deck.cards)
+        foreach (int index in deck)
         {
             cards.Add(AllCards[index].GetComponent<Card>());
         }
