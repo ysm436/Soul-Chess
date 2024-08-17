@@ -68,18 +68,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8879521606804161753}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5943837467758970341}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!114 &2353959064319767782 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 5333548943465374255}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6180971654891100062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6180971654891100062 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
@@ -104,7 +96,7 @@ MonoBehaviour:
   reigon: 2
   rarity: 1
   description: "\uAC15\uB9BC : \uBAA8\uB4E0 \uC801 \uAE30\uBB3C\uC744 \uAE30\uC808\uC2DC\uD0B5\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 2353959064319767782}
+  EffectOnCardUsed: {fileID: 5943837467758970341}
   isInSelection: 0
   pieceRestriction: 5
   _AD: 45
@@ -123,3 +115,15 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 0}
   InfusedPiece: {fileID: 0}
+--- !u!114 &5943837467758970341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6180971654891100062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193cb7bc1d75f024f9fd4b2d72e3a1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

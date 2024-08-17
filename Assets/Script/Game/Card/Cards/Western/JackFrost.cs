@@ -10,7 +10,7 @@ public class JackFrost : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        OnInfuse += SoulEffect;
+        //OnInfuse += SoulEffect;
     }
 
     public void SoulEffect(ChessPiece chessPiece)

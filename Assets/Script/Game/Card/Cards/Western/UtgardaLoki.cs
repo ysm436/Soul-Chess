@@ -11,7 +11,7 @@ public class UtgardaLoki : SoulCard
     {
         base.Awake();
 
-        OnInfuse += SoulEffect;
+        //OnInfuse += SoulEffect;
     }
 
     public void SoulEffect(ChessPiece chessPiece)
