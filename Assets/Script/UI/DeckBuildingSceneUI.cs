@@ -34,7 +34,7 @@ public class DeckBuildingSceneUI : MonoBehaviour
     private void CancelButtonFunction()
     {
         deckinfo.DeckCancel();
-        deckinfo.TempDeckReset();
+        deckinfo.CardSlotReset();
         GetComponent<DeckBuildingManager>().ReloadDisplayCard();
 
         deckListPanel.SetActive(true);
@@ -52,7 +52,7 @@ public class DeckBuildingSceneUI : MonoBehaviour
     private void saveButtonFunction()
     {
         deckinfo.DeckSave(deckinfo.loaded_deck_index);
-        deckinfo.TempDeckReset();
+        deckinfo.CardSlotReset();
         GetComponent<DeckBuildingManager>().ReloadDisplayCard();
         GameManager.instance.SaveDeckData();
 

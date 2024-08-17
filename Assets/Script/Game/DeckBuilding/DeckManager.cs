@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,7 +21,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
     [SerializeField] private TMP_InputField deckname_inputfield;
 
     public bool newDeckSignal = false;
-    public List<GameObject> TempDeck = new List<GameObject>();
+    private bool duplicateSignal = false;
+    private int tempdeckinputindex = 0;
+    public List<int> TempDeck = new List<int>();
 
     private DeckBuildingManager dbm;
 
@@ -37,34 +38,52 @@ public class DeckManager : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;
+        Transform displaystorage = dbm.DisplayStorage;
         DisplayCard CardInfo = dropped.GetComponent<DisplayCard>();
 
         if (CardInfo)
         {
             if (!TryInputCard(CardInfo)) //제한을 초과하지 않는 경우
             {
-                GameObject indeck = Instantiate(Simple_Card, CardSlot);
-                SimpleCard indeck_info = indeck.GetComponent<SimpleCard>();
-                int card_order = 0;
-
-                indeck.name = dropped.name.Replace("display", "deck");
-                indeck_info.cardindex = CardInfo.cardindex;
-                indeck_info.cardNameText.text = CardInfo.CardName;
-                indeck_info.cost.text = CardInfo.Cost.ToString();
-                CardInfo.quantity--;
-
-                // 코스트가 낮을 수록 앞으로 가게끔
-                for (; card_order < CardSlot.childCount - 1; card_order++)
+                if (duplicateSignal)
                 {
-                    if (int.Parse(CardSlot.GetChild(card_order).GetComponent<SimpleCard>().cost.text) > CardInfo.Cost)
+                    int card_index = CardInfo.cardindex;
+                    for (int simple_index = 0; simple_index < CardSlot.childCount; simple_index++)
                     {
-                        indeck.transform.SetSiblingIndex(card_order);
-                        break;
+                        SimpleCard simplecard_info = CardSlot.GetChild(simple_index).GetComponent<SimpleCard>();
+                        if (simplecard_info.cardindex == card_index)
+                        {
+                            simplecard_info.quantity += 1;
+                            break;
+                        }
                     }
+                    TempDeck.Insert(tempdeckinputindex, card_index);
+                }
+                else
+                {
+                    GameObject simplecard = Instantiate(Simple_Card, CardSlot);
+                    SimpleCard simplecard_info = simplecard.GetComponent<SimpleCard>();
+
+                    simplecard.name = dropped.name.Replace("display", "deck");
+                    simplecard_info.cardindex = CardInfo.cardindex;
+                    simplecard_info.cardNameText.text = CardInfo.CardName;
+                    simplecard_info.cost.text = CardInfo.Cost.ToString();
+                    simplecard_info.quantity = 1;
+                    
+                    // 코스트가 낮을 수록 앞으로 가게끔
+                    for (int card_order = 0; card_order < CardSlot.childCount - 1; card_order++)
+                    {
+                        if (int.Parse(CardSlot.GetChild(card_order).GetComponent<SimpleCard>().cost.text) > CardInfo.Cost)
+                        {
+                            simplecard.transform.SetSiblingIndex(card_order);
+                            break;
+                        }
+                    }
+
+                    TempDeck.Insert(tempdeckinputindex, simplecard_info.cardindex);
                 }
 
-                Transform displaystorage = dbm.DisplayStorage;
-
+                CardInfo.quantity--;
                 //덱에 더 이상 카드가 들어갈 수 없을 때 디스플레이에서 없애버립니다.
                 if (CardInfo.quantity <= 0)
                 {
@@ -72,16 +91,13 @@ public class DeckManager : MonoBehaviour, IDropHandler
                     dropped.transform.SetParent(displaystorage);
                     dropped.SetActive(false);
                 }
-
                 AddCardInfoInDeck(CardInfo);
-                TempDeck.Insert(card_order, indeck);
             }
         }
     }
 
-    //TempDeck을 초기화 합니다.
-    //TODO 더 효율적으로 바꿀 수 있다면 좋을 것 같습니다.
-    public void TempDeckReset()
+    //CardSlot을 초기화 합니다.
+    public void CardSlotReset()
     {
         for (int i = CardSlot.childCount; i > 0; i--)
         {
@@ -94,7 +110,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     //덱 생성 / 수정 후 저장
     public void DeckSave(int loaded_deck_index)
     {
-        List<int> newDeckcards = MakeCardindexDeckList(TempDeck);
+        List<int> newDeckcards = TempDeck.ToList();
 
         if (newDeckSignal) // 덱 새로 생성 시
         {
@@ -150,19 +166,50 @@ public class DeckManager : MonoBehaviour, IDropHandler
     public void DeckLoad(int deck_index)
     {
         loaded_deck_index = deck_index;
+        TempDeck = GameManager.instance.deckList[loaded_deck_index].cards.ToList();
 
-        List<GameObject> Loaded_deck = MakeGameobjectDeckList(loaded_deck_index);
-        TempDeck = Loaded_deck.ToList();
+        MakeSimpleCard();
+        LocalDeckInfoLoad();
 
-        //TODO 이중 for문이라 조금 더 효율적으로 바꿀 수 있으면 좋을 것 같습니다.
-        foreach (var card in TempDeck)
+        deckname_inputfield.text = GameManager.instance.deckList[loaded_deck_index].deckname;
+    }
+
+    public void MakeSimpleCard()
+    {
+        List<GameObject> allcardlist = dbm.AllCardList;
+
+        for (int i = 0; i < TempDeck.Count; i++)
         {
-            int card_index = card.GetComponent<SimpleCard>().cardindex;
+            int card = TempDeck[i];
+
+            if (i == 0 || card != TempDeck[i - 1])
+            {
+                Card cardinfo = allcardlist[card].GetComponent<Card>();
+                GameObject simplecard = Instantiate(Simple_Card, CardSlot);
+                SimpleCard simplecard_info = simplecard.GetComponent<SimpleCard>();
+
+                simplecard_info.cardindex = card;
+                simplecard_info.cardNameText.text = cardinfo.cardName;
+                simplecard_info.cost.text = cardinfo.cost.ToString();
+                simplecard_info.quantity = 1;
+            }
+            else
+            {
+                for (int simple_index = 0; simple_index < CardSlot.childCount; simple_index++)
+                {
+                    SimpleCard simplecard_info = CardSlot.GetChild(simple_index).GetComponent<SimpleCard>();
+                    if (simplecard_info.cardindex == card)
+                    {
+                        simplecard_info.quantity += 1;
+                        break;
+                    }
+                }   
+            }
 
             foreach (var display in dbm.DisplayCardList)
             {
                 DisplayCard displaycardinfo = display.GetComponent<DisplayCard>();
-                if (displaycardinfo.cardindex == card_index)
+                if (displaycardinfo.cardindex == card)
                 {
                     displaycardinfo.quantity -= 1;
 
@@ -176,43 +223,6 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 }
             }
         }
-        LocalDeckInfoLoad();
-        deckname_inputfield.text = GameManager.instance.deckList[deck_index].deckname;
-    }
-
-    //덱 로드를 위해 index를 통해 gameobject 리스트로 변환
-    public List<GameObject> MakeGameobjectDeckList(int deck_index)
-    {
-        List<GameObject> allcardlist = dbm.AllCardList;
-        List<GameObject> GameobjectList = new List<GameObject>();
-
-        foreach (var card_index in GameManager.instance.deckList[deck_index].cards)
-        {
-            Card cardinfo = allcardlist[card_index].GetComponent<Card>();
-            GameObject indeck = Instantiate(Simple_Card, CardSlot);
-            SimpleCard indeck_info = indeck.GetComponent<SimpleCard>();
-
-            indeck_info.cardindex = card_index;
-            indeck_info.cardNameText.text = cardinfo.cardName;
-            indeck_info.cost.text = cardinfo.cost.ToString();
-
-            GameobjectList.Add(indeck);
-        }
-
-        return GameobjectList;
-    }
-
-    //덱 리스트 저장을 위해 gameobject에서 카드 index만 뽑아 int 리스트로 변환
-    public List<int> MakeCardindexDeckList(List<GameObject> gameobjectlist)
-    {
-        List<int> cardindexList = new List<int>();
-
-        foreach (var gameobject in gameobjectlist)
-        {
-            cardindexList.Add(gameobject.GetComponent<SimpleCard>().cardindex);
-        }
-
-        return cardindexList;
     }
 
     private void DeckListLoad()
@@ -261,14 +271,42 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
     private bool TryInputCard(DisplayCard cardinfo)
     {
-        int duplicate_quantity = 0;
+        List<GameObject> allcardlist = dbm.AllCardList;
         bool error_signal = false;
+        int duplicate_quantity = 0;
+
+        duplicateSignal = false;
+        tempdeckinputindex = TempDeck.Count;
 
         foreach (var card in TempDeck)
         {
-            if (cardinfo.cardindex == card.GetComponent<SimpleCard>().cardindex)
+            if (cardinfo.cardindex == card)
             {
                 duplicate_quantity += 1;
+                duplicateSignal = true;
+                tempdeckinputindex = TempDeck.IndexOf(card);
+            }
+        }
+
+        if (!duplicateSignal)
+        {
+            for (int i = 0; i < TempDeck.Count; i++)
+            {
+                int temp_cost = allcardlist[TempDeck[i]].GetComponent<Card>().cost;
+                
+                if (cardinfo.Cost == temp_cost)
+                {
+                    tempdeckinputindex = i + 1;
+                }
+                else
+                {
+                    if (cardinfo.Cost < temp_cost)
+                    {
+                        tempdeckinputindex = i;
+                        break;
+                    }
+                }
+
             }
         }
 

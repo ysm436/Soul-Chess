@@ -1281,6 +1281,8 @@ MonoBehaviour:
   rook_cost: {fileID: 1275142666}
   queen_cost: {fileID: 1237234251}
   king_cost: {fileID: 1070589544}
+  legendary_cost: {fileID: 711035603}
+  mythical_cost: {fileID: 835825240}
 --- !u!1 &179050958
 GameObject:
   m_ObjectHideFlags: 0
@@ -8751,7 +8753,7 @@ MonoBehaviour:
   Simple_Deck: {fileID: 560925474644689047, guid: 18691da86d211a94eb8c4cca58649375, type: 3}
   deckname_inputfield: {fileID: 177664598}
   newDeckSignal: 0
-  TempDeck: []
+  TempDeck: 
 --- !u!1 &1485814816
 GameObject:
   m_ObjectHideFlags: 0
@@ -11335,7 +11337,7 @@ MonoBehaviour:
   AllCardList: []
   DisplayCardList: []
   max_card_index: 48
-  quantity_setting: 3
+  quantity_setting: 2
   DynamicDisplay: {fileID: 2101250960}
   DisplayStorage: {fileID: 1551673597}
   TrashCan: {fileID: 475217773}

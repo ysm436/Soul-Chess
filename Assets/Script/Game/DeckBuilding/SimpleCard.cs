@@ -72,9 +72,14 @@ public class SimpleCard : MonoBehaviour, IPointerClickHandler
                 }
             }
 
-            deckmanager.TempDeck.Remove(gameObject);
-            transform.SetParent(dbm.TrashCan);
-            gameObject.SetActive(false);
+            deckmanager.TempDeck.Remove(cardindex);
+            quantity -= 1;
+
+            if (quantity == 0)
+            {
+                transform.SetParent(dbm.TrashCan);
+                gameObject.SetActive(false);
+            }
         }
     }
 }
