@@ -7,6 +7,7 @@ using TMPro;
 public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject deckinfopanel;
+    [SerializeField] private Transform cost_graph;
     [SerializeField] private TextMeshProUGUI pawn_cost;
     [SerializeField] private TextMeshProUGUI knight_cost;
     [SerializeField] private TextMeshProUGUI bishop_cost;
@@ -19,6 +20,14 @@ public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
         DeckManager deckmanager = GetComponentInParent<DeckManager>();
+
+        for (int i = 0; i < cost_graph.childCount; i++)
+        {
+            RectTransform recttransform = cost_graph.GetChild(i).GetComponent<RectTransform>();
+            Vector2 graph_size = recttransform.sizeDelta;
+            graph_size.y = 20 * deckmanager.local_costs[i];
+            recttransform.sizeDelta = graph_size;
+        }
 
         pawn_cost.text = deckmanager.local_chesspieces[0].ToString() + " / 8";
         knight_cost.text = deckmanager.local_chesspieces[1].ToString() + " / 2";

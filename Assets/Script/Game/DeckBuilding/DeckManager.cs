@@ -10,6 +10,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     private int deck_length = -1;
     public int loaded_deck_index = 0;
     public int local_card_count = 0;
+    public int[] local_costs = new int[8]{0, 0, 0, 0, 0, 0, 0, 0};
     public int[] local_chesspieces = new int[6]{0, 0, 0, 0, 0, 0};
     public int[] local_rarities = new int[3]{0, 0, 0};
 
@@ -19,6 +20,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
     [SerializeField] private GameObject Simple_Card;
     [SerializeField] private GameObject Simple_Deck;
     [SerializeField] private TMP_InputField deckname_inputfield;
+
+    [SerializeField] private GameObject CautionPanel;
+    [SerializeField] private TextMeshProUGUI CautionText;
 
     public bool newDeckSignal = false;
     private bool duplicateSignal = false;
@@ -93,6 +97,10 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 }
                 AddCardInfoInDeck(CardInfo);
             }
+            else
+            {
+                CautionPanel.SetActive(true);
+            }
         }
     }
 
@@ -120,6 +128,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
             {
                 deckname = deckname_inputfield.text,
                 card_count = local_card_count,
+                costs = (int[])local_costs.Clone(),
                 chesspieces = (int[])local_chesspieces.Clone(),
                 Rarities = (int[])local_rarities.Clone(),
                 cards = newDeckcards
@@ -248,6 +257,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     private void LocalDeckInfoReset()
     {
         local_card_count = 0;
+        Array.Clear(local_costs, 0, local_costs.Length);
         Array.Clear(local_chesspieces, 0, local_chesspieces.Length);
         Array.Clear(local_rarities, 0, local_rarities.Length);
     }
@@ -257,6 +267,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         Deck loaded_deck = GameManager.instance.deckList[loaded_deck_index];
 
         local_card_count = loaded_deck.card_count;
+        local_costs = (int[])loaded_deck.costs.Clone();
         local_chesspieces = (int[])loaded_deck.chesspieces.Clone();
         local_rarities = (int[])loaded_deck.Rarities.Clone();
     }
@@ -265,6 +276,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         Deck loaded_deck = GameManager.instance.deckList[loaded_deck_index];
 
         loaded_deck.card_count = local_card_count;
+        loaded_deck.costs = (int[])local_costs.Clone();
         loaded_deck.chesspieces = (int[])local_chesspieces.Clone();
         loaded_deck.Rarities = (int[])local_rarities.Clone();
     }
@@ -314,11 +326,13 @@ public class DeckManager : MonoBehaviour, IDropHandler
         {
             if (duplicate_quantity >= 1)
             {
+                CautionText.text = "신화카드는 덱에 동일한 카드를 한장만 넣을 수 있습니다.";
                 error_signal = true;
             }
 
             if (local_rarities[2] == 3)
             {
+                CautionText.text = "신화카드는 덱에 3장만 넣을 수 있습니다.";
                 error_signal = true;
             }
         }
@@ -326,11 +340,13 @@ public class DeckManager : MonoBehaviour, IDropHandler
         {
             if (duplicate_quantity >= 1)
             {
+                CautionText.text = "전설카드는 덱에 동일한 카드를 한장만 넣을 수 있습니다.";
                 error_signal = true;
             }
 
             if (local_rarities[1] == 9)
             {
+                CautionText.text = "전설카드는 덱에 9장만 넣을 수 있습니다.";
                 error_signal = true;
             }
         }
@@ -338,6 +354,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         {
             if (duplicate_quantity >= 2)
             {
+                CautionText.text = "일반카드는 덱에 동일한 카드를 2장만 넣을 수 있습니다.";
                 error_signal = true;
             }
         }
@@ -348,6 +365,18 @@ public class DeckManager : MonoBehaviour, IDropHandler
     private void AddCardInfoInDeck(DisplayCard cardinfo)
     {
         local_card_count += 1;
+
+        switch (cardinfo.Cost)
+        {
+            case 0 : local_costs[0] += 1; break;
+            case 1 : local_costs[1] += 1; break;
+            case 2 : local_costs[2] += 1; break;
+            case 3 : local_costs[3] += 1; break;
+            case 4 : local_costs[4] += 1; break;
+            case 5 : local_costs[5] += 1; break;
+            case 6 : local_costs[6] += 1; break;
+            default : local_costs[7] += 1; break;
+        }
 
         List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();
         foreach (ChessPiece.PieceType piecetype in Enum.GetValues(typeof(ChessPiece.PieceType)))
@@ -383,6 +412,18 @@ public class DeckManager : MonoBehaviour, IDropHandler
     {
         local_card_count -= 1;
 
+        switch (cardinfo.Cost)
+        {
+            case 0 : local_costs[0] -= 1; break;
+            case 1 : local_costs[1] -= 1; break;
+            case 2 : local_costs[2] -= 1; break;
+            case 3 : local_costs[3] -= 1; break;
+            case 4 : local_costs[4] -= 1; break;
+            case 5 : local_costs[5] -= 1; break;
+            case 6 : local_costs[6] -= 1; break;
+            default : local_costs[7] -= 1; break;
+        }
+
         List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();
         foreach (ChessPiece.PieceType piecetype in Enum.GetValues(typeof(ChessPiece.PieceType)))
         {
@@ -411,5 +452,10 @@ public class DeckManager : MonoBehaviour, IDropHandler
             case Card.Rarity.Legendary : local_rarities[1] -= 1; break;
             case Card.Rarity.Mythical : local_rarities[2] -= 1; break;
         }
+    }
+
+    public void CancelCaution()
+    {
+        CautionPanel.SetActive(false);
     }
 }
