@@ -393,7 +393,7 @@ abstract public class ChessPiece : TargetableObject
     public void Unrestraint()
     {
         SetKeyword(Keyword.Type.Restraint, 0);
-
+        buff.TryRemoveSpecificBuff("", Buff.BuffType.Restraint); //구속 정보 제거
         if (soul != null && GetKeyword(Keyword.Type.Silence) != 1)      // 기물이 침묵 상태가 아니어야 함
         {
             soul.AddEffect();

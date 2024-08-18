@@ -12,7 +12,8 @@ public class Cerberus : SoulCard
 
     public override void AddEffect()
     {
-
+        InfusedPiece.moveCount += 2;
+        InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.MoveCount, 2, true);
     }
 
     public override void RemoveEffect()

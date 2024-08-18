@@ -11,6 +11,7 @@ public class AresEffect : Effect
         {
             piece.OnKilled += gameObject.GetComponent<Ares>().IncreaseStat;
         }
+        gameObject.GetComponent<Ares>().InfusedPiece.buff.AddBuffByDescription(gameObject.GetComponent<Ares>().cardName, Buff.BuffType.Description, "아레스: 적 기물 사망 시 +15/+15 부여", true);
         gameObject.GetComponent<Ares>().InfusedPiece.OnSoulRemoved += gameObject.GetComponent<Ares>().RemoveEffect;
     }
 }

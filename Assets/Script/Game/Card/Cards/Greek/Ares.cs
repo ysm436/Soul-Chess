@@ -25,7 +25,11 @@ public class Ares : SoulCard
 
     public override void AddEffect()
     {
-        
+        List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects;
+        foreach (ChessPiece piece in pieceList)
+        {
+            piece.OnKilled += IncreaseStat;
+        }
     }
 
     public override void RemoveEffect()
