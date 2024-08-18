@@ -47,12 +47,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
-            StartGame();
+        //if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        //StartGame();
     }
 
-    void StartGame()
+    bool gameStarted = false;
+    public void StartGame()
     {
+        if (gameStarted)
+            return;
+        else
+            gameStarted = true;
         PhotonNetwork.LoadLevel("GameScene");
     }
 

@@ -1,18 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LobbySceneUI : MonoBehaviour
 {
-    public int SelectedDeckIndex = 0;
+    private PhotonView photonView;
+    public NetworkManager networkManager;
+
+    public int SelectedDeckIndex = -1;
+    private bool isWhiteReady
+    {
+        get => _isWhiteReady;
+        set
+        {
+            _isWhiteReady = value;
+            TryStartGame();
+        }
+    }
+    private bool _isWhiteReady = false;
+    private bool isBlackReady
+    {
+        get => _isBlackReady;
+        set
+        {
+            _isBlackReady = value;
+            TryStartGame();
+        }
+    }
+    private bool _isBlackReady = false;
+
+
 
     [SerializeField] private GameObject DeckSelectPanel;
     [SerializeField] private GameObject DeckSelectButton;
     [SerializeField] private Transform DeckDisplay;
     [SerializeField] private Transform TrashCan;
     [SerializeField] private TextMeshProUGUI SelectedDeckInfo;
+
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
+
+    private void TryStartGame()
+    {
+        if (isBlackReady && isWhiteReady && GameManager.instance.isHost)
+            networkManager.StartGame();
+    }
 
     public void ExitButton()
     {
@@ -22,10 +59,27 @@ public class LobbySceneUI : MonoBehaviour
     public void StartButton()
     {
         if (SelectedDeckIndex == -1)
+        {
             Debug.Log("선택된 덱이 없습니다.");
+        }
         else
         {
-            GameManager.instance.LoadGameScene();
+            photonView.RPC("SetReady", RpcTarget.AllBuffered, GameManager.instance.isHost, true);
+        }
+    }
+
+    [PunRPC]
+    public void SetReady(bool isHost, bool ready)
+    {
+        if (isHost)
+        {
+            Debug.Log("player white is " + (ready ? "" : "not ") + "ready");
+            isWhiteReady = ready;
+        }
+        else
+        {
+            Debug.Log("player black is " + (ready ? "" : "not ") + "ready");
+            isBlackReady = ready;
         }
     }
 

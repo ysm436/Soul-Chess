@@ -8,7 +8,7 @@ using UnityEngine;
 public class DeckHandController : MonoBehaviour
 {
     PhotonView photonView;
-    readonly int CARD_DISTANCE_IN_HAND = 1;
+    readonly float CARD_DISTANCE_IN_HAND = 0.5f;
 
 
     public GameObject CardBoard;
@@ -49,11 +49,6 @@ public class DeckHandController : MonoBehaviour
         {
             AddCardInMyDeckObject(card);
         }
-        gameBoard.myController.OnOpponentTurnEnd += () => player.DrawCard();
-
-        //player.OnGetCard += (card) => card.transform.SetParent(handAnchor);
-
-
 
         player.Initialize();
 
@@ -90,9 +85,6 @@ public class DeckHandController : MonoBehaviour
         {
             AddCardInOpponentDeckObject(card);
         }
-
-        gameBoard.opponentController.OnOpponentTurnEnd += () => gameBoard.gameData.opponentPlayerData.DrawCard();
-
     }
 
     public void AddCardInMyDeckObject(Card card)
