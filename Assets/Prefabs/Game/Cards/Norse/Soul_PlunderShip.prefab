@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4597677055463952963
+--- !u!1001 &2705637314030183093
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -50,86 +50,73 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Name
-      value: Soul_Athena
+      value: Soul_PlunderShip
       objectReference: {fileID: 0}
-    - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: m_FlipY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: isPositiveEffect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].isFriendly
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].targetPieceType
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3111671115176496445}
+      addedObject: {fileID: -1174198120748112424}
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4337335728533308788}
+      addedObject: {fileID: -4044531659550928085}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!1 &2309661155767330802 stripped
+--- !u!1 &4201841637374859012 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 4597677055463952963}
+  m_PrefabInstance: {fileID: 2705637314030183093}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-3111671115176496445
+--- !u!114 &-1174198120748112424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2309661155767330802}
+  m_GameObject: {fileID: 4201841637374859012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8c112bc9a96c21419de462e2236d14d, type: 3}
+  m_Script: {fileID: 11500000, guid: cdd36f09dd1bb0548820ca51eec6890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: "\uC544\uD14C\uB098"
-  _cost: 6
+  cardName: "\uC57D\uD0C8\uC120"
+  _cost: 3
   illustration: {fileID: 0}
-  back: {fileID: 0}
-  reigon: 0
-  rarity: 2
-  description: "\uB0B4 \uB2E4\uB978 \uAE30\uBB3C\uB4E4\uC774 +10/+10\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 4337335728533308788}
+  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  reigon: 1
+  rarity: 0
+  description: "[\uAC15\uB9BC] \uC57D\uD0C8\uAFBC \uCE74\uB4DC 3\uC7A5\uC744 \uB0B4
+    \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: -4044531659550928085}
   isInSelection: 0
-  pieceRestriction: 2
-  _AD: 45
-  _HP: 45
+  pieceRestriction: 5
+  _AD: 25
+  _HP: 30
   accessorySpriteList:
-  - pieceType: 2
+  - pieceType: 1
     pieceColor: 0
-    sprite: {fileID: 21300000, guid: 2b1e7e62cd351014b9687d431ae09256, type: 3}
-  - pieceType: 2
+    sprite: {fileID: 21300000, guid: 7436c171410ed1a44abbf7d5e10b4e69, type: 3}
+  - pieceType: 1
     pieceColor: 1
-    sprite: {fileID: 21300000, guid: 2b1e7e62cd351014b9687d431ae09256, type: 3}
+    sprite: {fileID: 21300000, guid: 7436c171410ed1a44abbf7d5e10b4e69, type: 3}
+  - pieceType: 4
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 7436c171410ed1a44abbf7d5e10b4e69, type: 3}
+  - pieceType: 4
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 7436c171410ed1a44abbf7d5e10b4e69, type: 3}
   InfusedPiece: {fileID: 0}
---- !u!114 &4337335728533308788
+--- !u!114 &-4044531659550928085
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2309661155767330802}
+  m_GameObject: {fileID: 4201841637374859012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1b05bc9e8632a49abd124e88f07ab3, type: 3}
+  m_Script: {fileID: 11500000, guid: d2b4a88317e57ff44b4116cb899da8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plunderer_card: {fileID: 5374441978396574551, guid: eed5cb6a286ca8b429346d5f6fabd86c, type: 3}

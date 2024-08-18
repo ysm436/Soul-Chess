@@ -150,6 +150,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"펜리르", 10},
         {"피의 독수리", 11},
         {"우트가르다 로키", 12},
+        {"약탈선", 14},
         {"처형", 16},
         {"아레스", 18},
         {"어미 곰", 19},
@@ -169,6 +170,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"돈키호테", 44},
         {"음치 음유시인", 46},
         {"근엄한 경비병", 47},
-        {"크라켄", 48}
+        {"크라켄", 48},
+        {"약탈자", 1014}
     };
 }
