@@ -79,7 +79,7 @@ PrefabInstance:
     - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: EffectOnCardUsed
       value: 
-      objectReference: {fileID: 391618131688367025}
+      objectReference: {fileID: 0}
     - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: pieceRestriction
       value: 8
@@ -94,20 +94,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      insertIndex: 6
+      insertIndex: -1
       addedObject: {fileID: 1292469394887977406}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 558989280382440502}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!114 &391618131688367025 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 8052767433709974904}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8071162094226948297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8071162094226948297 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
@@ -133,7 +125,7 @@ MonoBehaviour:
   rarity: 2
   description: "\uAC15\uB9BC : \uBAA8\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C 25\uC758 \uD53C\uD574\uB97C
     \uC90D\uB2C8\uB2E4.\n"
-  EffectOnCardUsed: {fileID: 391618131688367025}
+  EffectOnCardUsed: {fileID: 558989280382440502}
   isInSelection: 0
   pieceRestriction: 8
   _AD: 55
@@ -146,3 +138,15 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: d9cf5d59a59331845a380f689da38f91, type: 3}
   InfusedPiece: {fileID: 0}
+--- !u!114 &558989280382440502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8071162094226948297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c824daf0f6d56b4f85be59ed78e470a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2540942998644401429
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_Name
+      value: Soul_Ares
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -664483067251759256}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3879541453782405440}
+  m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+--- !u!1 &4359647478322303140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+  m_PrefabInstance: {fileID: 2540942998644401429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-664483067251759256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359647478322303140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094f8ab604d58b948b1db8d7547e06b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardName: "\uC544\uB808\uC2A4"
+  _cost: 5
+  illustration: {fileID: 0}
+  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  reigon: 0
+  rarity: 2
+  description: "\uAE30\uBB3C\uC774 \uCC98\uCE58\uB420 \uB54C \uB9C8\uB2E4, +15/+15\uB97C
+    \uC5BB\uC2B5\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: 3879541453782405440}
+  isInSelection: 0
+  pieceRestriction: 2
+  _AD: 40
+  _HP: 40
+  accessorySpriteList:
+  - pieceType: 2
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 786b64dccbd669340bb6a8690101d8e5, type: 3}
+  - pieceType: 2
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 786b64dccbd669340bb6a8690101d8e5, type: 3}
+  InfusedPiece: {fileID: 0}
+--- !u!114 &3879541453782405440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359647478322303140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be65c59c76e28234b8f226df7b946383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

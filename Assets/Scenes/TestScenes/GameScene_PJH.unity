@@ -896,6 +896,10 @@ PrefabInstance:
       value: BlackBishop
       objectReference: {fileID: 0}
     - target: {fileID: 7382306160396615178, guid: 762e806020df41b488cb109713e1642f, type: 3}
+      propertyPath: attackDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382306160396615178, guid: 762e806020df41b488cb109713e1642f, type: 3}
       propertyPath: coordinate.x
       value: 2
       objectReference: {fileID: 0}
@@ -2752,6 +2756,7 @@ GameObject:
   - component: {fileID: 1387144021}
   - component: {fileID: 1387144020}
   - component: {fileID: 1387144023}
+  - component: {fileID: 1387144024}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2877,6 +2882,22 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1387144024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387144019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1001 &1445493054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3462,20 +3483,7 @@ MonoBehaviour:
   - {fileID: 7433252666421529211, guid: fc310b2ab5a30de4298b4aea18a015f4, type: 3}
   - {fileID: 1292469394887977406, guid: 69acd9f53abcc974da0de5adf88dba59, type: 3}
   deck:
-  - {fileID: 4824830457768495894, guid: dc0e4c5991c664d4aaaad1229ca79999, type: 3}
-  - {fileID: -2815551797691118998, guid: 2d9947a9ca0af554ebef3f3b895f3d78, type: 3}
-  - {fileID: 3604200065000529882, guid: 69c628af0606ded408e60e35428eab89, type: 3}
-  - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
-  - {fileID: 599667399022218461, guid: ff82128eca4e7994fb3e11360893a803, type: 3}
-  - {fileID: 6842244014742130878, guid: ce404b57a1b095e4bbcfbec40f372c12, type: 3}
-  - {fileID: 3001871606239782894, guid: c9617f8a99bf0d546be6bbe1811ac0e2, type: 3}
-  - {fileID: 4354718478632122283, guid: dc7cfa248f3e2994ab4c060628f9ed56, type: 3}
-  - {fileID: 6701591295210432181, guid: 44af0aea009005a43b6d3df9e4c112a1, type: 3}
-  - {fileID: -1208510047847783411, guid: 97d03e24daf82ae4486ae6ceec8dfdeb, type: 3}
-  - {fileID: 6592858290932310892, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
-  - {fileID: -7454198298593411323, guid: 67b4fae15f5a9a347a47817370ea4705, type: 3}
-  - {fileID: -542098215232420279, guid: a624a3c6dfec07e4e96e01a10fa19a1d, type: 3}
-  - {fileID: -8018143768630719333, guid: d7ad69c35265ccd4ea5664162fca2c34, type: 3}
+  - {fileID: -1909023723984232747, guid: 3d0e528de88532f4cb4c111c06500216, type: 3}
 --- !u!4 &1707751552
 Transform:
   m_ObjectHideFlags: 0
@@ -3790,6 +3798,10 @@ PrefabInstance:
     - target: {fileID: 5954609769523367539, guid: 2148801fa57205644be7a267c7bd5a71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771360765114331950, guid: 2148801fa57205644be7a267c7bd5a71, type: 3}
+      propertyPath: attackDamage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8771360765114331950, guid: 2148801fa57205644be7a267c7bd5a71, type: 3}
       propertyPath: coordinate.y
@@ -4687,6 +4699,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3805196673899827496, guid: cfeabdd2fc986454886ecb9e16b1ce3c, type: 3}
+      propertyPath: attackDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805196673899827496, guid: cfeabdd2fc986454886ecb9e16b1ce3c, type: 3}
       propertyPath: coordinate.x
       value: 3
       objectReference: {fileID: 0}
@@ -4874,6 +4890,10 @@ PrefabInstance:
     - target: {fileID: 791631163023233955, guid: b83aeec66bb7f2140832860720c8fb22, type: 3}
       propertyPath: m_Name
       value: BlackKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287479800442724811, guid: b83aeec66bb7f2140832860720c8fb22, type: 3}
+      propertyPath: attackDamage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3287479800442724811, guid: b83aeec66bb7f2140832860720c8fb22, type: 3}
       propertyPath: coordinate.x

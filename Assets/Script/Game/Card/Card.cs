@@ -15,8 +15,6 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
     private CardObject cardObject;
 
-    protected Predicate<ChessPiece> targetCondition = null;
-
     [Header("CardData")]
     public string cardName;
     public int cost
@@ -62,7 +60,9 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+        {
             GameBoard.instance.HideCard();
+        }
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -112,8 +112,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
             return false;
 
         //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
-        GameBoard.instance.CurrentPlayerController().UseCard(this, targetCondition);
-        return true;
+        return GameBoard.instance.CurrentPlayerController().UseCard(this);
     }
 
     public void FlipFront()
@@ -172,15 +171,26 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"라그나로크", 9},
         {"펜리르", 10},
         {"피의 독수리", 11},
+        {"우트가르다 로키", 12},
         {"처형", 16},
+        {"아레스", 18},
         {"어미 곰", 19},
         {"포세이돈", 21},
+        {"아테나", 22},
+        {"케르베로스", 24},
+        {"판도라의 상자", 27},
         {"페르세우스", 29},
+        {"데비 존스", 35},
+        {"카인", 36},
         {"모르건 르 페이", 37},
         {"호수의 여인", 38},
         {"베헤모스", 39},
+        {"다윗", 40},
         {"아벨", 42},
+        {"잭 프로스트", 43},
         {"돈키호테", 44},
+        {"음치 음유시인", 46},
+        {"근엄한 경비병", 47},
         {"크라켄", 48}
     };
 }

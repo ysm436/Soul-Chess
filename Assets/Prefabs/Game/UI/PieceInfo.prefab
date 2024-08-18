@@ -118,7 +118,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4582998040332275355, guid: f9784ba752a91f14aa18acb46607fe1f, type: 2}
+  - {fileID: 6494325888241723590, guid: 352334ce366fb4e4aafcffe7be09d14e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -160,11 +160,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC885\uB958 : \uD3F0\nHP : 55 / 55\nAD : 45\n\n[\uBD80\uC5EC\uB41C \uC601\uD63C]\n\uC5C6\uC74C\n\n[\uBC84\uD504
-    \uD6A8\uACFC]\n\uC5C6\uC74C\n\n[\uB514\uBC84\uD504]\n\uC5C6\uC74C"
+  m_text: "\uC885\uB958 : \uD3F0\nHP : 55 / 55\nAD : 45\n\n\uBD80\uC5EC\uB41C \uC601\uD63C:
+    \uC6B0\uD2B8\uAC00\uB974\uB2E4 \uB85C\uD0A4\n\n[\uBC84\uD504 \uD6A8\uACFC]\n\uC5C6\uC74C\n\n[\uB514\uBC84\uD504]\n\uC5C6\uC74C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f9784ba752a91f14aa18acb46607fe1f, type: 2}
-  m_sharedMaterial: {fileID: -4582998040332275355, guid: f9784ba752a91f14aa18acb46607fe1f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 352334ce366fb4e4aafcffe7be09d14e, type: 2}
+  m_sharedMaterial: {fileID: 6494325888241723590, guid: 352334ce366fb4e4aafcffe7be09d14e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535

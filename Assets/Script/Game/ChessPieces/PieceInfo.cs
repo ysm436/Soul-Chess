@@ -26,11 +26,11 @@ public class PieceInfo : MonoBehaviour
             default : pieceTypeText = "오류"; break;
         }
 
-        temp = "종류 : " + pieceTypeText + "\nHP : " + chessPiece.GetHP + " / " + chessPiece.maxHP;
+        temp = "종류: " + pieceTypeText + "\nHP: " + chessPiece.GetHP + " / " + chessPiece.maxHP;
         if (chessPiece.soul != null) temp += "(+" + chessPiece.soul.HP + ")";
-        temp += "\nAD : " + chessPiece.AD;
+        temp += "\nAD: " + chessPiece.AD;
         if (chessPiece.soul != null) temp += "(+" + chessPiece.soul.AD + ")";
-        if (chessPiece.soul != null) temp += "\n부여된 영혼 :" + chessPiece.soul.cardName;
+        if (chessPiece.soul != null) temp += "\n영혼: " + chessPiece.soul.cardName;
 
         //Buff Text
         temp += "\n[버프 목록]\n";
@@ -43,13 +43,13 @@ public class PieceInfo : MonoBehaviour
             switch (buffInfo.buffType)
             {
                 case Buff.BuffType.HP:
-                    buffText = $"{currentSourceName} : HP {currentValue}";
+                    buffText = $"{currentSourceName}: HP {currentValue}";
                     break;
                 case Buff.BuffType.AD:
-                    buffText = $"{currentSourceName} : AD {currentValue}";
+                    buffText = $"{currentSourceName}: AD {currentValue}";
                     break;
                 case Buff.BuffType.MoveCount:
-                    buffText = $"'{currentSourceName} : 이동 횟수 {currentValue}";
+                    buffText = $"'{currentSourceName}: 이동 횟수 {currentValue}";
                     break;
                 case Buff.BuffType.Description:
                     buffText = currentDescription;
