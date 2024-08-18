@@ -13,18 +13,6 @@ public class JackFrost : SoulCard
         //OnInfuse += SoulEffect;
     }
 
-    public void SoulEffect(ChessPiece chessPiece)
-    {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
-
-        foreach (ChessPiece piece in enemyPieceList)
-        {
-            piece.SetKeyword(Keyword.Type.Stun);
-            piece.buff.AddBuffByDescription(this.cardName, Buff.BuffType.Description, "잭 프로스트: 기절 부여", false);
-            GameBoard.instance.CurrentPlayerController().OnMyTurnStart += RemoveEffect;
-        }
-    }
-
     public override void AddEffect()
     {
         
@@ -35,7 +23,7 @@ public class JackFrost : SoulCard
 
         foreach (ChessPiece piece in enemyPieceList)
         {
-            piece.buff.TryRemoveSpecificBuff(this.cardName, Buff.BuffType.Description);
+            piece.buff.TryRemoveSpecificBuff(this.cardName, Buff.BuffType.Stun);
         }
         GameBoard.instance.CurrentPlayerController().OnMyTurnStart -= RemoveEffect;
     }

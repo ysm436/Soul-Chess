@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class UtgardaLoki : SoulCard
+public class HeavyArmoredInfantry : SoulCard
 {
-    protected override int CardID => cardIdDict["우트가르다 로키"];
+    protected override int CardID => cardIdDict["중기갑 보병"];
 
     protected override void Awake()
     {

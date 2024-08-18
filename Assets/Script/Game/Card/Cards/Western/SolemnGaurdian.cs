@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UtgardaLoki : SoulCard
+public class SolemnGuardian : SoulCard
 {
-    protected override int CardID => cardIdDict["우트가르다 로키"];
+    protected override int CardID => cardIdDict["근엄한 경비병"];
 
     protected override void Awake()
     {

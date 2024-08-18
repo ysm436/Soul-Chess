@@ -49,13 +49,16 @@ public class PieceInfo : MonoBehaviour
                     buffText = $"{currentSourceName}: AD {currentValue}";
                     break;
                 case Buff.BuffType.MoveCount:
-                    buffText = $"'{currentSourceName}: 이동 횟수 {currentValue}";
+                    buffText = $"{currentSourceName}: 이동 횟수 {currentValue}";
+                    break;
+                case Buff.BuffType.Defense: // 방어도 키워드 버프
+                    buffText = $"{currentSourceName}: 방어도 {currentValue}";
                     break;
                 case Buff.BuffType.Description:
                     buffText = currentDescription;
                     break;
-                default:
-                    buffText = "";
+                default: // 방어도 제외 키워드 버프 공통
+                    buffText = $"{currentDescription}"; //출처 표기 시 $"'{currentSourceName}: {currentDescription}";
                     break;
             }
             buffText += "\n";

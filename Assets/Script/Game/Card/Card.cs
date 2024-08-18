@@ -157,7 +157,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"아테나", 22},
         {"케르베로스", 24},
         {"판도라의 상자", 27},
-        {"페르세우스", 29},
+        {"중기갑 보병", 29},
         {"데비 존스", 35},
         {"카인", 36},
         {"모르건 르 페이", 37},

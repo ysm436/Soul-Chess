@@ -7,6 +7,7 @@ public class ToneDeafBard : SoulCard
 {
     protected override int CardID => Card.cardIdDict["음치 음유시인"];
 
+    [HideInInspector]
     public ChessPiece buffedPiece = null;
 
     protected override void Awake()

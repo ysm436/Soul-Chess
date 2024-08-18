@@ -71,7 +71,8 @@ abstract public class ChessPiece : TargetableObject
 
         if (GetKeyword(Keyword.Type.Shield) == 1)
         {
-            keywordDictionary[Keyword.Type.Shield] = 0;
+            SetKeyword(Keyword.Type.Shield, 0);
+            buff.TryRemoveSpecificBuff("", Buff.BuffType.Shield); //보호막 버프 제거
             return;
         }
 
@@ -332,7 +333,10 @@ abstract public class ChessPiece : TargetableObject
     // 예외) 방어력 n >= 1: 활성화 및 방어력 수치 나타냄 / n = 0: 비활성화
     public void SetKeyword(Keyword.Type keywordType, int n = 1)
     {
-        keywordDictionary[keywordType] = n;
+        if (keywordType == Keyword.Type.Defense)
+            keywordDictionary[keywordType] += n;
+        else
+            keywordDictionary[keywordType] = n;
 
         //버프 및 디버프 아이콘 스프라이트 설정 (우선순위는 Enum 값이 작을수록 높음)
         effectIcon.SetIconSprite();
@@ -484,6 +488,42 @@ abstract public class ChessPiece : TargetableObject
             {
                 moveCount -= buffInfo.value;
                 if (moveCount < 1) moveCount = 1;
+            }
+            else if (buffType == Buff.BuffType.Defense)
+            {
+                SetKeyword(Keyword.Type.Defense, GetKeyword(Keyword.Type.Defense) - (buffInfo.value * -1));
+            }
+            else if (buffType == Buff.BuffType.Immunity)
+            {
+                SetKeyword(Keyword.Type.Immunity, 0);
+            }
+            else if (buffType == Buff.BuffType.Taunt)
+            {
+                SetKeyword(Keyword.Type.Taunt, 0);
+            }
+            else if (buffType == Buff.BuffType.Shield)
+            {
+                SetKeyword(Keyword.Type.Shield, 0);
+            }
+            else if (buffType == Buff.BuffType.Stun)
+            {
+                SetKeyword(Keyword.Type.Stun, 0);
+            }
+            else if (buffType == Buff.BuffType.Restraint)
+            {
+                SetKeyword(Keyword.Type.Restraint, 0);
+            }
+            else if (buffType == Buff.BuffType.Stealth)
+            {
+                SetKeyword(Keyword.Type.Stealth, 0);
+            }
+            else if (buffType == Buff.BuffType.Silence)
+            {
+                SetKeyword(Keyword.Type.Silence, 0);
+            }
+            else if (buffType == Buff.BuffType.Rush)
+            {
+                SetKeyword(Keyword.Type.Rush, 0);
             }
 
             // buffType == Buff.BuffType.Description인 경우는 OnSoulRemoved 통해 구현

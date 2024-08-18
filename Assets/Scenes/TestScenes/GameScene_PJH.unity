@@ -3482,8 +3482,16 @@ MonoBehaviour:
   hand:
   - {fileID: 7433252666421529211, guid: fc310b2ab5a30de4298b4aea18a015f4, type: 3}
   - {fileID: 1292469394887977406, guid: 69acd9f53abcc974da0de5adf88dba59, type: 3}
+  - {fileID: 1292469394887977406, guid: 69acd9f53abcc974da0de5adf88dba59, type: 3}
   deck:
-  - {fileID: -1909023723984232747, guid: 3d0e528de88532f4cb4c111c06500216, type: 3}
+  - {fileID: 6854022891367674852, guid: bfd6ef0ae72a67441ab3f89cc6eafa2c, type: 3}
+  - {fileID: 6854022891367674852, guid: bfd6ef0ae72a67441ab3f89cc6eafa2c, type: 3}
+  - {fileID: 6854022891367674852, guid: bfd6ef0ae72a67441ab3f89cc6eafa2c, type: 3}
+  - {fileID: 6854022891367674852, guid: bfd6ef0ae72a67441ab3f89cc6eafa2c, type: 3}
+  - {fileID: -782661900279387010, guid: 315815b464b82b24cada34e98304a281, type: 3}
+  - {fileID: -782661900279387010, guid: 315815b464b82b24cada34e98304a281, type: 3}
+  - {fileID: -782661900279387010, guid: 315815b464b82b24cada34e98304a281, type: 3}
+  - {fileID: -782661900279387010, guid: 315815b464b82b24cada34e98304a281, type: 3}
 --- !u!4 &1707751552
 Transform:
   m_ObjectHideFlags: 0

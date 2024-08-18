@@ -12,8 +12,8 @@ public class JackFrostEffect : Effect
         foreach (ChessPiece piece in enemyPieceList)
         {
             piece.SetKeyword(Keyword.Type.Stun);
-            piece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "잭 프로스트: 기절 부여", false);
-            GameBoard.instance.CurrentPlayerController().OnMyTurnStart += gameObject.GetComponent<SoulCard>().RemoveEffect;
+            piece.buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Stun);
         }
+        GameBoard.instance.CurrentPlayerController().OnMyTurnStart += gameObject.GetComponent<SoulCard>().RemoveEffect;
     }
 }

@@ -12,7 +12,7 @@ public class UtgardaLokiEffect : Effect
         foreach (ChessPiece piece in enemyPieceList)
         {
             piece.SetKeyword(Keyword.Type.Silence);
-            piece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "우트가르다 로키: 침묵 부여", false);
+            piece.buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Silence);
         }
     }
 }
