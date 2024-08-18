@@ -348,6 +348,7 @@ abstract public class ChessPiece : TargetableObject
         else if (keywordType == Keyword.Type.Stun)
         {
             //효과 발동 시점의 색깔 턴이 한번 더 돌아와야 스턴 해제
+            //상대 턴에 스턴 효과를 부여당해서 풀리기 전 자기 턴에 스턴이 부여될 경우 최신화될 수 있도록 방법 구상 필요
             GameBoard.instance.CurrentPlayerController().OnMyTurnStart += Unstun;
         }
         else if (keywordType == Keyword.Type.Restraint)
@@ -384,6 +385,7 @@ abstract public class ChessPiece : TargetableObject
     public void Unstun()
     {
         SetKeyword(Keyword.Type.Stun, 0);
+        buff.TryRemoveSpecificBuff("", Buff.BuffType.Stun); //스턴 정보 제거
         GameBoard.instance.myController.OnMyTurnEnd -= Unstun;
     }
 

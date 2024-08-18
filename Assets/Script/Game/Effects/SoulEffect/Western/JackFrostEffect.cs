@@ -14,6 +14,5 @@ public class JackFrostEffect : Effect
             piece.SetKeyword(Keyword.Type.Stun);
             piece.buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Stun);
         }
-        GameBoard.instance.CurrentPlayerController().OnMyTurnStart += gameObject.GetComponent<SoulCard>().RemoveEffect;
     }
 }

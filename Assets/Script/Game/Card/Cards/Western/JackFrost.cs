@@ -10,7 +10,6 @@ public class JackFrost : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        //OnInfuse += SoulEffect;
     }
 
     public override void AddEffect()
@@ -19,12 +18,6 @@ public class JackFrost : SoulCard
     }
     public override void RemoveEffect()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.CurrentPlayerController().playerColor).ToList();
-
-        foreach (ChessPiece piece in enemyPieceList)
-        {
-            piece.buff.TryRemoveSpecificBuff(this.cardName, Buff.BuffType.Stun);
-        }
-        GameBoard.instance.CurrentPlayerController().OnMyTurnStart -= RemoveEffect;
+        
     }
 }
