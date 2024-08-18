@@ -22,8 +22,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
     [SerializeField] private GameObject Simple_Deck;
     [SerializeField] private TMP_InputField deckname_inputfield;
 
-    [SerializeField] private GameObject CautionPanel;
-    [SerializeField] private TextMeshProUGUI CautionText;
+    [SerializeField] public GameObject CautionPanel;
+    [SerializeField] public TextMeshProUGUI CautionText;
+    [SerializeField] private TextMeshProUGUI CardCountText;
 
     public bool newDeckSignal = false;
     private bool duplicateSignal = false;
@@ -274,6 +275,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         local_chesspieces = (int[])loaded_deck.chesspieces.Clone();
         local_extra_chesspieces = (int[])loaded_deck.extra_chesspieces.Clone();
         local_rarities = (int[])loaded_deck.Rarities.Clone();
+        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / 30";
     }
     private void DeckInfoSave()
     {
@@ -327,7 +329,12 @@ public class DeckManager : MonoBehaviour, IDropHandler
             }
         }
 
-        if (cardinfo.Rarity == Card.Rarity.Mythical)
+        if (local_card_count == 30)
+        {
+            CautionText.text = "덱에 카드는 30개만 넣을 수 있습니다.";
+            error_signal = true;
+        }
+        else if (cardinfo.Rarity == Card.Rarity.Mythical)
         {
             if (duplicate_quantity >= 1)
             {
@@ -426,6 +433,8 @@ public class DeckManager : MonoBehaviour, IDropHandler
             case Card.Rarity.Legendary : local_rarities[1] += 1; break;
             case Card.Rarity.Mythical : local_rarities[2] += 1; break;
         }
+
+        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / 30";
     }
 
     public void RemoveCardInfoInDeck(DisplayCard cardinfo)
@@ -487,6 +496,8 @@ public class DeckManager : MonoBehaviour, IDropHandler
             case Card.Rarity.Legendary : local_rarities[1] -= 1; break;
             case Card.Rarity.Mythical : local_rarities[2] -= 1; break;
         }
+
+        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / 30";
     }
 
     public void CancelCaution()
