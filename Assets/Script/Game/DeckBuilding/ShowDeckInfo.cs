@@ -29,12 +29,12 @@ public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             recttransform.sizeDelta = graph_size;
         }
 
-        pawn_cost.text = deckmanager.local_chesspieces[0].ToString() + " / 8";
-        knight_cost.text = deckmanager.local_chesspieces[1].ToString() + " / 2";
-        bishop_cost.text = deckmanager.local_chesspieces[2].ToString() + " / 2";
-        rook_cost.text = deckmanager.local_chesspieces[3].ToString() + " / 2";
-        queen_cost.text = deckmanager.local_chesspieces[4].ToString() + " / 1";
-        king_cost.text = deckmanager.local_chesspieces[5].ToString() + " / 1";
+        pawn_cost.text = deckmanager.local_chesspieces[0].ToString() + "(" + deckmanager.local_extra_chesspieces[0].ToString() + ")" + " / 8";
+        knight_cost.text = deckmanager.local_chesspieces[1].ToString() + "(" + deckmanager.local_extra_chesspieces[1].ToString() + ")" + " / 2";
+        bishop_cost.text = deckmanager.local_chesspieces[2].ToString() + "(" + deckmanager.local_extra_chesspieces[2].ToString() + ")" + " / 2";
+        rook_cost.text = deckmanager.local_chesspieces[3].ToString() + "(" + deckmanager.local_extra_chesspieces[3].ToString() + ")" + " / 2";
+        queen_cost.text = deckmanager.local_chesspieces[4].ToString() + "(" + deckmanager.local_extra_chesspieces[4].ToString() + ")" + " / 1";
+        king_cost.text = deckmanager.local_chesspieces[5].ToString() + "(" + deckmanager.local_extra_chesspieces[5].ToString() + ")" + " / 1";
 
         legendary_cost.text = deckmanager.local_rarities[1].ToString() + " / 9";
         mythical_cost.text = deckmanager.local_rarities[2].ToString() + " / 3";

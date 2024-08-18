@@ -93,6 +93,8 @@ public class DeckBuildingManager : MonoBehaviour
         DisplayCard.Reigon = cardinfo.reigon;
         DisplayCard.Rarity = cardinfo.rarity;
         DisplayCard.quantity = quantity;
+        DisplayCard.illustrate.sprite = cardinfo.illustration;
+        DisplayCard.cardframe.sprite = cardinfo.GetComponent<SpriteRenderer>().sprite;
 
         if (cardinfo is SoulCard)
         {

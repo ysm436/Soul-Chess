@@ -12,6 +12,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     public int local_card_count = 0;
     public int[] local_costs = new int[8]{0, 0, 0, 0, 0, 0, 0, 0};
     public int[] local_chesspieces = new int[6]{0, 0, 0, 0, 0, 0};
+    public int[] local_extra_chesspieces = new int[6]{0, 0, 0, 0, 0, 0};
     public int[] local_rarities = new int[3]{0, 0, 0};
 
     [SerializeField] private RectTransform trashcan;
@@ -130,6 +131,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 card_count = local_card_count,
                 costs = (int[])local_costs.Clone(),
                 chesspieces = (int[])local_chesspieces.Clone(),
+                extra_chesspieces = (int[])local_extra_chesspieces.Clone(),
                 Rarities = (int[])local_rarities.Clone(),
                 cards = newDeckcards
             };
@@ -259,6 +261,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         local_card_count = 0;
         Array.Clear(local_costs, 0, local_costs.Length);
         Array.Clear(local_chesspieces, 0, local_chesspieces.Length);
+        Array.Clear(local_extra_chesspieces, 0, local_extra_chesspieces.Length);
         Array.Clear(local_rarities, 0, local_rarities.Length);
     }
 
@@ -269,6 +272,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         local_card_count = loaded_deck.card_count;
         local_costs = (int[])loaded_deck.costs.Clone();
         local_chesspieces = (int[])loaded_deck.chesspieces.Clone();
+        local_extra_chesspieces = (int[])loaded_deck.extra_chesspieces.Clone();
         local_rarities = (int[])loaded_deck.Rarities.Clone();
     }
     private void DeckInfoSave()
@@ -278,6 +282,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         loaded_deck.card_count = local_card_count;
         loaded_deck.costs = (int[])local_costs.Clone();
         loaded_deck.chesspieces = (int[])local_chesspieces.Clone();
+        loaded_deck.extra_chesspieces = (int[])local_extra_chesspieces.Clone();
         loaded_deck.Rarities = (int[])local_rarities.Clone();
     }
 
@@ -387,16 +392,31 @@ public class DeckManager : MonoBehaviour, IDropHandler
             }
         }
 
-        foreach (var piecetype in includedTypes)
+        for (int i = includedTypes.Count - 1; i >= 0; i--)
         {
-            switch (piecetype)
+            if (i == includedTypes.Count - 1)
             {
-                case ChessPiece.PieceType.Pawn : local_chesspieces[0] += 1; break;
-                case ChessPiece.PieceType.Knight : local_chesspieces[1] += 1; break;
-                case ChessPiece.PieceType.Bishop : local_chesspieces[2] += 1; break;
-                case ChessPiece.PieceType.Rook : local_chesspieces[3] += 1; break;
-                case ChessPiece.PieceType.Quene : local_chesspieces[4] += 1; break;
-                case ChessPiece.PieceType.King : local_chesspieces[5] += 1; break;
+                switch (includedTypes[i])
+                {
+                    case ChessPiece.PieceType.Pawn : local_chesspieces[0] += 1; break;
+                    case ChessPiece.PieceType.Knight : local_chesspieces[1] += 1; break;
+                    case ChessPiece.PieceType.Bishop : local_chesspieces[2] += 1; break;
+                    case ChessPiece.PieceType.Rook : local_chesspieces[3] += 1; break;
+                    case ChessPiece.PieceType.Quene : local_chesspieces[4] += 1; break;
+                    case ChessPiece.PieceType.King : local_chesspieces[5] += 1; break;
+                }
+            }
+            else
+            {
+                switch (includedTypes[i])
+                {
+                    case ChessPiece.PieceType.Pawn : local_extra_chesspieces[0] += 1; break;
+                    case ChessPiece.PieceType.Knight : local_extra_chesspieces[1] += 1; break;
+                    case ChessPiece.PieceType.Bishop : local_extra_chesspieces[2] += 1; break;
+                    case ChessPiece.PieceType.Rook : local_extra_chesspieces[3] += 1; break;
+                    case ChessPiece.PieceType.Quene : local_extra_chesspieces[4] += 1; break;
+                    case ChessPiece.PieceType.King : local_extra_chesspieces[5] += 1; break;
+                }
             }
         }
 
@@ -433,16 +453,31 @@ public class DeckManager : MonoBehaviour, IDropHandler
             }
         }
 
-        foreach (var piecetype in includedTypes)
+        for (int i = includedTypes.Count - 1; i >= 0; i--)
         {
-            switch (piecetype)
+            if (i == includedTypes.Count - 1)
             {
-                case ChessPiece.PieceType.Pawn : local_chesspieces[0] -= 1; break;
-                case ChessPiece.PieceType.Knight : local_chesspieces[1] -= 1; break;
-                case ChessPiece.PieceType.Bishop : local_chesspieces[2] -= 1; break;
-                case ChessPiece.PieceType.Rook : local_chesspieces[3] -= 1; break;
-                case ChessPiece.PieceType.Quene : local_chesspieces[4] -= 1; break;
-                case ChessPiece.PieceType.King : local_chesspieces[5] -= 1; break;
+                switch (includedTypes[i])
+                {
+                    case ChessPiece.PieceType.Pawn : local_chesspieces[0] -= 1; break;
+                    case ChessPiece.PieceType.Knight : local_chesspieces[1] -= 1; break;
+                    case ChessPiece.PieceType.Bishop : local_chesspieces[2] -= 1; break;
+                    case ChessPiece.PieceType.Rook : local_chesspieces[3] -= 1; break;
+                    case ChessPiece.PieceType.Quene : local_chesspieces[4] -= 1; break;
+                    case ChessPiece.PieceType.King : local_chesspieces[5] -= 1; break;
+                }
+            }
+            else
+            {
+                switch (includedTypes[i])
+                {
+                    case ChessPiece.PieceType.Pawn : local_extra_chesspieces[0] -= 1; break;
+                    case ChessPiece.PieceType.Knight : local_extra_chesspieces[1] -= 1; break;
+                    case ChessPiece.PieceType.Bishop : local_extra_chesspieces[2] -= 1; break;
+                    case ChessPiece.PieceType.Rook : local_extra_chesspieces[3] -= 1; break;
+                    case ChessPiece.PieceType.Quene : local_extra_chesspieces[4] -= 1; break;
+                    case ChessPiece.PieceType.King : local_extra_chesspieces[5] -= 1; break;
+                }
             }
         }
 

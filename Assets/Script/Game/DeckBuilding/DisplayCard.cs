@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
@@ -64,6 +65,8 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public TextMeshProUGUI CardHPTMP;
     public TextMeshProUGUI CardADTMP;
 
+    public Image cardframe;
+    public Image illustrate;
 
     private Transform canvas;
     private CanvasGroup canvasGroup;
