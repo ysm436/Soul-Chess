@@ -10,7 +10,7 @@ public class Infusion : TargetingEffect
         targetTypes.Add(new EffectTarget(TargetType.Piece, pieceRestriction, false, true));
     }
     public Action<ChessPiece> infuse;
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         infuse.Invoke(targets[0] as ChessPiece);
     }

@@ -16,7 +16,7 @@ public class UtgardaLoki : SoulCard
 
     public void SoulEffect(ChessPiece chessPiece)
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != InfusedPiece.pieceColor).ToList();
 
         foreach (ChessPiece piece in enemyPieceList)
         {
@@ -27,10 +27,10 @@ public class UtgardaLoki : SoulCard
 
     public override void AddEffect()
     {
-        
+
     }
     public override void RemoveEffect()
     {
-        
+
     }
 }

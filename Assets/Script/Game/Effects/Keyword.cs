@@ -8,20 +8,20 @@ public class Keyword : Effect
 {
     public enum Type
     {
-        Defense,        // ¹æ¾î·Â
-        Immunity,       // ¸é¿ª
-        Taunt,          // µµ¹ß
-        Shield,         // º¸È£¸·
-        Stun,           // ±âÀý
-        Restraint,      // ±¸¼Ó
-        Stealth,        // Àº½Å
-        Silence,        // Ä§¹¬
-        Rush            // µ¹Áø
+        Defense,        // ï¿½ï¿½ï¿½ï¿½
+        Immunity,       // ï¿½é¿ª
+        Taunt,          // ï¿½ï¿½ï¿½ï¿½
+        Shield,         // ï¿½ï¿½È£ï¿½ï¿½
+        Stun,           // ï¿½ï¿½ï¿½ï¿½
+        Restraint,      // ï¿½ï¿½ï¿½ï¿½
+        Stealth,        // ï¿½ï¿½ï¿½ï¿½
+        Silence,        // Ä§ï¿½ï¿½
+        Rush            // ï¿½ï¿½ï¿½ï¿½
     }
 
     public static Type[] AllKeywords { get => Enum.GetValues(typeof(Type)).Cast<Type>().ToArray(); }
 
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
 
     }

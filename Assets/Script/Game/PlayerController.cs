@@ -304,7 +304,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isInfusing)
         {
-            (usingCard as SoulCard).infusion.EffectAction();
+            (usingCard as SoulCard).infusion.EffectAction(this);
             if (usingCard.EffectOnCardUsed != null)
             {
                 targetingEffect = null;
@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
                 photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), null);
         }
 
-        usingCard.EffectOnCardUsed?.EffectAction();
+        usingCard.EffectOnCardUsed?.EffectAction(this);
 
 
         GameBoard.instance.CurrentPlayerData().soulEssence -= usingCard.cost;
@@ -363,7 +363,7 @@ public class PlayerController : MonoBehaviour
             (card as SoulCard).infusion.SetTargetsByCoordinate(new Vector2Int[] { infusionTargetCoordinate });
             gameBoard.gameData.boardSquares[infusionTargetCoordinate.x, infusionTargetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.movable);
 
-            (card as SoulCard).infusion.EffectAction();
+            (card as SoulCard).infusion.EffectAction(gameBoard.opponentController);
         }
 
         if (card.EffectOnCardUsed is TargetingEffect)
@@ -387,12 +387,12 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            targetingEffect.EffectAction();
+            targetingEffect.EffectAction(gameBoard.opponentController);
         }
         else if (card.EffectOnCardUsed != null)
         {
 
-            card.EffectOnCardUsed.EffectAction();
+            card.EffectOnCardUsed.EffectAction(gameBoard.opponentController);
         }
 
         GameBoard.instance.gameData.opponentPlayerData.TryRemoveCardInHand(card);

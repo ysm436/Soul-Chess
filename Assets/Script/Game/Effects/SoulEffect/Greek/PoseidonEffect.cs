@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PoseidonEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects;
         for (int i = pieceList.Count - 1; i >= 0; i--)
