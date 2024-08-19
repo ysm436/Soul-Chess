@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private Card UsingCard = null;
+    private Card usingCard = null;
     private TargetingEffect targetingEffect;
     public bool isUsingCard = false;
     private bool isInfusing = false;
@@ -304,7 +304,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isInfusing)
         {
-            targetingEffect.EffectAction();// same as (usingCard as SoulCard).infusion.EffectAction();
+            (usingCard as SoulCard).infusion.EffectAction();
             if (usingCard.EffectOnCardUsed != null)
             {
                 targetingEffect = null;
@@ -313,10 +313,24 @@ public class PlayerController : MonoBehaviour
             }
             isInfusing = false;
         }
+
+        if (usingCard is SoulCard)
+        {
+            if (usingCard.EffectOnCardUsed is TargetingEffect)
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, (usingCard as SoulCard).infusion.targetCoordinates[0], (usingCard.EffectOnCardUsed as TargetingEffect).targetCoordinates);
+            else
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, (usingCard as SoulCard).infusion.targetCoordinates[0], null);
+        }
         else
         {
-            usingCard.EffectOnCardUsed.EffectAction();
+            if (usingCard.EffectOnCardUsed is TargetingEffect)
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), (usingCard.EffectOnCardUsed as TargetingEffect).targetCoordinates);
+            else
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), null);
         }
+
+        usingCard.EffectOnCardUsed?.EffectAction();
+
 
         GameBoard.instance.CurrentPlayerData().soulEssence -= usingCard.cost;
 
@@ -324,9 +338,78 @@ public class PlayerController : MonoBehaviour
             usingCard.Destroy();
         usingCard = null;
         isUsingCard = false;
-
         targetingEffect = null;
+
         GameBoard.instance.HideCard();
+
+    }
+
+    [PunRPC]
+    public void UseCardRemote(int cardIndex, Vector2 infusionTarget, Vector2[] targetArray = null)
+    {
+        Card card = gameBoard.gameData.opponentPlayerData.hand[cardIndex];
+        GameBoard.instance.CurrentPlayerData().soulEssence -= card.cost;
+
+        card.FlipFront();
+        gameBoard.ShowCard(card);
+
+        if (card is SoulCard)
+        {
+
+            Vector2Int infusionTargetCoordinate = Vector2Int.RoundToInt(infusionTarget);
+
+            Debug.Log(infusionTargetCoordinate);
+
+            (card as SoulCard).infusion.SetTargetsByCoordinate(new Vector2Int[] { infusionTargetCoordinate });
+            gameBoard.gameData.boardSquares[infusionTargetCoordinate.x, infusionTargetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.movable);
+
+            (card as SoulCard).infusion.EffectAction();
+        }
+
+        if (card.EffectOnCardUsed is TargetingEffect)
+        {
+            Vector2Int[] targetCoordinateArray = targetArray.Select(coordinate => Vector2Int.RoundToInt(coordinate)).ToArray();
+            TargetingEffect targetingEffect = card.EffectOnCardUsed as TargetingEffect;
+            targetingEffect.SetTargetsByCoordinate(targetCoordinateArray);
+
+            if (targetingEffect.IsPositiveEffect)
+            {
+                foreach (Vector2Int targetCoordinate in targetCoordinateArray)
+                {
+                    gameBoard.gameData.boardSquares[targetCoordinate.x, targetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.positive);
+                }
+            }
+            else if (targetingEffect.IsNegativeEffect)
+            {
+                foreach (Vector2Int targetCoordinate in targetCoordinateArray)
+                {
+                    gameBoard.gameData.boardSquares[targetCoordinate.x, targetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.negative);
+                }
+            }
+
+            targetingEffect.EffectAction();
+        }
+        else if (card.EffectOnCardUsed != null)
+        {
+
+            card.EffectOnCardUsed.EffectAction();
+        }
+
+        GameBoard.instance.gameData.opponentPlayerData.TryRemoveCardInHand(card);
+
+        if (!(card is SoulCard))
+            card.Destroy();
+
+        Invoke("HideRemoteUsedCard", 1f);
+    }
+    private void HideRemoteUsedCard()
+    {
+        gameBoard.HideCard();
+        foreach (BoardSquare bs in gameBoard.gameData.boardSquares)
+        {
+            bs.outline.changeOutline(BoardSquareOutline.TargetableStates.none);
+        }
+        GameBoard.instance.gameData.opponentPlayerData.UpdateHandPosition();
     }
 
     public void TurnStart()

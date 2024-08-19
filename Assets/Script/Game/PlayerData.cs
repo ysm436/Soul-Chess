@@ -84,11 +84,11 @@ public class PlayerData
     // 핸드에 있는 카드 삭제 (cardInstance: 핸드에서 지정되어야 함, 프리팹 X)
     public bool TryRemoveCardInHand(Card cardInstance)
     {
-        int index = hand.IndexOf(cardInstance);
-
-        if (index != -1)
+        Debug.Log(cardInstance.handIndex);
+        if (cardInstance.handIndex != -1)
         {
-            hand.Remove(cardInstance);
+            hand.RemoveAt(cardInstance.handIndex);
+            UpdateHandPosition();
             return true;
         }
         else

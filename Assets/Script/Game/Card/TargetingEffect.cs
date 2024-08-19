@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
-
 //TODO: targettype이 card인 경우의 gettargetlist 구현
 
 public abstract class TargetingEffect : Effect
@@ -14,6 +12,10 @@ public abstract class TargetingEffect : Effect
     /// </summary>
     [SerializeField]
     public List<EffectTarget> targetTypes = new List<EffectTarget>();
+    public Vector2[] targetCoordinates
+    {
+        get => targets.Select(t => (Vector2)(t as ChessPiece).coordinate).ToArray();
+    }
     protected List<TargetableObject> targets = new List<TargetableObject>();
 
     [SerializeField] private bool isPositiveEffect;
@@ -79,6 +81,16 @@ public abstract class TargetingEffect : Effect
                 default:
                     return new List<TargetableObject>();
             }
+        }
+    }
+    public void SetTargetsByCoordinate(Vector2Int[] targetCoordinateArray)
+    {
+        for (int i = 0; i < targetCoordinateArray.Length; i++)
+        {
+            UnityEngine.Debug.Log(targetCoordinateArray[i]);
+            targets.Add(
+                GameBoard.instance.gameData.pieceObjects.First<ChessPiece>(
+                    obj => obj.coordinate == targetCoordinateArray[i]));
         }
     }
     public enum TargetType

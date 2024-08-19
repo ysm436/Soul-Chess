@@ -10,6 +10,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 {
     [HideInInspector]
     public bool isMine;
+    public int handIndex = -1;
+
     abstract protected int CardID { get; }
     public int GetCardID { get => CardID; }
 
