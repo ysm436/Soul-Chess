@@ -8,8 +8,10 @@ public class PlunderShipEffect : Effect
     [SerializeField] private GameObject plunderer_card;
     public override void EffectAction()
     {
+        PlunderShip plundership_component = gameObject.GetComponent<PlunderShip>();
         PlayerData playercolor;
-        if (GameBoard.instance.myController.playerColor == GameBoard.PlayerColor.White)
+        
+        if (plundership_component.InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
             playercolor = GameBoard.instance.gameData.playerWhite;
         else
             playercolor = GameBoard.instance.gameData.playerBlack;

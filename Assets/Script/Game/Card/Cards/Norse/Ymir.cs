@@ -13,7 +13,7 @@ public class Ymir : SoulCard
     {
         base.Awake();
 
-        if (GameBoard.instance.myController.playerColor == GameBoard.PlayerColor.White)
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
             playercolor = GameBoard.instance.gameData.playerWhite;
         else
             playercolor = GameBoard.instance.gameData.playerBlack;

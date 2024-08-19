@@ -17,7 +17,7 @@ public class Athena : SoulCard
 
     public override void AddEffect()
     {
-        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == InfusedPiece.pieceColor).ToList();
 
         targets.Remove(InfusedPiece);
         foreach (var target in targets)
@@ -32,7 +32,7 @@ public class Athena : SoulCard
 
     public override void RemoveEffect()
     {
-        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == InfusedPiece.pieceColor).ToList();
         
         targets.Remove(InfusedPiece);
         foreach (var target in targets)

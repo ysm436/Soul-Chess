@@ -18,11 +18,11 @@ public class Hercules : SoulCard
         //추후 키워드 버프 관련 변경 머지 후 추가예정
         //InfusedPiece.buff.AddBuffByValue()
 
-        if (GameBoard.instance.CurrentPlayerController().isMyTurn) //내 턴에 카드가 나왔거나, 침묵등이 풀렸을 때
+        if (GameBoard.instance.CurrentPlayerController().isMyTurn) //내 턴에 카드가 나왔거나, 구속등이 풀렸을 때
         {
             ADmultiply();
         }
-
+        
         GameBoard.instance.myController.OnMyTurnStart += ADmultiply;
         GameBoard.instance.myController.OnMyTurnEnd += ADoriginate;
     }
@@ -43,11 +43,17 @@ public class Hercules : SoulCard
 
     public void ADmultiply()
     {
-        InfusedPiece.AD *= multipleAD;
+        if (GameBoard.instance.myController.playerColor == InfusedPiece.pieceColor) //mycontroller가 piececolor인지 확인
+        {
+            InfusedPiece.AD *= multipleAD;
+        }
     }
 
     public void ADoriginate()
     {
-        InfusedPiece.AD /= multipleAD;
+        if (GameBoard.instance.myController.playerColor == InfusedPiece.pieceColor) //mycontroller가 piececolor인지 확인
+        {
+            InfusedPiece.AD /= multipleAD;
+        }
     }
 }
