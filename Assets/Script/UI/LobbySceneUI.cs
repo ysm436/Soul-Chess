@@ -40,7 +40,7 @@ public class LobbySceneUI : MonoBehaviour
             {
                 for (int i = 0; i < GameManager.instance.deckList.Count; i++)
                 {
-                    if (GameManager.instance.deckList[i] != null)
+                    if (GameManager.instance.deckList[i].index != -1)
                     {
                         GameObject deckselectbutton = Instantiate(DeckSelectButton, DeckDisplay);
                         DeckSelectButton buttoninfo = deckselectbutton.GetComponent<DeckSelectButton>();

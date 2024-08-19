@@ -5,8 +5,7 @@ using UnityEngine;
 
 [Serializable] public class Deck
 {
-    static readonly int CARD_LIMIT = 30;
-    //public int index;
+    public int index;
     public string deckname;
     public int card_count = 0;
     public int[] costs = new int[8]{0, 0, 0, 0, 0, 0, 0, 0}; // {0, 1, 2, 3, 4, 5, 6, 7+}

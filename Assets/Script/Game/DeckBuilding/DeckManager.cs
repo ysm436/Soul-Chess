@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class DeckManager : MonoBehaviour, IDropHandler
 {
-    private int deck_length = -1;
+    private int CARD_LIMIT = 30;
     public int loaded_deck_index = 0;
     public int local_card_count = 0;
     public int[] local_costs = new int[8]{0, 0, 0, 0, 0, 0, 0, 0};
@@ -124,10 +124,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
         if (newDeckSignal) // 덱 새로 생성 시
         {
-            deck_length++;
-
             Deck newdeck = new Deck
             {
+                index = GameManager.instance.deckList.Count,
                 deckname = deckname_inputfield.text,
                 card_count = local_card_count,
                 costs = (int[])local_costs.Clone(),
@@ -141,7 +140,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
             GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
             SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
             newDeckInfo.DeckNameText.text = newdeck.deckname;
-            newDeckInfo.deck_index = deck_length;
+            newDeckInfo.deck_index = newdeck.index;
 
             TempDeck.Clear();
             newDeckSignal = false;
@@ -239,15 +238,13 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
     private void DeckListLoad()
     {
-        deck_length = -1;
         List<Deck> decklist = GameManager.instance.deckList.ToList();
         if (decklist != null)
         {
             for (int i = 0; i < decklist.Count; i++)
             {
-                if (decklist[i] != null)
+                if (decklist[i].index != -1)
                 {
-                    deck_length++;
                     GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
                     SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
                     newDeckInfo.deck_index = i;
@@ -331,7 +328,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
         if (local_card_count == 30)
         {
-            CautionText.text = "덱에 카드는 30개만 넣을 수 있습니다.";
+            CautionText.text = "덱에 카드는 "+ CARD_LIMIT.ToString() +"개만 넣을 수 있습니다.";
             error_signal = true;
         }
         else if (cardinfo.Rarity == Card.Rarity.Mythical)
@@ -497,7 +494,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
             case Card.Rarity.Mythical : local_rarities[2] -= 1; break;
         }
 
-        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / 30";
+        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / " +  CARD_LIMIT.ToString();
     }
 
     public void CancelCaution()
