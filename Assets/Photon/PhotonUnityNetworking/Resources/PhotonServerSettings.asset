@@ -44,6 +44,8 @@ MonoBehaviour:
   - InitializeRemote
   - SetReady
   - UseCardRemote
+  - RPCDraw
+  - LocalDraw
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -350,8 +350,8 @@ public class PlayerController : MonoBehaviour
         Card card = gameBoard.gameData.opponentPlayerData.hand[cardIndex];
         GameBoard.instance.CurrentPlayerData().soulEssence -= card.cost;
 
-        card.FlipFront();
         gameBoard.ShowCard(card);
+        GameBoard.instance.gameData.opponentPlayerData.TryRemoveCardInHand(card);
 
         if (card is SoulCard)
         {
@@ -395,8 +395,6 @@ public class PlayerController : MonoBehaviour
             card.EffectOnCardUsed.EffectAction(gameBoard.opponentController);
         }
 
-        GameBoard.instance.gameData.opponentPlayerData.TryRemoveCardInHand(card);
-
         if (!(card is SoulCard))
             card.Destroy();
 
@@ -424,6 +422,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Draw()
+    {
+        photonView.RPC("LocalDraw", RpcTarget.All);
+    }
+    [PunRPC]
+    public void LocalDraw()
     {
         if (playerColor == GameBoard.PlayerColor.White)
         {

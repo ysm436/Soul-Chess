@@ -75,7 +75,7 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             blackController.TurnStart();
             whiteController.OpponentTurnStart();
 
-            blackController.Draw();
+            blackController.LocalDraw();
             whiteController.OpponentDraw();
         }
         else
@@ -91,7 +91,7 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             whiteController.TurnStart();
             blackController.OpponentTurnStart();
 
-            whiteController.Draw();
+            whiteController.LocalDraw();
             blackController.OpponentDraw();
         }
     }
