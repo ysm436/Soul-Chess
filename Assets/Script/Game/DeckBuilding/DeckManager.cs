@@ -288,7 +288,6 @@ public class DeckManager : MonoBehaviour, IDropHandler
     private bool TryInputCard(DisplayCard cardinfo)
     {
         List<GameObject> allcardlist = GameManager.instance.AllCards.ToList();
-        List<GameObject> GameobjectList = new List<GameObject>();
         bool error_signal = false;
         int duplicate_quantity = 0;
 

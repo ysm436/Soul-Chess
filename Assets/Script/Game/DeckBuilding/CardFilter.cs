@@ -553,10 +553,6 @@ public class CardFilter : MonoBehaviour
                     if (!rarityToggleList[2]) continue;
                 }
 
-                if (cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.None))
-                {
-                    onflag = true;
-                }
                 if (cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Pawn))
                 {
                     if (chesspieceToggleList[0]) onflag = true;
@@ -581,8 +577,8 @@ public class CardFilter : MonoBehaviour
                 {
                     if (chesspieceToggleList[5]) onflag = true;
                 }
-
-                if (onflag)
+ 
+                if (onflag || cardinfo.CardType == Card.Type.Spell)
                 {
                     card.SetActive(true);
                 }
@@ -606,6 +602,7 @@ public class CardFilter : MonoBehaviour
                 if (chesspieceToggleList[3] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Rook)) continue;
                 if (chesspieceToggleList[4] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Quene)) continue;
                 if (chesspieceToggleList[5] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.King)) continue;
+                if (cardinfo.CardType == Card.Type.Spell) continue;
                 
                 card.SetActive(false);
             }
