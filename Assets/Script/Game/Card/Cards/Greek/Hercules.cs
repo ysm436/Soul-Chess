@@ -15,7 +15,7 @@ public class Hercules : SoulCard
     public override void AddEffect()
     {
         InfusedPiece.SetKeyword(Keyword.Type.Taunt);
-        //추후 키워드 버프 관련 변경 머지 후 추가예정
+        //버프 관련 변경 머지 후 추가예정
         //InfusedPiece.buff.AddBuffByValue()
 
         if (GameBoard.instance.CurrentPlayerController().isMyTurn) //내 턴에 카드가 나왔거나, 구속등이 풀렸을 때
@@ -30,7 +30,7 @@ public class Hercules : SoulCard
     public override void RemoveEffect()
     {
         InfusedPiece.SetKeyword(Keyword.Type.Taunt, 0);
-        //추후 키워드 버프 관련 변경 머지 후 추가예정
+        //버프 관련 변경 머지 후 추가예정
 
         if (GameBoard.instance.CurrentPlayerController().isMyTurn) //내 턴에 침묵등이 걸렸을 때
         {

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlunderShipEffect : Effect
@@ -20,7 +19,10 @@ public class PlunderShipEffect : Effect
         {
             GameObject plunderer = Instantiate(plunderer_card);
             Card plunderer_info = plunderer.GetComponent<Card>();
-            playercolor.TryAddCardInHand(plunderer_info);
+            if (!playercolor.TryAddCardInHand(plunderer_info))
+            {
+                Destroy(plunderer);
+            };
         }
     }
 }

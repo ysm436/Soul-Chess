@@ -12,15 +12,15 @@ public class Mimir : SoulCard
     protected override void Awake()
     {
         base.Awake();
-
-        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
-            playercolor = GameBoard.instance.gameData.playerWhite;
-        else
-            playercolor = GameBoard.instance.gameData.playerBlack;
     }
 
     public override void AddEffect()
     {
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
+            playercolor = GameBoard.instance.gameData.playerWhite;
+        else
+            playercolor = GameBoard.instance.gameData.playerBlack;
+
         foreach (var card in playercolor.hand)
         {
             card.cost = card.cost - reduction;

@@ -12,7 +12,7 @@ public class ExecutionEffect : TargetingEffect
     {
         foreach (var target in targets)
         {
-            if ((target as ChessPiece).GetHP < standardHP)
+            if ((target as ChessPiece).GetHP <= standardHP)
             {
                 (target as ChessPiece).MinusHP(insteadAD);
             }

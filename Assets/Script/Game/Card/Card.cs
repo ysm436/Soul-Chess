@@ -146,6 +146,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"프리그", 1},
         {"이미르", 2},
         {"토르", 3},
+        {"티르", 5},
         {"미미르", 6},
         {"수르트", 8},
         {"라그나로크", 9},
@@ -153,6 +154,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"피의 독수리", 11},
         {"우트가르다 로키", 12},
         {"약탈선", 14},
+        {"제우스", 15},
         {"처형", 16},
         {"아레스", 18},
         {"어미 곰", 19},
@@ -163,6 +165,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"판도라의 상자", 27},
         {"페르세우스", 29},
         {"생각뿐인 철학자", 30},
+        {"아서왕", 32},
         {"데비 존스", 35},
         {"카인", 36},
         {"모르건 르 페이", 37},
@@ -175,6 +178,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"음치 음유시인", 46},
         {"근엄한 경비병", 47},
         {"크라켄", 48},
-        {"약탈자", 1014}
+        {"아폴론", 49},
+        {"약탈자", 1014},
+        {"천둥벼락", 1015}
     };
 }
