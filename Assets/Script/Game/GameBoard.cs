@@ -11,8 +11,9 @@ public class GameBoard : MonoBehaviour
 {
     public static GameBoard instance = null;
 
-    [Header("DebugMode")]
+    [Header("DevOption")]
     public bool isDebugMode;
+    public SynchronizedRandom synchronizedRandom;
 
 
     [HideInInspector]
@@ -81,6 +82,7 @@ public class GameBoard : MonoBehaviour
         foreach (ChessPiece king in gameData.pieceObjects.Where(piece => piece.pieceType == ChessPiece.PieceType.King))
             king.OnKilled += OnGameOver;
 
+        synchronizedRandom.Init(GameManager.instance.isHost);
     }
 
     public BoardSquare GetBoardSquare(Vector2Int coordinate)
