@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -53,6 +54,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void LoadMainSceneFromGameScene()
+    {
+        Destroy(GameBoard.instance.gameObject);
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("MainScene");
+        GameBoard.instance = null;
+    }
     public void LoadMainScene()
     {
         SceneManager.LoadScene("MainScene");

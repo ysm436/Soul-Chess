@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -23,6 +24,7 @@ public class GameBoard : MonoBehaviour
     public GameObject cardBoard;
     public PieceInfo pieceInfo; //기물 정보 프리팹
 
+    public GameOverUI gameOverUI;
     public PlayerController whiteController;
     public PlayerController blackController;
 
@@ -75,6 +77,10 @@ public class GameBoard : MonoBehaviour
         //코스트 초기화(선공이 1, 후공이 0, 턴 종료 시 상대방 코스트 증가)
         gameData.playerBlack.soulOrbs = gameData.playerBlack.soulEssence = 0;
         gameData.playerWhite.soulOrbs = gameData.playerWhite.soulEssence = 1;
+
+        foreach (ChessPiece king in gameData.pieceObjects.Where(piece => piece.pieceType == ChessPiece.PieceType.King))
+            king.OnKilled += OnGameOver;
+
     }
 
     public BoardSquare GetBoardSquare(Vector2Int coordinate)
@@ -147,6 +153,14 @@ public class GameBoard : MonoBehaviour
             return myController;
         else
             return opponentController;
+    }
+
+    private void OnGameOver(ChessPiece killedKing)
+    {
+        if (killedKing.pieceColor == playerColor)
+            gameOverUI.OnDefeated();
+        else
+            gameOverUI.OnWin();
     }
 
     [System.Serializable]
