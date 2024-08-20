@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class KingArthurEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         KingArthur kingarthur_component = gameObject.GetComponent<KingArthur>();
         bool pawn_allsoul = true;

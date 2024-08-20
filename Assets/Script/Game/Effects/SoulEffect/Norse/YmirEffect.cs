@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class YmirEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         Ymir ymir_component = gameObject.GetComponent<Ymir>();
 

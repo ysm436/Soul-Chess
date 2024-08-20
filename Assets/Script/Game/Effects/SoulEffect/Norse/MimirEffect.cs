@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MimirEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         Mimir mimir_component = gameObject.GetComponent<Mimir>();
 

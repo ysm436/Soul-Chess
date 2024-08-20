@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HerculesEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         Hercules hercules_component = gameObject.GetComponent<Hercules>();
 

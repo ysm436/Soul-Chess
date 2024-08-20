@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ApollonEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         Apollon apollon_component = gameObject.GetComponent<Apollon>();
         Vector2Int StandardPosition = apollon_component.InfusedPiece.coordinate;

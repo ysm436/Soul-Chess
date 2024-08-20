@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class AthenaEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         Athena athena_component = gameObject.GetComponent<Athena>();
-        
+
         athena_component.AddEffect();
         athena_component.InfusedPiece.OnSoulRemoved += athena_component.RemoveEffect;
     }

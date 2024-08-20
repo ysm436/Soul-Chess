@@ -6,7 +6,7 @@ public class TyrEffect : TargetingEffect
 {
     ChessPiece restraint_target;
 
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         Tyr tyr_component = gameObject.GetComponent<Tyr>();
 

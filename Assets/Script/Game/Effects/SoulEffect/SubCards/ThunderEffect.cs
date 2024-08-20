@@ -7,7 +7,7 @@ public class ThunderEffect : Effect
     List<BoardSquare> sqList = new List<BoardSquare>(); //행 기준 BoardSquare
     List<BoardSquare> others = new List<BoardSquare>(); //나머지
     GameBoard.PlayerColor playercolor = GameBoard.PlayerColor.White; //EffectAction에 변수로 player 받으면 추가하겠습니다.
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         Vector2Int[] row_standards = {
             Vector2Int.zero,

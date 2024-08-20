@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722b508c31c62f24e968441158e52707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uD2F0\uB974"
   _cost: 7
   illustration: {fileID: 0}
@@ -112,6 +114,6 @@ MonoBehaviour:
   - targetType: 0
     targetPieceType: -1
     isOpponent: 1
-    isFriendly: 1
+    isFriendly: 0
   isPositiveEffect: 0
   isNegativeEffect: 1
