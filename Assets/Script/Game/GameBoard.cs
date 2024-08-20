@@ -10,16 +10,24 @@ public class GameBoard : MonoBehaviour
 {
     public static GameBoard instance = null;
 
+    [Header("DebugMode")]
+    public bool isDebugMode;
+
+
     [HideInInspector]
     public GameData gameData;
+
+    [Header("GameData")]
     public GameBoard.PlayerColor playerColor;
     public ChessBoard chessBoard;
     public GameObject cardBoard;
     public PieceInfo pieceInfo; //기물 정보 프리팹
-    public GameObject myDeckObject;
 
-    public PlayerController myController;
-    public PlayerController opponentController;
+    public PlayerController whiteController;
+    public PlayerController blackController;
+
+    public PlayerController myController { get => playerColor == PlayerColor.White ? whiteController : blackController; }
+    public PlayerController opponentController { get => playerColor == PlayerColor.White ? blackController : whiteController; }
 
     public Action<ChessPiece> OnPieceKilled;
 
@@ -34,7 +42,6 @@ public class GameBoard : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            GameManager.instance.gameBoard = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -43,8 +50,19 @@ public class GameBoard : MonoBehaviour
             return;
         }
 
+        //플레이어 색상(선공) 지정
+        if (GameManager.instance.isHost)
+            playerColor = PlayerColor.White;
+        else
+            playerColor = PlayerColor.Black;
+
+        //덱 초기화
+        //gameData.myPlayerData.deck = GameManager.instance.currentDeck;
+
+        //체스 판 세팅
         chessBoard.SetBoardSquares(gameData);
 
+        //체스 말 두기
         foreach (ChessPiece piece in chessBoard.GetComponentsInChildren<ChessPiece>())
         {
             gameData.TryAddPiece(piece);
@@ -129,12 +147,6 @@ public class GameBoard : MonoBehaviour
             return myController;
         else
             return opponentController;
-    }
-
-    public void AddCardInDeckObject(Card card)
-    {
-        card.FlipBack();
-        card.transform.position = myDeckObject.transform.position;
     }
 
     [System.Serializable]

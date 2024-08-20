@@ -15,7 +15,7 @@ public class Athena : SoulCard
 
     public void InfusedEffect(ChessPiece chessPiece)
     {
-        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == InfusedPiece.pieceColor).ToList();
         targets.Remove(chessPiece);
         foreach (var target in targets)
         {
@@ -25,7 +25,7 @@ public class Athena : SoulCard
             target.buff.AddBuffByValue("아테나", Buff.BuffType.AD, 10, true);
             target.buff.AddBuffByValue("아테나", Buff.BuffType.HP, 10, true);
         }
-        
+
         chessPiece.OnSoulRemoved += RemoveEffect;
     }
 

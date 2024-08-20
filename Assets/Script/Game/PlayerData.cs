@@ -25,12 +25,8 @@ public class PlayerData
     {
         deckPosition = new Vector2(7.6f, -2.3f); //UI에 맞게 좌표수정
 
-        foreach (Card card in deck)
-        {
-            GameBoard.instance.AddCardInDeckObject(card);
-        }
-
         ShuffleDeck();
+        Mulligan();
     }
 
     // 드로우
@@ -62,15 +58,16 @@ public class PlayerData
     {
         return hand.Count >= maxHandCardCount;
     }
-
-    public void UpdateHandPosition()
-    {
-        for (int i = 0; i < hand.Count; i++)
+    public Action UpdateHandPosition;
+    /*
+        public void UpdateHandPosition()
         {
-            hand[i].transform.position = new Vector3(0.5f * i - 8, -3.75f, -0.1f * i); //UI에 맞게 좌표수정
+            for (int i = 0; i < hand.Count; i++)
+            {
+                hand[i].transform.position = new Vector3(0.5f * i - 8, -3.75f, -0.1f * i); //UI에 맞게 좌표수정
+            }
         }
-    }
-
+    */
     public bool TryAddCardInHand(Card cardInstance)
     {
         if (IsHandFull())
@@ -87,11 +84,11 @@ public class PlayerData
     // 핸드에 있는 카드 삭제 (cardInstance: 핸드에서 지정되어야 함, 프리팹 X)
     public bool TryRemoveCardInHand(Card cardInstance)
     {
-        int index = hand.IndexOf(cardInstance);
-
-        if (index != -1)
+        Debug.Log(cardInstance.handIndex);
+        if (cardInstance.handIndex != -1)
         {
-            hand.Remove(cardInstance);
+            hand.RemoveAt(cardInstance.handIndex);
+            UpdateHandPosition();
             return true;
         }
         else
@@ -122,7 +119,10 @@ public class PlayerData
     public void GetCard(Card cardInstance)
     {
         hand.Add(cardInstance);
-        cardInstance.FlipFront();
+        if (cardInstance.isMine)
+            cardInstance.FlipFront();
+        else
+            cardInstance.FlipBack();
         cardInstance.GetComponent<SortingGroup>().sortingOrder = hand.Count - 1;
 
         UpdateHandPosition();

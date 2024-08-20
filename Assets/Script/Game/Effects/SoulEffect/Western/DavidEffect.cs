@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Photon.Pun.Demo.Cockpit;
 using UnityEngine;
 
 public class DavidEffect : TargetingEffect
@@ -18,11 +19,11 @@ public class DavidEffect : TargetingEffect
 
     void Awake()
     {
-        EffectTarget effectTarget = new EffectTarget(TargetType.Piece, targetPieceRestriction , true, false, condition);
+        EffectTarget effectTarget = new EffectTarget(TargetType.Piece, targetPieceRestriction, true, false, condition);
         targetTypes.Add(effectTarget);
     }
 
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         foreach (var target in targets)
         {

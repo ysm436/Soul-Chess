@@ -8,7 +8,7 @@ public class ExecutionEffect : TargetingEffect
     public int insteadAD;
     public int standardHP;
 
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         foreach (var target in targets)
         {
