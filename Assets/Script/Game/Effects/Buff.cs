@@ -124,7 +124,7 @@ public class Buff : Effect
     public bool TryRemoveSpecificBuff(string sourceName, BuffType buffType) 
     {
         //키워드 버프인 경우 sourceName 상관없이 삭제
-        if (buffType != BuffType.HP && buffType != BuffType.AD && buffType != BuffType.MoveCount && buffType != BuffType.Defense)
+        if (buffType != BuffType.HP && buffType != BuffType.AD && buffType != BuffType.MoveCount && buffType != BuffType.Defense && buffType != BuffType.Description)
         {
             if (FindKeyword(buffType, out int index))
             {

@@ -46,6 +46,7 @@ public class Hephaestus : SoulCard
     public override void AddEffect()
     {
         InfusedPiece.OnMove += SoulEffect;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
     public override void RemoveEffect()
     {

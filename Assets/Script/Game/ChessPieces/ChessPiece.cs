@@ -26,6 +26,7 @@ abstract public class ChessPiece : TargetableObject
 
     public Vector2Int coordinate;
     public bool isAlive;
+    [HideInInspector] public bool isRevivable = false; //부활 체크용
     public SoulCard soul
     {
         set { _soul = value; }
@@ -260,11 +261,15 @@ abstract public class ChessPiece : TargetableObject
     public void Kill()
     {
         OnKilled?.Invoke(this);
-        RemoveSoul();
+        if (!isRevivable)
+        {
+            RemoveSoul();
 
-        isAlive = false;
-        pieceObject.HPText.text = "0";
-        GameBoard.instance.KillPiece(this);
+            isAlive = false;
+            pieceObject.HPText.text = "0";
+            GameBoard.instance.KillPiece(this);
+        }
+        else isRevivable = false;
     }
 
     public void SetSoul(SoulCard targetSoul, Sprite sprite)
@@ -341,24 +346,24 @@ abstract public class ChessPiece : TargetableObject
         //버프 및 디버프 아이콘 스프라이트 설정 (우선순위는 Enum 값이 작을수록 높음)
         effectIcon.SetIconSprite();
 
-        if (keywordType == Keyword.Type.Taunt)
+        if (keywordType == Keyword.Type.Taunt && n == 1)
         {
             _tauntNumber = GameBoard.instance.gameData.tauntNumber;          //도발 부여 순서 저장
         }
-        else if (keywordType == Keyword.Type.Stun)
+        else if (keywordType == Keyword.Type.Stun && n == 1)
         {
             //효과 발동 시점의 색깔 턴이 한번 더 돌아와야 스턴 해제
             //상대 턴에 스턴 효과를 부여당해서 풀리기 전 자기 턴에 스턴이 부여될 경우 최신화될 수 있도록 방법 구상 필요
             GameBoard.instance.CurrentPlayerController().OnMyTurnStart += Unstun;
         }
-        else if (keywordType == Keyword.Type.Restraint)
+        else if (keywordType == Keyword.Type.Restraint && n == 1)
         {
             if (soul != null)
             {
                 soul.RemoveEffect();
             }
         }
-        else if (keywordType == Keyword.Type.Silence)
+        else if (keywordType == Keyword.Type.Silence && n == 1)
         {
             if (soul != null)
             {
@@ -366,7 +371,7 @@ abstract public class ChessPiece : TargetableObject
                 RemoveBuff();
             }
         }
-        else if (keywordType == Keyword.Type.Rush)
+        else if (keywordType == Keyword.Type.Rush && n == 1)
         {
             MakeIsSoulSetFalse();
         }
@@ -493,7 +498,7 @@ abstract public class ChessPiece : TargetableObject
             }
             else if (buffType == Buff.BuffType.Defense)
             {
-                SetKeyword(Keyword.Type.Defense, GetKeyword(Keyword.Type.Defense) - (buffInfo.value * -1));
+                SetKeyword(Keyword.Type.Defense, -buffInfo.value);
             }
             else if (buffType == Buff.BuffType.Immunity)
             {

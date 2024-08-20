@@ -66,20 +66,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      insertIndex: 6
+      insertIndex: -1
       addedObject: {fileID: 4824830457768495894}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3866558103305100114}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!114 &1138779223185715711 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 7305861583260526390}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8836071399338119815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8836071399338119815 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
@@ -105,7 +97,7 @@ MonoBehaviour:
   rarity: 1
   description: "\uC774 \uAE30\uBB3C\uC774 \uACF5\uACA9\uD558\uC5EC \uC801 \uAE30\uBB3C\uC744
     \uCC98\uCE58\uD560 \uB54C \uB9C8\uB2E4 +20/+20\uC744 \uC5BB\uC2B5\uB2C8\uB2E4"
-  EffectOnCardUsed: {fileID: 1138779223185715711}
+  EffectOnCardUsed: {fileID: -3866558103305100114}
   isInSelection: 0
   pieceRestriction: 8
   _AD: 80
@@ -118,3 +110,15 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 0be8445f34efc3349b406045a2dc8f2a, type: 3}
   InfusedPiece: {fileID: 0}
+--- !u!114 &-3866558103305100114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8836071399338119815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04112a8e809164448a876dfb4dd2e41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

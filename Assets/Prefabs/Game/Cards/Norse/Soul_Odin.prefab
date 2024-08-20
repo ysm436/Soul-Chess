@@ -66,20 +66,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      insertIndex: 6
+      insertIndex: -1
       addedObject: {fileID: 9197931309180194723}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4136368748621515445}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!114 &1138779223185715711 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 7305861583260526390}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8836071399338119815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8836071399338119815 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
@@ -105,13 +97,25 @@ MonoBehaviour:
   rarity: 2
   description: "\uAC15\uB9BC : 3\uAC00\uC9C0 \uBCF4\uBB3C \uC911 \uD558\uB098\uB97C
     \uC120\uD0DD\uD574 \uB0B4 \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 1138779223185715711}
+  EffectOnCardUsed: {fileID: 4136368748621515445}
   isInSelection: 0
   pieceRestriction: 32
   _AD: 45
   _HP: 45
   accessorySpriteList: []
   InfusedPiece: {fileID: 0}
+--- !u!114 &4136368748621515445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8836071399338119815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45baa2c672cb954cbd8553e1bafe6d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   selectionCardPrefabList:
   - {fileID: 4078594222576986540, guid: f878d194de68cb5429a9e66131e1c1ef, type: 3}
   - {fileID: 4078594222576986540, guid: bd68a39ebb17f3241a700a8383bac0da, type: 3}

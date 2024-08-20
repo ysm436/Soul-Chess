@@ -16,15 +16,11 @@ public class Frigg : SoulCard
         base.Awake();
 
         decreaseAmountDictionary = new();
-        OnInfuse += (ChessPiece chessPiece) => DecreaseEnemyPiecesAD();
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnStart += DecreaseEnemyPiecesAD;
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
-        OnInfuse += (ChessPiece chessPiece) => chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
     private void IncreaseEnemyPiecesAD()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != InfusedPiece.pieceColor).ToList();
 
         foreach (ChessPiece piece in enemyPieceList)
         {
@@ -36,12 +32,13 @@ public class Frigg : SoulCard
             {
                 piece.AD += decreaseAmount;
             }
+            piece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.AD);
         }
     }
 
     private void DecreaseEnemyPiecesAD()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != InfusedPiece.pieceColor).ToList();
 
         decreaseAmountDictionary.Clear();
         foreach (ChessPiece piece in enemyPieceList)
@@ -52,6 +49,7 @@ public class Frigg : SoulCard
             }
 
             piece.AD -= decreaseAmount;
+            piece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, -decreaseAmount, false);
         }
     }
 
@@ -60,6 +58,7 @@ public class Frigg : SoulCard
         DecreaseEnemyPiecesAD();
         GameBoard.instance.myController.OnMyTurnStart += DecreaseEnemyPiecesAD;
         GameBoard.instance.myController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()

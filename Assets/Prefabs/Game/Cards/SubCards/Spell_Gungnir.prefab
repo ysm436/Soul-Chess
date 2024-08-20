@@ -77,8 +77,64 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell_Gungnir
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6115177178300004621}
+    - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7220643531253071022}
   m_SourcePrefab: {fileID: 100100000, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+--- !u!1 &4078594222576986540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+  m_PrefabInstance: {fileID: 4616442128809638412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6115177178300004621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078594222576986540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0192c2da770f93a4d85cd685c4089caf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardName: "\uAD81\uB2C8\uB974"
+  _cost: 5
+  illustration: {fileID: 0}
+  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  reigon: 1
+  rarity: 2
+  description: "\uAE30\uBB3C \uD558\uB098\uC5D0\uAC8C 50\uC758 \uD53C\uD574\uB97C
+    \uC90D\uB2C8\uB2E4. \uB0B4 \uD134\uC774 \uC2DC\uC791\uB420 \uB54C \uB2E4\uC2DC
+    \uB0B4 \uC190\uC73C\uB85C \uB3CC\uC544\uC635\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: -7220643531253071022}
+  isInSelection: 0
+--- !u!114 &-7220643531253071022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078594222576986540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69bec1a88746ed04b885329ef54df9b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTypes:
+  - targetType: 0
+    targetPieceType: -1
+    isOpponent: 1
+    isFriendly: 1
+  isPositiveEffect: 0
+  isNegativeEffect: 1
+  dmg: 50
+  gungnir: {fileID: 6115177178300004621}

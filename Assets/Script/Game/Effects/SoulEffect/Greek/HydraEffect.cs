@@ -1,0 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class HydraEffect : Effect
+{
+    public override void EffectAction()
+    {
+        gameObject.GetComponent<SoulCard>().AddEffect();
+    }
+}

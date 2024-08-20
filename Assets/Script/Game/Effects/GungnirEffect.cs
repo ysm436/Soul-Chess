@@ -1,0 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GungnirEffect : TargetingEffect
+{
+    [HideInInspector] public int dmg = 50;
+    [SerializeField] private Gungnir gungnir;
+    public override void EffectAction()
+    {
+        foreach (var target in targets)
+        {
+            (target as ChessPiece).SpellAttacked(dmg);
+            Gungnir spellCard = Instantiate(gameObject.GetComponent<Gungnir>());
+            spellCard.ReadyToGetGungnir();
+        }
+    }
+}
