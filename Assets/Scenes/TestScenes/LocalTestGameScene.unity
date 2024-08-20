@@ -2602,13 +2602,17 @@ MonoBehaviour:
   CardBoard: {fileID: 1951553768}
   gameBoard: {fileID: 1132824878}
   hand:
-  - {fileID: 7433252666421529211, guid: fc310b2ab5a30de4298b4aea18a015f4, type: 3}
-  - {fileID: 1292469394887977406, guid: 69acd9f53abcc974da0de5adf88dba59, type: 3}
+  - {fileID: 4771082728145016201, guid: 2aecace7e64055d499cbc7e901539f1b, type: 3}
+  - {fileID: -4444905576441016423, guid: da0937e7690e1c5469c3d9d445f4319b, type: 3}
+  - {fileID: 1010927943054502142, guid: 98e4ec505b3e4f74191781f27c3f0fa9, type: 3}
   deck:
-  - {fileID: 4824830457768495894, guid: dc0e4c5991c664d4aaaad1229ca79999, type: 3}
-  - {fileID: -2815551797691118998, guid: 2d9947a9ca0af554ebef3f3b895f3d78, type: 3}
-  - {fileID: 3604200065000529882, guid: 69c628af0606ded408e60e35428eab89, type: 3}
-  - {fileID: 599667399022218461, guid: ff82128eca4e7994fb3e11360893a803, type: 3}
+  - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
+  - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
+  - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
+  - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
+  - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
+  - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
+  - {fileID: 9197931309180194723, guid: 55eea7fd0a8d7774b93722e3411c3f32, type: 3}
 --- !u!4 &1707751552
 Transform:
   m_ObjectHideFlags: 0

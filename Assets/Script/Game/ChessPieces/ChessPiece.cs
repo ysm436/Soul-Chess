@@ -72,6 +72,7 @@ abstract public class ChessPiece : TargetableObject
         if (GetKeyword(Keyword.Type.Shield) == 1)
         {
             keywordDictionary[Keyword.Type.Shield] = 0;
+            effectIcon.SetIconSprite();
             return;
         }
 

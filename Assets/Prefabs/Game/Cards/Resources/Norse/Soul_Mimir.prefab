@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4597677055463952963
+--- !u!1001 &4191677188905475383
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -50,86 +50,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Name
-      value: Soul_Athena
+      value: Soul_Mimir
       objectReference: {fileID: 0}
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: m_FlipY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: isPositiveEffect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].isFriendly
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      propertyPath: targetTypes.Array.data[0].targetPieceType
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 02986a37bd49c624da7ca5aa21fa7b08, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3111671115176496445}
+      addedObject: {fileID: 1010927943054502142}
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4337335728533308788}
+      addedObject: {fileID: -6232363627302796207}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!1 &2309661155767330802 stripped
+--- !u!1 &2731572022880675974 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 4597677055463952963}
+  m_PrefabInstance: {fileID: 4191677188905475383}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-3111671115176496445
+--- !u!114 &1010927943054502142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2309661155767330802}
+  m_GameObject: {fileID: 2731572022880675974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8c112bc9a96c21419de462e2236d14d, type: 3}
+  m_Script: {fileID: 11500000, guid: 23054b17028debd40956d37b1f3e87bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: "\uC544\uD14C\uB098"
-  _cost: 6
+  cardName: "\uBBF8\uBBF8\uB974"
+  _cost: 7
   illustration: {fileID: 0}
-  back: {fileID: 0}
-  reigon: 0
-  rarity: 2
-  description: "\uB0B4 \uB2E4\uB978 \uAE30\uBB3C\uB4E4\uC774 +10/+10\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 4337335728533308788}
+  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  reigon: 1
+  rarity: 1
+  description: "\uB0B4 \uCE74\uB4DC\uC758 \uBE44\uC6A9\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: -6232363627302796207}
   isInSelection: 0
-  pieceRestriction: 2
-  _AD: 45
-  _HP: 45
-  accessorySpriteList:
-  - pieceType: 2
-    pieceColor: 0
-    sprite: {fileID: 21300000, guid: 2b1e7e62cd351014b9687d431ae09256, type: 3}
-  - pieceType: 2
-    pieceColor: 1
-    sprite: {fileID: 21300000, guid: 2b1e7e62cd351014b9687d431ae09256, type: 3}
+  pieceRestriction: 6
+  _AD: 50
+  _HP: 50
+  accessorySpriteList: []
   InfusedPiece: {fileID: 0}
---- !u!114 &4337335728533308788
+--- !u!114 &-6232363627302796207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2309661155767330802}
+  m_GameObject: {fileID: 2731572022880675974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1b05bc9e8632a49abd124e88f07ab3, type: 3}
+  m_Script: {fileID: 11500000, guid: 122dbd15cdefbca46b1d322ec0be073a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
