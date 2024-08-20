@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RagnarokEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects;
 

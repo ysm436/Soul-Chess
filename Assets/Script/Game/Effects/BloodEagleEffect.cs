@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BloodEagleEffect : TargetingEffect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         foreach (var target in targets)
         {
             (target as ChessPiece).Kill();
         }
 
-        GameBoard.instance.myController.Draw();
+        player.Draw();
     }
 }

@@ -4,9 +4,13 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using Photon.Pun;
+using Photon.Pun.Demo.Cockpit;
 
 public class PlayerController : MonoBehaviour
 {
+    private PhotonView photonView;
+
     public GameBoard.PlayerColor playerColor;
     public GameBoard gameBoard;
     public SoulOrb soulOrb; //코스트 프리팹
@@ -14,9 +18,19 @@ public class PlayerController : MonoBehaviour
     ChessPiece chosenPiece = null;
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
-    private Card UsingCard = null;
+    private int movableCount = 1;
+    public bool TurnEndPossible
+    {
+        get
+        {
+            return (movableCount <= 0) || !(GameBoard.instance.gameData.pieceObjects.Any(obj => (obj.GetMovableCoordinates().Count >= 1 && obj.pieceColor == playerColor)));
+        }
+    }
+
+    private Card usingCard = null;
     private TargetingEffect targetingEffect;
     public bool isUsingCard = false;
+    private bool isInfusing = false;
     List<TargetableObject> targetableObjects = new List<TargetableObject>();
 
     public Action OnMyTurnStart;
@@ -31,6 +45,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _isMyTurn;
     public bool isMyTurn { get => _isMyTurn; }
 
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
+    private void Start()
+    {
+        OnOpponentTurnEnd += () => movableCount = 1;
+    }
     private void OnEnable()
     {
         foreach (var s in gameBoard.gameData.boardSquares)
@@ -48,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnClickBoardSquare(Vector2Int coordinate)
     {
-        if (!GameBoard.instance.isActivePlayer)
+        if (!GameBoard.instance.isActivePlayer && !GameBoard.instance.isDebugMode)
             return;
 
         ChessPiece targetPiece = gameBoard.gameData.GetPiece(coordinate);
@@ -74,7 +96,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else
+        else if (movableCount > 0)
         {
             if (chosenPiece == null)//선택된 (아군)기물이 없을 때
             {
@@ -98,16 +120,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (IsMovableCoordniate(coordinate))
                         {
-                            if (chosenPiece.Attack(targetPiece))
-                            {
-                                chosenPiece.Move(coordinate);
-                                gameBoard.chessBoard.SetPiecePositionByCoordinate(chosenPiece);
-                            }
-                            else if (!chosenPiece.isAlive)
-                            {
-                                //이벤트 메커니즘 수정하면서 다시 체크해볼게요
-                                //gameBoard.KillPiece(chosenPiece);
-                            }
+                            photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
 
                             chosenPiece = null;
                             ClearMovableCoordniates();
@@ -118,8 +131,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (IsMovableCoordniate(coordinate))
                     {
-                        chosenPiece.Move(coordinate);
-                        gameBoard.chessBoard.SetPiecePositionByCoordinate(chosenPiece);
+                        photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
                     }
                     chosenPiece = null;
                     ClearMovableCoordniates();
@@ -128,6 +140,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [PunRPC]
+    private void MovePiece(int src_x, int src_y, int dst_x, int dst_y, bool isAttack)
+    {
+        Vector2Int dst_coordinate = new Vector2Int(dst_x, dst_y);
+        Vector2Int src_coordinate = new Vector2Int(src_x, src_y);
+
+        ChessPiece srcPiece = GameBoard.instance.gameData.GetPiece(src_coordinate);
+
+        if (isAttack)
+        {
+            ChessPiece dstPiece = GameBoard.instance.gameData.GetPiece(dst_coordinate);
+            if (srcPiece.Attack(dstPiece))
+            {
+                srcPiece.Move(dst_coordinate);
+                gameBoard.chessBoard.SetPiecePositionByCoordinate(srcPiece);
+            }
+            else if (!srcPiece.isAlive)
+            {
+                //이벤트 메커니즘 수정하면서 다시 체크해볼게요
+                //gameBoard.KillPiece(srcPiece);
+            }
+        }
+        else
+        {
+            srcPiece.Move(dst_coordinate);
+            gameBoard.chessBoard.SetPiecePositionByCoordinate(srcPiece);
+        }
+
+        movableCount--;
+    }
     void SetChosenPiece(ChessPiece targetPiece)
     {
         ClearMovableCoordniates();
@@ -176,54 +218,196 @@ public class PlayerController : MonoBehaviour
                 else GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isPositiveTargetable = true;
             }
     }
-    public void UseCard(Card card, Predicate<ChessPiece> tartgetCondition = null)
+    public bool UseCard(Card card)
     {
-        UsingCard = card;
+        if (GameBoard.instance.CurrentPlayerData().soulEssence < card.cost)
+            return false;
+
+        usingCard = card;
         isUsingCard = true;
 
-        if (!(card.EffectOnCardUsed is TargetingEffect))
+        if (usingCard is SoulCard)
         {
-            UseCardEffect();
-            return;
+            if (!isInfusing)
+            {
+                if (!(usingCard as SoulCard).infusion.isAvailable(playerColor))
+                {
+                    usingCard = null;
+                    isUsingCard = false;
+                    return false;
+                }
+                else if (usingCard.EffectOnCardUsed is TargetingEffect)
+                {
+                    if (!(usingCard.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor))
+                    {
+                        usingCard = null;
+                        isUsingCard = false;
+                        return false;
+                    }
+                }
+
+                isInfusing = true;
+
+                targetingEffect = (usingCard as SoulCard).infusion;
+                ActiveTargeting();
+            }
+            else
+            {
+                isInfusing = false;
+
+                if (usingCard.EffectOnCardUsed is TargetingEffect)
+                {
+                    if (!(usingCard.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor))
+                    {
+                        usingCard = null;
+                        isUsingCard = false;
+                        return false;
+                    }
+                    targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
+                    ActiveTargeting();
+                }
+                else
+                {
+                    UseCardEffect();
+                }
+            }
         }
         else
         {
-            targetingEffect = card.EffectOnCardUsed as TargetingEffect;
+            if (card.EffectOnCardUsed is TargetingEffect)
+            {
+                targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
+                ActiveTargeting();
+            }
+            else
+            {
+                UseCardEffect();
+            }
         }
 
 
+        return true;
+    }
+    private void ActiveTargeting()
+    {
         ClearMovableCoordniates();
 
-        if (!targetingEffect.isAvailable(playerColor))
-        {
-            UsingCard = null;
-            isUsingCard = false;
-            return;
-        }
-
-        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor, tartgetCondition);
+        targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
         if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
         {
             //타겟 효과가 부정적인지 파라미터 전달
             SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
         }
-
-        GameBoard.instance.ShowCard(card);
     }
     public void UseCardEffect()
     {
-        UsingCard.EffectOnCardUsed.EffectAction();
-        GameBoard.instance.CurrentPlayerData().soulEssence -= UsingCard.cost;
+        if (isInfusing)
+        {
+            (usingCard as SoulCard).infusion.EffectAction(this);
+            if (usingCard.EffectOnCardUsed != null)
+            {
+                targetingEffect = null;
+                UseCard(usingCard);
+                return;
+            }
+            isInfusing = false;
+        }
 
-        if (!(UsingCard is SoulCard))
-            UsingCard.Destroy();
-        UsingCard = null;
+        if (usingCard is SoulCard)
+        {
+            if (usingCard.EffectOnCardUsed is TargetingEffect)
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, (usingCard as SoulCard).infusion.targetCoordinates[0], (usingCard.EffectOnCardUsed as TargetingEffect).targetCoordinates);
+            else
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, (usingCard as SoulCard).infusion.targetCoordinates[0], null);
+        }
+        else
+        {
+            if (usingCard.EffectOnCardUsed is TargetingEffect)
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), (usingCard.EffectOnCardUsed as TargetingEffect).targetCoordinates);
+            else
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), null);
+        }
+
+        usingCard.EffectOnCardUsed?.EffectAction(this);
+
+
+        GameBoard.instance.CurrentPlayerData().soulEssence -= usingCard.cost;
+
+        if (!(usingCard is SoulCard))
+            usingCard.Destroy();
+        usingCard = null;
         isUsingCard = false;
-
         targetingEffect = null;
 
         GameBoard.instance.HideCard();
+
+    }
+
+    [PunRPC]
+    public void UseCardRemote(int cardIndex, Vector2 infusionTarget, Vector2[] targetArray = null)
+    {
+        Card card = gameBoard.gameData.opponentPlayerData.hand[cardIndex];
+        GameBoard.instance.CurrentPlayerData().soulEssence -= card.cost;
+
+        gameBoard.ShowCard(card);
+        GameBoard.instance.gameData.opponentPlayerData.TryRemoveCardInHand(card);
+
+        if (card is SoulCard)
+        {
+
+            Vector2Int infusionTargetCoordinate = Vector2Int.RoundToInt(infusionTarget);
+
+            Debug.Log(infusionTargetCoordinate);
+
+            (card as SoulCard).infusion.SetTargetsByCoordinate(new Vector2Int[] { infusionTargetCoordinate });
+            gameBoard.gameData.boardSquares[infusionTargetCoordinate.x, infusionTargetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.movable);
+
+            (card as SoulCard).infusion.EffectAction(gameBoard.opponentController);
+        }
+
+        if (card.EffectOnCardUsed is TargetingEffect)
+        {
+            Vector2Int[] targetCoordinateArray = targetArray.Select(coordinate => Vector2Int.RoundToInt(coordinate)).ToArray();
+            TargetingEffect targetingEffect = card.EffectOnCardUsed as TargetingEffect;
+            targetingEffect.SetTargetsByCoordinate(targetCoordinateArray);
+
+            if (targetingEffect.IsPositiveEffect)
+            {
+                foreach (Vector2Int targetCoordinate in targetCoordinateArray)
+                {
+                    gameBoard.gameData.boardSquares[targetCoordinate.x, targetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.positive);
+                }
+            }
+            else if (targetingEffect.IsNegativeEffect)
+            {
+                foreach (Vector2Int targetCoordinate in targetCoordinateArray)
+                {
+                    gameBoard.gameData.boardSquares[targetCoordinate.x, targetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.negative);
+                }
+            }
+
+            targetingEffect.EffectAction(gameBoard.opponentController);
+        }
+        else if (card.EffectOnCardUsed != null)
+        {
+
+            card.EffectOnCardUsed.EffectAction(gameBoard.opponentController);
+        }
+
+        if (!(card is SoulCard))
+            card.Destroy();
+
+        Invoke("HideRemoteUsedCard", 1f);
+    }
+    private void HideRemoteUsedCard()
+    {
+        gameBoard.HideCard();
+        foreach (BoardSquare bs in gameBoard.gameData.boardSquares)
+        {
+            bs.outline.changeOutline(BoardSquareOutline.TargetableStates.none);
+        }
+        GameBoard.instance.gameData.opponentPlayerData.UpdateHandPosition();
     }
 
     public void TurnStart()
@@ -238,6 +422,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Draw()
+    {
+        photonView.RPC("LocalDraw", RpcTarget.All);
+    }
+    [PunRPC]
+    public void LocalDraw()
     {
         if (playerColor == GameBoard.PlayerColor.White)
         {

@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
-
 //TODO: targettype이 card인 경우의 gettargetlist 구현
 
 public abstract class TargetingEffect : Effect
@@ -14,6 +12,10 @@ public abstract class TargetingEffect : Effect
     /// </summary>
     [SerializeField]
     public List<EffectTarget> targetTypes = new List<EffectTarget>();
+    public Vector2[] targetCoordinates
+    {
+        get => targets.Select(t => (Vector2)(t as ChessPiece).coordinate).ToArray();
+    }
     protected List<TargetableObject> targets = new List<TargetableObject>();
 
     [SerializeField] private bool isPositiveEffect;
@@ -51,18 +53,20 @@ public abstract class TargetingEffect : Effect
     [Serializable]
     public class EffectTarget
     {
-        public EffectTarget(TargetType targetType, ChessPiece.PieceType targetPieceType, bool isOpponent, bool isFriendly)
+        public EffectTarget(TargetType targetType, ChessPiece.PieceType targetPieceType, bool isOpponent, bool isFriendly, Predicate<ChessPiece> condition = null)
         {
             this.targetType = targetType;
             this.targetPieceType = targetPieceType;
             this.isOpponent = isOpponent;
             this.isFriendly = isFriendly;
+            this.condition = condition;
         }
         public TargetType targetType;
         public ChessPiece.PieceType targetPieceType;
         public bool isOpponent;
         public bool isFriendly;
-        public List<TargetableObject> GetTargetList(GameBoard.PlayerColor playerColor, Predicate<ChessPiece> condition = null)
+        Predicate<ChessPiece> condition;
+        public List<TargetableObject> GetTargetList(GameBoard.PlayerColor playerColor)
         {
             switch (targetType)
             {
@@ -77,6 +81,16 @@ public abstract class TargetingEffect : Effect
                 default:
                     return new List<TargetableObject>();
             }
+        }
+    }
+    public void SetTargetsByCoordinate(Vector2Int[] targetCoordinateArray)
+    {
+        for (int i = 0; i < targetCoordinateArray.Length; i++)
+        {
+            UnityEngine.Debug.Log(targetCoordinateArray[i]);
+            targets.Add(
+                GameBoard.instance.gameData.pieceObjects.First<ChessPiece>(
+                    obj => obj.coordinate == targetCoordinateArray[i]));
         }
     }
     public enum TargetType

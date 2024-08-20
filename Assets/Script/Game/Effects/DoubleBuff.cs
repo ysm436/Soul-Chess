@@ -6,7 +6,7 @@ public class MultiBuff : TargetingEffect
 {
     public int buffHP;
     public int buffAD;
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         foreach (var t in targets)
         {

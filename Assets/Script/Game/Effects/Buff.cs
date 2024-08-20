@@ -103,7 +103,7 @@ public class Buff : Effect
         return false;
     }
 
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
 
     }

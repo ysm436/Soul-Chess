@@ -8,11 +8,14 @@ using UnityEngine.EventSystems;
 
 public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
+    [HideInInspector]
+    public bool isMine;
+    public int handIndex = -1;
+
     abstract protected int CardID { get; }
+    public int GetCardID { get => CardID; }
 
     private CardObject cardObject;
-
-    protected Predicate<ChessPiece> targetCondition = null;
 
     [Header("CardData")]
     public string cardName;
@@ -59,10 +62,14 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+        {
             GameBoard.instance.HideCard();
+        }
     }
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isMine) return;
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -71,6 +78,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isMine) return;
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             if (transform.position.y > 0)
@@ -78,12 +87,17 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                 if (!TryUse())
                 {
                     //카드 원위치
-                    GameBoard.instance.gameData.playerWhite.UpdateHandPosition();
+                    GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
                 }
                 else
                 {
-                    GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
+                    GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
                 }
+            }
+            else
+            {
+
+                GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
             }
         }
     }
@@ -100,8 +114,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
             return false;
 
         //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
-        GameBoard.instance.CurrentPlayerController().UseCard(this, targetCondition);
-        return true;
+        return GameBoard.instance.CurrentPlayerController().UseCard(this);
     }
 
     public void FlipFront()
@@ -141,6 +154,16 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
 
 
+    static public int[] GetCardIDArray(List<Card> cards)
+    {
+        int[] cardIDArray = new int[cards.Count];
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cardIDArray[i] = cards[i].GetCardID;
+        }
+        return cardIDArray;
+    }
+
     //Card Dictionary<CardName, CardID>
     public static Dictionary<string, int> cardIdDict = new Dictionary<string, int>(){
         {"오딘", 0},
@@ -150,15 +173,26 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"라그나로크", 9},
         {"펜리르", 10},
         {"피의 독수리", 11},
+        {"우트가르다 로키", 12},
         {"처형", 16},
+        {"아레스", 18},
         {"어미 곰", 19},
         {"포세이돈", 21},
+        {"아테나", 22},
+        {"케르베로스", 24},
+        {"판도라의 상자", 27},
         {"페르세우스", 29},
+        {"데비 존스", 35},
+        {"카인", 36},
         {"모르건 르 페이", 37},
         {"호수의 여인", 38},
         {"베헤모스", 39},
+        {"다윗", 40},
         {"아벨", 42},
+        {"잭 프로스트", 43},
         {"돈키호테", 44},
+        {"음치 음유시인", 46},
+        {"근엄한 경비병", 47},
         {"크라켄", 48}
     };
 }
