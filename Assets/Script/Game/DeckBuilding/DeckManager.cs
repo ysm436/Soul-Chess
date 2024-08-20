@@ -10,10 +10,10 @@ public class DeckManager : MonoBehaviour, IDropHandler
     private int CARD_LIMIT = 30;
     public int loaded_deck_index = 0;
     public int local_card_count = 0;
-    public int[] local_costs = new int[8]{0, 0, 0, 0, 0, 0, 0, 0};
-    public int[] local_chesspieces = new int[6]{0, 0, 0, 0, 0, 0};
-    public int[] local_extra_chesspieces = new int[6]{0, 0, 0, 0, 0, 0};
-    public int[] local_rarities = new int[3]{0, 0, 0};
+    public int[] local_costs = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] local_chesspieces = new int[6] { 0, 0, 0, 0, 0, 0 };
+    public int[] local_extra_chesspieces = new int[6] { 0, 0, 0, 0, 0, 0 };
+    public int[] local_rarities = new int[3] { 0, 0, 0 };
 
     [SerializeField] private RectTransform trashcan;
     [SerializeField] private RectTransform CardSlot;
@@ -75,7 +75,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
                     simplecard_info.cardNameText.text = CardInfo.CardName;
                     simplecard_info.cost.text = CardInfo.Cost.ToString();
                     simplecard_info.quantity = 1;
-                    
+
                     // 코스트가 낮을 수록 앞으로 가게끔
                     for (int card_order = 0; card_order < CardSlot.childCount - 1; card_order++)
                     {
@@ -187,7 +187,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
     public void MakeSimpleCard()
     {
-        List<GameObject> allcardlist = dbm.AllCardList;
+        List<GameObject> allcardlist = GameManager.instance.AllCards.ToList();
 
         for (int i = 0; i < TempDeck.Count; i++)
         {
@@ -214,7 +214,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
                         simplecard_info.quantity += 1;
                         break;
                     }
-                }   
+                }
             }
 
             foreach (var display in dbm.DisplayCardList)
@@ -289,7 +289,6 @@ public class DeckManager : MonoBehaviour, IDropHandler
     {
         List<GameObject> allcardlist = GameManager.instance.AllCards.ToList();
         List<GameObject> GameobjectList = new List<GameObject>();
-        List<GameObject> allcardlist = dbm.AllCardList;
         bool error_signal = false;
         int duplicate_quantity = 0;
 
@@ -311,7 +310,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
             for (int i = 0; i < TempDeck.Count; i++)
             {
                 int temp_cost = allcardlist[TempDeck[i]].GetComponent<Card>().cost;
-                
+
                 if (cardinfo.Cost == temp_cost)
                 {
                     tempdeckinputindex = i + 1;
@@ -330,7 +329,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
         if (local_card_count == 30)
         {
-            CautionText.text = "덱에 카드는 "+ CARD_LIMIT.ToString() +"개만 넣을 수 있습니다.";
+            CautionText.text = "덱에 카드는 " + CARD_LIMIT.ToString() + "개만 넣을 수 있습니다.";
             error_signal = true;
         }
         else if (cardinfo.Rarity == Card.Rarity.Mythical)
@@ -379,14 +378,14 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
         switch (cardinfo.Cost)
         {
-            case 0 : local_costs[0] += 1; break;
-            case 1 : local_costs[1] += 1; break;
-            case 2 : local_costs[2] += 1; break;
-            case 3 : local_costs[3] += 1; break;
-            case 4 : local_costs[4] += 1; break;
-            case 5 : local_costs[5] += 1; break;
-            case 6 : local_costs[6] += 1; break;
-            default : local_costs[7] += 1; break;
+            case 0: local_costs[0] += 1; break;
+            case 1: local_costs[1] += 1; break;
+            case 2: local_costs[2] += 1; break;
+            case 3: local_costs[3] += 1; break;
+            case 4: local_costs[4] += 1; break;
+            case 5: local_costs[5] += 1; break;
+            case 6: local_costs[6] += 1; break;
+            default: local_costs[7] += 1; break;
         }
 
         List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();
@@ -404,33 +403,33 @@ public class DeckManager : MonoBehaviour, IDropHandler
             {
                 switch (includedTypes[i])
                 {
-                    case ChessPiece.PieceType.Pawn : local_chesspieces[0] += 1; break;
-                    case ChessPiece.PieceType.Knight : local_chesspieces[1] += 1; break;
-                    case ChessPiece.PieceType.Bishop : local_chesspieces[2] += 1; break;
-                    case ChessPiece.PieceType.Rook : local_chesspieces[3] += 1; break;
-                    case ChessPiece.PieceType.Quene : local_chesspieces[4] += 1; break;
-                    case ChessPiece.PieceType.King : local_chesspieces[5] += 1; break;
+                    case ChessPiece.PieceType.Pawn: local_chesspieces[0] += 1; break;
+                    case ChessPiece.PieceType.Knight: local_chesspieces[1] += 1; break;
+                    case ChessPiece.PieceType.Bishop: local_chesspieces[2] += 1; break;
+                    case ChessPiece.PieceType.Rook: local_chesspieces[3] += 1; break;
+                    case ChessPiece.PieceType.Quene: local_chesspieces[4] += 1; break;
+                    case ChessPiece.PieceType.King: local_chesspieces[5] += 1; break;
                 }
             }
             else
             {
                 switch (includedTypes[i])
                 {
-                    case ChessPiece.PieceType.Pawn : local_extra_chesspieces[0] += 1; break;
-                    case ChessPiece.PieceType.Knight : local_extra_chesspieces[1] += 1; break;
-                    case ChessPiece.PieceType.Bishop : local_extra_chesspieces[2] += 1; break;
-                    case ChessPiece.PieceType.Rook : local_extra_chesspieces[3] += 1; break;
-                    case ChessPiece.PieceType.Quene : local_extra_chesspieces[4] += 1; break;
-                    case ChessPiece.PieceType.King : local_extra_chesspieces[5] += 1; break;
+                    case ChessPiece.PieceType.Pawn: local_extra_chesspieces[0] += 1; break;
+                    case ChessPiece.PieceType.Knight: local_extra_chesspieces[1] += 1; break;
+                    case ChessPiece.PieceType.Bishop: local_extra_chesspieces[2] += 1; break;
+                    case ChessPiece.PieceType.Rook: local_extra_chesspieces[3] += 1; break;
+                    case ChessPiece.PieceType.Quene: local_extra_chesspieces[4] += 1; break;
+                    case ChessPiece.PieceType.King: local_extra_chesspieces[5] += 1; break;
                 }
             }
         }
 
         switch (cardinfo.Rarity)
         {
-            case Card.Rarity.Common : local_rarities[0] += 1; break;
-            case Card.Rarity.Legendary : local_rarities[1] += 1; break;
-            case Card.Rarity.Mythical : local_rarities[2] += 1; break;
+            case Card.Rarity.Common: local_rarities[0] += 1; break;
+            case Card.Rarity.Legendary: local_rarities[1] += 1; break;
+            case Card.Rarity.Mythical: local_rarities[2] += 1; break;
         }
 
         CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / 30";
@@ -442,14 +441,14 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
         switch (cardinfo.Cost)
         {
-            case 0 : local_costs[0] -= 1; break;
-            case 1 : local_costs[1] -= 1; break;
-            case 2 : local_costs[2] -= 1; break;
-            case 3 : local_costs[3] -= 1; break;
-            case 4 : local_costs[4] -= 1; break;
-            case 5 : local_costs[5] -= 1; break;
-            case 6 : local_costs[6] -= 1; break;
-            default : local_costs[7] -= 1; break;
+            case 0: local_costs[0] -= 1; break;
+            case 1: local_costs[1] -= 1; break;
+            case 2: local_costs[2] -= 1; break;
+            case 3: local_costs[3] -= 1; break;
+            case 4: local_costs[4] -= 1; break;
+            case 5: local_costs[5] -= 1; break;
+            case 6: local_costs[6] -= 1; break;
+            default: local_costs[7] -= 1; break;
         }
 
         List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();
@@ -467,36 +466,36 @@ public class DeckManager : MonoBehaviour, IDropHandler
             {
                 switch (includedTypes[i])
                 {
-                    case ChessPiece.PieceType.Pawn : local_chesspieces[0] -= 1; break;
-                    case ChessPiece.PieceType.Knight : local_chesspieces[1] -= 1; break;
-                    case ChessPiece.PieceType.Bishop : local_chesspieces[2] -= 1; break;
-                    case ChessPiece.PieceType.Rook : local_chesspieces[3] -= 1; break;
-                    case ChessPiece.PieceType.Quene : local_chesspieces[4] -= 1; break;
-                    case ChessPiece.PieceType.King : local_chesspieces[5] -= 1; break;
+                    case ChessPiece.PieceType.Pawn: local_chesspieces[0] -= 1; break;
+                    case ChessPiece.PieceType.Knight: local_chesspieces[1] -= 1; break;
+                    case ChessPiece.PieceType.Bishop: local_chesspieces[2] -= 1; break;
+                    case ChessPiece.PieceType.Rook: local_chesspieces[3] -= 1; break;
+                    case ChessPiece.PieceType.Quene: local_chesspieces[4] -= 1; break;
+                    case ChessPiece.PieceType.King: local_chesspieces[5] -= 1; break;
                 }
             }
             else
             {
                 switch (includedTypes[i])
                 {
-                    case ChessPiece.PieceType.Pawn : local_extra_chesspieces[0] -= 1; break;
-                    case ChessPiece.PieceType.Knight : local_extra_chesspieces[1] -= 1; break;
-                    case ChessPiece.PieceType.Bishop : local_extra_chesspieces[2] -= 1; break;
-                    case ChessPiece.PieceType.Rook : local_extra_chesspieces[3] -= 1; break;
-                    case ChessPiece.PieceType.Quene : local_extra_chesspieces[4] -= 1; break;
-                    case ChessPiece.PieceType.King : local_extra_chesspieces[5] -= 1; break;
+                    case ChessPiece.PieceType.Pawn: local_extra_chesspieces[0] -= 1; break;
+                    case ChessPiece.PieceType.Knight: local_extra_chesspieces[1] -= 1; break;
+                    case ChessPiece.PieceType.Bishop: local_extra_chesspieces[2] -= 1; break;
+                    case ChessPiece.PieceType.Rook: local_extra_chesspieces[3] -= 1; break;
+                    case ChessPiece.PieceType.Quene: local_extra_chesspieces[4] -= 1; break;
+                    case ChessPiece.PieceType.King: local_extra_chesspieces[5] -= 1; break;
                 }
             }
         }
 
         switch (cardinfo.Rarity)
         {
-            case Card.Rarity.Common : local_rarities[0] -= 1; break;
-            case Card.Rarity.Legendary : local_rarities[1] -= 1; break;
-            case Card.Rarity.Mythical : local_rarities[2] -= 1; break;
+            case Card.Rarity.Common: local_rarities[0] -= 1; break;
+            case Card.Rarity.Legendary: local_rarities[1] -= 1; break;
+            case Card.Rarity.Mythical: local_rarities[2] -= 1; break;
         }
 
-        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / " +  CARD_LIMIT.ToString();
+        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / " + CARD_LIMIT.ToString();
     }
 
     public void CancelCaution()
