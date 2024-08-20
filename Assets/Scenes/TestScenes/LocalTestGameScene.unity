@@ -1728,6 +1728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1464a3476d9b6409b3f459335d71c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebugMode: 0
   gameData:
     pieceObjects: []
     graveyard: []
@@ -1756,8 +1757,8 @@ MonoBehaviour:
   cardBoard: {fileID: 1951553768}
   pieceInfo: {fileID: 1594983728884485668, guid: 6f09fd129a154794e8cebcd82ef9b00a, type: 3}
   myDeckObject: {fileID: 2095973276}
-  myController: {fileID: 625501409}
-  opponentController: {fileID: 1635301580}
+  whiteController: {fileID: 625501409}
+  blackController: {fileID: 1635301580}
   isShowingPieceInfo: 0
 --- !u!1001 &1184252153
 PrefabInstance:

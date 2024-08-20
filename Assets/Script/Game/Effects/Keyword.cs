@@ -21,7 +21,7 @@ public class Keyword : Effect
 
     public static Type[] AllKeywords { get => Enum.GetValues(typeof(Type)).Cast<Type>().ToArray(); }
 
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
 
     }

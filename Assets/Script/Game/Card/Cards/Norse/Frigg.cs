@@ -24,7 +24,7 @@ public class Frigg : SoulCard
 
     private void IncreaseEnemyPiecesAD()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != InfusedPiece.pieceColor).ToList();
 
         foreach (ChessPiece piece in enemyPieceList)
         {
@@ -41,7 +41,7 @@ public class Frigg : SoulCard
 
     private void DecreaseEnemyPiecesAD()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != InfusedPiece.pieceColor).ToList();
 
         decreaseAmountDictionary.Clear();
         foreach (ChessPiece piece in enemyPieceList)

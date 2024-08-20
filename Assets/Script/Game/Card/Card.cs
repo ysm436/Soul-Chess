@@ -8,7 +8,12 @@ using UnityEngine.EventSystems;
 
 public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
+    [HideInInspector]
+    public bool isMine;
+    public int handIndex = -1;
+
     abstract protected int CardID { get; }
+    public int GetCardID { get => CardID; }
 
     private CardObject cardObject;
 
@@ -63,6 +68,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isMine) return;
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -71,6 +78,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isMine) return;
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             if (transform.position.y > 0)
@@ -78,12 +87,17 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                 if (!TryUse())
                 {
                     //카드 원위치
-                    GameBoard.instance.gameData.playerWhite.UpdateHandPosition();
+                    GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
                 }
                 else
                 {
-                    GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
+                    GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
                 }
+            }
+            else
+            {
+
+                GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
             }
         }
     }
@@ -139,6 +153,16 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         Spell
     }
 
+
+    static public int[] GetCardIDArray(List<Card> cards)
+    {
+        int[] cardIDArray = new int[cards.Count];
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cardIDArray[i] = cards[i].GetCardID;
+        }
+        return cardIDArray;
+    }
 
     //Card Dictionary<CardName, CardID>
     public static Dictionary<string, int> cardIdDict = new Dictionary<string, int>(){

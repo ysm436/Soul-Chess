@@ -6,10 +6,10 @@ using UnityEngine;
 public class DavyJonesEffect : Effect
 {
     int change = 10;
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         //강림 시점에서 죽은 기물들 개수 (16-현재 기물 수) 만큼 스탯 증가 적용 후 남아있는 기물의 Onkilled 시 스탯 10씩 추가
-        List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor == GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor == player.playerColor).ToList();
         int deadMyPieceCount = 16 - pieceList.Count;
 
         gameObject.GetComponent<SoulCard>().InfusedPiece.AD += deadMyPieceCount * change;

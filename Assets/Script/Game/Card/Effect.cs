@@ -8,5 +8,5 @@ using UnityEngine;
 
 public abstract class Effect : MonoBehaviour
 {
-    public abstract void EffectAction();
+    public abstract void EffectAction(PlayerController player);
 }
