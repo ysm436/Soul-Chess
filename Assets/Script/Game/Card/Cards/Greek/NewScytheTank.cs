@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NewScytheTank : SoulCard
 {
-    protected override int CardID => cardIdDict["신속-낫전차"];
+    protected override int CardID => cardIdDict["신식-낫전차"];
 
     protected override void Awake()
     {

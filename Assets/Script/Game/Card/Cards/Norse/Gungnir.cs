@@ -6,18 +6,21 @@ public class Gungnir : SpellCard
 {
     protected override int CardID => Card.cardIdDict["궁니르"];
 
+    [HideInInspector] public PlayerController player = null;
+
     public void ReadyToGetGungnir()
     {
-        GameBoard.instance.myController.OnMyTurnStart += GetGungnir;
+        if (player != null) player.OnMyTurnStart += GetGungnir;
         gameObject.SetActive(false);
     }
 
     public void GetGungnir()
     {
-        if (GameBoard.instance.myController.playerColor == GameBoard.PlayerColor.White)
+        gameObject.SetActive(true);
+        if (player != null) player.OnMyTurnStart -= GetGungnir;
+        
+        if (player.playerColor == GameBoard.PlayerColor.White)
         {
-            gameObject.SetActive(true);
-            GameBoard.instance.myController.OnMyTurnStart -= GetGungnir;
             if (!GameBoard.instance.gameData.playerWhite.TryAddCardInHand(this))
             {
                 Debug.Log("궁니르 : Hand is Full");
@@ -27,8 +30,6 @@ public class Gungnir : SpellCard
         }
         else
         {
-            gameObject.SetActive(true);
-            GameBoard.instance.myController.OnMyTurnStart -= GetGungnir;
             if (!GameBoard.instance.gameData.playerBlack.TryAddCardInHand(this))
             {
                 Debug.Log("궁니르 : Hand is Full");

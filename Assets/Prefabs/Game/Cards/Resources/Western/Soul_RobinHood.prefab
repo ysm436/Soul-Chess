@@ -84,6 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0ac585055ae6c41b1158cc66ebcc87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uB85C\uBE48 \uD6C4\uB4DC"
   _cost: 6
   illustration: {fileID: 21300000, guid: 659f7a991affc534eb47d50bc7d1a03a, type: 3}
@@ -95,8 +97,8 @@ MonoBehaviour:
   EffectOnCardUsed: {fileID: -8533229200881966413}
   isInSelection: 0
   pieceRestriction: 6
-  _AD: 300
-  _HP: 300
+  _AD: 50
+  _HP: 30
   accessorySpriteList:
   - pieceType: 2
     pieceColor: 0

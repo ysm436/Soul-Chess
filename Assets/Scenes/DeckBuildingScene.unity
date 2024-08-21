@@ -1268,7 +1268,7 @@ RectTransform:
   m_Father: {fileID: 769142280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6337,7 +6337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1484079168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7351,7 +7351,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -660}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1781645682
 MonoBehaviour:
@@ -8395,7 +8395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0c8fd3d89ab194ab8761f27fdc597e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllCardList: []
   DisplayCardList: []
   max_card_index: 48
   quantity_setting: 2

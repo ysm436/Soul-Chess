@@ -84,6 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1b2007f133a1b4db53c46c1f01afe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uD280\uD3F0"
   _cost: 10
   illustration: {fileID: 21300000, guid: 1acb0bdb8574f1145bfcb6813bf348a4, type: 3}
@@ -100,40 +102,40 @@ MonoBehaviour:
   accessorySpriteList:
   - pieceType: 1
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 1
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 2
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 2
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 4
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 4
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 8
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 8
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 16
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 16
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 32
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   - pieceType: 32
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   InfusedPiece: {fileID: 0}
 --- !u!114 &-504592958107433718
 MonoBehaviour:

@@ -28,6 +28,7 @@ public class HellEffect : TargetingEffect
         foreach (var target in targets)
         {
             gameObject.GetComponent<Hell>().targetSoul = Instantiate((target as ChessPiece).soul);
+            gameObject.GetComponent<Hell>().targetSoul.isMine = true;
             gameObject.GetComponent<Hell>().targetSoul.gameObject.SetActive(false);
             (target as ChessPiece).RemoveSoul();
             gameObject.GetComponent<Hell>().AddEffect();

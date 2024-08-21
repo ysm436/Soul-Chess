@@ -19,7 +19,7 @@ public class Hydra : SoulCard
         {
             revivalCount--; Debug.Log("revivalCount: " + revivalCount.ToString());
             InfusedPiece.RemoveBuff();
-            InfusedPiece.OnKilled -= Revival;
+            RemoveEffect();
             InfusedPiece.AddHP(9999); //currentHP가 음수여도 maxHP로 회복하도록 이상치 투입
             AddEffect();
             InfusedPiece.isRevivable = true;

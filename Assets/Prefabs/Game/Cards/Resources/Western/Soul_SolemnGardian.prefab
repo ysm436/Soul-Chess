@@ -84,6 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7377490a149e649972090cae7fa8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uADFC\uC5C4\uD55C \uACBD\uBE44\uBCD1"
   _cost: 2
   illustration: {fileID: 21300000, guid: 1da0e391cea7d8d4397a365930876be0, type: 3}
@@ -99,10 +101,10 @@ MonoBehaviour:
   accessorySpriteList:
   - pieceType: 1
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 19c715100daed254483147fee2187809, type: 3}
   - pieceType: 1
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 19c715100daed254483147fee2187809, type: 3}
   InfusedPiece: {fileID: 0}
 --- !u!114 &6638018782557807443
 MonoBehaviour:

@@ -12,6 +12,8 @@ public class GungnirEffect : TargetingEffect
         {
             (target as ChessPiece).SpellAttacked(dmg);
             Gungnir spellCard = Instantiate(gameObject.GetComponent<Gungnir>());
+            spellCard.player = player;
+            spellCard.isMine = true;
             spellCard.ReadyToGetGungnir();
         }
     }

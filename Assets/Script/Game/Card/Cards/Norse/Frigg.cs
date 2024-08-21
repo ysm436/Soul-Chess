@@ -56,16 +56,32 @@ public class Frigg : SoulCard
     public override void AddEffect()
     {
         DecreaseEnemyPiecesAD();
-        GameBoard.instance.myController.OnMyTurnStart += DecreaseEnemyPiecesAD;
-        GameBoard.instance.myController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White) 
+        {
+            GameBoard.instance.whiteController.OnMyTurnStart += DecreaseEnemyPiecesAD;
+            GameBoard.instance.whiteController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
+        }
+        else
+        {
+            GameBoard.instance.blackController.OnMyTurnStart += DecreaseEnemyPiecesAD;
+            GameBoard.instance.blackController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
+        }
         InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
     {
         IncreaseEnemyPiecesAD();
-        GameBoard.instance.myController.OnMyTurnStart -= DecreaseEnemyPiecesAD;
-        GameBoard.instance.myController.OnMyTurnEnd -= IncreaseEnemyPiecesAD;
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White) 
+        {
+            GameBoard.instance.whiteController.OnMyTurnStart -= DecreaseEnemyPiecesAD;
+            GameBoard.instance.whiteController.OnMyTurnEnd -= IncreaseEnemyPiecesAD;
+        }
+        else
+        {
+            GameBoard.instance.blackController.OnMyTurnStart -= DecreaseEnemyPiecesAD;
+            GameBoard.instance.blackController.OnMyTurnEnd -= IncreaseEnemyPiecesAD;
+        }
         decreaseAmountDictionary.Clear();
     }
 }
