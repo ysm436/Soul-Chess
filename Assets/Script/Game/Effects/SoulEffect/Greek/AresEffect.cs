@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AresEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         //강림 시 버프 목록에 효과 설명 추가
         gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "아레스: 모든 기물 사망 시 +5/+5 부여", true);

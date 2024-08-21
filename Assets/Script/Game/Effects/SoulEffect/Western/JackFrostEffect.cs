@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class JackFrostEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != player.playerColor).ToList();
 
         foreach (ChessPiece piece in enemyPieceList)
         {

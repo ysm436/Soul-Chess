@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CerberusEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         gameObject.GetComponent<SoulCard>().AddEffect();
 

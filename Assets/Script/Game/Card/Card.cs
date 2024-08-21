@@ -8,7 +8,12 @@ using UnityEngine.EventSystems;
 
 public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
+    [HideInInspector]
+    public bool isMine;
+    public int handIndex = -1;
+
     abstract protected int CardID { get; }
+    public int GetCardID { get => CardID; }
 
     private CardObject cardObject;
 
@@ -63,6 +68,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isMine) return;
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -71,6 +78,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isMine) return;
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
             if (transform.position.y > 0)
@@ -78,12 +87,17 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                 if (!TryUse())
                 {
                     //카드 원위치
-                    GameBoard.instance.gameData.playerWhite.UpdateHandPosition();
+                    GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
                 }
                 else
                 {
-                    GameBoard.instance.gameData.playerWhite.TryRemoveCardInHand(this);
+                    GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
                 }
+            }
+            else
+            {
+
+                GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
             }
         }
     }
@@ -140,18 +154,31 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
 
 
+    static public int[] GetCardIDArray(List<Card> cards)
+    {
+        int[] cardIDArray = new int[cards.Count];
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cardIDArray[i] = cards[i].GetCardID;
+        }
+        return cardIDArray;
+    }
+
     //Card Dictionary<CardName, CardID>
     public static Dictionary<string, int> cardIdDict = new Dictionary<string, int>(){
         {"오딘", 0},
         {"프리그", 1},
+        {"이미르", 2},
         {"토르", 3},
-        {"로키", 4},
-        {"헬", 7},
+        {"티르", 5},
+        {"미미르", 6},
         {"수르트", 8},
         {"라그나로크", 9},
         {"펜리르", 10},
         {"피의 독수리", 11},
         {"우트가르다 로키", 12},
+        {"약탈선", 14},
+        {"제우스", 15},
         {"처형", 16},
         {"아레스", 18},
         {"어미 곰", 19},
@@ -160,11 +187,11 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"아테나", 22},
         {"히드라", 23},
         {"케르베로스", 24},
+        {"헤라클레스", 26},
         {"판도라의 상자", 27},
-        {"튀폰", 28},
-        {"중기갑 보병", 29},
-        {"신식-낫전차", 31},
-        {"녹색 기사", 33},
+        {"페르세우스", 29},
+        {"생각뿐인 철학자", 30},
+        {"아서왕", 32},
         {"데비 존스", 35},
         {"카인", 36},
         {"모르건 르 페이", 37},
@@ -179,8 +206,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"음치 음유시인", 46},
         {"근엄한 경비병", 47},
         {"크라켄", 48},
-        {"궁니르", 1000}, //서브 스펠카드
-        {"감반테인", 1001},
-        {"드라우프니르", 1002},
+        {"아폴론", 49},
+        {"약탈자", 1014},
+        {"천둥벼락", 1015}
     };
 }

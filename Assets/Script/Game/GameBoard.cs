@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -10,16 +11,26 @@ public class GameBoard : MonoBehaviour
 {
     public static GameBoard instance = null;
 
+    [Header("DevOption")]
+    public bool isDebugMode;
+    public SynchronizedRandom synchronizedRandom;
+
+
     [HideInInspector]
     public GameData gameData;
+
+    [Header("GameData")]
     public GameBoard.PlayerColor playerColor;
     public ChessBoard chessBoard;
     public GameObject cardBoard;
     public PieceInfo pieceInfo; //기물 정보 프리팹
-    public GameObject myDeckObject;
 
-    public PlayerController myController;
-    public PlayerController opponentController;
+    public GameOverUI gameOverUI;
+    public PlayerController whiteController;
+    public PlayerController blackController;
+
+    public PlayerController myController { get => playerColor == PlayerColor.White ? whiteController : blackController; }
+    public PlayerController opponentController { get => playerColor == PlayerColor.White ? blackController : whiteController; }
 
     public Action<ChessPiece> OnPieceKilled;
 
@@ -34,7 +45,6 @@ public class GameBoard : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            GameManager.instance.gameBoard = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -43,8 +53,19 @@ public class GameBoard : MonoBehaviour
             return;
         }
 
+        //플레이어 색상(선공) 지정
+        if (GameManager.instance.isHost)
+            playerColor = PlayerColor.White;
+        else
+            playerColor = PlayerColor.Black;
+
+        //덱 초기화
+        //gameData.myPlayerData.deck = GameManager.instance.currentDeck;
+
+        //체스 판 세팅
         chessBoard.SetBoardSquares(gameData);
 
+        //체스 말 두기
         foreach (ChessPiece piece in chessBoard.GetComponentsInChildren<ChessPiece>())
         {
             gameData.TryAddPiece(piece);
@@ -57,6 +78,11 @@ public class GameBoard : MonoBehaviour
         //코스트 초기화(선공이 1, 후공이 0, 턴 종료 시 상대방 코스트 증가)
         gameData.playerBlack.soulOrbs = gameData.playerBlack.soulEssence = 0;
         gameData.playerWhite.soulOrbs = gameData.playerWhite.soulEssence = 1;
+
+        foreach (ChessPiece king in gameData.pieceObjects.Where(piece => piece.pieceType == ChessPiece.PieceType.King))
+            king.OnKilled += OnGameOver;
+
+        synchronizedRandom.Init(GameManager.instance.isHost);
     }
 
     public BoardSquare GetBoardSquare(Vector2Int coordinate)
@@ -131,10 +157,12 @@ public class GameBoard : MonoBehaviour
             return opponentController;
     }
 
-    public void AddCardInDeckObject(Card card)
+    private void OnGameOver(ChessPiece killedKing)
     {
-        card.FlipBack();
-        card.transform.position = myDeckObject.transform.position;
+        if (killedKing.pieceColor == playerColor)
+            gameOverUI.OnDefeated();
+        else
+            gameOverUI.OnWin();
     }
 
     [System.Serializable]

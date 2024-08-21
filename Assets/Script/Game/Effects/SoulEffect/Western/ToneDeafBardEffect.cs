@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ToneDeafBardEffect : TargetingEffect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         int ADchange = -20;
         int maxHPchange = 20;

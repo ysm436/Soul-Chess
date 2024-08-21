@@ -8,11 +8,11 @@ public class ExecutionEffect : TargetingEffect
     public int insteadAD;
     public int standardHP;
 
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         foreach (var target in targets)
         {
-            if ((target as ChessPiece).GetHP < standardHP)
+            if ((target as ChessPiece).GetHP <= standardHP)
             {
                 (target as ChessPiece).SpellAttacked(insteadAD);
             }

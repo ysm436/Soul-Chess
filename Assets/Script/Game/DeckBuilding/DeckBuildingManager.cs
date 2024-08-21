@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class DeckBuildingManager : MonoBehaviour
 {
-    public List<GameObject> AllCardList = new List<GameObject>();
     public List<GameObject> DisplayCardList = new List<GameObject>();
 
     [SerializeField] private int max_card_index;
@@ -18,55 +17,17 @@ public class DeckBuildingManager : MonoBehaviour
 
     private void Awake()
     {
-        FindAllCard();
         MakeDisplayCard();
     }
 
-    // Greek, Norse, Western 폴더 내 존재하는 모든 카드를 찾습니다.
-    private void FindAllCard()
-    {
-        while (AllCardList.Count <= max_card_index)
-        {
-            AllCardList.Add(null);
-        }
 
-        string[] GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Greek" });
-
-        for (int i = 0; i < GUIDs.Length; i++)
-        {
-            string guid = GUIDs[i];
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-            AllCardList[Card.cardIdDict[asset.GetComponent<Card>().cardName]] = asset;
-        }
-
-        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Norse" });
-
-        for (int i = 0; i < GUIDs.Length; i++)
-        {
-            string guid = GUIDs[i];
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-            AllCardList[Card.cardIdDict[asset.GetComponent<Card>().cardName]] = asset;
-        }
-
-        GUIDs = AssetDatabase.FindAssets("t: prefab", new[] { "Assets/Prefabs/Game/Cards/Western" });
-
-        for (int i = 0; i < GUIDs.Length; i++)
-        {
-            string guid = GUIDs[i];
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-            AllCardList[Card.cardIdDict[asset.GetComponent<Card>().cardName]] = asset;
-        }
-    }
 
     // 카드들을 화면에 나타냅니다.
     private void MakeDisplayCard()
     {
-        for (int i = 0; i < AllCardList.Count; i++)
+        for (int i = 0; i < GameManager.instance.AllCards.Length; i++)
         {
-            if (AllCardList[i])
+            if (GameManager.instance.AllCards[i])
             {
                 AddDisplayCard(i, quantity_setting);
             }
@@ -76,7 +37,7 @@ public class DeckBuildingManager : MonoBehaviour
     //디스플레이 object를 생성합니다.
     public void AddDisplayCard(int card_index, int quantity)
     {
-        GameObject card = AllCardList[card_index];
+        GameObject card = GameManager.instance.AllCards[card_index];
 
         GameObject newDisplay = Instantiate(display_prefab, DynamicDisplay);
         newDisplay.name = card.name + "_display";
