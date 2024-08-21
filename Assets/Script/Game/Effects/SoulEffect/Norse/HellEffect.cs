@@ -19,7 +19,7 @@ public class HellEffect : TargetingEffect
     {
         if (soul == null) soul = gameObject.GetComponent<SoulCard>();
         Predicate<ChessPiece> condition = (ChessPiece piece) => (piece != soul.InfusedPiece) && (piece.soul != null);
-        EffectTarget effectTarget = new EffectTarget(TargetType.Piece, targetPieceRestriction , true, true, condition);
+        EffectTarget effectTarget = new EffectTarget(TargetType.Piece, targetPieceRestriction , false, true, condition);
         targetTypes.Add(effectTarget);
     }
 
