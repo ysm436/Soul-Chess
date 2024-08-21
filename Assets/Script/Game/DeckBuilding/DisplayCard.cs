@@ -68,6 +68,8 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public Image cardframe;
     public Image illustrate;
 
+    public List<Image> chesspiecedisplay_list;
+
     private Transform canvas;
     private CanvasGroup canvasGroup;
     private Vector3 Originposition;

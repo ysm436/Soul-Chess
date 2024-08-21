@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Linq;
 
 public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -14,6 +15,9 @@ public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private TextMeshProUGUI rook_cost;
     [SerializeField] private TextMeshProUGUI queen_cost;
     [SerializeField] private TextMeshProUGUI king_cost;
+    [SerializeField] private TextMeshProUGUI soul_cost;
+    [SerializeField] private TextMeshProUGUI spell_cost;
+    [SerializeField] private TextMeshProUGUI common_cost;
     [SerializeField] private TextMeshProUGUI legendary_cost;
     [SerializeField] private TextMeshProUGUI mythical_cost;
 
@@ -29,15 +33,20 @@ public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             recttransform.sizeDelta = graph_size;
         }
 
-        pawn_cost.text = deckmanager.local_chesspieces[0].ToString() + "(" + deckmanager.local_extra_chesspieces[0].ToString() + ")" + " / 8";
-        knight_cost.text = deckmanager.local_chesspieces[1].ToString() + "(" + deckmanager.local_extra_chesspieces[1].ToString() + ")" + " / 2";
-        bishop_cost.text = deckmanager.local_chesspieces[2].ToString() + "(" + deckmanager.local_extra_chesspieces[2].ToString() + ")" + " / 2";
-        rook_cost.text = deckmanager.local_chesspieces[3].ToString() + "(" + deckmanager.local_extra_chesspieces[3].ToString() + ")" + " / 2";
-        queen_cost.text = deckmanager.local_chesspieces[4].ToString() + "(" + deckmanager.local_extra_chesspieces[4].ToString() + ")" + " / 1";
-        king_cost.text = deckmanager.local_chesspieces[5].ToString() + "(" + deckmanager.local_extra_chesspieces[5].ToString() + ")" + " / 1";
+        pawn_cost.text = deckmanager.local_chesspieces[0].ToString() + "(" + deckmanager.local_extra_chesspieces[0].ToString() + ")";
+        knight_cost.text = deckmanager.local_chesspieces[1].ToString() + "(" + deckmanager.local_extra_chesspieces[1].ToString() + ")";
+        bishop_cost.text = deckmanager.local_chesspieces[2].ToString() + "(" + deckmanager.local_extra_chesspieces[2].ToString() + ")";
+        rook_cost.text = deckmanager.local_chesspieces[3].ToString() + "(" + deckmanager.local_extra_chesspieces[3].ToString() + ")";
+        queen_cost.text = deckmanager.local_chesspieces[4].ToString() + "(" + deckmanager.local_extra_chesspieces[4].ToString() + ")";
+        king_cost.text = deckmanager.local_chesspieces[5].ToString() + "(" + deckmanager.local_extra_chesspieces[5].ToString() + ")";
 
-        legendary_cost.text = deckmanager.local_rarities[1].ToString() + " / 9";
-        mythical_cost.text = deckmanager.local_rarities[2].ToString() + " / 3";
+        int soul_sum = deckmanager.local_chesspieces.Sum();
+        soul_cost.text = soul_sum.ToString() + " / 16";
+        spell_cost.text = (deckmanager.local_card_count - soul_sum).ToString();
+
+        common_cost.text = deckmanager.local_rarities[0].ToString();
+        legendary_cost.text = deckmanager.local_rarities[1].ToString();
+        mythical_cost.text = deckmanager.local_rarities[2].ToString() + " / 5";
 
         deckinfopanel.SetActive(true);
     }

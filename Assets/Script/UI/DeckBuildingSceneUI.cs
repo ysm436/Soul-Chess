@@ -79,17 +79,19 @@ public class DeckBuildingSceneUI : MonoBehaviour
     private bool deckavailable()
     {
         bool available = true;
+        int SoulCardQuantity = deckmanager.local_chesspieces.Sum();
 
-        if (deckmanager.local_chesspieces[0] < 8) available = false;
+        if (SoulCardQuantity < 16) available = false;
+        /* if (deckmanager.local_chesspieces[0] < 8) available = false;
         else if (deckmanager.local_chesspieces[1] < 2) available = false;
         else if (deckmanager.local_chesspieces[2] < 2) available = false;
         else if (deckmanager.local_chesspieces[3] < 2) available = false;
         else if (deckmanager.local_chesspieces[4] < 1) available = false;
-        else if (deckmanager.local_chesspieces[5] < 1) available = false;
+        else if (deckmanager.local_chesspieces[5] < 1) available = false; */
 
         if (available == false)
         {
-            deckmanager.CautionText.text = "기물 당 하나의 카드는 존재해야 합니다.";
+            deckmanager.CautionText.text = "덱에 적어도 16개의 기물카드는 들어가야 합니다.";
         }
 
         return available;

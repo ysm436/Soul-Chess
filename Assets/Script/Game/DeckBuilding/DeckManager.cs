@@ -180,7 +180,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
         TempDeck = GameManager.instance.deckList[loaded_deck_index].cards.ToList();
 
         MakeSimpleCard();
-        LocalDeckInfoLoad();
+        LocalDeckInfoLoad(loaded_deck_index);
 
         deckname_inputfield.text = GameManager.instance.deckList[loaded_deck_index].deckname;
     }
@@ -263,9 +263,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
         Array.Clear(local_rarities, 0, local_rarities.Length);
     }
 
-    private void LocalDeckInfoLoad()
+    private void LocalDeckInfoLoad(int index)
     {
-        Deck loaded_deck = GameManager.instance.deckList[loaded_deck_index];
+        Deck loaded_deck = GameManager.instance.deckList[index];
 
         local_card_count = loaded_deck.card_count;
         local_costs = (int[])loaded_deck.costs.Clone();
@@ -339,9 +339,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 error_signal = true;
             }
 
-            if (local_rarities[2] == 3)
+            if (local_rarities[2] == 5)
             {
-                CautionText.text = "신화카드는 덱에 3장만 넣을 수 있습니다.";
+                CautionText.text = "신화카드는 덱에 5장만 넣을 수 있습니다.";
                 error_signal = true;
             }
         }
@@ -353,11 +353,11 @@ public class DeckManager : MonoBehaviour, IDropHandler
                 error_signal = true;
             }
 
-            if (local_rarities[1] == 9)
+            /* if (local_rarities[1] == 9)
             {
                 CautionText.text = "전설카드는 덱에 9장만 넣을 수 있습니다.";
                 error_signal = true;
-            }
+            } */
         }
         else
         {

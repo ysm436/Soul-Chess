@@ -126,8 +126,7 @@ public class LobbySceneUI : MonoBehaviour
         {
             SelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckname + ">";
         }
-        SelectedDeckInfo.text = "Selected Deck Name : " + GameManager.instance.deckList[SelectedDeckIndex].deckname;
-
+        
         GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
     }
 
