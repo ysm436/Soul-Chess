@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NewScytheTankEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         gameObject.GetComponent<SoulCard>().InfusedPiece.SetKeyword(Keyword.Type.Defense, 10);
         gameObject.GetComponent<SoulCard>().InfusedPiece.SetKeyword(Keyword.Type.Shield);

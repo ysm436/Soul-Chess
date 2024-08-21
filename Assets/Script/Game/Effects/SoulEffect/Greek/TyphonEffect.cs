@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TyphonEffect : Effect
 {
-    public override void EffectAction() //자신의 핸드와 덱의 모든 카드 파괴
+    public override void EffectAction(PlayerController player) //자신의 핸드와 덱의 모든 카드 파괴
     {
         GameBoard.PlayerColor myColor = GameBoard.instance.myController.playerColor;
 

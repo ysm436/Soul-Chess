@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FenrirEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         //강림 시 버프 목록에 효과 설명 추가
         gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "펜리르: 적 기물 처치 시 +20/+20 부여", true);

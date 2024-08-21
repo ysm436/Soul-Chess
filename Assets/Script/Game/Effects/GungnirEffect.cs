@@ -6,7 +6,7 @@ public class GungnirEffect : TargetingEffect
 {
     [HideInInspector] public int dmg = 50;
     [SerializeField] private Gungnir gungnir;
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         foreach (var target in targets)
         {

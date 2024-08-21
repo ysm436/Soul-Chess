@@ -23,7 +23,7 @@ public class HellEffect : TargetingEffect
         targetTypes.Add(effectTarget);
     }
 
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         foreach (var target in targets)
         {

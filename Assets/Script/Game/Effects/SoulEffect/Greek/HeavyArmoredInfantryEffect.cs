@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HeavyArmoredInfantryEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         gameObject.GetComponent<SoulCard>().InfusedPiece.SetKeyword(Keyword.Type.Defense, 5);
         gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Defense, 5, true);

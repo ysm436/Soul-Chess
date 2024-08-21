@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SolemnGuardianEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         string cardName = gameObject.GetComponent<SoulCard>().cardName;
 

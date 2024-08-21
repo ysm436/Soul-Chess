@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FriggEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "프리그: 내 턴 동안 상대 기물 공격력 20 감소", true);
 

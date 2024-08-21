@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DraupnirEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         if (GameBoard.instance.myController.playerColor == GameBoard.PlayerColor.White)
             GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;

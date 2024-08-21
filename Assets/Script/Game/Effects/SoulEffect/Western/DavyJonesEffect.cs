@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DavyJonesEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "데비 존스: 죽은 아군 수 만큼 +10/+10 증가", true);
 

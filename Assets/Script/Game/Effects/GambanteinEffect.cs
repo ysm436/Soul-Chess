@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GambanteinEffect : Effect
 {
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
-        //상대의 패를 볼 수 있게 됩니다
+        Debug.Log("상대의 패를 볼 수 있게 됩니다");
     }
 }

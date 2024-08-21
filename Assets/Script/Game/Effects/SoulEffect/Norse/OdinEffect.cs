@@ -7,7 +7,7 @@ public class OdinEffect : Effect
     [SerializeField] private List<GameObject> selectionCardPrefabList;        //궁니르, 드라우프노르, 감반테인
 
     private List<GameObject> selectionCardInstanceList;
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         InstantiateSelectionCard(gameObject.GetComponent<SoulCard>().InfusedPiece);
     }

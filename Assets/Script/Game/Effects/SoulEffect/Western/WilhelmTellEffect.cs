@@ -7,7 +7,7 @@ public class WilhelmTellEffect : Effect
     List<BoardSquare> sqList = new List<BoardSquare>(); //방향 지정용 BoardSquare
     List<BoardSquare> others = new List<BoardSquare>(); //나머지
 
-    public override void EffectAction()
+    public override void EffectAction(PlayerController player)
     {
         Vector2Int coordinate = gameObject.GetComponent<SoulCard>().InfusedPiece.coordinate;
         GameData _chessData = GameBoard.instance.gameData;
