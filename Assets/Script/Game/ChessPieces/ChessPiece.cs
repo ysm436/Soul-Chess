@@ -151,6 +151,7 @@ abstract public class ChessPiece : TargetableObject
     public Action<ChessPiece> OnStartAttack;
     public Action<ChessPiece> OnEndAttack;
     public Action<ChessPiece, int> OnAttacked;
+    public Action<ChessPiece> OnAttackedAfter;
     public Action OnSpellAttacked;
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
@@ -247,6 +248,7 @@ abstract public class ChessPiece : TargetableObject
         OnAttacked?.Invoke(chessPiece, damage);
 
         MinusHP(damage);
+        OnAttackedAfter?.Invoke(chessPiece);
         return isAlive;
     }
     public bool SpellAttacked(int damage)

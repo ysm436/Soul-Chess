@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9480eb234739a498fe9d2a6843007a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uC774\uBBF8\uB974"
   _cost: 9
   illustration: {fileID: 0}
@@ -93,7 +95,43 @@ MonoBehaviour:
   pieceRestriction: -1
   _AD: 70
   _HP: 80
-  accessorySpriteList: []
+  accessorySpriteList:
+  - pieceType: 1
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 1
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 2
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 2
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 4
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 4
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 8
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 8
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 16
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 16
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 32
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
+  - pieceType: 32
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 4f9182e7428efbd48b90d92ef0a32086, type: 3}
   InfusedPiece: {fileID: 0}
 --- !u!114 &2685390501361198484
 MonoBehaviour:

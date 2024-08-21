@@ -24,7 +24,7 @@ public class TyrEffect : TargetingEffect
 
     public void restraint_remove(ChessPiece chessPiece)
     {
-        restraint_target.SetKeyword(Keyword.Type.Restraint, 0);
+        restraint_target.Unrestraint();
         //버프 관련 변경 머지 후 버프 추가
     }
 

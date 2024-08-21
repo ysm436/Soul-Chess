@@ -26,12 +26,10 @@ public class ApollonEffect : Effect
             TempPosition += Vector2Int.right;
         }
 
-        GameBoard.PlayerColor playerColor = apollon_component.InfusedPiece.pieceColor;
-
         foreach (var position in row) //열의 모든 내 기물에게 보호막
         {
             ChessPiece obj = GameBoard.instance.gameData.GetPiece(position);
-            if (obj != null && obj.pieceColor == playerColor)
+            if (obj != null && obj.pieceColor == player.playerColor)
             {
                 obj.SetKeyword(Keyword.Type.Shield);
                 //버프 관련 변경 머지 후 버프 추가
