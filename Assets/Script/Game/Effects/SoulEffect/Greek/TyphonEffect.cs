@@ -6,7 +6,7 @@ public class TyphonEffect : Effect
 {
     public override void EffectAction(PlayerController player) //자신의 핸드와 덱의 모든 카드 파괴
     {
-        GameBoard.PlayerColor myColor = GameBoard.instance.myController.playerColor;
+        GameBoard.PlayerColor myColor = player.playerColor;
 
         if (myColor == GameBoard.PlayerColor.White)
         {
