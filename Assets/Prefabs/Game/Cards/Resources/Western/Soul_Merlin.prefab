@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &55324913681154302
+--- !u!1001 &5688614986873841913
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Name
-      value: Soul_DavyJones
+      value: Soul_Merlin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58,66 +58,66 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -7927062622321583761}
+      addedObject: {fileID: -9100883492203961544}
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7886553202595520373}
+      addedObject: {fileID: -8211901857969220769}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!1 &2235799509568517455 stripped
+--- !u!1 &5850650120130338120 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 55324913681154302}
+  m_PrefabInstance: {fileID: 5688614986873841913}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-7927062622321583761
+--- !u!114 &-9100883492203961544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2235799509568517455}
+  m_GameObject: {fileID: 5850650120130338120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c69c5999680c2084f8b539f4a2b7435a, type: 3}
+  m_Script: {fileID: 11500000, guid: 495fdab77c7b5b64eaca2c7b0acf649d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isMine: 0
   handIndex: -1
-  cardName: "\uB370\uBE44 \uC874\uC2A4"
-  _cost: 5
-  illustration: {fileID: 21300000, guid: 42474967153569041b5025c8fcc1b06e, type: 3}
+  cardName: "\uBA40\uB9B0"
+  _cost: 8
+  illustration: {fileID: 21300000, guid: cd4413fca9c140e4ea3094cff10842ab, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 2
-  description: "\uC774\uBC88 \uAC8C\uC784\uC5D0\uC11C \uC8FD\uC740 \uB0B4 \uAE30\uBB3C
-    \uC218 \uB9CC\uD07C +10/+10\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 7886553202595520373}
+  description: "\uB0B4 \uB9C8\uBC95\uC758 \uD53C\uD574\uAC00 2\uBC30\uAC00 \uB429\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: -8211901857969220769}
   isInSelection: 0
-  pieceRestriction: 9
-  _AD: 20
-  _HP: 20
+  pieceRestriction: 5
+  _AD: 35
+  _HP: 65
   accessorySpriteList:
   - pieceType: 1
     pieceColor: 0
-    sprite: {fileID: 21300000, guid: c40d12bd15a385b41b86f6b419fdd41a, type: 3}
-  - pieceType: 8
-    pieceColor: 0
-    sprite: {fileID: 21300000, guid: 0c14240dd3c57de419141a3d11f52a24, type: 3}
+    sprite: {fileID: 21300000, guid: 6bcf0f8398d37f34494bea50cb1a449c, type: 3}
   - pieceType: 1
     pieceColor: 1
-    sprite: {fileID: 21300000, guid: c40d12bd15a385b41b86f6b419fdd41a, type: 3}
-  - pieceType: 8
+    sprite: {fileID: 21300000, guid: 6bcf0f8398d37f34494bea50cb1a449c, type: 3}
+  - pieceType: 4
     pieceColor: 1
-    sprite: {fileID: 21300000, guid: 0c14240dd3c57de419141a3d11f52a24, type: 3}
+    sprite: {fileID: 21300000, guid: 6bcf0f8398d37f34494bea50cb1a449c, type: 3}
+  - pieceType: 4
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 6bcf0f8398d37f34494bea50cb1a449c, type: 3}
   InfusedPiece: {fileID: 0}
---- !u!114 &7886553202595520373
+  player: {fileID: 0}
+--- !u!114 &-8211901857969220769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2235799509568517455}
+  m_GameObject: {fileID: 5850650120130338120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 412d03ae8f0c4074e991d4cddd7c99b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 77aa773b7bb11e541b781d4ee79b63e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

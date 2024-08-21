@@ -198,6 +198,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"신식-낫전차", 31},
         {"아서왕", 32},
         {"녹색 기사", 33},
+        {"멀린", 34},
         {"데비 존스", 35},
         {"카인", 36},
         {"모르건 르 페이", 37},
