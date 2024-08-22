@@ -321,6 +321,8 @@ MonoBehaviour:
   blackButton: {fileID: 21300000, guid: edc8a02128854254da50760cf1530179, type: 3}
   whiteController: {fileID: 625501409}
   blackController: {fileID: 1635301580}
+  mySoulOrb: {fileID: 0}
+  opponentSoulrOrb: {fileID: 0}
 --- !u!212 &463008057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1688,12 +1690,12 @@ SpriteRenderer:
   m_SortingLayerID: -28864343
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c4d4249f89779042a2b8f1e58861488, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a4e2895e0bda014a8fd4a609eedd2a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 17.777779, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1729,6 +1731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebugMode: 0
+  synchronizedRandom: {fileID: 0}
   gameData:
     pieceObjects: []
     graveyard: []
@@ -1756,7 +1759,7 @@ MonoBehaviour:
   chessBoard: {fileID: 1628251987148721090}
   cardBoard: {fileID: 1951553768}
   pieceInfo: {fileID: 1594983728884485668, guid: 6f09fd129a154794e8cebcd82ef9b00a, type: 3}
-  myDeckObject: {fileID: 2095973276}
+  gameOverUI: {fileID: 0}
   whiteController: {fileID: 625501409}
   blackController: {fileID: 1635301580}
   isShowingPieceInfo: 0

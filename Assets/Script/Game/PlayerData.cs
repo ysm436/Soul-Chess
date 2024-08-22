@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 [Serializable]
 public class PlayerData
 {
+    public GameBoard.PlayerColor playerColor;
+
     public int soulOrbs; // 자원 최대치
     public int soulEssence; // 현재 자원량
 
