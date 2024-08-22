@@ -90,30 +90,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner:
-    playerColor: 0
-    soulOrbs: 0
-    soulEssence: 0
+    playerColor: 1
+    soulOrbs: 3
+    soulEssence: 3
     maxHandCardCount: 8
     mulliganHandCount: 4
-    deck: []
-    hand: []
-    deckPosition: {x: 0, y: 0}
+    deck:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC74C\uCE58 \uC74C\uC720\uC2DC\uC778"
-  _cost: 3
+  _cost: 1
   illustration: {fileID: 21300000, guid: 693c969b97b97ae4cb0f81005ef94868, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 0
   description: "[\uAC15\uB9BC] \uAE30\uBB3C \uD558\uB098\uB97C \uC120\uD0DD\uD574
-    -20/+20\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+    \n-20/+20\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -5723978548355844231}
   isInSelection: 0
   pieceRestriction: 5
-  _AD: 20
-  _HP: 20
+  _AD: 10
+  _HP: 10
   accessorySpriteList:
   - pieceType: 1
     pieceColor: 0

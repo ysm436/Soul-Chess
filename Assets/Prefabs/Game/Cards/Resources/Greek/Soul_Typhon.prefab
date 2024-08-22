@@ -84,7 +84,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1b2007f133a1b4db53c46c1f01afe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMine: 0
+  owner:
+    playerColor: 1
+    soulOrbs: 3
+    soulEssence: 3
+    maxHandCardCount: 8
+    mulliganHandCount: 4
+    deck:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 7.6, y: -2.3}
+    spellDamageIncrease: 0
+    spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uD280\uD3F0"
   _cost: 10
@@ -97,8 +146,8 @@ MonoBehaviour:
   EffectOnCardUsed: {fileID: -504592958107433718}
   isInSelection: 0
   pieceRestriction: -1
-  _AD: 150
-  _HP: 150
+  _AD: 110
+  _HP: 110
   accessorySpriteList:
   - pieceType: 1
     pieceColor: 0

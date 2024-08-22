@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UtgardaLokiEffect : Effect
+public class UtgardaLokiEffect : TargetingEffect
 {
     public override void EffectAction(PlayerController player)
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != player.playerColor).ToList();
-
-        foreach (ChessPiece piece in enemyPieceList)
+        foreach (var target in targets)
         {
-            piece.SetKeyword(Keyword.Type.Silence);
-            piece.buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Silence);
+            (target as ChessPiece).SetKeyword(Keyword.Type.Silence);
+            (target as ChessPiece).buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Silence);
         }
     }
 }
