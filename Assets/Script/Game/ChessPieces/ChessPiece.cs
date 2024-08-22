@@ -53,6 +53,7 @@ abstract public class ChessPiece : TargetableObject
     private int attackDamage;
     
     public bool AffectByHades = false;
+    public bool AffectByAbel = false;
 
     // 키워드 우선순위: 면역, 도발, 보호막, 방어력
     // isTauntAttack은 도발이 연쇄적으로 작동하지 않도록 함
@@ -87,7 +88,7 @@ abstract public class ChessPiece : TargetableObject
 
         _currentHP -= value;
 
-        if (AffectByHades)
+        if (AffectByHades) //하데스 능력을 받을 경우
         {
             if(_currentHP <= 0)
             {
@@ -243,8 +244,13 @@ abstract public class ChessPiece : TargetableObject
             MinusHP(targetPiece.attackDamage);
         }
 
-
         OnEndAttack?.Invoke(targetPiece);
+
+        if (AffectByAbel) // 아벨 능력에 의해 죽었을 경우 위치 조정을 하지 않음
+        {
+            AffectByAbel = false;
+            return false;
+        }
 
         return targetIsKilled;
     }
