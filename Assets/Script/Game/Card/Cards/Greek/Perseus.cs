@@ -8,33 +8,25 @@ public class Perseus : SoulCard
     protected override int CardID => Card.cardIdDict["페르세우스"];
 
     [SerializeField] private List<GameObject> selectionPrefabList;
-
     private List<GameObject> selectionInstanceList;
-
-    public int selectionNumber { get; private set; }
 
     private int targethp;
     private int is_stealth;
+    private int selection;
     
     protected override void Awake()
     {
         base.Awake();
-        OnInfuse += InstantiateSelectionCard;
     }
 
     public void InstantiateSelectionCard(ChessPiece chessPiece)
     {
-        if (selectionPrefabList.Count == 0)
-        {
-            Debug.Log(cardName + "'s Selection Prefab List is empty");
-        }
-
         selectionInstanceList = new();
         foreach (GameObject selection in selectionPrefabList)
         {
             GameObject selectionInstance = Instantiate(selection);
             CardSelectionDisplay cardSelectionDisplay = selectionInstance.AddComponent<CardSelectionDisplay>();
-            cardSelectionDisplay.selectionNumber = selectionInstanceList.IndexOf(selection);
+            cardSelectionDisplay.selectionNumber = selectionPrefabList.IndexOf(selection);
             cardSelectionDisplay.OnSelected += GetAbility;
 
             cardSelectionDisplay.Initialize();
@@ -48,24 +40,28 @@ public class Perseus : SoulCard
         }
     }
 
-    private void GetAbility(int selectionNumber)
+    public void GetAbility(int selectionNumber)
     {
-        this.selectionNumber = selectionNumber;
-
+        Destroy(selectionInstanceList[selectionNumber]);
         if (selectionNumber == 0)
         {
+            selection = 0;
             InfusedPiece.OnStartAttack += GetHPInfoTarget;
+            InfusedPiece.buff.AddBuffByDescription("메두사의 머리", Buff.BuffType.Description, "이 기물에게 피해를 받은 기물은 기절합니다.", true);
             InfusedPiece.OnEndAttack += StunChessPiece;
         }
         else if (selectionNumber == 1)
         {
+            selection = 1;
             InfusedPiece.moveCount += 1;
             InfusedPiece.buff.AddBuffByValue("페가수스", Buff.BuffType.MoveCount, 2, true);
         }
         else
         {
+            selection = 2;
             InfusedPiece.SetKeyword(Keyword.Type.Stealth);
-            //버프 관련 내용 머지 후 추가 예정
+            InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
+            InfusedPiece.buff.AddBuffByDescription("하데스의 투구", Buff.BuffType.Description, "이 기물이 적을 처치하면 다시 은신합니다.", true);
             InfusedPiece.OnKill += StealthInfusedPiece;
         }
     }
@@ -80,25 +76,25 @@ public class Perseus : SoulCard
         if (chessPiece.GetHP < targethp) // 피해를 입었는지 확인
         {
             chessPiece.SetKeyword(Keyword.Type.Stun);
-            //버프 관련 내용 머지 후 추가 예정
+            chessPiece.buff.AddBuffByKeyword("메두사의 머리", Buff.BuffType.Stun);
         }
     }
 
     private void StealthInfusedPiece(ChessPiece chessPiece)
     {
         InfusedPiece.SetKeyword(Keyword.Type.Stealth);
-        //버프 관련 내용 머지 후 추가 예정
+        InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
     }
 
 
     public override void AddEffect()
     {
-        if (selectionNumber == 0)
+        if (selection == 0)
         {
             InfusedPiece.OnStartAttack += GetHPInfoTarget;
             InfusedPiece.OnEndAttack += StunChessPiece;
         }
-        else if (selectionNumber == 1)
+        else if (selection == 1)
         {
             InfusedPiece.moveCount += 1;
             InfusedPiece.buff.AddBuffByValue("페가수스", Buff.BuffType.MoveCount, 2, true);
@@ -106,18 +102,23 @@ public class Perseus : SoulCard
         else
         {
             InfusedPiece.SetKeyword(Keyword.Type.Stealth, is_stealth);
+            if (is_stealth == 1)
+            {
+                InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
+            }
             InfusedPiece.OnKill += StealthInfusedPiece;
         }
     }
 
     public override void RemoveEffect()
     {
-        if (selectionNumber == 0)
+        if (selection == 0)
         {
             InfusedPiece.OnStartAttack -= GetHPInfoTarget;
             InfusedPiece.OnEndAttack -= StunChessPiece;
+            InfusedPiece.buff.TryRemoveSpecificBuff("메두사의 머리", Buff.BuffType.Description);
         }
-        else if (selectionNumber == 1)
+        else if (selection == 1)
         {
             InfusedPiece.moveCount -= 1;
             InfusedPiece.buff.TryRemoveSpecificBuff("페가수스", Buff.BuffType.MoveCount);
@@ -126,6 +127,11 @@ public class Perseus : SoulCard
         {
             is_stealth = InfusedPiece.GetKeyword(Keyword.Type.Stealth);
             InfusedPiece.SetKeyword(Keyword.Type.Stealth, 0);
+            if (is_stealth == 1)
+            {
+                InfusedPiece.buff.TryRemoveSpecificBuff("하데스의 투구", Buff.BuffType.Stealth);
+            }
+            InfusedPiece.buff.TryRemoveSpecificBuff("하데스의 투구", Buff.BuffType.Description);
             InfusedPiece.OnKill -= StealthInfusedPiece;
         }
     }
