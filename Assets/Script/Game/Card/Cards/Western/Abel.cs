@@ -19,7 +19,7 @@ public class Abel : SoulCard
     {
         recent_attacked = chessPiece;
     }
-    private void OnAttackedBySpell()
+    private void OnAttackedBySpell(ChessPiece attackedPiece)
     {
         recent_attacked = null;
     }

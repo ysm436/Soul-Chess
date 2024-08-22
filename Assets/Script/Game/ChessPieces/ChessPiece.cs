@@ -51,7 +51,7 @@ abstract public class ChessPiece : TargetableObject
     }
     [SerializeField]
     private int attackDamage;
-    
+
     public bool AffectByHades = false;
     public bool AffectByAbel = false;
 
@@ -90,7 +90,7 @@ abstract public class ChessPiece : TargetableObject
 
         if (AffectByHades) //하데스 능력을 받을 경우
         {
-            if(_currentHP <= 0)
+            if (_currentHP <= 0)
             {
                 _currentHP = 1;
             }
@@ -163,7 +163,7 @@ abstract public class ChessPiece : TargetableObject
     public Action<ChessPiece> OnEndAttack;
     public Action<ChessPiece, int> OnAttacked;
     public Action<ChessPiece> OnAttackedAfter;
-    public Action OnSpellAttacked;
+    public Action<ChessPiece> OnSpellAttacked;
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
     public Action OnSoulRemoved;
@@ -269,7 +269,7 @@ abstract public class ChessPiece : TargetableObject
     }
     public bool SpellAttacked(int damage)
     {
-        OnSpellAttacked?.Invoke();
+        OnSpellAttacked?.Invoke(this);
 
         MinusHP(damage);
         return isAlive;
@@ -329,10 +329,10 @@ abstract public class ChessPiece : TargetableObject
         maxHP -= soul.HP;
         AD -= soul.AD;
 
-		//구버전 코드
+        //구버전 코드
         //spriteRenderer.sprite = defaultSprite;
-        
-        
+
+
         //악세서리 제거
         if (accessory != null)
         {
