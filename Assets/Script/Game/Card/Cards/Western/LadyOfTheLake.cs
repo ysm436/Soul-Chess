@@ -18,7 +18,7 @@ public class LadyOfTheLake : SoulCard
         List<ChessPiece> pieceList = new List<ChessPiece>();
         for (int i = GameBoard.instance.gameData.pieceObjects.Count - 1; i >= 0; i--)
         {
-            if (GameBoard.instance.gameData.pieceObjects[i].pieceColor == GameBoard.instance.myController.playerColor)
+            if (GameBoard.instance.gameData.pieceObjects[i].pieceColor == InfusedPiece.pieceColor)
                 pieceList.Add(GameBoard.instance.gameData.pieceObjects[i]);
         }
 
