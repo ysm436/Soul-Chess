@@ -37,7 +37,7 @@ public class OdinEffect : Effect
     {
         Card selectedCard = selectionCardInstanceList[selectionNumber].GetComponent<Card>();
         selectedCard.isInSelection = false;
-        selectedCard.isMine = true;
+        selectedCard.owner = GetComponent<Card>().owner;
         GameBoard.instance.gameData.playerWhite.TryAddCardInHand(selectedCard);
     }
 }

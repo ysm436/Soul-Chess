@@ -9,7 +9,8 @@ using UnityEngine.EventSystems;
 public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
     [HideInInspector]
-    public bool isMine;
+    public bool isMine { get => owner.playerColor == GameBoard.instance.playerColor; }
+    public PlayerData owner;
     public int handIndex = -1;
 
     abstract protected int CardID { get; }

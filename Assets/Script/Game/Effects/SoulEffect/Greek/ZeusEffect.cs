@@ -19,7 +19,7 @@ public class ZeusEffect : Effect
         {
             GameObject thunder = Instantiate(thunder_card);
             Card thunder_info = thunder.GetComponent<Card>();
-            thunder_info.isMine = true;
+            thunder_info.owner = GetComponent<Card>().owner;
             if (!playercolor.TryAddCardInHand(thunder_info))
             {
                 Destroy(thunder);

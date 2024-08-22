@@ -79,6 +79,9 @@ public class GameBoard : MonoBehaviour
         gameData.playerBlack.soulOrbs = gameData.playerBlack.soulEssence = 0;
         gameData.playerWhite.soulOrbs = gameData.playerWhite.soulEssence = 1;
 
+        gameData.myPlayerData.playerColor = myController.playerColor;
+        gameData.opponentPlayerData.playerColor = opponentController.playerColor;
+
         foreach (ChessPiece king in gameData.pieceObjects.Where(piece => piece.pieceType == ChessPiece.PieceType.King))
             king.OnKilled += OnGameOver;
 
@@ -115,6 +118,8 @@ public class GameBoard : MonoBehaviour
         showedCard.GetComponent<Collider2D>().enabled = false;
         showedCard.GetComponent<SortingGroup>().sortingOrder = -1;
         showedCard.transform.localScale = new Vector3(1f, 1f, 0f) * cardSize;
+
+        showedCard.FlipFront();
     }
     public void HideCard()
     {

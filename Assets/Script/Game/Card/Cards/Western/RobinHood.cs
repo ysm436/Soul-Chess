@@ -24,7 +24,7 @@ public class RobinHood : SoulCard
         if (targetPiece.soul != null && targetPiece.pieceColor != InfusedPiece.pieceColor)
         {
             targetSoul = Instantiate(targetPiece.soul);
-            targetSoul.isMine = true;
+            targetSoul.owner = owner;
             targetSoul.gameObject.SetActive(false);
             targetPiece.OnKilled += GetTargetSoulCard;
         }
