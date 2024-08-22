@@ -7,44 +7,53 @@ using UnityEngine;
 public class Abel : SoulCard
 {
     protected override int CardID => Card.cardIdDict["아벨"];
-    ChessPiece recent;
+    private ChessPiece recent_attacked;
+    private bool attack_signal;
 
     protected override void Awake()
     {
         base.Awake();
-        OnInfuse += InfuseEffect;
     }
 
-    public void InfuseEffect(ChessPiece chessPiece)
+    private void OnAttackedByChessPiece(ChessPiece chessPiece, int damage)
     {
-        chessPiece.OnAttacked += OnAttackedEffect;
-        chessPiece.OnKilled += OnKilledEffect;
-
-        chessPiece.OnSoulRemoved += RemoveEffect;
+        recent_attacked = chessPiece;
+    }
+    private void OnAttackedBySpell(ChessPiece attackedPiece)
+    {
+        recent_attacked = null;
+    }
+    private void AbelStartAttack(ChessPiece chessPiece)
+    {
+        attack_signal = true;
+    }
+    private void AbelEndAttack(ChessPiece chessPiece)
+    {
+        attack_signal = false;
     }
 
-    public void OnAttackedEffect(ChessPiece chessPiece, int damamge)
+    private void OnKilledEffect(ChessPiece chessPiece)
     {
-        recent = chessPiece;
-    }
-
-    public void OnKilledEffect(ChessPiece chessPiece)
-    {
-        if (!GameBoard.instance.myController.isMyTurn)
+        //아벨이 공격을 해서 피해를 받는 경우 제외 및 스펠카드로 죽지 않았을 때 활성화
+        if (!attack_signal && recent_attacked != null)
         {
-            recent.Kill();
+            recent_attacked.AffectByAbel = true;
+            recent_attacked.Kill();
         }
     }
 
+
     public override void AddEffect()
     {
-        InfusedPiece.OnAttacked += OnAttackedEffect;
+        InfusedPiece.OnStartAttack += AbelStartAttack;
+        InfusedPiece.OnEndAttack += AbelEndAttack;
+        InfusedPiece.OnAttacked += OnAttackedByChessPiece;
+        InfusedPiece.OnSpellAttacked += OnAttackedBySpell;
         InfusedPiece.OnKilled += OnKilledEffect;
     }
 
     public override void RemoveEffect()
     {
-        InfusedPiece.OnAttacked -= OnAttackedEffect;
         InfusedPiece.OnKilled -= OnKilledEffect;
     }
 }

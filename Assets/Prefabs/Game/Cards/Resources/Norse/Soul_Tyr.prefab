@@ -84,7 +84,7 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uD2F0\uB974"
   _cost: 7
-  illustration: {fileID: 0}
+  illustration: {fileID: 21300000, guid: c56bbae59c72def4197e7147312e64c3, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 2
@@ -96,7 +96,19 @@ MonoBehaviour:
   pieceRestriction: 10
   _AD: 25
   _HP: 90
-  accessorySpriteList: []
+  accessorySpriteList:
+  - pieceType: 8
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 1e68a44573e3f2b43b031db0d809391c, type: 3}
+  - pieceType: 8
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 1e68a44573e3f2b43b031db0d809391c, type: 3}
+  - pieceType: 2
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 1e68a44573e3f2b43b031db0d809391c, type: 3}
+  - pieceType: 2
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 1e68a44573e3f2b43b031db0d809391c, type: 3}
   InfusedPiece: {fileID: 0}
 --- !u!114 &2246044354094067083
 MonoBehaviour:

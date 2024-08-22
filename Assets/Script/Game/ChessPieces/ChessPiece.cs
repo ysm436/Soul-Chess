@@ -53,6 +53,9 @@ abstract public class ChessPiece : TargetableObject
     [SerializeField]
     private int attackDamage;
 
+    public bool AffectByHades = false;
+    public bool AffectByAbel = false;
+
     // 키워드 우선순위: 면역, 도발, 보호막, 방어력
     // isTauntAttack은 도발이 연쇄적으로 작동하지 않도록 함
     public void MinusHP(int value, bool isTauntAttack = false)
@@ -85,6 +88,14 @@ abstract public class ChessPiece : TargetableObject
         }
 
         _currentHP -= value;
+
+        if (AffectByHades) //하데스 능력을 받을 경우
+        {
+            if (_currentHP <= 0)
+            {
+                _currentHP = 1;
+            }
+        }
 
         if (_currentHP > 0)
             pieceObject.HPText.text = _currentHP.ToString();
@@ -152,6 +163,7 @@ abstract public class ChessPiece : TargetableObject
     public Action<ChessPiece> OnStartAttack;
     public Action<ChessPiece> OnEndAttack;
     public Action<ChessPiece, int> OnAttacked;
+    public Action<ChessPiece> OnAttackedAfter;
     public Action<ChessPiece> OnSpellAttacked;
     [HideInInspector] public int spellDamageCoefficient = 1; //멀린 효과 : 내 마법 피해 2배 구현용
     //public Action OnGetMovableCoordinate;
@@ -234,8 +246,13 @@ abstract public class ChessPiece : TargetableObject
             MinusHP(targetPiece.attackDamage);
         }
 
-
         OnEndAttack?.Invoke(targetPiece);
+
+        if (AffectByAbel) // 아벨 능력에 의해 죽었을 경우 위치 조정을 하지 않음
+        {
+            AffectByAbel = false;
+            return false;
+        }
 
         return targetIsKilled;
     }
@@ -249,6 +266,7 @@ abstract public class ChessPiece : TargetableObject
         OnAttacked?.Invoke(chessPiece, damage);
 
         MinusHP(damage);
+        OnAttackedAfter?.Invoke(chessPiece);
         return isAlive;
     }
     public bool SpellAttacked(int damage)
@@ -318,10 +336,10 @@ abstract public class ChessPiece : TargetableObject
         maxHP -= soul.HP;
         AD -= soul.AD;
 
-		//구버전 코드
+        //구버전 코드
         //spriteRenderer.sprite = defaultSprite;
-        
-        
+
+
         //악세서리 제거
         if (accessory != null)
         {

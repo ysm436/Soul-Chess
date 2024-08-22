@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hercules : SoulCard
 {
     protected override int CardID => Card.cardIdDict["헤라클레스"];
+    private PlayerController playercontroller;
     private int multipleAD = 2;
 
     protected override void Awake()
@@ -22,9 +23,14 @@ public class Hercules : SoulCard
         {
             ADmultiply();
         }
+
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
+            playercontroller = GameBoard.instance.whiteController;
+        else
+            playercontroller = GameBoard.instance.blackController;
         
-        GameBoard.instance.myController.OnMyTurnStart += ADmultiply;
-        GameBoard.instance.myController.OnMyTurnEnd += ADoriginate;
+        playercontroller.OnMyTurnStart += ADmultiply;
+        playercontroller.OnMyTurnEnd += ADoriginate;
     }
 
     public override void RemoveEffect()
@@ -38,13 +44,13 @@ public class Hercules : SoulCard
             ADoriginate();
         }
 
-        GameBoard.instance.myController.OnMyTurnStart -= ADmultiply;
-        GameBoard.instance.myController.OnMyTurnEnd -= ADoriginate;
+        playercontroller.OnMyTurnStart -= ADmultiply;
+        playercontroller.OnMyTurnEnd -= ADoriginate;
     }
 
     public void ADmultiply()
     {
-        if (GameBoard.instance.myController.playerColor == InfusedPiece.pieceColor) //mycontroller가 piececolor인지 확인
+        if (playercontroller.playerColor == InfusedPiece.pieceColor) //playercontroller가 piececolor인지 확인
         {
             InfusedPiece.AD *= multipleAD;
         }
@@ -52,7 +58,7 @@ public class Hercules : SoulCard
 
     public void ADoriginate()
     {
-        if (GameBoard.instance.myController.playerColor == InfusedPiece.pieceColor) //mycontroller가 piececolor인지 확인
+        if (playercontroller.playerColor == InfusedPiece.pieceColor) //playercontroller가 piececolor인지 확인
         {
             InfusedPiece.AD /= multipleAD;
         }

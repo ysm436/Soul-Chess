@@ -84,13 +84,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97b26746cbee38448f72609dc32efbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uC2E0\uC2DD-\uB0AB\uC804\uCC28"
   _cost: 5
   illustration: {fileID: 21300000, guid: 6170e472cdad6134994fd11e3cce4646, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 0
-  description: "\uAC15\uB9BC : \uBC29\uC5B4\uB3C4 10,  \uBCF4\uD638\uB9C9\uC744 \uD68D\uB4DD\uD569\uB2C8\uB2E4."
+  description: "[\uAC15\uB9BC]  \uBC29\uC5B4\uB3C4 10,  \uBCF4\uD638\uB9C9\uC744
+    \uD68D\uB4DD\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 298669615360064573}
   isInSelection: 0
   pieceRestriction: 8
