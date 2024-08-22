@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    public LobbySceneUI lobbySceneUI;
+
     private SoundManager soundManager;
     private void Awake()
     {
@@ -44,6 +46,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             GameManager.instance.isHost = false;
         else
             GameManager.instance.isHost = true;
+        lobbySceneUI.Init();
         Debug.Log("Join");
     }
 
@@ -61,7 +64,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         else
             gameStarted = true;
         PhotonNetwork.LoadLevel("GameScene");
-        soundManager.PlayBgm("GameScene");
         Debug.Log("gamescene");
     }
 

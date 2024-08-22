@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     }
     private const string PATH = "/Save/";
     private const string FILE_NAME = "DeckData.json";
-    private SoundManager soundManager;
+    public SoundManager soundManager;
 
     private void Awake()
     {
@@ -55,14 +55,17 @@ public class GameManager : MonoBehaviour
     {
 
     }
-
+    public void LoadMatchingSceneFromLobbyScene()
+    {
+        PhotonNetwork.Disconnect();
+        LoadMatchingScene();
+    }
     public void LoadMainSceneFromGameScene()
     {
         Destroy(GameBoard.instance.gameObject);
-        PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene("MainScene");
+        PhotonNetwork.Disconnect();
+        LoadMainScene();
         GameBoard.instance = null;
-        soundManager.PlayBgm("MainScene");
     }
     public void LoadMainScene()
     {
@@ -141,6 +144,8 @@ public class GameManager : MonoBehaviour
 
         foreach (var g in AllCardObjectsList)
         {
+            Debug.Log(g.GetComponent<Card>().cardName);
+            Debug.Log(Card.cardIdDict[g.GetComponent<Card>().cardName]);
             AllCards[Card.cardIdDict[g.GetComponent<Card>().cardName]] = g;
         }
     }

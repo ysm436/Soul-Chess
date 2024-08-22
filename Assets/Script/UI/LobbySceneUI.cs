@@ -4,13 +4,21 @@ using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LobbySceneUI : MonoBehaviour
 {
     private PhotonView photonView;
     public NetworkManager networkManager;
+    public Button whiteReadyButton;
+    public TextMeshProUGUI whiteReadyButtonText;
+    public Button blackReadyButton;
+    public TextMeshProUGUI blackReadyButtonText;
+    public RectTransform myCardText;
 
     public int SelectedDeckIndex = -1;
+
+    private bool isReady { get => GameManager.instance.isHost ? isWhiteReady : isBlackReady; }
     private bool isWhiteReady
     {
         get => _isWhiteReady;
@@ -43,6 +51,22 @@ public class LobbySceneUI : MonoBehaviour
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+        blackReadyButton.enabled = false;
+        whiteReadyButton.enabled = false;
+    }
+    public void Init()
+    {
+        if (GameManager.instance.isHost)
+        {
+            whiteReadyButton.enabled = true;
+            myCardText.gameObject.SetActive(true);
+        }
+        else
+        {
+            blackReadyButton.enabled = true;
+            myCardText.anchoredPosition = new Vector3(-myCardText.anchoredPosition.x, myCardText.anchoredPosition.y);
+            myCardText.gameObject.SetActive(true);
+        }
     }
 
     private void TryStartGame()
@@ -53,10 +77,11 @@ public class LobbySceneUI : MonoBehaviour
 
     public void ExitButton()
     {
+        PhotonNetwork.AutomaticallySyncScene = false;
         GameManager.instance.LoadMatchingScene();
     }
 
-    public void StartButton()
+    public void ReadyButton()
     {
         if (SelectedDeckIndex == -1)
         {
@@ -64,7 +89,7 @@ public class LobbySceneUI : MonoBehaviour
         }
         else
         {
-            photonView.RPC("SetReady", RpcTarget.AllBuffered, GameManager.instance.isHost, true);
+            photonView.RPC("SetReady", RpcTarget.AllBuffered, GameManager.instance.isHost, !isReady);
         }
     }
 
@@ -75,11 +100,20 @@ public class LobbySceneUI : MonoBehaviour
         {
             Debug.Log("player white is " + (ready ? "" : "not ") + "ready");
             isWhiteReady = ready;
+            if (ready)
+                whiteReadyButtonText.color = Color.red;
+            else
+                whiteReadyButtonText.color = Color.black;
         }
         else
         {
             Debug.Log("player black is " + (ready ? "" : "not ") + "ready");
             isBlackReady = ready;
+            if (ready)
+                blackReadyButtonText.color = Color.red;
+            else
+
+                blackReadyButtonText.color = Color.black;
         }
     }
 
@@ -126,7 +160,7 @@ public class LobbySceneUI : MonoBehaviour
         {
             SelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckname + ">";
         }
-        
+
         GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
     }
 
