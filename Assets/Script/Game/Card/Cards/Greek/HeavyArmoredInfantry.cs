@@ -13,10 +13,11 @@ public class HeavyArmoredInfantry : SoulCard
 
     public override void AddEffect()
     {
-        
+        InfusedPiece.SetKeyword(Keyword.Type.Defense, 5);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.Defense, 5, true);
     }
     public override void RemoveEffect()
     {
-        
+        InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Defense);
     }
 }

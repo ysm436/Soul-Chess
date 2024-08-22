@@ -35,6 +35,7 @@ public class ApollonEffect : Effect
             {
                 obj.SetKeyword(Keyword.Type.Shield);
                 //버프 관련 변경 머지 후 버프 추가
+                obj.buff.AddBuffByKeyword(apollon_component.cardName, Buff.BuffType.Shield);
             }
         }
         apollon_component.AddEffect(); //자신에게 보호막
