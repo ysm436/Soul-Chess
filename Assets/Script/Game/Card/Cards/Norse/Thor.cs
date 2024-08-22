@@ -16,7 +16,8 @@ public class Thor : SoulCard
 
     private void AttackRandomEnemyPiece()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != GameBoard.instance.myController.playerColor).ToList();
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece =>
+            piece.pieceColor != player.playerColor && piece.soul != null).ToList(); //영혼 부여된 기물만 제거
 
         if (enemyPieceList.Count == 0)
             return;

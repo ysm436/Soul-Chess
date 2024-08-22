@@ -68,6 +68,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7454198298593411323}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5850359546616703673}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
 --- !u!1 &749898991636666037 stripped
 GameObject:
@@ -96,12 +99,30 @@ MonoBehaviour:
   rarity: 1
   description: "[\uC720\uC5B8] \uBB34\uC791\uC704 \uC801 \uAE30\uBB3C\uC5D0\uAC8C
     \uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4. 8\uBC88 \uBC18\uBCF5\uD569\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 0}
+  EffectOnCardUsed: {fileID: 5850359546616703673}
   isInSelection: 0
   pieceRestriction: 8
   _AD: 78
   _HP: 78
-  accessorySpriteList: []
+  accessorySpriteList:
+  - pieceType: 8
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: eb5f536aed014de47b377001c79c3316, type: 3}
+  - pieceType: 8
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: eb5f536aed014de47b377001c79c3316, type: 3}
   InfusedPiece: {fileID: 0}
   repeat: 8
   damage: 8
+--- !u!114 &5850359546616703673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749898991636666037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8226f25a206c1da4eb0cd721903b59cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

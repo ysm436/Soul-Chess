@@ -125,8 +125,8 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 2
-  description: "[\uAC15\uB9BC] \uBAA8\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C 25\uC758 \uD53C\uD574\uB97C
-    \uC90D\uB2C8\uB2E4.\n"
+  description: "[\uAC15\uB9BC] \uBAA8\uB4E0 \uC601\uD63C\uC774 \uAE43\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C
+    25\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 558989280382440502}
   isInSelection: 0
   pieceRestriction: 8

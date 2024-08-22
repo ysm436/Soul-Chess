@@ -90,8 +90,8 @@ MonoBehaviour:
   reigon: 0
   rarity: 2
   description: "\uD589\uC744 \uC120\uD0DD\uD569\uB2C8\uB2E4. \uADF8 \uD589\uC5D0
-    \uC788\uB294 \uBAA8\uB4E0 \uC801 \uAE30\uBB3C\uC5D0\uAC8C 35\uC758 \uD53C\uD574\uB97C
-    \uC90D\uB2C8\uB2E4."
+    \uC788\uB294 \uBAA8\uB4E0 \uC601\uD63C\uC774 \uAE43\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C
+    35\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -6734192282877653182}
   isInSelection: 0
 --- !u!114 &-6734192282877653182

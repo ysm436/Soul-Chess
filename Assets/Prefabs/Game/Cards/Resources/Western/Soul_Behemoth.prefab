@@ -64,6 +64,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6592858290932310892}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5580636979039151795}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
 --- !u!1 &4488957673976943173 stripped
 GameObject:
@@ -82,6 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4236771400fe8d842af19c379876c008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uBCA0\uD5E4\uBAA8\uC2A4"
   _cost: 9
   illustration: {fileID: 21300000, guid: cf4e86c1a0035df41b013a733d722bbe, type: 3}
@@ -89,21 +94,29 @@ MonoBehaviour:
   reigon: 2
   rarity: 2
   description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, +10/+10\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 5415071180265959741}
+  EffectOnCardUsed: {fileID: -5580636979039151795}
   isInSelection: 0
   pieceRestriction: 8
   _AD: 70
   _HP: 70
-  accessorySpriteList: []
+  accessorySpriteList:
+  - pieceType: 8
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 681a72d67b7191c418bf6f39791de8bd, type: 3}
+  - pieceType: 8
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 681a72d67b7191c418bf6f39791de8bd, type: 3}
   InfusedPiece: {fileID: 0}
---- !u!114 &5415071180265959741 stripped
+  player: {fileID: 0}
+--- !u!114 &-5580636979039151795
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 2416270540618328052}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4488957673976943173}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fd9ef5eb5f4cdf4599197a01795cbd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

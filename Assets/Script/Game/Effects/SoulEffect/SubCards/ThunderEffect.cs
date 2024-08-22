@@ -51,7 +51,7 @@ public class ThunderEffect : Effect
         while (GameBoard.instance.gameData.IsValidCoordinate(targetCoordinate))
         {
             ChessPiece target = GameBoard.instance.gameData.GetPiece(targetCoordinate);
-            if (target != null && target.pieceColor != playercolor)
+            if (target.soul != null && target.pieceColor != playercolor) //영혼만 공격
             {
                 target.SpellAttacked(35);
             }

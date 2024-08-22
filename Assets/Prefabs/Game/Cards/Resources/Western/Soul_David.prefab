@@ -103,16 +103,16 @@ MonoBehaviour:
   accessorySpriteList:
   - pieceType: 1
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 782c5f953eea3ed4299f057e923c70fc, type: 3}
   - pieceType: 32
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 782c5f953eea3ed4299f057e923c70fc, type: 3}
   - pieceType: 1
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 782c5f953eea3ed4299f057e923c70fc, type: 3}
   - pieceType: 32
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 782c5f953eea3ed4299f057e923c70fc, type: 3}
   InfusedPiece: {fileID: 0}
 --- !u!114 &2377348935909867065
 MonoBehaviour:

@@ -64,6 +64,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8018143768630719333}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6973040188266450300}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
 --- !u!1 &6491951197048986 stripped
 GameObject:
@@ -82,6 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71d14047dc54d84aad316ac74428df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uBAA8\uB974\uAC74 \uB974 \uD398\uC774"
   _cost: 4
   illustration: {fileID: 21300000, guid: 6bcf9c5d389ed4f4b82abc761aaa01e8, type: 3}
@@ -90,7 +95,7 @@ MonoBehaviour:
   rarity: 2
   description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uBB34\uC791\uC704 \uC544\uAD70
     \uAE30\uBB3C\uC758 \uCCB4\uB825\uC744 \uBAA8\uB450 \uD68C\uBCF5\uC2DC\uD0B5\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 8465317945174799330}
+  EffectOnCardUsed: {fileID: 6973040188266450300}
   isInSelection: 0
   pieceRestriction: 20
   _AD: 20
@@ -109,14 +114,16 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 4ad5d7bd4ed7e8e4db69de54247fc1f4, type: 3}
   InfusedPiece: {fileID: 0}
---- !u!114 &8465317945174799330 stripped
+  player: {fileID: 0}
+--- !u!114 &6973040188266450300
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 2293662741994202411}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6491951197048986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
+  m_Script: {fileID: 11500000, guid: 151cbcabd46475345acfe079d7dbbfee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

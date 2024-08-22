@@ -62,20 +62,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      insertIndex: 6
+      insertIndex: -1
       addedObject: {fileID: 6842244014742130878}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -748067917244196058}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!114 &88144215726592661 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 7752741695717721180}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8382587618704912877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8382587618704912877 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
@@ -93,16 +85,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae95f209af0ba54da96a5ab43231bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uD1A0\uB974"
   _cost: 8
   illustration: {fileID: 21300000, guid: 4c47b1203c3245c41b52d8fdf4e1f7a8, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 2
-  description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uBB34\uC791\uC704 \uC801
-    \uAE30\uBB3C\uC5D0\uAC8C \uB0B4 \uACF5\uACA9\uB825\uB9CC\uD07C \uD53C\uD574\uB97C
-    \uC90D\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 88144215726592661}
+  description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uC601\uD63C\uC774 \uAE43\uB4E0
+    \uBB34\uC791\uC704 \uC801 \uAE30\uBB3C\uC5D0\uAC8C \uB0B4 \uACF5\uACA9\uB825\uB9CC\uD07C
+    \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: -748067917244196058}
   isInSelection: 0
   pieceRestriction: 8
   _AD: 40
@@ -115,3 +109,16 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 2cc150a9c502e1d4da5d6c8cfce19202, type: 3}
   InfusedPiece: {fileID: 0}
+  player: {fileID: 0}
+--- !u!114 &-748067917244196058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8382587618704912877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df80b188b4cdbf43927abc3dddcaa92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

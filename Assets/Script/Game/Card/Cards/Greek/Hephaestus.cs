@@ -36,7 +36,8 @@ public class Hephaestus : SoulCard
                 aroundCoordinates.RemoveAt(i);
                 continue;
             }
-            if (_chessData.GetPiece(currentCoordinate) != null && _chessData.GetPiece(currentCoordinate) != InfusedPiece)
+            if (_chessData.GetPiece(currentCoordinate) != null && _chessData.GetPiece(currentCoordinate) != InfusedPiece &&
+                _chessData.GetPiece(currentCoordinate).soul != null) //영혼에만 피해
             {
                 _chessData.GetPiece(currentCoordinate).MinusHP(20);
             }

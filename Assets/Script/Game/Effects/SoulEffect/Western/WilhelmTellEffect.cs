@@ -63,7 +63,7 @@ public class WilhelmTellEffect : Effect
             }
             else
             {
-                piece.MinusHP(80);
+                piece.MinusHP(60);
                 Debug.Log("빌헬름 텔 효과 발동");
                 break;
             }

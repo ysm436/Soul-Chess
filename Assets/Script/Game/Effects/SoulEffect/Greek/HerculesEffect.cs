@@ -7,6 +7,7 @@ public class HerculesEffect : Effect
     public override void EffectAction(PlayerController player)
     {
         Hercules hercules_component = gameObject.GetComponent<Hercules>();
+        hercules_component.playercontroller = player;
 
         hercules_component.InfusedPiece.buff.AddBuffByDescription(hercules_component.cardName, Buff.BuffType.Description, "헤라클레스: 본인 턴 동안 공격력 2배", true);
         hercules_component.AddEffect();
