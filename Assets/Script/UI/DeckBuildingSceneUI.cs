@@ -15,6 +15,7 @@ public class DeckBuildingSceneUI : MonoBehaviour
     [SerializeField] public GameObject deckListPanel;
     [SerializeField] public GameObject newDeckPanel;
     public DeckManager deckmanager;
+    private bool debug = false;
 
     private void Awake()
     {
@@ -81,7 +82,19 @@ public class DeckBuildingSceneUI : MonoBehaviour
         bool available = true;
         int SoulCardQuantity = deckmanager.local_chesspieces.Sum();
 
-        if (SoulCardQuantity < 16) available = false;
+        if (debug)
+            return true;
+
+        if (deckmanager.local_card_count < 30)
+        {            
+            available = false;
+            deckmanager.CautionText.text = "덱에 30장의 카드가 들어가야 합니다.";
+        }
+        else if (SoulCardQuantity < 16)
+        {
+            available = false;
+            deckmanager.CautionText.text = "덱에 적어도 16개의 기물카드는 들어가야 합니다.";
+        }
         /* if (deckmanager.local_chesspieces[0] < 8) available = false;
         else if (deckmanager.local_chesspieces[1] < 2) available = false;
         else if (deckmanager.local_chesspieces[2] < 2) available = false;
@@ -89,11 +102,20 @@ public class DeckBuildingSceneUI : MonoBehaviour
         else if (deckmanager.local_chesspieces[4] < 1) available = false;
         else if (deckmanager.local_chesspieces[5] < 1) available = false; */
 
-        if (available == false)
-        {
-            deckmanager.CautionText.text = "덱에 적어도 16개의 기물카드는 들어가야 합니다.";
-        }
-
         return available;
+    }
+
+    public void debugToggle(bool debugtoggle)
+    {
+        if (debugtoggle)
+        {
+            deckmanager.debug_button = true;
+            debug = true;
+        }
+        else
+        {
+            deckmanager.debug_button = false;
+            debug = false;
+        }
     }
 }

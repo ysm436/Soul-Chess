@@ -137,6 +137,15 @@ public class DeckBuildingManager : MonoBehaviour
         {
             Transform card = DisplayStorage.GetChild(i - 1);
             AddDisplayCard(card.gameObject.GetComponent<DisplayCard>().cardindex, quantity_setting);
+            Transform added_display = DynamicDisplay.GetChild(DynamicDisplay.childCount - 1);
+            for (int card_order = 0; card_order < DynamicDisplay.childCount - 1; card_order++)
+            {
+                if (DynamicDisplay.GetChild(card_order).GetComponent<DisplayCard>().cardindex > added_display.GetComponent<DisplayCard>().cardindex)
+                {
+                    added_display.SetSiblingIndex(card_order);
+                    break;
+                }
+            }
             card.SetParent(TrashCan);
             card.gameObject.SetActive(false);
         }
