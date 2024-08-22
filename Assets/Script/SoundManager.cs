@@ -12,8 +12,6 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-
         bgmPlayer = gameObject.AddComponent<AudioSource>();
         bgmVolume = 1f;
 
