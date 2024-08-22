@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Name
-      value: Spell_ Pegasus
+      value: Spell_Pegasus
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
@@ -82,7 +82,7 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uD398\uAC00\uC218\uC2A4"
   _cost: 0
-  illustration: {fileID: 0}
+  illustration: {fileID: 21300000, guid: f9d27b2ee7e0f364b81bbe09a89fb480, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 1

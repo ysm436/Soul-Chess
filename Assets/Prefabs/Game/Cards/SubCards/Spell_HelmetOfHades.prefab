@@ -82,7 +82,7 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uD558\uB370\uC2A4\uC758 \uD22C\uAD6C"
   _cost: 0
-  illustration: {fileID: 0}
+  illustration: {fileID: 21300000, guid: a8ce55289122c944882ec801d234c511, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 1

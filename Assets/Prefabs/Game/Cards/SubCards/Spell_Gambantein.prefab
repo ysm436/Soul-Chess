@@ -106,9 +106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9f6b8e8a3483d41b515b5984d730e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uAC10\uBC18\uD14C\uC778"
   _cost: 8
-  illustration: {fileID: 0}
+  illustration: {fileID: 21300000, guid: 69fd2f70b9826774787c5fb7f95af465, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 2
