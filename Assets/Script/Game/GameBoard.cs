@@ -85,6 +85,10 @@ public class GameBoard : MonoBehaviour
         synchronizedRandom.Init(GameManager.instance.isHost);
     }
 
+    private void Start()
+    {
+        GameManager.instance.soundManager.PlayBgm("GameScene");
+    }
     public BoardSquare GetBoardSquare(Vector2Int coordinate)
     {
         return gameData.boardSquares[coordinate.x, coordinate.y];
