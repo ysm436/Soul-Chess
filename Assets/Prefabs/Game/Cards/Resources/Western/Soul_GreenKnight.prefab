@@ -88,7 +88,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 2
-  description: "\uAC15\uB9BC : \uAE30\uBB3C \uD558\uB098\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.
+  description: "[\uAC15\uB9BC] \uAE30\uBB3C \uD558\uB098\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.
     \uADF8 \uAE30\uBB3C\uC774 \uC774 \uAE30\uBB3C\uC744 \uACF5\uACA9\uD569\uB2C8\uB2E4.
     \uC774\uD6C4 \uB3C4\uBC1C\uC744 \uD68D\uB4DD\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 7792896826575377344}

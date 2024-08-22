@@ -65,17 +65,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -1208510047847783411}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!114 &1942988319355413372 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 8095363646312904117}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042065685120303108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8042065685120303108 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
@@ -93,16 +82,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88198c9e05adea4f858bc52fa3d934b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uC544\uBCA8"
   _cost: 4
   illustration: {fileID: 21300000, guid: 498cdfc4304de2e4fb29e8a1c916c666, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 2
-  description: "\uC720\uC5B8 : \uC774 \uAE30\uBB3C\uC774 \uACF5\uACA9 \uBC1B\uC544
+  description: "[\uC720\uC5B8] \uC774 \uAE30\uBB3C\uC774 \uACF5\uACA9 \uBC1B\uC544
     \uCC98\uCE58\uB420 \uB54C, \uC774 \uAE30\uBB3C\uC744 \uACF5\uACA9\uD55C \uAE30\uBB3C\uC744
     \uCC98\uCE58\uD569\uB2C8\uB2E4. "
-  EffectOnCardUsed: {fileID: 1942988319355413372}
+  EffectOnCardUsed: {fileID: 0}
   isInSelection: 0
   pieceRestriction: 5
   _AD: 30

@@ -100,9 +100,9 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 1
-  description: "\uAC15\uB9BC : \uC544\uAD70 \uAE30\uBB3C\uC758 \uC601\uD63C\uC744
+  description: "[\uAC15\uB9BC] \uC544\uAD70 \uAE30\uBB3C\uC758 \uC601\uD63C\uC744
     \uD761\uC218\uD569\uB2C8\uB2E4. \uADF8 \uC601\uD63C\uC758 \uB2A5\uB825\uCE58\uB97C
-    \uC5BB\uC2B5\uB2C8\uB2E4.\r\n\uC720\uC5B8 : \uADF8 \uC601\uD63C\uC744 \uB0B4
+    \uC5BB\uC2B5\uB2C8\uB2E4.\r\n[\uC720\uC5B8] \uADF8 \uC601\uD63C\uC744 \uB0B4
     \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -6496355444723469496}
   isInSelection: 0

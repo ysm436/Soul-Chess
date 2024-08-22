@@ -84,13 +84,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c97ff4deba13594c8c837d7bad8a2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uD5E4\uB77C\uD074\uB808\uC2A4"
   _cost: 9
   illustration: {fileID: 0}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 1
-  description: "[\uB3C4\uBC1C]\r\n\uB0B4 \uD134\uC5D0 \uACF5\uACA9\uB825\uC774 2\uBC30\uAC00
+  description: "[\uB3C4\uBC1C] \uB0B4 \uD134\uC5D0 \uACF5\uACA9\uB825\uC774 2\uBC30\uAC00
     \uB429\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 1265310719377410018}
   isInSelection: 0
