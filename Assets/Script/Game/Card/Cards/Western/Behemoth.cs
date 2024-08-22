@@ -57,6 +57,6 @@ public class Behemoth : SoulCard
             }
         }
 
-        GameBoard.instance.myController.OnMyTurnEnd -= IncreaseStat;
+        player.OnMyTurnEnd -= IncreaseStat;
     }
 }
