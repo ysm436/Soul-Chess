@@ -19,7 +19,7 @@ public class PlunderShipEffect : Effect
         {
             GameObject plunderer = Instantiate(plunderer_card);
             Card plunderer_info = plunderer.GetComponent<Card>();
-            plunderer_info.isMine = true;
+            plunderer_info.owner = GetComponent<Card>().owner;
             if (!playercolor.TryAddCardInHand(plunderer_info))
             {
                 Destroy(plunderer);
