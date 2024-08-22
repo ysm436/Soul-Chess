@@ -10,7 +10,7 @@ public class RagnarokEffect : Effect
 
         for (int i = pieceList.Count - 1; i >= 0; i--)
         {
-            if (pieceList[i].pieceType != ChessPiece.PieceType.King && pieceList[i].pieceType != ChessPiece.PieceType.Quene)
+            if (pieceList[i].pieceType == ChessPiece.PieceType.Pawn)
             {
                 pieceList[i].Kill();
             }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Hercules : SoulCard
 {
     protected override int CardID => Card.cardIdDict["헤라클레스"];
-    public PlayerController playercontroller = null;
+    [HideInInspector] public PlayerController playercontroller = null;
     private int multipleAD = 2;
 
     protected override void Awake()

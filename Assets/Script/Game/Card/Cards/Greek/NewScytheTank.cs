@@ -14,10 +14,10 @@ public class NewScytheTank : SoulCard
     public override void AddEffect()
     {
         InfusedPiece.SetKeyword(Keyword.Type.Defense, 10);
-        InfusedPiece.SetKeyword(Keyword.Type.Shield);
+        InfusedPiece.SetKeyword(Keyword.Type.Rush);
 
         InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.Defense, 10, true);
-        InfusedPiece.buff.AddBuffByKeyword(cardName, Buff.BuffType.Shield);
+        InfusedPiece.buff.AddBuffByKeyword(cardName, Buff.BuffType.Rush);
 
         InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
@@ -25,9 +25,9 @@ public class NewScytheTank : SoulCard
     public override void RemoveEffect()
     {
         InfusedPiece.SetKeyword(Keyword.Type.Defense, -10);
-        InfusedPiece.SetKeyword(Keyword.Type.Shield, 0);
+        InfusedPiece.SetKeyword(Keyword.Type.Rush, 0);
 
         InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Defense);
-        InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Shield);
+        InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Rush);
     }
 }
