@@ -6,10 +6,9 @@ using UnityEngine.Events;
 using Unity.Collections;
 using UnityEngine.EventSystems;
 
-public class BoardSquare : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class BoardSquare : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     public BoardSquareOutline outline; //외곽선 프리팹
-    public Vector2Int coordinate;
 
     public bool isMovable
     {

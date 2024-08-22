@@ -24,7 +24,6 @@ abstract public class ChessPiece : TargetableObject
     protected GameData _chessData;
     public GameData chessData { set { _chessData = value; } }
 
-    public Vector2Int coordinate;
     public bool isAlive;
     [HideInInspector] public bool isRevivable = false; //부활 체크용
     public SoulCard soul
