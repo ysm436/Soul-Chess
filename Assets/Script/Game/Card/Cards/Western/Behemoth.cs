@@ -6,35 +6,57 @@ public class Behemoth : SoulCard
 {
     protected override int CardID => Card.cardIdDict["베헤모스"];
 
+    [HideInInspector] public PlayerController player = null;
+    private int buffedStat = 0;
+    private int IncreaseAmount = 10;
+
     protected override void Awake()
     {
         base.Awake();
-        OnInfuse += SoulEffect;
     }
 
-    public void SoulEffect(ChessPiece chessPiece)
+    public void IncreaseStat()
     {
-        GameBoard.instance.myController.OnMyTurnEnd += SoulEffect2;
+        InfusedPiece.maxHP += IncreaseAmount;
+        InfusedPiece.AD += IncreaseAmount;
+        buffedStat += IncreaseAmount;
 
-        chessPiece.OnSoulRemoved += RemoveEffect;
-    }
-
-    public void SoulEffect2()
-    {
-        InfusedPiece.maxHP += 10;
-        InfusedPiece.AD += 10;
-
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, 10, true);
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, 10, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, IncreaseAmount, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, IncreaseAmount, true);
     }
 
     public override void AddEffect()
     {
-        GameBoard.instance.myController.OnMyTurnEnd += SoulEffect2;
+        InfusedPiece.maxHP += buffedStat;
+        InfusedPiece.AD += buffedStat;
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, buffedStat, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, buffedStat, true);
+        buffedStat = 0;
+
+        if (player != null) player.OnMyTurnEnd += IncreaseStat;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
     {
-        GameBoard.instance.myController.OnMyTurnEnd -= SoulEffect2;
+        for(int i = InfusedPiece.buff.buffList.Count-1; i >= 0; i--)
+        {
+            Buff.BuffInfo buffInfo = InfusedPiece.buff.buffList[i];
+            if (buffInfo.sourceName == cardName)
+            {
+                if (buffInfo.buffType == Buff.BuffType.AD)
+                {
+                    InfusedPiece.AD -= buffInfo.value;
+                    InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.AD);
+                }
+                else if (buffInfo.buffType == Buff.BuffType.HP)
+                {
+                    InfusedPiece.maxHP = (InfusedPiece.maxHP-buffInfo.value) > 0 ? InfusedPiece.maxHP-buffInfo.value : 1;
+                    InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.HP);
+                }
+            }
+        }
+
+        GameBoard.instance.myController.OnMyTurnEnd -= IncreaseStat;
     }
 }

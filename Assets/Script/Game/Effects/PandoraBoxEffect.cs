@@ -13,7 +13,7 @@ public class PandoraBoxEffect : Effect
 
         foreach (ChessPiece piece in pieces)
         {
-            int temp = Random.Range(0,2);
+            int temp = SynchronizedRandom.Range(0,2);
             if (temp == 0)
             {
                 piece.AD += change;

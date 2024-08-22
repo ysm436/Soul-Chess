@@ -9,6 +9,7 @@ public class ToneDeafBard : SoulCard
 
     [HideInInspector]
     public ChessPiece buffedPiece = null;
+    [HideInInspector] public int decreaseAmount = 20;
 
     protected override void Awake()
     {
@@ -24,14 +25,14 @@ public class ToneDeafBard : SoulCard
         if (buffedPiece != null && buffedPiece != gameObject.GetComponent<SoulCard>().InfusedPiece)
         {
             //원래 효과
-            /*
+            ///*
             buffedPiece.buff.TryRemoveSpecificBuff(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.AD);
             buffedPiece.buff.TryRemoveSpecificBuff(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.HP);
-            buffedPiece.AD += 20;
+            buffedPiece.AD += decreaseAmount;
             buffedPiece.maxHP = (buffedPiece.maxHP-20) > 0 ? (buffedPiece.maxHP-20) : 1;
-            */
+            //*/
             //아군 구속 테스트용
-            buffedPiece.Unrestraint();
+            //buffedPiece.Unrestraint();
 
             //아군 침묵 테스트용
             //buffedPiece.SetKeyword(Keyword.Type.Silence, 0);

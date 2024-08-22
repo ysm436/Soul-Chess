@@ -14,14 +14,6 @@ public class Kraken : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        OnInfuse += InfuseEffect;
-    }
-
-    public void InfuseEffect(ChessPiece chessPiece)
-    {
-        chessPiece.OnKilled += OnKilledEffect;
-
-        chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public void OnKilledEffect(ChessPiece chessPiece)
@@ -30,7 +22,7 @@ public class Kraken : SoulCard
 
         for (int i = 0; i < repeat; i++)
         {
-            int ran = Random.Range(0, targets.Count);
+            int ran = SynchronizedRandom.Range(0, targets.Count);
             targets[ran].MinusHP(damage);
 
             if (!targets[ran].isAlive)
@@ -41,6 +33,7 @@ public class Kraken : SoulCard
     public override void AddEffect()
     {
         InfusedPiece.OnKilled += OnKilledEffect;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()

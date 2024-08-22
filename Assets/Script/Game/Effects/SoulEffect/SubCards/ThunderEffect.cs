@@ -9,6 +9,7 @@ public class ThunderEffect : Effect
     GameBoard.PlayerColor playercolor = GameBoard.PlayerColor.White; //EffectAction에 변수로 player 받으면 추가하겠습니다.
     public override void EffectAction(PlayerController player)
     {
+        playercolor = player.playerColor; //추가함
         Vector2Int[] row_standards = {
             Vector2Int.zero,
             Vector2Int.up,

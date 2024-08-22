@@ -24,6 +24,7 @@ public class NewScytheTank : SoulCard
 
     public override void RemoveEffect()
     {
+        InfusedPiece.SetKeyword(Keyword.Type.Defense, -10);
         InfusedPiece.SetKeyword(Keyword.Type.Shield, 0);
 
         InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Defense);

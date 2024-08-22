@@ -8,42 +8,28 @@ public class Surtr : SoulCard
 {
     protected override int CardID => Card.cardIdDict["수르트"];
 
+    [HideInInspector] public PlayerController player = null;
+
     protected override void Awake()
     {
         base.Awake();
 
-        GameBoard.instance.myController.OnMyTurnEnd += DecreaseCost;
-        GameBoard.instance.opponentController.OnMyTurnEnd += DecreaseCost;
-
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnEnd -= DecreaseCost;
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.opponentController.OnMyTurnEnd -= DecreaseCost;
-
-        OnInfuse += DestroyAllCards;
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnEnd += DestroyInfusedPiece;
-
-        OnInfuse += (ChessPiece chessPiece) => chessPiece.OnSoulRemoved += RemoveEffect;
+        GameBoard.instance.whiteController.OnMyTurnEnd += DecreaseCost;
+        GameBoard.instance.blackController.OnMyTurnEnd += DecreaseCost;
     }
 
     private void OnDisable()
     {
-        GameBoard.instance.myController.OnMyTurnEnd -= DecreaseCost;
-        GameBoard.instance.opponentController.OnMyTurnEnd -= DecreaseCost;
+        GameBoard.instance.whiteController.OnMyTurnEnd -= DecreaseCost;
+        GameBoard.instance.blackController.OnMyTurnEnd -= DecreaseCost;
     }
 
-    private void DecreaseCost()
+    public void DecreaseCost()
     {
         if (cost > 0)
         {
             cost--;
         }
-    }
-
-    private void DestroyAllCards(ChessPiece chessPiece)
-    {
-        GameBoard.instance.gameData.playerWhite.RemoveHandCards();
-        GameBoard.instance.gameData.playerWhite.RemoveDeckCards();
-        GameBoard.instance.gameData.playerBlack.RemoveHandCards();
-        GameBoard.instance.gameData.playerBlack.RemoveDeckCards();
     }
 
     private void DestroyInfusedPiece()
@@ -53,10 +39,11 @@ public class Surtr : SoulCard
 
     public override void AddEffect()
     {
-        GameBoard.instance.myController.OnMyTurnEnd += DestroyInfusedPiece;
+        if (player != null) player.OnMyTurnEnd += DestroyInfusedPiece;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
     public override void RemoveEffect()
     {
-        GameBoard.instance.myController.OnMyTurnEnd -= DestroyInfusedPiece;
+        if (player != null) player.OnMyTurnEnd -= DestroyInfusedPiece;
     }
 }
