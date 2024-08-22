@@ -51,6 +51,8 @@ abstract public class ChessPiece : TargetableObject
     }
     [SerializeField]
     private int attackDamage;
+    
+    public bool AffectByHades = false;
 
     // 키워드 우선순위: 면역, 도발, 보호막, 방어력
     // isTauntAttack은 도발이 연쇄적으로 작동하지 않도록 함
@@ -84,6 +86,14 @@ abstract public class ChessPiece : TargetableObject
         }
 
         _currentHP -= value;
+
+        if (AffectByHades)
+        {
+            if(_currentHP <= 0)
+            {
+                _currentHP = 1;
+            }
+        }
 
         if (_currentHP > 0)
             pieceObject.HPText.text = _currentHP.ToString();

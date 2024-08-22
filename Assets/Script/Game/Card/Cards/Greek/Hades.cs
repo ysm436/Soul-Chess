@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Hades : SoulCard
@@ -19,12 +20,44 @@ public class Hades : SoulCard
         else
             playercontroller = GameBoard.instance.blackController;
 
-        //playercontroller.OnMyTurnStart +=
+        MakeHadesAffect();
+
+        playercontroller.OnMyTurnStart += MakeHadesAffect;
+        playercontroller.OnMyTurnEnd += RemoveHadesAffect;
     }
 
     public override void RemoveEffect()
     {
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
+            playercontroller = GameBoard.instance.whiteController;
+        else
+            playercontroller = GameBoard.instance.blackController;
+
+        RemoveHadesAffect();
+
+        playercontroller.OnMyTurnStart -= MakeHadesAffect;
+        playercontroller.OnMyTurnEnd -= RemoveHadesAffect;
     }
 
+    private void MakeHadesAffect()
+    {
+        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == InfusedPiece.pieceColor).ToList();
+        targets.Remove(InfusedPiece);
+        
+        foreach (var target in targets)
+        {
+            target.AffectByHades = true;
+        }
+    }
 
+    private void RemoveHadesAffect()
+    {
+        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == InfusedPiece.pieceColor).ToList();
+        targets.Remove(InfusedPiece);
+        
+        foreach (var target in targets)
+        {
+            target.AffectByHades = false;
+        }
+    }
 }
