@@ -89,7 +89,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc453345859f5894f8f00f16206d2d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMine: 0
+  owner:
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
+    maxHandCardCount: 8
+    mulliganHandCount: 4
+    deck: []
+    hand: []
+    deckPosition: {x: 0, y: 0}
+    spellDamageIncrease: 0
+    spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC74C\uCE58 \uC74C\uC720\uC2DC\uC778"
   _cost: 3
@@ -98,7 +108,7 @@ MonoBehaviour:
   reigon: 2
   rarity: 0
   description: "[\uAC15\uB9BC] \uAE30\uBB3C \uD558\uB098\uB97C \uC120\uD0DD\uD574
-    \n-20/+20\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+    -20/+20\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -5723978548355844231}
   isInSelection: 0
   pieceRestriction: 5
@@ -119,6 +129,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: ac84d5a528c052a4992f2303cae4f9df, type: 3}
   InfusedPiece: {fileID: 0}
   buffedPiece: {fileID: 0}
+  decreaseAmount: 20
 --- !u!114 &-5723978548355844231
 MonoBehaviour:
   m_ObjectHideFlags: 0
