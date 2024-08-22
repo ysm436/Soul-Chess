@@ -12,15 +12,14 @@ public class DonQuixote : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        OnInfuse += InfuseEffect;
     }
 
-    public void InfuseEffect(ChessPiece chessPiece)
+    public void InfuseEffect()
     {
-        chessPiece.OnStartAttack += StartAttackEffect;
-        chessPiece.OnEndAttack += EndAttackEffect;
+        InfusedPiece.OnStartAttack += StartAttackEffect;
+        InfusedPiece.OnEndAttack += EndAttackEffect;
 
-        chessPiece.OnSoulRemoved += RemoveEffect;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public void StartAttackEffect(ChessPiece chessPiece)

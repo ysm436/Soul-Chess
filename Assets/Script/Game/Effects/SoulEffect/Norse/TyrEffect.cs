@@ -16,6 +16,7 @@ public class TyrEffect : TargetingEffect
         }
         restraint_target.SetKeyword(Keyword.Type.Restraint);
         //버프 관련 변경 머지 후 버프 추가
+        restraint_target.buff.AddBuffByKeyword(tyr_component.cardName, Buff.BuffType.Restraint);
 
         tyr_component.AddEffect();
         tyr_component.InfusedPiece.OnKilled += restraint_remove;
@@ -24,8 +25,7 @@ public class TyrEffect : TargetingEffect
 
     public void restraint_remove(ChessPiece chessPiece)
     {
-        restraint_target.SetKeyword(Keyword.Type.Restraint, 0);
-        //버프 관련 변경 머지 후 버프 추가
+        restraint_target.Unrestraint();
     }
 
 }

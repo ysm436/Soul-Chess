@@ -18,6 +18,7 @@ public class HeavyArmoredInfantry : SoulCard
     }
     public override void RemoveEffect()
     {
+        InfusedPiece.SetKeyword(Keyword.Type.Defense, -5);
         InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Defense);
     }
 }

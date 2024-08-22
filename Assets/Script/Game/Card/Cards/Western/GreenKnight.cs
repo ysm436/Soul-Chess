@@ -13,10 +13,12 @@ public class GreenKnight : SoulCard
 
     public override void AddEffect()
     {
-        
+        InfusedPiece.SetKeyword(Keyword.Type.Taunt);
+        InfusedPiece.buff.AddBuffByKeyword(cardName, Buff.BuffType.Taunt);
     }
     public override void RemoveEffect()
     {
-        
+        InfusedPiece.SetKeyword(Keyword.Type.Taunt, 0);
+        InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Taunt);
     }
 }

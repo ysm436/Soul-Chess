@@ -24,6 +24,7 @@ public class KingArthurEffect : Effect
         {
             foreach (var piece in friendlypiece)
             {
+                piece.buff.AddBuffByDescription(kingarthur_component.cardName, Buff.BuffType.Description, "아서왕: 공격력 2배 적용됨", false);
                 piece.AD *= 2;
             }
         }

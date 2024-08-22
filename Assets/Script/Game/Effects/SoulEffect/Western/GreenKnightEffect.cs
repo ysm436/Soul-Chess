@@ -30,7 +30,6 @@ public class GreenKnightEffect : TargetingEffect
             (target as ChessPiece).Attack(gameObject.GetComponent<SoulCard>().InfusedPiece);
         }
 
-        gameObject.GetComponent<SoulCard>().InfusedPiece.SetKeyword(Keyword.Type.Taunt);
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Taunt);
+        gameObject.GetComponent<SoulCard>().AddEffect();
     }
 }
