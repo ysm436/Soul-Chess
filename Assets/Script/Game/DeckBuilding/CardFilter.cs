@@ -1,31 +1,234 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CardFilter : MonoBehaviour
 {
-    private bool Soul = true;
-    private bool Spell = true;
-    private bool Greek = true;
-    private bool Western = true;
-    private bool Norse = true;
-    private bool Common = true;
-    private bool Legendary = true;
-    private bool Mythical = true;
+    private bool[] costToggleList = new bool[8] {true, true, true, true, true, true, true, true}; // {0, 1, 2, 3, 4, 5, 6, 7+}
+    private bool[] typeToggleList = new bool[2] {true, true}; // {soul, spell}
+    private bool[] regionToggleList = new bool[3] {true, true, true}; // {greek, western, norse}
+    private bool[] rarityToggleList = new bool[3] {true, true, true}; // {common, legendary, mythical}
+    private bool[] chesspieceToggleList = new bool[6] {true, true, true, true, true, true}; // {pawn, knight, bishop, rook, quene, king}
+    [SerializeField] TMP_InputField searchinputfield;
+    
+    private void Awake()
+    {
+        searchinputfield.onValueChanged.AddListener(SearchCard);
+    }
 
-    // 소울 카드 토글
+    public void SearchCard(string searchtext)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        foreach (var card in DisplayCardList)
+        {
+            string cardname = card.GetComponent<DisplayCard>().CardName;
+            int cardnamelength = cardname.Length;
+            int searchlength = searchtext.Length;
+
+            if (cardnamelength >= searchtext.Length)
+            {
+                for (int i = 0; i <= cardnamelength - searchlength; i++)
+                {
+                    if (searchtext.ToLower() == cardname.Substring(i, searchlength).ToLower())
+                    {
+                        card.SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        card.SetActive(false);
+                    }
+                }
+            }
+        }
+    }
+
+    //마나 토글
+    public void Cost0Toggle(bool cost0)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost0)
+        {
+            costToggleList[0] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[0] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 0)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+    public void Cost1Toggle(bool cost1)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost1)
+        {
+            costToggleList[1] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[1] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 1)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+    public void Cost2Toggle(bool cost2)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost2)
+        {
+            costToggleList[2] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[2] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 2)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+    public void Cost3Toggle(bool cost3)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost3)
+        {
+            costToggleList[3] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[3] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 3)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+    public void Cost4Toggle(bool cost4)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost4)
+        {
+            costToggleList[4] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[4] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 4)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+    public void Cost5Toggle(bool cost5)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost5)
+        {
+            costToggleList[5] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[5] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 5)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+    public void Cost6Toggle(bool cost6)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost6)
+        {
+            costToggleList[6] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[6] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 6)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+    public void Cost7pToggle(bool cost7)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost7)
+        {
+            costToggleList[7] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[7] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost >= 7)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+
+    //스펠 카드 토글
     public void SoulToggle(bool soul)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
 
         if (soul)
         {
-            Soul = true;
+            typeToggleList[0] = true;
             ForOnToggle();
         }
         else
         {
-            Soul = false;
+            typeToggleList[0] = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Soul)
@@ -35,7 +238,6 @@ public class CardFilter : MonoBehaviour
             }
         }
     }
-
     //스펠 카드 토글
     public void SpellToggle(bool spell)
     {
@@ -43,12 +245,12 @@ public class CardFilter : MonoBehaviour
 
         if (spell)
         {
-            Spell = true;
+            typeToggleList[1] = true;
             ForOnToggle();
         }
         else
         {
-            Spell = false;
+            typeToggleList[1] = false;
             foreach (var card in DisplayCardList)
             {
                 if (card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Spell)
@@ -60,21 +262,21 @@ public class CardFilter : MonoBehaviour
     }
 
     //그리스 지역 토글
-    public void GreekToggle(bool greek)
+    public void GreekToggle(bool western)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
 
-        if (greek)
+        if (western)
         {
-            Greek = true;
+            regionToggleList[0] = true;
             ForOnToggle();
         }
         else
         {
-            Greek = false;
+            regionToggleList[0] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Greek")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Greek)
                 {
                     card.SetActive(false);
                 }
@@ -89,15 +291,15 @@ public class CardFilter : MonoBehaviour
 
         if (western)
         {
-            Western = true;
+            regionToggleList[1] = true;
             ForOnToggle();
         }
         else
         {
-            Western = false;
+            regionToggleList[1] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Western")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Western)
                 {
                     card.SetActive(false);
                 }
@@ -112,15 +314,15 @@ public class CardFilter : MonoBehaviour
 
         if (norse)
         {
-            Norse = true;
+            regionToggleList[2] = true;
             ForOnToggle();
         }
         else
         {
-            Norse = false;
+            regionToggleList[2] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == "Norse")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Norse)
                 {
                     card.SetActive(false);
                 }
@@ -135,15 +337,15 @@ public class CardFilter : MonoBehaviour
 
         if (common)
         {
-            Common = true;
+            rarityToggleList[0] = true;
             ForOnToggle();
         }
         else
         {
-            Common = false;
+            rarityToggleList[0] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Common")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Common)
                 {
                     card.SetActive(false);
                 }
@@ -158,15 +360,15 @@ public class CardFilter : MonoBehaviour
 
         if (legendary)
         {
-            Legendary = true;
+            rarityToggleList[1] = true;
             ForOnToggle();
         }
         else
         {
-            Legendary = false;
+            rarityToggleList[1] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Legendary")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Legendary)
                 {
                     card.SetActive(false);
                 }
@@ -181,15 +383,15 @@ public class CardFilter : MonoBehaviour
 
         if (mythical)
         {
-            Mythical = true;
+            rarityToggleList[2] = true;
             ForOnToggle();
         }
         else
         {
-            Mythical = false;
+            rarityToggleList[2] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == "Mythical")
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Mythical)
                 {
                     card.SetActive(false);
                 }
@@ -197,7 +399,194 @@ public class CardFilter : MonoBehaviour
         }
     }
 
-    void ForOnToggle()
+    //기물 관련 토글
+    public void PawnToggle(bool pawn_on)
+    {
+        chesspieceToggleList[0] = pawn_on;
+        if (pawn_on)
+        {
+            ForOnToggle();
+        }
+        else
+        {
+            ForOffChessPieceToggle();
+        }
+    }
+    public void KnightToggle(bool knight_on)
+    {
+        chesspieceToggleList[1] = knight_on;
+
+        if (knight_on)
+        {
+            ForOnToggle();
+        }
+        else
+        {
+            ForOffChessPieceToggle();
+        }
+    }
+    public void BishopToggle(bool bishop_on)
+    {
+        chesspieceToggleList[2] = bishop_on;
+        if (bishop_on)
+        {
+            ForOnToggle();
+        }
+        else
+        {
+            ForOffChessPieceToggle();
+        }
+    }
+    public void RookToggle(bool rook_on)
+    {
+        chesspieceToggleList[3] = rook_on;
+        if (rook_on)
+        {
+            ForOnToggle();
+        }
+        else
+        {
+            ForOffChessPieceToggle();
+        }
+    }
+    public void QueneToggle(bool quene_on)
+    {
+        chesspieceToggleList[4] = quene_on;
+        if (quene_on)
+        {
+            ForOnToggle();
+        }
+        else
+        {
+            ForOffChessPieceToggle();
+        }
+    }
+    public void KingToggle(bool king_on)
+    {
+        chesspieceToggleList[5] = king_on;
+        if (king_on)
+        {
+            ForOnToggle();
+        }
+        else
+        {
+            ForOffChessPieceToggle();
+        }
+    }
+
+    private void ForOnToggle()
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+        
+        foreach (var card in DisplayCardList)
+        {
+            DisplayCard cardinfo = card.GetComponent<DisplayCard>();
+            bool onflag = false;
+
+            if (!card.activeSelf)
+            {   
+                if (cardinfo.Cost == 0)
+                {
+                    if(!costToggleList[0]) continue;
+                }
+                else if (cardinfo.Cost == 1)
+                {
+                    if(!costToggleList[1]) continue;
+                }
+                else if (cardinfo.Cost == 2)
+                {
+                    if(!costToggleList[2]) continue;
+                }
+                else if (cardinfo.Cost == 3)
+                {
+                    if(!costToggleList[3]) continue;
+                }
+                else if (cardinfo.Cost == 4)
+                {
+                    if(!costToggleList[4]) continue;
+                }
+                else if (cardinfo.Cost == 5)
+                {
+                    if(!costToggleList[5]) continue;
+                }
+                else if (cardinfo.Cost == 6)
+                {
+                    if(!costToggleList[6]) continue;
+                }
+                else if (cardinfo.Cost >= 7)
+                {
+                    if(!costToggleList[7]) continue;
+                }
+
+                if (cardinfo.CardType == Card.Type.Soul)
+                {
+                    if (!typeToggleList[0]) continue; 
+                }
+                else
+                {
+                    if (!typeToggleList[1]) continue;
+                }
+
+                if (cardinfo.Reigon == Card.Reigon.Greek)
+                {
+                    if (!regionToggleList[0]) continue;
+                }
+                else if (cardinfo.Reigon == Card.Reigon.Western)
+                {
+                    if (!regionToggleList[1]) continue;
+                }
+                else
+                {
+                    if (!regionToggleList[2]) continue;
+                }
+
+                if (cardinfo.Rarity == Card.Rarity.Common)
+                {
+                    if (!rarityToggleList[0]) continue;
+                }
+                else if (cardinfo.Rarity == Card.Rarity.Legendary)
+                {
+                    if (!rarityToggleList[1]) continue;
+                }
+                else
+                {
+                    if (!rarityToggleList[2]) continue;
+                }
+
+                if (cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Pawn))
+                {
+                    if (chesspieceToggleList[0]) onflag = true;
+                }
+                if (!onflag && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Knight))
+                {
+                    if (chesspieceToggleList[1]) onflag = true;
+                }
+                if (!onflag && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Bishop))
+                {
+                    if (chesspieceToggleList[2]) onflag = true;
+                }
+                if (!onflag && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Rook))
+                {
+                    if (chesspieceToggleList[3]) onflag = true;
+                }
+                if (!onflag && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Quene))
+                {
+                    if (chesspieceToggleList[4]) onflag = true;
+                }
+                if (!onflag && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.King))
+                {
+                    if (chesspieceToggleList[5]) onflag = true;
+                }
+ 
+                if (onflag || cardinfo.CardType == Card.Type.Spell)
+                {
+                    card.SetActive(true);
+                }
+            }
+        }
+    }
+
+    private void ForOffChessPieceToggle()
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
         
@@ -205,44 +594,17 @@ public class CardFilter : MonoBehaviour
         {
             DisplayCard cardinfo = card.GetComponent<DisplayCard>();
 
-            if (!card.activeSelf)
+            if (card.activeSelf)
             {   
-                if (cardinfo.CardType == Card.Type.Soul)
-                {
-                    if (!Soul) continue; 
-                }
-                else
-                {
-                    if (!Spell) continue;
-                }
-
-                if (cardinfo.Reigon == "Greek")
-                {
-                    if (!Greek) continue;
-                }
-                else if (cardinfo.Reigon == "Western")
-                {
-                    if (!Western) continue;
-                }
-                else
-                {
-                    if (!Norse) continue;
-                }
-
-                if (cardinfo.Rarity == "Common")
-                {
-                    if (!Common) continue;
-                }
-                else if (cardinfo.Rarity == "Legendary")
-                {
-                    if (!Legendary) continue;
-                }
-                else
-                {
-                    if (!Mythical) continue;
-                }
-
-                card.SetActive(true);
+                if (chesspieceToggleList[0] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Pawn)) continue;
+                if (chesspieceToggleList[1] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Knight)) continue;
+                if (chesspieceToggleList[2] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Bishop)) continue;
+                if (chesspieceToggleList[3] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Rook)) continue;
+                if (chesspieceToggleList[4] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Quene)) continue;
+                if (chesspieceToggleList[5] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.King)) continue;
+                if (cardinfo.CardType == Card.Type.Spell) continue;
+                
+                card.SetActive(false);
             }
         }
     }

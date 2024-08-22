@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class DeckBuildingSceneUI : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class DeckBuildingSceneUI : MonoBehaviour
     [SerializeField] public Button deckloadButton;
     [SerializeField] public GameObject deckListPanel;
     [SerializeField] public GameObject newDeckPanel;
-    public DeckManager deckinfo;
+    public DeckManager deckmanager;
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class DeckBuildingSceneUI : MonoBehaviour
         cancelButton.onClick.AddListener(CancelButtonFunction);
         saveButton.onClick.AddListener(saveButtonFunction);
 
-        deckinfo = newDeckPanel.GetComponent<DeckManager>();
+        deckmanager = newDeckPanel.GetComponent<DeckManager>();
     }
 
     private void LoadMainScene()
@@ -33,8 +34,8 @@ public class DeckBuildingSceneUI : MonoBehaviour
 
     private void CancelButtonFunction()
     {
-        deckinfo.DeckCancel();
-        deckinfo.TempDeckReset();
+        deckmanager.DeckCancel();
+        deckmanager.CardSlotReset();
         GetComponent<DeckBuildingManager>().ReloadDisplayCard();
 
         deckListPanel.SetActive(true);
@@ -43,7 +44,7 @@ public class DeckBuildingSceneUI : MonoBehaviour
 
     private void NewDeckButtonFunction()
     {
-        deckinfo.newDeckSignal = true;
+        deckmanager.newDeckSignal = true;
 
         deckListPanel.SetActive(false);
         newDeckPanel.SetActive(true);
@@ -51,20 +52,48 @@ public class DeckBuildingSceneUI : MonoBehaviour
 
     private void saveButtonFunction()
     {
-        deckinfo.DeckSave(deckinfo.loaded_deck_index);
-        deckinfo.TempDeckReset();
-        GetComponent<DeckBuildingManager>().ReloadDisplayCard();
-        GameManager.instance.SaveDeckData();
+        if (deckavailable())
+        {
+            deckmanager.DeckSave(deckmanager.loaded_deck_index);
+            deckmanager.CardSlotReset();
+            GetComponent<DeckBuildingManager>().ReloadDisplayCard();
+            GameManager.instance.SaveDeckData();
 
-        deckListPanel.SetActive(true);
-        newDeckPanel.SetActive(false);
+            deckListPanel.SetActive(true);
+            newDeckPanel.SetActive(false);
+        }
+        else
+        {
+            deckmanager.CautionPanel.SetActive(true);
+        }
     }
 
     public void LoadDeck(int deck_index)
     {
-        deckinfo.DeckLoad(deck_index);
+        deckmanager.DeckLoad(deck_index);
 
         deckListPanel.SetActive(false);
         newDeckPanel.SetActive(true);
+    }
+
+    private bool deckavailable()
+    {
+        bool available = true;
+        int SoulCardQuantity = deckmanager.local_chesspieces.Sum();
+
+        if (SoulCardQuantity < 16) available = false;
+        /* if (deckmanager.local_chesspieces[0] < 8) available = false;
+        else if (deckmanager.local_chesspieces[1] < 2) available = false;
+        else if (deckmanager.local_chesspieces[2] < 2) available = false;
+        else if (deckmanager.local_chesspieces[3] < 2) available = false;
+        else if (deckmanager.local_chesspieces[4] < 1) available = false;
+        else if (deckmanager.local_chesspieces[5] < 1) available = false; */
+
+        if (available == false)
+        {
+            deckmanager.CautionText.text = "덱에 적어도 16개의 기물카드는 들어가야 합니다.";
+        }
+
+        return available;
     }
 }
