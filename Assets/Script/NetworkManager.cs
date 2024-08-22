@@ -6,11 +6,13 @@ using UnityEngine;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    private SoundManager soundManager;
     private void Awake()
     {
         // 마스터 클라이언트가 PhotonNetwork.LoadLevel()을 호출할 수 있도록 하고,
         // 같은 룸에 있는 모든 클라이언트가 레벨을 동기화하게 함
         PhotonNetwork.AutomaticallySyncScene = true;
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // 클라이언트가 마스터에 연결되면 호출됨
@@ -59,6 +61,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         else
             gameStarted = true;
         PhotonNetwork.LoadLevel("GameScene");
+        soundManager.PlayBgm("GameScene");
+        Debug.Log("gamescene");
     }
 
 

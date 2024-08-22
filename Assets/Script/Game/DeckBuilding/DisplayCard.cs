@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
@@ -49,9 +50,9 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
     }
     public Card.Type CardType;
-    public string Reigon;
-    public string ChessPiece;
-    public string Rarity;
+    public Card.Reigon Reigon;
+    public ChessPiece.PieceType ChessPiece;
+    public Card.Rarity Rarity;
     public string Description
     {
         set { CardDescriptionTMP.text = value; }
@@ -64,6 +65,10 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public TextMeshProUGUI CardHPTMP;
     public TextMeshProUGUI CardADTMP;
 
+    public Image cardframe;
+    public Image illustrate;
+
+    public List<Image> chesspiecedisplay_list;
 
     private Transform canvas;
     private CanvasGroup canvasGroup;

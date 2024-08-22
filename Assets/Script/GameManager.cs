@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     }
     private const string PATH = "/Save/";
     private const string FILE_NAME = "DeckData.json";
+    private SoundManager soundManager;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            soundManager = transform.GetChild(0).GetComponent<SoundManager>();
         }
         else
         {
@@ -60,14 +62,17 @@ public class GameManager : MonoBehaviour
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainScene");
         GameBoard.instance = null;
+        soundManager.PlayBgm("MainScene");
     }
     public void LoadMainScene()
     {
         SceneManager.LoadScene("MainScene");
+        soundManager.PlayBgm("MainScene");
     }
     public void LoadDeckBuildingScene()
     {
         SceneManager.LoadScene("DeckBuildingScene");
+        soundManager.PlayBgm("DeckBuildingScene");
     }
     public void LoadMatchingScene()
     {
@@ -76,6 +81,7 @@ public class GameManager : MonoBehaviour
     public void LoadLobbyScene()
     {
         SceneManager.LoadScene("LobbyScene");
+        soundManager.PlayBgm("LobbyScene");
     }
     public void LoadGameScene()
     {
