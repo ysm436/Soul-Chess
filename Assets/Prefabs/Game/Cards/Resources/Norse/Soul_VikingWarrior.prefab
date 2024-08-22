@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4399300382469127598
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_Name
+      value: Soul_VikingWarrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aee935555f4763348b68be29c5f0a43f, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8247402589421994838}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3459992950709373579}
+  m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+--- !u!1 &2508186245921556511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+  m_PrefabInstance: {fileID: 4399300382469127598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8247402589421994838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508186245921556511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ae9e09a5f0c0d4ea93355ef1dac7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
+  cardName: "\uBC14\uC774\uD0B9 \uC804\uC0AC"
+  _cost: 2
+  illustration: {fileID: 21300000, guid: 30f7b8330ca144b4ca88f820393c4f65, type: 3}
+  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  reigon: 1
+  rarity: 0
+  description: "\uD53C\uD574\uB97C \uBC1B\uC740 \uC0C1\uD0DC\uC774\uBA74, \uACF5\uACA9\uB825\uC774
+    20 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: 3459992950709373579}
+  isInSelection: 0
+  pieceRestriction: 1
+  _AD: 15
+  _HP: 25
+  accessorySpriteList:
+  - pieceType: 1
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 1c48a98cb2083e24db1cc04e2347ccd7, type: 3}
+  - pieceType: 1
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 1c48a98cb2083e24db1cc04e2347ccd7, type: 3}
+  InfusedPiece: {fileID: 0}
+--- !u!114 &3459992950709373579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508186245921556511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79baac79e1c784b46bada84bfe8a7b59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

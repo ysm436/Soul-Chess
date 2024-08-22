@@ -179,9 +179,11 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"펜리르", 10},
         {"피의 독수리", 11},
         {"우트가르다 로키", 12},
+        {"바이킹 전사", 13},
         {"약탈선", 14},
         {"제우스", 15},
         {"처형", 16},
+        {"하데스", 17},
         {"아레스", 18},
         {"어미 곰", 19},
         {"헤파이스토스", 20},
@@ -218,6 +220,9 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"감반테인", 1001},
         {"드라우프니르", 1002},
         {"약탈자", 1014},
-        {"천둥벼락", 1015}
+        {"천둥벼락", 1015},
+        {"메두사의 머리", 1025},
+        {"페가수스", 1026},
+        {"하데스의 투구", 1027}
     };
 }

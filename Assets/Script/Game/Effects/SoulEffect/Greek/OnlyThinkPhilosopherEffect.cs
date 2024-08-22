@@ -7,13 +7,13 @@ public class OnlyThinkPhilosopherEffect : Effect
     public override void EffectAction(PlayerController player)
     {
         OnlyThinkPhilosopher onlythinkphilosopher_component = gameObject.GetComponent<OnlyThinkPhilosopher>();
-        PlayerData playercolor;
+        PlayerData playerdata;
 
         if (onlythinkphilosopher_component.InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
-            playercolor = GameBoard.instance.gameData.playerWhite;
+            playerdata = GameBoard.instance.gameData.playerWhite;
         else
-            playercolor = GameBoard.instance.gameData.playerBlack;
+            playerdata = GameBoard.instance.gameData.playerBlack;
 
-        playercolor.DrawCard();
+        playerdata.DrawCard();
     }
 }
