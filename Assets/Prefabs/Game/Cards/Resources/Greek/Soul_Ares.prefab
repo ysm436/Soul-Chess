@@ -81,18 +81,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: "\uC544\uB808\uC2A4"
-  _cost: 5
-  illustration: {fileID: 0}
+  _cost: 3
+  illustration: {fileID: 21300000, guid: 64d5d64e5620c6649b4b1d82fad4d6a9, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 2
-  description: "\uAE30\uBB3C\uC774 \uCC98\uCE58\uB420 \uB54C \uB9C8\uB2E4, +15/+15\uB97C
+  description: "\uAE30\uBB3C\uC774 \uCC98\uCE58\uB420 \uB54C \uB9C8\uB2E4, +5/+5\uB97C
     \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 3879541453782405440}
   isInSelection: 0
   pieceRestriction: 2
-  _AD: 40
-  _HP: 40
+  _AD: 20
+  _HP: 20
   accessorySpriteList:
   - pieceType: 2
     pieceColor: 0

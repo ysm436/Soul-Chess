@@ -14,13 +14,12 @@ public class ExecutionEffect : TargetingEffect
         {
             if ((target as ChessPiece).GetHP <= standardHP)
             {
-                (target as ChessPiece).MinusHP(insteadAD);
+                (target as ChessPiece).SpellAttacked(insteadAD);
             }
             else
             {
-                (target as ChessPiece).MinusHP(basicAD);
+                (target as ChessPiece).SpellAttacked(basicAD);
             }
         }
     }
-
 }

@@ -89,9 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc453345859f5894f8f00f16206d2d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  handIndex: -1
   cardName: "\uC74C\uCE58 \uC74C\uC720\uC2DC\uC778"
   _cost: 3
-  illustration: {fileID: 0}
+  illustration: {fileID: 21300000, guid: 693c969b97b97ae4cb0f81005ef94868, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 0
@@ -99,23 +101,24 @@ MonoBehaviour:
     \n-20/+20\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -5723978548355844231}
   isInSelection: 0
-  pieceRestriction: 1
+  pieceRestriction: 5
   _AD: 20
   _HP: 20
   accessorySpriteList:
   - pieceType: 1
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: ac84d5a528c052a4992f2303cae4f9df, type: 3}
   - pieceType: 4
     pieceColor: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: ac84d5a528c052a4992f2303cae4f9df, type: 3}
   - pieceType: 1
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: ac84d5a528c052a4992f2303cae4f9df, type: 3}
   - pieceType: 4
     pieceColor: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: ac84d5a528c052a4992f2303cae4f9df, type: 3}
   InfusedPiece: {fileID: 0}
+  buffedPiece: {fileID: 0}
 --- !u!114 &-5723978548355844231
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,12 +25,45 @@ public class DavyJones : SoulCard
 
     public override void AddEffect()
     {
+        RemoveEffect();        
 
+        List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor == InfusedPiece.pieceColor).ToList();
+        int deadMyPieceCount = 16 - pieceList.Count;
+
+        InfusedPiece.AD += deadMyPieceCount * change;
+        InfusedPiece.maxHP += deadMyPieceCount * change;
+
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, deadMyPieceCount * change, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, deadMyPieceCount * change, true);
+
+        foreach (ChessPiece piece in pieceList)
+        {
+            piece.OnKilled += IncreaseStat;
+        }
+        
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
     {
-        List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor == GameBoard.instance.myController.playerColor).ToList();
+        for(int i = InfusedPiece.buff.buffList.Count-1; i >= 0; i--)
+        {
+            Buff.BuffInfo buffInfo = InfusedPiece.buff.buffList[i];
+            if (buffInfo.sourceName == cardName)
+            {
+                if (buffInfo.buffType == Buff.BuffType.AD)
+                {
+                    InfusedPiece.AD -= buffInfo.value;
+                    InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.AD);
+                }
+                else if (buffInfo.buffType == Buff.BuffType.HP)
+                {
+                    InfusedPiece.maxHP = (InfusedPiece.maxHP-buffInfo.value) > 0 ? InfusedPiece.maxHP-buffInfo.value : 1;
+                    InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.HP);
+                }
+            }
+        }
+        List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor == InfusedPiece.pieceColor).ToList();
         foreach (ChessPiece piece in pieceList)
         {
             piece.OnKilled -= IncreaseStat;

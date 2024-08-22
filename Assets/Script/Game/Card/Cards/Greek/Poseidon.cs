@@ -9,19 +9,6 @@ public class Poseidon : SoulCard
     protected override void Awake()
     {
         base.Awake();
-        //OnInfuse += SoulEffect;
-    }
-
-    public void SoulEffect(ChessPiece chessPiece)
-    {
-        List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects;
-        for (int i = pieceList.Count - 1; i >= 0; i--)
-        {
-            if (pieceList[i] != gameObject.GetComponent<SoulCard>().InfusedPiece)
-            {
-                pieceList[i].MinusHP(25);
-            }
-        }
     }
 
     public override void AddEffect()

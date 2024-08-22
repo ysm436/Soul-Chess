@@ -12,12 +12,12 @@ public class Cerberus : SoulCard
 
     public override void AddEffect()
     {
-
+        InfusedPiece.moveCount += 2;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
     {
         InfusedPiece.moveCount -= 2;
-        InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.MoveCount);
     }
 }

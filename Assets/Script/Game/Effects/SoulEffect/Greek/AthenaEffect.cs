@@ -9,7 +9,14 @@ public class AthenaEffect : Effect
     {
         Athena athena_component = gameObject.GetComponent<Athena>();
 
+        athena_component.InfusedPiece.buff.AddBuffByDescription(athena_component.cardName, Buff.BuffType.Description, "아테나: 다른 아군 기물 +10/+10 부여", true);
         athena_component.AddEffect();
-        athena_component.InfusedPiece.OnSoulRemoved += athena_component.RemoveEffect;
+        athena_component.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
+    }
+
+    public void RemoveBuffInfo()
+    {
+        Athena athena_component = gameObject.GetComponent<Athena>();
+        athena_component.InfusedPiece.buff.TryRemoveSpecificBuff(athena_component.cardName, Buff.BuffType.Description);
     }
 }
