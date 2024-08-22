@@ -106,10 +106,10 @@ MonoBehaviour:
   _AD: 10
   _HP: 15
   accessorySpriteList:
-  - pieceType: 0
+  - pieceType: 1
     pieceColor: 0
     sprite: {fileID: 21300000, guid: bead961fcc2e32942beb70c4d61c8b34, type: 3}
-  - pieceType: 0
+  - pieceType: 1
     pieceColor: 1
     sprite: {fileID: 21300000, guid: bead961fcc2e32942beb70c4d61c8b34, type: 3}
   InfusedPiece: {fileID: 0}
