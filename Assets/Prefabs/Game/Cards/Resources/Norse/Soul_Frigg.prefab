@@ -80,7 +80,7 @@ PrefabInstance:
     - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: EffectOnCardUsed
       value: 
-      objectReference: {fileID: 1231344544525149533}
+      objectReference: {fileID: 0}
     - target: {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: pieceRestriction
       value: 16
@@ -95,20 +95,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-      insertIndex: 6
+      insertIndex: -1
       addedObject: {fileID: -2815551797691118998}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1414403984435467240}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
---- !u!114 &1231344544525149533 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
-  m_PrefabInstance: {fileID: 8915155407265575828}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7240474155979933221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706eb39c8a2a18e4fa6b84d7781dee53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7240474155979933221 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
@@ -134,7 +126,7 @@ MonoBehaviour:
   rarity: 2
   description: "\uB0B4 \uD134 \uB3D9\uC548, \uC0C1\uB300 \uAE30\uBB3C\uB4E4\uC758
     \uACF5\uACA9\uB825\uC774 20 \uAC10\uC18C\uD569\uB2C8\uB2E4"
-  EffectOnCardUsed: {fileID: 1231344544525149533}
+  EffectOnCardUsed: {fileID: 1414403984435467240}
   isInSelection: 0
   pieceRestriction: 16
   _AD: 40
@@ -148,3 +140,15 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: b64051da0136109499e5a28531a9d964, type: 3}
   InfusedPiece: {fileID: 0}
   decreaseAmount: 20
+--- !u!114 &1414403984435467240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240474155979933221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58ce6abe89987524fa6947fc91156f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

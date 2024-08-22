@@ -26,6 +26,7 @@ abstract public class ChessPiece : TargetableObject
 
     public Vector2Int coordinate;
     public bool isAlive;
+    [HideInInspector] public bool isRevivable = false; //부활 체크용
     public SoulCard soul
     {
         set { _soul = value; }
@@ -74,8 +75,8 @@ abstract public class ChessPiece : TargetableObject
 
         if (GetKeyword(Keyword.Type.Shield) == 1)
         {
-            keywordDictionary[Keyword.Type.Shield] = 0;
-            effectIcon.SetIconSprite();
+            SetKeyword(Keyword.Type.Shield, 0);
+            buff.TryRemoveSpecificBuff("", Buff.BuffType.Shield); //보호막 버프 제거
             return;
         }
 
@@ -164,6 +165,7 @@ abstract public class ChessPiece : TargetableObject
     public Action<ChessPiece, int> OnAttacked;
     public Action<ChessPiece> OnAttackedAfter;
     public Action<ChessPiece> OnSpellAttacked;
+    [HideInInspector] public int spellDamageCoefficient = 1; //멀린 효과 : 내 마법 피해 2배 구현용
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
     public Action OnSoulRemoved;
@@ -271,18 +273,23 @@ abstract public class ChessPiece : TargetableObject
     {
         OnSpellAttacked?.Invoke(this);
 
-        MinusHP(damage);
+        MinusHP(damage * spellDamageCoefficient); //멀린 효과 : 내 마법 피해 2배 구현용
+        spellDamageCoefficient = 1;
         return isAlive;
     }
 
     public void Kill()
     {
         OnKilled?.Invoke(this);
-        RemoveSoul();
+        if (!isRevivable)
+        {
+            RemoveSoul();
 
-        isAlive = false;
-        pieceObject.HPText.text = "0";
-        GameBoard.instance.KillPiece(this);
+            isAlive = false;
+            pieceObject.HPText.text = "0";
+            GameBoard.instance.KillPiece(this);
+        }
+        else isRevivable = false;
     }
 
     public void SetSoul(SoulCard targetSoul, Sprite sprite)
@@ -351,28 +358,32 @@ abstract public class ChessPiece : TargetableObject
     // 예외) 방어력 n >= 1: 활성화 및 방어력 수치 나타냄 / n = 0: 비활성화
     public void SetKeyword(Keyword.Type keywordType, int n = 1)
     {
-        keywordDictionary[keywordType] = n;
+        if (keywordType == Keyword.Type.Defense)
+            keywordDictionary[keywordType] += n;
+        else
+            keywordDictionary[keywordType] = n;
 
         //버프 및 디버프 아이콘 스프라이트 설정 (우선순위는 Enum 값이 작을수록 높음)
         effectIcon.SetIconSprite();
 
-        if (keywordType == Keyword.Type.Taunt)
+        if (keywordType == Keyword.Type.Taunt && n == 1)
         {
             _tauntNumber = GameBoard.instance.gameData.tauntNumber;          //도발 부여 순서 저장
         }
-        else if (keywordType == Keyword.Type.Stun)
+        else if (keywordType == Keyword.Type.Stun && n == 1)
         {
             //효과 발동 시점의 색깔 턴이 한번 더 돌아와야 스턴 해제
+            //상대 턴에 스턴 효과를 부여당해서 풀리기 전 자기 턴에 스턴이 부여될 경우 최신화될 수 있도록 방법 구상 필요
             GameBoard.instance.CurrentPlayerController().OnMyTurnStart += Unstun;
         }
-        else if (keywordType == Keyword.Type.Restraint)
+        else if (keywordType == Keyword.Type.Restraint && n == 1)
         {
             if (soul != null)
             {
                 soul.RemoveEffect();
             }
         }
-        else if (keywordType == Keyword.Type.Silence)
+        else if (keywordType == Keyword.Type.Silence && n == 1)
         {
             if (soul != null)
             {
@@ -380,7 +391,7 @@ abstract public class ChessPiece : TargetableObject
                 RemoveBuff();
             }
         }
-        else if (keywordType == Keyword.Type.Rush)
+        else if (keywordType == Keyword.Type.Rush && n == 1)
         {
             MakeIsSoulSetFalse();
         }
@@ -399,6 +410,7 @@ abstract public class ChessPiece : TargetableObject
     public void Unstun()
     {
         SetKeyword(Keyword.Type.Stun, 0);
+        buff.TryRemoveSpecificBuff("", Buff.BuffType.Stun); //스턴 정보 제거
         GameBoard.instance.myController.OnMyTurnEnd -= Unstun;
     }
 
@@ -406,7 +418,7 @@ abstract public class ChessPiece : TargetableObject
     public void Unrestraint()
     {
         SetKeyword(Keyword.Type.Restraint, 0);
-
+        buff.TryRemoveSpecificBuff("", Buff.BuffType.Restraint); //구속 정보 제거
         if (soul != null && GetKeyword(Keyword.Type.Silence) != 1)      // 기물이 침묵 상태가 아니어야 함
         {
             soul.AddEffect();
@@ -503,6 +515,42 @@ abstract public class ChessPiece : TargetableObject
             {
                 moveCount -= buffInfo.value;
                 if (moveCount < 1) moveCount = 1;
+            }
+            else if (buffType == Buff.BuffType.Defense)
+            {
+                SetKeyword(Keyword.Type.Defense, -buffInfo.value);
+            }
+            else if (buffType == Buff.BuffType.Immunity)
+            {
+                SetKeyword(Keyword.Type.Immunity, 0);
+            }
+            else if (buffType == Buff.BuffType.Taunt)
+            {
+                SetKeyword(Keyword.Type.Taunt, 0);
+            }
+            else if (buffType == Buff.BuffType.Shield)
+            {
+                SetKeyword(Keyword.Type.Shield, 0);
+            }
+            else if (buffType == Buff.BuffType.Stun)
+            {
+                SetKeyword(Keyword.Type.Stun, 0);
+            }
+            else if (buffType == Buff.BuffType.Restraint)
+            {
+                SetKeyword(Keyword.Type.Restraint, 0);
+            }
+            else if (buffType == Buff.BuffType.Stealth)
+            {
+                SetKeyword(Keyword.Type.Stealth, 0);
+            }
+            else if (buffType == Buff.BuffType.Silence)
+            {
+                SetKeyword(Keyword.Type.Silence, 0);
+            }
+            else if (buffType == Buff.BuffType.Rush)
+            {
+                SetKeyword(Keyword.Type.Rush, 0);
             }
 
             // buffType == Buff.BuffType.Description인 경우는 OnSoulRemoved 통해 구현

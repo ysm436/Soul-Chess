@@ -5,8 +5,19 @@ using UnityEngine.EventSystems;
 public class SimpleCard : MonoBehaviour, IPointerClickHandler
 {
     public int cardindex;
+    private int _quantity;
+    public int quantity
+    {
+        get {return _quantity;}
+        set
+        {
+            _quantity = value;
+            quantityText.text = value.ToString();
+        }
+    }
     public TextMeshProUGUI cardNameText;
     public TextMeshProUGUI cost;
+    public TextMeshProUGUI quantityText;
     
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -15,6 +26,8 @@ public class SimpleCard : MonoBehaviour, IPointerClickHandler
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            DeckManager deckmanager = GetComponentInParent<DeckManager>();
+
             for (int i = dbm.DisplayStorage.childCount; i > 0; i--)
             {
                 Transform find_card = dbm.DisplayStorage.GetChild(i - 1);
@@ -43,23 +56,30 @@ public class SimpleCard : MonoBehaviour, IPointerClickHandler
 
                 find_card.SetParent(dbm.TrashCan);
                 find_card.gameObject.SetActive(false);
+                deckmanager.RemoveCardInfoInDeck(added_display.GetComponent<DisplayCard>());
             }
             else // 디스플레이에 카드가 남아있을 경우
             {
                 foreach (var display in dbm.DisplayCardList)
                 {
                     DisplayCard displaycardinfo = display.GetComponent<DisplayCard>();
-                    if(displaycardinfo.cardindex == cardindex)
+                    if (displaycardinfo.cardindex == cardindex)
                     {
                         displaycardinfo.quantity += 1;
+                        deckmanager.RemoveCardInfoInDeck(displaycardinfo);
                         break;
                     }
                 }
             }
 
-            GetComponentInParent<DeckManager>().TempDeck.Remove(gameObject);
-            transform.SetParent(dbm.TrashCan);
-            gameObject.SetActive(false);
+            deckmanager.TempDeck.Remove(cardindex);
+            quantity -= 1;
+
+            if (quantity == 0)
+            {
+                transform.SetParent(dbm.TrashCan);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

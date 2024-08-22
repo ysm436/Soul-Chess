@@ -25,9 +25,11 @@ public class Athena : SoulCard
             target.maxHP += IncreaseAmountHP;
             target.AD += IncreaseAmountAD;
 
-            target.buff.AddBuffByValue("아테나", Buff.BuffType.AD, 10, true);
-            target.buff.AddBuffByValue("아테나", Buff.BuffType.HP, 10, true);
+            target.buff.AddBuffByValue("아테나", Buff.BuffType.AD, 10, false);
+            target.buff.AddBuffByValue("아테나", Buff.BuffType.HP, 10, false);
         }
+
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()

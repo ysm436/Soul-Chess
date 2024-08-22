@@ -16,10 +16,6 @@ public class Frigg : SoulCard
         base.Awake();
 
         decreaseAmountDictionary = new();
-        OnInfuse += (ChessPiece chessPiece) => DecreaseEnemyPiecesAD();
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnStart += DecreaseEnemyPiecesAD;
-        OnInfuse += (ChessPiece chessPiece) => GameBoard.instance.myController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
-        OnInfuse += (ChessPiece chessPiece) => chessPiece.OnSoulRemoved += RemoveEffect;
     }
 
     private void IncreaseEnemyPiecesAD()
@@ -36,6 +32,7 @@ public class Frigg : SoulCard
             {
                 piece.AD += decreaseAmount;
             }
+            piece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.AD);
         }
     }
 
@@ -52,21 +49,39 @@ public class Frigg : SoulCard
             }
 
             piece.AD -= decreaseAmount;
+            piece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, -decreaseAmount, false);
         }
     }
 
     public override void AddEffect()
     {
         DecreaseEnemyPiecesAD();
-        GameBoard.instance.myController.OnMyTurnStart += DecreaseEnemyPiecesAD;
-        GameBoard.instance.myController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White) 
+        {
+            GameBoard.instance.whiteController.OnMyTurnStart += DecreaseEnemyPiecesAD;
+            GameBoard.instance.whiteController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
+        }
+        else
+        {
+            GameBoard.instance.blackController.OnMyTurnStart += DecreaseEnemyPiecesAD;
+            GameBoard.instance.blackController.OnMyTurnEnd += IncreaseEnemyPiecesAD;
+        }
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
     {
         IncreaseEnemyPiecesAD();
-        GameBoard.instance.myController.OnMyTurnStart -= DecreaseEnemyPiecesAD;
-        GameBoard.instance.myController.OnMyTurnEnd -= IncreaseEnemyPiecesAD;
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White) 
+        {
+            GameBoard.instance.whiteController.OnMyTurnStart -= DecreaseEnemyPiecesAD;
+            GameBoard.instance.whiteController.OnMyTurnEnd -= IncreaseEnemyPiecesAD;
+        }
+        else
+        {
+            GameBoard.instance.blackController.OnMyTurnStart -= DecreaseEnemyPiecesAD;
+            GameBoard.instance.blackController.OnMyTurnEnd -= IncreaseEnemyPiecesAD;
+        }
         decreaseAmountDictionary.Clear();
     }
 }

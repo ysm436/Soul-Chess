@@ -1,26 +1,28 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeckBuildingManager : MonoBehaviour
 {
     public List<GameObject> DisplayCardList = new List<GameObject>();
 
+    [SerializeField] private List<Sprite> Icon_sprites;
     [SerializeField] private int max_card_index;
     [SerializeField] private int quantity_setting;
 
     public Transform DynamicDisplay;
     public Transform DisplayStorage; // 디스플레이 카드가 덱에 들어가 남아있는 카드의 개수가 0개가 되었을 때 저장되는 창고
     public Transform TrashCan; // 더 이상 쓰지 않는 object를 넣어두는 쓰레기통
-    public GameObject display_prefab;
+    public GameObject display_prefab_odd;
+    public GameObject display_prefab_even;
 
     private void Awake()
     {
         MakeDisplayCard();
     }
-
-
 
     // 카드들을 화면에 나타냅니다.
     private void MakeDisplayCard()
@@ -38,41 +40,87 @@ public class DeckBuildingManager : MonoBehaviour
     public void AddDisplayCard(int card_index, int quantity)
     {
         GameObject card = GameManager.instance.AllCards[card_index];
-
-        GameObject newDisplay = Instantiate(display_prefab, DynamicDisplay);
-        newDisplay.name = card.name + "_display";
-
-        //TextMeshProUGUI[] texts = newDisplay.GetComponentsInChildren<TextMeshProUGUI>();
-
         Card cardinfo = card.GetComponent<Card>();
-        DisplayCard DisplayCard = newDisplay.GetComponent<DisplayCard>();
+        
+        ChessPiece.PieceType piecelist = ChessPiece.PieceType.None;
+        List<ChessPiece.PieceType> includedChesspieces = new List<ChessPiece.PieceType>();
+        GameObject newDisplay;
+        int chesspiece_count;
+        
+        if (card.GetComponent<SpellCard>()) // 스펠 카드
+        {
+            chesspiece_count = 0;
+        }
+        else // 소울 카드
+        {
+            piecelist = card.GetComponent<SoulCard>().pieceRestriction;
+            foreach (ChessPiece.PieceType piecetype in Enum.GetValues(typeof(ChessPiece.PieceType)))
+            {
+                if (piecetype != ChessPiece.PieceType.None && piecelist.HasFlag(piecetype))
+                {
+                    includedChesspieces.Add(piecetype);
+                }
+            }
+            chesspiece_count = includedChesspieces.Count;
+        }
 
-        DisplayCard.cardindex = card_index;
-        DisplayCard.CardName = cardinfo.cardName;
-        DisplayCard.Cost = cardinfo.cost;
-        DisplayCard.Description = cardinfo.description;
-        DisplayCard.Reigon = cardinfo.reigon.ToString();
-        DisplayCard.Rarity = cardinfo.rarity.ToString();
-        DisplayCard.quantity = quantity;
+        DisplayCard displaycard;
+        if (chesspiece_count % 2 == 0) // 디스플레이에 표시될 기물 짝수개
+        {
+            newDisplay = Instantiate(display_prefab_even, DynamicDisplay);
+            displaycard = newDisplay.GetComponent<DisplayCard>();
+            int child_number = 0;
+            
+            foreach (var piece in includedChesspieces)
+            {
+                Image piece_display = displaycard.chesspiecedisplay_list[child_number];
+                piece_display.sprite = ChessPieceDisplay(piece);
+                piece_display.gameObject.SetActive(true);
+                child_number++;
+            }
+        }
+        else // 홀수개
+        {
+            newDisplay = Instantiate(display_prefab_odd, DynamicDisplay);
+            displaycard = newDisplay.GetComponent<DisplayCard>();
+            int child_number = 0;
+            
+            foreach (var piece in includedChesspieces)
+            {
+                Image piece_display = displaycard.chesspiecedisplay_list[child_number];
+                piece_display.sprite = ChessPieceDisplay(piece);
+                piece_display.gameObject.SetActive(true);
+                child_number++;
+            }
+        }
+
+        newDisplay.name = card.name + "_display";
+        displaycard.cardindex = card_index;
+        displaycard.CardName = cardinfo.cardName;
+        displaycard.Cost = cardinfo.cost;
+        displaycard.Description = cardinfo.description;
+        displaycard.Reigon = cardinfo.reigon;
+        displaycard.Rarity = cardinfo.rarity;
+        displaycard.quantity = quantity;
+        displaycard.illustrate.sprite = cardinfo.illustration;
+        displaycard.cardframe.sprite = cardinfo.GetComponent<SpriteRenderer>().sprite;
 
         if (cardinfo is SoulCard)
         {
-            DisplayCard.HP = (cardinfo as SoulCard).HP;
-            DisplayCard.AD = (cardinfo as SoulCard).AD;
+            displaycard.HP = (cardinfo as SoulCard).HP;
+            displaycard.AD = (cardinfo as SoulCard).AD;
         }
 
-        if (card.GetComponent<SpellCard>())
+        if (chesspiece_count == 0)
         {
-            DisplayCard.CardType = Card.Type.Spell;
+            displaycard.CardType = Card.Type.Spell;
+            displaycard.ChessPiece = ChessPiece.PieceType.None;
         }
         else
         {
-            DisplayCard.CardType = Card.Type.Soul;
+            displaycard.CardType = Card.Type.Soul;
+            displaycard.ChessPiece = piecelist;
         }
-
-        //texts[0].text = DisplayCard.CardName;
-        //texts[1].text = DisplayCard.Cost.ToString();
-        //texts[2].text = cardinfo.description;
 
         DisplayCardList.Add(newDisplay);
     }
@@ -91,6 +139,34 @@ public class DeckBuildingManager : MonoBehaviour
             AddDisplayCard(card.gameObject.GetComponent<DisplayCard>().cardindex, quantity_setting);
             card.SetParent(TrashCan);
             card.gameObject.SetActive(false);
+        }
+    }
+
+    private Sprite ChessPieceDisplay(ChessPiece.PieceType piece)
+    {
+        if (piece.HasFlag(ChessPiece.PieceType.King))
+        {
+            return Icon_sprites[0];
+        }
+        else if (piece.HasFlag(ChessPiece.PieceType.Quene))
+        {
+            return Icon_sprites[1];
+        }
+        else if (piece.HasFlag(ChessPiece.PieceType.Rook))
+        {
+            return Icon_sprites[2];
+        }
+        else if (piece.HasFlag(ChessPiece.PieceType.Bishop))
+        {
+            return Icon_sprites[3];
+        }
+        else if (piece.HasFlag(ChessPiece.PieceType.Knight))
+        {
+            return Icon_sprites[4];
+        }
+        else
+        {
+            return Icon_sprites[5];
         }
     }
 }
