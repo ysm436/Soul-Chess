@@ -99,13 +99,14 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 2
-  description: "[\uAC15\uB9BC] \uC544\uAD70 \uAE30\uBB3C \uD558\uB098\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.
-    \uADF8 \uAE30\uBB3C\uC758 \uC2A4\uD0EF\uACFC \uD6A8\uACFC\uB97C \uBCF5\uC0AC\uD569\uB2C8\uB2E4."
+  description: "[\uAC15\uB9BC] \uB0B4 \uC190\uD328\uC5D0\uC11C \uBE44\uC6A9\uC774
+    \uAC00\uC7A5 \uB192\uC740 \uCE74\uB4DC\uC640 \uB0AE\uC740 \uCE74\uB4DC\uC758
+    \uBE44\uC6A9\uC744 \uBC14\uAFC9\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 1598759761263525744}
   isInSelection: 0
-  pieceRestriction: 4
-  _AD: 0
-  _HP: 0
+  pieceRestriction: 5
+  _AD: 30
+  _HP: 30
   accessorySpriteList:
   - pieceType: 4
     pieceColor: 0
@@ -113,10 +114,13 @@ MonoBehaviour:
   - pieceType: 4
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 00aa2097f980fe341ab92709e787bf3b, type: 3}
+  - pieceType: 1
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 00aa2097f980fe341ab92709e787bf3b, type: 3}
+  - pieceType: 1
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 00aa2097f980fe341ab92709e787bf3b, type: 3}
   InfusedPiece: {fileID: 0}
-  targetPieceAD: -1000
-  targetPieceHP: -1000
-  targetSoul: {fileID: 0}
 --- !u!114 &1598759761263525744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +133,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c503f170e82f67949a006447b02cae09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTypes: []
-  isPositiveEffect: 1
-  isNegativeEffect: 0

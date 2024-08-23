@@ -4,9 +4,51 @@ using System.Collections.Generic;
 using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 
-public class LokiEffect : TargetingEffect
+public class LokiEffect : Effect
 {
-    ChessPiece.PieceType targetPieceRestriction =
+    public override void EffectAction(PlayerController player)
+    {
+        PlayerData objectplayerdata;
+        int min_cost = 1000;
+        int min_index = -1;
+        int max_cost = -1;
+        int max_index = -1;
+
+        if (player.playerColor == GameBoard.PlayerColor.White)
+        {
+            objectplayerdata = GameBoard.instance.gameData.playerWhite;
+        }
+        else
+        {
+            objectplayerdata = GameBoard.instance.gameData.playerBlack;
+        }
+
+        for (int i = 0; i < objectplayerdata.hand.Count; i++)
+        {
+            Card objectcard = objectplayerdata.hand[i];
+            if (objectcard.cost > max_cost)
+            {
+                max_cost = objectcard.cost;
+                max_index = i;
+            }
+            
+            if (objectcard.cost < min_cost)
+            {
+                min_cost = objectcard.cost;
+                min_index = i;
+            }
+        }
+
+        Card max_card = objectplayerdata.hand[max_index];
+        Card min_card = objectplayerdata.hand[min_index];
+
+        max_card.cost = min_cost;
+        min_card.cost = max_cost;
+    }
+
+}
+
+/*     ChessPiece.PieceType targetPieceRestriction =
         ChessPiece.PieceType.Pawn |
         ChessPiece.PieceType.Knight |
         ChessPiece.PieceType.Bishop |
@@ -48,5 +90,4 @@ public class LokiEffect : TargetingEffect
     public void RemoveBuffInfo()
     {
         gameObject.GetComponent<Loki>().InfusedPiece.buff.TryRemoveSpecificBuff(gameObject.GetComponent<Loki>().cardName, Buff.BuffType.Description);
-    }
-}
+    } */
