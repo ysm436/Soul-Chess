@@ -28,7 +28,11 @@ public class Mimir : SoulCard
             {
                 cardCostDict.TryAdd(card, card.cost);
             }
-            card.cost -= reduction;
+            else
+            {
+                card.cost -= reduction;
+                cardCostDict.TryAdd(card, reduction);
+            } 
         }
         playercolor.OnGetCard += CardCostReduction;
         InfusedPiece.OnSoulRemoved += RemoveEffect;
@@ -58,10 +62,10 @@ public class Mimir : SoulCard
         {
             cardCostDict.TryAdd(card, card.cost);
         }
-        card.cost -= reduction;
-        if (card.cost < 0)
+        else
         {
-            card.cost = 0;
+            card.cost -= reduction;
+            cardCostDict.TryAdd(card, reduction);
         }
     }
 }
