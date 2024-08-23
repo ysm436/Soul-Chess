@@ -45,6 +45,7 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
     }    // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.isHost = false;
         Debug.Log("is in lobby:" + PhotonNetwork.InLobby);
         Connect();
     }
