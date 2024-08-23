@@ -60,6 +60,7 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public TextMeshProUGUI CardNameTMP;
     public TextMeshProUGUI CardCostTMP;
+    public TextMeshProUGUI CardTypeTMP;
     public TextMeshProUGUI CardDescriptionTMP;
     public GameObject SoulElements;
     public TextMeshProUGUI CardHPTMP;
@@ -89,6 +90,7 @@ public class DisplayCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         {
             case Card.Type.Spell:
                 SoulElements.SetActive(false);
+                CardTypeTMP.text = "마법";
                 break;
             case Card.Type.Soul:
                 break;

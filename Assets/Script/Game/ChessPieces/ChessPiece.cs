@@ -86,6 +86,10 @@ abstract public class ChessPiece : TargetableObject
             value -= keywordDictionary[Keyword.Type.Defense];
         }
 
+        //피격 이펙트
+        PieceEffectIcon attackedEffect = Instantiate(effectIconPrefab, transform.position, Quaternion.identity);
+        attackedEffect.AttackedEffect();
+
         _currentHP -= value;
 
         if (AffectByHades) //하데스 능력을 받을 경우
@@ -156,6 +160,7 @@ abstract public class ChessPiece : TargetableObject
     private PieceEffectIcon effectIcon = null;
     [SerializeField]
     PieceEffectIcon effectIconPrefab;
+    private PieceEffectIcon moveRestrictionIcon = null;
 
     public Action<ChessPiece> OnKill;
     public Action<ChessPiece> OnKilled; //유언
@@ -224,6 +229,7 @@ abstract public class ChessPiece : TargetableObject
     virtual public void Move(Vector2Int targetCoordinate)
     {
         SetKeyword(Keyword.Type.Stealth, 0);
+        buff.TryRemoveSpecificBuff("", Buff.BuffType.Stealth);
 
         OnMove?.Invoke(targetCoordinate);
 
@@ -302,7 +308,11 @@ abstract public class ChessPiece : TargetableObject
             RemoveSoul();
 
         isSoulSet = true;                                       // 영혼이 부여된 턴에는 이동 불가
-        GameBoard.instance.myController.OnMyTurnEnd += MakeIsSoulSetFalse;
+        if (moveRestrictionIcon == null) moveRestrictionIcon = Instantiate(effectIconPrefab, transform.position, Quaternion.identity);
+        moveRestrictionIcon.MoveRestrictionEffect();
+        if (pieceColor == GameBoard.PlayerColor.White)
+            GameBoard.instance.whiteController.OnMyTurnEnd += MakeIsSoulSetFalse;
+        else GameBoard.instance.blackController.OnMyTurnEnd += MakeIsSoulSetFalse;
 
         SetKeyword(Keyword.Type.Silence, 0);                    // 영혼 부여 시 침묵 초기화
 
@@ -407,6 +417,7 @@ abstract public class ChessPiece : TargetableObject
     private void MakeIsSoulSetFalse()
     {
         isSoulSet = false;
+        if (moveRestrictionIcon != null) { moveRestrictionIcon.DestroyIcon(); moveRestrictionIcon = null; }
         GameBoard.instance.myController.OnMyTurnEnd -= MakeIsSoulSetFalse;
     }
 

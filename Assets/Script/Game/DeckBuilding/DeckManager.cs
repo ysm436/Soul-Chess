@@ -10,7 +10,7 @@ public class DeckManager : MonoBehaviour, IDropHandler
     private int CARD_LIMIT = 30;
     public int loaded_deck_index = 0;
     public int local_card_count = 0;
-    public int[] local_costs = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] local_costs = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public int[] local_chesspieces = new int[6] { 0, 0, 0, 0, 0, 0 };
     public int[] local_extra_chesspieces = new int[6] { 0, 0, 0, 0, 0, 0 };
     public int[] local_rarities = new int[3] { 0, 0, 0 };
@@ -391,7 +391,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
             case 4: local_costs[4] += 1; break;
             case 5: local_costs[5] += 1; break;
             case 6: local_costs[6] += 1; break;
-            default: local_costs[7] += 1; break;
+            case 7: local_costs[7] += 1; break;
+            case 8: local_costs[8] += 1; break;
+            default: local_costs[9] += 1; break;
         }
 
         List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();
@@ -454,7 +456,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
             case 4: local_costs[4] -= 1; break;
             case 5: local_costs[5] -= 1; break;
             case 6: local_costs[6] -= 1; break;
-            default: local_costs[7] -= 1; break;
+            case 7: local_costs[7] -= 1; break;
+            case 8: local_costs[8] -= 1; break;
+            default: local_costs[9] -= 1; break;
         }
 
         List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();

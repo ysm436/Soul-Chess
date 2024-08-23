@@ -6,7 +6,7 @@ using TMPro;
 
 public class CardFilter : MonoBehaviour
 {
-    private bool[] costToggleList = new bool[8] {true, true, true, true, true, true, true, true}; // {0, 1, 2, 3, 4, 5, 6, 7+}
+    private bool[] costToggleList = new bool[10] {true, true, true, true, true, true, true, true, true, true}; // {0, 1, 2, 3, 4, 5, 6, 7, 8, 9+}
     private bool[] typeToggleList = new bool[2] {true, true}; // {soul, spell}
     private bool[] regionToggleList = new bool[3] {true, true, true}; // {greek, western, norse}
     private bool[] rarityToggleList = new bool[3] {true, true, true}; // {common, legendary, mythical}
@@ -194,7 +194,7 @@ public class CardFilter : MonoBehaviour
             }
         }
     }
-    public void Cost7pToggle(bool cost7)
+    public void Cost7Toggle(bool cost7)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
 
@@ -208,7 +208,49 @@ public class CardFilter : MonoBehaviour
             costToggleList[7] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost >= 7)
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 7)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+    public void Cost8Toggle(bool cost8)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost8)
+        {
+            costToggleList[8] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[8] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 8)
+                {
+                    card.SetActive(false);
+                }
+            }
+        }
+    }
+    public void Cost9pToggle(bool cost9)
+    {
+        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (cost9)
+        {
+            costToggleList[9] = true;
+            ForOnToggle();
+        }
+        else
+        {
+            costToggleList[9] = false;
+            foreach (var card in DisplayCardList)
+            {
+                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost >= 9)
                 {
                     card.SetActive(false);
                 }
@@ -513,9 +555,17 @@ public class CardFilter : MonoBehaviour
                 {
                     if(!costToggleList[6]) continue;
                 }
-                else if (cardinfo.Cost >= 7)
+                else if (cardinfo.Cost == 7)
                 {
                     if(!costToggleList[7]) continue;
+                }
+                else if (cardinfo.Cost == 8)
+                {
+                    if(!costToggleList[8]) continue;
+                }
+                else if (cardinfo.Cost >= 9)
+                {
+                    if(!costToggleList[9]) continue;
                 }
 
                 if (cardinfo.CardType == Card.Type.Soul)

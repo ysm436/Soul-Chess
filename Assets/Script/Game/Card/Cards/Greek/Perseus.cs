@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Perseus : SoulCard
@@ -13,6 +12,7 @@ public class Perseus : SoulCard
     private int targethp;
     private int is_stealth;
     private int selection;
+    private bool affectbyhelmetofhades = false;
     
     protected override void Awake()
     {
@@ -62,7 +62,8 @@ public class Perseus : SoulCard
             InfusedPiece.SetKeyword(Keyword.Type.Stealth);
             InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
             InfusedPiece.buff.AddBuffByDescription("하데스의 투구", Buff.BuffType.Description, "이 기물이 적을 처치하면 다시 은신합니다.", true);
-            InfusedPiece.OnKill += StealthInfusedPiece;
+            InfusedPiece.OnKill += AffectHelmetOfHades;
+            InfusedPiece.OnMove += StealthInfusedPiece;
         }
     }
 
@@ -80,10 +81,19 @@ public class Perseus : SoulCard
         }
     }
 
-    private void StealthInfusedPiece(ChessPiece chessPiece)
+    private void AffectHelmetOfHades(ChessPiece chessPiece)
     {
-        InfusedPiece.SetKeyword(Keyword.Type.Stealth);
-        InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
+        affectbyhelmetofhades = true;
+    }
+
+    private void StealthInfusedPiece(Vector2Int targetcoordinate)
+    {
+        if (affectbyhelmetofhades == true)
+        {
+            InfusedPiece.SetKeyword(Keyword.Type.Stealth);
+            InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
+            affectbyhelmetofhades = false;
+        }
     }
 
 
@@ -106,7 +116,7 @@ public class Perseus : SoulCard
             {
                 InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
             }
-            InfusedPiece.OnKill += StealthInfusedPiece;
+            InfusedPiece.OnKill += AffectHelmetOfHades;
         }
     }
 
@@ -132,7 +142,7 @@ public class Perseus : SoulCard
                 InfusedPiece.buff.TryRemoveSpecificBuff("하데스의 투구", Buff.BuffType.Stealth);
             }
             InfusedPiece.buff.TryRemoveSpecificBuff("하데스의 투구", Buff.BuffType.Description);
-            InfusedPiece.OnKill -= StealthInfusedPiece;
+            InfusedPiece.OnKill -= AffectHelmetOfHades;
         }
     }
 }
