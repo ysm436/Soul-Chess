@@ -144,10 +144,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab095e7e6da4ba04c87c7b90e3e85470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 3
-    soulEssence: 3
+    playerColor: 0
+    soulOrbs: 1
+    soulEssence: 1
     maxHandCardCount: 8
     mulliganHandCount: 4
     deck:
@@ -160,33 +161,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     hand:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -203,8 +178,7 @@ MonoBehaviour:
   rarity: 1
   description: "\uD134\uC774 \uC885\uB8CC\uB420 \uB54C \uB9C8\uB2E4, \uBE44\uC6A9\uC774
     1 \uC904\uC5B4\uB4ED\uB2C8\uB2E4.\r\n[\uAC15\uB9BC] \u2018\uBAA8\uB4E0\u2019
-    \uCE74\uB4DC\uB97C \uD30C\uAD34\uD569\uB2C8\uB2E4. \uB0B4 \uD134\uC774 \uB05D\uB0A0
-    \uB54C, \uC774 \uAE30\uBB3C\uC740 \uD30C\uAD34\uB429\uB2C8\uB2E4."
+    \uCE74\uB4DC\uB97C \uD30C\uAD34\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -1006345869655507637}
   isInSelection: 0
   pieceRestriction: -1
