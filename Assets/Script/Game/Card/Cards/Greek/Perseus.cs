@@ -65,7 +65,6 @@ public class Perseus : SoulCard
             //InfusedPiece.OnKill += AffectHelmetOfHades;
             //InfusedPiece.OnMove += StealthInfusedPiece;
         }
-        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     private void GetHPInfoTarget(ChessPiece chessPiece) //피해를 입었는지 확인하기 위해 hp 정보를 가져옴
