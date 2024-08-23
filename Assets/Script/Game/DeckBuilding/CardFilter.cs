@@ -12,6 +12,7 @@ public class CardFilter : MonoBehaviour
     private bool[] rarityToggleList = new bool[3] {true, true, true}; // {common, legendary, mythical}
     private bool[] chesspieceToggleList = new bool[6] {true, true, true, true, true, true}; // {pawn, knight, bishop, rook, quene, king}
     [SerializeField] TMP_InputField searchinputfield;
+    private bool search_signal = false;
     
     private void Awake()
     {
@@ -21,6 +22,11 @@ public class CardFilter : MonoBehaviour
     public void SearchCard(string searchtext)
     {
         List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().DisplayCardList;
+
+        if (searchtext != "" && !search_signal)
+        {
+            search_signal = true;
+        }
 
         foreach (var card in DisplayCardList)
         {
@@ -44,6 +50,17 @@ public class CardFilter : MonoBehaviour
                 }
             }
         }
+
+        if (searchtext == "" && search_signal)
+        {
+            search_signal = false;
+            foreach (var card in DisplayCardList)
+            {
+                card.SetActive(false);
+            }
+
+            ForOnToggle();
+        }
     }
 
     //마나 토글
@@ -61,7 +78,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[0] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 0)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost == 0)
                 {
                     card.SetActive(false);
                 }
@@ -82,7 +99,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[1] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 1)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost == 1)
                 {
                     card.SetActive(false);
                 }
@@ -103,7 +120,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[2] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 2)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost == 2)
                 {
                     card.SetActive(false);
                 }
@@ -124,7 +141,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[3] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 3)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost == 3)
                 {
                     card.SetActive(false);
                 }
@@ -145,7 +162,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[4] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 4)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost == 4)
                 {
                     card.SetActive(false);
                 }
@@ -166,7 +183,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[5] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 5)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost == 5)
                 {
                     card.SetActive(false);
                 }
@@ -187,7 +204,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[6] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 6)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost == 6)
                 {
                     card.SetActive(false);
                 }
@@ -208,7 +225,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[7] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 7)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost == 7)
                 {
                     card.SetActive(false);
                 }
@@ -229,7 +246,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[8] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost == 8)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost == 8)
                 {
                     card.SetActive(false);
                 }
@@ -250,7 +267,7 @@ public class CardFilter : MonoBehaviour
             costToggleList[9] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Cost >= 9)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Cost >= 9)
                 {
                     card.SetActive(false);
                 }
@@ -273,7 +290,7 @@ public class CardFilter : MonoBehaviour
             typeToggleList[0] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Soul)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Soul)
                 {
                     card.SetActive(false);
                 }
@@ -295,7 +312,7 @@ public class CardFilter : MonoBehaviour
             typeToggleList[1] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Spell)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().CardType == Card.Type.Spell)
                 {
                     card.SetActive(false);
                 }
@@ -318,7 +335,7 @@ public class CardFilter : MonoBehaviour
             regionToggleList[0] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Greek)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Greek)
                 {
                     card.SetActive(false);
                 }
@@ -341,7 +358,7 @@ public class CardFilter : MonoBehaviour
             regionToggleList[1] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Western)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Western)
                 {
                     card.SetActive(false);
                 }
@@ -364,7 +381,7 @@ public class CardFilter : MonoBehaviour
             regionToggleList[2] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Norse)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Reigon == Card.Reigon.Norse)
                 {
                     card.SetActive(false);
                 }
@@ -387,7 +404,7 @@ public class CardFilter : MonoBehaviour
             rarityToggleList[0] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Common)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Common)
                 {
                     card.SetActive(false);
                 }
@@ -410,7 +427,7 @@ public class CardFilter : MonoBehaviour
             rarityToggleList[1] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Legendary)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Legendary)
                 {
                     card.SetActive(false);
                 }
@@ -433,7 +450,7 @@ public class CardFilter : MonoBehaviour
             rarityToggleList[2] = false;
             foreach (var card in DisplayCardList)
             {
-                if (card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Mythical)
+                if (!search_signal && card.activeSelf && card.GetComponent<DisplayCard>().Rarity == Card.Rarity.Mythical)
                 {
                     card.SetActive(false);
                 }
@@ -525,7 +542,7 @@ public class CardFilter : MonoBehaviour
             DisplayCard cardinfo = card.GetComponent<DisplayCard>();
             bool onflag = false;
 
-            if (!card.activeSelf)
+            if (!card.activeSelf && !search_signal)
             {   
                 if (cardinfo.Cost == 0)
                 {
@@ -644,7 +661,7 @@ public class CardFilter : MonoBehaviour
         {
             DisplayCard cardinfo = card.GetComponent<DisplayCard>();
 
-            if (card.activeSelf)
+            if (!search_signal && card.activeSelf)
             {   
                 if (chesspieceToggleList[0] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Pawn)) continue;
                 if (chesspieceToggleList[1] && cardinfo.ChessPiece.HasFlag(ChessPiece.PieceType.Knight)) continue;
