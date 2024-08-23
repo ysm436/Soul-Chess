@@ -130,7 +130,6 @@ MonoBehaviour:
     \uB0B4 \uC190\uC73C\uB85C \uB3CC\uC544\uC635\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -7220643531253071022}
   isInSelection: 0
-  playercontroller: {fileID: 0}
   gungnir_prefab: {fileID: 4078594222576986540}
 --- !u!114 &-7220643531253071022
 MonoBehaviour:
@@ -155,3 +154,4 @@ MonoBehaviour:
   isNegativeEffect: 1
   dmg: 50
   gungnir: {fileID: 6115177178300004621}
+  gungnir_prefab: {fileID: 4078594222576986540}
