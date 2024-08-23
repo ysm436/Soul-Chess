@@ -19,7 +19,6 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
     public TMP_InputField roomName;
     public TextMeshProUGUI roomnameAnounceText;
     public GameObject LoadingView;
-    public GameObject RoomMaxAnnounce;
 
     public bool roomCreatingPanelActive
     {
@@ -169,17 +168,7 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
         if (roomSetCorrectly)
         {
             PhotonNetwork.JoinRoom(CurrentRoomText.text);
-            Invoke("ShowRoomMaxAnnounce", 0.5f);
         }
-    }
-    private void ShowRoomMaxAnnounce()
-    {
-        RoomMaxAnnounce.SetActive(true);
-        Invoke("HideRoomMaxAnnounce", 1.5f);
-    }
-    private void HideRoomMaxAnnounce()
-    {
-        RoomMaxAnnounce.SetActive(false);
     }
     // 클라이언트가 어떤 방식으로든 연결이 끊어지면 호출됨
     public override void OnDisconnected(DisconnectCause cause)
