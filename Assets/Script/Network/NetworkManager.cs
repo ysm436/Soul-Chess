@@ -62,6 +62,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
         loadingView.SetActive(false);
     }
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        PhotonNetwork.LeaveRoom();
+    }
     public override void OnLeftRoom()
     {
         base.OnLeftRoom();
