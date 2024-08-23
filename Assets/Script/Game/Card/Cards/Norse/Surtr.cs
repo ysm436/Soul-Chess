@@ -32,18 +32,12 @@ public class Surtr : SoulCard
         }
     }
 
-    private void DestroyInfusedPiece()
-    {
-        InfusedPiece.Kill();
-    }
-
     public override void AddEffect()
     {
-        if (player != null) player.OnMyTurnEnd += DestroyInfusedPiece;
-        InfusedPiece.OnSoulRemoved += RemoveEffect;
+
     }
     public override void RemoveEffect()
     {
-        if (player != null) player.OnMyTurnEnd -= DestroyInfusedPiece;
+
     }
 }

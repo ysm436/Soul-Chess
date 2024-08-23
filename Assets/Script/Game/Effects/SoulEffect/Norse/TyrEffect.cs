@@ -5,6 +5,7 @@ using UnityEngine;
 public class TyrEffect : TargetingEffect
 {
     ChessPiece restraint_target;
+    int defense_quantity = 10;
 
     public override void EffectAction(PlayerController player)
     {
@@ -19,13 +20,12 @@ public class TyrEffect : TargetingEffect
         restraint_target.buff.AddBuffByKeyword(tyr_component.cardName, Buff.BuffType.Restraint);
 
         tyr_component.AddEffect();
-        tyr_component.InfusedPiece.OnKilled += restraint_remove;
         tyr_component.InfusedPiece.OnSoulRemoved += tyr_component.RemoveEffect;
-    }
 
-    public void restraint_remove(ChessPiece chessPiece)
-    {
-        restraint_target.Unrestraint();
+        tyr_component.InfusedPiece.SetKeyword(Keyword.Type.Taunt);
+        tyr_component.InfusedPiece.SetKeyword(Keyword.Type.Defense, defense_quantity);
+        //버프 관련 변경 머지 후 버프 추가
+        tyr_component.InfusedPiece.buff.AddBuffByKeyword(tyr_component.cardName, Buff.BuffType.Taunt);
+        tyr_component.InfusedPiece.buff.AddBuffByValue(tyr_component.cardName, Buff.BuffType.Defense, defense_quantity, true);
     }
-
 }

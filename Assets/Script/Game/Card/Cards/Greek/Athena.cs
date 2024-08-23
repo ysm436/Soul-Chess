@@ -45,5 +45,6 @@ public class Athena : SoulCard
             target.buff.TryRemoveSpecificBuff("아테나", Buff.BuffType.AD);
             target.buff.TryRemoveSpecificBuff("아테나", Buff.BuffType.HP);
         }
+        InfusedPiece.OnSoulRemoved -= RemoveEffect;
     }
 }

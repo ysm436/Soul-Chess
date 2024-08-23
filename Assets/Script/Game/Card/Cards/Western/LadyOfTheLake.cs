@@ -23,11 +23,11 @@ public class LadyOfTheLake : SoulCard
         }
 
         int temp = SynchronizedRandom.Range(0, pieceList.Count);
-        pieceList[temp].maxHP += 20;
-        pieceList[temp].AD += 20;
+        pieceList[temp].maxHP += 10;
+        pieceList[temp].AD += 10;
 
-        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.HP, 20, true);
-        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.AD, 20, true);
+        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.HP, 10, true);
+        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.AD, 10, true);
     }
 
     public override void AddEffect()

@@ -26,6 +26,7 @@ public class Mimir : SoulCard
             card.cost = card.cost - reduction;
         }
         playercolor.OnGetCard += CardCostReduction;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
@@ -35,6 +36,7 @@ public class Mimir : SoulCard
             card.cost += reduction;
         }
         playercolor.OnGetCard -= CardCostReduction;
+        InfusedPiece.OnSoulRemoved -= RemoveEffect;
     }
 
     public void CardCostReduction(Card card)

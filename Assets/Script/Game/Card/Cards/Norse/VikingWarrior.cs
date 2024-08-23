@@ -23,6 +23,8 @@ public class VikingWarrior : SoulCard
             InfusedPiece.buff.AddBuffByValue("바이킹 전사", Buff.BuffType.AD, 20, true);
         }
         InfusedPiece.OnAttackedAfter += increaseAD;
+        
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
@@ -33,6 +35,8 @@ public class VikingWarrior : SoulCard
             InfusedPiece.buff.TryRemoveSpecificBuff("바이킹 전사", Buff.BuffType.AD);
         }
         InfusedPiece.OnAttackedAfter -= increaseAD;
+
+        InfusedPiece.OnSoulRemoved -= RemoveEffect;
     }
 
     private void increaseAD(ChessPiece chessPiece)

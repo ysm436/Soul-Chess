@@ -26,7 +26,7 @@ public class ApollonEffect : Effect
             TempPosition += Vector2Int.right;
         }
 
-        foreach (var position in row) //열의 모든 내 기물에게 보호막
+        foreach (var position in row) //행의 모든 내 기물에게 보호막
         {
             ChessPiece obj = GameBoard.instance.gameData.GetPiece(position);
             if (obj != null && obj.pieceColor == player.playerColor)
@@ -36,6 +36,7 @@ public class ApollonEffect : Effect
                 obj.buff.AddBuffByKeyword(apollon_component.cardName, Buff.BuffType.Shield);
             }
         }
-        apollon_component.AddEffect(); //자신에게 보호막
+        apollon_component.InfusedPiece.SetKeyword(Keyword.Type.Shield); //자신에게 보호막
+        apollon_component.InfusedPiece.buff.AddBuffByKeyword(apollon_component.cardName, Buff.BuffType.Shield);
     }
 }

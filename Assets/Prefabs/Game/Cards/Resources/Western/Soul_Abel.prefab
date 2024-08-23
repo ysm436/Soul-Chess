@@ -85,7 +85,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88198c9e05adea4f858bc52fa3d934b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMine: 0
+  coordinate: {x: 0, y: 0}
+  owner:
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
+    maxHandCardCount: 8
+    mulliganHandCount: 4
+    deck: []
+    hand: []
+    deckPosition: {x: 0, y: 0}
+    spellDamageIncrease: 0
+    spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC544\uBCA8"
   _cost: 4
@@ -99,8 +110,8 @@ MonoBehaviour:
   EffectOnCardUsed: {fileID: -8131353371072324936}
   isInSelection: 0
   pieceRestriction: 5
-  _AD: 30
-  _HP: 50
+  _AD: 40
+  _HP: 20
   accessorySpriteList:
   - pieceType: 4
     pieceColor: 0

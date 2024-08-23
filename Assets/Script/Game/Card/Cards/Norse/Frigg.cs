@@ -18,7 +18,7 @@ public class Frigg : SoulCard
         decreaseAmountDictionary = new();
     }
 
-    private void IncreaseEnemyPiecesAD()
+    public void IncreaseEnemyPiecesAD()
     {
         List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != InfusedPiece.pieceColor).ToList();
 
@@ -36,7 +36,7 @@ public class Frigg : SoulCard
         }
     }
 
-    private void DecreaseEnemyPiecesAD()
+    public void DecreaseEnemyPiecesAD()
     {
         List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != InfusedPiece.pieceColor).ToList();
 
@@ -55,7 +55,8 @@ public class Frigg : SoulCard
 
     public override void AddEffect()
     {
-        DecreaseEnemyPiecesAD();
+        if (GameBoard.instance.CurrentPlayerController().playerColor == InfusedPiece.pieceColor)
+            DecreaseEnemyPiecesAD();
         if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White) 
         {
             GameBoard.instance.whiteController.OnMyTurnStart += DecreaseEnemyPiecesAD;
@@ -71,7 +72,8 @@ public class Frigg : SoulCard
 
     public override void RemoveEffect()
     {
-        IncreaseEnemyPiecesAD();
+        if (GameBoard.instance.CurrentPlayerController().playerColor == InfusedPiece.pieceColor)
+            IncreaseEnemyPiecesAD();
         if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White) 
         {
             GameBoard.instance.whiteController.OnMyTurnStart -= DecreaseEnemyPiecesAD;
@@ -83,5 +85,6 @@ public class Frigg : SoulCard
             GameBoard.instance.blackController.OnMyTurnEnd -= IncreaseEnemyPiecesAD;
         }
         decreaseAmountDictionary.Clear();
+        InfusedPiece.OnSoulRemoved -= RemoveEffect;
     }
 }

@@ -11,7 +11,7 @@ public class LadyOfTheLakeEffect : Effect
 
         ladyOfTheLake.player = player;
 
-        ladyOfTheLake.InfusedPiece.buff.AddBuffByDescription(ladyOfTheLake.cardName, Buff.BuffType.Description, "호수의 여인: 자신 턴 종료 시 무작위 아군 기물에게 +20/+20 부여", true);
+        ladyOfTheLake.InfusedPiece.buff.AddBuffByDescription(ladyOfTheLake.cardName, Buff.BuffType.Description, "호수의 여인: 자신 턴 종료 시 무작위 아군 기물에게 +10/+10 부여", true);
         ladyOfTheLake.AddEffect();
         ladyOfTheLake.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
     }

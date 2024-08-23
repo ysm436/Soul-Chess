@@ -26,6 +26,7 @@ public class Hercules : SoulCard
         
         playercontroller.OnMyTurnStart += ADmultiply;
         playercontroller.OnMyTurnEnd += ADoriginate;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
@@ -41,6 +42,7 @@ public class Hercules : SoulCard
 
         playercontroller.OnMyTurnStart -= ADmultiply;
         playercontroller.OnMyTurnEnd -= ADoriginate;
+        InfusedPiece.OnSoulRemoved -= RemoveEffect;
     }
 
     public void ADmultiply()

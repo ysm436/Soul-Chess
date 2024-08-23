@@ -372,6 +372,7 @@ abstract public class ChessPiece : TargetableObject
     // 예외) 방어력 n >= 1: 활성화 및 방어력 수치 나타냄 / n = 0: 비활성화
     public void SetKeyword(Keyword.Type keywordType, int n = 1)
     {
+        int oldKeyword = GetKeyword(keywordType);
         if (keywordType == Keyword.Type.Defense)
             keywordDictionary[keywordType] += n;
         else
@@ -387,12 +388,13 @@ abstract public class ChessPiece : TargetableObject
         else if (keywordType == Keyword.Type.Stun && n == 1)
         {
             //효과 발동 시점의 색깔 턴이 한번 더 돌아와야 스턴 해제
-            //상대 턴에 스턴 효과를 부여당해서 풀리기 전 자기 턴에 스턴이 부여될 경우 최신화될 수 있도록 방법 구상 필요
+            GameBoard.instance.whiteController.OnMyTurnStart -= Unstun; //이미 있는 스턴 덮어씌우기
+            GameBoard.instance.blackController.OnMyTurnStart -= Unstun;
             GameBoard.instance.CurrentPlayerController().OnMyTurnStart += Unstun;
         }
         else if (keywordType == Keyword.Type.Restraint && n == 1)
         {
-            if (soul != null)
+            if (soul != null && oldKeyword != 1) //구속 풀리기 전에 다시 구속되면 RemoveEffect가 2번 실행되는 버그 수정
             {
                 soul.RemoveEffect();
             }
@@ -401,7 +403,7 @@ abstract public class ChessPiece : TargetableObject
         {
             if (soul != null)
             {
-                soul.RemoveEffect();
+                if (oldKeyword != 1) soul.RemoveEffect(); //침묵 풀리기 전에 다시 침묵되면 RemoveEffect 2번 실행 버그 수정
                 RemoveBuff();
             }
         }
@@ -421,12 +423,12 @@ abstract public class ChessPiece : TargetableObject
         GameBoard.instance.myController.OnMyTurnEnd -= MakeIsSoulSetFalse;
     }
 
-    // 스턴 해제 (턴 종료 시 호출)
+    // 스턴 해제 (다시 턴 시작 시 호출)
     public void Unstun()
     {
         SetKeyword(Keyword.Type.Stun, 0);
         buff.TryRemoveSpecificBuff("", Buff.BuffType.Stun); //스턴 정보 제거
-        GameBoard.instance.myController.OnMyTurnEnd -= Unstun;
+        GameBoard.instance.CurrentPlayerController().OnMyTurnStart -= Unstun;
     }
 
     // 구속 해제

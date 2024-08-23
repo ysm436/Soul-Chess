@@ -5,7 +5,6 @@ using UnityEngine;
 public class Apollon : SoulCard
 {
     protected override int CardID => Card.cardIdDict["아폴론"];
-    private int shield_exist = 1;
     protected override void Awake()
     {
         base.Awake();
@@ -13,17 +12,11 @@ public class Apollon : SoulCard
 
     public override void AddEffect()
     {
-        if (shield_exist == 1) 
-        {
-            InfusedPiece.SetKeyword(Keyword.Type.Shield);
-            InfusedPiece.buff.AddBuffByKeyword(cardName, Buff.BuffType.Shield);
-        }
+        
     }
 
     public override void RemoveEffect()
     {
-        shield_exist = InfusedPiece.GetKeyword(Keyword.Type.Shield); //보호막이 깨져 있는지 확인
-        InfusedPiece.SetKeyword(Keyword.Type.Shield, 0);
-        InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Shield);
+        
     }
 }
