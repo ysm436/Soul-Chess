@@ -78,7 +78,7 @@ public class LobbySceneUI : MonoBehaviour
     public void ExitButton()
     {
         PhotonNetwork.AutomaticallySyncScene = false;
-        GameManager.instance.LoadMatchingScene();
+        GameManager.instance.LoadMainScene();
     }
 
     public void ReadyButton()

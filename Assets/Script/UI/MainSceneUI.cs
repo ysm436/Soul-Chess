@@ -12,7 +12,7 @@ public class MainSceneUI : MonoBehaviour
 
     private void Start()
     {
-        matchingButton.onClick.AddListener(GameManager.instance.LoadMatchingScene);
+        matchingButton.onClick.AddListener(GameManager.instance.LoadLobbyScene);
         deckBuildingButton.onClick.AddListener(GameManager.instance.LoadDeckBuildingScene);
         quitButton.onClick.AddListener(QuitGame);
     }
