@@ -60,8 +60,12 @@ public class LobbySceneUI : MonoBehaviour
         blackReadyButton.enabled = false;
         whiteReadyButton.enabled = false;
     }
+    bool isInitialzed = false;
     public void Init()
     {
+        if (isInitialzed)
+            return;
+
         if (GameManager.instance.isHost)
         {
             Debug.Log("is host");
@@ -69,7 +73,7 @@ public class LobbySceneUI : MonoBehaviour
             myCardText.gameObject.SetActive(true);
             if (PhotonNetwork.CurrentRoom.PlayerCount <= 1)
             {
-                whiteInfo.SetActive(true);
+                blackInfo.SetActive(false);
                 blackLoading.SetActive(true);
             }
         }
@@ -81,10 +85,12 @@ public class LobbySceneUI : MonoBehaviour
             myCardText.gameObject.SetActive(true);
             if (PhotonNetwork.CurrentRoom.PlayerCount <= 1)
             {
-                blackInfo.SetActive(true);
+                whiteInfo.SetActive(false);
                 whiteLoading.SetActive(true);
             }
         }
+
+        isInitialzed = true;
     }
 
     private void TryStartGame()
