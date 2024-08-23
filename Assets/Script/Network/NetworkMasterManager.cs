@@ -42,16 +42,14 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
         // 마스터 클라이언트가 PhotonNetwork.LoadLevel()을 호출할 수 있도록 하고,
         // 같은 룸에 있는 모든 클라이언트가 레벨을 동기화하게 함
         PhotonNetwork.AutomaticallySyncScene = true;
-
-        if (PhotonNetwork.InLobby)
-        {
-            LoadingView.SetActive(false);
-        }
-
     }    // Start is called before the first frame update
     void Start()
     {
         Connect();
+        if (PhotonNetwork.InLobby)
+        {
+            LoadingView.SetActive(false);
+        }
     }
 
     /// <summary>
