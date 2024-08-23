@@ -167,7 +167,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
     //Card Dictionary<CardName, CardID>
     public static Dictionary<string, int> cardIdDict = new Dictionary<string, int>(){
-        {"오딘", 0},
+        //{"오딘", 0},
         {"프리그", 1},
         {"이미르", 2},
         {"토르", 3},
@@ -192,7 +192,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"아테나", 22},
         {"히드라", 23},
         {"케르베로스", 24},
-        {"페르세우스", 25},
+        //{"페르세우스", 25},
         {"헤라클레스", 26},
         {"판도라의 상자", 27},
         {"튀폰", 28},
