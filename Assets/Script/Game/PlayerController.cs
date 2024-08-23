@@ -158,6 +158,7 @@ public class PlayerController : MonoBehaviour
 
         movableCount--;
         srcPiece.additionalMoveLeft--;
+        isMoved = true;
 
         if (isAttack)
         {
