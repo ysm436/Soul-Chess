@@ -224,6 +224,7 @@ abstract public class ChessPiece : TargetableObject
     virtual public void Move(Vector2Int targetCoordinate)
     {
         SetKeyword(Keyword.Type.Stealth, 0);
+        buff.TryRemoveSpecificBuff("", Buff.BuffType.Stealth);
 
         OnMove?.Invoke(targetCoordinate);
 
