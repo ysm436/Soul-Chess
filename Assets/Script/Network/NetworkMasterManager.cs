@@ -168,12 +168,14 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
     {
         if (roomSetCorrectly)
         {
-            if (!PhotonNetwork.JoinRoom(CurrentRoomText.text))
-            {
-                RoomMaxAnnounce.SetActive(true);
-                Invoke("HideRoomMaxAnnounce", 1.5f);
-            }
+            PhotonNetwork.JoinRoom(CurrentRoomText.text);
+            Invoke("ShowRoomMaxAnnounce", 0.5f);
         }
+    }
+    private void ShowRoomMaxAnnounce()
+    {
+        RoomMaxAnnounce.SetActive(true);
+        Invoke("HideRoomMaxAnnounce", 1.5f);
     }
     private void HideRoomMaxAnnounce()
     {
