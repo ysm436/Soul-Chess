@@ -12,8 +12,9 @@ public class CardFilter : MonoBehaviour
     private bool[] rarityToggleList = new bool[3] {true, true, true}; // {common, legendary, mythical}
     private bool[] chesspieceToggleList = new bool[6] {true, true, true, true, true, true}; // {pawn, knight, bishop, rook, quene, king}
     [SerializeField] TMP_InputField searchinputfield;
+    [SerializeField] GameObject preventPanel;    
     private bool search_signal = false;
-    
+
     private void Awake()
     {
         searchinputfield.onValueChanged.AddListener(SearchCard);
@@ -26,6 +27,7 @@ public class CardFilter : MonoBehaviour
         if (searchtext != "" && !search_signal)
         {
             search_signal = true;
+            preventPanel.SetActive(true);
         }
 
         foreach (var card in DisplayCardList)
@@ -59,6 +61,7 @@ public class CardFilter : MonoBehaviour
                 card.SetActive(false);
             }
 
+            preventPanel.SetActive(false);
             ForOnToggle();
         }
     }
