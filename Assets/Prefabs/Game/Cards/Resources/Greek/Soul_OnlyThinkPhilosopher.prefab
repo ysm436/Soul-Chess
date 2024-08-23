@@ -86,13 +86,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 0
-    soulOrbs: 10
-    soulEssence: 10
+    playerColor: 1
+    soulOrbs: 2
+    soulEssence: 1
     maxHandCardCount: 8
     mulliganHandCount: 4
-    deck: []
+    deck:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     deckPosition: {x: 0, y: 0}
@@ -112,10 +139,16 @@ MonoBehaviour:
   _AD: 30
   _HP: 10
   accessorySpriteList:
-  - pieceType: 5
+  - pieceType: 1
     pieceColor: 0
     sprite: {fileID: 21300000, guid: 110d051c682f35649bb1c7692b2f9661, type: 3}
-  - pieceType: 5
+  - pieceType: 1
+    pieceColor: 1
+    sprite: {fileID: 21300000, guid: 110d051c682f35649bb1c7692b2f9661, type: 3}
+  - pieceType: 4
+    pieceColor: 0
+    sprite: {fileID: 21300000, guid: 110d051c682f35649bb1c7692b2f9661, type: 3}
+  - pieceType: 4
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 110d051c682f35649bb1c7692b2f9661, type: 3}
   InfusedPiece: {fileID: 0}
