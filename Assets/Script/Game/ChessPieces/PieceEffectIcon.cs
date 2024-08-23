@@ -29,4 +29,21 @@ public class PieceEffectIcon : MonoBehaviour
         }
         spriteRenderer.sprite = null;
     }
+
+    public void AttackedEffect()
+    {
+        spriteRenderer.sprite = sprites[8];
+        Invoke("DestroyIcon", 0.4f);
+    }
+
+    public void MoveRestrictionEffect()
+    {
+        spriteRenderer.sprite = sprites[9];
+    }
+
+    public void DestroyIcon()
+    {
+        CancelInvoke("DestroyIcon");
+        Destroy(gameObject);
+    }
 }
