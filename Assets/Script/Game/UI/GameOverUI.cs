@@ -44,6 +44,8 @@ public class GameOverUI : MonoBehaviour
     }
     public void OnExit()
     {
-        GameManager.instance.LoadMainSceneFromGameScene();
+        Destroy(GameBoard.instance.gameObject);
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+        PhotonNetwork.LeaveRoom();
     }
 }

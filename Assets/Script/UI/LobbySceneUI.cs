@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,11 @@ public class LobbySceneUI : MonoBehaviour
     public Button blackReadyButton;
     public TextMeshProUGUI blackReadyButtonText;
     public RectTransform myCardText;
+
+    public GameObject whiteInfo;
+    public GameObject blackInfo;
+    public GameObject whiteLoading;
+    public GameObject blackLoading;
 
     public int SelectedDeckIndex = -1;
 
@@ -54,19 +60,37 @@ public class LobbySceneUI : MonoBehaviour
         blackReadyButton.enabled = false;
         whiteReadyButton.enabled = false;
     }
+    bool isInitialzed = false;
     public void Init()
     {
+        if (isInitialzed)
+            return;
+
         if (GameManager.instance.isHost)
         {
+            Debug.Log("is host");
             whiteReadyButton.enabled = true;
             myCardText.gameObject.SetActive(true);
+            if (PhotonNetwork.CurrentRoom.PlayerCount <= 1)
+            {
+                blackInfo.SetActive(false);
+                blackLoading.SetActive(true);
+            }
         }
         else
         {
+            Debug.Log("is not host");
             blackReadyButton.enabled = true;
             myCardText.anchoredPosition = new Vector3(-myCardText.anchoredPosition.x, myCardText.anchoredPosition.y);
             myCardText.gameObject.SetActive(true);
+            if (PhotonNetwork.CurrentRoom.PlayerCount <= 1)
+            {
+                whiteInfo.SetActive(false);
+                whiteLoading.SetActive(true);
+            }
         }
+
+        isInitialzed = true;
     }
 
     private void TryStartGame()
@@ -75,11 +99,6 @@ public class LobbySceneUI : MonoBehaviour
             networkManager.StartGame();
     }
 
-    public void ExitButton()
-    {
-        PhotonNetwork.AutomaticallySyncScene = false;
-        GameManager.instance.LoadMatchingScene();
-    }
 
     public void ReadyButton()
     {
@@ -163,5 +182,17 @@ public class LobbySceneUI : MonoBehaviour
 
         GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
     }
-
+    public void OnOtherPlayerJoined()
+    {
+        if (GameManager.instance.isHost)
+        {
+            blackInfo.SetActive(true);
+            blackLoading.SetActive(false);
+        }
+        else
+        {
+            whiteInfo.SetActive(true);
+            whiteLoading.SetActive(false);
+        }
+    }
 }
