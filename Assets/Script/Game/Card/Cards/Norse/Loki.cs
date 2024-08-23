@@ -6,7 +6,23 @@ public class Loki : SoulCard
 {
     protected override int CardID => cardIdDict["로키"];
 
-    [HideInInspector] public int targetPieceAD = -1000;
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    public override void AddEffect()
+    {
+
+    }
+
+    public override void RemoveEffect()
+    {
+
+    }
+}
+
+/*     [HideInInspector] public int targetPieceAD = -1000;
     [HideInInspector] public int targetPieceHP = -1000;
     [HideInInspector] public SoulCard targetSoul = null;
 
@@ -55,5 +71,4 @@ public class Loki : SoulCard
                 }
             }
         }
-    }
-}
+    } */
