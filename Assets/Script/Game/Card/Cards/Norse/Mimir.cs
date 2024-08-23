@@ -42,5 +42,9 @@ public class Mimir : SoulCard
     public void CardCostReduction(Card card)
     {
         card.cost -= reduction;
+        if (card.cost < 0)
+        {
+            card.cost = 0;
+        }
     }
 }

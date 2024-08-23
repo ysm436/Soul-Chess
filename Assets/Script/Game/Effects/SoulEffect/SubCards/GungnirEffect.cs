@@ -20,6 +20,7 @@ public class GungnirEffect : TargetingEffect
             Card gungnir_cardcomponent = gungnir_card.GetComponent<Card>();
             gungnir_cardcomponent.isInSelection = false;
             gungnir_cardcomponent.owner = gungnir.owner;
+            gungnir_cardcomponent.cost = 5;
 
             gungnir_card.GetComponent<Gungnir>().ReadyToGetGungnir(player);
         }
