@@ -117,6 +117,7 @@ public class Perseus : SoulCard
                 InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
             }
             InfusedPiece.OnKill += AffectHelmetOfHades;
+            InfusedPiece.buff.AddBuffByDescription("하데스의 투구", Buff.BuffType.Description, "이 기물이 적을 처치하면 다시 은신합니다.", true);
         }
     }
 
