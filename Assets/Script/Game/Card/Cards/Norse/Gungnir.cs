@@ -20,7 +20,6 @@ public class Gungnir : SpellCard
     public void GetGungnir()
     {
         gameObject.SetActive(true);
-        Debug.Log("GetGungnir");
         Player.OnMyTurnStart -= GetGungnir;
         
         if (Player.playerColor == GameBoard.PlayerColor.White)

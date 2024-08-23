@@ -16,11 +16,11 @@ public class GungnirEffect : TargetingEffect
         {
             (target as ChessPiece).SpellAttacked(dmg);
 
+            GetComponent<Card>().cost = 5;
             GameObject gungnir_card = Instantiate(gungnir_prefab);
             Card gungnir_cardcomponent = gungnir_card.GetComponent<Card>();
             gungnir_cardcomponent.isInSelection = false;
             gungnir_cardcomponent.owner = gungnir.owner;
-            gungnir_cardcomponent.cost = 5;
 
             gungnir_card.GetComponent<Gungnir>().ReadyToGetGungnir(player);
         }
