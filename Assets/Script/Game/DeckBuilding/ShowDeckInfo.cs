@@ -29,7 +29,7 @@ public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             RectTransform recttransform = cost_graph.GetChild(i).GetComponent<RectTransform>();
             Vector2 graph_size = recttransform.sizeDelta;
-            graph_size.y = 20 * deckmanager.local_costs[i];
+            graph_size.y = 10 * deckmanager.local_costs[i];
             recttransform.sizeDelta = graph_size;
         }
 
