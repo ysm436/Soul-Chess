@@ -16,6 +16,8 @@ public class PlayerData
     public int maxHandCardCount = 8;    //최대 손패
     public int mulliganHandCount = 4;   //첫 손패
 
+    public bool isRevealed = false; //감반테인 투시용
+
     public List<Card> deck;
     public List<Card> hand;
     public Action<Card> OnGetCard;      // Card는 새로 뽑은 카드

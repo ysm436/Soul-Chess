@@ -140,6 +140,10 @@ public class DeckHandController : MonoBehaviour
             hand[i].GetComponent<SortingGroup>().sortingOrder = i;
             hand[i].transform.SetParent(opponentHandTransform);
             hand[i].transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * i, 0, -0.1f * i); //UI에 맞게 좌표수정
+            if (player.isRevealed)
+            {
+                hand[i].FlipFront();
+            }
         }
     }
 

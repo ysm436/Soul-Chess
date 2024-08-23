@@ -8,6 +8,7 @@ public class Mimir : SoulCard
     protected override int CardID => Card.cardIdDict["미미르"];
     private PlayerData playercolor;
     private int reduction = 1;
+    Dictionary<Card, int> cardCostDict = new Dictionary<Card, int>();
 
     protected override void Awake()
     {
@@ -23,7 +24,11 @@ public class Mimir : SoulCard
 
         foreach (var card in playercolor.hand)
         {
-            card.cost = card.cost - reduction > 0 ? card.cost - reduction : 0;
+            if (card.cost < reduction)
+            {
+                cardCostDict.TryAdd(card, card.cost);
+            }
+            card.cost -= reduction;
         }
         playercolor.OnGetCard += CardCostReduction;
         InfusedPiece.OnSoulRemoved += RemoveEffect;
@@ -33,14 +38,26 @@ public class Mimir : SoulCard
     {
         foreach (var card in playercolor.hand)
         {
-            card.cost += reduction;
+            if (cardCostDict.ContainsKey(card))
+            {
+                card.cost += cardCostDict[card];
+            }
+            else
+            {
+                card.cost += reduction;
+            }
         }
+        cardCostDict.Clear();
         playercolor.OnGetCard -= CardCostReduction;
         InfusedPiece.OnSoulRemoved -= RemoveEffect;
     }
 
     public void CardCostReduction(Card card)
     {
+        if (card.cost < reduction)
+        {
+            cardCostDict.TryAdd(card, card.cost);
+        }
         card.cost -= reduction;
         if (card.cost < 0)
         {
