@@ -256,7 +256,8 @@ public class PlayerController : MonoBehaviour
                 }
 
                 isInfusing = true;
-
+                //영혼 카드는 강림 선택 시점이 여기인듯
+                (usingCard as SoulCard).gameObject.SetActive(false);
                 targetingEffect = (usingCard as SoulCard).infusion;
                 ActiveTargeting();
             }
@@ -272,6 +273,8 @@ public class PlayerController : MonoBehaviour
                         isUsingCard = false;
                         return false;
                     }
+                    //영혼 카드는 강림 선택 시점이 여기인듯
+                    (usingCard as SoulCard).gameObject.SetActive(false);
                     targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
                     ActiveTargeting();
                 }
@@ -285,6 +288,7 @@ public class PlayerController : MonoBehaviour
         {
             if (card.EffectOnCardUsed is TargetingEffect)
             {
+                usingCard.gameObject.SetActive(false); //마법 카드는 여기인듯?
                 targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
                 ActiveTargeting();
             }

@@ -227,9 +227,6 @@ abstract public class ChessPiece : TargetableObject
     abstract public List<Vector2Int> GetMovableCoordinates();
     virtual public void Move(Vector2Int targetCoordinate)
     {
-        SetKeyword(Keyword.Type.Stealth, 0);
-        buff.TryRemoveSpecificBuff("", Buff.BuffType.Stealth);
-
         OnMove?.Invoke(targetCoordinate);
 
         coordinate = targetCoordinate;
@@ -242,6 +239,9 @@ abstract public class ChessPiece : TargetableObject
     public bool Attack(ChessPiece targetPiece)
     {
         OnStartAttack?.Invoke(targetPiece);
+        //은신 해제
+        SetKeyword(Keyword.Type.Stealth, 0);
+        buff.TryRemoveSpecificBuff("", Buff.BuffType.Stealth);
 
         targetPiece.Attacked(this, attackDamage);
 
