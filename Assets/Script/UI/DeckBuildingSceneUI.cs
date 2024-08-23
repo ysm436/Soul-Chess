@@ -15,7 +15,6 @@ public class DeckBuildingSceneUI : MonoBehaviour
     [SerializeField] public GameObject deckListPanel;
     [SerializeField] public GameObject newDeckPanel;
     public DeckManager deckmanager;
-    private bool debug = false;
 
     private void Awake()
     {
@@ -82,9 +81,6 @@ public class DeckBuildingSceneUI : MonoBehaviour
         bool available = true;
         int SoulCardQuantity = deckmanager.local_chesspieces.Sum();
 
-        if (debug)
-            return true;
-
         if (deckmanager.local_card_count < 30)
         {            
             available = false;
@@ -103,19 +99,5 @@ public class DeckBuildingSceneUI : MonoBehaviour
         else if (deckmanager.local_chesspieces[5] < 1) available = false; */
 
         return available;
-    }
-
-    public void debugToggle(bool debugtoggle)
-    {
-        if (debugtoggle)
-        {
-            deckmanager.debug_button = true;
-            debug = true;
-        }
-        else
-        {
-            deckmanager.debug_button = false;
-            debug = false;
-        }
     }
 }
