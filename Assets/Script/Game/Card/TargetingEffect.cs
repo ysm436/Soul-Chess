@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 //TODO: targettype이 card인 경우의 gettargetlist 구현
 
@@ -12,9 +13,17 @@ public abstract class TargetingEffect : Effect
     /// </summary>
     [SerializeField]
     public List<EffectTarget> targetTypes = new List<EffectTarget>();
-    public Vector2[] targetCoordinates
+    public Vector3[] serializedTargetData
     {
-        get => targets.Select(t => (Vector2)t.coordinate).ToArray();
+        get
+        {
+            Vector3[] targetData = new Vector3[targets.Count];
+            for (int i = 0; i < targets.Count; i++)
+            {
+                targetData[i] = new Vector3(targets[i].coordinate.x, targets[i].coordinate.y, (float)targetTypes[i].targetType);
+            }
+            return targetData;
+        }
     }
     protected List<TargetableObject> targets = new List<TargetableObject>();
 
@@ -125,14 +134,28 @@ public abstract class TargetingEffect : Effect
             }
         }
     }
-    public void SetTargetsByCoordinate(Vector2Int[] targetCoordinateArray)
+    public void SetTargetsByCoordinate(Vector2Int[] targetCoordinateArray, TargetingEffect.TargetType[] targetTypes)
     {
+        TargetableObject target;
         for (int i = 0; i < targetCoordinateArray.Length; i++)
         {
             UnityEngine.Debug.Log(targetCoordinateArray[i]);
-            targets.Add(
-                GameBoard.instance.gameData.pieceObjects.First<ChessPiece>(
-                    obj => obj.coordinate == targetCoordinateArray[i]));
+            switch (targetTypes[i])
+            {
+                case TargetingEffect.TargetType.Piece:
+                    target = GameBoard.instance.gameData.GetPiece(targetCoordinateArray[i]);
+                    UnityEngine.Debug.Log("TargetType is piece");
+                    break;
+                case TargetingEffect.TargetType.Tile:
+                    target = GameBoard.instance.gameData.GetBoardSquare(targetCoordinateArray[i]);
+                    UnityEngine.Debug.Log("TargetType is tile");
+                    break;
+                default:
+                    target = null;
+                    UnityEngine.Debug.LogError("TargetType is null");
+                    break;
+            }
+            targets.Add(target);
         }
     }
     public enum TargetType

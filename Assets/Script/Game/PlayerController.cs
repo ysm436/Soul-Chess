@@ -323,14 +323,14 @@ public class PlayerController : MonoBehaviour
         if (usingCard is SoulCard)
         {
             if (usingCard.EffectOnCardUsed is TargetingEffect)
-                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, (usingCard as SoulCard).infusion.targetCoordinates[0], (usingCard.EffectOnCardUsed as TargetingEffect).targetCoordinates);
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, (usingCard as SoulCard).infusion.serializedTargetData[0], (usingCard.EffectOnCardUsed as TargetingEffect).serializedTargetData);
             else
-                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, (usingCard as SoulCard).infusion.targetCoordinates[0], null);
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, (usingCard as SoulCard).infusion.serializedTargetData[0], null);
         }
         else
         {
             if (usingCard.EffectOnCardUsed is TargetingEffect)
-                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), (usingCard.EffectOnCardUsed as TargetingEffect).targetCoordinates);
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), (usingCard.EffectOnCardUsed as TargetingEffect).serializedTargetData);
             else
                 photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), null);
         }
@@ -351,7 +351,7 @@ public class PlayerController : MonoBehaviour
     }
 
     [PunRPC]
-    public void UseCardRemote(int cardIndex, Vector2 infusionTarget, Vector2[] targetArray = null)
+    public void UseCardRemote(int cardIndex, Vector3 infusionTarget, Vector3[] targetArray = null)
     {
         Card card = gameBoard.gameData.opponentPlayerData.hand[cardIndex];
         GameBoard.instance.CurrentPlayerData().soulEssence -= card.cost;
@@ -366,7 +366,7 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log(infusionTargetCoordinate);
 
-            (card as SoulCard).infusion.SetTargetsByCoordinate(new Vector2Int[] { infusionTargetCoordinate });
+            (card as SoulCard).infusion.SetTargetsByCoordinate(new Vector2Int[] { infusionTargetCoordinate }, new TargetingEffect.TargetType[] { TargetingEffect.TargetType.Piece });
             gameBoard.gameData.boardSquares[infusionTargetCoordinate.x, infusionTargetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.movable);
 
             (card as SoulCard).infusion.EffectAction(gameBoard.opponentController);
@@ -376,7 +376,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector2Int[] targetCoordinateArray = targetArray.Select(coordinate => Vector2Int.RoundToInt(coordinate)).ToArray();
             TargetingEffect targetingEffect = card.EffectOnCardUsed as TargetingEffect;
-            targetingEffect.SetTargetsByCoordinate(targetCoordinateArray);
+            targetingEffect.SetTargetsByCoordinate(targetCoordinateArray, targetArray.Select(t => (TargetingEffect.TargetType)t.z).ToArray());
 
             if (targetingEffect.IsPositiveEffect)
             {

@@ -61,4 +61,8 @@ public class GameData
     {
         return pieceObjects.FirstOrDefault(obj => obj.coordinate == targetCoordinate);
     }
+    public BoardSquare GetBoardSquare(Vector2Int targetCoordinate)
+    {
+        return boardSquares[targetCoordinate.x, targetCoordinate.y];
+    }
 }
