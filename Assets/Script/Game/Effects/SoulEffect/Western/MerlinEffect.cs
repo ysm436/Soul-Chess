@@ -6,8 +6,9 @@ public class MerlinEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "멀린: 자신 마법 카드 비용 0", true);
+        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "멀린: 자신 마법 카드 피해 2배", true);
 
+        gameObject.GetComponent<Merlin>().player = player;
         gameObject.GetComponent<SoulCard>().AddEffect();
 
         gameObject.GetComponent<SoulCard>().InfusedPiece.OnSoulRemoved += RemoveBuffInfo;

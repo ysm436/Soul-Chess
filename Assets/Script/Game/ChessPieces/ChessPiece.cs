@@ -397,15 +397,14 @@ abstract public class ChessPiece : TargetableObject
         {
             if (soul != null && oldKeyword != 1) //구속 풀리기 전에 다시 구속되면 RemoveEffect가 2번 실행되는 버그 수정
             {
-                if (GetKeyword(Keyword.Type.Silence) != 1) //침묵 상태에서 구속될 때 RemoveEffect가 2번 실행되는 버그 수정
-                    soul.RemoveEffect();
+                soul.RemoveEffect();
             }
         }
         else if (keywordType == Keyword.Type.Silence && n == 1)
         {
             if (soul != null)
             {
-                if (oldKeyword != 1 && GetKeyword(Keyword.Type.Restraint) != 1) soul.RemoveEffect(); //침묵,구속 풀리기 전에 다시 침묵되면 RemoveEffect 2번 실행 버그 수정
+                if (oldKeyword != 1) soul.RemoveEffect(); //침묵 풀리기 전에 다시 침묵되면 RemoveEffect 2번 실행 버그 수정
                 RemoveBuff();
             }
         }
