@@ -23,7 +23,7 @@ public class Mimir : SoulCard
 
         foreach (var card in playercolor.hand)
         {
-            card.cost = card.cost - reduction;
+            card.cost = card.cost - reduction > 0 ? card.cost - reduction : 0;
         }
         playercolor.OnGetCard += CardCostReduction;
         InfusedPiece.OnSoulRemoved += RemoveEffect;

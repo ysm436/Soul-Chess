@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class MerlinEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "멀린: 자신 마법 카드 피해 2배", true);
+        PlayerData playerData = null;
+        if (player.playerColor == GameBoard.PlayerColor.White)
+            playerData = GameBoard.instance.gameData.playerWhite;
+        else
+            playerData = GameBoard.instance.gameData.playerBlack;      
 
-        gameObject.GetComponent<Merlin>().player = player;
-        gameObject.GetComponent<SoulCard>().AddEffect();
+        List<Card> ourSpellCards = playerData.hand.Where(card => card.GetComponent<SpellCard>() != null).ToList();
 
-        gameObject.GetComponent<SoulCard>().InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
-    }
-
-    public void RemoveBuffInfo()
-    {
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.TryRemoveSpecificBuff(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description);
+        foreach (var card in ourSpellCards)
+        {
+            card.cost = 0;
+        }
     }
 }
