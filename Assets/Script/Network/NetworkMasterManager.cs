@@ -94,7 +94,7 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
     {
         base.OnRoomListUpdate(roomList);
         GameObject tmpRoomButton;
-        foreach (RoomInfo room in roomList.Where(r => r.PlayerCount < 2))
+        foreach (RoomInfo room in roomList.Where(r => r.PlayerCount < 2 && r.IsVisible))
         {
             if (room.RemovedFromList == true)
             {

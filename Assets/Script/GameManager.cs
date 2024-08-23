@@ -57,13 +57,14 @@ public class GameManager : MonoBehaviour
     }
     public void LoadMatchingSceneFromLobbyScene()
     {
-        PhotonNetwork.Disconnect();
+        PhotonNetwork.LeaveRoom();
         LoadMatchingScene();
     }
     public void LoadMainSceneFromGameScene()
     {
         Destroy(GameBoard.instance.gameObject);
-        PhotonNetwork.Disconnect();
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+        PhotonNetwork.LeaveRoom();
         LoadMainScene();
         GameBoard.instance = null;
     }
