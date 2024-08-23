@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
 
     ChessPiece chosenPiece = null;
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
-
-    private int movableCount = 1;
     private int additionalMoveCount = 0;
 
     private bool isMoved;
@@ -54,7 +52,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        OnOpponentTurnEnd += () => { movableCount = 1 + additionalMoveCount; isMoved = false; };
+        OnOpponentTurnEnd += () => { isMoved = false; };
     }
     private void OnEnable()
     {
@@ -109,8 +107,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (targetPiece != null)
                 {
-                    if (movableCount > 0 || targetPiece.additionalMoveLeft > 0)
-                        if (IsMyPiece(targetPiece))//고른 기물이 아군일때
+                    if (IsMyPiece(targetPiece))//고른 기물이 아군일때
+                        if (!isMoved || (targetPiece.moveCountInThisTurn > 0 && targetPiece.moveCountInThisTurn <= targetPiece.moveCount))
                         {
                             SetChosenPiece(targetPiece);
                         }
@@ -156,8 +154,7 @@ public class PlayerController : MonoBehaviour
 
         ChessPiece srcPiece = GameBoard.instance.gameData.GetPiece(src_coordinate);
 
-        movableCount--;
-        srcPiece.additionalMoveLeft--;
+        srcPiece.moveCountInThisTurn++;
         isMoved = true;
 
         if (isAttack)

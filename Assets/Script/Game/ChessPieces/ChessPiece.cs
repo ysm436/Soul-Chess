@@ -148,7 +148,7 @@ abstract public class ChessPiece : TargetableObject
     }
     [SerializeField]
     private int _maxHP;
-    public int additionalMoveLeft;
+    public int moveCountInThisTurn;
     protected int _moveCount = 0;
     public int moveCount { get => _moveCount; set => _moveCount = value; }
 
@@ -216,7 +216,7 @@ abstract public class ChessPiece : TargetableObject
     private void Start()
     {
 
-        GameBoard.instance.myController.OnMyTurnStart += () => additionalMoveLeft = moveCount;
+        GameBoard.instance.myController.OnMyTurnStart += () => moveCountInThisTurn = 0;
     }
 
     /// <summary>
