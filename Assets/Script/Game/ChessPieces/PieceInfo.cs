@@ -22,7 +22,7 @@ public class PieceInfo : MonoBehaviour
             case ChessPiece.PieceType.Bishop : pieceTypeText = "비숍"; break;
             case ChessPiece.PieceType.Rook : pieceTypeText = "룩"; break;
             case ChessPiece.PieceType.Quene : pieceTypeText = "퀸"; break;
-            case ChessPiece.PieceType.King : pieceTypeText = "킹"; break;
+            case ChessPiece.PieceType.King : pieceTypeText = "킹 [마법 피해 면역]"; break;
             default : pieceTypeText = "오류"; break;
         }
 

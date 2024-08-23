@@ -126,4 +126,4 @@ MonoBehaviour:
     tileCoordinate: {x: 0, y: 0}
   isPositiveEffect: 0
   isNegativeEffect: 1
-  damage: 15
+  damage: 35

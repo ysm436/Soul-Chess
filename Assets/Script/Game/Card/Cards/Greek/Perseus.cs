@@ -61,9 +61,9 @@ public class Perseus : SoulCard
             selection = 2;
             InfusedPiece.SetKeyword(Keyword.Type.Stealth);
             InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
-            InfusedPiece.buff.AddBuffByDescription("하데스의 투구", Buff.BuffType.Description, "이 기물이 적을 처치하면 다시 은신합니다.", true);
-            InfusedPiece.OnKill += AffectHelmetOfHades;
-            InfusedPiece.OnMove += StealthInfusedPiece;
+            //InfusedPiece.buff.AddBuffByDescription("하데스의 투구", Buff.BuffType.Description, "이 기물이 적을 처치하면 다시 은신합니다.", true);
+            //InfusedPiece.OnKill += AffectHelmetOfHades;
+            //InfusedPiece.OnMove += StealthInfusedPiece;
         }
     }
 

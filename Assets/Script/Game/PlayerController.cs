@@ -288,6 +288,12 @@ public class PlayerController : MonoBehaviour
         {
             if (card.EffectOnCardUsed is TargetingEffect)
             {
+                if (!(usingCard.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor))
+                {
+                    usingCard = null;
+                    isUsingCard = false;
+                    return false;
+                }
                 usingCard.gameObject.SetActive(false); //마법 카드는 여기인듯?
                 targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
                 ActiveTargeting();
