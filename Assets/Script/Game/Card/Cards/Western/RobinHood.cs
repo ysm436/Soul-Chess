@@ -25,6 +25,7 @@ public class RobinHood : SoulCard
         {
             targetSoul = Instantiate(targetPiece.soul);
             targetSoul.owner = owner;
+            targetSoul.transform.Rotate(0, 0, -180);
             targetSoul.gameObject.SetActive(false);
             targetPiece.OnKilled += GetTargetSoulCard;
         }

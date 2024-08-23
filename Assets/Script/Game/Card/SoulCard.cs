@@ -68,38 +68,43 @@ public abstract class SoulCard : Card
         soulCardObject.HPText.text = HP.ToString();
 
         //기물 제한 아이콘 생성 후 위치 정렬
-        List<SoulCardPieceRestriction> icons = new List<SoulCardPieceRestriction>();
-        foreach (ChessPiece.PieceType value in Enum.GetValues(typeof(ChessPiece.PieceType)))
+        //만약 이미 활성화된 기물제한 아이콘이 있으면 생성X
+        if (!GetComponentInChildren<SoulCardPieceRestriction>())
         {
-            if (pieceRestriction.HasFlag(value) && (value != ChessPiece.PieceType.None))
+            List<SoulCardPieceRestriction> icons = new List<SoulCardPieceRestriction>();
+            foreach (ChessPiece.PieceType value in Enum.GetValues(typeof(ChessPiece.PieceType)))
             {
-                SoulCardPieceRestriction temp = Instantiate(soulCardObject.PieceRestrictionIcon, transform.position, Quaternion.identity);
-                temp.gameObject.SetActive(true);
-                temp.transform.SetParent(transform);
-                temp.transform.localScale *= 0.8f;
-                temp.SetIconSprite(value);
-                icons.Add(temp);
-            }
-        }
-        if (icons.Count > 0)
-        {
-            if (icons.Count % 2 == 0) //아이콘이 짝수 개
-            {
-                int temp = icons.Count / 2;
-                for (int i = temp - 1; i >= 0; i--)
+                if (pieceRestriction.HasFlag(value) && (value != ChessPiece.PieceType.None))
                 {
-                    icons[i].transform.localPosition = new Vector3(-0.08f - i * 0.16f, -1.175f, 0);
-                    icons[icons.Count - 1 - i].transform.localPosition = new Vector3(0.08f + i * 0.16f, -1.175f, 0);
+                    SoulCardPieceRestriction temp = Instantiate(soulCardObject.PieceRestrictionIcon, transform.position, Quaternion.identity);
+                    temp.gameObject.SetActive(true);
+                    temp.transform.SetParent(transform);
+                    temp.transform.localScale *= 0.8f;
+                    temp.transform.localRotation = Quaternion.identity;
+                    temp.SetIconSprite(value);
+                    icons.Add(temp);
                 }
             }
-            else //아이콘이 홀수 개
+            if (icons.Count > 0)
             {
-                int temp = icons.Count / 2;
-                icons[temp].transform.localPosition = new Vector3(0, -1.175f, 0);
-                for (int i = temp - 1; i >= 0; i--)
+                if (icons.Count % 2 == 0) //아이콘이 짝수 개
                 {
-                    icons[i].transform.localPosition = new Vector3(-0.16f * i, -1.175f, 0);
-                    icons[icons.Count - 1 - i].transform.localPosition = new Vector3(i * 0.16f, -1.175f, 0);
+                    int temp = icons.Count / 2;
+                    for (int i = temp - 1; i >= 0; i--)
+                    {
+                        icons[i].transform.localPosition = new Vector3(-0.08f - i * 0.16f, -1.175f, 0);
+                        icons[icons.Count - 1 - i].transform.localPosition = new Vector3(0.08f + i * 0.16f, -1.175f, 0);
+                    }
+                }
+                else //아이콘이 홀수 개
+                {
+                    int temp = icons.Count / 2;
+                    icons[temp].transform.localPosition = new Vector3(0, -1.175f, 0);
+                    for (int i = temp - 1; i >= 0; i--)
+                    {
+                        icons[i].transform.localPosition = new Vector3(-0.16f * i, -1.175f, 0);
+                        icons[icons.Count - 1 - i].transform.localPosition = new Vector3(i * 0.16f, -1.175f, 0);
+                    }
                 }
             }
         }
