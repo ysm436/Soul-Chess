@@ -103,6 +103,7 @@ public class Perseus : SoulCard
         {
             InfusedPiece.OnStartAttack += GetHPInfoTarget;
             InfusedPiece.OnEndAttack += StunChessPiece;
+            InfusedPiece.buff.AddBuffByDescription("메두사의 머리", Buff.BuffType.Description, "이 기물에게 피해를 받은 기물은 기절합니다.", true);
         }
         else if (selection == 1)
         {
