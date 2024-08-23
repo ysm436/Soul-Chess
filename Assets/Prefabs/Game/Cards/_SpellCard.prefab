@@ -60,32 +60,5 @@ PrefabInstance:
     - {fileID: 7296888130200308405, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2026877158094313868, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8480252315183081039}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
---- !u!1 &8686025853277164448 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2026877158094313868, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
-  m_PrefabInstance: {fileID: 7253641448969554476}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8480252315183081039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8686025853277164448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1e0411c5f0421c4e9cda5b952b6dd4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardName: SpellCard
-  _cost: 0
-  illustration: {fileID: 21300000, guid: 2a060849faf2cd54685410696f0d776e, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
-  description: Spell Description
-  EffectOnCardUsed: {fileID: 0}
-  isInSelection: 0
