@@ -169,7 +169,6 @@ abstract public class ChessPiece : TargetableObject
     public Action<ChessPiece, int> OnAttacked;
     public Action<ChessPiece> OnAttackedAfter;
     public Action<ChessPiece> OnSpellAttacked;
-    [HideInInspector] public int spellDamageCoefficient = 1; //멀린 효과 : 내 마법 피해 2배 구현용
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
     public Action OnSoulRemoved;
@@ -281,10 +280,12 @@ abstract public class ChessPiece : TargetableObject
     }
     public bool SpellAttacked(int damage)
     {
+        if (pieceType == PieceType.King)
+            return isAlive;
+
         OnSpellAttacked?.Invoke(this);
 
-        MinusHP(damage * spellDamageCoefficient); //멀린 효과 : 내 마법 피해 2배 구현용
-        spellDamageCoefficient = 1;
+        MinusHP(damage); //멀린 효과 : 내 마법 피해 2배 구현용
         return isAlive;
     }
 
