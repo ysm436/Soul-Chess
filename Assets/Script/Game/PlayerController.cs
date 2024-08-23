@@ -330,9 +330,9 @@ public class PlayerController : MonoBehaviour
         else
         {
             if (usingCard.EffectOnCardUsed is TargetingEffect)
-                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), (usingCard.EffectOnCardUsed as TargetingEffect).serializedTargetData);
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector3(-1, -1, -1), (usingCard.EffectOnCardUsed as TargetingEffect).serializedTargetData);
             else
-                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector2(-1, -1), null);
+                photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector3(-1, -1, -1), null);
         }
 
         usingCard.EffectOnCardUsed?.EffectAction(this);
