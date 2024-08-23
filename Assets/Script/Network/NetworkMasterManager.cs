@@ -63,6 +63,10 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
             {
                 LoadingView.SetActive(false);
             }
+            else
+            {
+                PhotonNetwork.JoinLobby();
+            }
         }
         else
         {
