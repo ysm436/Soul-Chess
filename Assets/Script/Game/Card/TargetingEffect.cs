@@ -14,7 +14,7 @@ public abstract class TargetingEffect : Effect
     public List<EffectTarget> targetTypes = new List<EffectTarget>();
     public Vector2[] targetCoordinates
     {
-        get => targets.Select(t => (Vector2)(t as ChessPiece).coordinate).ToArray();
+        get => targets.Select(t => (Vector2)t.coordinate).ToArray();
     }
     protected List<TargetableObject> targets = new List<TargetableObject>();
 
@@ -61,11 +61,27 @@ public abstract class TargetingEffect : Effect
             this.isFriendly = isFriendly;
             this.condition = condition;
         }
+        public EffectTarget(TargetType targetType, TargetTiles targetTiles, Vector2Int tileCoordinate)
+        {
+            this.targetType = targetType;
+            this.targetTiles = targetTiles;
+            this.tileCoordinate = tileCoordinate;
+        }
         public TargetType targetType;
         public ChessPiece.PieceType targetPieceType;
         public bool isOpponent;
         public bool isFriendly;
         Predicate<ChessPiece> condition;
+
+        public TargetTiles targetTiles;
+        [HideInInspector] public Vector2Int tileCoordinate;
+        public enum TargetTiles
+        {
+            Around,
+            Row,
+            Colom
+        }
+
         public List<TargetableObject> GetTargetList(GameBoard.PlayerColor playerColor)
         {
             switch (targetType)
@@ -78,6 +94,32 @@ public abstract class TargetingEffect : Effect
                             && (obj.pieceColor == playerColor || (obj.pieceType != ChessPiece.PieceType.King && obj.GetKeyword(Keyword.Type.Stealth) != 1))
                             && (condition == null ? true : condition(obj)
                         )).Cast<TargetableObject>().ToList();
+                case TargetType.Tile:
+                    List<TargetableObject> targetList = new();
+                    switch (targetTiles)
+                    {
+                        case TargetTiles.Row:
+                            foreach (TargetableObject t in GameBoard.instance.gameData.boardSquares)
+                                if (t.coordinate.y == tileCoordinate.y) targetList.Add(t);
+                            break;
+                        case TargetTiles.Colom:
+                            foreach (TargetableObject t in GameBoard.instance.gameData.boardSquares)
+                                if (t.coordinate.x == tileCoordinate.x) targetList.Add(t);
+                            break;
+                        case TargetTiles.Around:
+                            int distance_x;
+                            int distance_y;
+                            foreach (TargetableObject t in GameBoard.instance.gameData.boardSquares)
+                            {
+                                distance_x = t.coordinate.x - tileCoordinate.x;
+                                distance_y = t.coordinate.y - tileCoordinate.y;
+                                if (distance_x >= -1 && distance_x <= 1 && distance_y >= -1 && distance_y <= 1 && !(distance_x == 0 && distance_y == 0))
+                                    if (GameBoard.instance.gameData.IsValidCoordinate(t.coordinate))
+                                        targetList.Add(t);
+                            }
+                            break;
+                    }
+                    return targetList;
                 default:
                     return new List<TargetableObject>();
             }
@@ -96,6 +138,6 @@ public abstract class TargetingEffect : Effect
     public enum TargetType
     {
         Piece,
-        Card
+        Tile
     }
 }

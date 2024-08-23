@@ -77,10 +77,17 @@ public class PlayerController : MonoBehaviour
 
         if (isUsingCard)
         {
-            if (targetableObjects.Contains(targetPiece))
+            if (targetableObjects.Any(obj => obj.coordinate == coordinate))
             {
                 ClearTargetableObjects();
-                if (targetingEffect.SetTarget(targetPiece))
+
+                TargetableObject target;
+                if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
+                    target = targetPiece;
+                else // if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Tile)
+                    target = GameBoard.instance.gameData.boardSquares[coordinate.x, coordinate.y];
+
+                if (targetingEffect.SetTarget(target))
                 {
                     UseCardEffect();
                 }
@@ -88,11 +95,8 @@ public class PlayerController : MonoBehaviour
                 {
                     targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
-                    if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
-                    {
-                        //타겟 효과가 부정적인지 파라미터 전달
-                        SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
-                    }
+                    //타겟 효과가 부정적인지 파라미터 전달
+                    SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
                 }
             }
         }
@@ -211,11 +215,13 @@ public class PlayerController : MonoBehaviour
     void SetTargetableObjects(bool isTargetable, bool isNegativeEffect)
     {
         foreach (var obj in targetableObjects)
-            if (obj is ChessPiece && isTargetable)
+            if (isTargetable)
             {
                 //타겟 효과가 부정적인지 체크
-                if (isNegativeEffect) GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isNegativeTargetable = true;
-                else GameBoard.instance.GetBoardSquare((obj as ChessPiece).coordinate).isPositiveTargetable = true;
+                if (isNegativeEffect)
+                    GameBoard.instance.GetBoardSquare(obj.coordinate).isNegativeTargetable = true;
+                else
+                    GameBoard.instance.GetBoardSquare(obj.coordinate).isPositiveTargetable = true;
             }
     }
     public bool UseCard(Card card)
@@ -294,11 +300,8 @@ public class PlayerController : MonoBehaviour
 
         targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
-        if (targetingEffect.GetTargetType().targetType == TargetingEffect.TargetType.Piece)
-        {
-            //타겟 효과가 부정적인지 파라미터 전달
-            SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
-        }
+        //타겟 효과가 부정적인지 파라미터 전달
+        SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
     }
     public void UseCardEffect()
     {

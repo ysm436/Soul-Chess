@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3095d6c96a137e2498fe15734eafd02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coordinate: {x: 0, y: 0}
   isMine: 0
   handIndex: -1
   cardName: "\uBE4C\uD5EC\uB984 \uD154"
@@ -120,3 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebdcbf6c68ba34b4695c4b8e8c67d599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTypes:
+  - targetType: 1
+    targetPieceType: 0
+    isOpponent: 0
+    isFriendly: 0
+    targetTiles: 0
+    tileCoordinate: {x: 0, y: 0}
+  isPositiveEffect: 0
+  isNegativeEffect: 1
+  damage: 60
