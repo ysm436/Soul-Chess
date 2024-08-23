@@ -23,9 +23,10 @@ public class Merlin : SoulCard
     }
 
     public void MultiplyDmg(ChessPiece piece)
-    {
+    {/*
         if (player == GameBoard.instance.CurrentPlayerController())
             piece.spellDamageCoefficient = 2;
+    */
     }
 
     public override void RemoveEffect()

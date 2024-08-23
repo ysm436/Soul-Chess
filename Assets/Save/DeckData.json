@@ -1,0 +1,46 @@
+{
+    "DeckData": [
+        {
+            "index": 0,
+            "deckname": "",
+            "card_count": 2,
+            "costs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                2
+            ],
+            "chesspieces": [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0
+            ],
+            "extra_chesspieces": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "Rarities": [
+                0,
+                2,
+                0
+            ],
+            "cards": [
+                24,
+                24
+            ]
+        }
+    ]
+}
