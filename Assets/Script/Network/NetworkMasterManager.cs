@@ -45,11 +45,8 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
     }    // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("is in lobby:" + PhotonNetwork.InLobby);
         Connect();
-        if (PhotonNetwork.InLobby)
-        {
-            LoadingView.SetActive(false);
-        }
     }
 
     /// <summary>
@@ -62,11 +59,10 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
         // 연결 되었는지를 체크해서, 룸에 참여할지 재연결을 시도할지 결정
         if (PhotonNetwork.IsConnected)
         {
-            /*
-            // 랜덤 룸에 접속.
-            // 접속에 실패하면 OnJoinRandomFailed()이 실행되어 실패 알림.
-            PhotonNetwork.JoinRandomRoom();
-            */
+            if (PhotonNetwork.InLobby)
+            {
+                LoadingView.SetActive(false);
+            }
         }
         else
         {
