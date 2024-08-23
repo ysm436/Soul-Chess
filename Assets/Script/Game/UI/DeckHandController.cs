@@ -4,6 +4,7 @@ using System.Linq;
 using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class DeckHandController : MonoBehaviour
 {
@@ -114,6 +115,7 @@ public class DeckHandController : MonoBehaviour
         for (int i = 0; i < hand.Count; i++)
         {
             hand[i].handIndex = i;
+            hand[i].GetComponent<SortingGroup>().sortingOrder = i;
             hand[i].transform.SetParent(myHandTransform);
             hand[i].transform.localPosition = new Vector3(anchor_x + CARD_DISTANCE_IN_HAND * i, 0, -0.1f * i); //UI에 맞게 좌표수정
         }
@@ -135,6 +137,7 @@ public class DeckHandController : MonoBehaviour
         for (int i = 0; i < hand.Count; i++)
         {
             hand[i].handIndex = i;
+            hand[i].GetComponent<SortingGroup>().sortingOrder = i;
             hand[i].transform.SetParent(opponentHandTransform);
             hand[i].transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * i, 0, -0.1f * i); //UI에 맞게 좌표수정
         }
