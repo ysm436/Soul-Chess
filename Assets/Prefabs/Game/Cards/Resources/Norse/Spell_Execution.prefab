@@ -118,15 +118,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b09fb3ccc56db47bf553d653f8e18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coordinate: {x: 0, y: 0}
+  owner:
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
+    maxHandCardCount: 8
+    mulliganHandCount: 4
+    deck: []
+    hand: []
+    deckPosition: {x: 0, y: 0}
+    spellDamageIncrease: 0
+    spellDamageCoefficient: 1
+  handIndex: -1
   cardName: "\uCC98\uD615"
   _cost: 4
   illustration: {fileID: 21300000, guid: 9959659b1f79ddb48966d6708944a321, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 0
-  description: "\uAE30\uBB3C\uC5D0\uAC8C \uD53C\uD574\uB97C 30\uC90D\uB2C8\uB2E4.
-    \uAE30\uBB3C\uC758 \uCCB4\uB825\uC774 60\uC774\uD558\uBA74, 60\uC758 \uD53C\uD574\uB97C
-    \uC90D\uB2C8\uB2E4."
+  description: "\uC601\uD63C\uC774 \uAE43\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C \uD53C\uD574\uB97C
+    30\uC90D\uB2C8\uB2E4. \uAE30\uBB3C\uC758 \uCCB4\uB825\uC774 60\uC774\uD558\uBA74,
+    60\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -3397328758503862818}
   isInSelection: 0
 --- !u!114 &-3397328758503862818
@@ -146,6 +159,8 @@ MonoBehaviour:
     targetPieceType: -1
     isOpponent: 1
     isFriendly: 0
+    targetTiles: 0
+    tileCoordinate: {x: 0, y: 0}
   isPositiveEffect: 0
   isNegativeEffect: 1
   basicAD: 30
