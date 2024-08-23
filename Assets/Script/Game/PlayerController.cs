@@ -482,4 +482,24 @@ public class PlayerController : MonoBehaviour
     {
         OnOpponentTurnEnd?.Invoke();
     }
+    public void TryAddCardInMyHand(string cardName)
+    {
+        photonView.RPC("TryAddCardInMyHandRPC", RpcTarget.All, cardName);
+    }
+    [PunRPC]
+    public void TryAddCardInMyHandRPC(string cardName)
+    {
+        Card cardInstance = Instantiate(GameManager.instance.AllCards[Card.cardIdDict[cardName]]).GetComponent<Card>();
+        if (playerColor == GameBoard.PlayerColor.White)
+        {
+            cardInstance.owner = gameBoard.gameData.playerWhite;
+            gameBoard.gameData.playerWhite.TryAddCardInHand(cardInstance);
+        }
+        else
+        {
+            cardInstance.owner = gameBoard.gameData.playerBlack;
+            gameBoard.gameData.playerBlack.TryAddCardInHand(cardInstance);
+        }
+    }
+
 }

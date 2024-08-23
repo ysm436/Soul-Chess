@@ -142,26 +142,4 @@ public class DeckHandController : MonoBehaviour
             hand[i].transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * i, 0, -0.1f * i); //UI에 맞게 좌표수정
         }
     }
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            player.RemoveHandCards();
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Debug.Log("Try to Remove First Card in Hand");
-            bool result = player.TryRemoveCardInHand(player.hand[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            bool result = player.TryAddCardInHand(Instantiate(GameBoard.instance.gameData.myPlayerData.deck[0]));
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            player.RemoveDeckCards();
-        }
-    }
 }

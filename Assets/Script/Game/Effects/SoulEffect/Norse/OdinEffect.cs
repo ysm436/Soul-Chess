@@ -1,18 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 
 public class OdinEffect : Effect
 {
-    private PhotonView photonView;
     [SerializeField] private List<GameObject> selectionCardPrefabList;        //궁니르, 드라우프노르, 감반테인
     private PlayerController Player;
-
-    private void Awake()
-    {
-        photonView = GetComponent<PhotonView>();
-    }
 
     private List<GameObject> selectionCardInstanceList;
     public override void EffectAction(PlayerController player)
@@ -30,7 +23,7 @@ public class OdinEffect : Effect
             GameObject selectionCardInstance = Instantiate(selectionCard);
             CardSelectionDisplay cardSelectionDisplay = selectionCardInstance.AddComponent<CardSelectionDisplay>();
             cardSelectionDisplay.selectionNumber = selectionCardPrefabList.IndexOf(selectionCard);
-            cardSelectionDisplay.OnSelected += (selectionNumber) => photonView.RPC("AddCardToHand", RpcTarget.All, selectionNumber);
+            cardSelectionDisplay.OnSelected += AddCardToHand;
 
             cardSelectionDisplay.Initialize();
 
@@ -43,23 +36,14 @@ public class OdinEffect : Effect
         }
     }
 
-    [PunRPC]
     private void AddCardToHand(int selectionNumber)
     {
-        if (Player.playerColor == GameBoard.instance.playerColor)
-            Destroy(selectionCardInstanceList[selectionNumber]);
+        Destroy(selectionCardInstanceList[selectionNumber]);
         GameObject selectedcard = Instantiate(selectionCardPrefabList[selectionNumber]);
         Card selectedcard_cardcomponent = selectedcard.GetComponent<Card>();
         selectedcard_cardcomponent.isInSelection = false;
         selectedcard_cardcomponent.owner = GetComponent<Card>().owner;
 
-        if (Player.playerColor == GameBoard.PlayerColor.White)
-        {
-            GameBoard.instance.gameData.playerWhite.TryAddCardInHand(selectedcard_cardcomponent);
-        }
-        else
-        {
-            GameBoard.instance.gameData.playerBlack.TryAddCardInHand(selectedcard_cardcomponent);
-        }
+        Player.TryAddCardInMyHand(selectedcard_cardcomponent.cardName);
     }
 }
