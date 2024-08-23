@@ -108,7 +108,7 @@ public class Perseus : SoulCard
         {
             InfusedPiece.moveCount += 1;
             InfusedPiece.buff.AddBuffByValue("페가수스", Buff.BuffType.MoveCount, 2, true);
-        }
+        }/*
         else
         {
             InfusedPiece.SetKeyword(Keyword.Type.Stealth, is_stealth);
@@ -116,9 +116,10 @@ public class Perseus : SoulCard
             {
                 InfusedPiece.buff.AddBuffByKeyword("하데스의 투구", Buff.BuffType.Stealth);
             }
-            InfusedPiece.OnKill += AffectHelmetOfHades;
-            InfusedPiece.buff.AddBuffByDescription("하데스의 투구", Buff.BuffType.Description, "이 기물이 적을 처치하면 다시 은신합니다.", true);
-        }
+            //InfusedPiece.OnKill += AffectHelmetOfHades;
+            //InfusedPiece.buff.AddBuffByDescription("하데스의 투구", Buff.BuffType.Description, "이 기물이 적을 처치하면 다시 은신합니다.", true);
+        }*/
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
@@ -133,7 +134,7 @@ public class Perseus : SoulCard
         {
             InfusedPiece.moveCount -= 1;
             InfusedPiece.buff.TryRemoveSpecificBuff("페가수스", Buff.BuffType.MoveCount);
-        }
+        }/*
         else
         {
             is_stealth = InfusedPiece.GetKeyword(Keyword.Type.Stealth);
@@ -142,8 +143,9 @@ public class Perseus : SoulCard
             {
                 InfusedPiece.buff.TryRemoveSpecificBuff("하데스의 투구", Buff.BuffType.Stealth);
             }
-            InfusedPiece.buff.TryRemoveSpecificBuff("하데스의 투구", Buff.BuffType.Description);
-            InfusedPiece.OnKill -= AffectHelmetOfHades;
-        }
+            //InfusedPiece.buff.TryRemoveSpecificBuff("하데스의 투구", Buff.BuffType.Description);
+            //InfusedPiece.OnKill -= AffectHelmetOfHades;
+        }*/
+        InfusedPiece.OnSoulRemoved -= RemoveEffect;
     }
 }
