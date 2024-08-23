@@ -13,7 +13,7 @@ public class Perseus : SoulCard
     private int is_stealth;
     private int selection;
     private bool affectbyhelmetofhades = false;
-    
+
     protected override void Awake()
     {
         base.Awake();
@@ -54,7 +54,7 @@ public class Perseus : SoulCard
         {
             selection = 1;
             InfusedPiece.moveCount += 1;
-            InfusedPiece.buff.AddBuffByValue("페가수스", Buff.BuffType.MoveCount, 2, true);
+            InfusedPiece.buff.AddBuffByValue("페가수스", Buff.BuffType.MoveCount, 1, true);
         }
         else
         {
