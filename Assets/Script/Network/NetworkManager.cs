@@ -32,6 +32,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             return;
         else
             gameStarted = true;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
         PhotonNetwork.LoadLevel("GameScene");
         Debug.Log("gamescene");
     }
