@@ -404,7 +404,7 @@ public class PlayerController : MonoBehaviour
         if (!(card is SoulCard))
             card.Destroy();
 
-        Invoke("HideRemoteUsedCard", 1f);
+        Invoke("HideRemoteUsedCard", 1.5f);
     }
     private void HideRemoteUsedCard()
     {
