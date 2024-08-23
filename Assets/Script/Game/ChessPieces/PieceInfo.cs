@@ -33,7 +33,7 @@ public class PieceInfo : MonoBehaviour
         if (chessPiece.soul != null) temp += "\n영혼: " + chessPiece.soul.cardName;
 
         //Buff Text
-        temp += "\n[버프 목록]\n";
+        temp += "\n[적용 효과 목록]\n";
         foreach (Buff.BuffInfo buffInfo in chessPiece.buff.buffList)
         {
             string buffText;
