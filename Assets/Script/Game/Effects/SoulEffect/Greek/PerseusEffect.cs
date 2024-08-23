@@ -10,6 +10,7 @@ public class PerseusEffect : Effect
     {
         Perseus perseus_component = gameObject.GetComponent<Perseus>();
         perseus_component.InstantiateSelectionCard(gameObject.GetComponent<SoulCard>().InfusedPiece);
+        perseus_component.InfusedPiece.OnSoulRemoved += perseus_component.RemoveEffect;
     }
 
 

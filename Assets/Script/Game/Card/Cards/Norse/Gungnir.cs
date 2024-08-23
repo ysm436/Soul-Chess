@@ -6,25 +6,34 @@ public class Gungnir : SpellCard
 {
     protected override int CardID => Card.cardIdDict["궁니르"];
 
-    [HideInInspector] public PlayerController player = null;
+    private PlayerController Player;
+    [SerializeField] private GameObject gungnir_prefab;
 
-    public void ReadyToGetGungnir()
+    public void ReadyToGetGungnir(PlayerController player)
     {
-        if (player != null) player.OnMyTurnStart += GetGungnir;
-        gameObject.SetActive(false);
+        Player = player;
+
+        /* Player.OnMyTurnStart += GetGungnir;
+        gameObject.SetActive(false); */
     }
 
     public void GetGungnir()
     {
-        gameObject.SetActive(true);
-        if (player != null) player.OnMyTurnStart -= GetGungnir;
-        
-        if (player.playerColor == GameBoard.PlayerColor.White)
+        /* gameObject.SetActive(true);
+        Debug.Log("GetGungnir");
+        Player.OnMyTurnStart -= GetGungnir; */
+
+        /* GameObject gungnir_card = Instantiate(gungnir_prefab);
+        Card gungnir_cardcomponent = gungnir_card.GetComponent<Card>();
+        gungnir_cardcomponent.isInSelection = false;
+        gungnir_cardcomponent.owner = owner; */
+
+        if (Player.playerColor == GameBoard.PlayerColor.White)
         {
             if (!GameBoard.instance.gameData.playerWhite.TryAddCardInHand(this))
             {
                 Debug.Log("궁니르 : Hand is Full");
-                Destroy();
+                Destroy(this);
                 return;
             }
         }
@@ -33,10 +42,38 @@ public class Gungnir : SpellCard
             if (!GameBoard.instance.gameData.playerBlack.TryAddCardInHand(this))
             {
                 Debug.Log("궁니르 : Hand is Full");
-                GameBoard.instance.myController.OnMyTurnStart -= GetGungnir;
-                Destroy();
+                Destroy(this);
                 return;
             }
         }
     }
+
+    /* public void GetGungnir()
+    { */
+        /* gameObject.SetActive(true); */
+        /* if (playercontroller != null) playercontroller.OnMyTurnStart -= GetGungnir;
+        GameObject gungnir_card = Instantiate(gungnir_prefab);
+        Card gungnir_cardcomponent = gungnir_card.GetComponent<Card>();
+        gungnir_cardcomponent.owner = owner;
+
+        if (playercontroller.playerColor == GameBoard.PlayerColor.White)
+        {
+            if (!GameBoard.instance.gameData.playerWhite.TryAddCardInHand(gungnir_cardcomponent))
+            {
+                Debug.Log("궁니르 : Hand is Full");
+                Destroy();
+                return;
+            }
+        }
+        else
+        {
+            if (!GameBoard.instance.gameData.playerBlack.TryAddCardInHand(gungnir_cardcomponent))
+            {
+                Debug.Log("궁니르 : Hand is Full");
+                playercontroller.OnMyTurnStart -= GetGungnir;
+                Destroy();
+                return;
+            }
+        }
+    } */
 }

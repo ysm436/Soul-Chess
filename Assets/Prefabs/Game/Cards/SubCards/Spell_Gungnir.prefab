@@ -106,7 +106,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0192c2da770f93a4d85cd685c4089caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMine: 0
+  coordinate: {x: 0, y: 0}
+  owner:
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
+    maxHandCardCount: 8
+    mulliganHandCount: 4
+    deck: []
+    hand: []
+    deckPosition: {x: 0, y: 0}
+    spellDamageIncrease: 0
+    spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uAD81\uB2C8\uB974"
   _cost: 5
@@ -119,7 +130,8 @@ MonoBehaviour:
     \uB0B4 \uC190\uC73C\uB85C \uB3CC\uC544\uC635\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -7220643531253071022}
   isInSelection: 0
-  player: {fileID: 0}
+  playercontroller: {fileID: 0}
+  gungnir_prefab: {fileID: 4078594222576986540}
 --- !u!114 &-7220643531253071022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +148,9 @@ MonoBehaviour:
   - targetType: 0
     targetPieceType: -1
     isOpponent: 1
-    isFriendly: 1
+    isFriendly: 0
+    targetTiles: 0
+    tileCoordinate: {x: 0, y: 0}
   isPositiveEffect: 0
   isNegativeEffect: 1
   dmg: 50
