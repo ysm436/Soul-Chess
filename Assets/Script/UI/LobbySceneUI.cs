@@ -64,6 +64,7 @@ public class LobbySceneUI : MonoBehaviour
     {
         if (GameManager.instance.isHost)
         {
+            Debug.Log("is host");
             whiteReadyButton.enabled = true;
             myCardText.gameObject.SetActive(true);
             if (PhotonNetwork.CurrentRoom.PlayerCount <= 1)
@@ -74,6 +75,7 @@ public class LobbySceneUI : MonoBehaviour
         }
         else
         {
+            Debug.Log("is not host");
             blackReadyButton.enabled = true;
             myCardText.anchoredPosition = new Vector3(-myCardText.anchoredPosition.x, myCardText.anchoredPosition.y);
             myCardText.gameObject.SetActive(true);
