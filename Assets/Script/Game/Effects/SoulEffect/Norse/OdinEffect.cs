@@ -5,10 +5,12 @@ using UnityEngine;
 public class OdinEffect : Effect
 {
     [SerializeField] private List<GameObject> selectionCardPrefabList;        //궁니르, 드라우프노르, 감반테인
+    private PlayerController Player;
 
     private List<GameObject> selectionCardInstanceList;
     public override void EffectAction(PlayerController player)
     {
+        Player = player;
         InstantiateSelectionCard(gameObject.GetComponent<SoulCard>().InfusedPiece);
     }
 
@@ -35,9 +37,19 @@ public class OdinEffect : Effect
 
     private void AddCardToHand(int selectionNumber)
     {
-        Card selectedCard = selectionCardInstanceList[selectionNumber].GetComponent<Card>();
-        selectedCard.isInSelection = false;
-        selectedCard.owner = GetComponent<Card>().owner;
-        GameBoard.instance.gameData.playerWhite.TryAddCardInHand(selectedCard);
+        Destroy(selectionCardInstanceList[selectionNumber]);
+        GameObject selectedcard = Instantiate(selectionCardPrefabList[selectionNumber]);
+        Card selectedcard_cardcomponent = selectedcard.GetComponent<Card>();
+        selectedcard_cardcomponent.isInSelection = false;
+        selectedcard_cardcomponent.owner = GetComponent<Card>().owner;
+
+        if (Player.playerColor == GameBoard.PlayerColor.White)
+        {
+            GameBoard.instance.gameData.playerWhite.TryAddCardInHand(selectedcard_cardcomponent);
+        }
+        else
+        {
+            GameBoard.instance.gameData.playerBlack.TryAddCardInHand(selectedcard_cardcomponent);
+        }
     }
 }
