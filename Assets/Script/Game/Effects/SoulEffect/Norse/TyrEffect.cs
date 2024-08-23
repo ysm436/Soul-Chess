@@ -13,11 +13,11 @@ public class TyrEffect : TargetingEffect
 
         foreach (var target in targets)
         {
-            restraint_target = target as ChessPiece;
+            tyr_component.restraint_target = target as ChessPiece;
         }
-        restraint_target.SetKeyword(Keyword.Type.Restraint);
+        tyr_component.restraint_target.SetKeyword(Keyword.Type.Restraint);
         //버프 관련 변경 머지 후 버프 추가
-        restraint_target.buff.AddBuffByKeyword(tyr_component.cardName, Buff.BuffType.Restraint);
+        tyr_component.restraint_target.buff.AddBuffByKeyword(tyr_component.cardName, Buff.BuffType.Restraint);
 
         tyr_component.AddEffect();
         tyr_component.InfusedPiece.OnSoulRemoved += tyr_component.RemoveEffect;

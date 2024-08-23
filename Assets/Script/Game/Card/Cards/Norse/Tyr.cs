@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tyr : SoulCard
 {
     protected override int CardID => Card.cardIdDict["티르"];
-    ChessPiece restraint_target;
+    [HideInInspector] public ChessPiece restraint_target = null;
 
     protected override void Awake()
     {
@@ -26,6 +26,6 @@ public class Tyr : SoulCard
 
     public void Restraint_remove(ChessPiece chessPiece)
     {
-        restraint_target.Unrestraint();
+        if (restraint_target != null) restraint_target.Unrestraint();
     }
 }
