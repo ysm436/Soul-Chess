@@ -60,14 +60,6 @@ public class GameManager : MonoBehaviour
         PhotonNetwork.LeaveRoom();
         LoadMatchingScene();
     }
-    public void LoadMainSceneFromGameScene()
-    {
-        Destroy(GameBoard.instance.gameObject);
-        PhotonNetwork.CurrentRoom.IsVisible = false;
-        PhotonNetwork.LeaveRoom();
-        LoadMainScene();
-        GameBoard.instance = null;
-    }
     public void LoadMainScene()
     {
         SceneManager.LoadScene("MainScene");
