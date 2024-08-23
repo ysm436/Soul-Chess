@@ -19,11 +19,14 @@ public class PlayerController : MonoBehaviour
     List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
     private int movableCount = 1;
+    private int additionalMoveCount = 0;
+
+    private bool isMoved;
     public bool TurnEndPossible
     {
         get
         {
-            return (movableCount <= 0) || !(GameBoard.instance.gameData.pieceObjects.Any(obj => (obj.GetMovableCoordinates().Count >= 1 && obj.pieceColor == playerColor)));
+            return isMoved || !(GameBoard.instance.gameData.pieceObjects.Any(obj => (obj.GetMovableCoordinates().Count >= 1 && obj.pieceColor == playerColor)));
         }
     }
 
@@ -51,7 +54,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        OnOpponentTurnEnd += () => movableCount = 1;
+        OnOpponentTurnEnd += () => { movableCount = 1 + additionalMoveCount; isMoved = false; };
     }
     private void OnEnable()
     {
@@ -100,16 +103,17 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (movableCount > 0)
+        else //이동 관련 코드
         {
             if (chosenPiece == null)//선택된 (아군)기물이 없을 때
             {
                 if (targetPiece != null)
                 {
-                    if (IsMyPiece(targetPiece))//고른 기물이 아군일때
-                    {
-                        SetChosenPiece(targetPiece);
-                    }
+                    if (movableCount > 0 || targetPiece.additionalMoveLeft > 0)
+                        if (IsMyPiece(targetPiece))//고른 기물이 아군일때
+                        {
+                            SetChosenPiece(targetPiece);
+                        }
                 }
             }
             else//선택된 (아군)기물이 있을 때
@@ -152,6 +156,9 @@ public class PlayerController : MonoBehaviour
 
         ChessPiece srcPiece = GameBoard.instance.gameData.GetPiece(src_coordinate);
 
+        movableCount--;
+        srcPiece.additionalMoveLeft--;
+
         if (isAttack)
         {
             ChessPiece dstPiece = GameBoard.instance.gameData.GetPiece(dst_coordinate);
@@ -171,8 +178,6 @@ public class PlayerController : MonoBehaviour
             srcPiece.Move(dst_coordinate);
             gameBoard.chessBoard.SetPiecePositionByCoordinate(srcPiece);
         }
-
-        movableCount--;
     }
     void SetChosenPiece(ChessPiece targetPiece)
     {

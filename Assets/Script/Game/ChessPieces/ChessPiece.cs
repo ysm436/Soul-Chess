@@ -144,8 +144,8 @@ abstract public class ChessPiece : TargetableObject
     }
     [SerializeField]
     private int _maxHP;
-
-    protected int _moveCount;
+    public int additionalMoveLeft;
+    protected int _moveCount = 0;
     public int moveCount { get => _moveCount; set => _moveCount = value; }
 
     private PieceObject pieceObject;
@@ -207,6 +207,11 @@ abstract public class ChessPiece : TargetableObject
             effectIcon.transform.SetParent(transform);
             effectIcon.piece = this;
         }
+    }
+    private void Start()
+    {
+
+        GameBoard.instance.myController.OnMyTurnStart += () => additionalMoveLeft = moveCount;
     }
 
     /// <summary>
