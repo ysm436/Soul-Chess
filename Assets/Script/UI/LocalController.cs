@@ -13,6 +13,7 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     public Sprite blackButton;
     public PlayerController whiteController;
     public PlayerController blackController;
+    public TurnChangeButtonHighlight turnChangeButtonHighlight;
     public SoulOrb mySoulOrb;
     public SoulOrb opponentSoulrOrb;
 
@@ -94,5 +95,6 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             whiteController.LocalDraw();
             blackController.OpponentDraw();
         }
+        turnChangeButtonHighlight.spriteRenderer.enabled = false;
     }
 }
