@@ -111,7 +111,8 @@ public class GameBoard : MonoBehaviour
             targetPiece.coordinate = Vector2Int.right * (gameData.blackGraveyard.Count - 1) + Vector2Int.up * GameData.BOARD_SIZE;
         }
 
-        //targetPiece.DestroyMoveRestrictionIcon();
+        targetPiece.effectIcon.RemoveIcon();
+        targetPiece.DestroyMoveRestrictionIcon();
         gameData.pieceObjects.Remove(targetPiece);
 
         chessBoard.SetPiecePositionByCoordinate(targetPiece);

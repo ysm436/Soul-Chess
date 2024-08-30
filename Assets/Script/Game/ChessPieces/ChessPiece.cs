@@ -157,7 +157,7 @@ abstract public class ChessPiece : TargetableObject
     private SpriteRenderer accessory = null;
     [SerializeField]
     SpriteRenderer accessoryPrefab;
-    private PieceEffectIcon effectIcon = null;
+    public PieceEffectIcon effectIcon = null;
     [SerializeField]
     PieceEffectIcon effectIconPrefab;
     private PieceEffectIcon moveRestrictionIcon = null;
@@ -421,8 +421,17 @@ abstract public class ChessPiece : TargetableObject
     private void MakeIsSoulSetFalse()
     {
         isSoulSet = false;
-        if (moveRestrictionIcon != null) { moveRestrictionIcon.DestroyIcon(); moveRestrictionIcon = null; }
+        DestroyMoveRestrictionIcon();
         GameBoard.instance.myController.OnMyTurnEnd -= MakeIsSoulSetFalse;
+    }
+
+    public void DestroyMoveRestrictionIcon()
+    {
+        if (moveRestrictionIcon != null) 
+        { 
+            moveRestrictionIcon.DestroyIcon();
+            moveRestrictionIcon = null;
+        }
     }
 
     // 스턴 해제 (다시 턴 시작 시 호출)

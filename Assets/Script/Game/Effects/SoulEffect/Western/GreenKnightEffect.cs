@@ -25,12 +25,12 @@ public class GreenKnightEffect : TargetingEffect
 
     public override void EffectAction(PlayerController player)
     {
+        gameObject.GetComponent<SoulCard>().InfusedPiece.SetKeyword(Keyword.Type.Taunt);
+        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Taunt);
+
         foreach (var target in targets)
         {
             (target as ChessPiece).Attack(gameObject.GetComponent<SoulCard>().InfusedPiece);
         }
-
-        gameObject.GetComponent<SoulCard>().InfusedPiece.SetKeyword(Keyword.Type.Taunt);
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Taunt);
     }
 }

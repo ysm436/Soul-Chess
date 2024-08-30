@@ -46,4 +46,9 @@ public class PieceEffectIcon : MonoBehaviour
         CancelInvoke("DestroyIcon");
         Destroy(gameObject);
     }
+
+    public void RemoveIcon()
+    {
+        spriteRenderer.sprite = null;
+    }
 }
