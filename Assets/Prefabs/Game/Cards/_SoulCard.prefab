@@ -26,9 +26,9 @@ Transform:
   m_GameObject: {fileID: 882738915756872958}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7525, y: -1.245, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.77, y: -1.3899999, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 856866762464153108}
   m_Father: {fileID: 1322892559162298629}
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: -295583789
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 15bd242bcce3e0e4e9c8f9f3ab979d96, type: 3}
-  m_Color: {r: 1, g: 0.9674024, b: 0.082352936, a: 0.6431373}
+  m_Sprite: {fileID: 21300000, guid: f547cd389760023449b907f3a78223ba, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -111,8 +111,8 @@ Transform:
   m_GameObject: {fileID: 4400087011069823492}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.757, y: -1.246, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 0}
+  m_LocalPosition: {x: 0.77, y: -1.43, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4817042860317141836}
@@ -159,8 +159,8 @@ SpriteRenderer:
   m_SortingLayerID: -295583789
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 15bd242bcce3e0e4e9c8f9f3ab979d96, type: 3}
-  m_Color: {r: 1, g: 0.082352936, b: 0.17759709, a: 0.6431373}
+  m_Sprite: {fileID: 21300000, guid: e3bb8d3012a1ba94dbd3297a3b6d3742, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -296,8 +296,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.5
-  m_fontSizeBase: 2.5
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -368,7 +368,7 @@ Transform:
   m_GameObject: {fileID: 5232791168542909610}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.175, z: 0}
+  m_LocalPosition: {x: 0, y: -1.21, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -471,8 +471,8 @@ Transform:
   m_GameObject: {fileID: 6270228790134789447}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.75725, y: 1.234, z: 0}
-  m_LocalScale: {x: 1.415, y: 1.39, z: 0}
+  m_LocalPosition: {x: 0.76, y: 1.1972, z: 0}
+  m_LocalScale: {x: 1.42, y: 1.4, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8959346574219239717}
@@ -564,7 +564,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.082}
   m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &195456103803345405
@@ -656,8 +656,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.5
-  m_fontSizeBase: 2.5
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -937,13 +937,13 @@ PrefabInstance:
       addedObject: {fileID: 4723397728993883310}
     - targetCorrespondingSourceObject: {fileID: 1276941704583445816, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
       insertIndex: 4
-      addedObject: {fileID: 4734057868854054491}
+      addedObject: {fileID: 5218378610497634737}
     - targetCorrespondingSourceObject: {fileID: 1276941704583445816, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
       insertIndex: 5
-      addedObject: {fileID: 5126679806129111899}
+      addedObject: {fileID: 4734057868854054491}
     - targetCorrespondingSourceObject: {fileID: 1276941704583445816, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
       insertIndex: 6
-      addedObject: {fileID: 5218378610497634737}
+      addedObject: {fileID: 5126679806129111899}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2026877158094313868, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
       insertIndex: -1

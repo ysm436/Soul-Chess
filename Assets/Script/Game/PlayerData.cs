@@ -52,7 +52,7 @@ public class PlayerData
             }
             else
             {
-                card.transform.localScale += new Vector3(0.25f, 0.25f, 0);
+                card.transform.localScale = new Vector3(1.25f, 1.25f, 0);
                 GetCard(card);
             }
             return true;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class LocalController : MonoBehaviour, IPointerClickHandler
 {
@@ -15,6 +16,7 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     public PlayerController blackController;
     public SoulOrb mySoulOrb;
     public SoulOrb opponentSoulrOrb;
+    public GameObject turn_display;
 
     private void Awake()
     {
@@ -43,6 +45,12 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     {
         whiteController.enabled = true;
         blackController.enabled = false;
+
+        if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
+            turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+        else
+            turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+        StartCoroutine("TurnDisplayOnOff");
     }
 
     void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
@@ -71,6 +79,12 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
 
             whiteController.TurnEnd();
             blackController.OpponentTurnEnd();
+            
+            if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
+                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            else
+                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+            StartCoroutine("TurnDisplayOnOff");
 
             blackController.TurnStart();
             whiteController.OpponentTurnStart();
@@ -88,11 +102,24 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             blackController.TurnEnd();
             whiteController.OpponentTurnEnd();
 
+            if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
+                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+            else
+                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            StartCoroutine("TurnDisplayOnOff");
+
             whiteController.TurnStart();
             blackController.OpponentTurnStart();
 
             whiteController.LocalDraw();
             blackController.OpponentDraw();
         }
+    }
+
+    private IEnumerator TurnDisplayOnOff()
+    {
+        turn_display.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        turn_display.SetActive(false);
     }
 }

@@ -12,11 +12,13 @@ public class SoulOrb : MonoBehaviour
     {
         if (playerColor == GameBoard.PlayerColor.White)
         {
-            soulEssenceText.text = GameBoard.instance.gameData.playerWhite.soulEssence.ToString();
+            PlayerData white_data = GameBoard.instance.gameData.playerWhite;
+            soulEssenceText.text = white_data.soulEssence.ToString() + " / " + white_data.soulOrbs.ToString();
         }
         else
         {
-            soulEssenceText.text = GameBoard.instance.gameData.playerBlack.soulEssence.ToString();
+            PlayerData black_data = GameBoard.instance.gameData.playerBlack;
+            soulEssenceText.text = black_data.soulEssence.ToString() + " / " + black_data.soulOrbs.ToString();
         }
     }
 }
