@@ -20,6 +20,10 @@ public class PlunderShipEffect : Effect
             GameObject plunderer = Instantiate(plunderer_card);
             Card plunderer_info = plunderer.GetComponent<Card>();
             plunderer_info.owner = GetComponent<Card>().owner;
+            
+            if (playercolor.playerColor != GameBoard.instance.myController.playerColor)
+                plunderer.transform.localEulerAngles = new Vector3(0, 0, 180); //적이 카드를 사용할 경우 카드가 회전해서 상대의 손에 들어가도록 변경
+
             if (!playercolor.TryAddCardInHand(plunderer_info))
             {
                 Destroy(plunderer);

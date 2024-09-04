@@ -92,18 +92,18 @@ public abstract class SoulCard : Card
                     int temp = icons.Count / 2;
                     for (int i = temp - 1; i >= 0; i--)
                     {
-                        icons[i].transform.localPosition = new Vector3(-0.08f - i * 0.16f, -1.175f, 0);
-                        icons[icons.Count - 1 - i].transform.localPosition = new Vector3(0.08f + i * 0.16f, -1.175f, 0);
+                        icons[i].transform.localPosition = new Vector3(-0.08f - i * 0.16f, -1.21f, 0);
+                        icons[icons.Count - 1 - i].transform.localPosition = new Vector3(0.08f + i * 0.16f, -1.21f, 0);
                     }
                 }
                 else //아이콘이 홀수 개
                 {
                     int temp = icons.Count / 2;
-                    icons[temp].transform.localPosition = new Vector3(0, -1.175f, 0);
+                    icons[temp].transform.localPosition = new Vector3(0, -1.21f, 0);
                     for (int i = temp - 1; i >= 0; i--)
                     {
-                        icons[i].transform.localPosition = new Vector3(-0.16f * i, -1.175f, 0);
-                        icons[icons.Count - 1 - i].transform.localPosition = new Vector3(i * 0.16f, -1.175f, 0);
+                        icons[i].transform.localPosition = new Vector3(-0.16f * i, -1.21f, 0);
+                        icons[icons.Count - 1 - i].transform.localPosition = new Vector3(i * 0.16f, -1.21f, 0);
                     }
                 }
             }

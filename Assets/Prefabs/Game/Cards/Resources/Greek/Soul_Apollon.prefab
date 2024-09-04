@@ -87,6 +87,7 @@ MonoBehaviour:
     soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
+    isRevealed: 0
     deck: []
     hand: []
     deckPosition: {x: 0, y: 0}

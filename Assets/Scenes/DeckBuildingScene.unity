@@ -22847,8 +22847,8 @@ MonoBehaviour:
   DynamicDisplay: {fileID: 2101250960}
   DisplayStorage: {fileID: 1551673597}
   TrashCan: {fileID: 475217773}
-  display_prefab_odd: {fileID: 2026877158094313868, guid: 8b65eb25faf3d0141b456f416066173a, type: 3}
-  display_prefab_even: {fileID: 2026877158094313868, guid: 7fb2892c6a9dae147bcd2bec4fa4ff77, type: 3}
+  display_prefab_odd: {fileID: 2026877158094313868, guid: 78a0bc12ec440744ab1cb3df63c236a4, type: 3}
+  display_prefab_even: {fileID: 2026877158094313868, guid: 0c0ff2e0f6933e2488762f29190aa0d6, type: 3}
 --- !u!114 &2136815247
 MonoBehaviour:
   m_ObjectHideFlags: 0
