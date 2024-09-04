@@ -100,10 +100,21 @@ public class GameBoard : MonoBehaviour
     {
         OnPieceKilled?.Invoke(targetPiece);
 
-        gameData.graveyard.Add(targetPiece);
+        if (targetPiece.pieceColor == PlayerColor.White)
+        {
+            gameData.whiteGraveyard.Add(targetPiece);
+            targetPiece.coordinate = Vector2Int.right * (gameData.whiteGraveyard.Count - 1) + Vector2Int.down;
+        }
+        else
+        {
+            gameData.blackGraveyard.Add(targetPiece);
+            targetPiece.coordinate = Vector2Int.right * (gameData.blackGraveyard.Count - 1) + Vector2Int.up * GameData.BOARD_SIZE;
+        }
+
+        targetPiece.effectIcon.RemoveIcon();
+        targetPiece.DestroyMoveRestrictionIcon();
         gameData.pieceObjects.Remove(targetPiece);
 
-        targetPiece.coordinate = Vector2Int.right * (gameData.graveyard.Count - 1) + Vector2Int.down;
         chessBoard.SetPiecePositionByCoordinate(targetPiece);
     }
 
