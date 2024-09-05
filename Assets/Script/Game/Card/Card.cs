@@ -75,15 +75,18 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
+            GameBoard.instance.myHand.color = new Color(1, 1, 1, 0.2f);
         }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!isMine) return;
 
+        GameBoard.instance.myHand.color = Color.clear;
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
-            if (transform.position.y > 0)
+            if (GameBoard.instance.isCardUsed(transform.position))
             {
                 if (!TryUse())
                 {
