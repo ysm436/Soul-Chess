@@ -129,7 +129,7 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC2E0\uC2DD-\uB0AB\uC804\uCC28"
-  _cost: 5
+  _cost: 3
   illustration: {fileID: 21300000, guid: 6170e472cdad6134994fd11e3cce4646, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
   isInSelection: 0
   pieceRestriction: 10
   _AD: 40
-  _HP: 40
+  _HP: 10
   accessorySpriteList:
   - pieceType: 2
     pieceColor: 0
