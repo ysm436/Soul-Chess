@@ -104,6 +104,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
                     GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
                     Destroy();
+                    GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
 
                     GameBoard.instance.myController.Draw();
                 }

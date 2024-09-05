@@ -235,8 +235,6 @@ public class PlayerController : MonoBehaviour
         usingCard = card;
         isUsingCard = true;
 
-        GameBoard.instance.cancelButton.Show();
-
         if (usingCard is SoulCard)
         {
             if (!isInfusing)
@@ -326,7 +324,6 @@ public class PlayerController : MonoBehaviour
     public void CancelUseCard()
     {
         ClearTargetableObjects();
-
 
         GameBoard.instance.HideCard();
         usingCard.gameObject.SetActive(true);
