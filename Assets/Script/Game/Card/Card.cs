@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun.Demo.Cockpit;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.EventSystems;
 
 public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
+    public static int discardCost = 2;
     [HideInInspector]
     public bool isMine { get => owner.playerColor == GameBoard.instance.playerColor; }
     public PlayerData owner;
@@ -75,29 +77,38 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
+
+            GameBoard.instance.myHand.color = new Color(1, 1, 1, 0.6f);
+            GameBoard.instance.trashCan.gameObject.SetActive(true);
         }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!isMine) return;
 
+        GameBoard.instance.myHand.color = Color.clear;
+        GameBoard.instance.trashCan.gameObject.SetActive(false);
+
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
-            if (transform.position.y > 0)
+            if (GameBoard.instance.isCardDiscarded(transform.position))
+            {
+                if (!TryDiscard())
+                {
+                    //카드 원위치
+                    GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
+                }
+            }
+            else if (GameBoard.instance.isCardUsed(transform.position))
             {
                 if (!TryUse())
                 {
                     //카드 원위치
                     GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
                 }
-                else
-                {
-                    GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
-                }
             }
             else
             {
-
                 GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
             }
         }
@@ -116,6 +127,16 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
         //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
         return GameBoard.instance.CurrentPlayerController().UseCard(this);
+    }
+    public virtual bool TryDiscard()
+    {
+        if (GameBoard.instance.isActivePlayer)
+            return false;
+        if (GameBoard.instance.gameData.myPlayerData.soulEssence < discardCost)
+            return false;
+
+        GameBoard.instance.myController.DiscardCard(this);
+        return true;
     }
 
     public void FlipFront()

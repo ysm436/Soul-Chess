@@ -255,6 +255,8 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                GameBoard.instance.cancelButton.Show();
+
                 isInfusing = true;
                 //영혼 카드는 강림 선택 시점이 여기인듯
                 (usingCard as SoulCard).gameObject.SetActive(false);
@@ -294,6 +296,9 @@ public class PlayerController : MonoBehaviour
                     isUsingCard = false;
                     return false;
                 }
+
+                GameBoard.instance.cancelButton.Show();
+
                 usingCard.gameObject.SetActive(false); //마법 카드는 여기인듯?
                 targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
                 ActiveTargeting();
@@ -316,8 +321,22 @@ public class PlayerController : MonoBehaviour
         //타겟 효과가 부정적인지 파라미터 전달
         SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
     }
+    public void CancelUseCard()
+    {
+        ClearTargetableObjects();
+
+        GameBoard.instance.HideCard();
+        usingCard.gameObject.SetActive(true);
+        GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
+
+        isInfusing = false;
+        usingCard = null;
+        isUsingCard = false;
+        targetingEffect = null;
+    }
     public void UseCardEffect()
     {
+        GameBoard.instance.cancelButton.Hide();
         if (isInfusing)
         {
             (usingCard as SoulCard).infusion.EffectAction(this);
@@ -350,11 +369,14 @@ public class PlayerController : MonoBehaviour
 
         GameBoard.instance.CurrentPlayerData().soulEssence -= usingCard.cost;
 
+        GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(usingCard);
+
         if (!(usingCard is SoulCard))
             usingCard.Destroy();
         usingCard = null;
         isUsingCard = false;
         targetingEffect = null;
+
 
         GameBoard.instance.HideCard();
 
@@ -437,6 +459,24 @@ public class PlayerController : MonoBehaviour
         OnOpponentTurnStart?.Invoke();
     }
 
+    public void DiscardCard(Card card)
+    {
+        photonView.RPC("RPCDiscardCard", RpcTarget.All, card.handIndex);
+    }
+
+    [PunRPC]
+    public void RPCDiscardCard(int handIndex)
+    {
+        Card cardInstance = GameBoard.instance.CurrentPlayerData().hand[handIndex];
+
+        GameBoard.instance.CurrentPlayerData().soulEssence -= Card.discardCost;
+        GameBoard.instance.CurrentPlayerData().TryRemoveCardInHand(cardInstance);
+        cardInstance.Destroy();
+        GameBoard.instance.HideCard();
+        GameBoard.instance.CurrentPlayerData().UpdateHandPosition();
+
+        LocalDraw();
+    }
     public void Draw()
     {
         photonView.RPC("LocalDraw", RpcTarget.All);

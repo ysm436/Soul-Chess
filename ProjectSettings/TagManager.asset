@@ -53,11 +53,18 @@ TagManager:
   - name: CardBoard
     uniqueID: 2561719631
     locked: 0
+  - name: CardUseUI
+    uniqueID: 2022297331
+    locked: 0
   - name: Card
     uniqueID: 3999383507
     locked: 0
   - name: PieceInfo
     uniqueID: 3946181735
+    locked: 0
   - name: Deck
     uniqueID: 3085121659
+    locked: 0
+  - name: TrashCan
+    uniqueID: 331307845
     locked: 0

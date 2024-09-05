@@ -22,7 +22,10 @@ public class GameBoard : MonoBehaviour
     [Header("GameData")]
     public GameBoard.PlayerColor playerColor;
     public ChessBoard chessBoard;
-    public GameObject cardBoard;
+    public Transform cardBoard;
+    public SpriteRenderer myHand;
+    public SpriteRenderer trashCan;
+    public CancelButton cancelButton;
     public PieceInfo pieceInfo; //기물 정보 프리팹
 
     public GameOverUI gameOverUI;
@@ -92,6 +95,15 @@ public class GameBoard : MonoBehaviour
     {
         GameManager.instance.soundManager.PlayBgm("GameScene");
     }
+    public bool isCardUsed(Vector3 cardPosition)
+    {
+        return Mathf.Abs(cardPosition.x - myHand.transform.position.x) > myHand.bounds.size.x / 2
+            || Mathf.Abs(cardPosition.y - myHand.transform.position.y) > myHand.bounds.size.y / 2;
+    }
+    public bool isCardDiscarded(Vector3 cardPosition)
+    {
+        return Mathf.Sqrt(Mathf.Pow(cardPosition.x - trashCan.transform.position.x, 2) + Mathf.Pow(cardPosition.y - trashCan.transform.position.y, 2)) < trashCan.bounds.size.x / 2;
+    }
     public BoardSquare GetBoardSquare(Vector2Int coordinate)
     {
         return gameData.boardSquares[coordinate.x, coordinate.y];
@@ -125,7 +137,7 @@ public class GameBoard : MonoBehaviour
         if (showedCard != null)
             HideCard();
 
-        showedCard = Instantiate(card, cardBoard.transform.position, Quaternion.identity);
+        showedCard = Instantiate(card, cardBoard.position, Quaternion.identity);
         showedCard.GetComponent<Collider2D>().enabled = false;
         showedCard.GetComponent<SortingGroup>().sortingOrder = -1;
         showedCard.transform.localScale = new Vector3(1f, 1f, 0f) * cardSize;
@@ -148,7 +160,7 @@ public class GameBoard : MonoBehaviour
         if (showedPieceInfo != null)
             HidePieceInfo();
 
-        showedPieceInfo = Instantiate(pieceInfo, cardBoard.transform.position, Quaternion.identity);
+        showedPieceInfo = Instantiate(pieceInfo, cardBoard.position, Quaternion.identity);
         showedPieceInfo.EditDescription(piece);
         isShowingPieceInfo = true;
     }
