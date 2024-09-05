@@ -25,6 +25,7 @@ public class GameBoard : MonoBehaviour
     public Transform cardBoard;
     public SpriteRenderer myHand;
     public SpriteRenderer trashCan;
+    public CancelButton cancelButton;
     public PieceInfo pieceInfo; //기물 정보 프리팹
 
     public GameOverUI gameOverUI;

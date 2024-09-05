@@ -117,7 +117,6 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                 }
                 else
                 {
-                    GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
                 }
             }
             else

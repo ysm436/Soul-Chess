@@ -235,6 +235,8 @@ public class PlayerController : MonoBehaviour
         usingCard = card;
         isUsingCard = true;
 
+        GameBoard.instance.cancelButton.Show();
+
         if (usingCard is SoulCard)
         {
             if (!isInfusing)
@@ -316,8 +318,21 @@ public class PlayerController : MonoBehaviour
         //타겟 효과가 부정적인지 파라미터 전달
         SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
     }
+    public void CancelUseCard()
+    {
+        ClearTargetableObjects();
+
+        GameBoard.instance.HideCard();
+        usingCard.gameObject.SetActive(true);
+        GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
+
+        usingCard = null;
+        isUsingCard = false;
+        targetingEffect = null;
+    }
     public void UseCardEffect()
     {
+        GameBoard.instance.cancelButton.Hide();
         if (isInfusing)
         {
             (usingCard as SoulCard).infusion.EffectAction(this);
@@ -350,11 +365,14 @@ public class PlayerController : MonoBehaviour
 
         GameBoard.instance.CurrentPlayerData().soulEssence -= usingCard.cost;
 
+        GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(usingCard);
+
         if (!(usingCard is SoulCard))
             usingCard.Destroy();
         usingCard = null;
         isUsingCard = false;
         targetingEffect = null;
+
 
         GameBoard.instance.HideCard();
 
