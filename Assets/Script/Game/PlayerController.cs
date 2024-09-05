@@ -322,10 +322,12 @@ public class PlayerController : MonoBehaviour
     {
         ClearTargetableObjects();
 
+
         GameBoard.instance.HideCard();
         usingCard.gameObject.SetActive(true);
         GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
 
+        isInfusing = false;
         usingCard = null;
         isUsingCard = false;
         targetingEffect = null;
