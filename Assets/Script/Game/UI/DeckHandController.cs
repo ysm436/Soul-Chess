@@ -74,6 +74,7 @@ public class DeckHandController : MonoBehaviour
             instantiatedCard = Instantiate(card, deckAnchor);
             instantiatedCard.FlipBack();
             GameBoard.instance.gameData.opponentPlayerData.deck.Add(instantiatedCard);
+            instantiatedCard.GetComponent<SortingGroup>().sortingOrder = -1;
         }
 
         foreach (Card card in GameManager.instance.GetCardListFrom(handData.ToList<int>()))
@@ -138,7 +139,7 @@ public class DeckHandController : MonoBehaviour
         for (int i = 0; i < hand.Count; i++)
         {
             hand[i].handIndex = i;
-            hand[i].GetComponent<SortingGroup>().sortingOrder = i;
+            hand[i].GetComponent<SortingGroup>().sortingOrder = i - GameBoard.instance.gameData.opponentPlayerData.maxHandCardCount;
             hand[i].transform.SetParent(opponentHandTransform);
             hand[i].transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * i, 0, -0.1f * i); //UI에 맞게 좌표수정
             if (player.isRevealed)
