@@ -459,6 +459,23 @@ public class PlayerController : MonoBehaviour
         OnOpponentTurnStart?.Invoke();
     }
 
+    public void DiscardCard(Card card)
+    {
+        photonView.RPC("RPCDiscardCard", RpcTarget.All, card.handIndex);
+    }
+
+    [PunRPC]
+    public void RPCDiscardCard(int handIndex)
+    {
+        Card cardInstance = GameBoard.instance.CurrentPlayerData().hand[handIndex];
+
+        GameBoard.instance.CurrentPlayerData().soulEssence -= Card.discardCost;
+        GameBoard.instance.CurrentPlayerData().TryRemoveCardInHand(cardInstance);
+        Destroy(cardInstance);
+        GameBoard.instance.CurrentPlayerData().UpdateHandPosition();
+
+        LocalDraw();
+    }
     public void Draw()
     {
         photonView.RPC("LocalDraw", RpcTarget.All);

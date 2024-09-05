@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
-    const int discardCost = 2;
+    public static int discardCost = 2;
     [HideInInspector]
     public bool isMine { get => owner.playerColor == GameBoard.instance.playerColor; }
     public PlayerData owner;
@@ -100,15 +100,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                 }
                 else
                 {
-                    GameBoard.instance.gameData.myPlayerData.soulEssence -= discardCost;
-
-                    GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
-                    Destroy();
-                    GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
-
-                    GameBoard.instance.myController.Draw();
-
-                    Debug.Log(cardName + "Discarded");
+                    GameBoard.instance.myController.DiscardCard(this);
                 }
             }
             else if (GameBoard.instance.isCardUsed(transform.position))
