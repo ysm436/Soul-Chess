@@ -257,6 +257,8 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                GameBoard.instance.cancelButton.Show();
+
                 isInfusing = true;
                 //영혼 카드는 강림 선택 시점이 여기인듯
                 (usingCard as SoulCard).gameObject.SetActive(false);
@@ -296,6 +298,9 @@ public class PlayerController : MonoBehaviour
                     isUsingCard = false;
                     return false;
                 }
+
+                GameBoard.instance.cancelButton.Show();
+
                 usingCard.gameObject.SetActive(false); //마법 카드는 여기인듯?
                 targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
                 ActiveTargeting();
