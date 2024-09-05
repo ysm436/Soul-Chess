@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun.Demo.Cockpit;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.EventSystems;
 
 public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
+    const int discardCost = 2;
     [HideInInspector]
     public bool isMine { get => owner.playerColor == GameBoard.instance.playerColor; }
     public PlayerData owner;
@@ -75,7 +77,9 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {
             Vector3 tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
-            GameBoard.instance.myHand.color = new Color(1, 1, 1, 0.2f);
+
+            GameBoard.instance.myHand.color = new Color(1, 1, 1, 0.6f);
+            GameBoard.instance.trashCan.gameObject.SetActive(true);
         }
     }
     public void OnEndDrag(PointerEventData eventData)
@@ -83,10 +87,28 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         if (!isMine) return;
 
         GameBoard.instance.myHand.color = Color.clear;
+        GameBoard.instance.trashCan.gameObject.SetActive(false);
 
         if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
         {
-            if (GameBoard.instance.isCardUsed(transform.position))
+            if (GameBoard.instance.isCardDiscarded(transform.position))
+            {
+                if (GameBoard.instance.gameData.myPlayerData.soulEssence < discardCost)
+                {
+                    //카드 원위치
+                    GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
+                }
+                else
+                {
+                    GameBoard.instance.gameData.myPlayerData.soulEssence -= discardCost;
+
+                    GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(this);
+                    Destroy();
+
+                    GameBoard.instance.myController.Draw();
+                }
+            }
+            else if (GameBoard.instance.isCardUsed(transform.position))
             {
                 if (!TryUse())
                 {

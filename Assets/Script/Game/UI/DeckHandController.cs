@@ -45,6 +45,7 @@ public class DeckHandController : MonoBehaviour
             instantiatedCard = Instantiate(card, deckAnchor);
             instantiatedCard.FlipBack();
             player.deck.Add(instantiatedCard);
+            instantiatedCard.GetComponent<SortingGroup>().sortingOrder = -1;
         }
         foreach (Card card in gameBoard.gameData.myPlayerData.deck)
         {

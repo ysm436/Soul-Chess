@@ -24,6 +24,7 @@ public class GameBoard : MonoBehaviour
     public ChessBoard chessBoard;
     public Transform cardBoard;
     public SpriteRenderer myHand;
+    public SpriteRenderer trashCan;
     public PieceInfo pieceInfo; //기물 정보 프리팹
 
     public GameOverUI gameOverUI;
@@ -97,6 +98,10 @@ public class GameBoard : MonoBehaviour
     {
         return Mathf.Abs(cardPosition.x - myHand.transform.position.x) > myHand.bounds.size.x / 2
             || Mathf.Abs(cardPosition.y - myHand.transform.position.y) > myHand.bounds.size.y / 2;
+    }
+    public bool isCardDiscarded(Vector3 cardPosition)
+    {
+        return Mathf.Sqrt(Mathf.Pow(2, cardPosition.x - trashCan.transform.position.x) + Mathf.Pow(2, cardPosition.y - trashCan.transform.position.y)) < trashCan.bounds.size.x;
     }
     public BoardSquare GetBoardSquare(Vector2Int coordinate)
     {
