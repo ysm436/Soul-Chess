@@ -76,8 +76,8 @@ public class GameBoard : MonoBehaviour
 
 
         //코스트 초기화(선공이 1, 후공이 0, 턴 종료 시 상대방 코스트 증가)
-        gameData.playerBlack.soulOrbs = gameData.playerBlack.soulEssence = 0;
-        gameData.playerWhite.soulOrbs = gameData.playerWhite.soulEssence = 1;
+        gameData.playerBlack.soulOrbs = gameData.playerBlack.soulEssence = 3;
+        gameData.playerWhite.soulOrbs = gameData.playerWhite.soulEssence = 4;
 
         gameData.myPlayerData.playerColor = myController.playerColor;
         gameData.opponentPlayerData.playerColor = opponentController.playerColor;
