@@ -472,6 +472,7 @@ public class PlayerController : MonoBehaviour
         GameBoard.instance.CurrentPlayerData().soulEssence -= Card.discardCost;
         GameBoard.instance.CurrentPlayerData().TryRemoveCardInHand(cardInstance);
         cardInstance.Destroy();
+        GameBoard.instance.HideCard();
         GameBoard.instance.CurrentPlayerData().UpdateHandPosition();
 
         LocalDraw();
