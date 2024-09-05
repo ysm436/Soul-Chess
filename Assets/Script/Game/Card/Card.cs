@@ -93,14 +93,10 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {
             if (GameBoard.instance.isCardDiscarded(transform.position))
             {
-                if (GameBoard.instance.gameData.myPlayerData.soulEssence < discardCost)
+                if (!TryDiscard())
                 {
                     //카드 원위치
                     GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
-                }
-                else
-                {
-                    GameBoard.instance.myController.DiscardCard(this);
                 }
             }
             else if (GameBoard.instance.isCardUsed(transform.position))
@@ -110,13 +106,9 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                     //카드 원위치
                     GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
                 }
-                else
-                {
-                }
             }
             else
             {
-
                 GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
             }
         }
@@ -135,6 +127,16 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
         //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
         return GameBoard.instance.CurrentPlayerController().UseCard(this);
+    }
+    public virtual bool TryDiscard()
+    {
+        if (GameBoard.instance.isActivePlayer)
+            return false;
+        if (GameBoard.instance.gameData.myPlayerData.soulEssence < discardCost)
+            return false;
+
+        GameBoard.instance.myController.DiscardCard(this);
+        return true;
     }
 
     public void FlipFront()
