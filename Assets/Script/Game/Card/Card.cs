@@ -107,6 +107,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                     GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
 
                     GameBoard.instance.myController.Draw();
+
+                    Debug.Log(cardName + "Discarded");
                 }
             }
             else if (GameBoard.instance.isCardUsed(transform.position))

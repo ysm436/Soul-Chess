@@ -102,7 +102,7 @@ public class GameBoard : MonoBehaviour
     }
     public bool isCardDiscarded(Vector3 cardPosition)
     {
-        return Mathf.Sqrt(Mathf.Pow(2, cardPosition.x - trashCan.transform.position.x) + Mathf.Pow(2, cardPosition.y - trashCan.transform.position.y)) < trashCan.bounds.size.x;
+        return Mathf.Sqrt(Mathf.Pow(cardPosition.x - trashCan.transform.position.x, 2) + Mathf.Pow(cardPosition.y - trashCan.transform.position.y, 2)) < trashCan.bounds.size.x / 2;
     }
     public BoardSquare GetBoardSquare(Vector2Int coordinate)
     {
