@@ -33,6 +33,7 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject _roomCreatingPanel;
 
     bool isCreatingRoom = false;
+    bool isReconnecting = false;
 
     private Dictionary<string, GameObject> localRoomDict = new();
 
@@ -61,7 +62,7 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.InLobby)
             {
-                LoadingView.SetActive(false);
+                Reconnect();
             }
             else
             {
@@ -73,6 +74,13 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
             // 서버 연결에 실패하면 서버에 연결 시도
             PhotonNetwork.ConnectUsingSettings();
         }
+    }
+    public void Reconnect()
+    {
+        isReconnecting = true;
+        PhotonNetwork.LeaveLobby();
+        PhotonNetwork.JoinLobby();
+        isReconnecting = false;
     }
 
     // 클라이언트가 마스터에 연결되면 호출됨
