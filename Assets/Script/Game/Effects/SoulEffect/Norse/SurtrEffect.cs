@@ -14,5 +14,14 @@ public class SurtrEffect : Effect
         GameBoard.instance.gameData.playerWhite.RemoveDeckCards();
         GameBoard.instance.gameData.playerBlack.RemoveHandCards();
         GameBoard.instance.gameData.playerBlack.RemoveDeckCards();
+
+        if (surtr_component.InfusedPiece.pieceColor == GameBoard.PlayerColor.Black)
+        {
+            GameBoard.instance.gameData.playerBlack.TryAddCardInHand(GetComponent<Card>());
+        }
+        else
+        {
+            GameBoard.instance.gameData.playerWhite.TryAddCardInHand(GetComponent<Card>());
+        }
     }
 }
