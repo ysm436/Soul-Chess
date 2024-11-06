@@ -130,7 +130,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     public virtual bool TryDiscard()
     {
-        if (GameBoard.instance.isActivePlayer)
+        if (!GameBoard.instance.isActivePlayer)
             return false;
         if (GameBoard.instance.gameData.myPlayerData.soulEssence < discardCost)
             return false;
