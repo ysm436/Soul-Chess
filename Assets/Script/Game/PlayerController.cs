@@ -364,12 +364,11 @@ public class PlayerController : MonoBehaviour
                 photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, new Vector3(-1, -1, -1), null);
         }
 
-        usingCard.EffectOnCardUsed?.EffectAction(this);
-
-
         GameBoard.instance.CurrentPlayerData().soulEssence -= usingCard.cost;
 
         GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(usingCard);
+
+        usingCard.EffectOnCardUsed?.EffectAction(this);
 
         if (!(usingCard is SoulCard))
             usingCard.Destroy();
