@@ -542,7 +542,7 @@ abstract public class ChessPiece : TargetableObject
             else if (buffType == Buff.BuffType.MoveCount)
             {
                 moveCount -= buffInfo.value;
-                if (moveCount < 1) moveCount = 1;
+                if (moveCount < 1) moveCount = 0;
             }
             else if (buffType == Buff.BuffType.Defense)
             {
