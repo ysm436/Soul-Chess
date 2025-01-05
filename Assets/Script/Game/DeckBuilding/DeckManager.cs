@@ -33,6 +33,8 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
     private DeckBuildingManager dbm;
     
+    public bool debug_button = false;
+
     //덱 데이터로부터 덱 리스트와 이름 파일을 불러옵니다.
     public void Awake()
     {
@@ -325,6 +327,9 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
             }
         }
+
+        if (debug_button)
+            return false;
 
         if (local_card_count == 30)
         {
