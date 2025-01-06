@@ -6,7 +6,7 @@ public class Hercules : SoulCard
 {
     protected override int CardID => Card.cardIdDict["헤라클레스"];
     [HideInInspector] public PlayerController playercontroller = null;
-    private int multipleAD = 2;
+    public int multipleAD = 2;
 
     protected override void Awake()
     {

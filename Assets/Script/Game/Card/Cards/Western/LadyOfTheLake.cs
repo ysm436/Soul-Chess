@@ -7,6 +7,8 @@ public class LadyOfTheLake : SoulCard
     protected override int CardID => Card.cardIdDict["호수의 여인"];
 
     [HideInInspector] public PlayerController player = null;
+    public int increasedAD = 10;
+    public int increasedHP = 10;
 
     protected override void Awake()
     {
@@ -23,11 +25,11 @@ public class LadyOfTheLake : SoulCard
         }
 
         int temp = SynchronizedRandom.Range(0, pieceList.Count);
-        pieceList[temp].maxHP += 10;
-        pieceList[temp].AD += 10;
+        pieceList[temp].AD += increasedAD;
+        pieceList[temp].maxHP += increasedHP;
 
-        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.HP, 10, true);
-        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.AD, 10, true);
+        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.AD, increasedAD, true);
+        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.HP, increasedHP, true);
     }
 
     public override void AddEffect()

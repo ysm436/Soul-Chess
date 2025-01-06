@@ -6,6 +6,7 @@ using UnityEngine;
 public class Poseidon : SoulCard
 {
     protected override int CardID => Card.cardIdDict["포세이돈"];
+    public int damageAmount = 25;
     protected override void Awake()
     {
         base.Awake();

@@ -5,9 +5,9 @@ using System;
 
 public class ExecutionEffect : TargetingEffect
 {
-    public int basicAD;
-    public int insteadAD;
-    public int standardHP;
+    [SerializeField] public int basicAD;
+    [SerializeField] public int insteadAD;
+    [SerializeField] public int standardHP;
 
     ChessPiece.PieceType targetPieceRestriction =
         ChessPiece.PieceType.Pawn |

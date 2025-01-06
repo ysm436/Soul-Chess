@@ -7,7 +7,8 @@ public class DavyJones : SoulCard
 {
     protected override int CardID => Card.cardIdDict["데비 존스"];
 
-    private int change = 10;
+    public int increasedAD = 10;
+    public int increasedHP = 10;
 
     protected override void Awake()
     {
@@ -16,11 +17,11 @@ public class DavyJones : SoulCard
 
     public void IncreaseStat(ChessPiece chessPiece)
     {
-        InfusedPiece.AD += change;
-        InfusedPiece.maxHP += change;
+        InfusedPiece.AD += increasedAD;
+        InfusedPiece.maxHP += increasedHP;
 
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, change, true);
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, change, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, increasedAD, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, increasedHP, true);
     }
 
     public override void AddEffect()
@@ -30,11 +31,11 @@ public class DavyJones : SoulCard
         List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor == InfusedPiece.pieceColor).ToList();
         int deadMyPieceCount = 16 - pieceList.Count;
 
-        InfusedPiece.AD += deadMyPieceCount * change;
-        InfusedPiece.maxHP += deadMyPieceCount * change;
+        InfusedPiece.AD += deadMyPieceCount * increasedAD;
+        InfusedPiece.maxHP += deadMyPieceCount * increasedHP;
 
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, deadMyPieceCount * change, true);
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, deadMyPieceCount * change, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, deadMyPieceCount * increasedAD, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, deadMyPieceCount * increasedHP, true);
 
         foreach (ChessPiece piece in pieceList)
         {

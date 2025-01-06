@@ -7,45 +7,46 @@ using UnityEngine.Rendering;
 public class VikingWarrior : SoulCard
 {
     protected override int CardID => Card.cardIdDict["바이킹 전사"];
-    private bool increased;
+    private bool increasedFlag;
+    public int increasedAD = 20;
 
     protected override void Awake()
     {
         base.Awake();
-        increased = false;
+        increasedFlag = false;
     }
 
     public override void AddEffect()
     {
-        if (increased)
+        if (increasedFlag)
         {
-            InfusedPiece.AD += 20;
-            InfusedPiece.buff.AddBuffByValue("바이킹 전사", Buff.BuffType.AD, 20, true);
+            InfusedPiece.AD += increasedAD;
+            InfusedPiece.buff.AddBuffByValue("바이킹 전사", Buff.BuffType.AD, increasedAD, true);
         }
-        InfusedPiece.OnAttackedAfter += increaseAD;
+        InfusedPiece.OnAttackedAfter += IncreasingAD;
         
         InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
     {
-        if (increased)
+        if (increasedFlag)
         {
-            InfusedPiece.AD -= 20;
+            InfusedPiece.AD -= increasedAD;
             InfusedPiece.buff.TryRemoveSpecificBuff("바이킹 전사", Buff.BuffType.AD);
         }
-        InfusedPiece.OnAttackedAfter -= increaseAD;
+        InfusedPiece.OnAttackedAfter -= IncreasingAD;
 
         InfusedPiece.OnSoulRemoved -= RemoveEffect;
     }
 
-    private void increaseAD(ChessPiece chessPiece)
+    private void IncreasingAD(ChessPiece chessPiece)
     {
-        if (!increased && InfusedPiece.GetHP < InfusedPiece.maxHP)
+        if (!increasedFlag && InfusedPiece.GetHP < InfusedPiece.maxHP)
         {
-            increased = true;
+            increasedFlag = true;
             InfusedPiece.AD += 20;
-            InfusedPiece.buff.AddBuffByValue("바이킹 전사", Buff.BuffType.AD, 20, true);
+            InfusedPiece.buff.AddBuffByValue("바이킹 전사", Buff.BuffType.AD, increasedAD, true);
         }
     }
 }

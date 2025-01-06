@@ -5,6 +5,9 @@ using UnityEngine;
 public class Zeus : SoulCard
 {
     protected override int CardID => Card.cardIdDict["제우스"];
+
+    public int cardAmount = 3;
+
     protected override void Awake()
     {
         base.Awake();

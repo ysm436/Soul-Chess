@@ -6,6 +6,8 @@ public class Hephaestus : SoulCard
 {
     protected override int CardID => cardIdDict["헤파이스토스"];
 
+    public int rangeDamage = 20;
+
     protected override void Awake()
     {
         base.Awake();
@@ -39,7 +41,7 @@ public class Hephaestus : SoulCard
             if (_chessData.GetPiece(currentCoordinate) != null && _chessData.GetPiece(currentCoordinate) != InfusedPiece &&
                 _chessData.GetPiece(currentCoordinate).soul != null) //영혼에만 피해
             {
-                _chessData.GetPiece(currentCoordinate).MinusHP(20);
+                _chessData.GetPiece(currentCoordinate).MinusHP(rangeDamage);
             }
         }
     }

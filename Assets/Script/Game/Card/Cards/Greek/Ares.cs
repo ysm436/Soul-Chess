@@ -6,8 +6,8 @@ public class Ares : SoulCard
 {
     protected override int CardID => Card.cardIdDict["아레스"];
 
-    private int IncreaseAmountAD = 5;
-    private int IncreaseAmountHP = 5;
+    public int increasedAD = 5;
+    public int increasedHP = 5;
     private int buffedStat = 0;  //구속 해제 시 스탯 변화 롤백용
 
     protected override void Awake()
@@ -17,12 +17,12 @@ public class Ares : SoulCard
 
     public void IncreaseStat(ChessPiece chessPiece)
     {
-        InfusedPiece.AD += IncreaseAmountAD;
-        InfusedPiece.maxHP += IncreaseAmountHP;
-        buffedStat += IncreaseAmountAD;
+        InfusedPiece.AD += increasedAD;
+        InfusedPiece.maxHP += increasedHP;
+        buffedStat += increasedAD;
 
-        InfusedPiece.buff.AddBuffByValue(this.cardName, Buff.BuffType.AD, IncreaseAmountAD, true);
-        InfusedPiece.buff.AddBuffByValue(this.cardName, Buff.BuffType.HP, IncreaseAmountHP, true);
+        InfusedPiece.buff.AddBuffByValue(this.cardName, Buff.BuffType.AD, increasedAD, true);
+        InfusedPiece.buff.AddBuffByValue(this.cardName, Buff.BuffType.HP, increasedHP, true);
     }
 
     public override void AddEffect()

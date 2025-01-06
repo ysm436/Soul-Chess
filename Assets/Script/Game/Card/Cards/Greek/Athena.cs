@@ -7,8 +7,8 @@ public class Athena : SoulCard
 {
     protected override int CardID => Card.cardIdDict["아테나"];
 
-    private int IncreaseAmountAD = 10;
-    private int IncreaseAmountHP = 10;
+    public int increasedAD = 10;
+    public int increasedHP = 10;
 
     protected override void Awake()
     {
@@ -22,11 +22,11 @@ public class Athena : SoulCard
         targets.Remove(InfusedPiece);
         foreach (var target in targets)
         {
-            target.maxHP += IncreaseAmountHP;
-            target.AD += IncreaseAmountAD;
+            target.maxHP += increasedHP;
+            target.AD += increasedAD;
 
-            target.buff.AddBuffByValue("아테나", Buff.BuffType.AD, 10, false);
-            target.buff.AddBuffByValue("아테나", Buff.BuffType.HP, 10, false);
+            target.buff.AddBuffByValue("아테나", Buff.BuffType.AD, increasedAD, false);
+            target.buff.AddBuffByValue("아테나", Buff.BuffType.HP, increasedHP, false);
         }
 
         InfusedPiece.OnSoulRemoved += RemoveEffect;
@@ -39,8 +39,8 @@ public class Athena : SoulCard
         targets.Remove(InfusedPiece);
         foreach (var target in targets)
         {
-            target.maxHP -= IncreaseAmountHP;
-            target.AD -= IncreaseAmountAD;
+            target.maxHP -= increasedHP;
+            target.AD -= increasedAD;
 
             target.buff.TryRemoveSpecificBuff("아테나", Buff.BuffType.AD);
             target.buff.TryRemoveSpecificBuff("아테나", Buff.BuffType.HP);

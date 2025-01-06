@@ -6,7 +6,7 @@ public class Hydra : SoulCard
 {
     protected override int CardID => cardIdDict["히드라"];
 
-    [HideInInspector] public int revivalCount = 8;
+    [SerializeField] private int revivalCount = 8;
 
     protected override void Awake()
     {
@@ -35,7 +35,7 @@ public class Hydra : SoulCard
 
             if (buffInfo.sourceName == cardName && buffInfo.buffType == Buff.BuffType.Description) return;
         }
-        InfusedPiece.buff.AddBuffByDescription(cardName, Buff.BuffType.Description, "히드라: 남은 부활 횟수 "+revivalCount.ToString()+"번", true);
+        InfusedPiece.buff.AddBuffByDescription(cardName, Buff.BuffType.Description, "히드라: 남은 부활 횟수 "+ revivalCount.ToString() +"번", true);
         InfusedPiece.OnKilled += Revival;
         InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
