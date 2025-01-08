@@ -52,11 +52,72 @@ public class ChessBoard : MonoBehaviour
         }
     }
 
-    public void SetPiecePositionByCoordinate(ChessPiece chessPiece)
+    public Vector2 GetPositionUsingCoordinate(Vector2 coordinate)
+    {
+        if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
+            return coordinate + basePosition;
+        else
+            return Vector2.one * 7 + basePosition - coordinate;
+    }
+
+    /* public void SetPiecePositionByCoordinate(ChessPiece chessPiece)
     {
         if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
             chessPiece.transform.position = (Vector2)chessPiece.coordinate + basePosition;
         else
             chessPiece.transform.position = Vector2.one * 7 + basePosition - (Vector2)chessPiece.coordinate;
+    } */
+
+    public void MovePieceAnimation(ChessPiece chessPiece)
+    {
+        Vector2 destPosition = GetPositionUsingCoordinate(chessPiece.coordinate);
+
+        chessPiece.GetComponent<Animator>().SetTrigger("moveTrigger");
+        StartCoroutine(MovePieceAnimationC(chessPiece, chessPiece.transform.position, destPosition, chessPiece.GetComponent<ChessPiece>().moveDuration));
+    }
+
+    IEnumerator MovePieceAnimationC(ChessPiece chessPiece, Vector2 startPos, Vector2 destPos, float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            chessPiece.transform.position = Vector2.Lerp(startPos, destPos, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        chessPiece.transform.position = destPos;
+    }
+
+    public void AttackAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
+    {
+        Vector2 destPosition = GetPositionUsingCoordinate(srcPiece.coordinate);
+
+        srcPiece.GetComponent<Animator>().SetTrigger("moveTrigger");
+        StartCoroutine(AttackAnimationC(srcPiece, srcPiece.transform.position, destPosition, srcPiece.GetComponent<ChessPiece>().moveDuration, dstPiece));
+    }
+
+    IEnumerator AttackAnimationC(ChessPiece srcPiece, Vector2 startPos, Vector2 destPos, float duration, ChessPiece dstPiece)
+    {
+        yield return StartCoroutine(MovePieceAnimationC(srcPiece, startPos, destPos, duration));
+        dstPiece.GetComponent<Animator>().SetTrigger("attackedTrigger");
+        dstPiece.GetComponent<ChessPiece>().MakeAttackedEffect();
+    }
+
+    public void BackForthPieceAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
+    {
+        Vector2 destPosition = GetPositionUsingCoordinate(dstPiece.coordinate);
+
+        srcPiece.GetComponent<Animator>().SetTrigger("returnTrigger");
+        StartCoroutine(BackForthPieceAnimationC(srcPiece, srcPiece.transform.position, destPosition, srcPiece.GetComponent<ChessPiece>().moveDuration, dstPiece));
+    }
+
+    IEnumerator BackForthPieceAnimationC(ChessPiece srcPiece, Vector2 startPos, Vector2 destPos, float duration, ChessPiece dstPiece)
+    {
+        yield return StartCoroutine(AttackAnimationC(srcPiece, startPos, destPos, duration, dstPiece));
+        yield return StartCoroutine(MovePieceAnimationC(srcPiece, destPos, startPos, duration));
     }
 }

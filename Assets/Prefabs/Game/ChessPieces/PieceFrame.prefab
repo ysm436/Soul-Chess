@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 543308849717537781}
   - component: {fileID: 5581011222737220574}
   - component: {fileID: 4543133928736363449}
+  - component: {fileID: 2092499663171585368}
   m_Layer: 0
   m_Name: PieceFrame
   m_TagString: Untagged
@@ -613,3 +614,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPText: {fileID: 2516753907325449508}
   ADText: {fileID: 123127902294897182}
+--- !u!95 &2092499663171585368
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372488193520614636}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 53ba23770393e28448e3be777eb510ba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

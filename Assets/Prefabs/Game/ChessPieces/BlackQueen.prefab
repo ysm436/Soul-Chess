@@ -103,10 +103,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   isAlive: 1
+  isRevivable: 0
   pieceType: 16
   pieceColor: 1
   attackDamage: 10
+  moveDuration: 0.15
+  AffectByHades: 0
+  AffectByAbel: 0
   _maxHP: 10
+  moveCountInThisTurn: 0
   accessoryPrefab: {fileID: 1089044075087322650, guid: 07ba29d40d13cee4aa1ca3b1f53c962e, type: 3}
+  effectIcon: {fileID: 0}
   effectIconPrefab: {fileID: -1691133565048959338, guid: b246cdbf7f39f4e4b929e93e6327e386, type: 3}
   buff: {fileID: 0}
