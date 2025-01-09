@@ -9,6 +9,8 @@ public class Surtr : SoulCard
     protected override int CardID => Card.cardIdDict["수르트"];
 
     [HideInInspector] public PlayerController player = null;
+    
+    [SerializeField] private int decreaseCost = 1;
 
     protected override void Awake()
     {
@@ -28,7 +30,10 @@ public class Surtr : SoulCard
     {
         if (cost > 0)
         {
-            cost--;
+            cost -= decreaseCost;
+            
+            if (cost < 0)
+                cost = 0;
         }
     }
 

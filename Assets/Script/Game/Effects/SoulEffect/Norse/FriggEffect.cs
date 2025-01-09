@@ -6,10 +6,12 @@ public class FriggEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByDescription(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Description, "프리그: 내 턴 동안 상대 기물 공격력 20 감소", true);
+        Frigg friggComponent = gameObject.GetComponent<Frigg>();
 
-        gameObject.GetComponent<SoulCard>().AddEffect();
-        gameObject.GetComponent<SoulCard>().InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
+        friggComponent.InfusedPiece.buff.AddBuffByDescription(friggComponent.cardName, Buff.BuffType.Description, "프리그: 내 턴 동안 상대 기물 공격력 "+ friggComponent.decreaseAmount +" 감소", true);
+
+        friggComponent.AddEffect();
+        friggComponent.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
     }
 
     public void RemoveBuffInfo()

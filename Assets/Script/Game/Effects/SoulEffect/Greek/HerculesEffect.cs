@@ -6,18 +6,18 @@ public class HerculesEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        Hercules hercules_component = gameObject.GetComponent<Hercules>();
-        hercules_component.playercontroller = player;
+        Hercules herculesComponent = gameObject.GetComponent<Hercules>();
+        herculesComponent.playercontroller = player;
 
-        hercules_component.InfusedPiece.buff.AddBuffByDescription(hercules_component.cardName, Buff.BuffType.Description, "헤라클레스: 본인 턴 동안 공격력 2배", true);
-        hercules_component.AddEffect();
+        herculesComponent.InfusedPiece.buff.AddBuffByDescription(herculesComponent.cardName, Buff.BuffType.Description, "헤라클레스: 본인 턴 동안 공격력 " + herculesComponent.multipleAD +"배", true);
+        herculesComponent.AddEffect();
         
-        hercules_component.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
+        herculesComponent.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
     }
 
     public void RemoveBuffInfo()
     {
-        Hercules hercules_component = gameObject.GetComponent<Hercules>();
-        hercules_component.InfusedPiece.buff.TryRemoveSpecificBuff(hercules_component.cardName, Buff.BuffType.Description);
+        Hercules herculesComponent = gameObject.GetComponent<Hercules>();
+        herculesComponent.InfusedPiece.buff.TryRemoveSpecificBuff(herculesComponent.cardName, Buff.BuffType.Description);
     }
 }

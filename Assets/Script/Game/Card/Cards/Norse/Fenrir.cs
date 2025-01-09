@@ -7,8 +7,8 @@ public class Fenrir : SoulCard
 {
     protected override int CardID => Card.cardIdDict["펜리르"];
 
-    private int IncreaseAmountAD = 20;
-    private int IncreaseAmountHP = 20;
+    public int increasedAD = 20;
+    public int increasedHP = 20;
     private int buffedStat = 0;
 
     protected override void Awake()
@@ -18,12 +18,12 @@ public class Fenrir : SoulCard
 
     private void IncreaseStat(ChessPiece chessPiece)
     {
-        InfusedPiece.AD += IncreaseAmountAD;
-        InfusedPiece.maxHP += IncreaseAmountHP;
-        buffedStat += IncreaseAmountAD;
+        InfusedPiece.AD += increasedAD;
+        InfusedPiece.maxHP += increasedHP;
+        buffedStat += increasedAD;
 
-        InfusedPiece.buff.AddBuffByValue(this.cardName, Buff.BuffType.AD, IncreaseAmountAD, true);
-        InfusedPiece.buff.AddBuffByValue(this.cardName, Buff.BuffType.HP, IncreaseAmountHP, true);
+        InfusedPiece.buff.AddBuffByValue(this.cardName, Buff.BuffType.AD, increasedAD, true);
+        InfusedPiece.buff.AddBuffByValue(this.cardName, Buff.BuffType.HP, increasedHP, true);
     }
 
     public override void AddEffect()

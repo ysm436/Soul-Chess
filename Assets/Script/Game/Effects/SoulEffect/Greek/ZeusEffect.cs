@@ -7,15 +7,15 @@ public class ZeusEffect : Effect
     [SerializeField] private GameObject thunder_card;
     public override void EffectAction(PlayerController player)
     {
-        Zeus zeus_component = gameObject.GetComponent<Zeus>();
+        Zeus zeusComponent = gameObject.GetComponent<Zeus>();
         PlayerData playercolor;
 
-        if (zeus_component.InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
+        if (zeusComponent.InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
             playercolor = GameBoard.instance.gameData.playerWhite;
         else
             playercolor = GameBoard.instance.gameData.playerBlack;
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < zeusComponent.cardAmount; i++)
         {
             GameObject thunder = Instantiate(thunder_card);
             Card thunder_info = thunder.GetComponent<Card>();

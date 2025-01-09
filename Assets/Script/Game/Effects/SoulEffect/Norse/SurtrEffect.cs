@@ -6,16 +6,16 @@ public class SurtrEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        Surtr surtr_component = gameObject.GetComponent<Surtr>();
-        GameBoard.instance.whiteController.OnMyTurnEnd -= surtr_component.DecreaseCost;
-        GameBoard.instance.blackController.OnMyTurnEnd -= surtr_component.DecreaseCost;
+        Surtr surtrComponent = gameObject.GetComponent<Surtr>();
+        GameBoard.instance.whiteController.OnMyTurnEnd -= surtrComponent.DecreaseCost;
+        GameBoard.instance.blackController.OnMyTurnEnd -= surtrComponent.DecreaseCost;
 
         GameBoard.instance.gameData.playerWhite.RemoveHandCards();
         GameBoard.instance.gameData.playerWhite.RemoveDeckCards();
         GameBoard.instance.gameData.playerBlack.RemoveHandCards();
         GameBoard.instance.gameData.playerBlack.RemoveDeckCards();
 
-        if (surtr_component.InfusedPiece.pieceColor == GameBoard.PlayerColor.Black)
+        if (surtrComponent.InfusedPiece.pieceColor == GameBoard.PlayerColor.Black)
         {
             GameBoard.instance.gameData.playerBlack.TryAddCardInHand(GetComponent<Card>());
         }

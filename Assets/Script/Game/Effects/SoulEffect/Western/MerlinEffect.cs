@@ -5,6 +5,8 @@ using System.Linq;
 
 public class MerlinEffect : Effect
 {
+    public int cost = 0;
+
     public override void EffectAction(PlayerController player)
     {
         PlayerData playerData = null;
@@ -17,7 +19,7 @@ public class MerlinEffect : Effect
 
         foreach (var card in ourSpellCards)
         {
-            card.cost = 0;
+            card.cost = cost;
         }
     }
 }

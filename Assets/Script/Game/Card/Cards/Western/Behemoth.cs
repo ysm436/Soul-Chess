@@ -7,8 +7,10 @@ public class Behemoth : SoulCard
     protected override int CardID => Card.cardIdDict["베헤모스"];
 
     [HideInInspector] public PlayerController player = null;
-    private int buffedStat = 0;
-    private int IncreaseAmount = 10;
+    private int buffedAD = 0;
+    private int buffedHP = 0;
+    public int increasedAD = 10;
+    public int increasedHP = 10;
 
     protected override void Awake()
     {
@@ -17,21 +19,23 @@ public class Behemoth : SoulCard
 
     public void IncreaseStat()
     {
-        InfusedPiece.maxHP += IncreaseAmount;
-        InfusedPiece.AD += IncreaseAmount;
-        buffedStat += IncreaseAmount;
+        InfusedPiece.maxHP += increasedHP;
+        InfusedPiece.AD += increasedAD;
+        buffedHP += increasedHP;
+        buffedAD += increasedAD;
 
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, IncreaseAmount, true);
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, IncreaseAmount, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, increasedHP, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, increasedAD, true);
     }
 
     public override void AddEffect()
     {
-        InfusedPiece.maxHP += buffedStat;
-        InfusedPiece.AD += buffedStat;
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, buffedStat, true);
-        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, buffedStat, true);
-        buffedStat = 0;
+        InfusedPiece.maxHP += buffedHP;
+        InfusedPiece.AD += buffedAD;
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, buffedHP, true);
+        InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, buffedAD, true);
+        buffedHP = 0;
+        buffedAD = 0;
 
         if (player != null) player.OnMyTurnEnd += IncreaseStat;
         InfusedPiece.OnSoulRemoved += RemoveEffect;

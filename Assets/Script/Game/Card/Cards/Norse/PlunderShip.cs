@@ -7,6 +7,8 @@ public class PlunderShip : SoulCard
 {
     protected override int CardID => Card.cardIdDict["약탈선"];
 
+    public int cardAmount = 3;
+
     protected override void Awake()
     {
         base.Awake();
