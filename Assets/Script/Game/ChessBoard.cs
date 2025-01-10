@@ -80,10 +80,11 @@ public class ChessBoard : MonoBehaviour
     IEnumerator MovePieceAnimationC(ChessPiece chessPiece, Vector2 startPos, Vector2 destPos, float duration)
     {
         float elapsedTime = 0f;
+        ChessPiece chessPieceComponent = chessPiece.GetComponent<ChessPiece>();
 
         while (elapsedTime < duration)
         {
-            float t = elapsedTime / duration;
+            float t = chessPieceComponent.speedCurve.Evaluate(elapsedTime / duration);
             chessPiece.transform.position = Vector2.Lerp(startPos, destPos, t);
 
             elapsedTime += Time.deltaTime;
@@ -105,9 +106,11 @@ public class ChessBoard : MonoBehaviour
         bool killTriggerFlag = false;
         float elapsedTime = 0f;
 
+        ChessPiece srcPieceComponent = srcPiece.GetComponent<ChessPiece>();
+        
         while (elapsedTime < srcPiece.moveDuration)
         {
-            float t = elapsedTime / srcPiece.moveDuration;
+            float t = srcPieceComponent.speedCurve.Evaluate(elapsedTime / srcPieceComponent.moveDuration);
             srcPiece.transform.position = Vector2.Lerp(srcPiece.transform.position, destPosition, t);
 
             elapsedTime += Time.deltaTime;

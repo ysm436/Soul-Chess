@@ -178,7 +178,8 @@ abstract public class ChessPiece : TargetableObject
 
     protected bool isSoulSet;
 
-    Animator animator;
+    private Animator animator;
+    public AnimationCurve speedCurve;
 
     private void Awake()
     {
