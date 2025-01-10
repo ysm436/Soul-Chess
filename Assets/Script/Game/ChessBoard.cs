@@ -68,6 +68,7 @@ public class ChessBoard : MonoBehaviour
             chessPiece.transform.position = Vector2.one * 7 + basePosition - (Vector2)chessPiece.coordinate;
     } */
 
+    // 기물 단순 이동
     public void MovePieceAnimation(ChessPiece chessPiece)
     {
         Vector2 destPosition = GetPositionUsingCoordinate(chessPiece.coordinate);
@@ -92,32 +93,59 @@ public class ChessBoard : MonoBehaviour
         chessPiece.transform.position = destPos;
     }
 
-    public void AttackAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
+    // 공격 후 처치 성공
+    public void KillAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
+    {
+        StartCoroutine(KillAnimationC(srcPiece, dstPiece));
+    }
+
+    IEnumerator KillAnimationC(ChessPiece srcPiece, ChessPiece dstPiece)
     {
         Vector2 destPosition = GetPositionUsingCoordinate(srcPiece.coordinate);
+        bool killTriggerFlag = false;
+        float elapsedTime = 0f;
 
-        srcPiece.GetComponent<Animator>().SetTrigger("moveTrigger");
-        StartCoroutine(AttackAnimationC(srcPiece, srcPiece.transform.position, destPosition, srcPiece.GetComponent<ChessPiece>().moveDuration, dstPiece));
+        while (elapsedTime < srcPiece.moveDuration)
+        {
+            float t = elapsedTime / srcPiece.moveDuration;
+            srcPiece.transform.position = Vector2.Lerp(srcPiece.transform.position, destPosition, t);
+
+            elapsedTime += Time.deltaTime;
+
+            if (!killTriggerFlag && Vector2.Distance(srcPiece.transform.position, dstPiece.transform.position) < 3)
+            {
+                dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+                killTriggerFlag = true;
+            }
+
+            yield return null;
+        }
     }
 
-    IEnumerator AttackAnimationC(ChessPiece srcPiece, Vector2 startPos, Vector2 destPos, float duration, ChessPiece dstPiece)
-    {
-        yield return StartCoroutine(MovePieceAnimationC(srcPiece, startPos, destPos, duration));
-        dstPiece.GetComponent<Animator>().SetTrigger("attackedTrigger");
-        dstPiece.GetComponent<ChessPiece>().MakeAttackedEffect();
-    }
-
-    public void BackForthPieceAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
+    // 공격 후 처치 실패
+    public void ForthBackPieceAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
     {
         Vector2 destPosition = GetPositionUsingCoordinate(dstPiece.coordinate);
 
         srcPiece.GetComponent<Animator>().SetTrigger("returnTrigger");
-        StartCoroutine(BackForthPieceAnimationC(srcPiece, srcPiece.transform.position, destPosition, srcPiece.GetComponent<ChessPiece>().moveDuration, dstPiece));
+        StartCoroutine(ForthBackPieceAnimationC(srcPiece, srcPiece.transform.position, destPosition, srcPiece.GetComponent<ChessPiece>().moveDuration, dstPiece));
     }
 
-    IEnumerator BackForthPieceAnimationC(ChessPiece srcPiece, Vector2 startPos, Vector2 destPos, float duration, ChessPiece dstPiece)
+    IEnumerator ForthBackPieceAnimationC(ChessPiece srcPiece, Vector2 startPos, Vector2 destPos, float duration, ChessPiece dstPiece)
     {
-        yield return StartCoroutine(AttackAnimationC(srcPiece, startPos, destPos, duration, dstPiece));
+        yield return StartCoroutine(MovePieceAnimationC(srcPiece, startPos, destPos, duration));
+        StartCoroutine(AttackedAnimationC(dstPiece));
         yield return StartCoroutine(MovePieceAnimationC(srcPiece, destPos, startPos, duration));
+    }
+    
+    IEnumerator AttackedAnimationC(ChessPiece dstPiece)
+    {
+        Animator dstPieceAnimator = dstPiece.GetComponent<Animator>();
+        dstPieceAnimator.SetTrigger("attackedTrigger");
+        dstPieceAnimator.SetBool("isVibrated", true);
+        dstPiece.GetComponent<ChessPiece>().MakeAttackedEffect();
+        yield return new WaitForSeconds(0.5f);
+        dstPieceAnimator.SetBool("isVibrated", false);
+        dstPiece.transform.position = GetPositionUsingCoordinate(dstPiece.coordinate);
     }
 }

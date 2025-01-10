@@ -163,13 +163,13 @@ public class PlayerController : MonoBehaviour
             if (srcPiece.Attack(dstPiece))
             {
                 srcPiece.Move(dst_coordinate);
-                gameBoard.chessBoard.AttackAnimation(srcPiece, dstPiece);
+                gameBoard.chessBoard.KillAnimation(srcPiece, dstPiece);
             }
             else
             {
                 srcPiece.GetComponent<Animator>().SetTrigger("moveTrigger");
                 srcPiece.GetComponent<Animator>().SetBool("isReturning", true);
-                gameBoard.chessBoard.BackForthPieceAnimation(srcPiece, dstPiece);
+                gameBoard.chessBoard.ForthBackPieceAnimation(srcPiece, dstPiece);
             }
         }
         else

@@ -116,8 +116,7 @@ public class GameBoard : MonoBehaviour
 
     IEnumerator KillPieceAnimationC(ChessPiece targetPiece)
     {
-        targetPiece.GetComponent<Animator>().SetBool("isKilled", true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         if (targetPiece.pieceColor == PlayerColor.White)
         {
             gameData.whiteGraveyard.Add(targetPiece);
