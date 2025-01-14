@@ -18,5 +18,7 @@ public class TyphonEffect : Effect
             GameBoard.instance.gameData.playerBlack.RemoveHandCards();
             GameBoard.instance.gameData.playerBlack.RemoveDeckCards();
         }
+        
+        gameObject.GetComponent<Typhon>().AddEffect();
     }
 }

@@ -15,10 +15,6 @@ public class Hercules : SoulCard
 
     public override void AddEffect()
     {
-        InfusedPiece.SetKeyword(Keyword.Type.Taunt);
-        //버프 관련 변경 머지 후 추가예정
-        InfusedPiece.buff.AddBuffByKeyword(cardName, Buff.BuffType.Taunt);
-
         if (playercontroller == GameBoard.instance.CurrentPlayerController())
         {
             ADmultiply();
@@ -31,10 +27,6 @@ public class Hercules : SoulCard
 
     public override void RemoveEffect()
     {
-        InfusedPiece.SetKeyword(Keyword.Type.Taunt, 0);
-        //버프 관련 변경 머지 후 추가예정
-        InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Taunt);
-
         if (playercontroller == GameBoard.instance.CurrentPlayerController())
         {
             ADoriginate();

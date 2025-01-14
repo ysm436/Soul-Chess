@@ -75,11 +75,11 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
         {
             spriteRenderer.sprite = blackButton;
 
-            whiteController.enabled = false;
-            blackController.enabled = true;
-
             whiteController.TurnEnd();
             blackController.OpponentTurnEnd();
+
+            whiteController.enabled = false;
+            blackController.enabled = true;
             
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
                 turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
@@ -97,11 +97,11 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
         {
             spriteRenderer.sprite = whiteButton;
 
-            blackController.enabled = false;
-            whiteController.enabled = true;
-
             blackController.TurnEnd();
             whiteController.OpponentTurnEnd();
+            
+            blackController.enabled = false;
+            whiteController.enabled = true;
 
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
                 turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";

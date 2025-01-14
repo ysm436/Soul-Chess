@@ -86,14 +86,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 0
-    soulOrbs: 0
-    soulEssence: 0
+    playerColor: 1
+    soulOrbs: 7
+    soulEssence: 7
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
-    deck: []
-    hand: []
+    deck:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
@@ -104,7 +115,8 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 0
-  description: "[\uBC29\uC5B4\uB3C4 5]"
+  description: "[\uAC15\uB9BC] \uC591 \uC606 \uB0B4 \uAE30\uBB3C\uC5D0\uAC8C \uCCB4\uB825\uC744
+    5 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -2114984967717608709}
   isInSelection: 0
   pieceRestriction: 1
@@ -118,6 +130,7 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 81972bca31ce67e46954e15f7be014d7, type: 3}
   InfusedPiece: {fileID: 0}
+  increasedHP: 5
 --- !u!114 &-2114984967717608709
 MonoBehaviour:
   m_ObjectHideFlags: 0

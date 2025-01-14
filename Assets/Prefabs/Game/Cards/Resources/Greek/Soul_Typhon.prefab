@@ -86,41 +86,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 3
-    soulEssence: 3
+    playerColor: 0
+    soulOrbs: 10
+    soulEssence: 10
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
     deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -133,7 +105,8 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    deckPosition: {x: 7.6, y: -2.3}
+    - {fileID: 0}
+    deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
@@ -144,7 +117,8 @@ MonoBehaviour:
   reigon: 0
   rarity: 1
   description: "[\uAC15\uB9BC] \uB0B4 \uD328\uC640 \uB371\uC5D0 \uC788\uB294 \uBAA8\uB4E0
-    \uCE74\uB4DC\uB97C \uD30C\uAD34\uD569\uB2C8\uB2E4."
+    \uCE74\uB4DC\uB97C \uD30C\uAD34\uD569\uB2C8\uB2E4.\n3\uD134 \uB4A4, \uC774 \uAE30\uBB3C\uC740
+    \uD30C\uAD34\uB429\uB2C8\uB2E4.\n"
   EffectOnCardUsed: {fileID: -504592958107433718}
   isInSelection: 0
   pieceRestriction: -1
@@ -188,6 +162,7 @@ MonoBehaviour:
     pieceColor: 0
     sprite: {fileID: 21300000, guid: 6bad8d4e9771ba14bae3ba6c48aad874, type: 3}
   InfusedPiece: {fileID: 0}
+  countdown: 3
 --- !u!114 &-504592958107433718
 MonoBehaviour:
   m_ObjectHideFlags: 0
