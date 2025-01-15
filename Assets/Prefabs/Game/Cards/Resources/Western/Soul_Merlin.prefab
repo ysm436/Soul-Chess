@@ -87,6 +87,7 @@ MonoBehaviour:
     soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
+    isRevealed: 0
     deck: []
     hand: []
     deckPosition: {x: 0, y: 0}
@@ -99,8 +100,8 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 2
-  description: "[\uAC15\uB9BC] \uB0B4 \uD328\uC5D0 \uC874\uC7AC\uD558\uB294 \uB9C8\uBC95\uC758
-    \uBE44\uC6A9\uC774 0\uC774 \uB429\uB2C8\uB2E4."
+  description: "\uC774 \uC601\uD63C\uC774 \uBD80\uC5EC\uB41C \uAE30\uBB3C\uC774 \uC0B4\uC544\uC788\uB294
+    \uB3D9\uC548 \uB0B4 \uB9C8\uBC95\uC758 \uBE44\uC6A9\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8211901857969220769}
   isInSelection: 0
   pieceRestriction: 5
@@ -120,6 +121,7 @@ MonoBehaviour:
     pieceColor: 0
     sprite: {fileID: 21300000, guid: 6bcf0f8398d37f34494bea50cb1a449c, type: 3}
   InfusedPiece: {fileID: 0}
+  reductionCost: 1
 --- !u!114 &-8211901857969220769
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ThunderEffect : TargetingEffect
 {
-    [SerializeField] private int thunderDamage;
+    [SerializeField] private int thunderDamage = 35;
     private void Awake()
     {
         if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)

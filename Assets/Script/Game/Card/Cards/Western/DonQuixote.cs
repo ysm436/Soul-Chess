@@ -14,14 +14,6 @@ public class DonQuixote : SoulCard
         base.Awake();
     }
 
-    public void InfuseEffect()
-    {
-        InfusedPiece.OnStartAttack += StartAttackEffect;
-        InfusedPiece.OnEndAttack += EndAttackEffect;
-
-        InfusedPiece.OnSoulRemoved += RemoveEffect;
-    }
-
     public void StartAttackEffect(ChessPiece chessPiece)
     {
         if (chessPiece.AD >= standardAD)
@@ -44,11 +36,13 @@ public class DonQuixote : SoulCard
     {
         InfusedPiece.OnStartAttack += StartAttackEffect;
         InfusedPiece.OnEndAttack += EndAttackEffect;
+        InfusedPiece.buff.AddBuffByDescription(cardName, Buff.BuffType.Description, "돈키호테: 공격력 " + standardAD + " 이상 기물 공격 시 " + extraAD + " 추가 피해", true);
     }
 
     public override void RemoveEffect()
     {
         InfusedPiece.OnStartAttack -= StartAttackEffect;
         InfusedPiece.OnEndAttack -= EndAttackEffect;
+        InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Description);
     }
 }

@@ -21,9 +21,9 @@ public class PieceEffectIcon : MonoBehaviour
     {
         foreach (Keyword.Type i in Enum.GetValues(typeof(Keyword.Type)))
         {
-            if ((i != Keyword.Type.Defense) && (piece.GetKeyword(i) > 0))
+            if (/* (i != Keyword.Type.Defense) &&  */piece.GetKeyword(i) > 0)
             {
-                spriteRenderer.sprite = sprites[(int)i - 1];
+                spriteRenderer.sprite = sprites[(int)i];
                 return;
             }
         }
@@ -32,13 +32,13 @@ public class PieceEffectIcon : MonoBehaviour
 
     public void AttackedEffect()
     {
-        spriteRenderer.sprite = sprites[8];
+        spriteRenderer.sprite = sprites[5];
         Invoke("DestroyIcon", 0.4f);
     }
 
     public void MoveRestrictionEffect()
     {
-        spriteRenderer.sprite = sprites[9];
+        spriteRenderer.sprite = sprites[6];
     }
 
     public void DestroyIcon()

@@ -80,7 +80,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c6ab1dfb891f04f9d538760d6d15dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMine: 0
+  coordinate: {x: 0, y: 0}
+  owner:
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
+    maxHandCardCount: 8
+    mulliganHandCount: 4
+    isRevealed: 0
+    deck: []
+    hand: []
+    deckPosition: {x: 0, y: 0}
+    spellDamageIncrease: 0
+    spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uCE74\uC778"
   _cost: 4
@@ -125,3 +137,4 @@ MonoBehaviour:
   targetTypes: []
   isPositiveEffect: 0
   isNegativeEffect: 1
+  multipleAmount: 7
