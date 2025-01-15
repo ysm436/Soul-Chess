@@ -22,7 +22,18 @@ public class Thor : SoulCard
         if (enemyPieceList.Count == 0)
             return;
 
-        enemyPieceList[SynchronizedRandom.Range(0, enemyPieceList.Count)].MinusHP(InfusedPiece.AD);
+        ChessPiece objPiece = enemyPieceList[SynchronizedRandom.Range(0, enemyPieceList.Count)];
+        
+        objPiece.MinusHP(InfusedPiece.AD);
+        if (objPiece.isAlive)
+        {
+            GameBoard.instance.chessBoard.AttackedAnimation(objPiece);
+        }
+        else
+        {
+            objPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+            objPiece.MakeAttackedEffect();
+        }
     }
 
     public override void AddEffect()

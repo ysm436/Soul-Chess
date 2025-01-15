@@ -27,6 +27,8 @@ public class DavidEffect : TargetingEffect
     {
         foreach (var target in targets)
         {
+            (target as ChessPiece).GetComponent<Animator>().SetTrigger("killedTrigger");
+            (target as ChessPiece).MakeAttackedEffect();
             (target as ChessPiece).Kill();
         }
     }

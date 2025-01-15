@@ -94,7 +94,7 @@ public class ChessBoard : MonoBehaviour
         chessPiece.transform.position = destPos;
     }
 
-    // 공격 후 처치 성공
+    // 처치 성공 애니메이션
     public void KillAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
     {
         StartCoroutine(KillAnimationC(srcPiece, dstPiece));
@@ -118,6 +118,7 @@ public class ChessBoard : MonoBehaviour
             if (!killTriggerFlag && Vector2.Distance(srcPiece.transform.position, dstPiece.transform.position) < 3)
             {
                 dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+                dstPiece.GetComponent<ChessPiece>().MakeAttackedEffect();
                 killTriggerFlag = true;
             }
 
@@ -125,7 +126,7 @@ public class ChessBoard : MonoBehaviour
         }
     }
 
-    // 공격 후 처치 실패
+    // 공격 후 처치 실패 애니메이션
     public void ForthBackPieceAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
     {
         Vector2 destPosition = GetPositionUsingCoordinate(dstPiece.coordinate);
@@ -140,8 +141,15 @@ public class ChessBoard : MonoBehaviour
         StartCoroutine(AttackedAnimationC(dstPiece));
         yield return StartCoroutine(MovePieceAnimationC(srcPiece, destPos, startPos, duration));
     }
-    
-    IEnumerator AttackedAnimationC(ChessPiece dstPiece)
+
+    // 공격당하는 애니메이션
+    public void AttackedAnimation(ChessPiece objPiece)
+    {
+        StartCoroutine(GameBoard.instance.chessBoard.AttackedAnimationC(objPiece));
+    }
+
+
+    public IEnumerator AttackedAnimationC(ChessPiece dstPiece)
     {
         Animator dstPieceAnimator = dstPiece.GetComponent<Animator>();
         dstPieceAnimator.SetTrigger("attackedTrigger");

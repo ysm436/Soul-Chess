@@ -282,6 +282,17 @@ abstract public class ChessPiece : TargetableObject
         OnSpellAttacked?.Invoke(this);
 
         MinusHP(damage); //멀린 효과 : 내 마법 피해 2배 구현용
+
+        if (isAlive)
+        {
+            StartCoroutine(GameBoard.instance.chessBoard.AttackedAnimationC(this));
+        }
+        else
+        {
+            GetComponent<Animator>().SetTrigger("killedTrigger");
+            MakeAttackedEffect();
+        }
+
         return isAlive;
     }
 
