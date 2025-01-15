@@ -7,10 +7,9 @@ public class SolemnGuardianEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        gameObject.GetComponent<SoulCard>().InfusedPiece.SetKeyword(Keyword.Type.Shield);
-        gameObject.GetComponent<SoulCard>().InfusedPiece.SetKeyword(Keyword.Type.Taunt);
+        SolemnGuardian solemnGuardianComponent = gameObject.GetComponent<SolemnGuardian>();
 
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Shield);
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByKeyword(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Taunt);
+        solemnGuardianComponent.InfusedPiece.SetKeyword(Keyword.Type.Shield);
+        solemnGuardianComponent.InfusedPiece.buff.AddBuffByKeyword(solemnGuardianComponent.cardName, Buff.BuffType.Shield);
     }
 }

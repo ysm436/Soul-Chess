@@ -53,7 +53,6 @@ public class Mimir : SoulCard
         }
         cardCostDict.Clear();
         playercolor.OnGetCard -= CardCostReduction;
-        InfusedPiece.OnSoulRemoved -= RemoveEffect;
     }
 
     public void CardCostReduction(Card card)

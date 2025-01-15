@@ -80,54 +80,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722b508c31c62f24e968441158e52707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 3
-    soulEssence: 3
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
-    deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    hand:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    deckPosition: {x: 7.6, y: -2.3}
+    isRevealed: 0
+    deck: []
+    hand: []
+    deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
@@ -137,9 +100,8 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 2
-  description: "[\uB3C4\uBC1C] [\uBC29\uC5B4\uB825 10]\n[\uAC15\uB9BC] \uC801 \uAE30\uBB3C
-    \uD558\uB098\uB97C \uC120\uD0DD\uD558\uC5EC \uAD6C\uC18D\uC2DC\uD0B5\uB2C8\uB2E4.\n[\uC720\uC5B8]
-    \uADF8 \uAE30\uBB3C\uC758 \uAD6C\uC18D\uC744 \uD574\uC81C\uD569\uB2C8\uB2E4."
+  description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uBB34\uC791\uC704 \uC801
+    \uAE30\uBB3C \uD558\uB098\uB97C \uAE30\uC808\uC2DC\uD0B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 2246044354094067083}
   isInSelection: 0
   pieceRestriction: 8
@@ -150,12 +112,6 @@ MonoBehaviour:
     pieceColor: 0
     sprite: {fileID: 21300000, guid: 1e68a44573e3f2b43b031db0d809391c, type: 3}
   - pieceType: 8
-    pieceColor: 1
-    sprite: {fileID: 21300000, guid: 1e68a44573e3f2b43b031db0d809391c, type: 3}
-  - pieceType: 2
-    pieceColor: 0
-    sprite: {fileID: 21300000, guid: 1e68a44573e3f2b43b031db0d809391c, type: 3}
-  - pieceType: 2
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 1e68a44573e3f2b43b031db0d809391c, type: 3}
   InfusedPiece: {fileID: 0}
@@ -171,10 +127,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741eeb4953dc31a49afd4062b1754750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTypes:
-  - targetType: 0
-    targetPieceType: -1
-    isOpponent: 1
-    isFriendly: 0
-  isPositiveEffect: 0
-  isNegativeEffect: 1

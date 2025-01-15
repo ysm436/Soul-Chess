@@ -6,37 +6,34 @@ public class ApollonEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        Apollon apollon_component = gameObject.GetComponent<Apollon>();
-        Vector2Int StandardPosition = apollon_component.InfusedPiece.coordinate;
-        List<Vector2Int> row = new List<Vector2Int>();
+        Apollon apollonComponent = gameObject.GetComponent<Apollon>();
+        Vector2Int StandardPosition = apollonComponent.InfusedPiece.coordinate;
 
-        Vector2Int TempPosition = StandardPosition;
-        TempPosition += Vector2Int.left;
-        while (GameBoard.instance.gameData.IsValidCoordinate(TempPosition))
+        Vector2Int tempPosition = StandardPosition;
+        tempPosition += Vector2Int.left;
+        if (GameBoard.instance.gameData.IsValidCoordinate(tempPosition))
         {
-            row.Add(TempPosition);
-            TempPosition += Vector2Int.left;
-        }
-
-        TempPosition = StandardPosition;
-        TempPosition += Vector2Int.right;
-        while (GameBoard.instance.gameData.IsValidCoordinate(TempPosition))
-        {
-            row.Add(TempPosition);
-            TempPosition += Vector2Int.right;
-        }
-
-        foreach (var position in row) //행의 모든 내 기물에게 보호막
-        {
-            ChessPiece obj = GameBoard.instance.gameData.GetPiece(position);
-            if (obj != null && obj.pieceColor == player.playerColor)
+            ChessPiece objPiece = GameBoard.instance.gameData.GetPiece(tempPosition);
+            if (objPiece != null && objPiece.pieceColor == player.playerColor)
             {
-                obj.SetKeyword(Keyword.Type.Shield);
-                //버프 관련 변경 머지 후 버프 추가
-                obj.buff.AddBuffByKeyword(apollon_component.cardName, Buff.BuffType.Shield);
+                objPiece.SetKeyword(Keyword.Type.Shield);
+                objPiece.buff.AddBuffByKeyword(apollonComponent.cardName, Buff.BuffType.Shield);
             }
         }
-        apollon_component.InfusedPiece.SetKeyword(Keyword.Type.Shield); //자신에게 보호막
-        apollon_component.InfusedPiece.buff.AddBuffByKeyword(apollon_component.cardName, Buff.BuffType.Shield);
+
+        tempPosition = StandardPosition;
+        tempPosition += Vector2Int.right;
+        if (GameBoard.instance.gameData.IsValidCoordinate(tempPosition))
+        {
+            ChessPiece objPiece = GameBoard.instance.gameData.GetPiece(tempPosition);
+            if (objPiece != null && objPiece.pieceColor == player.playerColor)
+            {
+                objPiece.SetKeyword(Keyword.Type.Shield);
+                objPiece.buff.AddBuffByKeyword(apollonComponent.cardName, Buff.BuffType.Shield);
+            }
+        }
+
+        apollonComponent.InfusedPiece.SetKeyword(Keyword.Type.Shield); //자신에게 보호막
+        apollonComponent.InfusedPiece.buff.AddBuffByKeyword(apollonComponent.cardName, Buff.BuffType.Shield);
     }
 }

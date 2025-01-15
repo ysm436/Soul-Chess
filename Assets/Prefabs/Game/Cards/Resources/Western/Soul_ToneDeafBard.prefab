@@ -91,18 +91,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 1
+    playerColor: 0
+    soulOrbs: 0
     soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
     deck: []
-    hand:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    deckPosition: {x: 7.6, y: -2.3}
+    hand: []
+    deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
@@ -148,3 +145,5 @@ MonoBehaviour:
   targetTypes: []
   isPositiveEffect: 1
   isNegativeEffect: 0
+  changeAD: -20
+  changeHP: 20

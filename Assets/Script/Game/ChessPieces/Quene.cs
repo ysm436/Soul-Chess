@@ -9,7 +9,7 @@ public class Quene : ChessPiece
     {
         List<Vector2Int> movableCoordinates = new List<Vector2Int>();
 
-        if (GetKeyword(Keyword.Type.Stun) == 1 || GetKeyword(Keyword.Type.Restraint) == 1 || isSoulSet) return movableCoordinates;
+        if (GetKeyword(Keyword.Type.Stun) == 1 /* || GetKeyword(Keyword.Type.Restraint) == 1  */|| isSoulSet) return movableCoordinates;
 
         ChessPiece blockingPiece;
         Vector2Int targetCoordinate;

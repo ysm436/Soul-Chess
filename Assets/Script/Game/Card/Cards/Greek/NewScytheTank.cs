@@ -6,8 +6,6 @@ public class NewScytheTank : SoulCard
 {
     protected override int CardID => cardIdDict["신식-낫전차"];
 
-    public int defenseAmount = 10;
-
     protected override void Awake()
     {
         base.Awake();

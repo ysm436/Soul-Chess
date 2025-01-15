@@ -104,16 +104,17 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC7AD \uD504\uB85C\uC2A4\uD2B8"
-  _cost: 3
+  _cost: 6
   illustration: {fileID: 21300000, guid: 8902077ca8db70a48be98f62b1fd7bbd, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 1
-  description: "[\uAC15\uB9BC] \uBAA8\uB4E0 \uC801 \uAE30\uBB3C\uC744 \uAE30\uC808\uC2DC\uD0B5\uB2C8\uB2E4."
+  description: "[\uAC15\uB9BC] \uC801 \uAE30\uBB3C\uC744 \uD558\uB098 \uC120\uD0DD\uD558\uC5EC
+    \uAE30\uC808\uC2DC\uD0B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 5943837467758970341}
   isInSelection: 0
   pieceRestriction: 5
-  _AD: 30
+  _AD: 45
   _HP: 20
   accessorySpriteList:
   - pieceType: 1
@@ -141,3 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193cb7bc1d75f024f9fd4b2d72e3a1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTypes:
+  - targetType: 0
+    targetPieceType: -1
+    isOpponent: 1
+    isFriendly: 0
+    targetTiles: 0
+    tileCoordinate: {x: 0, y: 0}
+  isPositiveEffect: 0
+  isNegativeEffect: 1

@@ -80,7 +80,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d5a32beff23554bbe3cc4a013c6dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMine: 0
+  coordinate: {x: 0, y: 0}
+  owner:
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
+    maxHandCardCount: 8
+    mulliganHandCount: 4
+    isRevealed: 0
+    deck: []
+    hand: []
+    deckPosition: {x: 0, y: 0}
+    spellDamageIncrease: 0
+    spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC544\uC11C\uC655"
   _cost: 10
@@ -104,6 +116,7 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: de9530e6ad9979b4f8aeb2e78567b661, type: 3}
   InfusedPiece: {fileID: 0}
+  multipleAmount: 2
 --- !u!114 &2861086591322708584
 MonoBehaviour:
   m_ObjectHideFlags: 0
