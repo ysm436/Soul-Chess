@@ -103,10 +103,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   isAlive: 1
+  isRevivable: 0
   pieceType: 1
   pieceColor: 1
   attackDamage: 10
+  moveDuration: 0.25
+  AffectByHades: 0
+  AffectByAbel: 0
   _maxHP: 10
+  moveCountInThisTurn: 0
   accessoryPrefab: {fileID: 1089044075087322650, guid: 07ba29d40d13cee4aa1ca3b1f53c962e, type: 3}
+  effectIcon: {fileID: 0}
   effectIconPrefab: {fileID: -1691133565048959338, guid: b246cdbf7f39f4e4b929e93e6327e386, type: 3}
   buff: {fileID: 0}
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.39009428
+      value: 0.23923686
+      inSlope: 2.0271633
+      outSlope: 2.0271633
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.05248344
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -12,6 +12,8 @@ public class RagnarokEffect : Effect
         {
             if (pieceList[i].pieceType == ChessPiece.PieceType.Pawn)
             {
+                pieceList[i].GetComponent<Animator>().SetTrigger("killedTrigger");
+                pieceList[i].MakeAttackedEffect();
                 pieceList[i].Kill();
             }
         }

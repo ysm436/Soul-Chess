@@ -52,6 +52,7 @@ abstract public class ChessPiece : TargetableObject
     [SerializeField]
     private int attackDamage;
 
+    public float moveDuration = 0.3f;
     public bool AffectByHades = false;
     public bool AffectByAbel = false;
 
@@ -85,10 +86,6 @@ abstract public class ChessPiece : TargetableObject
                 return;
             value -= keywordDictionary[Keyword.Type.Defense];
         } */
-
-        //피격 이펙트
-        PieceEffectIcon attackedEffect = Instantiate(effectIconPrefab, transform.position, Quaternion.identity);
-        attackedEffect.AttackedEffect();
 
         _currentHP -= value;
 
@@ -159,7 +156,7 @@ abstract public class ChessPiece : TargetableObject
     SpriteRenderer accessoryPrefab;
     public PieceEffectIcon effectIcon = null;
     [SerializeField]
-    PieceEffectIcon effectIconPrefab;
+    private PieceEffectIcon effectIconPrefab;
     private PieceEffectIcon moveRestrictionIcon = null;
 
     public Action<ChessPiece> OnKill;
@@ -181,6 +178,8 @@ abstract public class ChessPiece : TargetableObject
 
     protected bool isSoulSet;
 
+    private Animator animator;
+    public AnimationCurve speedCurve;
 
     private void Awake()
     {
@@ -214,7 +213,7 @@ abstract public class ChessPiece : TargetableObject
     }
     private void Start()
     {
-
+        animator = GetComponent<Animator>();
         GameBoard.instance.myController.OnMyTurnStart += () => moveCountInThisTurn = 0;
     }
 
@@ -238,6 +237,7 @@ abstract public class ChessPiece : TargetableObject
     /// <returns>target is killed</returns>
     public bool Attack(ChessPiece targetPiece)
     {
+        animator.SetBool("isAttacking", true);
         OnStartAttack?.Invoke(targetPiece);
         //은신 해제
         SetKeyword(Keyword.Type.Stealth, 0);
@@ -249,10 +249,6 @@ abstract public class ChessPiece : TargetableObject
         if (!targetPiece.isAlive)
         {
             OnKill?.Invoke(targetPiece);
-        }
-        else
-        {
-            MinusHP(targetPiece.attackDamage);
         }
 
         OnEndAttack?.Invoke(targetPiece);
@@ -286,6 +282,17 @@ abstract public class ChessPiece : TargetableObject
         OnSpellAttacked?.Invoke(this);
 
         MinusHP(damage); //멀린 효과 : 내 마법 피해 2배 구현용
+
+        if (isAlive)
+        {
+            StartCoroutine(GameBoard.instance.chessBoard.AttackedAnimationC(this));
+        }
+        else
+        {
+            GetComponent<Animator>().SetTrigger("killedTrigger");
+            MakeAttackedEffect();
+        }
+
         return isAlive;
     }
 
@@ -588,6 +595,13 @@ abstract public class ChessPiece : TargetableObject
         pieceObject.ADText.text = attackDamage.ToString();
 
         buff.ClearBuffList();
+    }
+
+    public void MakeAttackedEffect()
+    {
+        //피격 이펙트
+        PieceEffectIcon attackedEffect = Instantiate(effectIconPrefab, transform.position, Quaternion.identity);
+        attackedEffect.AttackedEffect();
     }
 
 

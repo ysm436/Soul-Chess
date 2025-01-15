@@ -33,7 +33,7 @@ public class PieceEffectIcon : MonoBehaviour
     public void AttackedEffect()
     {
         spriteRenderer.sprite = sprites[5];
-        Invoke("DestroyIcon", 0.4f);
+        Invoke("DestroyIcon", 0.2f);
     }
 
     public void MoveRestrictionEffect()

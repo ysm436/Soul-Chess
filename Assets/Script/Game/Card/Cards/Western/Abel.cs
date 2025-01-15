@@ -38,6 +38,8 @@ public class Abel : SoulCard
         if (!attack_signal && recent_attacked != null)
         {
             recent_attacked.AffectByAbel = true;
+            recent_attacked.GetComponent<Animator>().SetTrigger("killedTrigger");
+            recent_attacked.MakeAttackedEffect();
             recent_attacked.Kill();
         }
     }

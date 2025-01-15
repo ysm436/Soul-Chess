@@ -74,7 +74,7 @@ public class GameBoard : MonoBehaviour
             gameData.TryAddPiece(piece);
 
             piece.chessData = gameData;
-            chessBoard.SetPiecePositionByCoordinate(piece);
+            piece.transform.position = chessBoard.GetPositionUsingCoordinate(piece.coordinate);
         }
 
 
@@ -110,8 +110,13 @@ public class GameBoard : MonoBehaviour
     }
     public void KillPiece(ChessPiece targetPiece)
     {
-        OnPieceKilled?.Invoke(targetPiece);
+        OnPieceKilled?.Invoke(targetPiece); // 이거 의미 없는 것 같은데..
+        StartCoroutine(KillPieceAnimationC(targetPiece));
+    }
 
+    IEnumerator KillPieceAnimationC(ChessPiece targetPiece)
+    {
+        yield return new WaitForSeconds(1.5f);
         if (targetPiece.pieceColor == PlayerColor.White)
         {
             gameData.whiteGraveyard.Add(targetPiece);
@@ -127,7 +132,7 @@ public class GameBoard : MonoBehaviour
         targetPiece.DestroyMoveRestrictionIcon();
         gameData.pieceObjects.Remove(targetPiece);
 
-        chessBoard.SetPiecePositionByCoordinate(targetPiece);
+        targetPiece.transform.position = chessBoard.GetPositionUsingCoordinate(targetPiece.coordinate);
     }
 
     Card showedCard = null;

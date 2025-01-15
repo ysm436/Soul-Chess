@@ -163,18 +163,19 @@ public class PlayerController : MonoBehaviour
             if (srcPiece.Attack(dstPiece))
             {
                 srcPiece.Move(dst_coordinate);
-                gameBoard.chessBoard.SetPiecePositionByCoordinate(srcPiece);
+                gameBoard.chessBoard.KillAnimation(srcPiece, dstPiece);
             }
-            else if (!srcPiece.isAlive)
+            else
             {
-                //이벤트 메커니즘 수정하면서 다시 체크해볼게요
-                //gameBoard.KillPiece(srcPiece);
+                srcPiece.GetComponent<Animator>().SetTrigger("moveTrigger");
+                srcPiece.GetComponent<Animator>().SetBool("isReturning", true);
+                gameBoard.chessBoard.ForthBackPieceAnimation(srcPiece, dstPiece);
             }
         }
         else
         {
             srcPiece.Move(dst_coordinate);
-            gameBoard.chessBoard.SetPiecePositionByCoordinate(srcPiece);
+            gameBoard.chessBoard.MovePieceAnimation(srcPiece);
         }
     }
     void SetChosenPiece(ChessPiece targetPiece)

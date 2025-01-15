@@ -22,11 +22,19 @@ public class Kraken : SoulCard
 
         for (int i = 0; i < repeat; i++)
         {
-            int ran = SynchronizedRandom.Range(0, targets.Count);
-            targets[ran].MinusHP(damage);
-
-            if (!targets[ran].isAlive)
-                targets.Remove(targets[ran]);
+            ChessPiece objPiece = targets[SynchronizedRandom.Range(0, targets.Count)];
+            
+            objPiece.MinusHP(damage);
+            if (objPiece.isAlive)
+            {
+                GameBoard.instance.chessBoard.AttackedAnimation(objPiece);
+            }
+            else
+            {
+                targets.Remove(objPiece);
+                objPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+                objPiece.MakeAttackedEffect();
+            }
         }
     }
 
