@@ -124,6 +124,8 @@ public class ChessBoard : MonoBehaviour
 
             yield return null;
         }
+
+        srcPiece.transform.position = destPosition;
     }
 
     // 공격 후 처치 실패 애니메이션
