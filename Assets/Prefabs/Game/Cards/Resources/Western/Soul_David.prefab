@@ -141,3 +141,4 @@ MonoBehaviour:
   targetTypes: []
   isPositiveEffect: 0
   isNegativeEffect: 1
+  standardAD: 70

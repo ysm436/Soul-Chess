@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CainEffect : TargetingEffect
 {
+    [SerializeField] private int multipleAmount = 7;
+
     ChessPiece.PieceType targetPieceRestriction =
         ChessPiece.PieceType.Pawn |
         ChessPiece.PieceType.Knight |
@@ -28,7 +30,7 @@ public class CainEffect : TargetingEffect
     {
         foreach (var target in targets)
         {
-            soul.AD = (target as ChessPiece).soul.cost * 7;
+            soul.AD = (target as ChessPiece).soul.cost * multipleAmount;
             (target as ChessPiece).RemoveSoul();
         }
     }

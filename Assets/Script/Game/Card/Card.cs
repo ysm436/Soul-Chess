@@ -7,7 +7,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
+public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler
 {
     public static int discardCost = 2;
     [HideInInspector]
@@ -69,7 +69,22 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
             GameBoard.instance.HideCard();
         }
     }
-    public void OnDrag(PointerEventData eventData)
+
+    private void OnMouseDown()
+    {
+        if (!isMine) return;
+        
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+        {
+            if (!TryUse())
+            {
+                //카드 원위치
+                GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
+            }
+        }
+    }
+
+    /*public void OnDrag(PointerEventData eventData)
     {
         if (!isMine) return;
 
@@ -112,7 +127,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                 GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
             }
         }
-    }
+    }*/
+
     public void Destroy()
     {
         Destroy(gameObject);

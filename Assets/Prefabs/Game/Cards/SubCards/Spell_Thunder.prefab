@@ -88,6 +88,7 @@ MonoBehaviour:
     soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
+    isRevealed: 0
     deck: []
     hand: []
     deckPosition: {x: 0, y: 0}
@@ -126,4 +127,4 @@ MonoBehaviour:
     tileCoordinate: {x: 0, y: 0}
   isPositiveEffect: 0
   isNegativeEffect: 1
-  damage: 35
+  thunderDamage: 35

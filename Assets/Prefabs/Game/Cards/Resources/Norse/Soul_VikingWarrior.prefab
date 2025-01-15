@@ -119,6 +119,7 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 1c48a98cb2083e24db1cc04e2347ccd7, type: 3}
   InfusedPiece: {fileID: 0}
+  increasedAD: 20
 --- !u!114 &3459992950709373579
 MonoBehaviour:
   m_ObjectHideFlags: 0

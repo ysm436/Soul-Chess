@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ThunderEffect : TargetingEffect
 {
-    public int damage;
+    [SerializeField] private int thunderDamage = 35;
     private void Awake()
     {
         if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
@@ -27,7 +27,7 @@ public class ThunderEffect : TargetingEffect
                 targetPiece = GameBoard.instance.gameData.GetPiece(sq.coordinate);
                 if (targetPiece != null)
                     if (targetPiece.soul != null && targetPiece.pieceColor != player.playerColor)
-                        targetPiece.SpellAttacked(damage);
+                        targetPiece.SpellAttacked(thunderDamage);
             }
         }
     }

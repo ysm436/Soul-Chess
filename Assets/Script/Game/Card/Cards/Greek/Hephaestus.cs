@@ -1,56 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Hephaestus : SoulCard
 {
     protected override int CardID => cardIdDict["헤파이스토스"];
+    private PlayerController playerController;
+    private int soulDamage = 10;
 
     protected override void Awake()
     {
         base.Awake();
     }
 
-    public void SoulEffect(Vector2Int coordinate)
+    public void AttackSoulPiece()
     {
-        List<Vector2Int> aroundCoordinates = new()
+        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece =>
+            piece.soul != null).ToList();
+
+        if (enemyPieceList.Count == 0)
+            return;
+        
+        foreach (var objPiece in enemyPieceList)
         {
-            coordinate + Vector2Int.up,
-            coordinate + Vector2Int.up + Vector2Int.right,
-            coordinate + Vector2Int.up + Vector2Int.left,
-            coordinate + Vector2Int.down,
-            coordinate + Vector2Int.down + Vector2Int.right,
-            coordinate + Vector2Int.down + Vector2Int.left,
-            coordinate + Vector2Int.right,
-            coordinate + Vector2Int.left,
-        };
-
-        GameData _chessData = GameBoard.instance.gameData;
-
-        for(int i = aroundCoordinates.Count - 1; i >= 0; i--)
-        {
-            Vector2Int currentCoordinate = aroundCoordinates[i];
-
-            if (!_chessData.IsValidCoordinate(currentCoordinate)) //잘못된 좌표면 제거
-            {
-                aroundCoordinates.RemoveAt(i);
-                continue;
-            }
-            if (_chessData.GetPiece(currentCoordinate) != null && _chessData.GetPiece(currentCoordinate) != InfusedPiece &&
-                _chessData.GetPiece(currentCoordinate).soul != null) //영혼에만 피해
-            {
-                _chessData.GetPiece(currentCoordinate).MinusHP(20);
-            }
+            objPiece.MinusHP(soulDamage);
         }
     }
 
     public override void AddEffect()
     {
-        InfusedPiece.OnMove += SoulEffect;
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
+            playerController = GameBoard.instance.whiteController;
+        else
+            playerController = GameBoard.instance.blackController;
+
+        playerController.OnMyTurnEnd += AttackSoulPiece;
         InfusedPiece.OnSoulRemoved += RemoveEffect;
+        InfusedPiece.buff.AddBuffByDescription(cardName, Buff.BuffType.Description, "헤파이스토스: 내 턴이 끝날 때, 영혼이 부여된 모든 기물에게 "+ soulDamage +" 피해를 줍니다.", true);
     }
     public override void RemoveEffect()
     {
-        InfusedPiece.OnMove -= SoulEffect;
+        if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
+            playerController = GameBoard.instance.whiteController;
+        else
+            playerController = GameBoard.instance.blackController;
+
+        playerController.OnMyTurnEnd -= AttackSoulPiece;
+        InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Description);
     }
 }

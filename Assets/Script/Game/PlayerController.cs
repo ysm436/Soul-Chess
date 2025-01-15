@@ -96,33 +96,33 @@ public class PlayerController : MonoBehaviour
                 {
                     targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
-                    //타겟 효과가 부정적인지 파라미터 전달
+                    // 타겟 효과가 부정적인지 파라미터 전달
                     SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
                 }
             }
         }
-        else //이동 관련 코드
+        else // 이동 관련 코드
         {
-            if (chosenPiece == null)//선택된 (아군)기물이 없을 때
+            if (chosenPiece == null)// 선택된 (아군)기물이 없을 때
             {
                 if (targetPiece != null)
                 {
-                    if (IsMyPiece(targetPiece))//고른 기물이 아군일때
+                    if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
                         if (!isMoved || (targetPiece.moveCountInThisTurn > 0 && targetPiece.moveCountInThisTurn <= targetPiece.moveCount))
                         {
                             SetChosenPiece(targetPiece);
                         }
                 }
             }
-            else//선택된 (아군)기물이 있을 때
+            else // 선택된 (아군)기물이 있을 때
             {
                 if (targetPiece != null)
                 {
-                    if (IsMyPiece(targetPiece))//고른 기물이 아군일때
+                    if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
                     {
                         SetChosenPiece(targetPiece);
                     }
-                    else//고른 기물이 적일 때
+                    else// 고른 기물이 적일 때
                     {
                         if (IsMovableCoordniate(coordinate))
                         {
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                 }
-                else //고른 칸이 빈칸일때
+                else // 고른 칸이 빈칸일때
                 {
                     if (IsMovableCoordniate(coordinate))
                     {
@@ -238,9 +238,9 @@ public class PlayerController : MonoBehaviour
 
         if (usingCard is SoulCard)
         {
-            if (!isInfusing)
+            if (!isInfusing) // 소울 카드를 처음 냈을 때
             {
-                if (!(usingCard as SoulCard).infusion.isAvailable(playerColor))
+                if (!(usingCard as SoulCard).infusion.isAvailable(playerColor)) // 카드의 기물 제한을 만족하지 못하는 경우
                 {
                     usingCard = null;
                     isUsingCard = false;
@@ -248,7 +248,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (usingCard.EffectOnCardUsed is TargetingEffect)
                 {
-                    if (!(usingCard.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor))
+                    if (!(usingCard.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor)) // 카드의 효과 대상이 없는 경우
                     {
                         usingCard = null;
                         isUsingCard = false;
@@ -259,12 +259,11 @@ public class PlayerController : MonoBehaviour
                 GameBoard.instance.cancelButton.Show();
 
                 isInfusing = true;
-                //영혼 카드는 강림 선택 시점이 여기인듯
                 (usingCard as SoulCard).gameObject.SetActive(false);
                 targetingEffect = (usingCard as SoulCard).infusion;
-                ActiveTargeting();
+                ActiveTargeting(); // 카드 강림 대상 선택
             }
-            else
+            else // 소울 카드 내고 -> 강림 대상 선택 후
             {
                 isInfusing = false;
 
@@ -309,7 +308,6 @@ public class PlayerController : MonoBehaviour
                 UseCardEffect();
             }
         }
-
 
         return true;
     }
@@ -503,7 +501,7 @@ public class PlayerController : MonoBehaviour
     public void TurnEnd()
     {
         OnMyTurnEnd?.Invoke();
-        //턴 종료 시 상대 코스트 회복
+        // 턴 종료 시 상대 코스트 회복
         if (playerColor == GameBoard.PlayerColor.White)
         {
             if (GameBoard.instance.gameData.playerBlack.soulOrbs < 10)

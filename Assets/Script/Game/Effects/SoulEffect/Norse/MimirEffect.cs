@@ -6,18 +6,18 @@ public class MimirEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        Mimir mimir_component = gameObject.GetComponent<Mimir>();
+        Mimir mimirComponent = gameObject.GetComponent<Mimir>();
 
-        mimir_component.InfusedPiece.buff.AddBuffByDescription(mimir_component.cardName, Buff.BuffType.Description, "미미르: 내 패의 카드 비용 1 감소", true);
+        mimirComponent.InfusedPiece.buff.AddBuffByDescription(mimirComponent.cardName, Buff.BuffType.Description, "미미르: 내 패의 카드 비용 "+ mimirComponent.reductionCost +" 감소", true);
 
-        mimir_component.AddEffect();
+        mimirComponent.AddEffect();
         
-        mimir_component.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
+        mimirComponent.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
     }
 
     public void RemoveBuffInfo()
     {
-        Mimir mimir_component = gameObject.GetComponent<Mimir>();
-        mimir_component.InfusedPiece.buff.TryRemoveSpecificBuff(mimir_component.cardName, Buff.BuffType.Description);
+        Mimir mimirComponent = gameObject.GetComponent<Mimir>();
+        mimirComponent.InfusedPiece.buff.TryRemoveSpecificBuff(mimirComponent.cardName, Buff.BuffType.Description);
     }
 }

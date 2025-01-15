@@ -6,12 +6,12 @@ public class BehemothEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        Behemoth behemoth_component = gameObject.GetComponent<Behemoth>();
-        behemoth_component.player = player;
+        Behemoth behemothComponent = gameObject.GetComponent<Behemoth>();
+        behemothComponent.player = player;
 
-        behemoth_component.InfusedPiece.buff.AddBuffByDescription(behemoth_component.cardName, Buff.BuffType.Description, "베헤모스: 자신 턴 종료 시 +10/+10 획득", true);
-        behemoth_component.AddEffect();
-        behemoth_component.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
+        behemothComponent.InfusedPiece.buff.AddBuffByDescription(behemothComponent.cardName, Buff.BuffType.Description, "베헤모스: 자신 턴 종료 시 +" + behemothComponent.increasedAD + "/+" + behemothComponent.increasedHP + " 획득", true);
+        behemothComponent.AddEffect();
+        behemothComponent.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
     }
 
     public void RemoveBuffInfo()

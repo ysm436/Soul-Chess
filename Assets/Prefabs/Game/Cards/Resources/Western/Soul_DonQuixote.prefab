@@ -91,32 +91,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 0
-    soulOrbs: 10
-    soulEssence: 3
+    playerColor: 1
+    soulOrbs: 0
+    soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
-    deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    hand:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    deck: []
+    hand: []
     deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
@@ -127,7 +109,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 1
-  description: "[\uB3CC\uC9C4] \uACF5\uACA9\uB825\uC774 70 \uC774\uC0C1\uC778 \uAE30\uBB3C\uC744
+  description: "\uACF5\uACA9\uB825\uC774 70 \uC774\uC0C1\uC778 \uAE30\uBB3C\uC744
     \uACF5\uACA9\uD560 \uB54C 40\uC758 \uCD94\uAC00 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 5720266044062554583}
   isInSelection: 0

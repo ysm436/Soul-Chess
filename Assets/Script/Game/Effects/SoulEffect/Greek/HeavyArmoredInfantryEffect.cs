@@ -7,7 +7,31 @@ public class HeavyArmoredInfantryEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        gameObject.GetComponent<SoulCard>().InfusedPiece.SetKeyword(Keyword.Type.Defense, 5);
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.Defense, 5, true);
+        HeavyArmoredInfantry heavyArmoredInfantryComponent = gameObject.GetComponent<HeavyArmoredInfantry>();
+        Vector2Int StandardPosition = heavyArmoredInfantryComponent.InfusedPiece.coordinate;
+
+        Vector2Int tempPosition = StandardPosition;
+        tempPosition += Vector2Int.left;
+        if (GameBoard.instance.gameData.IsValidCoordinate(tempPosition))
+        {
+            ChessPiece objPiece = GameBoard.instance.gameData.GetPiece(tempPosition);
+            if (objPiece != null && objPiece.pieceColor == player.playerColor)
+            {
+                objPiece.maxHP += heavyArmoredInfantryComponent.increasedHP;
+                objPiece.buff.AddBuffByValue(heavyArmoredInfantryComponent.cardName, Buff.BuffType.HP, heavyArmoredInfantryComponent.increasedHP, false);
+            }
+        }
+
+        tempPosition = StandardPosition;
+        tempPosition += Vector2Int.right;
+        if (GameBoard.instance.gameData.IsValidCoordinate(tempPosition))
+        {
+            ChessPiece objPiece = GameBoard.instance.gameData.GetPiece(tempPosition);
+            if (objPiece != null && objPiece.pieceColor == player.playerColor)
+            {
+                objPiece.maxHP += heavyArmoredInfantryComponent.increasedHP;
+                objPiece.buff.AddBuffByValue(heavyArmoredInfantryComponent.cardName, Buff.BuffType.HP, heavyArmoredInfantryComponent.increasedHP, false);
+            }
+        }
     }
 }

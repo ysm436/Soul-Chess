@@ -6,10 +6,12 @@ public class CerberusEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        gameObject.GetComponent<SoulCard>().AddEffect();
+        Cerberus cerberusComponent = gameObject.GetComponent<Cerberus>();
 
-        gameObject.GetComponent<SoulCard>().InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.MoveCount, 2, true);
-        gameObject.GetComponent<SoulCard>().InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
+        cerberusComponent.AddEffect();
+
+        cerberusComponent.InfusedPiece.buff.AddBuffByValue(cerberusComponent.cardName, Buff.BuffType.MoveCount, cerberusComponent.increasedMoveCount, true);
+        cerberusComponent.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
     }
 
     public void RemoveBuffInfo()
