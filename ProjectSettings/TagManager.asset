@@ -68,3 +68,6 @@ TagManager:
   - name: TrashCan
     uniqueID: 331307845
     locked: 0
+  - name: Tutorial
+    uniqueID: 1223407413
+    locked: 0
