@@ -118,7 +118,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (targetPiece != null)
                 {
-                    if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
+                    if (chosenPiece == targetPiece)
+                    {
+                        chosenPiece = null;
+                        ClearMovableCoordniates();
+                    }
+                    else if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
                     {
                         SetChosenPiece(targetPiece);
                     }
