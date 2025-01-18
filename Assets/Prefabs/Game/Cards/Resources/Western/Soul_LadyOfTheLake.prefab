@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6802077257807117280
+--- !u!1001 &8393322415419027876
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,74 +8,73 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3734480829488543473, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 1322892559162298629, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4488957673976943173, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - target: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Name
-      value: Soul_LadyOfTheLake
+      value: LakeOf
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6592858290932310892, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4488957673976943173, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -542098215232420279}
-    - targetCorrespondingSourceObject: {fileID: 4488957673976943173, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
+      addedObject: {fileID: 5363472566365213485}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5130617828655704524}
-  m_SourcePrefab: {fileID: 100100000, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
---- !u!1 &6930527465101322661 stripped
+      addedObject: {fileID: -7123187572071259608}
+  m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+--- !u!1 &7762156533256602645 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 4488957673976943173, guid: ad9ea7076351dda45bceebe2ed5d9deb, type: 3}
-  m_PrefabInstance: {fileID: 6802077257807117280}
+  m_CorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+  m_PrefabInstance: {fileID: 8393322415419027876}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-542098215232420279
+--- !u!114 &5363472566365213485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6930527465101322661}
+  m_GameObject: {fileID: 7762156533256602645}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76e7722b1955d184d9553bbb59f9253c, type: 3}
@@ -88,6 +87,7 @@ MonoBehaviour:
     soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
+    isRevealed: 0
     deck: []
     hand: []
     deckPosition: {x: 0, y: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   rarity: 2
   description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C \uBB34\uC791\uC704 \uC544\uAD70
     \uAE30\uBB3C\uC5D0\uAC8C +10/+10\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4"
-  EffectOnCardUsed: {fileID: -5130617828655704524}
+  EffectOnCardUsed: {fileID: -5130617828655704524, guid: a624a3c6dfec07e4e96e01a10fa19a1d, type: 3}
   isInSelection: 0
   pieceRestriction: 20
   _AD: 40
@@ -122,13 +122,15 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 0206b72d0f4d66f47a84f0013175c40e, type: 3}
   InfusedPiece: {fileID: 0}
   player: {fileID: 0}
---- !u!114 &-5130617828655704524
+  increasedAD: 10
+  increasedHP: 10
+--- !u!114 &-7123187572071259608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6930527465101322661}
+  m_GameObject: {fileID: 7762156533256602645}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12e4d97573f96704fa5d896fc9d119d7, type: 3}

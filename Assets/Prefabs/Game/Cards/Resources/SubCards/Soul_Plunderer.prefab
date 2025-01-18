@@ -67,6 +67,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       insertIndex: -1
       addedObject: {fileID: -4275885913970496622}
+    - targetCorrespondingSourceObject: {fileID: 2288860475118794161, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4289914002319621180}
   m_SourcePrefab: {fileID: 100100000, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
 --- !u!1 &5374441978396574551 stripped
 GameObject:
@@ -106,7 +109,7 @@ MonoBehaviour:
   reigon: 1
   rarity: 0
   description: 
-  EffectOnCardUsed: {fileID: 0}
+  EffectOnCardUsed: {fileID: 4289914002319621180}
   isInSelection: 0
   pieceRestriction: 1
   _AD: 10
@@ -119,3 +122,15 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: bead961fcc2e32942beb70c4d61c8b34, type: 3}
   InfusedPiece: {fileID: 0}
+--- !u!114 &4289914002319621180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5374441978396574551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee26e1c826e7e447b6f48fb5d746810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
