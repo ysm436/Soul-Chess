@@ -5,6 +5,7 @@ using System;
 using UnityEngine.Events;
 using Unity.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class BoardSquare : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
@@ -75,6 +76,7 @@ public class BoardSquare : TargetableObject, IPointerEnterHandler, IPointerExitH
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (SceneManager.GetActiveScene().name == "TutorialScene") return;
         //카드 사용 중인지 체크해서 그 때는 기물 정보 표시 X
         if (GameBoard.instance.gameData.GetPiece(coordinate) && (!GameBoard.instance.CurrentPlayerController().isUsingCard))
             GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));

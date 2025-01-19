@@ -14,7 +14,7 @@ public class CutoutMaskUI : Image
             RectTransform canvasRectTransform = canvas.GetComponent<RectTransform>();
             RectTransform rectTransform = this.GetComponent<RectTransform>();
 
-            rectTransform.sizeDelta = new Vector2(canvasRectTransform.rect.width, canvasRectTransform.rect.height);
+            rectTransform.sizeDelta = new Vector2(5000f, 5000f);
             rectTransform.pivot = new Vector2(0.5f, 0.5f);
             rectTransform.position = canvasRectTransform.position;
         }
