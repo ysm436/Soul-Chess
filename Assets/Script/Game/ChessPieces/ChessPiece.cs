@@ -181,6 +181,8 @@ abstract public class ChessPiece : TargetableObject
     private Animator animator;
     public AnimationCurve speedCurve;
 
+    public Material pieceMat;
+
     private void Awake()
     {
         _currentHP = _maxHP;
@@ -210,10 +212,11 @@ abstract public class ChessPiece : TargetableObject
             effectIcon.transform.SetParent(transform);
             effectIcon.piece = this;
         }
+        animator = GetComponent<Animator>();
+        pieceMat = GetComponent<Renderer>().material;
     }
     private void Start()
     {
-        animator = GetComponent<Animator>();
         GameBoard.instance.myController.OnMyTurnStart += () => moveCountInThisTurn = 0;
     }
 

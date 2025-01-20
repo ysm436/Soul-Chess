@@ -120,17 +120,20 @@ public class PlayerController : MonoBehaviour
                 {
                     if (chosenPiece == targetPiece)
                     {
+                        targetPiece.pieceMat.SetFloat("_OutlineAlpha", 0f);
                         chosenPiece = null;
                         ClearMovableCoordniates();
                     }
                     else if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
                     {
+                        chosenPiece.pieceMat.SetFloat("_OutlineAlpha", 0f);
                         SetChosenPiece(targetPiece);
                     }
                     else// 고른 기물이 적일 때
                     {
                         if (IsMovableCoordniate(coordinate))
                         {
+                            chosenPiece.pieceMat.SetFloat("_OutlineAlpha", 0f);
                             photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
 
                             chosenPiece = null;
@@ -140,6 +143,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else // 고른 칸이 빈칸일때
                 {
+                    chosenPiece.pieceMat.SetFloat("_OutlineAlpha", 0f);
                     if (IsMovableCoordniate(coordinate))
                     {
                         photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
@@ -185,6 +189,7 @@ public class PlayerController : MonoBehaviour
     }
     void SetChosenPiece(ChessPiece targetPiece)
     {
+        targetPiece.pieceMat.SetFloat("_OutlineAlpha", 1f);
         ClearMovableCoordniates();
 
         movableCoordinates.AddRange(targetPiece.GetMovableCoordinates());
