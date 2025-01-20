@@ -59,10 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach (var s in gameBoard.gameData.boardSquares)
         {
-            if (SceneManager.GetActiveScene().name == "TutorialScene")
-            {
-                return;
-            }
+            if (SceneManager.GetActiveScene().name == "TutorialScene") return;
             s.OnClick = OnClickBoardSquare;
         }
     }

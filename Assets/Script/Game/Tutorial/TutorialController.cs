@@ -22,11 +22,11 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
     public TutorialManager tutorialManager;
 
-    public TextMeshProUGUI descriptionText;
-
     public SoulCard plunder;
 
     private int turn;
+
+    private const float routineDelay = 1f;
 
     private void Start()
     {
@@ -67,7 +67,6 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
     void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
     {
-        Debug.Log("TurnEndClicked");
         if (tutorialManager.isMoved)
             TurnEnd();
         else
@@ -80,7 +79,7 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
         {
             if (turn == 0)
             {
-                descriptionText.text = "";
+                tutorialManager.RemoveText();
             }
             OnTurnEndClicked();
         }
@@ -180,15 +179,20 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
     private IEnumerator EnemyFirstRoutine()
     {
-        yield return new WaitForSeconds(0.5f);
+        tutorialManager.RemoveShadow();
+        yield return new WaitForSeconds(routineDelay);
         tutorialManager.MovePiece(6, 6, 6, 4, false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(routineDelay);
         OnTurnEndClicked();
     }
 
     private IEnumerator EnemySecondRoutine1()
     {
-        yield return new WaitForSeconds(0.5f);
+        tutorialManager.RemoveShadow();
+
+        tutorialManager.RemoveText();
+
+        yield return new WaitForSeconds(routineDelay);
 
         tutorialManager.MovePiece(6, 4, 5, 3, true);
 
@@ -204,25 +208,41 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
     private IEnumerator EnemySecondRoutine2()
     {
-        yield return new WaitForSeconds(1f);
+        tutorialManager.RemoveShadow();
+
+        yield return new WaitForSeconds(routineDelay);
 
         SoulCard vikingInstance = Instantiate(tutorialManager.viking) as SoulCard;
         vikingInstance.Infuse(GameBoard.instance.gameData.GetPiece(new Vector2Int(5, 3)));
+        var opponentHand = GameObject.Find("OpponentHand");
+        opponentHand.transform.GetChild(opponentHand.transform.childCount - 1).gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(EnemyShowCardRoutine(tutorialManager.viking));
+
+        tutorialManager.UpdateOpponentHandPosition();
+
+        yield return new WaitForSeconds(routineDelay);
 
         tutorialManager.ProcessStep16();
     }
 
     private IEnumerator EnemyThirdRoutine1()
     {
+        tutorialManager.RemoveShadow();
         tutorialManager.RemoveText();
-        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(routineDelay);
 
         SoulCard plunderInstance = Instantiate(plunder) as SoulCard;
         plunderInstance.Infuse(GameBoard.instance.gameData.GetPiece(new Vector2Int(3, 6)));
+        var opponentHand = GameObject.Find("OpponentHand");
+        opponentHand.transform.GetChild(opponentHand.transform.childCount - 1).gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(0.5f);
+        tutorialManager.UpdateOpponentHandPosition();
+
+        StartCoroutine(EnemyShowCardRoutine(plunder));
+
+        yield return new WaitForSeconds(routineDelay);
 
         tutorialManager.ProcessStep22();
     }
@@ -232,14 +252,25 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
     }
     private IEnumerator EnemyThirdRoutine2()
     {
+        tutorialManager.RemoveShadow();
         tutorialManager.RemoveText();
         tutorialManager.RemoveNextButton();
-        yield return new WaitForSeconds(0.5f);
+
+        yield return new WaitForSeconds(routineDelay);
 
         tutorialManager.MovePiece(5, 3, 5, 2, false);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(routineDelay);
 
         tutorialManager.ProcessStep23();
+    }
+
+    private IEnumerator EnemyShowCardRoutine(Card card)
+    {
+        tutorialManager.ShowCard(card);
+
+        yield return new WaitForSeconds(1.5f);
+
+        tutorialManager.RemoveShowCard();
     }
 }
