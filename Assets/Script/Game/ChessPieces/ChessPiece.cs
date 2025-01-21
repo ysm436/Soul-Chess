@@ -607,6 +607,16 @@ abstract public class ChessPiece : TargetableObject
         attackedEffect.AttackedEffect();
     }
 
+    public void SelectedEffectOn()
+    {
+        pieceMat.SetFloat("_OutlineAlpha", 1f);
+    }
+
+    public void SelectedEffectOff()
+    {
+        pieceMat.SetFloat("_OutlineAlpha", 0f);
+    }
+
 
     [Flags]
     public enum PieceType

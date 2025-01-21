@@ -120,6 +120,14 @@ public class DeckHandController : MonoBehaviour
             hand[i].GetComponent<SortingGroup>().sortingOrder = i;
             hand[i].transform.SetParent(myHandTransform);
             hand[i].transform.localPosition = new Vector3(anchor_x + CARD_DISTANCE_IN_HAND * i, 0, -0.1f * i); //UI에 맞게 좌표수정
+            if (hand[i].cost <= GameBoard.instance.gameData.myPlayerData.soulEssence)
+            {
+                hand[i].GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 1f);
+            }
+            else
+            {
+                hand[i].GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 0f);
+            }
         }
     }
 

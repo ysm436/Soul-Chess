@@ -120,20 +120,20 @@ public class PlayerController : MonoBehaviour
                 {
                     if (chosenPiece == targetPiece)
                     {
-                        targetPiece.pieceMat.SetFloat("_OutlineAlpha", 0f);
+                        targetPiece.SelectedEffectOff();
                         chosenPiece = null;
                         ClearMovableCoordniates();
                     }
                     else if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
                     {
-                        chosenPiece.pieceMat.SetFloat("_OutlineAlpha", 0f);
+                        chosenPiece.SelectedEffectOff();
                         SetChosenPiece(targetPiece);
                     }
                     else// 고른 기물이 적일 때
                     {
                         if (IsMovableCoordniate(coordinate))
                         {
-                            chosenPiece.pieceMat.SetFloat("_OutlineAlpha", 0f);
+                            chosenPiece.SelectedEffectOff();
                             photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
 
                             chosenPiece = null;
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else // 고른 칸이 빈칸일때
                 {
-                    chosenPiece.pieceMat.SetFloat("_OutlineAlpha", 0f);
+                    chosenPiece.SelectedEffectOff();
                     if (IsMovableCoordniate(coordinate))
                     {
                         photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
     }
     void SetChosenPiece(ChessPiece targetPiece)
     {
-        targetPiece.pieceMat.SetFloat("_OutlineAlpha", 1f);
+        targetPiece.SelectedEffectOn();
         ClearMovableCoordniates();
 
         movableCoordinates.AddRange(targetPiece.GetMovableCoordinates());
