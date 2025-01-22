@@ -11,20 +11,18 @@ public class DeckSelectButton : MonoBehaviour
     public void DeckSelect()
     {
         //기존의 선택되어 있던 덱의 쉐이더 끄기
-        GetComponentInParent<LobbySceneUI>().GetSelectedDeckButton().ControlShader(false);
+        if(GetComponentInParent<LobbySceneUI>().SelectedDeckIndex != -1)
+            GetComponentInParent<LobbySceneUI>().GetSelectedDeckButton().ControlShader(false);
 
         //지금 덱 쉐이더 활성화
         ControlShader(true);
 
-        //카드목록 띄운다면 여기서도 추가해야함
-        ShowCardList();
-
         GetComponentInParent<LobbySceneUI>().SelectedDeckIndex = deck_index;
+
+        //카드목록 띄운다면 여기서도 추가해야함
+        GetComponentInParent<LobbySceneUI>().ShowSelectedDeckCardList();
     }
 
     public void ControlShader(bool activate)
-    { }
-
-    public void ShowCardList()
     { }
 }

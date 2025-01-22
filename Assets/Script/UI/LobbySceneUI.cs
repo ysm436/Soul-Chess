@@ -54,6 +54,8 @@ public class LobbySceneUI : MonoBehaviour
     [SerializeField] private Transform DeckDisplay;
     [SerializeField] private Transform TrashCan;
     [SerializeField] private TextMeshProUGUI SelectedDeckInfo;
+    [SerializeField] private Transform CardListDisplay;
+    [SerializeField] private GameObject CardInfoUIView; //이건 들어갈 scrollview
 
     private void Awake()
     {
@@ -179,9 +181,36 @@ public class LobbySceneUI : MonoBehaviour
                 var deckSelectButton = GetSelectedDeckButton();
                 //선택되어있는게 있다면 쉐이더 활성화
                 deckSelectButton.ControlShader(true);
-                //카드목록 띄운다면 여기서도 추가해야함
-                deckSelectButton.ShowCardList();
             }
+            //카드목록 띄운다면 여기서도 추가해야함
+            ShowSelectedDeckCardList();
+        }
+    }
+
+    public void ShowSelectedDeckCardList()
+    {
+        if (SelectedDeckIndex == -1)
+        {
+            CardInfoUIView.SetActive(false);
+            return;
+        }
+
+        CardInfoUIView.SetActive(true);
+
+        for (int i = 0; i < CardListDisplay.childCount; i++)
+        {
+            CardListDisplay.GetChild(i).gameObject.SetActive(false);
+        }
+
+        Deck selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
+
+        int index = 0;
+
+        foreach(var card in selectedDeck.cards)
+        {
+            var tmp = CardListDisplay.GetChild(index++);
+            tmp.gameObject.SetActive(true);
+            tmp.GetComponent<CardInfoUI>().SetCardInfoUI(GameManager.instance.AllCards[card].GetComponent<Card>());
         }
     }
 

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public List<Deck> deckList = new List<Deck>();
     public Deck selectedDeck = null;
 
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject[] AllCards;
 
     [Serializable]
