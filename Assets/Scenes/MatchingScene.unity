@@ -590,8 +590,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1565517660}
         m_TargetAssemblyTypeName: NetworkMasterManager, Assembly-CSharp
-        m_MethodName: set_roomCreatingPanelActive
-        m_Mode: 6
+        m_MethodName: JoinCurRoom
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2044,8 +2044,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1565517660}
         m_TargetAssemblyTypeName: NetworkMasterManager, Assembly-CSharp
-        m_MethodName: JoinCurRoom
-        m_Mode: 1
+        m_MethodName: set_roomCreatingPanelActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
