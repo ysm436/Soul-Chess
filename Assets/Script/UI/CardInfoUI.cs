@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class CardInfoUI : MonoBehaviour
 {
@@ -48,6 +49,16 @@ public class CardInfoUI : MonoBehaviour
         entry_PointerExit.eventID = EventTriggerType.PointerExit;
         entry_PointerExit.callback.AddListener((data) => { HideCardUI(); });
         eventTrigger.triggers.Add(entry_PointerExit);
+
+        EventTrigger.Entry entry_OnScroll = new EventTrigger.Entry();
+        entry_OnScroll.eventID = EventTriggerType.Scroll;
+        entry_OnScroll.callback.AddListener((data) => {OnScroll(data);});
+        eventTrigger.triggers.Add(entry_OnScroll);
+    }
+
+    public void OnScroll(BaseEventData data)
+    {
+        transform.parent.parent.parent.GetComponent<ScrollRect>().OnScroll(data as PointerEventData);
     }
 
     [SerializeField] private CardUI cardUI;
