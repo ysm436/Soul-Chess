@@ -6,18 +6,11 @@ public class YmirEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        Ymir ymir_component = gameObject.GetComponent<Ymir>();
+        Ymir ymirComponent = gameObject.GetComponent<Ymir>();
 
-        ymir_component.InfusedPiece.buff.AddBuffByDescription(ymir_component.cardName, Buff.BuffType.Description, "이미르: 사망 시 패가 가득찰 때까지 드로우", true);
+        ymirComponent.InfusedPiece.buff.AddBuffByDescription(ymirComponent.cardName, Buff.BuffType.Description, "이미르: 사망 시 패가 가득찰 때까지 카드를 뽑습니다.", true);
 
-        ymir_component.AddEffect();
-        ymir_component.InfusedPiece.OnSoulRemoved += ymir_component.RemoveEffect;
-        ymir_component.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;
-    }
-
-    public void RemoveBuffInfo()
-    {
-        Ymir ymir_component = gameObject.GetComponent<Ymir>();
-        ymir_component.InfusedPiece.buff.TryRemoveSpecificBuff(ymir_component.cardName, Buff.BuffType.Description);
+        ymirComponent.AddEffect();
+        ymirComponent.InfusedPiece.OnSoulRemoved += ymirComponent.RemoveEffect;
     }
 }

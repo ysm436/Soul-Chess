@@ -10,4 +10,5 @@ public class CardObject : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public TextMeshPro descriptionText;
     public SpriteRenderer backSpriteRenderer;
+    public Renderer canUseEffectRenderer;
 }

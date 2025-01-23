@@ -6,6 +6,7 @@ using UnityEngine;
 using System;
 using Photon.Pun;
 using Photon.Pun.Demo.Cockpit;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach (var s in gameBoard.gameData.boardSquares)
         {
+            if (SceneManager.GetActiveScene().name == "TutorialScene") return;
             s.OnClick = OnClickBoardSquare;
         }
     }
@@ -118,14 +120,22 @@ public class PlayerController : MonoBehaviour
             {
                 if (targetPiece != null)
                 {
-                    if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
+                    if (chosenPiece == targetPiece)
                     {
+                        targetPiece.SelectedEffectOff();
+                        chosenPiece = null;
+                        ClearMovableCoordniates();
+                    }
+                    else if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
+                    {
+                        chosenPiece.SelectedEffectOff();
                         SetChosenPiece(targetPiece);
                     }
                     else// 고른 기물이 적일 때
                     {
                         if (IsMovableCoordniate(coordinate))
                         {
+                            chosenPiece.SelectedEffectOff();
                             photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
 
                             chosenPiece = null;
@@ -135,6 +145,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else // 고른 칸이 빈칸일때
                 {
+                    chosenPiece.SelectedEffectOff();
                     if (IsMovableCoordniate(coordinate))
                     {
                         photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
@@ -180,6 +191,7 @@ public class PlayerController : MonoBehaviour
     }
     void SetChosenPiece(ChessPiece targetPiece)
     {
+        targetPiece.SelectedEffectOn();
         ClearMovableCoordniates();
 
         movableCoordinates.AddRange(targetPiece.GetMovableCoordinates());
@@ -484,11 +496,11 @@ public class PlayerController : MonoBehaviour
     {
         if (playerColor == GameBoard.PlayerColor.White)
         {
-            GameBoard.instance.gameData.playerWhite.DrawCard();
+            StartCoroutine(GameBoard.instance.gameData.playerWhite.DrawCardWithAnimation());
         }
         else
         {
-            GameBoard.instance.gameData.playerBlack.DrawCard();
+            StartCoroutine(GameBoard.instance.gameData.playerBlack.DrawCardWithAnimation());
         }
         OnMyDraw?.Invoke();
     }
@@ -496,6 +508,21 @@ public class PlayerController : MonoBehaviour
     public void OpponentDraw()
     {
         OnOpponentDraw?.Invoke();
+    }
+    
+    public void MultipleDraw(int count, PlayerController opponentController)
+    {
+        StartCoroutine(MultipleDrawC(count, opponentController));
+    }
+
+    private IEnumerator MultipleDrawC(int count, PlayerController opponentController)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            LocalDraw();
+            opponentController.OpponentDraw();
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public void TurnEnd()

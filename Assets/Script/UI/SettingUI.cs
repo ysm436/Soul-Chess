@@ -22,7 +22,8 @@ public class SettingUI : MonoBehaviour
             SceneManager.GetActiveScene().name == "GameScene_PJH" ||
             SceneManager.GetActiveScene().name == "GameScene_WKH" ||
             SceneManager.GetActiveScene().name == "GameScene_YSM" ||
-            SceneManager.GetActiveScene().name == "LocalTestGameScene")
+            SceneManager.GetActiveScene().name == "LocalTestGameScene" ||
+            SceneManager.GetActiveScene().name == "TutorialScene")
         {
             giveUpButton.gameObject.SetActive(true);
         }

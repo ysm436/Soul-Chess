@@ -6,14 +6,21 @@ public class OnlyThinkPhilosopherEffect : Effect
 {
     public override void EffectAction(PlayerController player)
     {
-        OnlyThinkPhilosopher onlythinkphilosopherComponent = gameObject.GetComponent<OnlyThinkPhilosopher>();
-        PlayerData playerdata;
-
-        if (onlythinkphilosopherComponent.InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
-            playerdata = GameBoard.instance.gameData.playerWhite;
+        PlayerController playerController;
+        PlayerController opponentController;
+        
+        if (player.playerColor == GameBoard.PlayerColor.White)
+        {
+            playerController = GameBoard.instance.whiteController;
+            opponentController = GameBoard.instance.blackController;
+        }
         else
-            playerdata = GameBoard.instance.gameData.playerBlack;
+        {
+            playerController = GameBoard.instance.blackController;
+            opponentController = GameBoard.instance.whiteController;
+        }
 
-        playerdata.DrawCard();
+        playerController.LocalDraw();
+        opponentController.OpponentDraw();
     }
 }
