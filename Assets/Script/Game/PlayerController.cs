@@ -6,6 +6,7 @@ using UnityEngine;
 using System;
 using Photon.Pun;
 using Photon.Pun.Demo.Cockpit;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach (var s in gameBoard.gameData.boardSquares)
         {
+            if (SceneManager.GetActiveScene().name == "TutorialScene") return;
             s.OnClick = OnClickBoardSquare;
         }
     }

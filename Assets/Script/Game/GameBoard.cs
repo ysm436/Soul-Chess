@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 // TODO: PlayerColor GameData로 옮기기
 
@@ -199,7 +200,15 @@ public class GameBoard : MonoBehaviour
         if (killedKing.pieceColor == playerColor)
             gameOverUI.OnDefeated();
         else
+        {
+            if (SceneManager.GetActiveScene().name == "TutorialScene")
+            {
+                var tutorialManager = FindObjectOfType<TutorialManager>();
+                tutorialManager.gameOverUI.OnWin();
+                return;
+            }
             gameOverUI.OnWin();
+        }
     }
 
     [System.Serializable]

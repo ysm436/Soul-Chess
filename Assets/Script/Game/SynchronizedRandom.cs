@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SynchronizedRandom : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SynchronizedRandom : MonoBehaviour
 
     public void Init(bool isHost)
     {
+        if (SceneManager.GetActiveScene().name == "TutorialScene") return;
         photonView = GetComponent<PhotonView>();
         if (isHost)
             Synchronize();
