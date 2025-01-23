@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using DG.Tweening;
 
 public class DeckHandController : MonoBehaviour
 {
@@ -81,6 +81,7 @@ public class DeckHandController : MonoBehaviour
         {
             card.owner = GameBoard.instance.gameData.opponentPlayerData;
             instantiatedCard = Instantiate(card, handAnchor);
+            instantiatedCard.transform.position = new Vector3(-5.85f, 7f, 0);
             GameBoard.instance.gameData.opponentPlayerData.TryAddCardInHand(instantiatedCard);
         }
 
@@ -113,21 +114,26 @@ public class DeckHandController : MonoBehaviour
         else
             anchor_x = -(hand.Count / 2f) * CARD_DISTANCE_IN_HAND;
 
-
         for (int i = 0; i < hand.Count; i++)
         {
             hand[i].handIndex = i;
             hand[i].GetComponent<SortingGroup>().sortingOrder = i;
             hand[i].transform.SetParent(myHandTransform);
-            hand[i].transform.localPosition = new Vector3(anchor_x + CARD_DISTANCE_IN_HAND * i, 0, -0.1f * i); //UI에 맞게 좌표수정
-            if (hand[i].cost <= GameBoard.instance.gameData.myPlayerData.soulEssence)
-            {
-                hand[i].GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 1f);
-            }
-            else
-            {
-                hand[i].GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 0f);
-            }
+            StartCoroutine(UpdateMyHandPositionAnimation(hand[i], anchor_x, i));
+        }
+    }
+    IEnumerator UpdateMyHandPositionAnimation(Card objCard, float anchor_x, int handIndex)
+    {
+        yield return objCard.transform.DOLocalMoveX(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0.3f).WaitForCompletion();
+        yield return objCard.transform.DOLocalMoveY(0, 0.7f).WaitForCompletion();
+        objCard.transform.localPosition = new Vector3(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UI에 맞게 좌표수정
+        if (objCard.cost <= GameBoard.instance.gameData.myPlayerData.soulEssence)
+        {
+            objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 1f);
+        }
+        else
+        {
+            objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 0f);
         }
     }
 
@@ -149,12 +155,19 @@ public class DeckHandController : MonoBehaviour
             hand[i].handIndex = i;
             hand[i].GetComponent<SortingGroup>().sortingOrder = i - GameBoard.instance.gameData.opponentPlayerData.maxHandCardCount;
             hand[i].transform.SetParent(opponentHandTransform);
-            hand[i].transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * i, 0, -0.1f * i); //UI에 맞게 좌표수정
+            StartCoroutine(UpdateOpponentHandPositionAnimation(hand[i], anchor_x, i));
             if (player.isRevealed)
             {
                 hand[i].FlipFront();
             }
         }
+    }
+
+    IEnumerator UpdateOpponentHandPositionAnimation(Card objCard, float anchor_x, int handIndex)
+    {
+        yield return objCard.transform.DOLocalMoveX(anchor_x - CARD_DISTANCE_IN_HAND * handIndex, 0.3f).WaitForCompletion();
+        yield return objCard.transform.DOLocalMoveY(0, 0.8f).WaitForCompletion();
+        objCard.transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UI에 맞게 좌표수정
     }
 
 

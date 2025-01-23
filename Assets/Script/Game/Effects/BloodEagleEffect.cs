@@ -32,6 +32,21 @@ public class BloodEagleEffect : TargetingEffect
             (target as ChessPiece).Kill();
         }
 
-        player.Draw();
+        PlayerController playerController;
+        PlayerController opponentController;
+        
+        if (player.playerColor == GameBoard.PlayerColor.White)
+        {
+            playerController = GameBoard.instance.whiteController;
+            opponentController = GameBoard.instance.blackController;
+        }
+        else
+        {
+            playerController = GameBoard.instance.blackController;
+            opponentController = GameBoard.instance.whiteController;
+        }
+
+        playerController.LocalDraw();
+        opponentController.OpponentDraw();
     }
 }

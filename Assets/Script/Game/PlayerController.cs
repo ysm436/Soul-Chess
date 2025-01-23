@@ -494,11 +494,11 @@ public class PlayerController : MonoBehaviour
     {
         if (playerColor == GameBoard.PlayerColor.White)
         {
-            GameBoard.instance.gameData.playerWhite.DrawCard();
+            StartCoroutine(GameBoard.instance.gameData.playerWhite.DrawCardWithAnimation());
         }
         else
         {
-            GameBoard.instance.gameData.playerBlack.DrawCard();
+            StartCoroutine(GameBoard.instance.gameData.playerBlack.DrawCardWithAnimation());
         }
         OnMyDraw?.Invoke();
     }
@@ -506,6 +506,21 @@ public class PlayerController : MonoBehaviour
     public void OpponentDraw()
     {
         OnOpponentDraw?.Invoke();
+    }
+    
+    public void MultipleDraw(int count, PlayerController opponentController)
+    {
+        StartCoroutine(MultipleDrawC(count, opponentController));
+    }
+
+    private IEnumerator MultipleDrawC(int count, PlayerController opponentController)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            LocalDraw();
+            opponentController.OpponentDraw();
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public void TurnEnd()

@@ -6,7 +6,9 @@ using UnityEngine;
 public class Ymir : SoulCard
 {
     protected override int CardID => Card.cardIdDict["이미르"];
-    private PlayerData playercolor;
+    private PlayerController playerController;
+    private PlayerController opponentController;
+    private PlayerData playerData;
 
 
     protected override void Awake()
@@ -17,10 +19,17 @@ public class Ymir : SoulCard
     public override void AddEffect()
     {
         if (InfusedPiece.pieceColor == GameBoard.PlayerColor.White)
-            playercolor = GameBoard.instance.gameData.playerWhite;
+        {
+            playerData = GameBoard.instance.gameData.playerWhite;
+            playerController = GameBoard.instance.whiteController;
+            opponentController = GameBoard.instance.blackController;
+        }
         else
-            playercolor = GameBoard.instance.gameData.playerBlack;
-        
+        {
+            playerData = GameBoard.instance.gameData.playerBlack;
+            playerController = GameBoard.instance.blackController;
+            opponentController = GameBoard.instance.whiteController;
+        }
         InfusedPiece.OnKilled += DrawUntilFull;
     }
 
@@ -31,17 +40,7 @@ public class Ymir : SoulCard
 
     public void DrawUntilFull(ChessPiece chessPiece)
     {
-        while (true)
-        {
-            if (playercolor.hand.Count < playercolor.maxHandCardCount && playercolor.deck.Count > 0)
-            {
-                playercolor.DrawCard();
-            }
-            else
-            {
-                break;
-            }
-        }
+        int count = playerData.maxHandCardCount - playerData.hand.Count;
+        playerController.MultipleDraw(count, opponentController);
     }
-    
 }
