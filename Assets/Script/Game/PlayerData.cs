@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 [Serializable]
 public class PlayerData
@@ -52,10 +53,59 @@ public class PlayerData
             }
             else
             {
+                card.transform.position = new Vector3(-5.85f, -7f, 0);
                 card.transform.localScale = new Vector3(1.25f, 1.25f, 0);
                 GetCard(card);
             }
             return true;
+        }
+    }
+
+    public IEnumerator DrawCardWithAnimation()
+    {
+        if (deck.Count <= 0)
+        {
+            yield break;
+        }
+        else
+        {
+            Card card = deck[deck.Count - 1];
+            deck.RemoveAt(deck.Count - 1);
+ 
+            yield return card.transform.DOLocalMoveY(-7, 0.6f)
+                .SetRelative()
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    card.FlipFront();
+                })
+                .WaitForCompletion();
+
+            if (playerColor == GameBoard.instance.playerColor)
+            {
+                card.transform.localPosition = new Vector3(-5f, 3.5f, 0);
+                card.transform.localScale = new Vector3(2.5f, 2.5f, 0);
+            }
+
+            yield return new WaitForSeconds(1f);
+
+            if (IsHandFull())
+            {
+                DestroyCard(card);
+            }
+            else
+            {
+                card.transform.localScale = new Vector3(1.25f, 1.25f, 0);
+
+                if (playerColor == GameBoard.instance.playerColor)
+                {
+                    card.transform.position = new Vector3(-5.85f, -7f, 0);
+                }
+                else
+                {
+                    card.transform.position = new Vector3(-5.85f, 7f, 0);
+                }
+                GetCard(card);
+            }
         }
     }
 
