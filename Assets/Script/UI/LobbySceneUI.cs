@@ -145,12 +145,10 @@ public class LobbySceneUI : MonoBehaviour
             if (ready)
             {
                 blackReadyButtonText.color = Color.red;
-                blackReadyButtonText.text = "준비완료";
             }
             else
             {
                 blackReadyButtonText.color = Color.black;
-                blackReadyButtonText.text = "준비취소";
                 startButton.gameObject.SetActive(false);
             }
         }
