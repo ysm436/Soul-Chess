@@ -128,4 +128,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d6b6925f4fa74d9d879c1c2776090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thunder_card: {fileID: 2097923499070114172, guid: 71e61402aec19664986161ca341fc47c, type: 3}
+  thunderCard: {fileID: 2097923499070114172, guid: 71e61402aec19664986161ca341fc47c, type: 3}
