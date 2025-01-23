@@ -16,6 +16,7 @@ public class LobbySceneUI : MonoBehaviour
     public Button blackReadyButton;
     public TextMeshProUGUI blackReadyButtonText;
     public RectTransform myCardText;
+    public Button startButton;
 
     public GameObject whiteInfo;
     public GameObject blackInfo;
@@ -31,7 +32,7 @@ public class LobbySceneUI : MonoBehaviour
         set
         {
             _isWhiteReady = value;
-            TryStartGame();
+            TryActivateStartButton();
         }
     }
     private bool _isWhiteReady = false;
@@ -41,10 +42,10 @@ public class LobbySceneUI : MonoBehaviour
         set
         {
             _isBlackReady = value;
-            TryStartGame();
+            TryActivateStartButton();
         }
     }
-    private bool _isBlackReady = false;
+    public bool _isBlackReady = false;
 
 
 
@@ -53,6 +54,8 @@ public class LobbySceneUI : MonoBehaviour
     [SerializeField] private Transform DeckDisplay;
     [SerializeField] private Transform TrashCan;
     [SerializeField] private TextMeshProUGUI SelectedDeckInfo;
+    [SerializeField] private Transform CardListDisplay;
+    [SerializeField] private GameObject CardInfoUIView; //이건 들어갈 scrollview
 
     private void Awake()
     {
@@ -90,13 +93,19 @@ public class LobbySceneUI : MonoBehaviour
             }
         }
 
+        //덱 선택해주세요 셰이더 활성화
+
+        startButton.onClick.AddListener(() => networkManager.StartGame());
+
         isInitialzed = true;
     }
 
-    private void TryStartGame()
+    private void TryActivateStartButton()
     {
         if (isBlackReady && isWhiteReady && GameManager.instance.isHost)
-            networkManager.StartGame();
+        {
+            startButton.gameObject.SetActive(true);
+        }
     }
 
 
@@ -120,19 +129,28 @@ public class LobbySceneUI : MonoBehaviour
             Debug.Log("player white is " + (ready ? "" : "not ") + "ready");
             isWhiteReady = ready;
             if (ready)
+            {
                 whiteReadyButtonText.color = Color.red;
+            }
             else
+            {
                 whiteReadyButtonText.color = Color.black;
+                startButton.gameObject.SetActive(false);
+            }
         }
         else
         {
             Debug.Log("player black is " + (ready ? "" : "not ") + "ready");
             isBlackReady = ready;
             if (ready)
+            {
                 blackReadyButtonText.color = Color.red;
+            }
             else
-
+            {
                 blackReadyButtonText.color = Color.black;
+                startButton.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -155,7 +173,51 @@ public class LobbySceneUI : MonoBehaviour
                     }
                 }
             }
+
+            if (SelectedDeckIndex != -1)
+            {
+                var deckSelectButton = GetSelectedDeckButton();
+                //선택되어있는게 있다면 쉐이더 활성화
+                deckSelectButton.ControlShader(true);
+            }
+            //카드목록 띄운다면 여기서도 추가해야함
+            ShowSelectedDeckCardList();
         }
+    }
+
+    public void ShowSelectedDeckCardList()
+    {
+        if (SelectedDeckIndex == -1)
+        {
+            CardInfoUIView.SetActive(false);
+            return;
+        }
+
+        CardInfoUIView.SetActive(true);
+
+        for (int i = 0; i < CardListDisplay.childCount; i++)
+        {
+            CardListDisplay.GetChild(i).gameObject.SetActive(false);
+        }
+
+        Deck selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
+
+        int index = 0;
+
+        foreach(var card in selectedDeck.cards)
+        {
+            var tmp = CardListDisplay.GetChild(index++);
+            tmp.gameObject.SetActive(true);
+            tmp.GetComponent<CardInfoUI>().SetCardInfoUI(GameManager.instance.AllCards[card].GetComponent<Card>());
+        }
+    }
+
+    public DeckSelectButton GetSelectedDeckButton()
+    {
+        if (SelectedDeckIndex == -1)
+            return null;
+
+        return DeckDisplay.GetChild(SelectedDeckIndex).GetComponent<DeckSelectButton>();
     }
 
     public void CloseDeckButton()
@@ -173,14 +235,15 @@ public class LobbySceneUI : MonoBehaviour
 
         if (SelectedDeckIndex == -1)
         {
+            //덱 선택해주세요 셰이더 활성화
             SelectedDeckInfo.text = "덱을 선택해 주세요.";
         }
         else
         {
+            //덱 선택해주세요 셰이더 비활성화
             SelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckname + ">";
+            GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
         }
-
-        GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
     }
     public void OnOtherPlayerJoined()
     {
