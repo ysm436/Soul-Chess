@@ -1375,7 +1375,7 @@ GameObject:
   - component: {fileID: 249038072}
   - component: {fileID: 249038071}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PlayerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1397,8 +1397,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -460, y: -170}
-  m_SizeDelta: {x: 114.0806, y: 36.8936}
+  m_AnchoredPosition: {x: -460, y: -350}
+  m_SizeDelta: {x: 115, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &249038071
 MonoBehaviour:
@@ -1429,8 +1429,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1447,8 +1447,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4147,7 +4147,7 @@ GameObject:
   - component: {fileID: 1121765236}
   - component: {fileID: 1121765235}
   m_Layer: 5
-  m_Name: Norse
+  m_Name: Legendary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7449,7 +7449,7 @@ GameObject:
   - component: {fileID: 1937453871}
   - component: {fileID: 1937453870}
   m_Layer: 5
-  m_Name: Greek
+  m_Name: Common
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7494,7 +7494,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ee9a0a16c7ca8384580a849cf8cab189, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a53e7809d0518e34084347c8a80565aa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8055,7 +8055,7 @@ GameObject:
   - component: {fileID: 2091420568}
   - component: {fileID: 2091420567}
   m_Layer: 5
-  m_Name: Western
+  m_Name: Mythical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8100,7 +8100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a53e7809d0518e34084347c8a80565aa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee9a0a16c7ca8384580a849cf8cab189, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

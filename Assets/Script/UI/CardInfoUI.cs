@@ -11,6 +11,7 @@ public class CardInfoUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardNameText;
     [SerializeField] private GameObject[] costImages;
     [SerializeField] private TextMeshProUGUI cardCostText;
+    [SerializeField] private GameObject[] cardRankes;
 
     private Card cardInfo = null;
     public void SetCardInfoUI(Card card)
@@ -22,13 +23,21 @@ public class CardInfoUI : MonoBehaviour
         {
             costImages[0].SetActive(true);
             costImages[1].SetActive(false);
-            cardCostText.color = Color.black;
+            cardCostText.color = new Color(92 / 255f, 0, 0);
         }
         else
         {
             costImages[0].SetActive(false);
             costImages[1].SetActive(true);
-            cardCostText.color = Color.white;
+            cardCostText.color = new Color(29 / 255f, 62 / 255f, 7 / 225f);
+        }
+
+        foreach (var cardRank in cardRankes)
+            cardRank.SetActive(false);
+
+        for (int i = 0; i < (int)card.rarity; i++)
+        {
+            cardRankes[i].SetActive(true);
         }
 
         cardInfo = card;
