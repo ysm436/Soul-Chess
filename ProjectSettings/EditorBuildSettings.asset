@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MatchingScene.unity
     guid: 5ed9ac25c2714be44b98ab672fd0b0de
+  - enabled: 1
+    path: Assets/Scenes/PvELobbyScene.unity
+    guid: eea0523c4d1d35c409126b45b13a94b1
+  - enabled: 1
+    path: Assets/Scenes/PvEGameScene.unity
+    guid: 110eeb5820e15404881e7c1b69193c11
   m_configObjects: {}
