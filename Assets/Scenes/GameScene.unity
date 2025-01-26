@@ -3130,6 +3130,7 @@ MonoBehaviour:
   - {fileID: 6299940136839190016, guid: 5774fd488f14e6b4396382217fb55d10, type: 3}
   - {fileID: 6299940136839190016, guid: 5774fd488f14e6b4396382217fb55d10, type: 3}
   - {fileID: 6299940136839190016, guid: 5774fd488f14e6b4396382217fb55d10, type: 3}
+  soulSetCanMove: 1
   gameData:
     BOARD_SIZE_HEIGHT: 0
     BOARD_SIZE_WIDTH: 0

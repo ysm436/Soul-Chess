@@ -23,6 +23,7 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private Transform chessPieceParent;
     [SerializeField] private List<GameObject> whiteChessPieceList;
     [SerializeField] private List<GameObject> blackChessPieceList;
+    public bool soulSetCanMove;
     
 
     [HideInInspector]
