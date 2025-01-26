@@ -43,6 +43,8 @@ public class GameBoard : MonoBehaviour
         get => myController.enabled;
     }
 
+    public bool isWhiteTurn = true;
+
     private void Awake()
     {
         //singleton
@@ -59,9 +61,17 @@ public class GameBoard : MonoBehaviour
 
         //플레이어 색상(선공) 지정
         if (GameManager.instance.isHost)
+        {
             playerColor = PlayerColor.White;
+            if (SceneManager.GetActiveScene().name == "PvEGameScene")
+                blackController.GetComponent<PvEPlayerController>().isComputer = true;
+        }
         else
+        {
             playerColor = PlayerColor.Black;
+            if (SceneManager.GetActiveScene().name == "PvEGameScene")
+                whiteController.GetComponent<PvEPlayerController>().isComputer = true;
+        }
 
         //덱 초기화
         //gameData.myPlayerData.deck = GameManager.instance.currentDeck;
