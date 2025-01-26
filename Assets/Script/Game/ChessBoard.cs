@@ -22,9 +22,9 @@ public class ChessBoard : MonoBehaviour
     {
         if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
         {
-            for (int i = 0; i < GameData.BOARD_SIZE; i++)
+            for (int i = 0; i < gameData.BOARD_SIZE_HEIGHT; i++)
             {
-                for (int j = 0; j < GameData.BOARD_SIZE; j++)
+                for (int j = 0; j < gameData.BOARD_SIZE_WIDTH; j++)
                 {
                     gameData.boardSquares[j, i] = Instantiate<GameObject>(boardSquareSample, new Vector2(j, i) + basePosition, Quaternion.identity, transform).GetComponent<BoardSquare>();
 
@@ -37,9 +37,9 @@ public class ChessBoard : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < GameData.BOARD_SIZE; i++)
+            for (int i = 0; i < gameData.BOARD_SIZE_HEIGHT; i++)
             {
-                for (int j = 0; j < GameData.BOARD_SIZE; j++)
+                for (int j = 0; j < gameData.BOARD_SIZE_WIDTH; j++)
                 {
                     gameData.boardSquares[j, i] = Instantiate<GameObject>(boardSquareSample, new Vector2(7 - j, 7 - i) + basePosition, Quaternion.identity, transform).GetComponent<BoardSquare>();
 
