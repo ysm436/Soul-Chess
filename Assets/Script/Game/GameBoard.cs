@@ -45,6 +45,8 @@ public class GameBoard : MonoBehaviour
 
     public bool isWhiteTurn = true;
 
+    public bool isComputerTurn = false;
+
     private void Awake()
     {
         //singleton

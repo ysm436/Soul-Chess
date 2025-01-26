@@ -53,7 +53,7 @@ public class PvEPlayerController : PlayerController
 
     public override void OnClickBoardSquare(Vector2Int coordinate)
     {
-        if (!GameBoard.instance.isActivePlayer && !GameBoard.instance.isDebugMode)
+        if (!((GameBoard.instance.isWhiteTurn && playerColor == GameBoard.PlayerColor.White) || (!GameBoard.instance.isWhiteTurn && playerColor == GameBoard.PlayerColor.Black)))
             return;
 
         ChessPiece targetPiece = gameBoard.gameData.GetPiece(coordinate);
@@ -398,10 +398,44 @@ public class PvEPlayerController : PlayerController
         }
     }
 
+    
     private IEnumerator ComputerAct()
     {
-        Debug.Log(1);
         yield return new WaitForSeconds(4f);
+        //카드 쓰기
+
+        //체스 말 이동
+        yield return MovePieceComputer();
         GetComponentInParent<PvELocalController>().TurnEnd();
+    }
+
+    private IEnumerator MovePieceComputer()
+    {
+        yield return CalculateAllPossibleCoordinate();
+    }
+
+    private IEnumerator CalculateAllPossibleCoordinate()
+    {
+        List<(ChessPiece piece, Vector2Int coord)> AllMovableCoordinates = new List<(ChessPiece piece, Vector2Int coord)>();
+
+        List<ChessPiece> AllChessPieces = GameBoard.instance.chessBoard.GetAllPieces(playerColor);
+
+        foreach (var piece in AllChessPieces)
+        {
+            foreach(Vector2Int coord in piece.GetMovableCoordinates())
+                AllMovableCoordinates.Add((piece,coord));
+        }
+
+        //가중치 계산하기
+
+        int randNum = UnityEngine.Random.Range(0, AllChessPieces.Count);
+
+        OnClickBoardSquare(AllMovableCoordinates[randNum].piece.coordinate);
+
+        yield return new WaitForSeconds(2f);
+
+        OnClickBoardSquare(AllMovableCoordinates[randNum].coord);
+
+        yield return new WaitForSeconds(1f);
     }
 }

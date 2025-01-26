@@ -17,6 +17,7 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
     public SoulOrb mySoulOrb;
     public SoulOrb opponentSoulrOrb;
     public GameObject turn_display;
+    [SerializeField] private GameObject blocker;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.Black;
             whiteController.soulOrb = mySoulOrb;
             blackController.soulOrb = opponentSoulrOrb;
+            ChangeComputerTurn(false);
         }
         else
         {
@@ -38,6 +40,7 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.White;
             blackController.soulOrb = mySoulOrb;
             whiteController.soulOrb = opponentSoulrOrb;
+            ChangeComputerTurn(true);
         }
 
     }
@@ -67,7 +70,6 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
     {
         if ((GameBoard.instance.isWhiteTurn && whiteController.enabled) || (!GameBoard.instance.isWhiteTurn && blackController.enabled))
         {
-            Debug.Log(2);
             OnTurnEndClicked();
         }
     }
@@ -76,8 +78,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
     {
         if (whiteController.enabled)
         {
-            Debug.Log(3);
             GameBoard.instance.isWhiteTurn = false;
+            ChangeComputerTurn(!GameBoard.instance.isComputerTurn);
             spriteRenderer.sprite = blackButton;
 
             whiteController.TurnEnd();
@@ -100,8 +102,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            Debug.Log(4);
             GameBoard.instance.isWhiteTurn = true;
+            ChangeComputerTurn(!GameBoard.instance.isComputerTurn);
             spriteRenderer.sprite = whiteButton;
 
             blackController.TurnEnd();
@@ -130,5 +132,11 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
         turn_display.SetActive(true);
         yield return new WaitForSeconds(1f);
         turn_display.SetActive(false);
+    }
+
+    private void ChangeComputerTurn(bool active)
+    {
+        GameBoard.instance.isComputerTurn = active;
+        blocker.gameObject.SetActive(active);
     }
 }
