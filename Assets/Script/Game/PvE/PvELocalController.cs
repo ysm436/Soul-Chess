@@ -50,9 +50,14 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
         blackController.enabled = false;
 
         if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
+        {
             turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+        }
         else
+        {
             turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            StartCoroutine(whiteController.GetComponent<PvEPlayerController>().ComputerAct());
+        }
         StartCoroutine("TurnDisplayOnOff");
     }
 

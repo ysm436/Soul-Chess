@@ -162,6 +162,7 @@ public class GameBoard : MonoBehaviour
 
         showedCard.FlipFront();
     }
+
     public void HideCard()
     {
         if (showedCard == null)
@@ -205,6 +206,14 @@ public class GameBoard : MonoBehaviour
             return myController;
         else
             return opponentController;
+    }
+
+    public PlayerData ComputerData()
+    {
+        if (isWhiteTurn == isComputerTurn)
+            return gameData.playerWhite;
+        else
+            return gameData.playerBlack;
     }
 
     private void OnGameOver(ChessPiece killedKing)

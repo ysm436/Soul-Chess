@@ -18,6 +18,7 @@ public class SettingUI : MonoBehaviour
 
         giveUpButton.gameObject.SetActive(false);
         if (SceneManager.GetActiveScene().name == "GameScene" ||
+            SceneManager.GetActiveScene().name == "PvEGameScene" ||
             SceneManager.GetActiveScene().name == "GameScene_KDH" ||
             SceneManager.GetActiveScene().name == "GameScene_PJH" ||
             SceneManager.GetActiveScene().name == "GameScene_WKH" ||

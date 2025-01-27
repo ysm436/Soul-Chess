@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class PvEPlayerController : PlayerController
 {
+    private PlayerData thisPlayerData;
     public bool isComputer
     {
         get
@@ -34,6 +35,11 @@ public class PvEPlayerController : PlayerController
     private void Start()
     {
         OnOpponentTurnEnd += () => { isMoved = false; };
+
+        if (isComputer)
+            thisPlayerData = GameBoard.instance.ComputerData();
+        else
+            thisPlayerData = GameBoard.instance.CurrentPlayerData();
     }
     private void OnEnable()
     {
@@ -221,7 +227,7 @@ public class PvEPlayerController : PlayerController
     }
     public override bool UseCard(Card card)
     {
-        if (GameBoard.instance.CurrentPlayerData().soulEssence < card.cost)
+        if (thisPlayerData.soulEssence < card.cost)
             return false;
 
         usingCard = card;
@@ -247,7 +253,12 @@ public class PvEPlayerController : PlayerController
                     }
                 }
 
-                GameBoard.instance.cancelButton.Show();
+                if (!isComputer)
+                    GameBoard.instance.cancelButton.Show();
+                else
+                {
+                    gameBoard.ShowCard(usingCard);
+                }
 
                 isInfusing = true;
                 (usingCard as SoulCard).gameObject.SetActive(false);
@@ -288,7 +299,10 @@ public class PvEPlayerController : PlayerController
                     return false;
                 }
 
-                GameBoard.instance.cancelButton.Show();
+                if(!isComputer)
+                    GameBoard.instance.cancelButton.Show();
+                else
+                    gameBoard.ShowCard(usingCard);
 
                 usingCard.gameObject.SetActive(false); //마법 카드는 여기인듯?
                 targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
@@ -326,9 +340,9 @@ public class PvEPlayerController : PlayerController
             isInfusing = false;
         }
 
-        GameBoard.instance.CurrentPlayerData().soulEssence -= usingCard.cost;
-
-        GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(usingCard);
+        thisPlayerData.soulEssence -= usingCard.cost;
+        
+        thisPlayerData.TryRemoveCardInHand(usingCard);
 
         usingCard.EffectOnCardUsed?.EffectAction(this);
 
@@ -355,18 +369,19 @@ public class PvEPlayerController : PlayerController
 
     public override void DiscardCard(Card card)
     {
+        Debug.Log("Discard");
         RPCDiscardCard(card.handIndex);
     }
 
     public override void RPCDiscardCard(int handIndex)
     {
-        Card cardInstance = GameBoard.instance.CurrentPlayerData().hand[handIndex];
+        Card cardInstance = thisPlayerData.hand[handIndex];
 
-        GameBoard.instance.CurrentPlayerData().soulEssence -= Card.discardCost;
-        GameBoard.instance.CurrentPlayerData().TryRemoveCardInHand(cardInstance);
+        thisPlayerData.soulEssence -= Card.discardCost;
+        thisPlayerData.TryRemoveCardInHand(cardInstance);
         cardInstance.Destroy();
         GameBoard.instance.HideCard();
-        GameBoard.instance.CurrentPlayerData().UpdateHandPosition();
+        thisPlayerData.UpdateHandPosition();
 
         LocalDraw();
     }
@@ -399,14 +414,89 @@ public class PvEPlayerController : PlayerController
     }
 
     
-    private IEnumerator ComputerAct()
+    public IEnumerator ComputerAct()
     {
         yield return new WaitForSeconds(4f);
         //카드 쓰기
-
+        yield return UseCardComputer();
         //체스 말 이동
         yield return MovePieceComputer();
         GetComponentInParent<PvELocalController>().TurnEnd();
+    }
+
+    private IEnumerator UseCardComputer()
+    {
+        int nowCost = GameBoard.instance.ComputerData().soulEssence;
+        List<Card> hand = GameBoard.instance.ComputerData().hand;
+        int handCount = hand.Count;
+
+        int[,] dp = new int[handCount,2];
+        dp[0, 0] = 0;
+        if (nowCost >= hand[0].cost && CanUseCard(hand[0]))
+            dp[0, 1] = hand[0].cost;
+        else
+            dp[0, 1] = -1;
+        for (int i = 1; i < handCount; i++)
+        {
+            dp[i, 0] = Mathf.Max(dp[i - 1, 0], dp[i - 1, 1]);
+
+            if (hand[i].cost > nowCost || !CanUseCard(hand[i]))
+            {
+                dp[i, 1] = -1;
+                continue;
+            }
+            else
+                dp[i, 1] = hand[i].cost;
+
+            if (dp[i - 1, 0] + hand[i].cost <= nowCost)
+                dp[i, 1] = dp[i - 1, 0] + hand[i].cost;
+            if (dp[i-1,1] != -1 && dp[i - 1, 1] + hand[i].cost <= nowCost)
+                dp[i, 1] = dp[i - 1, 1] + hand[i].cost;
+        }
+
+        for (int i = 0; i < handCount; i++)
+        {
+            Debug.Log(i + " " + 0 + " : " + dp[i, 0]);
+            Debug.Log(i + " " + 1 + " : " + dp[i, 1]);
+        }
+
+        List<Card> willUseCards = new List<Card>();
+
+        for (int i = handCount - 1; i >= 0; i--)
+        {
+            if (hand[i].cost > nowCost)
+                continue;
+            if (dp[i, 1] >= dp[i, 0])
+            {
+                willUseCards.Add(hand[i]);
+                nowCost -= hand[i].cost;
+            }
+        }
+
+        foreach (var card in willUseCards)
+        {
+            Debug.Log(card);
+        }
+
+        foreach (var card in willUseCards)
+        {
+            if (UseCard(card))
+            {
+                yield return new WaitForSeconds(3f);
+                int randNum = UnityEngine.Random.Range(0, targetableObjects.Count);
+                //Debug.Log(targetableObjects.Count);
+                //Debug.Log(randNum);
+                OnClickBoardSquare(targetableObjects[randNum].coordinate);
+                yield return new WaitForSeconds(2f);
+                if (targetableObjects.Count > 0)
+                {
+                    OnClickBoardSquare(targetableObjects[randNum].coordinate);
+                    yield return new WaitForSeconds(2f);
+                }
+            }
+        }
+
+        yield return null;
     }
 
     private IEnumerator MovePieceComputer()
@@ -427,15 +517,47 @@ public class PvEPlayerController : PlayerController
         }
 
         //가중치 계산하기
+        if (AllMovableCoordinates.Count > 0)
+        {
+            int randNum = UnityEngine.Random.Range(0, AllChessPieces.Count);
 
-        int randNum = UnityEngine.Random.Range(0, AllChessPieces.Count);
+            OnClickBoardSquare(AllMovableCoordinates[randNum].piece.coordinate);
 
-        OnClickBoardSquare(AllMovableCoordinates[randNum].piece.coordinate);
+            yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(2f);
+            OnClickBoardSquare(AllMovableCoordinates[randNum].coord);
 
-        OnClickBoardSquare(AllMovableCoordinates[randNum].coord);
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
-        yield return new WaitForSeconds(1f);
+    public bool CanUseCard(Card card)
+    {
+        if (card is SoulCard)
+        {
+            if (!(card as SoulCard).infusion.isAvailable(playerColor)) // 카드의 기물 제한을 만족하지 못하는 경우
+            {
+                return false;
+            }
+            else if (card.EffectOnCardUsed is TargetingEffect)
+            {
+                if (!(card.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor)) // 카드의 효과 대상이 없는 경우
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            if (card.EffectOnCardUsed is TargetingEffect)
+            {
+                if (!(card.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor))
+                {
+
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
