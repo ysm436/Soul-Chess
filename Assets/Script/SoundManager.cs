@@ -32,6 +32,7 @@ public class SoundManager : MonoBehaviour
         bgmDictionary.Add("GameScene1", Resources.Load<AudioClip>("BGM/Red Castle"));
         bgmDictionary.Add("GameScene2", Resources.Load<AudioClip>("BGM/Into The Forest"));
         bgmDictionary.Add("GameScene3", Resources.Load<AudioClip>("BGM/Master of the Feast"));
+        bgmDictionary.Add("GameScene4", Resources.Load<AudioClip>("BGM/NewGameBGM"));
     }
 
     private void InitializeSFX()
@@ -43,6 +44,9 @@ public class SoundManager : MonoBehaviour
         sfxDictionary.Add("SetSoul", Resources.Load<AudioClip>("SFX/SetSoul"));
         sfxDictionary.Add("Turn", Resources.Load<AudioClip>("SFX/Turn"));
         sfxDictionary.Add("UseCard", Resources.Load<AudioClip>("SFX/UseCard"));
+        sfxDictionary.Add("Fire", Resources.Load<AudioClip>("SFX/Fire"));
+        sfxDictionary.Add("Electricity", Resources.Load<AudioClip>("SFX/Electricity"));
+        sfxDictionary.Add("Water", Resources.Load<AudioClip>("SFX/Water"));
 
     }
 
@@ -63,11 +67,14 @@ public class SoundManager : MonoBehaviour
 
     IEnumerator PlayBgmList()
     {
-        bgmPlayer.loop = false;
+        //bgmPlayer.loop = false;
+        bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
-        bgmPlayer.clip = bgmDictionary["GameScene3"];
+        bgmPlayer.clip = bgmDictionary["GameScene4"];
         bgmPlayer.Play();
-        while(true)
+
+        yield return new WaitForFixedUpdate();
+        /*while(true)
         {
             yield return new WaitForSeconds(1.0f);
             if(!bgmPlayer.isPlaying)
@@ -91,7 +98,7 @@ public class SoundManager : MonoBehaviour
                         break;
                 }
             }
-        }
+        }*/
     }
 
     public void StopBgm()
