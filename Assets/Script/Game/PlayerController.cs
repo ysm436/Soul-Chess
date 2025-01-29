@@ -175,18 +175,21 @@ public class PlayerController : MonoBehaviour
             {
                 srcPiece.Move(dst_coordinate);
                 gameBoard.chessBoard.KillAnimation(srcPiece, dstPiece);
+                GameManager.instance.soundManager.PlaySFX("Destroy");
             }
             else
             {
                 srcPiece.GetComponent<Animator>().SetTrigger("moveTrigger");
                 srcPiece.GetComponent<Animator>().SetBool("isReturning", true);
                 gameBoard.chessBoard.ForthBackPieceAnimation(srcPiece, dstPiece);
+                GameManager.instance.soundManager.PlaySFX("Attack");
             }
         }
         else
         {
             srcPiece.Move(dst_coordinate);
             gameBoard.chessBoard.MovePieceAnimation(srcPiece);
+            GameManager.instance.soundManager.PlaySFX("Move");
         }
     }
     void SetChosenPiece(ChessPiece targetPiece)
@@ -412,6 +415,8 @@ public class PlayerController : MonoBehaviour
             gameBoard.gameData.boardSquares[infusionTargetCoordinate.x, infusionTargetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.movable);
 
             (card as SoulCard).infusion.EffectAction(gameBoard.opponentController);
+
+            GameManager.instance.soundManager.PlaySFX("SetSoul");
         }
 
         if (card.EffectOnCardUsed is TargetingEffect)

@@ -116,6 +116,9 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             blackController.OpponentDraw();
         }
         turnChangeButtonHighlight.spriteRenderer.enabled = false;
+
+        GameManager.instance.soundManager.PlaySFX("Turn");
+        GameManager.instance.soundManager.PlaySFX("Draw");
     }
 
     private IEnumerator TurnDisplayOnOff()

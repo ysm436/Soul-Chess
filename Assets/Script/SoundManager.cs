@@ -5,22 +5,45 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public AudioSource bgmPlayer;
+    public AudioSource sfxPlayer;
     public float bgmVolume { get; set; }
 
     private Dictionary<string, AudioClip> bgmDictionary = new Dictionary<string, AudioClip>();
     private int num = 1;
+
+    private Dictionary<string, AudioClip> sfxDictionary = new Dictionary<string, AudioClip>();
 
     void Awake()
     {
         bgmPlayer = gameObject.AddComponent<AudioSource>();
         bgmVolume = 1f;
 
+        sfxPlayer = gameObject.AddComponent<AudioSource>();
+
+        InitializeBGM();
+        InitializeSFX();
+    }
+
+    private void InitializeBGM()
+    {
         bgmDictionary.Add("MainScene", Resources.Load<AudioClip>("BGM/Teller of the Tales"));
         bgmDictionary.Add("LobbyScene", Resources.Load<AudioClip>("BGM/Midnight Tale"));
         bgmDictionary.Add("DeckBuildingScene", Resources.Load<AudioClip>("BGM/Folk Round"));
         bgmDictionary.Add("GameScene1", Resources.Load<AudioClip>("BGM/Red Castle"));
         bgmDictionary.Add("GameScene2", Resources.Load<AudioClip>("BGM/Into The Forest"));
         bgmDictionary.Add("GameScene3", Resources.Load<AudioClip>("BGM/Master of the Feast"));
+    }
+
+    private void InitializeSFX()
+    {
+        sfxDictionary.Add("Attack", Resources.Load<AudioClip>("SFX/Attack"));
+        sfxDictionary.Add("Destroy", Resources.Load<AudioClip>("SFX/Destroy"));
+        sfxDictionary.Add("Draw", Resources.Load<AudioClip>("SFX/Draw"));
+        sfxDictionary.Add("Move", Resources.Load<AudioClip>("SFX/Move"));
+        sfxDictionary.Add("SetSoul", Resources.Load<AudioClip>("SFX/SetSoul"));
+        sfxDictionary.Add("Turn", Resources.Load<AudioClip>("SFX/Turn"));
+        sfxDictionary.Add("UseCard", Resources.Load<AudioClip>("SFX/UseCard"));
+
     }
 
     public void PlayBgm(string name)
@@ -75,5 +98,16 @@ public class SoundManager : MonoBehaviour
     {
         bgmPlayer.clip = null;
         bgmPlayer.Stop();
+    }
+
+    public void PlaySFX(string name)
+    {
+        if (!sfxDictionary.ContainsKey(name))
+        {
+            Debug.Log("ERROR: SoundManager doesn't have SFX " + name);
+            return;
+        }
+
+        sfxPlayer.PlayOneShot(sfxDictionary[name]);
     }
 }
