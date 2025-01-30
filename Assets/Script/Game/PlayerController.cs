@@ -416,7 +416,7 @@ public class PlayerController : MonoBehaviour
 
             (card as SoulCard).infusion.EffectAction(gameBoard.opponentController);
 
-            GameManager.instance.soundManager.PlaySFX("SetSoul");
+            GameManager.instance.soundManager.PlaySFX("SetSoul", card.GetCardID);
         }
 
         if (card.EffectOnCardUsed is TargetingEffect)

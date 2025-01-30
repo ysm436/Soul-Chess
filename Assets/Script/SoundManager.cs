@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -12,6 +13,14 @@ public class SoundManager : MonoBehaviour
     private int num = 1;
 
     private Dictionary<string, AudioClip> sfxDictionary = new Dictionary<string, AudioClip>();
+
+    private readonly Dictionary<string, string> elementSFXDictionary = new Dictionary<string, string>()
+    {
+        { "수르트", "Fire" },
+        { "제우스", "Electricity" },
+        { "포세이돈", "Water" },
+        { "약탈선", "Water" },
+    };
 
     void Awake()
     {
@@ -107,12 +116,21 @@ public class SoundManager : MonoBehaviour
         bgmPlayer.Stop();
     }
 
-    public void PlaySFX(string name)
+    public void PlaySFX(string name, int id = -1)
     {
         if (!sfxDictionary.ContainsKey(name))
         {
             Debug.Log("ERROR: SoundManager doesn't have SFX " + name);
             return;
+        }
+
+        if (name == "SetSoul" && id >= 0)
+        {
+            string cardName = Card.cardIdDict.FirstOrDefault(x => x.Value == id).Key;
+            if (elementSFXDictionary.ContainsKey(cardName))
+            {
+                name = elementSFXDictionary[cardName];
+            }
         }
 
         sfxPlayer.PlayOneShot(sfxDictionary[name]);
