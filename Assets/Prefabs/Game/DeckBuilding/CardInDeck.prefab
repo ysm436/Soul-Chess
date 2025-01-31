@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 961229292295611974}
   - component: {fileID: 437344599201748345}
   m_Layer: 5
-  m_Name: Quantity_Text
+  m_Name: QuantityText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 2544551257424148230}
   - component: {fileID: 2673260691478949314}
   m_Layer: 5
-  m_Name: Cost_Text
+  m_Name: CostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 4561467537380758821}
   - component: {fileID: 8969920406030526456}
   m_Layer: 5
-  m_Name: Cardname_Text
+  m_Name: CardnameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 7846098234452227832}
   - component: {fileID: 6435329092576398986}
   m_Layer: 5
-  m_Name: SimpleCard
+  m_Name: CardInDeck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,8 +493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee3a0c9125497340a980144bab45f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardindex: 0
-  quantity: 0
+  cardDisplayIndex: 0
+  cardIndex: 0
   cardNameText: {fileID: 8969920406030526456}
-  cost: {fileID: 2673260691478949314}
+  costText: {fileID: 2673260691478949314}
   quantityText: {fileID: 437344599201748345}

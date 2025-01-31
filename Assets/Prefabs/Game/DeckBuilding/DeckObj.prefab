@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1216522560406564195}
   - component: {fileID: 6264986129022174256}
   m_Layer: 5
-  m_Name: SimpleDeck
+  m_Name: DeckObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,9 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee0838bd7f101b4ca41aa2ad1ec9ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deck_index: 0
-  DeckNameText: {fileID: 2269538181239671736}
-  LoadDeckButton: {fileID: 1216522560406564195}
+  deckIndex: 0
+  deckNameText: {fileID: 2269538181239671736}
+  loadDeckButton: {fileID: 1216522560406564195}
 --- !u!1 &8666609471233323579
 GameObject:
   m_ObjectHideFlags: 0

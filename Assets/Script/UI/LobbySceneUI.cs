@@ -168,7 +168,7 @@ public class LobbySceneUI : MonoBehaviour
                     {
                         GameObject deckselectbutton = Instantiate(DeckSelectButton, DeckDisplay);
                         DeckSelectButton buttoninfo = deckselectbutton.GetComponent<DeckSelectButton>();
-                        buttoninfo.deckname.text = GameManager.instance.deckList[i].deckname;
+                        buttoninfo.deckname.text = GameManager.instance.deckList[i].deckName;
                         buttoninfo.deck_index = i;
                     }
                 }
@@ -241,7 +241,7 @@ public class LobbySceneUI : MonoBehaviour
         else
         {
             //덱 선택해주세요 셰이더 비활성화
-            SelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckname + ">";
+            SelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckName + ">";
             GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
         }
     }

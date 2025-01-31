@@ -3,27 +3,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SimpleDeck : MonoBehaviour, IPointerClickHandler
+public class deckObj : MonoBehaviour, IPointerClickHandler
 {
-    public int deck_index;
-    public TextMeshProUGUI DeckNameText;
-    public Button LoadDeckButton;
+    public int deckIndex;
+    public TextMeshProUGUI deckNameText;
+    public Button loadDeckButton;
 
     private void Awake()
     {
-        LoadDeckButton.onClick.AddListener(LoadDeck);
+        loadDeckButton.onClick.AddListener(LoadDeck);
     }
 
     public void LoadDeck()
     {
-        GetComponentInParent<DeckBuildingSceneUI>().LoadDeck(deck_index);
+        GetComponentInParent<DeckBuildingSceneUI>().LoadDeckButtonFunction(deckIndex);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            GameManager.instance.deckList[deck_index].index = -1;
+            GameManager.instance.deckList[deckIndex].index = -1;
             GameManager.instance.SaveDeckData();
 
             Destroy(gameObject);
