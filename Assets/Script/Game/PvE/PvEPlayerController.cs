@@ -454,11 +454,11 @@ public class PvEPlayerController : PlayerController
                 dp[i, 1] = dp[i - 1, 1] + hand[i].cost;
         }
 
-        for (int i = 0; i < handCount; i++)
-        {
-            Debug.Log(i + " " + 0 + " : " + dp[i, 0]);
-            Debug.Log(i + " " + 1 + " : " + dp[i, 1]);
-        }
+        //for (int i = 0; i < handCount; i++)
+        //{
+            //Debug.Log(i + " " + 0 + " : " + dp[i, 0]);
+            //Debug.Log(i + " " + 1 + " : " + dp[i, 1]);
+        //}
 
         List<Card> willUseCards = new List<Card>();
 
@@ -466,7 +466,7 @@ public class PvEPlayerController : PlayerController
         {
             if (hand[i].cost > nowCost)
                 continue;
-            if (dp[i, 1] >= dp[i, 0])
+            if (dp[i, 1] > dp[i, 0])
             {
                 willUseCards.Add(hand[i]);
                 nowCost -= hand[i].cost;
@@ -475,7 +475,7 @@ public class PvEPlayerController : PlayerController
 
         foreach (var card in willUseCards)
         {
-            Debug.Log(card);
+            //Debug.Log(card);
         }
 
         foreach (var card in willUseCards)
@@ -483,20 +483,137 @@ public class PvEPlayerController : PlayerController
             if (UseCard(card))
             {
                 yield return new WaitForSeconds(3f);
-                int randNum = UnityEngine.Random.Range(0, targetableObjects.Count);
+                //int randNum = UnityEngine.Random.Range(0, targetableObjects.Count);
                 //Debug.Log(targetableObjects.Count);
                 //Debug.Log(randNum);
-                OnClickBoardSquare(targetableObjects[randNum].coordinate);
+
+                OnClickBoardSquare(GetCardUseCoordinate());
                 yield return new WaitForSeconds(2f);
                 if (targetableObjects.Count > 0)
                 {
-                    OnClickBoardSquare(targetableObjects[randNum].coordinate);
+                    OnClickBoardSquare(GetCardUseCoordinate());
                     yield return new WaitForSeconds(2f);
                 }
             }
         }
 
         yield return null;
+    }
+
+    private Vector2Int GetCardUseCoordinate()
+    {
+        List<Tuple<int, Vector2Int>> targetablePieces = new List<Tuple<int, Vector2Int>>();
+
+        foreach (var target in targetableObjects)
+        {
+            int weight = CalculateCardToPiece(gameBoard.gameData.GetPiece(target.coordinate));
+
+            targetablePieces.Add(new Tuple<int, Vector2Int>(weight, target.coordinate));
+        }
+
+
+        if (usingCard is Execution)
+        {
+            for(int i = 0;i<targetableObjects.Count;i++)
+            {
+                if (gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).AD >= 6 && gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).GetHP <= 6)
+                {
+                    int weight = targetablePieces[i].Item1 + 2000;
+                    targetablePieces.Add(new Tuple<int, Vector2Int>(weight, targetableObjects[i].coordinate));
+                }
+            }
+        }
+
+        if (usingCard is BloodEagle)
+        {
+            for (int i = 0; i < targetableObjects.Count; i++)
+            {
+                if ((gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).AD + gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).GetHP) >= 12)
+                {
+                    int weight = targetablePieces[i].Item1 + 2000;
+                    targetablePieces.Add(new Tuple<int, Vector2Int>(weight, targetableObjects[i].coordinate));
+                }
+            }
+        }
+
+        if(usingCard is David)
+        {
+            for (int i = 0; i < targetableObjects.Count; i++)
+            {
+                if (!isInfusing)
+                {
+                    if (gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).pieceType == ChessPiece.PieceType.King)
+                    {
+                        int weight = targetablePieces[i].Item1 + 2000;
+                        targetablePieces.Add(new Tuple<int, Vector2Int>(weight, targetableObjects[i].coordinate));
+                    }
+                }
+                else
+                {
+                    if ((gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).AD + gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).GetHP) >= 12)
+                    {
+                        int weight = targetablePieces[i].Item1 + 2000;
+                        targetablePieces.Add(new Tuple<int, Vector2Int>(weight, targetableObjects[i].coordinate));
+                    }
+                }
+            }
+        }
+
+        if (usingCard is DonQuixote)
+        {
+            for (int i = 0; i < targetableObjects.Count; i++)
+            {
+                if ((gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).pieceType == ChessPiece.PieceType.Knight))
+                {
+                    int weight = targetablePieces[i].Item1 + 2000;
+                    targetablePieces.Add(new Tuple<int, Vector2Int>(weight, targetableObjects[i].coordinate));
+                }
+            }
+        }
+
+        if (usingCard is LadyOfTheLake)
+        {
+            for (int i = 0; i < targetableObjects.Count; i++)
+            {
+                if ((gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).pieceType == ChessPiece.PieceType.Quene))
+                {
+                    int weight = targetablePieces[i].Item1 + 2000;
+                    targetablePieces.Add(new Tuple<int, Vector2Int>(weight, targetableObjects[i].coordinate));
+                }
+            }
+        }
+
+        if (usingCard is NewScytheTank)
+        {
+            for (int i = 0; i < targetableObjects.Count; i++)
+            {
+                if ((gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).pieceType == ChessPiece.PieceType.Rook))
+                {
+                    int weight = targetablePieces[i].Item1 + 2000;
+                    targetablePieces.Add(new Tuple<int, Vector2Int>(weight, targetableObjects[i].coordinate));
+                }
+            }
+        }
+
+        targetablePieces.Sort((a, b) => b.Item1.CompareTo(a.Item1));
+
+        foreach (var t in targetablePieces)
+        {
+            //Debug.Log(gameBoard.gameData.GetPiece(t.Item2).gameObject.name + t.Item2 + " : " + t.Item1);
+        }
+
+        return targetablePieces[0].Item2;
+    }
+
+    private int CalculateCardToPiece(ChessPiece piece)
+    {
+        int num = 0;
+        if (piece.soul == null)
+            num += 1000;
+        num += (12 - piece.GetHP) * 10;
+        num += cardPieceWeight[piece.pieceType];
+
+        return num;
     }
 
     private IEnumerator MovePieceComputer()
@@ -506,30 +623,114 @@ public class PvEPlayerController : PlayerController
 
     private IEnumerator CalculateAllPossibleCoordinate()
     {
-        List<(ChessPiece piece, Vector2Int coord)> AllMovableCoordinates = new List<(ChessPiece piece, Vector2Int coord)>();
+        List<Tuple<int, ChessPiece, Vector2Int>> AllMovableCoordinates = new List<Tuple<int, ChessPiece, Vector2Int>>();
 
         List<ChessPiece> AllChessPieces = GameBoard.instance.chessBoard.GetAllPieces(playerColor);
 
         foreach (var piece in AllChessPieces)
         {
-            foreach(Vector2Int coord in piece.GetMovableCoordinates())
-                AllMovableCoordinates.Add((piece,coord));
+            //Debug.Log(piece.gameObject.name);
+            foreach (Vector2Int coord in piece.GetMovableCoordinates())
+            {
+                int weight = (100 - movePieceWeight[piece.pieceType] * 10) - CalculateDestoryablePieces(piece, coord) * 10;
+                ChessPiece oppPiece = gameBoard.gameData.GetPiece(coord);
+                if (oppPiece != null)
+                {
+                    if (piece.AD >= oppPiece.GetHP)
+                        weight += movePieceWeight[oppPiece.pieceType] * 10;
+                }
+
+                weight += Mathf.Abs(coord.x - piece.coordinate.x) + Mathf.Abs(coord.y - piece.coordinate.y);
+
+                AllMovableCoordinates.Add(new Tuple<int, ChessPiece, Vector2Int>(weight, piece, coord));
+
+                Debug.Log(piece.gameObject.name + " " + piece.coordinate + " to " + coord + " : " + weight);
+            }
+        }
+
+        AllMovableCoordinates.Sort((a, b) => b.Item1.CompareTo(a.Item1));
+
+        foreach (var t in AllMovableCoordinates)
+        {
+            //Debug.Log(t.Item2.gameObject.name + " " +t.Item2.coordinate +" to " + t.Item3 + " : " + t.Item1);
         }
 
         //가중치 계산하기
         if (AllMovableCoordinates.Count > 0)
         {
-            int randNum = UnityEngine.Random.Range(0, AllChessPieces.Count);
-
-            OnClickBoardSquare(AllMovableCoordinates[randNum].piece.coordinate);
+            Debug.Log(AllMovableCoordinates[0].Item2.coordinate);
+            OnClickBoardSquare(AllMovableCoordinates[0].Item2.coordinate);
 
             yield return new WaitForSeconds(2f);
 
-            OnClickBoardSquare(AllMovableCoordinates[randNum].coord);
+            Debug.Log(AllMovableCoordinates[0].Item3);
+            OnClickBoardSquare(AllMovableCoordinates[0].Item3);
 
             yield return new WaitForSeconds(1f);
         }
     }
+
+    // 상대말한테 파괴 당하는가 ( 해당 말[myPiece]이 myCoord로 이동했을 때)
+    // 현 상태 보고 싶으면 myCoord 현재 위치 넣기
+    private int CalculateDestoryablePieces(ChessPiece myPiece, Vector2Int myCoord)
+    {
+        int num = 0;
+
+        GameData tempGameData = gameBoard.gameData;
+
+        Vector2Int originCoord = myPiece.coordinate;
+
+        myPiece.coordinate = myCoord;
+
+        List<(ChessPiece piece, Vector2Int coord)> AllOpponentMovableCoordinates = new List<(ChessPiece piece, Vector2Int coord)>();
+        List<ChessPiece> AllOpponentChessPieces = null;
+
+        if (playerColor == GameBoard.PlayerColor.White)
+            AllOpponentChessPieces = GameBoard.instance.chessBoard.GetAllPieces(GameBoard.PlayerColor.Black);
+        else
+            AllOpponentChessPieces = GameBoard.instance.chessBoard.GetAllPieces(GameBoard.PlayerColor.White);
+
+        foreach (var oppPiece in AllOpponentChessPieces)
+        {
+            foreach (Vector2Int coord in oppPiece.GetMovableCoordinates())
+            {
+                var myPieces = GameBoard.instance.chessBoard.GetAllPieces(playerColor);
+
+                foreach (var piece in myPieces)
+                {
+                    if (coord == piece.coordinate && piece.GetHP <= oppPiece.AD)
+                    {
+                        Debug.Log(piece.gameObject.name + piece.coordinate);
+                        num += movePieceWeight[piece.pieceType];
+                    }
+                }
+            }
+        }
+
+        myPiece.coordinate = originCoord;
+
+        return num;
+    }
+
+    public static Dictionary<ChessPiece.PieceType, int> movePieceWeight = new Dictionary<ChessPiece.PieceType, int>()
+    {
+        {ChessPiece.PieceType.Pawn,1 },
+        {ChessPiece.PieceType.Knight,3 },
+        {ChessPiece.PieceType.Bishop,3 },
+        {ChessPiece.PieceType.Rook,5 },
+        {ChessPiece.PieceType.Quene,9 },
+        {ChessPiece.PieceType.King,100 }
+    };
+
+    public static Dictionary<ChessPiece.PieceType, int> cardPieceWeight = new Dictionary<ChessPiece.PieceType, int>()
+    {
+        {ChessPiece.PieceType.Pawn,10 },
+        {ChessPiece.PieceType.Knight,8 },
+        {ChessPiece.PieceType.Bishop,6 },
+        {ChessPiece.PieceType.Rook,6 },
+        {ChessPiece.PieceType.Quene,4 },
+        {ChessPiece.PieceType.King,2 }
+    };
 
     public bool CanUseCard(Card card)
     {
