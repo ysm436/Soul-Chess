@@ -21,6 +21,7 @@ public class PvEDeckHandController : MonoBehaviour
     public Transform opponentHandTransform;
 
     PlayerData player;
+    PlayerData computer;
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class PvEDeckHandController : MonoBehaviour
         GameBoard.instance.gameData.myPlayerData.UpdateHandPosition += UpdateMyHandPosition;
 
         player = GameBoard.instance.gameData.myPlayerData;
+        computer = GameBoard.instance.gameData.opponentPlayerData;
 
         Card instantiatedCard;
 
@@ -54,11 +56,10 @@ public class PvEDeckHandController : MonoBehaviour
 
         player.Initialize();
 
-
         //이게 AI덱 생성과 핸드 생성인듯
-        InitializeRemote(Card.GetCardIDArray(player.deck), Card.GetCardIDArray(player.hand));
+        InitializeRemote();
     }
-    public void InitializeRemote(int[] deckData, int[] handData)
+    public void InitializeRemote()
     {
         GameBoard.instance.gameData.opponentPlayerData.UpdateHandPosition += UpdateOpponentHandPosition;
 
@@ -68,7 +69,9 @@ public class PvEDeckHandController : MonoBehaviour
 
         var handAnchor = opponentHandTransform;
 
-        foreach (Card card in GameManager.instance.GetCardListFrom(deckData.ToList<int>()))
+        List<int> computerDeck = CreateComputerDeck();
+
+        foreach (Card card in GameManager.instance.GetCardListFrom(computerDeck))
         {
             card.owner = GameBoard.instance.gameData.opponentPlayerData;
             instantiatedCard = Instantiate(card, deckAnchor);
@@ -77,19 +80,92 @@ public class PvEDeckHandController : MonoBehaviour
             instantiatedCard.GetComponent<SortingGroup>().sortingOrder = -1;
         }
 
-        foreach (Card card in GameManager.instance.GetCardListFrom(handData.ToList<int>()))
-        {
-            card.owner = GameBoard.instance.gameData.opponentPlayerData;
-            instantiatedCard = Instantiate(card, handAnchor);
-            instantiatedCard.transform.position = new Vector3(-5.85f, 7f, 0);
-            GameBoard.instance.gameData.opponentPlayerData.TryAddCardInHand(instantiatedCard);
-        }
-
         foreach (Card card in gameBoard.gameData.opponentPlayerData.deck)
         {
             AddCardInOpponentDeckObject(card);
         }
+
+        computer.Initialize();
     }
+
+    private List<int> CreateComputerDeck()
+    {
+        List<int> commonCards = new List<int>();
+        List<int> legendaryCards = new List<int>();
+        List<int> mythicalCards = new List<int>();
+
+        foreach (var cardObj in GameManager.instance.AllCards)
+        {
+            if (cardObj == null)
+                continue;
+            Card card = cardObj?.GetComponent<Card>();
+
+            if (card != null)
+            {
+                //제한 카드 예외처리
+                // 아서왕의 가호,오딘의눈 카드 아직 없던데
+                if (card is Hell || card is ToneDeafBard || card is WilhelmTell || card is JackFrost || card is Cain || card is GreenKnight || card is Cerberus 
+                    || card is Hades || card is Zeus || card is Surtr)
+                    continue;
+
+
+                switch (card.rarity)
+                {
+                    case Card.Rarity.Common:
+                        commonCards.Add(card.GetCardID);
+                        break;
+                    case Card.Rarity.Legendary:
+                        legendaryCards.Add(card.GetCardID);
+                        break;
+                    case Card.Rarity.Mythical:
+                        mythicalCards.Add(card.GetCardID);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+        // 덱 추가하기
+
+        List<int> computerDeck = new List<int>();
+
+        //신화 카드
+        for (int i = 0; i < 3; i++)
+        {
+            int temp;
+            temp = UnityEngine.Random.Range(0, mythicalCards.Count);
+
+            computerDeck.Add(mythicalCards[temp]);
+
+            mythicalCards.RemoveAt(temp);
+        }
+        //전설카드
+        for (int i = 0; i < 9; i++)
+        {
+            int temp;
+            temp = UnityEngine.Random.Range(0, legendaryCards.Count);
+
+            computerDeck.Add(legendaryCards[temp]);
+
+            legendaryCards.RemoveAt(temp);
+        }
+        //일반카드
+        for (int i = 0; i < 6; i++)
+        {
+            int temp;
+            temp = UnityEngine.Random.Range(0, commonCards.Count);
+
+            computerDeck.Add(commonCards[temp]);
+            computerDeck.Add(commonCards[temp]);
+
+            commonCards.RemoveAt(temp);
+        }
+
+        return computerDeck;
+    }
+
 
     public void AddCardInMyDeckObject(Card card)
     {
