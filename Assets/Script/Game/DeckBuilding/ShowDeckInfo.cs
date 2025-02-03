@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
-using System.Linq;
 
 public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -17,22 +14,22 @@ public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        DeckManager deckmanager = GetComponentInParent<DeckManager>();
+        DeckManager deckManager = GetComponentInParent<DeckManager>();
 
         for (int i = 0; i < costGraph.childCount; i++)
         {
-            RectTransform recttransform = costGraph.GetChild(i).GetComponent<RectTransform>();
-            Vector2 graphSize = recttransform.sizeDelta;
-            graphSize.y = 10 * deckmanager.loadedDeckCosts[i];
-            recttransform.sizeDelta = graphSize;
+            RectTransform rectTransform = costGraph.GetChild(i).GetComponent<RectTransform>();
+            Vector2 graphSize = rectTransform.sizeDelta;
+            graphSize.y = 10 * deckManager.loadedDeckCosts[i];
+            rectTransform.sizeDelta = graphSize;
         }
 
-        soulCost.text = deckmanager.loadedDeckTypes[0].ToString();
-        spellCost.text = deckmanager.loadedDeckTypes[1].ToString();
+        soulCost.text = deckManager.loadedDeckTypes[0].ToString();
+        spellCost.text = deckManager.loadedDeckTypes[1].ToString();
 
-        commonCost.text = deckmanager.loadedDeckRarities[0].ToString();
-        legendaryCost.text = deckmanager.loadedDeckRarities[1].ToString() + " / 9";
-        mythicalCost.text = deckmanager.loadedDeckRarities[2].ToString() + " / 3";
+        commonCost.text = deckManager.loadedDeckRarities[0].ToString();
+        legendaryCost.text = deckManager.loadedDeckRarities[1].ToString() + " / 9";
+        mythicalCost.text = deckManager.loadedDeckRarities[2].ToString() + " / 3";
 
         deckInfoPanel.SetActive(true);
     }

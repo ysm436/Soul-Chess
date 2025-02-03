@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,39 +19,11 @@ public class DisplayInfo : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
             if (value == 0)
             {
-                Image[] images = GetComponentsInChildren<Image>();
-                foreach (var image in images)
-                {
-                    Color color = image.color;
-                    color.a = 0.5f;
-                    image.color = color;
-                }
-
-                TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
-                foreach (var text in texts)
-                {
-                    text.alpha = 0.5f;
-                }
-
-                canvasGroup.blocksRaycasts = false;
+                DisplayUnAvailable();
             }
             else
             {
-                Image[] images = GetComponentsInChildren<Image>();
-                foreach (var image in images)
-                {
-                    Color color = image.color;
-                    color.a = 1f;
-                    image.color = color;
-                }
-
-                TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
-                foreach (var text in texts)
-                {
-                    text.alpha = 1f;
-                }
-
-                canvasGroup.blocksRaycasts = true;
+                DisplayAvailable();
             }
         }
     }
@@ -214,5 +185,43 @@ public class DisplayInfo : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         {
             dbm.deckManager.InsertCardInDeck(draggedCard.GetComponent<DisplayInfo>());
         }
+    }
+
+    public void DisplayUnAvailable()
+    {
+        Image[] images = GetComponentsInChildren<Image>();
+        foreach (var image in images)
+        {
+            Color color = image.color;
+            color.a = 0.5f;
+            image.color = color;
+        }
+
+        TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (var text in texts)
+        {
+            text.alpha = 0.5f;
+        }
+
+        canvasGroup.blocksRaycasts = false;
+    }
+
+    public void DisplayAvailable()
+    {   
+        Image[] images = GetComponentsInChildren<Image>();
+        foreach (var image in images)
+        {
+            Color color = image.color;
+            color.a = 1f;
+            image.color = color;
+        }
+
+        TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (var text in texts)
+        {
+            text.alpha = 1f;
+        }
+
+        canvasGroup.blocksRaycasts = true;
     }
 }

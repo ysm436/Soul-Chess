@@ -169,7 +169,7 @@ public class LobbySceneUI : MonoBehaviour
                         GameObject deckselectbutton = Instantiate(DeckSelectButton, DeckDisplay);
                         DeckSelectButton buttoninfo = deckselectbutton.GetComponent<DeckSelectButton>();
                         buttoninfo.deckname.text = GameManager.instance.deckList[i].deckName;
-                        buttoninfo.deck_index = i;
+                        buttoninfo.deckIndex = i;
                     }
                 }
             }

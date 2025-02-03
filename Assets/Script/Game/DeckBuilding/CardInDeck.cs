@@ -28,7 +28,7 @@ public class CardInDeck : MonoBehaviour, IPointerClickHandler
         {
             DisplayInfo targetDisplayInfo = dbm.cardDisplayList[cardDisplayIndex].GetComponent<DisplayInfo>();
             targetDisplayInfo.Quantity += 1;
-            dbm.deckManager.tempDeck.Remove(cardIndex);
+            dbm.deckManager.tempDeck.Remove(cardDisplayIndex);
             Quantity -= 1;
 
             if (Quantity == 0)

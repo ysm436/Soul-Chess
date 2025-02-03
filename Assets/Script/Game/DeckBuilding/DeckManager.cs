@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DeckManager : MonoBehaviour
 {
@@ -24,6 +24,8 @@ public class DeckManager : MonoBehaviour
     [SerializeField] public GameObject cautionPanel;
     [SerializeField] public TextMeshProUGUI cautionText;
     [SerializeField] private TextMeshProUGUI cardCountText;
+    [SerializeField] private Text legendaryCountText;
+    [SerializeField] private Text mythicalCountText;
 
     public bool newDeckSignal = false;
     private bool duplicateSignal = false;
@@ -307,6 +309,30 @@ public class DeckManager : MonoBehaviour
         loadedDeckCosts = (int[])loadedDeck.costs.Clone();
         loadedDeckTypes = (int[])loadedDeck.types.Clone();
         loadedDeckRarities = (int[])loadedDeck.rarities.Clone();
+
+        if (loadedDeckRarities[1] == 9)
+        {
+            foreach (var cardDisplay in dbm.cardDisplayList)
+            {
+                DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                if (targetDisplay.Rarity == Card.Rarity.Legendary)
+                {
+                    targetDisplay.DisplayUnAvailable();
+                }
+            }
+        }
+
+        if (loadedDeckRarities[2] == 3)
+        {
+            foreach (var cardDisplay in dbm.cardDisplayList)
+            {
+                DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                if (targetDisplay.Rarity == Card.Rarity.Mythical)
+                {
+                    targetDisplay.DisplayUnAvailable();
+                }
+            }
+        }
         cardCountText.text = "카드 : " + loadedDeckCardCount.ToString() + " / " + CARD_LIMIT.ToString();
     }
     private void DeckInfoSave()
@@ -346,8 +372,36 @@ public class DeckManager : MonoBehaviour
         switch (cardInfo.Rarity)
         {
             case Card.Rarity.Common: loadedDeckRarities[0] += 1; break;
-            case Card.Rarity.Legendary: loadedDeckRarities[1] += 1; break;
-            case Card.Rarity.Mythical: loadedDeckRarities[2] += 1; break;
+            case Card.Rarity.Legendary:
+                loadedDeckRarities[1] += 1;
+                legendaryCountText.text = "전설 (" + loadedDeckRarities[1].ToString() + "/9)";
+                if (loadedDeckRarities[1] == 9)
+                {
+                    foreach (var cardDisplay in dbm.cardDisplayList)
+                    {
+                        DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                        if (targetDisplay.Rarity == Card.Rarity.Legendary)
+                        {
+                            targetDisplay.DisplayUnAvailable();
+                        }
+                    }
+                }
+                break;
+            case Card.Rarity.Mythical:
+                loadedDeckRarities[2] += 1;
+                mythicalCountText.text = "신화 (" + loadedDeckRarities[2].ToString() + "/3)";
+                if (loadedDeckRarities[2] == 3)
+                {
+                    foreach (var cardDisplay in dbm.cardDisplayList)
+                    {
+                        DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                        if (targetDisplay.Rarity == Card.Rarity.Mythical)
+                        {
+                            targetDisplay.DisplayUnAvailable();
+                        }
+                    }
+                }
+                break;
         }
 
         cardCountText.text = "카드 : " + loadedDeckCardCount.ToString() + " / " + CARD_LIMIT.ToString();
@@ -380,10 +434,37 @@ public class DeckManager : MonoBehaviour
         switch (cardInfo.Rarity)
         {
             case Card.Rarity.Common: loadedDeckRarities[0] -= 1; break;
-            case Card.Rarity.Legendary: loadedDeckRarities[1] -= 1; break;
-            case Card.Rarity.Mythical: loadedDeckRarities[2] -= 1; break;
+            case Card.Rarity.Legendary:
+                if (loadedDeckRarities[1] == 9)
+                {
+                    foreach (var cardDisplay in dbm.cardDisplayList)
+                    {
+                        DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                        if (targetDisplay.Rarity == Card.Rarity.Legendary && targetDisplay.Quantity != 0)
+                        {
+                            targetDisplay.DisplayAvailable();
+                        }
+                    }
+                }
+                loadedDeckRarities[1] -= 1;
+                legendaryCountText.text = "전설 (" + loadedDeckRarities[1].ToString() + "/9)";
+                break;
+            case Card.Rarity.Mythical:
+                if (loadedDeckRarities[2] == 3)
+                {
+                    foreach (var cardDisplay in dbm.cardDisplayList)
+                    {
+                        DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                        if (targetDisplay.Rarity == Card.Rarity.Mythical && targetDisplay.Quantity != 0)
+                        {
+                            targetDisplay.DisplayAvailable();
+                        }
+                    }
+                }
+                loadedDeckRarities[2] -= 1;
+                mythicalCountText.text = "신화 (" + loadedDeckRarities[2].ToString() + "/3)";
+                break;
         }
-
         cardCountText.text = "카드 : " + loadedDeckCardCount.ToString() + " / " + CARD_LIMIT.ToString();
     }
 

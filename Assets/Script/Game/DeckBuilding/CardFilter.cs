@@ -1,36 +1,58 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Data.Common;
+using System.Linq;
+using Unity.VisualScripting;
 
 public class CardFilter : MonoBehaviour
 {
+    private DeckBuildingManager dbm;
+    
     private bool[] typeToggleList = new bool[2] {true, true}; // {soul, spell}
     private bool[] regionToggleList = new bool[3] {true, true, true}; // {greek, western, norse}
     private bool[] rarityToggleList = new bool[3] {true, true, true}; // {common, legendary, mythical}
+
+    private List<DisplayInfo> displayCardInfoList = new List<DisplayInfo>();
+    private List<int> cardFilterOnIndexList = new List<int>();
+    private List<int> cardFilterOffIndexList = new List<int>();
+    public List<int> searchIndexList = new List<int>();
+
     [SerializeField] TMP_InputField searchInputField;
-    [SerializeField] GameObject preventPanel;    
     private bool searchSignal = false;
 
     private void Awake()
     {
         searchInputField.onValueChanged.AddListener(SearchCard);
+        dbm = GetComponent<DeckBuildingManager>();
+
+        foreach (var displayCard in dbm.cardDisplayList)
+        {
+            DisplayInfo targetDisplay = displayCard.GetComponent<DisplayInfo>();
+            displayCardInfoList.Add(targetDisplay);
+            cardFilterOnIndexList.Add(targetDisplay.cardDisplayIndex);
+            searchIndexList.Add(targetDisplay.cardDisplayIndex);
+        }
     }
 
     public void SearchCard(string searchtext)
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-
-        if (searchtext != "" && !searchSignal)
+        if (searchtext != "")
         {
+            Debug.Log("??");
             searchSignal = true;
-            preventPanel.SetActive(true);
+            searchIndexList.Clear();
+        }
+        else
+        {
+            searchSignal = false;
+            DisplayReload();
+            return;
         }
 
-        foreach (var card in DisplayCardList)
+        foreach (var displayCardInfo in displayCardInfoList)
         {
-            string cardname = card.GetComponent<DisplayInfo>().CardName;
+            string cardname = displayCardInfo.CardName;
             int cardnamelength = cardname.Length;
             int searchlength = searchtext.Length;
 
@@ -40,35 +62,18 @@ public class CardFilter : MonoBehaviour
                 {
                     if (searchtext.ToLower() == cardname.Substring(i, searchlength).ToLower())
                     {
-                        card.SetActive(true);
+                        searchIndexList.Add(displayCardInfo.cardDisplayIndex);
                         break;
-                    }
-                    else
-                    {
-                        card.SetActive(false);
                     }
                 }
             }
         }
-
-        if (searchtext == "" && searchSignal)
-        {
-            searchSignal = false;
-            foreach (var card in DisplayCardList)
-            {
-                card.SetActive(false);
-            }
-
-            preventPanel.SetActive(false);
-            ForOnToggle();
-        }
+        DisplayReload();
     }
 
     //스펠 카드 토글
     public void SoulToggle(bool soul)
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-
         if (soul)
         {
             typeToggleList[0] = true;
@@ -77,20 +82,22 @@ public class CardFilter : MonoBehaviour
         else
         {
             typeToggleList[0] = false;
-            foreach (var card in DisplayCardList)
+            foreach (var targetDisplayIndex in cardFilterOnIndexList.ToList())
             {
-                if (!searchSignal && card.activeSelf && card.GetComponent<DisplayInfo>().cardType == Card.Type.Soul)
+                DisplayInfo targetDisplay = displayCardInfoList[targetDisplayIndex];
+                if (targetDisplay.cardType == Card.Type.Soul)
                 {
-                    card.SetActive(false);
+                    cardFilterOnIndexList.Remove(targetDisplayIndex);
+                    cardFilterOffIndexList.Add(targetDisplayIndex);
                 }
             }
+            DisplayReload();
         }
     }
+
     //스펠 카드 토글
     public void SpellToggle(bool spell)
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-
         if (spell)
         {
             typeToggleList[1] = true;
@@ -99,22 +106,24 @@ public class CardFilter : MonoBehaviour
         else
         {
             typeToggleList[1] = false;
-            foreach (var card in DisplayCardList)
+            foreach (var targetDisplayIndex in cardFilterOnIndexList.ToList())
             {
-                if (!searchSignal && card.activeSelf && card.GetComponent<DisplayInfo>().cardType == Card.Type.Spell)
+                DisplayInfo targetDisplay = displayCardInfoList[targetDisplayIndex];
+                if (targetDisplay.cardType == Card.Type.Spell)
                 {
-                    card.SetActive(false);
+                    Debug.Log(targetDisplayIndex);
+                    cardFilterOffIndexList.Add(targetDisplayIndex);
+                    cardFilterOnIndexList.Remove(targetDisplayIndex);
                 }
             }
+            DisplayReload();
         }
     }
 
     //그리스 지역 토글
-    public void GreekToggle(bool western)
+    public void GreekToggle(bool greek)
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-
-        if (western)
+        if (greek)
         {
             regionToggleList[0] = true;
             ForOnToggle();
@@ -122,21 +131,22 @@ public class CardFilter : MonoBehaviour
         else
         {
             regionToggleList[0] = false;
-            foreach (var card in DisplayCardList)
+            foreach (var targetDisplayIndex in cardFilterOnIndexList.ToList())
             {
-                if (!searchSignal && card.activeSelf && card.GetComponent<DisplayInfo>().reigon == Card.Reigon.Greek)
+                DisplayInfo targetDisplay = displayCardInfoList[targetDisplayIndex];
+                if (targetDisplay.reigon == Card.Reigon.Greek)
                 {
-                    card.SetActive(false);
+                    cardFilterOnIndexList.Remove(targetDisplayIndex);
+                    cardFilterOffIndexList.Add(targetDisplayIndex);
                 }
             }
+            DisplayReload();
         }
     }
 
     //서유럽 지역 토글
     public void WesternToggle(bool western)
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-
         if (western)
         {
             regionToggleList[1] = true;
@@ -145,21 +155,22 @@ public class CardFilter : MonoBehaviour
         else
         {
             regionToggleList[1] = false;
-            foreach (var card in DisplayCardList)
+            foreach (var targetDisplayIndex in cardFilterOnIndexList.ToList())
             {
-                if (!searchSignal && card.activeSelf && card.GetComponent<DisplayInfo>().reigon == Card.Reigon.Western)
+                DisplayInfo targetDisplay = displayCardInfoList[targetDisplayIndex];
+                if (targetDisplay.reigon == Card.Reigon.Western)
                 {
-                    card.SetActive(false);
+                    cardFilterOnIndexList.Remove(targetDisplayIndex);
+                    cardFilterOffIndexList.Add(targetDisplayIndex);
                 }
             }
+            DisplayReload();
         }
     }
 
     //북유럽 지역 토글
     public void NorseToggle(bool norse)
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-
         if (norse)
         {
             regionToggleList[2] = true;
@@ -168,21 +179,22 @@ public class CardFilter : MonoBehaviour
         else
         {
             regionToggleList[2] = false;
-            foreach (var card in DisplayCardList)
+            foreach (var targetDisplayIndex in cardFilterOnIndexList.ToList())
             {
-                if (!searchSignal && card.activeSelf && card.GetComponent<DisplayInfo>().reigon == Card.Reigon.Norse)
+                DisplayInfo targetDisplay = displayCardInfoList[targetDisplayIndex];
+                if (targetDisplay.reigon == Card.Reigon.Norse)
                 {
-                    card.SetActive(false);
+                    cardFilterOnIndexList.Remove(targetDisplayIndex);
+                    cardFilterOffIndexList.Add(targetDisplayIndex);
                 }
             }
+            DisplayReload();
         }
     }
 
     //일반 등급 토글
     public void CommonToggle(bool common)
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-
         if (common)
         {
             rarityToggleList[0] = true;
@@ -191,21 +203,22 @@ public class CardFilter : MonoBehaviour
         else
         {
             rarityToggleList[0] = false;
-            foreach (var card in DisplayCardList)
+            foreach (var targetDisplayIndex in cardFilterOnIndexList.ToList())
             {
-                if (!searchSignal && card.activeSelf && card.GetComponent<DisplayInfo>().Rarity == Card.Rarity.Common)
+                DisplayInfo targetDisplay = displayCardInfoList[targetDisplayIndex];
+                if (targetDisplay.Rarity == Card.Rarity.Common)
                 {
-                    card.SetActive(false);
+                    cardFilterOnIndexList.Remove(targetDisplayIndex);
+                    cardFilterOffIndexList.Add(targetDisplayIndex);
                 }
             }
+            DisplayReload();
         }
     }
 
     //전설 등급 토글
     public void LegendaryToggle(bool legendary)
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-
         if (legendary)
         {
             rarityToggleList[1] = true;
@@ -214,21 +227,22 @@ public class CardFilter : MonoBehaviour
         else
         {
             rarityToggleList[1] = false;
-            foreach (var card in DisplayCardList)
+            foreach (var targetDisplayIndex in cardFilterOnIndexList.ToList())
             {
-                if (!searchSignal && card.activeSelf && card.GetComponent<DisplayInfo>().Rarity == Card.Rarity.Legendary)
+                DisplayInfo targetDisplay = displayCardInfoList[targetDisplayIndex];
+                if (targetDisplay.Rarity == Card.Rarity.Legendary)
                 {
-                    card.SetActive(false);
+                    cardFilterOnIndexList.Remove(targetDisplayIndex);
+                    cardFilterOffIndexList.Add(targetDisplayIndex);
                 }
             }
+            DisplayReload();
         }
     }
 
     //신화 등급 토글
     public void MythicalToggle(bool mythical)
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-
         if (mythical)
         {
             rarityToggleList[2] = true;
@@ -237,67 +251,83 @@ public class CardFilter : MonoBehaviour
         else
         {
             rarityToggleList[2] = false;
-            foreach (var card in DisplayCardList)
+            foreach (var targetDisplayIndex in cardFilterOnIndexList.ToList())
             {
-                if (!searchSignal && card.activeSelf && card.GetComponent<DisplayInfo>().Rarity == Card.Rarity.Mythical)
+                DisplayInfo targetDisplay = displayCardInfoList[targetDisplayIndex];
+                if (targetDisplay.Rarity == Card.Rarity.Mythical)
                 {
-                    card.SetActive(false);
+                    cardFilterOnIndexList.Remove(targetDisplayIndex);
+                    cardFilterOffIndexList.Add(targetDisplayIndex);
                 }
             }
+            DisplayReload();
         }
     }
 
     private void ForOnToggle()
     {
-        List<GameObject> DisplayCardList = GetComponent<DeckBuildingManager>().cardDisplayList;
-        
-        foreach (var card in DisplayCardList)
+        foreach (var targetDisplayIndex in cardFilterOffIndexList.ToList())
         {
-            DisplayInfo cardinfo = card.GetComponent<DisplayInfo>();
-            bool onflag = false;
+            DisplayInfo cardinfo = displayCardInfoList[targetDisplayIndex];
 
-            if (!card.activeSelf && !searchSignal)
-            {   
-                if (cardinfo.cardType == Card.Type.Soul)
-                {
-                    if (!typeToggleList[0]) continue; 
-                }
-                else
-                {
-                    if (!typeToggleList[1]) continue;
-                }
-
-                if (cardinfo.reigon == Card.Reigon.Greek)
-                {
-                    if (!regionToggleList[0]) continue;
-                }
-                else if (cardinfo.reigon == Card.Reigon.Western)
-                {
-                    if (!regionToggleList[1]) continue;
-                }
-                else
-                {
-                    if (!regionToggleList[2]) continue;
-                }
-
-                if (cardinfo.Rarity == Card.Rarity.Common)
-                {
-                    if (!rarityToggleList[0]) continue;
-                }
-                else if (cardinfo.Rarity == Card.Rarity.Legendary)
-                {
-                    if (!rarityToggleList[1]) continue;
-                }
-                else
-                {
-                    if (!rarityToggleList[2]) continue;
-                }
- 
-                if (onflag || cardinfo.cardType == Card.Type.Spell)
-                {
-                    card.SetActive(true);
-                }
+            if (cardinfo.cardType == Card.Type.Soul)
+            {
+                if (!typeToggleList[0]) continue; 
             }
+            else
+            {
+                if (!typeToggleList[1]) continue;
+            }
+
+            if (cardinfo.reigon == Card.Reigon.Greek)
+            {
+                if (!regionToggleList[0]) continue;
+            }
+            else if (cardinfo.reigon == Card.Reigon.Western)
+            {
+                if (!regionToggleList[1]) continue;
+            }
+            else
+            {
+                if (!regionToggleList[2]) continue;
+            }
+
+            if (cardinfo.Rarity == Card.Rarity.Common)
+            {
+                if (!rarityToggleList[0]) continue;
+            }
+            else if (cardinfo.Rarity == Card.Rarity.Legendary)
+            {
+                if (!rarityToggleList[1]) continue;
+            }
+            else
+            {
+                if (!rarityToggleList[2]) continue;
+            }
+
+            cardFilterOnIndexList.Add(targetDisplayIndex);
+            cardFilterOffIndexList.Remove(targetDisplayIndex);
         }
+        DisplayReload();
+    }
+
+    private void DisplayReload()
+    {
+        if (searchSignal)
+        {
+            foreach (var cardDisplay in dbm.cardDisplayList)
+                cardDisplay.SetActive(false);
+
+            foreach (var cardDisplayIndex in cardFilterOnIndexList.Intersect(searchIndexList))
+                displayCardInfoList[cardDisplayIndex].gameObject.SetActive(true);
+        }
+        else
+        {
+            foreach (var cardDisplayIndex in cardFilterOnIndexList)
+                displayCardInfoList[cardDisplayIndex].gameObject.SetActive(true);
+        }
+        
+        foreach (var cardDisplayIndex in cardFilterOffIndexList)
+            displayCardInfoList[cardDisplayIndex].gameObject.SetActive(false);
     }
 }
