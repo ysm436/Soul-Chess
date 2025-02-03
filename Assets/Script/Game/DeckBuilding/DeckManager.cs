@@ -215,6 +215,7 @@ public class DeckManager : MonoBehaviour
 
         LocalDeckInfoReset();
         deckNameInputfield.text = "";
+        cardCountText.text = "카드 : 0 / " + CARD_LIMIT.ToString();
     }
 
     // 덱 생성 / 수정 취소
@@ -224,6 +225,7 @@ public class DeckManager : MonoBehaviour
         tempDeck.Clear();
         LocalDeckInfoReset();
         deckNameInputfield.text = "";
+        cardCountText.text = "카드 : 0 / " + CARD_LIMIT.ToString();
     }
 
     // 덱 로드
