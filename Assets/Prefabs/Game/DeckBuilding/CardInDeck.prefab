@@ -372,7 +372,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6da5cdf1fcdfd33479cbb929866afc07, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0aa73859dd05b1543a73eeb0869897b5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9d2f0e1dd4ba33c4793ba7b81b7fa31a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40db423b2feec8344828135479993a3e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9d2f0e1dd4ba33c4793ba7b81b7fa31a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40db423b2feec8344828135479993a3e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -806,8 +806,8 @@ MonoBehaviour:
   cardDisplayIndex: 0
   cardIndex: 0
   typeSpriteList:
-  - {fileID: 21300000, guid: 6da5cdf1fcdfd33479cbb929866afc07, type: 3}
-  - {fileID: 21300000, guid: 034b0e5c980a15244a7f7e4917a6101d, type: 3}
+  - {fileID: 21300000, guid: 0aa73859dd05b1543a73eeb0869897b5, type: 3}
+  - {fileID: 21300000, guid: 9522264838401c74c98cde3762292b6c, type: 3}
   rankGameObjectList:
   - {fileID: 4612611734592837295}
   - {fileID: 8607740232579901198}
@@ -881,7 +881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9d2f0e1dd4ba33c4793ba7b81b7fa31a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40db423b2feec8344828135479993a3e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
