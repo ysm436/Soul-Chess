@@ -9,20 +9,22 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
 {
     PhotonView photonView;
 
-    SpriteRenderer spriteRenderer;
+    public GameObject turnChangeButton;
+    private SpriteRenderer turnChangeButtonSR;
+    private Material turnChangeButtonMaterial;
     public Sprite whiteButton;
     public Sprite blackButton;
     public PlayerController whiteController;
     public PlayerController blackController;
-    public TurnChangeButtonHighlight turnChangeButtonHighlight;
     public SoulOrb mySoulOrb;
     public SoulOrb opponentSoulrOrb;
     public GameObject turn_display;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = whiteButton;
+        turnChangeButtonSR = turnChangeButton.GetComponent<SpriteRenderer>();
+        turnChangeButtonSR.sprite = whiteButton;
+        turnChangeButtonMaterial = turnChangeButton.GetComponent<Renderer>().material;
 
         photonView = GetComponent<PhotonView>();
 
@@ -73,7 +75,7 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     {
         if (whiteController.enabled)
         {
-            spriteRenderer.sprite = blackButton;
+            turnChangeButtonSR.sprite = blackButton;
 
             whiteController.TurnEnd();
             blackController.OpponentTurnEnd();
@@ -82,9 +84,19 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             blackController.enabled = true;
             
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.white;
+                TurnButtonText.text = "상대 턴";
                 turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            }
             else
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.white;
+                TurnButtonText.text = "턴 종료";
                 turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+            }
             StartCoroutine("TurnDisplayOnOff");
 
             blackController.TurnStart();
@@ -95,7 +107,7 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            spriteRenderer.sprite = whiteButton;
+            turnChangeButtonSR.sprite = whiteButton;
 
             blackController.TurnEnd();
             whiteController.OpponentTurnEnd();
@@ -104,9 +116,19 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             whiteController.enabled = true;
 
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.black;
+                TurnButtonText.text = "턴 종료";
                 turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+            }
             else
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.black;
+                TurnButtonText.text = "상대 턴";
                 turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            }
             StartCoroutine("TurnDisplayOnOff");
 
             whiteController.TurnStart();
@@ -115,7 +137,8 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             whiteController.LocalDraw();
             blackController.OpponentDraw();
         }
-        turnChangeButtonHighlight.spriteRenderer.enabled = false;
+
+        turnChangeButtonMaterial.SetFloat("_InnerOutlineAlpha", 0f);
     }
 
     private IEnumerator TurnDisplayOnOff()
