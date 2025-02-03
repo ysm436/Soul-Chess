@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CardInDeck : MonoBehaviour, IPointerClickHandler
 {
@@ -9,16 +11,47 @@ public class CardInDeck : MonoBehaviour, IPointerClickHandler
     private int _quantity;
     public int Quantity
     {
-        get {return _quantity;}
+        get { return _quantity; }
         set
         {
             _quantity = value;
-            quantityText.text = value.ToString();
+            quantityText.text = "X " + value.ToString();
         }
     }
+
+    public Card.Type cardType
+    {
+        set
+        {
+            if (value == Card.Type.Soul)
+                cardTypeImage.sprite = typeSpriteList[0];
+            else
+                cardTypeImage.sprite = typeSpriteList[1];
+        }
+    }
+
+    public Card.Rarity cardRarity
+    {
+        set
+        {
+            if (value == Card.Rarity.Legendary)
+                rankGameObjectList[1].SetActive(true);
+            else if (value == Card.Rarity.Mythical)
+            {
+                rankGameObjectList[1].SetActive(true);
+                rankGameObjectList[2].SetActive(true);
+            }    
+        }
+    }
+
+    [SerializeField] private List<Sprite> typeSpriteList;
+    [SerializeField] private List<GameObject> rankGameObjectList;
+
     public TextMeshProUGUI cardNameText;
     public TextMeshProUGUI costText;
-    public TextMeshProUGUI quantityText;
+    [SerializeField] private TextMeshProUGUI quantityText;
+
+    [SerializeField] private Image cardTypeImage;
     
     public void OnPointerClick(PointerEventData eventData)
     {

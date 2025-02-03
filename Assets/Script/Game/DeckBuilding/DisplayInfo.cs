@@ -174,16 +174,16 @@ public class DisplayInfo : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             {
                 inDeckSignal = true;
             }
-            else
-            {
-                canvasGroup.blocksRaycasts = true;
-                Destroy(draggedCard);
-            }
         }
         
         if (inDeckSignal)
         {
             dbm.deckManager.InsertCardInDeck(draggedCard.GetComponent<DisplayInfo>());
+        }
+        else
+        {
+            canvasGroup.blocksRaycasts = true;
+            Destroy(draggedCard);
         }
     }
 

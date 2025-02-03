@@ -76,6 +76,8 @@ public class DeckManager : MonoBehaviour
                     cardInDeckInfo.cardIndex = targetCard.cardIndex;
                     cardInDeckInfo.cardNameText.text = targetCard.CardName;
                     cardInDeckInfo.costText.text = targetCard.Cost.ToString();
+                    cardInDeckInfo.cardType = targetCard.cardType;
+                    cardInDeckInfo.cardRarity = targetCard.Rarity;
                     cardInDeckInfo.Quantity = 1;
 
                     for (int cardInDeckOrder = 0; cardInDeckOrder < cardInDeckSlot.childCount - 1; cardInDeckOrder++)
@@ -259,6 +261,8 @@ public class DeckManager : MonoBehaviour
                 cardInDeckInfo.cardIndex = targetCard.cardIndex;
                 cardInDeckInfo.cardNameText.text = targetCard.CardName;
                 cardInDeckInfo.costText.text = targetCard.Cost.ToString();
+                cardInDeckInfo.cardType = targetCard.cardType;
+                cardInDeckInfo.cardRarity = targetCard.Rarity;
                 cardInDeckInfo.Quantity = 1;
             }
             else
