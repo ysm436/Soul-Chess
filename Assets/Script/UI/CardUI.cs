@@ -37,7 +37,7 @@ public class CardUI : MonoBehaviour
         foreach (var cardFrame in cardFrames)
             cardFrame.SetActive(false);
 
-        cardFrames[(int)card.reigon].SetActive(true);
+        cardFrames[(int)card.rarity].SetActive(true);
 
         cardName.text = card.cardName;
         cost.text = card.cost.ToString();
