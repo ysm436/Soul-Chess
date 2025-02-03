@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System.Data.Common;
 
 public class DeckBuildingSceneUI : MonoBehaviour
 {
@@ -11,10 +12,10 @@ public class DeckBuildingSceneUI : MonoBehaviour
     [SerializeField] private Button newDeckButton;
     [SerializeField] private Button cancelButton;
     [SerializeField] private Button saveButton;
-    [SerializeField] public Button deckloadButton;
+    [SerializeField] public Button deckLoadButton;
     [SerializeField] public GameObject deckListPanel;
-    [SerializeField] public GameObject newDeckPanel;
-    public DeckManager deckmanager;
+    [SerializeField] public GameObject createDeckPanel;
+    public DeckManager deckManager;
     public bool debug = false;
 
     private void Awake()
@@ -23,9 +24,9 @@ public class DeckBuildingSceneUI : MonoBehaviour
         quitButton.onClick.AddListener(GameManager.instance.LoadMainScene);
         newDeckButton.onClick.AddListener(NewDeckButtonFunction);
         cancelButton.onClick.AddListener(CancelButtonFunction);
-        saveButton.onClick.AddListener(saveButtonFunction);
+        saveButton.onClick.AddListener(SaveButtonFunction);
 
-        deckmanager = newDeckPanel.GetComponent<DeckManager>();
+        deckManager = createDeckPanel.GetComponent<DeckManager>();
     }
 
     private void LoadMainScene()
@@ -35,72 +36,60 @@ public class DeckBuildingSceneUI : MonoBehaviour
 
     private void CancelButtonFunction()
     {
-        deckmanager.DeckCancel();
-        deckmanager.CardSlotReset();
+        deckManager.DeckCancel();
+        deckManager.CardSlotReset();
         GetComponent<DeckBuildingManager>().ReloadDisplayCard();
 
         deckListPanel.SetActive(true);
-        newDeckPanel.SetActive(false);
+        createDeckPanel.SetActive(false);
     }
 
     private void NewDeckButtonFunction()
     {
-        deckmanager.newDeckSignal = true;
+        deckManager.newDeckSignal = true;
 
         deckListPanel.SetActive(false);
-        newDeckPanel.SetActive(true);
+        createDeckPanel.SetActive(true);
     }
 
-    private void saveButtonFunction()
+    private void SaveButtonFunction()
     {
-        if (deckavailable())
+        if (deckAvailable())
         {
-            deckmanager.DeckSave(deckmanager.loaded_deck_index);
-            deckmanager.CardSlotReset();
+            deckManager.DeckSave(deckManager.loadedDeckIndex);
+            deckManager.CardSlotReset();
             GetComponent<DeckBuildingManager>().ReloadDisplayCard();
             GameManager.instance.SaveDeckData();
 
             deckListPanel.SetActive(true);
-            newDeckPanel.SetActive(false);
+            createDeckPanel.SetActive(false);
         }
         else
         {
-            deckmanager.CautionPanel.SetActive(true);
+            deckManager.cautionPanel.SetActive(true);
         }
     }
 
-    public void LoadDeck(int deck_index)
+    public void LoadDeckButtonFunction(int deckIndex)
     {
-        deckmanager.DeckLoad(deck_index);
+        deckManager.DeckLoad(deckIndex);
 
         deckListPanel.SetActive(false);
-        newDeckPanel.SetActive(true);
+        createDeckPanel.SetActive(true);
     }
 
-    private bool deckavailable()
+    private bool deckAvailable()
     {
         bool available = true;
-        int SoulCardQuantity = deckmanager.local_chesspieces.Sum();
 
         if (debug)
             return true;
 
-        if (deckmanager.local_card_count < 30)
+        if (deckManager.loadedDeckCardCount < 24)
         {            
             available = false;
-            deckmanager.CautionText.text = "덱에 30장의 카드가 들어가야 합니다.";
+            deckManager.cautionText.text = "덱에 24장의 카드가 들어가야 합니다.";
         }
-        else if (SoulCardQuantity < 16)
-        {
-            available = false;
-            deckmanager.CautionText.text = "덱에 적어도 16개의 기물카드는 들어가야 합니다.";
-        }
-        /* if (deckmanager.local_chesspieces[0] < 8) available = false;
-        else if (deckmanager.local_chesspieces[1] < 2) available = false;
-        else if (deckmanager.local_chesspieces[2] < 2) available = false;
-        else if (deckmanager.local_chesspieces[3] < 2) available = false;
-        else if (deckmanager.local_chesspieces[4] < 1) available = false;
-        else if (deckmanager.local_chesspieces[5] < 1) available = false; */
 
         return available;
     }
@@ -109,12 +98,12 @@ public class DeckBuildingSceneUI : MonoBehaviour
     {
         if (debugtoggle)
         {
-            deckmanager.debug_button = true;
+            deckManager.debugButton = true;
             debug = true;
         }
         else
         {
-            deckmanager.debug_button = false;
+            deckManager.debugButton = false;
             debug = false;
         }
     }

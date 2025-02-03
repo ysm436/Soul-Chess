@@ -1,181 +1,138 @@
 using System;
 using System.Collections.Generic;
-using TMPro;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DeckBuildingManager : MonoBehaviour
 {
-    public List<GameObject> DisplayCardList = new List<GameObject>();
+    public DeckManager deckManager;
 
-    [SerializeField] private List<Sprite> Icon_sprites;
-    [SerializeField] private int max_card_index;
-    [SerializeField] private int quantity_setting;
+    public List<GameObject> cardDisplayList = new List<GameObject>();
+    public List<int> cardIndexList = new List<int>();
 
-    public Transform DynamicDisplay;
-    public Transform DisplayStorage; // 디스플레이 카드가 덱에 들어가 남아있는 카드의 개수가 0개가 되었을 때 저장되는 창고
-    public Transform TrashCan; // 더 이상 쓰지 않는 object를 넣어두는 쓰레기통
-    public GameObject display_prefab_odd;
-    public GameObject display_prefab_even;
+    // [SerializeField] private List<Sprite> iconSprites;
+    [SerializeField] private int quantitySetting;
+
+    public Transform cardDisplayArea;
+    public Transform displayStorageArea;        // 디스플레이 카드가 덱에 들어가 남아있는 카드의 개수가 0개가 되었을 때 저장되는 창고
+    public Transform trashCan;              // 더 이상 쓰지 않는 object를 넣어두는 쓰레기통
+    
+    public GameObject displayPrefab;
+    /* public GameObject oddDisplayPrefab;
+    public GameObject evenDisplayPrefab; */
 
     private void Awake()
     {
-        MakeDisplayCard();
+        SetDisplayCard();
     }
 
     // 카드들을 화면에 나타냅니다.
-    private void MakeDisplayCard()
+    private void SetDisplayCard()
     {
+        List<Tuple<GameObject, Card>> OrderedCards = new List<Tuple<GameObject, Card>>();
+        
         for (int i = 0; i < GameManager.instance.AllCards.Length; i++)
         {
-            if (GameManager.instance.AllCards[i])
+            GameObject obj = GameManager.instance.AllCards[i];
+            if (obj)
             {
-                AddDisplayCard(i, quantity_setting);
-            }
-        }
-    }
-
-    //디스플레이 object를 생성합니다.
-    public void AddDisplayCard(int card_index, int quantity)
-    {
-        GameObject card = GameManager.instance.AllCards[card_index];
-        Card cardinfo = card.GetComponent<Card>();
-        
-        ChessPiece.PieceType piecelist = ChessPiece.PieceType.None;
-        List<ChessPiece.PieceType> includedChesspieces = new List<ChessPiece.PieceType>();
-        GameObject newDisplay;
-        int chesspiece_count;
-        
-        if (card.GetComponent<SpellCard>()) // 스펠 카드
-        {
-            chesspiece_count = 0;
-        }
-        else // 소울 카드
-        {
-            piecelist = card.GetComponent<SoulCard>().pieceRestriction;
-            foreach (ChessPiece.PieceType piecetype in Enum.GetValues(typeof(ChessPiece.PieceType)))
-            {
-                if (piecetype != ChessPiece.PieceType.None && piecelist.HasFlag(piecetype))
-                {
-                    includedChesspieces.Add(piecetype);
-                }
-            }
-            chesspiece_count = includedChesspieces.Count;
-        }
-
-        DisplayCard displaycard;
-        if (chesspiece_count % 2 == 0) // 디스플레이에 표시될 기물 짝수개
-        {
-            newDisplay = Instantiate(display_prefab_even, DynamicDisplay);
-            displaycard = newDisplay.GetComponent<DisplayCard>();
-            int child_number = 0;
-            
-            foreach (var piece in includedChesspieces)
-            {
-                Image piece_display = displaycard.chesspiecedisplay_list[child_number];
-                piece_display.sprite = ChessPieceDisplay(piece);
-                piece_display.gameObject.SetActive(true);
-                child_number++;
-            }
-        }
-        else // 홀수개
-        {
-            newDisplay = Instantiate(display_prefab_odd, DynamicDisplay);
-            displaycard = newDisplay.GetComponent<DisplayCard>();
-            int child_number = 0;
-            
-            foreach (var piece in includedChesspieces)
-            {
-                Image piece_display = displaycard.chesspiecedisplay_list[child_number];
-                piece_display.sprite = ChessPieceDisplay(piece);
-                piece_display.gameObject.SetActive(true);
-                child_number++;
+                Card objCard = obj.GetComponent<Card>();
+                OrderedCards.Add(Tuple.Create(obj, objCard));
             }
         }
 
-        newDisplay.name = card.name + "_display";
-        displaycard.cardindex = card_index;
-        displaycard.CardName = cardinfo.cardName;
-        displaycard.Cost = cardinfo.cost;
-        displaycard.Description = cardinfo.description;
-        displaycard.Reigon = cardinfo.reigon;
-        displaycard.Rarity = cardinfo.rarity;
-        displaycard.quantity = quantity;
-        displaycard.illustrate.sprite = cardinfo.illustration;
-        displaycard.cardframe.sprite = cardinfo.GetComponent<SpriteRenderer>().sprite;
+        OrderedCards = OrderedCards
+            .OrderBy(entry => entry.Item2.cost)
+            .ThenBy(entry => entry.Item1.GetComponent<SoulCard>() != null ? 0 : 1)
+            .ThenByDescending(entry => entry.Item2.rarity)
+            .ThenBy(entry => entry.Item2.reigon)
+            .ToList();
 
-        if (cardinfo is SoulCard)
+        for (int i = 0; i < OrderedCards.Count; i++)
         {
-            displaycard.HP = (cardinfo as SoulCard).HP;
-            displaycard.AD = (cardinfo as SoulCard).AD;
-        }
+            GameObject card = OrderedCards[i].Item1;
+            Card cardInfo = OrderedCards[i].Item2;
+            int quantity;
+            if (!(OrderedCards[i].Item2.rarity == Card.Rarity.Common))
+                quantity = 1;
+            else
+                quantity = 2;
 
-        if (chesspiece_count == 0)
-        {
-            displaycard.CardType = Card.Type.Spell;
-            displaycard.ChessPiece = ChessPiece.PieceType.None;
-        }
-        else
-        {
-            displaycard.CardType = Card.Type.Soul;
-            displaycard.ChessPiece = piecelist;
-        }
+            GameObject cardDisplayObj = Instantiate(displayPrefab, cardDisplayArea);
+            DisplayInfo displayInfo = cardDisplayObj.GetComponent<DisplayInfo>();
 
-        DisplayCardList.Add(newDisplay);
+            cardDisplayObj.name = card.name + "Display";
+            displayInfo.cardDisplayIndex = i;
+            displayInfo.cardIndex = cardInfo.GetCardID;
+            displayInfo.CardName = cardInfo.cardName;
+            displayInfo.Cost = cardInfo.cost;
+            displayInfo.description = cardInfo.description;
+            displayInfo.reigon = cardInfo.reigon;
+            displayInfo.Rarity = cardInfo.rarity;
+            displayInfo.illustrate.sprite = cardInfo.illustration;
+            displayInfo.Quantity = quantity;
+
+            if (cardInfo is SoulCard)
+            {
+                displayInfo.cardType = Card.Type.Soul;
+                displayInfo.HP = (cardInfo as SoulCard).HP;
+                displayInfo.AD = (cardInfo as SoulCard).AD;
+            }
+            else
+            {
+                displayInfo.cardType = Card.Type.Spell;
+            }
+
+            displayInfo.chessPieceType = ChessPiece.PieceType.None;
+            cardDisplayList.Add(cardDisplayObj);
+            cardIndexList.Add(displayInfo.cardIndex);
+        }
     }
 
     //디스플레이될 카드들을 재설정 합니다.
     public void ReloadDisplayCard()
     {
-        foreach (var display_card in DisplayCardList)
+        foreach (var displayCard in cardDisplayList)
         {
-            display_card.GetComponent<DisplayCard>().quantity = quantity_setting;
-        }
+            DisplayInfo targetDisplay = displayCard.GetComponent<DisplayInfo>();
 
-        for (int i = DisplayStorage.childCount; i > 0; i--)
-        {
-            Transform card = DisplayStorage.GetChild(i - 1);
-            AddDisplayCard(card.gameObject.GetComponent<DisplayCard>().cardindex, quantity_setting);
-            Transform added_display = DynamicDisplay.GetChild(DynamicDisplay.childCount - 1);
-            for (int card_order = 0; card_order < DynamicDisplay.childCount - 1; card_order++)
+            if (targetDisplay.Rarity == Card.Rarity.Common)
             {
-                if (DynamicDisplay.GetChild(card_order).GetComponent<DisplayCard>().cardindex > added_display.GetComponent<DisplayCard>().cardindex)
-                {
-                    added_display.SetSiblingIndex(card_order);
-                    break;
-                }
+                targetDisplay.Quantity = 2;
             }
-            card.SetParent(TrashCan);
-            card.gameObject.SetActive(false);
+            else
+            {
+                targetDisplay.Quantity = 1;
+            }
         }
     }
 
-    private Sprite ChessPieceDisplay(ChessPiece.PieceType piece)
+    /* private Sprite ChessPieceDisplay(ChessPiece.PieceType piece)
     {
         if (piece.HasFlag(ChessPiece.PieceType.King))
         {
-            return Icon_sprites[0];
+            return iconSprites[0];
         }
         else if (piece.HasFlag(ChessPiece.PieceType.Quene))
         {
-            return Icon_sprites[1];
+            return iconSprites[1];
         }
         else if (piece.HasFlag(ChessPiece.PieceType.Rook))
         {
-            return Icon_sprites[2];
+            return iconSprites[2];
         }
         else if (piece.HasFlag(ChessPiece.PieceType.Bishop))
         {
-            return Icon_sprites[3];
+            return iconSprites[3];
         }
         else if (piece.HasFlag(ChessPiece.PieceType.Knight))
         {
-            return Icon_sprites[4];
+            return iconSprites[4];
         }
         else
         {
-            return Icon_sprites[5];
+            return iconSprites[5];
         }
-    }
+    } */
 }
