@@ -1,15 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HadesEffect : Effect
+public class HadesEffect : TargetingEffect
 {
+    ChessPiece.PieceType targetPieceRestriction =
+        ChessPiece.PieceType.Pawn |
+        ChessPiece.PieceType.Knight |
+        ChessPiece.PieceType.Bishop |
+        ChessPiece.PieceType.Rook |
+        ChessPiece.PieceType.Quene |
+        ChessPiece.PieceType.King;
+
+    SoulCard soul = null;
+
+    private void Awake()
+    {
+        if (soul == null) soul = gameObject.GetComponent<SoulCard>();
+        Predicate<ChessPiece> condition = (ChessPiece piece) => piece.soul != null &&  piece.maxHP > piece.GetHP;
+        EffectTarget effectTarget = new EffectTarget(TargetType.Piece, targetPieceRestriction, true, false, condition);
+        targetTypes.Add(effectTarget);
+    }
+
     public override void EffectAction(PlayerController player)
     {
-        Hades hadesComponent = gameObject.GetComponent<Hades>();
-
-        hadesComponent.InfusedPiece.buff.AddBuffByDescription(hadesComponent.cardName, Buff.BuffType.Description, "하데스: 자신 턴 동안 아군 HP가 1 미만으로 내려가지 않음", true);
-        hadesComponent.AddEffect();
-        hadesComponent.InfusedPiece.OnSoulRemoved += hadesComponent.RemoveEffect;
+        foreach (var target in targets)
+        {
+            (target as ChessPiece).GetComponent<Animator>().SetTrigger("killedTrigger");
+            (target as ChessPiece).MakeAttackedEffect();
+            (target as ChessPiece).Kill();
+        }
     }
 }
