@@ -10,9 +10,10 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    static public readonly int BOARD_SIZE = 8;
+    public int BOARD_SIZE_HEIGHT;
+    public int BOARD_SIZE_WIDTH;
 
-    public BoardSquare[,] boardSquares = new BoardSquare[BOARD_SIZE, BOARD_SIZE];
+    public BoardSquare[,] boardSquares;
     [SerializeField]
     public List<ChessPiece> pieceObjects = new List<ChessPiece>();
     public List<ChessPiece> whiteGraveyard = new List<ChessPiece>();
@@ -44,9 +45,9 @@ public class GameData
     /// <returns></returns>
     public bool IsValidCoordinate(Vector2Int targetCoordinate)
     {
-        if (targetCoordinate.x < 0 || targetCoordinate.x >= BOARD_SIZE)
+        if (targetCoordinate.x < 0 || targetCoordinate.x >= BOARD_SIZE_WIDTH)
             return false;
-        if (targetCoordinate.y < 0 || targetCoordinate.y >= BOARD_SIZE)
+        if (targetCoordinate.y < 0 || targetCoordinate.y >= BOARD_SIZE_HEIGHT)
             return false;
 
         return true;

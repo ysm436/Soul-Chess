@@ -16,6 +16,15 @@ public class GameBoard : MonoBehaviour
     public bool isDebugMode;
     public SynchronizedRandom synchronizedRandom;
 
+    [Header("TestSetting")]
+    [SerializeField] private RectTransform chessBoardBG;
+    public int chessBoardSizeHeight;
+    public int chessBoardSizeWidth;
+    [SerializeField] private Transform chessPieceParent;
+    [SerializeField] private List<GameObject> whiteChessPieceList;
+    [SerializeField] private List<GameObject> blackChessPieceList;
+    public bool soulSetCanMove;
+    
 
     [HideInInspector]
     public GameData gameData;
@@ -66,18 +75,42 @@ public class GameBoard : MonoBehaviour
         //덱 초기화
         //gameData.myPlayerData.deck = GameManager.instance.currentDeck;
 
+        //체스 판 크기 세팅
+        gameData.BOARD_SIZE_HEIGHT = chessBoardSizeHeight;
+        gameData.BOARD_SIZE_WIDTH = chessBoardSizeWidth;
+        gameData.boardSquares = new BoardSquare[chessBoardSizeHeight, chessBoardSizeWidth];
+        chessBoardBG.sizeDelta = new Vector2((float)(chessBoardSizeHeight + 0.5), (float)(chessBoardSizeWidth + 0.5));
+
         //체스 판 세팅
         chessBoard.SetBoardSquares(gameData);
 
-        //체스 말 두기
-        foreach (ChessPiece piece in chessBoard.GetComponentsInChildren<ChessPiece>())
-        {
-            gameData.TryAddPiece(piece);
+        //흰색 체스 말 두기
+        for (int h = 0; h < (whiteChessPieceList.Count() / chessBoardSizeWidth); h++) {
+            for (int w = 0; w < chessBoardSizeWidth; w++) {
+                GameObject pieceObj = Instantiate(whiteChessPieceList[h * chessBoardSizeWidth + w], chessPieceParent);
+                ChessPiece pieceComponent = pieceObj.GetComponent<ChessPiece>();
 
-            piece.chessData = gameData;
-            piece.transform.position = chessBoard.GetPositionUsingCoordinate(piece.coordinate);
+                pieceComponent.coordinate = new Vector2Int(w, h);
+                gameData.TryAddPiece(pieceComponent);
+
+                pieceComponent.chessData = gameData;
+                pieceComponent.transform.position = chessBoard.GetPositionUsingCoordinate(pieceComponent.coordinate);
+            }
         }
 
+        //검은색 체스 말 두기
+        for (int h = 0; h < (blackChessPieceList.Count() / chessBoardSizeWidth); h++) {
+            for (int w = 0; w < chessBoardSizeWidth; w++) {
+                GameObject pieceObj = Instantiate(blackChessPieceList[h * chessBoardSizeWidth + w], chessPieceParent);
+                ChessPiece pieceComponent = pieceObj.GetComponent<ChessPiece>();
+
+                pieceComponent.coordinate = new Vector2Int(w, (chessBoardSizeHeight - 1) - h);
+                gameData.TryAddPiece(pieceComponent);
+
+                pieceComponent.chessData = gameData;
+                pieceComponent.transform.position = chessBoard.GetPositionUsingCoordinate(pieceComponent.coordinate);
+            }
+        }
 
         //코스트 초기화(선공이 1, 후공이 0, 턴 종료 시 상대방 코스트 증가)
         gameData.playerBlack.soulOrbs = gameData.playerBlack.soulEssence = 3;
@@ -126,7 +159,7 @@ public class GameBoard : MonoBehaviour
         else
         {
             gameData.blackGraveyard.Add(targetPiece);
-            targetPiece.coordinate = Vector2Int.right * (gameData.blackGraveyard.Count - 1) + Vector2Int.up * GameData.BOARD_SIZE;
+            targetPiece.coordinate = Vector2Int.right * (gameData.blackGraveyard.Count - 1) + Vector2Int.up * gameData.BOARD_SIZE_HEIGHT;
         }
 
         targetPiece.effectIcon.RemoveIcon();
