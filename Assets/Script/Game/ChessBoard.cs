@@ -117,6 +117,7 @@ public class ChessBoard : MonoBehaviour
 
             if (!killTriggerFlag && Vector2.Distance(srcPiece.transform.position, dstPiece.transform.position) < 3)
             {
+                GameManager.instance.soundManager.PlaySFX("Destroy");
                 dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
                 dstPiece.GetComponent<ChessPiece>().MakeAttackedEffect();
                 killTriggerFlag = true;
@@ -140,6 +141,7 @@ public class ChessBoard : MonoBehaviour
     IEnumerator ForthBackPieceAnimationC(ChessPiece srcPiece, Vector2 startPos, Vector2 destPos, float duration, ChessPiece dstPiece)
     {
         yield return StartCoroutine(MovePieceAnimationC(srcPiece, startPos, destPos, duration));
+        GameManager.instance.soundManager.PlaySFX("Attack");
         StartCoroutine(AttackedAnimationC(dstPiece));
         yield return StartCoroutine(MovePieceAnimationC(srcPiece, destPos, startPos, duration));
     }

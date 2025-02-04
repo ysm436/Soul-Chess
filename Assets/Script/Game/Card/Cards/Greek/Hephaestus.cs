@@ -26,6 +26,8 @@ public class Hephaestus : SoulCard
         {
             objPiece.MinusHP(soulDamage);
         }
+
+        GameManager.instance.soundManager.PlaySFX("Fire");
     }
 
     public override void AddEffect()
