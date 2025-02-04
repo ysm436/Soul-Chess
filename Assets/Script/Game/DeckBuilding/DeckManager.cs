@@ -3,37 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class DeckManager : MonoBehaviour, IDropHandler
+public class DeckManager : MonoBehaviour
 {
-    private int CARD_LIMIT = 30;
-    public int loaded_deck_index = 0;
-    public int local_card_count = 0;
-    public int[] local_costs = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    public int[] local_chesspieces = new int[6] { 0, 0, 0, 0, 0, 0 };
-    public int[] local_extra_chesspieces = new int[6] { 0, 0, 0, 0, 0, 0 };
-    public int[] local_rarities = new int[3] { 0, 0, 0 };
+    private int CARD_LIMIT = 24;
+    public int loadedDeckIndex = 0;
+    public int loadedDeckCardCount = 0;
+    public int[] loadedDeckCosts = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public int[] loadedDeckTypes = new int[2] { 0, 0 };
+    public int[] loadedDeckRarities = new int[3] { 0, 0, 0 };
 
-    [SerializeField] private RectTransform trashcan;
-    [SerializeField] private RectTransform CardSlot;
-    [SerializeField] private RectTransform DeckSlot;
-    [SerializeField] private GameObject Simple_Card;
-    [SerializeField] private GameObject Simple_Deck;
-    [SerializeField] private TMP_InputField deckname_inputfield;
+    [SerializeField] private RectTransform trashCan;
+    [SerializeField] private RectTransform cardInDeckSlot;
+    [SerializeField] private RectTransform deckSlot;
+    [SerializeField] private GameObject cardInDeckPrefab;
+    [SerializeField] private GameObject deckObj;
+    [SerializeField] private TMP_InputField deckNameInputfield;
 
-    [SerializeField] public GameObject CautionPanel;
-    [SerializeField] public TextMeshProUGUI CautionText;
-    [SerializeField] private TextMeshProUGUI CardCountText;
+    [SerializeField] public GameObject cautionPanel;
+    [SerializeField] public TextMeshProUGUI cautionText;
+    [SerializeField] private TextMeshProUGUI cardCountText;
+    [SerializeField] private Text legendaryCountText;
+    [SerializeField] private Text mythicalCountText;
 
     public bool newDeckSignal = false;
     private bool duplicateSignal = false;
-    private int tempdeckinputindex = 0;
-    public List<int> TempDeck = new List<int>();
+    private int tempDeckInputIndex = 0;
+    public List<int> tempDeck = new List<int>();
 
     private DeckBuildingManager dbm;
     
-    public bool debug_button = false;
+    public bool debugButton = false;
 
     //덱 데이터로부터 덱 리스트와 이름 파일을 불러옵니다.
     public void Awake()
@@ -43,198 +44,240 @@ public class DeckManager : MonoBehaviour, IDropHandler
     }
 
     //디스플레이된 카드를 덱에 넣으려고 할 때
-    public void OnDrop(PointerEventData eventData)
+    public void InsertCardInDeck(DisplayInfo cardInfo)
     {
-        GameObject dropped = eventData.pointerDrag;
-        Transform displaystorage = dbm.DisplayStorage;
-        DisplayCard CardInfo = dropped.GetComponent<DisplayCard>();
+        DisplayInfo targetCard = dbm.cardDisplayList[cardInfo.cardDisplayIndex].GetComponent<DisplayInfo>();
 
-        if (CardInfo)
+        if (targetCard)
         {
-            if (!TryInputCard(CardInfo)) //제한을 초과하지 않는 경우
+            if (!TryInputCard(targetCard)) //제한을 초과하지 않는 경우
             {
                 if (duplicateSignal)
                 {
-                    int card_index = CardInfo.cardindex;
-                    for (int simple_index = 0; simple_index < CardSlot.childCount; simple_index++)
+                    int displayCardIndex = targetCard.cardDisplayIndex;
+                    for (int cardInDeckIndex = 0; cardInDeckIndex < cardInDeckSlot.childCount; cardInDeckIndex++)
                     {
-                        SimpleCard simplecard_info = CardSlot.GetChild(simple_index).GetComponent<SimpleCard>();
-                        if (simplecard_info.cardindex == card_index)
+                        CardInDeck cardInDeckInfo = cardInDeckSlot.GetChild(cardInDeckIndex).GetComponent<CardInDeck>();
+                        if (cardInDeckInfo.cardDisplayIndex == displayCardIndex)
                         {
-                            simplecard_info.quantity += 1;
+                            cardInDeckInfo.Quantity += 1;
                             break;
                         }
                     }
-                    TempDeck.Insert(tempdeckinputindex, card_index);
+                    tempDeck.Insert(tempDeckInputIndex, displayCardIndex);
                 }
                 else
                 {
-                    GameObject simplecard = Instantiate(Simple_Card, CardSlot);
-                    SimpleCard simplecard_info = simplecard.GetComponent<SimpleCard>();
+                    GameObject cardInDeck = Instantiate(cardInDeckPrefab, cardInDeckSlot);
+                    CardInDeck cardInDeckInfo = cardInDeck.GetComponent<CardInDeck>();
 
-                    simplecard.name = dropped.name.Replace("display", "deck");
-                    simplecard_info.cardindex = CardInfo.cardindex;
-                    simplecard_info.cardNameText.text = CardInfo.CardName;
-                    simplecard_info.cost.text = CardInfo.Cost.ToString();
-                    simplecard_info.quantity = 1;
+                    cardInDeckInfo.name = cardInfo.name.Replace("Display", "InDeck");
+                    cardInDeckInfo.cardDisplayIndex = targetCard.cardDisplayIndex;
+                    cardInDeckInfo.cardIndex = targetCard.cardIndex;
+                    cardInDeckInfo.cardNameText.text = targetCard.CardName;
+                    cardInDeckInfo.costText.text = targetCard.Cost.ToString();
+                    cardInDeckInfo.cardType = targetCard.cardType;
+                    cardInDeckInfo.cardRarity = targetCard.Rarity;
+                    cardInDeckInfo.Quantity = 1;
 
-                    // 코스트가 낮을 수록 앞으로 가게끔
-                    for (int card_order = 0; card_order < CardSlot.childCount - 1; card_order++)
+                    for (int cardInDeckOrder = 0; cardInDeckOrder < cardInDeckSlot.childCount - 1; cardInDeckOrder++)
                     {
-                        if (int.Parse(CardSlot.GetChild(card_order).GetComponent<SimpleCard>().cost.text) > CardInfo.Cost)
+                        if (cardInDeckSlot.GetChild(cardInDeckOrder).GetComponent<CardInDeck>().cardDisplayIndex > targetCard.cardDisplayIndex)
                         {
-                            simplecard.transform.SetSiblingIndex(card_order);
+                            cardInDeck.transform.SetSiblingIndex(cardInDeckOrder);
                             break;
                         }
                     }
-
-                    TempDeck.Insert(tempdeckinputindex, simplecard_info.cardindex);
+                    tempDeck.Insert(tempDeckInputIndex, cardInDeckInfo.cardDisplayIndex);
                 }
 
-                CardInfo.quantity--;
-                //덱에 더 이상 카드가 들어갈 수 없을 때 디스플레이에서 없애버립니다.
-                if (CardInfo.quantity <= 0)
-                {
-                    dbm.DisplayCardList.Remove(dropped);
-                    dropped.transform.SetParent(displaystorage);
-                    dropped.SetActive(false);
-                }
-                AddCardInfoInDeck(CardInfo);
+                targetCard.Quantity--;
+                AddCardInfoInDeck(targetCard);
+                Destroy(cardInfo.gameObject);
             }
             else
             {
-                CautionPanel.SetActive(true);
+                cautionPanel.SetActive(true);
             }
         }
     }
 
-    //CardSlot을 초기화 합니다.
+    private bool TryInputCard(DisplayInfo cardInfo)
+    {
+        bool errorSignal = false;
+        duplicateSignal = false;
+        tempDeckInputIndex = tempDeck.Count;
+
+        foreach (var card in tempDeck)
+        {
+            if (cardInfo.cardDisplayIndex == card)
+            {
+                duplicateSignal = true;
+                tempDeckInputIndex = tempDeck.IndexOf(card);
+            }
+        }
+
+        if (!duplicateSignal)
+        {
+            for (int i = 0; i < tempDeck.Count; i++)
+            {
+                if (cardInfo.cardDisplayIndex <= tempDeck[i])
+                {
+                    tempDeckInputIndex = i;
+                    break;
+                }
+            }
+        }
+
+        if (debugButton)
+            return false;
+
+        if (loadedDeckCardCount == CARD_LIMIT)
+        {
+            cautionText.text = "덱에 카드는 " + CARD_LIMIT.ToString() + "개만 넣을 수 있습니다.";
+            errorSignal = true;
+        }
+        else if (cardInfo.Rarity == Card.Rarity.Mythical)
+        {
+            if (loadedDeckRarities[2] == 3)
+            {
+                cautionText.text = "신화카드는 덱에 3장만 넣을 수 있습니다.";
+                errorSignal = true;
+            }
+        }
+        else if (cardInfo.Rarity == Card.Rarity.Legendary)
+        {
+            if (loadedDeckRarities[1] == 9)
+            {
+                cautionText.text = "전설카드는 덱에 9장만 넣을 수 있습니다.";
+                errorSignal = true;
+            }
+        }
+
+        return errorSignal;
+    }
+
+    // CardSlot을 초기화 합니다.
     public void CardSlotReset()
     {
-        for (int i = CardSlot.childCount; i > 0; i--)
+        for (int i = cardInDeckSlot.childCount; i > 0; i--)
         {
-            Transform card = CardSlot.GetChild(i - 1);
-            card.SetParent(trashcan);
+            Transform card = cardInDeckSlot.GetChild(i - 1);
+            card.SetParent(trashCan);
             card.gameObject.SetActive(false);
         }
     }
 
-    //덱 생성 / 수정 후 저장
-    public void DeckSave(int loaded_deck_index)
+    // 덱 생성 / 수정 후 저장
+    public void DeckSave(int loadedDeckIndex)
     {
-        List<int> newDeckcards = TempDeck.ToList();
+        List<int> newDeckcards = new List<int>();
+
+        foreach (var displayIndex in tempDeck)
+        {
+            newDeckcards.Add(dbm.cardDisplayList[displayIndex].GetComponent<DisplayInfo>().cardIndex);
+        }
 
         if (newDeckSignal) // 덱 새로 생성 시
         {
             Deck newdeck = new Deck
             {
                 index = GameManager.instance.deckList.Count,
-                deckname = deckname_inputfield.text,
-                card_count = local_card_count,
-                costs = (int[])local_costs.Clone(),
-                chesspieces = (int[])local_chesspieces.Clone(),
-                extra_chesspieces = (int[])local_extra_chesspieces.Clone(),
-                Rarities = (int[])local_rarities.Clone(),
+                deckName = deckNameInputfield.text,
+                cardCount = loadedDeckCardCount,
+                costs = (int[])loadedDeckCosts.Clone(),
+                types = (int[])loadedDeckTypes.Clone(),
+                rarities = (int[])loadedDeckRarities.Clone(),
                 cards = newDeckcards
             };
             GameManager.instance.deckList.Add(newdeck);
 
-            GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
-            SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
-            newDeckInfo.DeckNameText.text = newdeck.deckname;
-            newDeckInfo.deck_index = newdeck.index;
+            GameObject newDeckDisplay = Instantiate(deckObj, deckSlot);
+            deckObj newDeckInfo = newDeckDisplay.GetComponent<deckObj>();
+            newDeckInfo.deckNameText.text = newdeck.deckName;
+            newDeckInfo.deckIndex = newdeck.index;
 
-            TempDeck.Clear();
+            tempDeck.Clear();
             newDeckSignal = false;
         }
         else // 덱 수정 시
         {
-            Deck loaded_deck = GameManager.instance.deckList[loaded_deck_index];
-            loaded_deck.deckname = deckname_inputfield.text;
-            loaded_deck.cards = newDeckcards;
-            TempDeck.Clear();
+            Deck loadedDeck = GameManager.instance.deckList[loadedDeckIndex];
+            loadedDeck.deckName = deckNameInputfield.text;
+            loadedDeck.cards = newDeckcards;
+            tempDeck.Clear();
 
-            for (int i = 0; i < DeckSlot.childCount; i++)
+            for (int i = 0; i < deckSlot.childCount; i++)
             {
-                Destroy(DeckSlot.GetChild(i).gameObject);
+                Destroy(deckSlot.GetChild(i).gameObject);
             }
             DeckListLoad();
             DeckInfoSave();
         }
 
         LocalDeckInfoReset();
-        deckname_inputfield.text = "";
+        deckNameInputfield.text = "";
+        cardCountText.text = "카드 : 0 / " + CARD_LIMIT.ToString();
     }
 
     // 덱 생성 / 수정 취소
     public void DeckCancel()
     {
         newDeckSignal = false;
-        TempDeck.Clear();
+        tempDeck.Clear();
         LocalDeckInfoReset();
-        deckname_inputfield.text = "";
+        deckNameInputfield.text = "";
+        cardCountText.text = "카드 : 0 / " + CARD_LIMIT.ToString();
     }
 
-    //덱 로드
-    public void DeckLoad(int deck_index)
+    // 덱 로드
+    public void DeckLoad(int deckIndex)
     {
-        loaded_deck_index = deck_index;
-        TempDeck = GameManager.instance.deckList[loaded_deck_index].cards.ToList();
+        loadedDeckIndex = deckIndex;
 
-        MakeSimpleCard();
-        LocalDeckInfoLoad(loaded_deck_index);
-
-        deckname_inputfield.text = GameManager.instance.deckList[loaded_deck_index].deckname;
-    }
-
-    public void MakeSimpleCard()
-    {
-        List<GameObject> allcardlist = GameManager.instance.AllCards.ToList();
-
-        for (int i = 0; i < TempDeck.Count; i++)
+        foreach (var cardIndex in GameManager.instance.deckList[loadedDeckIndex].cards)
         {
-            int card = TempDeck[i];
+            tempDeck.Add(dbm.cardIndexList.IndexOf(cardIndex));
+        }
 
-            if (i == 0 || card != TempDeck[i - 1])
+        MakeCardInDeck();
+        LocalDeckInfoLoad(loadedDeckIndex);
+        deckNameInputfield.text = GameManager.instance.deckList[loadedDeckIndex].deckName;
+    }
+
+    public void MakeCardInDeck()
+    {
+        for (int i = 0; i < tempDeck.Count; i++)
+        {
+            int targetDisplayCardIndex = tempDeck[i];
+            DisplayInfo targetCard = dbm.cardDisplayList[targetDisplayCardIndex].GetComponent<DisplayInfo>();
+
+            if (i == 0 || targetDisplayCardIndex != tempDeck[i - 1])
             {
-                Card cardinfo = allcardlist[card].GetComponent<Card>();
-                GameObject simplecard = Instantiate(Simple_Card, CardSlot);
-                SimpleCard simplecard_info = simplecard.GetComponent<SimpleCard>();
+                GameObject cardInDeck = Instantiate(cardInDeckPrefab, cardInDeckSlot);
+                CardInDeck cardInDeckInfo = cardInDeck.GetComponent<CardInDeck>();
 
-                simplecard_info.cardindex = card;
-                simplecard_info.cardNameText.text = cardinfo.cardName;
-                simplecard_info.cost.text = cardinfo.cost.ToString();
-                simplecard_info.quantity = 1;
+                cardInDeckInfo.cardDisplayIndex = targetDisplayCardIndex;
+                cardInDeckInfo.cardIndex = targetCard.cardIndex;
+                cardInDeckInfo.cardNameText.text = targetCard.CardName;
+                cardInDeckInfo.costText.text = targetCard.Cost.ToString();
+                cardInDeckInfo.cardType = targetCard.cardType;
+                cardInDeckInfo.cardRarity = targetCard.Rarity;
+                cardInDeckInfo.Quantity = 1;
             }
             else
             {
-                for (int simple_index = 0; simple_index < CardSlot.childCount; simple_index++)
+                for (int cardInDeckIndex = 0; cardInDeckIndex < cardInDeckSlot.childCount; cardInDeckIndex++)
                 {
-                    SimpleCard simplecard_info = CardSlot.GetChild(simple_index).GetComponent<SimpleCard>();
-                    if (simplecard_info.cardindex == card)
+                    CardInDeck cardInDeckInfo = cardInDeckSlot.GetChild(cardInDeckIndex).GetComponent<CardInDeck>();
+                    if (cardInDeckInfo.cardDisplayIndex == targetDisplayCardIndex)
                     {
-                        simplecard_info.quantity += 1;
+                        cardInDeckInfo.Quantity += 1;
                         break;
                     }
                 }
             }
-
-            foreach (var display in dbm.DisplayCardList)
-            {
-                DisplayCard displaycardinfo = display.GetComponent<DisplayCard>();
-                if (displaycardinfo.cardindex == card)
-                {
-                    displaycardinfo.quantity -= 1;
-
-                    if (displaycardinfo.quantity <= 0)
-                    {
-                        dbm.DisplayCardList.Remove(display);
-                        display.transform.SetParent(dbm.DisplayStorage);
-                        display.gameObject.SetActive(false);
-                    }
-                    break;
-                }
-            }
+            targetCard.Quantity -= 1;
         }
     }
 
@@ -247,10 +290,10 @@ public class DeckManager : MonoBehaviour, IDropHandler
             {
                 if (decklist[i].index != -1)
                 {
-                    GameObject newDeckDisplay = Instantiate(Simple_Deck, DeckSlot);
-                    SimpleDeck newDeckInfo = newDeckDisplay.GetComponent<SimpleDeck>();
-                    newDeckInfo.deck_index = i;
-                    newDeckInfo.DeckNameText.text = decklist[i].deckname;
+                    GameObject newDeckDisplay = Instantiate(deckObj, deckSlot);
+                    deckObj newDeckInfo = newDeckDisplay.GetComponent<deckObj>();
+                    newDeckInfo.deckIndex = i;
+                    newDeckInfo.deckNameText.text = decklist[i].deckName;
                 }
             }
         }
@@ -258,258 +301,181 @@ public class DeckManager : MonoBehaviour, IDropHandler
 
     private void LocalDeckInfoReset()
     {
-        local_card_count = 0;
-        Array.Clear(local_costs, 0, local_costs.Length);
-        Array.Clear(local_chesspieces, 0, local_chesspieces.Length);
-        Array.Clear(local_extra_chesspieces, 0, local_extra_chesspieces.Length);
-        Array.Clear(local_rarities, 0, local_rarities.Length);
+        loadedDeckCardCount = 0;
+        Array.Clear(loadedDeckCosts, 0, loadedDeckCosts.Length);
+        Array.Clear(loadedDeckTypes, 0, loadedDeckTypes.Length);
+        Array.Clear(loadedDeckRarities, 0, loadedDeckRarities.Length);
     }
 
     private void LocalDeckInfoLoad(int index)
     {
-        Deck loaded_deck = GameManager.instance.deckList[index];
+        Deck loadedDeck = GameManager.instance.deckList[index];
 
-        local_card_count = loaded_deck.card_count;
-        local_costs = (int[])loaded_deck.costs.Clone();
-        local_chesspieces = (int[])loaded_deck.chesspieces.Clone();
-        local_extra_chesspieces = (int[])loaded_deck.extra_chesspieces.Clone();
-        local_rarities = (int[])loaded_deck.Rarities.Clone();
-        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / 30";
+        loadedDeckCardCount = loadedDeck.cardCount;
+        loadedDeckCosts = (int[])loadedDeck.costs.Clone();
+        loadedDeckTypes = (int[])loadedDeck.types.Clone();
+        loadedDeckRarities = (int[])loadedDeck.rarities.Clone();
+
+        if (loadedDeckRarities[1] == 9)
+        {
+            foreach (var cardDisplay in dbm.cardDisplayList)
+            {
+                DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                if (targetDisplay.Rarity == Card.Rarity.Legendary)
+                {
+                    targetDisplay.DisplayUnAvailable();
+                }
+            }
+        }
+
+        if (loadedDeckRarities[2] == 3)
+        {
+            foreach (var cardDisplay in dbm.cardDisplayList)
+            {
+                DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                if (targetDisplay.Rarity == Card.Rarity.Mythical)
+                {
+                    targetDisplay.DisplayUnAvailable();
+                }
+            }
+        }
+        cardCountText.text = "카드 : " + loadedDeckCardCount.ToString() + " / " + CARD_LIMIT.ToString();
     }
     private void DeckInfoSave()
     {
-        Deck loaded_deck = GameManager.instance.deckList[loaded_deck_index];
+        Deck loadedDeck = GameManager.instance.deckList[loadedDeckIndex];
 
-        loaded_deck.card_count = local_card_count;
-        loaded_deck.costs = (int[])local_costs.Clone();
-        loaded_deck.chesspieces = (int[])local_chesspieces.Clone();
-        loaded_deck.extra_chesspieces = (int[])local_extra_chesspieces.Clone();
-        loaded_deck.Rarities = (int[])local_rarities.Clone();
+        loadedDeck.cardCount = loadedDeckCardCount;
+        loadedDeck.costs = (int[])loadedDeckCosts.Clone();
+        loadedDeck.types = (int[])loadedDeckTypes.Clone();
+        loadedDeck.rarities = (int[])loadedDeckRarities.Clone();
     }
 
-    private bool TryInputCard(DisplayCard cardinfo)
+    private void AddCardInfoInDeck(DisplayInfo cardInfo)
     {
-        List<GameObject> allcardlist = GameManager.instance.AllCards.ToList();
-        bool error_signal = false;
-        int duplicate_quantity = 0;
+        loadedDeckCardCount += 1;
 
-        duplicateSignal = false;
-        tempdeckinputindex = TempDeck.Count;
-
-        foreach (var card in TempDeck)
+        switch (cardInfo.Cost)
         {
-            if (cardinfo.cardindex == card)
-            {
-                duplicate_quantity += 1;
-                duplicateSignal = true;
-                tempdeckinputindex = TempDeck.IndexOf(card);
-            }
+            case 0: loadedDeckCosts[0] += 1; break;
+            case 1: loadedDeckCosts[1] += 1; break;
+            case 2: loadedDeckCosts[2] += 1; break;
+            case 3: loadedDeckCosts[3] += 1; break;
+            case 4: loadedDeckCosts[4] += 1; break;
+            case 5: loadedDeckCosts[5] += 1; break;
+            case 6: loadedDeckCosts[6] += 1; break;
+            case 7: loadedDeckCosts[7] += 1; break;
+            case 8: loadedDeckCosts[8] += 1; break;
+            default: loadedDeckCosts[9] += 1; break;
         }
 
-        if (!duplicateSignal)
+        switch (cardInfo.cardType)
         {
-            for (int i = 0; i < TempDeck.Count; i++)
-            {
-                int temp_cost = allcardlist[TempDeck[i]].GetComponent<Card>().cost;
+            case Card.Type.Soul: loadedDeckTypes[0] += 1; break;
+            case Card.Type.Spell: loadedDeckTypes[1] += 1; break;
+        }
 
-                if (cardinfo.Cost == temp_cost)
+        switch (cardInfo.Rarity)
+        {
+            case Card.Rarity.Common: loadedDeckRarities[0] += 1; break;
+            case Card.Rarity.Legendary:
+                loadedDeckRarities[1] += 1;
+                legendaryCountText.text = "전설 (" + loadedDeckRarities[1].ToString() + "/9)";
+                if (loadedDeckRarities[1] == 9)
                 {
-                    tempdeckinputindex = i + 1;
-                }
-                else
-                {
-                    if (cardinfo.Cost < temp_cost)
+                    foreach (var cardDisplay in dbm.cardDisplayList)
                     {
-                        tempdeckinputindex = i;
-                        break;
+                        DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                        if (targetDisplay.Rarity == Card.Rarity.Legendary)
+                        {
+                            targetDisplay.DisplayUnAvailable();
+                        }
                     }
                 }
-
-            }
+                break;
+            case Card.Rarity.Mythical:
+                loadedDeckRarities[2] += 1;
+                mythicalCountText.text = "신화 (" + loadedDeckRarities[2].ToString() + "/3)";
+                if (loadedDeckRarities[2] == 3)
+                {
+                    foreach (var cardDisplay in dbm.cardDisplayList)
+                    {
+                        DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                        if (targetDisplay.Rarity == Card.Rarity.Mythical)
+                        {
+                            targetDisplay.DisplayUnAvailable();
+                        }
+                    }
+                }
+                break;
         }
 
-        if (debug_button)
-            return false;
-
-        if (local_card_count == 30)
-        {
-            CautionText.text = "덱에 카드는 " + CARD_LIMIT.ToString() + "개만 넣을 수 있습니다.";
-            error_signal = true;
-        }
-        else if (cardinfo.Rarity == Card.Rarity.Mythical)
-        {
-            if (duplicate_quantity >= 1)
-            {
-                CautionText.text = "신화카드는 덱에 동일한 카드를 한장만 넣을 수 있습니다.";
-                error_signal = true;
-            }
-
-            if (local_rarities[2] == 5)
-            {
-                CautionText.text = "신화카드는 덱에 5장만 넣을 수 있습니다.";
-                error_signal = true;
-            }
-        }
-        else if (cardinfo.Rarity == Card.Rarity.Legendary)
-        {
-            if (duplicate_quantity >= 1)
-            {
-                CautionText.text = "전설카드는 덱에 동일한 카드를 한장만 넣을 수 있습니다.";
-                error_signal = true;
-            }
-
-            /* if (local_rarities[1] == 9)
-            {
-                CautionText.text = "전설카드는 덱에 9장만 넣을 수 있습니다.";
-                error_signal = true;
-            } */
-        }
-        else
-        {
-            if (duplicate_quantity >= 2)
-            {
-                CautionText.text = "일반카드는 덱에 동일한 카드를 2장만 넣을 수 있습니다.";
-                error_signal = true;
-            }
-        }
-
-        return error_signal;
+        cardCountText.text = "카드 : " + loadedDeckCardCount.ToString() + " / " + CARD_LIMIT.ToString();
     }
 
-    private void AddCardInfoInDeck(DisplayCard cardinfo)
+    public void RemoveCardInfoInDeck(DisplayInfo cardInfo)
     {
-        local_card_count += 1;
+        loadedDeckCardCount -= 1;
 
-        switch (cardinfo.Cost)
+        switch (cardInfo.Cost)
         {
-            case 0: local_costs[0] += 1; break;
-            case 1: local_costs[1] += 1; break;
-            case 2: local_costs[2] += 1; break;
-            case 3: local_costs[3] += 1; break;
-            case 4: local_costs[4] += 1; break;
-            case 5: local_costs[5] += 1; break;
-            case 6: local_costs[6] += 1; break;
-            case 7: local_costs[7] += 1; break;
-            case 8: local_costs[8] += 1; break;
-            default: local_costs[9] += 1; break;
+            case 0: loadedDeckCosts[0] -= 1; break;
+            case 1: loadedDeckCosts[1] -= 1; break;
+            case 2: loadedDeckCosts[2] -= 1; break;
+            case 3: loadedDeckCosts[3] -= 1; break;
+            case 4: loadedDeckCosts[4] -= 1; break;
+            case 5: loadedDeckCosts[5] -= 1; break;
+            case 6: loadedDeckCosts[6] -= 1; break;
+            case 7: loadedDeckCosts[7] -= 1; break;
+            case 8: loadedDeckCosts[8] -= 1; break;
+            default: loadedDeckCosts[9] -= 1; break;
         }
 
-        List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();
-        foreach (ChessPiece.PieceType piecetype in Enum.GetValues(typeof(ChessPiece.PieceType)))
+        switch (cardInfo.cardType)
         {
-            if (piecetype != ChessPiece.PieceType.None && cardinfo.ChessPiece.HasFlag(piecetype))
-            {
-                includedTypes.Add(piecetype);
-            }
+            case Card.Type.Soul: loadedDeckTypes[0] -= 1; break;
+            case Card.Type.Spell: loadedDeckTypes[1] -= 1; break;
         }
 
-        for (int i = includedTypes.Count - 1; i >= 0; i--)
+        switch (cardInfo.Rarity)
         {
-            if (i == includedTypes.Count - 1)
-            {
-                switch (includedTypes[i])
+            case Card.Rarity.Common: loadedDeckRarities[0] -= 1; break;
+            case Card.Rarity.Legendary:
+                if (loadedDeckRarities[1] == 9)
                 {
-                    case ChessPiece.PieceType.Pawn: local_chesspieces[0] += 1; break;
-                    case ChessPiece.PieceType.Knight: local_chesspieces[1] += 1; break;
-                    case ChessPiece.PieceType.Bishop: local_chesspieces[2] += 1; break;
-                    case ChessPiece.PieceType.Rook: local_chesspieces[3] += 1; break;
-                    case ChessPiece.PieceType.Quene: local_chesspieces[4] += 1; break;
-                    case ChessPiece.PieceType.King: local_chesspieces[5] += 1; break;
+                    foreach (var cardDisplay in dbm.cardDisplayList)
+                    {
+                        DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                        if (targetDisplay.Rarity == Card.Rarity.Legendary && targetDisplay.Quantity != 0)
+                        {
+                            targetDisplay.DisplayAvailable();
+                        }
+                    }
                 }
-            }
-            else
-            {
-                switch (includedTypes[i])
+                loadedDeckRarities[1] -= 1;
+                legendaryCountText.text = "전설 (" + loadedDeckRarities[1].ToString() + "/9)";
+                break;
+            case Card.Rarity.Mythical:
+                if (loadedDeckRarities[2] == 3)
                 {
-                    case ChessPiece.PieceType.Pawn: local_extra_chesspieces[0] += 1; break;
-                    case ChessPiece.PieceType.Knight: local_extra_chesspieces[1] += 1; break;
-                    case ChessPiece.PieceType.Bishop: local_extra_chesspieces[2] += 1; break;
-                    case ChessPiece.PieceType.Rook: local_extra_chesspieces[3] += 1; break;
-                    case ChessPiece.PieceType.Quene: local_extra_chesspieces[4] += 1; break;
-                    case ChessPiece.PieceType.King: local_extra_chesspieces[5] += 1; break;
+                    foreach (var cardDisplay in dbm.cardDisplayList)
+                    {
+                        DisplayInfo targetDisplay = cardDisplay.GetComponent<DisplayInfo>();
+                        if (targetDisplay.Rarity == Card.Rarity.Mythical && targetDisplay.Quantity != 0)
+                        {
+                            targetDisplay.DisplayAvailable();
+                        }
+                    }
                 }
-            }
+                loadedDeckRarities[2] -= 1;
+                mythicalCountText.text = "신화 (" + loadedDeckRarities[2].ToString() + "/3)";
+                break;
         }
-
-        switch (cardinfo.Rarity)
-        {
-            case Card.Rarity.Common: local_rarities[0] += 1; break;
-            case Card.Rarity.Legendary: local_rarities[1] += 1; break;
-            case Card.Rarity.Mythical: local_rarities[2] += 1; break;
-        }
-
-        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / 30";
-    }
-
-    public void RemoveCardInfoInDeck(DisplayCard cardinfo)
-    {
-        local_card_count -= 1;
-
-        switch (cardinfo.Cost)
-        {
-            case 0: local_costs[0] -= 1; break;
-            case 1: local_costs[1] -= 1; break;
-            case 2: local_costs[2] -= 1; break;
-            case 3: local_costs[3] -= 1; break;
-            case 4: local_costs[4] -= 1; break;
-            case 5: local_costs[5] -= 1; break;
-            case 6: local_costs[6] -= 1; break;
-            case 7: local_costs[7] -= 1; break;
-            case 8: local_costs[8] -= 1; break;
-            default: local_costs[9] -= 1; break;
-        }
-
-        List<ChessPiece.PieceType> includedTypes = new List<ChessPiece.PieceType>();
-        foreach (ChessPiece.PieceType piecetype in Enum.GetValues(typeof(ChessPiece.PieceType)))
-        {
-            if (piecetype != ChessPiece.PieceType.None && cardinfo.ChessPiece.HasFlag(piecetype))
-            {
-                includedTypes.Add(piecetype);
-            }
-        }
-
-        for (int i = includedTypes.Count - 1; i >= 0; i--)
-        {
-            if (i == includedTypes.Count - 1)
-            {
-                switch (includedTypes[i])
-                {
-                    case ChessPiece.PieceType.Pawn: local_chesspieces[0] -= 1; break;
-                    case ChessPiece.PieceType.Knight: local_chesspieces[1] -= 1; break;
-                    case ChessPiece.PieceType.Bishop: local_chesspieces[2] -= 1; break;
-                    case ChessPiece.PieceType.Rook: local_chesspieces[3] -= 1; break;
-                    case ChessPiece.PieceType.Quene: local_chesspieces[4] -= 1; break;
-                    case ChessPiece.PieceType.King: local_chesspieces[5] -= 1; break;
-                }
-            }
-            else
-            {
-                switch (includedTypes[i])
-                {
-                    case ChessPiece.PieceType.Pawn: local_extra_chesspieces[0] -= 1; break;
-                    case ChessPiece.PieceType.Knight: local_extra_chesspieces[1] -= 1; break;
-                    case ChessPiece.PieceType.Bishop: local_extra_chesspieces[2] -= 1; break;
-                    case ChessPiece.PieceType.Rook: local_extra_chesspieces[3] -= 1; break;
-                    case ChessPiece.PieceType.Quene: local_extra_chesspieces[4] -= 1; break;
-                    case ChessPiece.PieceType.King: local_extra_chesspieces[5] -= 1; break;
-                }
-            }
-        }
-
-        switch (cardinfo.Rarity)
-        {
-            case Card.Rarity.Common: local_rarities[0] -= 1; break;
-            case Card.Rarity.Legendary: local_rarities[1] -= 1; break;
-            case Card.Rarity.Mythical: local_rarities[2] -= 1; break;
-        }
-
-        CardCountText.text = "카드개수 : " + local_card_count.ToString() + " / " + CARD_LIMIT.ToString();
+        cardCountText.text = "카드 : " + loadedDeckCardCount.ToString() + " / " + CARD_LIMIT.ToString();
     }
 
     public void CancelCaution()
     {
-        CautionPanel.SetActive(false);
+        cautionPanel.SetActive(false);
     }
-
-
 }

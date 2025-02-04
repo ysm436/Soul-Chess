@@ -1,60 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
-using System.Linq;
 
 public class ShowDeckInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private GameObject deckinfopanel;
-    [SerializeField] private Transform cost_graph;
-    [SerializeField] private TextMeshProUGUI pawn_cost;
-    [SerializeField] private TextMeshProUGUI knight_cost;
-    [SerializeField] private TextMeshProUGUI bishop_cost;
-    [SerializeField] private TextMeshProUGUI rook_cost;
-    [SerializeField] private TextMeshProUGUI queen_cost;
-    [SerializeField] private TextMeshProUGUI king_cost;
-    [SerializeField] private TextMeshProUGUI soul_cost;
-    [SerializeField] private TextMeshProUGUI spell_cost;
-    [SerializeField] private TextMeshProUGUI common_cost;
-    [SerializeField] private TextMeshProUGUI legendary_cost;
-    [SerializeField] private TextMeshProUGUI mythical_cost;
+    [SerializeField] private GameObject deckInfoPanel;
+    [SerializeField] private Transform costGraph;
+    [SerializeField] private TextMeshProUGUI soulCost;
+    [SerializeField] private TextMeshProUGUI spellCost;
+    [SerializeField] private TextMeshProUGUI commonCost;
+    [SerializeField] private TextMeshProUGUI legendaryCost;
+    [SerializeField] private TextMeshProUGUI mythicalCost;
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        DeckManager deckmanager = GetComponentInParent<DeckManager>();
+        DeckManager deckManager = GetComponentInParent<DeckManager>();
 
-        for (int i = 0; i < cost_graph.childCount; i++)
+        for (int i = 0; i < costGraph.childCount; i++)
         {
-            RectTransform recttransform = cost_graph.GetChild(i).GetComponent<RectTransform>();
-            Vector2 graph_size = recttransform.sizeDelta;
-            graph_size.y = 10 * deckmanager.local_costs[i];
-            recttransform.sizeDelta = graph_size;
+            RectTransform rectTransform = costGraph.GetChild(i).GetComponent<RectTransform>();
+            Vector2 graphSize = rectTransform.sizeDelta;
+            graphSize.y = 10 * deckManager.loadedDeckCosts[i];
+            rectTransform.sizeDelta = graphSize;
         }
 
-        pawn_cost.text = deckmanager.local_chesspieces[0].ToString() + "(" + deckmanager.local_extra_chesspieces[0].ToString() + ")";
-        knight_cost.text = deckmanager.local_chesspieces[1].ToString() + "(" + deckmanager.local_extra_chesspieces[1].ToString() + ")";
-        bishop_cost.text = deckmanager.local_chesspieces[2].ToString() + "(" + deckmanager.local_extra_chesspieces[2].ToString() + ")";
-        rook_cost.text = deckmanager.local_chesspieces[3].ToString() + "(" + deckmanager.local_extra_chesspieces[3].ToString() + ")";
-        queen_cost.text = deckmanager.local_chesspieces[4].ToString() + "(" + deckmanager.local_extra_chesspieces[4].ToString() + ")";
-        king_cost.text = deckmanager.local_chesspieces[5].ToString() + "(" + deckmanager.local_extra_chesspieces[5].ToString() + ")";
+        soulCost.text = deckManager.loadedDeckTypes[0].ToString();
+        spellCost.text = deckManager.loadedDeckTypes[1].ToString();
 
-        int soul_sum = deckmanager.local_chesspieces.Sum();
-        soul_cost.text = soul_sum.ToString() + " / 16";
-        spell_cost.text = (deckmanager.local_card_count - soul_sum).ToString();
+        commonCost.text = deckManager.loadedDeckRarities[0].ToString();
+        legendaryCost.text = deckManager.loadedDeckRarities[1].ToString() + " / 9";
+        mythicalCost.text = deckManager.loadedDeckRarities[2].ToString() + " / 3";
 
-        common_cost.text = deckmanager.local_rarities[0].ToString();
-        legendary_cost.text = deckmanager.local_rarities[1].ToString();
-        mythical_cost.text = deckmanager.local_rarities[2].ToString() + " / 5";
-
-        deckinfopanel.SetActive(true);
+        deckInfoPanel.SetActive(true);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
-        deckinfopanel.SetActive(false);
+        deckInfoPanel.SetActive(false);
     }
-
-
 }

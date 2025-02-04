@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
     public Action OnMyTurnEnd;
     public Action OnOpponentTurnEnd;
 
+    public ChessTimer chessTimer;
+
     [SerializeField] private bool _isMyTurn;
     public bool isMyTurn { get => _isMyTurn; }
 
@@ -462,6 +464,7 @@ public class PlayerController : MonoBehaviour
     {
         _isMyTurn = true;
         OnMyTurnStart?.Invoke();
+        chessTimer.StartTimer();
     }
 
     public void OpponentTurnStart()
@@ -541,6 +544,8 @@ public class PlayerController : MonoBehaviour
                 GameBoard.instance.gameData.playerWhite.soulOrbs++;
             GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;
         }
+
+        chessTimer.StopTimer();
     }
 
     public void OpponentTurnEnd()
