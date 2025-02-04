@@ -175,21 +175,19 @@ public class PlayerController : MonoBehaviour
             {
                 srcPiece.Move(dst_coordinate);
                 gameBoard.chessBoard.KillAnimation(srcPiece, dstPiece);
-                GameManager.instance.soundManager.PlaySFX("Destroy");
             }
             else
             {
                 srcPiece.GetComponent<Animator>().SetTrigger("moveTrigger");
                 srcPiece.GetComponent<Animator>().SetBool("isReturning", true);
                 gameBoard.chessBoard.ForthBackPieceAnimation(srcPiece, dstPiece);
-                GameManager.instance.soundManager.PlaySFX("Attack");
             }
         }
         else
         {
             srcPiece.Move(dst_coordinate);
+            GameManager.instance.soundManager.PlaySFX("Move", pitch: 2.0f);
             gameBoard.chessBoard.MovePieceAnimation(srcPiece);
-            GameManager.instance.soundManager.PlaySFX("Move");
         }
     }
     void SetChosenPiece(ChessPiece targetPiece)
@@ -365,6 +363,7 @@ public class PlayerController : MonoBehaviour
 
         if (usingCard is SoulCard)
         {
+            GameManager.instance.soundManager.PlaySFX("SetSoul", usingCard.GetCardID, startTime: 0.5f);
             if (usingCard.EffectOnCardUsed is TargetingEffect)
                 photonView.RPC("UseCardRemote", RpcTarget.Others, usingCard.handIndex, (usingCard as SoulCard).infusion.serializedTargetData[0], (usingCard.EffectOnCardUsed as TargetingEffect).serializedTargetData);
             else
@@ -406,6 +405,7 @@ public class PlayerController : MonoBehaviour
 
         if (card is SoulCard)
         {
+            GameManager.instance.soundManager.PlaySFX("SetSoul", card.GetCardID, startTime: 0.5f);
 
             Vector2Int infusionTargetCoordinate = Vector2Int.RoundToInt(infusionTarget);
 
@@ -416,7 +416,6 @@ public class PlayerController : MonoBehaviour
 
             (card as SoulCard).infusion.EffectAction(gameBoard.opponentController);
 
-            GameManager.instance.soundManager.PlaySFX("SetSoul", card.GetCardID);
         }
 
         if (card.EffectOnCardUsed is TargetingEffect)
@@ -532,6 +531,7 @@ public class PlayerController : MonoBehaviour
 
     public void TurnEnd()
     {
+        GameManager.instance.soundManager.PlaySFX("Turn");
         OnMyTurnEnd?.Invoke();
         // 턴 종료 시 상대 코스트 회복
         if (playerColor == GameBoard.PlayerColor.White)

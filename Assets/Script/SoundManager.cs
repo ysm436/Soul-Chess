@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
     void Awake()
     {
         bgmPlayer = gameObject.AddComponent<AudioSource>();
-        bgmVolume = 1f;
+        bgmVolume = 0.7f;
 
         sfxPlayer = gameObject.AddComponent<AudioSource>();
 
@@ -116,7 +116,7 @@ public class SoundManager : MonoBehaviour
         bgmPlayer.Stop();
     }
 
-    public void PlaySFX(string name, int id = -1)
+    public void PlaySFX(string name, int id = -1, float volume = 1.0f, float pitch = 1.0f, float startTime = 0f)
     {
         if (!sfxDictionary.ContainsKey(name))
         {
@@ -132,7 +132,9 @@ public class SoundManager : MonoBehaviour
                 name = elementSFXDictionary[cardName];
             }
         }
-
-        sfxPlayer.PlayOneShot(sfxDictionary[name]);
+        
+        sfxPlayer.pitch = pitch;
+        sfxPlayer.time = startTime;
+        sfxPlayer.PlayOneShot(sfxDictionary[name], volume);
     }
 }
