@@ -74,3 +74,6 @@ TagManager:
   - name: Tutorial
     uniqueID: 1223407413
     locked: 0
+  - name: Effect
+    uniqueID: 4209578835
+    locked: 0
