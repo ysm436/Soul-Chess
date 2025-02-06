@@ -163,4 +163,23 @@ public class ChessBoard : MonoBehaviour
         dstPieceAnimator.SetBool("isVibrated", false);
         dstPiece.transform.position = GetPositionUsingCoordinate(dstPiece.coordinate);
     }
+
+    public List<ChessPiece> GetAllPieces(GameBoard.PlayerColor color)
+    {
+        List<ChessPiece> chessPieces = new List<ChessPiece>();
+
+        int count = transform.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            ChessPiece piece = transform.GetChild(i).GetComponent<ChessPiece>();
+            if (piece == null || !piece.isAlive)
+                continue;
+            if (piece.pieceColor == color)
+            {
+                chessPieces.Add(piece);
+            }
+        }
+
+        return chessPieces;
+    }
 }
