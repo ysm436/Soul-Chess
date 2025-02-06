@@ -117,21 +117,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596391799992f8646846d8c078579754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMine: 0
+  coordinate: {x: 0, y: 0}
+  owner:
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
+    maxHandCardCount: 8
+    mulliganHandCount: 4
+    isRevealed: 0
+    deck: []
+    hand: []
+    deckPosition: {x: 0, y: 0}
+    spellDamageIncrease: 0
+    spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uD3EC\uC138\uC774\uB3C8"
-  _cost: 7
+  _cost: 4
   illustration: {fileID: 21300000, guid: 3290a7c77b39f564a933e21f19d1a46f, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 2
   description: "[\uAC15\uB9BC] \uBAA8\uB4E0 \uC601\uD63C\uC774 \uAE43\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C
-    25\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    2\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 558989280382440502}
   isInSelection: 0
-  pieceRestriction: 8
-  _AD: 55
-  _HP: 55
+  pieceRestriction: -1
+  _AD: 5
+  _HP: 5
   accessorySpriteList:
   - pieceType: 8
     pieceColor: 0
@@ -140,6 +152,7 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: d9cf5d59a59331845a380f689da38f91, type: 3}
   InfusedPiece: {fileID: 0}
+  damageAmount: 2
 --- !u!114 &558989280382440502
 MonoBehaviour:
   m_ObjectHideFlags: 0

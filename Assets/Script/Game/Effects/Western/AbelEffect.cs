@@ -8,8 +8,9 @@ public class AbelEffect : Effect
     public override void EffectAction(PlayerController player)
     {
         Abel abelComponent = gameObject.GetComponent<Abel>();
+        abelComponent.player = player;
 
-        abelComponent.InfusedPiece.buff.AddBuffByDescription(abelComponent.cardName, Buff.BuffType.Description, "아벨: [유언] 이 기물이 기물에게 공격당해 사망 시 해당 기물 파괴", true);
+        abelComponent.InfusedPiece.buff.AddBuffByDescription(abelComponent.cardName, Buff.BuffType.Description, "아벨: [유언] 무작위 적 기물 처치", true);
         abelComponent.AddEffect();
         abelComponent.InfusedPiece.OnSoulRemoved += abelComponent.RemoveEffect;
         abelComponent.InfusedPiece.OnSoulRemoved += RemoveBuffInfo;

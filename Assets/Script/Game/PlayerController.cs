@@ -10,17 +10,17 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    private PhotonView photonView;
+    protected PhotonView photonView;
 
     public GameBoard.PlayerColor playerColor;
     public GameBoard gameBoard;
     public SoulOrb soulOrb; //코스트 프리팹
 
-    ChessPiece chosenPiece = null;
-    List<Vector2Int> movableCoordinates = new List<Vector2Int>();
-    private int additionalMoveCount = 0;
+    protected ChessPiece chosenPiece = null;
+    protected List<Vector2Int> movableCoordinates = new List<Vector2Int>();
+    protected int additionalMoveCount = 0;
 
-    private bool isMoved;
+    protected bool isMoved;
     public bool TurnEndPossible
     {
         get
@@ -29,11 +29,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private Card usingCard = null;
-    private TargetingEffect targetingEffect;
+    protected Card usingCard = null;
+    protected TargetingEffect targetingEffect;
     public bool isUsingCard = false;
-    private bool isInfusing = false;
-    List<TargetableObject> targetableObjects = new List<TargetableObject>();
+    protected bool isInfusing = false;
+    protected List<TargetableObject> targetableObjects = new List<TargetableObject>();
 
     public Action OnMyTurnStart;
     public Action OnOpponentTurnStart;
@@ -46,8 +46,8 @@ public class PlayerController : MonoBehaviour
 
     public ChessTimer chessTimer;
 
-    [SerializeField] private bool _isMyTurn;
-    public bool isMyTurn { get => _isMyTurn; }
+    [SerializeField] protected bool _isMyTurn;
+    public virtual bool isMyTurn { get => _isMyTurn; }
 
     private void Awake()
     {
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnClickBoardSquare(Vector2Int coordinate)
+    public virtual void OnClickBoardSquare(Vector2Int coordinate)
     {
         if (!GameBoard.instance.isActivePlayer && !GameBoard.instance.isDebugMode)
             return;
@@ -243,7 +243,7 @@ public class PlayerController : MonoBehaviour
                     GameBoard.instance.GetBoardSquare(obj.coordinate).isPositiveTargetable = true;
             }
     }
-    public bool UseCard(Card card)
+    public virtual bool UseCard(Card card)
     {
         if (GameBoard.instance.CurrentPlayerData().soulEssence < card.cost)
             return false;
@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
         //타겟 효과가 부정적인지 파라미터 전달
         SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
     }
-    public void CancelUseCard()
+    public virtual void CancelUseCard()
     {
         ClearTargetableObjects();
 
@@ -348,7 +348,7 @@ public class PlayerController : MonoBehaviour
         isUsingCard = false;
         targetingEffect = null;
     }
-    public void UseCardEffect()
+    public virtual void UseCardEffect()
     {
         GameBoard.instance.cancelButton.Hide();
         if (isInfusing)
@@ -397,7 +397,7 @@ public class PlayerController : MonoBehaviour
     }
 
     [PunRPC]
-    public void UseCardRemote(int cardIndex, Vector3 infusionTarget, Vector3[] targetArray = null)
+    public virtual void UseCardRemote(int cardIndex, Vector3 infusionTarget, Vector3[] targetArray = null)
     {
         Card card = gameBoard.gameData.opponentPlayerData.hand[cardIndex];
         GameBoard.instance.CurrentPlayerData().soulEssence -= card.cost;
@@ -476,13 +476,13 @@ public class PlayerController : MonoBehaviour
         OnOpponentTurnStart?.Invoke();
     }
 
-    public void DiscardCard(Card card)
+    public virtual void DiscardCard(Card card)
     {
         photonView.RPC("RPCDiscardCard", RpcTarget.All, card.handIndex);
     }
 
     [PunRPC]
-    public void RPCDiscardCard(int handIndex)
+    public virtual void RPCDiscardCard(int handIndex)
     {
         Card cardInstance = GameBoard.instance.CurrentPlayerData().hand[handIndex];
 
@@ -494,12 +494,12 @@ public class PlayerController : MonoBehaviour
 
         LocalDraw();
     }
-    public void Draw()
+    public virtual void Draw()
     {
         photonView.RPC("LocalDraw", RpcTarget.All);
     }
     [PunRPC]
-    public void LocalDraw()
+    public virtual void LocalDraw()
     {
         if (playerColor == GameBoard.PlayerColor.White)
         {

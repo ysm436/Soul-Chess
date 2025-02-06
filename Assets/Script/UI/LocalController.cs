@@ -8,7 +8,7 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
 {
     PhotonView photonView;
 
-    public GameObject turnChangeButton;
+    [SerializeField] private GameObject turnChangeButton;
     private SpriteRenderer turnChangeButtonSR;
     private Material turnChangeButtonMaterial;
     public Sprite whiteButton;

@@ -104,18 +104,18 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uD06C\uB77C\uCF04"
-  _cost: 8
+  _cost: 4
   illustration: {fileID: 21300000, guid: 27d4a556ffa3e5845a2c78f2ac16f2bc, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 1
   description: "[\uC720\uC5B8] \uBB34\uC791\uC704 \uC801 \uAE30\uBB3C\uC5D0\uAC8C
-    \uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4. 8\uBC88 \uBC18\uBCF5\uD569\uB2C8\uB2E4."
+    \uD53C\uD574\uB97C 1 \uC90D\uB2C8\uB2E4. 8\uBC88 \uBC18\uBCF5\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 5850359546616703673}
   isInSelection: 0
-  pieceRestriction: 8
-  _AD: 78
-  _HP: 78
+  pieceRestriction: -1
+  _AD: 7
+  _HP: 7
   accessorySpriteList:
   - pieceType: 8
     pieceColor: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: eb5f536aed014de47b377001c79c3316, type: 3}
   InfusedPiece: {fileID: 0}
   repeat: 8
-  damage: 8
+  damage: 1
 --- !u!114 &5850359546616703673
 MonoBehaviour:
   m_ObjectHideFlags: 0

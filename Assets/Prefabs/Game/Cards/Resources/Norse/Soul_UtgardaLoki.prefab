@@ -104,17 +104,19 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC6B0\uD2B8\uAC00\uB974\uB2E4 \uB85C\uD0A4"
-  _cost: 3
+  _cost: 2
   illustration: {fileID: 21300000, guid: 44ee189dbcfdcf7479c0b2d1c764dc35, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
   rarity: 1
-  description: "[\uAC15\uB9BC] \uC801 \uAE30\uBB3C \uD558\uB098\uB97C \uCE68\uBB35\uC2DC\uD0B5\uB2C8\uB2E4."
+  description: "[\uAC15\uB9BC] \uC801 \uAE30\uBB3C \uD558\uB098\uB97C \uCE68\uBB35\uC2DC\uD0B5\uB2C8\uB2E4.\n\uD0B9
+    \uAE30\uBB3C\uC5D0 \uAC15\uB9BC \uC2DC, \uCE68\uBB35 \uC2DC\uD0A4\uACE0, \uAE30\uC808
+    \uC2DC\uD0B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -852172297929449117}
   isInSelection: 0
-  pieceRestriction: 32
-  _AD: 30
-  _HP: 20
+  pieceRestriction: -1
+  _AD: 3
+  _HP: 3
   accessorySpriteList:
   - pieceType: 32
     pieceColor: 0
@@ -150,3 +152,4 @@ MonoBehaviour:
     tileCoordinate: {x: 0, y: 0}
   isPositiveEffect: 0
   isNegativeEffect: 1
+  additionalBuffPieceType: 32

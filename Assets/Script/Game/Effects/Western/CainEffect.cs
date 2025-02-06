@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CainEffect : TargetingEffect
 {
-    [SerializeField] private int multipleAmount = 7;
+    [SerializeField] private int multipleAmount = 2;
 
     ChessPiece.PieceType targetPieceRestriction =
         ChessPiece.PieceType.Pawn |

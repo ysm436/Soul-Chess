@@ -109,13 +109,13 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 0
-  description: "[\uAC15\uB9BC] \uD558\uB098\uC758 \uAE30\uBB3C\uC5D0\uAC8C -20/+20\uC744
+  description: "[\uAC15\uB9BC] \uD558\uB098\uC758 \uAE30\uBB3C\uC5D0\uAC8C -2/+2\uC744
     \uBD80\uC5EC\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -5723978548355844231}
   isInSelection: 0
-  pieceRestriction: 5
-  _AD: 10
-  _HP: 10
+  pieceRestriction: -1
+  _AD: 1
+  _HP: 1
   accessorySpriteList:
   - pieceType: 1
     pieceColor: 0
@@ -145,5 +145,5 @@ MonoBehaviour:
   targetTypes: []
   isPositiveEffect: 1
   isNegativeEffect: 0
-  changeAD: -20
-  changeHP: 20
+  changeAD: 1
+  changeHP: 1

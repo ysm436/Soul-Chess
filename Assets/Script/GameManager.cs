@@ -89,6 +89,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    public void LoadPvELobbyScene()
+    {
+        SceneManager.LoadScene("PvELobbyScene");
+    }
+    public void LoadPvEGameScene()
+    {
+        SceneManager.LoadScene("PvEGameScene");
+    }
+
     public void SaveDeckData()
     {
         string path = Application.dataPath + PATH;

@@ -107,7 +107,7 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uD5EC"
-  _cost: 5
+  _cost: 3
   illustration: {fileID: 21300000, guid: 274a123bb2229da41b5bef53514de642, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 1
@@ -115,12 +115,14 @@ MonoBehaviour:
   description: "[\uAC15\uB9BC] \uC544\uAD70 \uAE30\uBB3C\uC758 \uC601\uD63C\uC744
     \uD761\uC218\uD569\uB2C8\uB2E4. \uADF8 \uC601\uD63C\uC758 \uB2A5\uB825\uCE58\uB97C
     \uC5BB\uC2B5\uB2C8\uB2E4.\r\n[\uC720\uC5B8] \uADF8 \uC601\uD63C\uC744 \uB0B4
-    \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
+    \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4.\n\uD038 \uAE30\uBB3C\uC5D0
+    \uAC15\uB9BC \uC2DC, \uB300\uC2E0 \uB2A5\uB825\uCE58\uB97C \uB450\uBC30\uB85C
+    \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -6496355444723469496}
   isInSelection: 0
-  pieceRestriction: 16
-  _AD: 45
-  _HP: 45
+  pieceRestriction: -1
+  _AD: 3
+  _HP: 3
   accessorySpriteList:
   - pieceType: 16
     pieceColor: 0
@@ -130,6 +132,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 6dc7c482b7305814fbcb5db89f9d8987, type: 3}
   InfusedPiece: {fileID: 0}
   targetSoul: {fileID: 0}
+  additionalBuffPieceType: 16
 --- !u!114 &-6496355444723469496
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -45,6 +45,11 @@ public class GameOverUI : MonoBehaviour
     public void OnExit()
     {
         Destroy(GameBoard.instance.gameObject);
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "PvEGameScene")
+        {
+            GameManager.instance.LoadMainScene();
+            return;
+        }
         PhotonNetwork.LeaveRoom();
     }
 }
