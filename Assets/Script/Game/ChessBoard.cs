@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class ChessBoard : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class ChessBoard : MonoBehaviour
     public GameObject boardSquareSample;
 
     public GameObject blocker;
+    public Canvas effectCanvas;
     [SerializeField] private Volume volume;
     private ColorAdjustments colorAdjustments;
 
@@ -189,7 +191,8 @@ public class ChessBoard : MonoBehaviour
         }).SetEase(Ease.InOutSine).OnComplete(() => {
             GameObject projectile = Instantiate(projectilePrefab);
             projectile.transform.position = srcPiece.transform.position;
-            projectile.transform.DOMove(dstPiece.transform.position, 1f).SetEase(Ease.OutCubic).OnComplete(() => {
+            projectile.transform.DOMove(dstPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                GameManager.instance.soundManager.PlaySFX("Destroy");
                 dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
                 dstPiece.MakeAttackedEffect();
                 dstPiece.Kill();
@@ -201,6 +204,25 @@ public class ChessBoard : MonoBehaviour
                 {
                     colorAdjustments.postExposure.Override(value);
                 }).SetEase(Ease.InOutSine);
+            });
+        });
+    }
+
+    public void TileEffect(GameObject tileEffectPrefab, ChessPiece objPiece)
+    {
+        GameObject tileEffectObj = Instantiate(tileEffectPrefab);
+        tileEffectObj.transform.position = objPiece.transform.position;
+        tileEffectObj.transform.parent = effectCanvas.transform;
+
+        Image image = tileEffectObj.GetComponent<Image>();
+
+        DOVirtual.Float(0f, 1f, 0.5f, (value) => {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, value);
+        }).OnComplete(() => {
+            DOVirtual.Float(1f, 0f, 0.5f, (value) => {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, value);
+            }).OnComplete(() => {
+                Destroy(tileEffectObj);
             });
         });
     }

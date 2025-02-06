@@ -26,7 +26,7 @@ public class DavidEffect : TargetingEffect
         foreach (var target in targets)
         {
             Debug.Log("David Effect");
-            GameBoard.instance.chessBoard.KillByCardEffect(projectile, davidComponent.InfusedPiece, target as ChessPiece);
+            GameBoard.instance.chessBoard.KillByCardEffect(effectPrefab, davidComponent.InfusedPiece, target as ChessPiece);
         }
     }
 }

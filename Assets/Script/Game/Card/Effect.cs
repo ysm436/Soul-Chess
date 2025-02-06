@@ -8,6 +8,6 @@ using UnityEngine;
 
 public abstract class Effect : MonoBehaviour
 {
-    public GameObject projectile;
+    public GameObject effectPrefab;
     public abstract void EffectAction(PlayerController player);
 }

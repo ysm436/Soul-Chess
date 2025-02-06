@@ -129,11 +129,11 @@ public class DeckHandController : MonoBehaviour
         objCard.transform.localPosition = new Vector3(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UI에 맞게 좌표수정
         if (objCard.cost <= GameBoard.instance.gameData.myPlayerData.soulEssence)
         {
-            objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 1f);
+            objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_Alpha", 1f);
         }
         else
         {
-            objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 0f);
+            objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_Alpha", 0f);
         }
     }
 

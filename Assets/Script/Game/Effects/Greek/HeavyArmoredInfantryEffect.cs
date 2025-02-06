@@ -17,6 +17,7 @@ public class HeavyArmoredInfantryEffect : Effect
             ChessPiece objPiece = GameBoard.instance.gameData.GetPiece(tempPosition);
             if (objPiece != null && objPiece.pieceColor == player.playerColor)
             {
+                GameBoard.instance.chessBoard.TileEffect(effectPrefab, objPiece);
                 objPiece.maxHP += heavyArmoredInfantryComponent.increasedHP;
                 objPiece.buff.AddBuffByValue(heavyArmoredInfantryComponent.cardName, Buff.BuffType.HP, heavyArmoredInfantryComponent.increasedHP, false);
             }
@@ -29,6 +30,7 @@ public class HeavyArmoredInfantryEffect : Effect
             ChessPiece objPiece = GameBoard.instance.gameData.GetPiece(tempPosition);
             if (objPiece != null && objPiece.pieceColor == player.playerColor)
             {
+                GameBoard.instance.chessBoard.TileEffect(effectPrefab, objPiece);
                 objPiece.maxHP += heavyArmoredInfantryComponent.increasedHP;
                 objPiece.buff.AddBuffByValue(heavyArmoredInfantryComponent.cardName, Buff.BuffType.HP, heavyArmoredInfantryComponent.increasedHP, false);
             }
