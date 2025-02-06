@@ -50,6 +50,9 @@ TagManager:
   - name: ChessBoard
     uniqueID: 3582244469
     locked: 0
+  - name: TileEffect
+    uniqueID: 2529044077
+    locked: 0
   - name: ChessPieces
     uniqueID: 1913470231
     locked: 0
@@ -73,4 +76,7 @@ TagManager:
     locked: 0
   - name: Tutorial
     uniqueID: 1223407413
+    locked: 0
+  - name: ObjEffect
+    uniqueID: 4209578835
     locked: 0
