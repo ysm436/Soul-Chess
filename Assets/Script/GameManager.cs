@@ -97,7 +97,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("PvEGameScene");
     }
-
+    public void LoadCreditScene()
+    {
+        SceneManager.LoadScene("CreditScene");
+    }
     public void SaveDeckData()
     {
         string path = Application.dataPath + PATH;

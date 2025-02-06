@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PvEGameScene.unity
     guid: 110eeb5820e15404881e7c1b69193c11
+  - enabled: 1
+    path: Assets/Scenes/CreditScene.unity
+    guid: a711f190879e3dd48a337b21c421021c
   m_configObjects: {}
