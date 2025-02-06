@@ -6,25 +6,25 @@ using UnityEngine.EventSystems;
 using TMPro;
 public class PvELocalController : MonoBehaviour, IPointerClickHandler
 {
-    PhotonView photonView;
-
-    SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject turnChangeButton;
+    private SpriteRenderer turnChangeButtonSR;
+    private Material turnChangeButtonMaterial;
     public Sprite whiteButton;
     public Sprite blackButton;
     public PlayerController whiteController;
     public PlayerController blackController;
-    public TurnChangeButtonHighlight turnChangeButtonHighlight;
     public SoulOrb mySoulOrb;
     public SoulOrb opponentSoulrOrb;
-    public GameObject turn_display;
+    public ChessTimer myTimer;
+    public ChessTimer opponentTimer;
+    public GameObject turnDisplay;
     [SerializeField] private GameObject blocker;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = whiteButton;
-
-        photonView = GetComponent<PhotonView>();
+        turnChangeButtonSR = turnChangeButton.GetComponent<SpriteRenderer>();
+        turnChangeButtonSR.sprite = whiteButton;
+        turnChangeButtonMaterial = turnChangeButton.GetComponent<Renderer>().material;
 
         if (GameManager.instance.isHost)
         {
@@ -32,6 +32,11 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.Black;
             whiteController.soulOrb = mySoulOrb;
             blackController.soulOrb = opponentSoulrOrb;
+
+            myTimer.playerColor = GameBoard.PlayerColor.White;
+            opponentTimer.playerColor = GameBoard.PlayerColor.Black;
+            whiteController.chessTimer = myTimer;
+            blackController.chessTimer = opponentTimer;
             ChangeComputerTurn(false);
         }
         else
@@ -40,6 +45,11 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.White;
             blackController.soulOrb = mySoulOrb;
             whiteController.soulOrb = opponentSoulrOrb;
+
+            myTimer.playerColor = GameBoard.PlayerColor.Black;
+            opponentTimer.playerColor = GameBoard.PlayerColor.White;
+            blackController.chessTimer = myTimer;
+            whiteController.chessTimer = opponentTimer;
             ChangeComputerTurn(true);
         }
 
@@ -51,14 +61,16 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
 
         if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
         {
-            turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "¥ÁΩ≈¿« ≈œ";
+            turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "ÎãπÏã†Ïùò ÌÑ¥";
         }
         else
         {
-            turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "ªÛ¥Î¿« ≈œ";
+            turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "ÏÉÅÎåÄÏùò ÌÑ¥";
             StartCoroutine(whiteController.GetComponent<PvEPlayerController>().ComputerAct());
         }
         StartCoroutine("TurnDisplayOnOff");
+        
+        whiteController.chessTimer.StartTimer();
     }
 
     void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
@@ -85,7 +97,7 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
         {
             GameBoard.instance.isWhiteTurn = false;
             ChangeComputerTurn(!GameBoard.instance.isComputerTurn);
-            spriteRenderer.sprite = blackButton;
+            turnChangeButtonSR.sprite = blackButton;
 
             whiteController.TurnEnd();
             blackController.OpponentTurnEnd();
@@ -94,10 +106,19 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
             blackController.enabled = true;
 
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
-                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "ªÛ¥Î¿« ≈œ";
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.white;
+                TurnButtonText.text = "ÏÉÅÎåÄ ÌÑ¥";
+                turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "ÏÉÅÎåÄÏùò ÌÑ¥";
+            }
             else
-                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "¥ÁΩ≈¿« ≈œ";
-            StartCoroutine("TurnDisplayOnOff");
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.white;
+                TurnButtonText.text = "ÌÑ¥ Ï¢ÖÎ£å";
+                turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "ÎãπÏã†Ïùò ÌÑ¥";
+            }
 
             blackController.TurnStart();
             whiteController.OpponentTurnStart();
@@ -109,7 +130,7 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
         {
             GameBoard.instance.isWhiteTurn = true;
             ChangeComputerTurn(!GameBoard.instance.isComputerTurn);
-            spriteRenderer.sprite = whiteButton;
+            turnChangeButtonSR.sprite = whiteButton;
 
             blackController.TurnEnd();
             whiteController.OpponentTurnEnd();
@@ -118,9 +139,19 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
             whiteController.enabled = true;
 
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
-                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "¥ÁΩ≈¿« ≈œ";
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.black;
+                TurnButtonText.text = "ÌÑ¥ Ï¢ÖÎ£å";
+                turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "ÎãπÏã†Ïùò ÌÑ¥";
+            }
             else
-                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "ªÛ¥Î¿« ≈œ";
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.black;
+                TurnButtonText.text = "ÏÉÅÎåÄ ÌÑ¥";
+                turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "ÏÉÅÎåÄÏùò ÌÑ¥";
+            }
             StartCoroutine("TurnDisplayOnOff");
 
             whiteController.TurnStart();
@@ -129,14 +160,14 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
             whiteController.LocalDraw();
             blackController.OpponentDraw();
         }
-        turnChangeButtonHighlight.spriteRenderer.enabled = false;
+        turnChangeButtonMaterial.SetFloat("_InnerOutlineAlpha", 0f);
     }
 
     private IEnumerator TurnDisplayOnOff()
     {
-        turn_display.SetActive(true);
+        turnDisplay.SetActive(true);
         yield return new WaitForSeconds(1f);
-        turn_display.SetActive(false);
+        turnDisplay.SetActive(false);
     }
 
     private void ChangeComputerTurn(bool active)

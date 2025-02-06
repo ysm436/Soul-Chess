@@ -52,7 +52,7 @@ public class PvELobbySceneUI : MonoBehaviour
     [SerializeField] private Transform TrashCan;
     [SerializeField] private TextMeshProUGUI SelectedDeckInfo;
     [SerializeField] private Transform CardListDisplay;
-    [SerializeField] private GameObject CardInfoUIView; //ÀÌ°Ç µé¾î°¥ scrollview
+    [SerializeField] private GameObject CardInfoUIView; //ï¿½Ì°ï¿½ ï¿½ï¿½î°¥ scrollview
 
     private void Awake()
     {
@@ -63,7 +63,7 @@ public class PvELobbySceneUI : MonoBehaviour
     bool isInitialzed = false;
     private void Start()
     {
-        //µ¦ ¼±ÅÃÇØÁÖ¼¼¿ä ¼ÎÀÌ´õ È°¼ºÈ­
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ È°ï¿½ï¿½È­
 
         startButton.onClick.AddListener(() => GameManager.instance.LoadPvEGameScene());
         exitButton.onClick.AddListener(() => GameManager.instance.LoadMainScene());
@@ -82,7 +82,7 @@ public class PvELobbySceneUI : MonoBehaviour
     {
         if (SelectedDeckIndex == -1)
         {
-            Debug.Log("¼±ÅÃµÈ µ¦ÀÌ ¾ø½À´Ï´Ù.");
+            Debug.Log("ì„ íƒëœ ë±ì´ ì—†ìŠµë‹ˆë‹¤.");
         }
         else
         {
@@ -133,8 +133,8 @@ public class PvELobbySceneUI : MonoBehaviour
                     {
                         GameObject deckselectbutton = Instantiate(DeckSelectButton, DeckDisplay);
                         DeckSelectButton buttoninfo = deckselectbutton.GetComponent<DeckSelectButton>();
-                        buttoninfo.deckname.text = GameManager.instance.deckList[i].deckname;
-                        buttoninfo.deck_index = i;
+                        buttoninfo.deckname.text = GameManager.instance.deckList[i].deckName;
+                        buttoninfo.deckIndex = i;
                     }
                 }
             }
@@ -142,10 +142,10 @@ public class PvELobbySceneUI : MonoBehaviour
             if (SelectedDeckIndex != -1)
             {
                 var deckSelectButton = GetSelectedDeckButton();
-                //¼±ÅÃµÇ¾îÀÖ´Â°Ô ÀÖ´Ù¸é ½¦ÀÌ´õ È°¼ºÈ­
+                //ï¿½ï¿½ï¿½ÃµÇ¾ï¿½ï¿½Ö´Â°ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ È°ï¿½ï¿½È­
                 deckSelectButton.ControlShader(true);
             }
-            //Ä«µå¸ñ·Ï ¶ç¿î´Ù¸é ¿©±â¼­µµ Ãß°¡ÇØ¾ßÇÔ
+            //Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½
             ShowSelectedDeckCardList();
         }
     }
@@ -200,13 +200,13 @@ public class PvELobbySceneUI : MonoBehaviour
 
         if (SelectedDeckIndex == -1)
         {
-            //µ¦ ¼±ÅÃÇØÁÖ¼¼¿ä ¼ÎÀÌ´õ È°¼ºÈ­
-            SelectedDeckInfo.text = "µ¦À» ¼±ÅÃÇØ ÁÖ¼¼¿ä.";
+            //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ È°ï¿½ï¿½È­
+            SelectedDeckInfo.text = "ë±ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.";
         }
         else
         {
-            //µ¦ ¼±ÅÃÇØÁÖ¼¼¿ä ¼ÎÀÌ´õ ºñÈ°¼ºÈ­
-            SelectedDeckInfo.text = "¼±ÅÃµÈ µ¦\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckname + ">";
+            //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+            SelectedDeckInfo.text = "ì„ íƒëœ ë±\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckName + ">";
             GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
         }
     }
@@ -221,18 +221,18 @@ public class PvELobbySceneUI : MonoBehaviour
         SetReady(false);
         if (isPlayerWhite)
         {
-            whiteReadyButtonText.text = "ÁØºñ";
+            whiteReadyButtonText.text = "ï¿½Øºï¿½";
             whiteReadyButton.enabled = true;
             blackReadyButton.enabled = false;
-            blackReadyButtonText.text = "ÄÄÇ»ÅÍ";
+            blackReadyButtonText.text = "ï¿½ï¿½Ç»ï¿½ï¿½";
             blackReadyButtonText.color = Color.black;
         }
         else
         {
-            blackReadyButtonText.text = "ÁØºñ";
+            blackReadyButtonText.text = "ï¿½Øºï¿½";
             whiteReadyButton.enabled = false;
             blackReadyButton.enabled = true;
-            whiteReadyButtonText.text = "ÄÄÇ»ÅÍ";
+            whiteReadyButtonText.text = "ï¿½ï¿½Ç»ï¿½ï¿½";
             whiteReadyButtonText.color = Color.black;
         }
     }
