@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,36 +5,35 @@ using UnityEngine;
 public class DeckSelectButton : MonoBehaviour
 {
     public TextMeshProUGUI deckname;
-    public int deck_index;
+    public int deckIndex;
     public void DeckSelect()
     {
         if (GetComponentInParent<LobbySceneUI>() == null)
         {
-            //±âÁ¸ÀÇ ¼±ÅÃµÇ¾î ÀÖ´ø µ¦ÀÇ ½¦ÀÌ´õ ²ô±â
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÃµÇ¾ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (GetComponentInParent<PvELobbySceneUI>().SelectedDeckIndex != -1)
                 GetComponentInParent<PvELobbySceneUI>().GetSelectedDeckButton().ControlShader(false);
 
-            //Áö±Ý µ¦ ½¦ÀÌ´õ È°¼ºÈ­
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ È°ï¿½ï¿½È­
             ControlShader(true);
 
-            GetComponentInParent<PvELobbySceneUI>().SelectedDeckIndex = deck_index;
+            GetComponentInParent<PvELobbySceneUI>().SelectedDeckIndex = deckIndex;
 
-            //Ä«µå¸ñ·Ï ¶ç¿î´Ù¸é ¿©±â¼­µµ Ãß°¡ÇØ¾ßÇÔ
+            //Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½
             GetComponentInParent<PvELobbySceneUI>().ShowSelectedDeckCardList();
         }
-
         else
         {
-            //±âÁ¸ÀÇ ¼±ÅÃµÇ¾î ÀÖ´ø µ¦ÀÇ ½¦ÀÌ´õ ²ô±â
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÃµÇ¾ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (GetComponentInParent<LobbySceneUI>().SelectedDeckIndex != -1)
                 GetComponentInParent<LobbySceneUI>().GetSelectedDeckButton().ControlShader(false);
 
-            //Áö±Ý µ¦ ½¦ÀÌ´õ È°¼ºÈ­
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ È°ï¿½ï¿½È­
             ControlShader(true);
 
-            GetComponentInParent<LobbySceneUI>().SelectedDeckIndex = deck_index;
+            GetComponentInParent<LobbySceneUI>().SelectedDeckIndex = deckIndex;
 
-            //Ä«µå¸ñ·Ï ¶ç¿î´Ù¸é ¿©±â¼­µµ Ãß°¡ÇØ¾ßÇÔ
+            //Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½
             GetComponentInParent<LobbySceneUI>().ShowSelectedDeckCardList();
         }
     }

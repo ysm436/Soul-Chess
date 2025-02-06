@@ -141,6 +141,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         if (GameBoard.instance.CurrentPlayerData().soulEssence < cost)
             return false;
 
+        GameManager.instance.soundManager.PlaySFX("UseCard");
+
         //코스트 제거는 PlayerController.UseCardEffect에서 수행함 (타겟 지정 후 효과 발동한 다음 코스트 제거)
         return GameBoard.instance.CurrentPlayerController().UseCard(this);
     }

@@ -21,7 +21,7 @@ public class CardUI : MonoBehaviour
     {
         if (card is SoulCard)
         {
-            type.text = "øµ»•";
+            type.text = "ÏòÅÌòº";
             AD.SetActive(true);
             HP.SetActive(true);
             ADText.text = card.GetComponent<SoulCard>().AD.ToString();
@@ -29,7 +29,7 @@ public class CardUI : MonoBehaviour
         }
         else
         {
-            type.text = "∏∂π˝";
+            type.text = "ÎßàÎ≤ï";
             AD.SetActive(false);
             HP.SetActive(false);
         }
@@ -37,15 +37,11 @@ public class CardUI : MonoBehaviour
         foreach (var cardFrame in cardFrames)
             cardFrame.SetActive(false);
 
-        cardFrames[(int)card.reigon].SetActive(true);
+        cardFrames[(int)card.rarity].SetActive(true);
 
         cardName.text = card.cardName;
         cost.text = card.cost.ToString();
         description.text = card.description;
-
-        Debug.Log("Sprites/Legacy/GameObjects/Card Illustration/" + card.reigon + "/" + card.illustration.name);
-        Debug.Log(Resources.Load("Sprites/Legacy/GameObjects/Card Illustration/" + card.reigon + "/" + card.illustration.name).GetType());
-        
-        illustration.sprite = Resources.Load<Sprite>("Sprites/Legacy/GameObjects/Card Illustration/" + card.reigon + "/" + card.illustration.name);
+        illustration.sprite = card.illustration;
     }
 }

@@ -36,6 +36,8 @@ public class Kraken : SoulCard
                 objPiece.MakeAttackedEffect();
             }
         }
+
+        GameManager.instance.soundManager.PlaySFX("Water");
     }
 
     public override void AddEffect()

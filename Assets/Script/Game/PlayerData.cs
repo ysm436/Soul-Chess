@@ -69,6 +69,7 @@ public class PlayerData
         }
         else
         {
+            GameManager.instance.soundManager.PlaySFX("Draw", volume: 3f);
             Card card = deck[deck.Count - 1];
             deck.RemoveAt(deck.Count - 1);
  

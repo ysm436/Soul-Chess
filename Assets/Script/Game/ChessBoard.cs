@@ -22,9 +22,9 @@ public class ChessBoard : MonoBehaviour
     {
         if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
         {
-            for (int i = 0; i < GameData.BOARD_SIZE; i++)
+            for (int i = 0; i < gameData.BOARD_SIZE_HEIGHT; i++)
             {
-                for (int j = 0; j < GameData.BOARD_SIZE; j++)
+                for (int j = 0; j < gameData.BOARD_SIZE_WIDTH; j++)
                 {
                     gameData.boardSquares[j, i] = Instantiate<GameObject>(boardSquareSample, new Vector2(j, i) + basePosition, Quaternion.identity, transform).GetComponent<BoardSquare>();
 
@@ -37,9 +37,9 @@ public class ChessBoard : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < GameData.BOARD_SIZE; i++)
+            for (int i = 0; i < gameData.BOARD_SIZE_HEIGHT; i++)
             {
-                for (int j = 0; j < GameData.BOARD_SIZE; j++)
+                for (int j = 0; j < gameData.BOARD_SIZE_WIDTH; j++)
                 {
                     gameData.boardSquares[j, i] = Instantiate<GameObject>(boardSquareSample, new Vector2(7 - j, 7 - i) + basePosition, Quaternion.identity, transform).GetComponent<BoardSquare>();
 
@@ -117,6 +117,7 @@ public class ChessBoard : MonoBehaviour
 
             if (!killTriggerFlag && Vector2.Distance(srcPiece.transform.position, dstPiece.transform.position) < 3)
             {
+                GameManager.instance.soundManager.PlaySFX("Destroy");
                 dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
                 dstPiece.GetComponent<ChessPiece>().MakeAttackedEffect();
                 killTriggerFlag = true;
@@ -140,6 +141,7 @@ public class ChessBoard : MonoBehaviour
     IEnumerator ForthBackPieceAnimationC(ChessPiece srcPiece, Vector2 startPos, Vector2 destPos, float duration, ChessPiece dstPiece)
     {
         yield return StartCoroutine(MovePieceAnimationC(srcPiece, startPos, destPos, duration));
+        GameManager.instance.soundManager.PlaySFX("Attack");
         StartCoroutine(AttackedAnimationC(dstPiece));
         yield return StartCoroutine(MovePieceAnimationC(srcPiece, destPos, startPos, duration));
     }

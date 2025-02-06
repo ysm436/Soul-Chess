@@ -318,12 +318,15 @@ abstract public class ChessPiece : TargetableObject
         if (soul != null)
             RemoveSoul();
 
-        isSoulSet = true;                                       // 영혼이 부여된 턴에는 이동 불가
-        if (moveRestrictionIcon == null) moveRestrictionIcon = Instantiate(effectIconPrefab, transform.position, Quaternion.identity);
-        moveRestrictionIcon.MoveRestrictionEffect();
-        if (pieceColor == GameBoard.PlayerColor.White)
-            GameBoard.instance.whiteController.OnMyTurnEnd += MakeIsSoulSetFalse;
-        else GameBoard.instance.blackController.OnMyTurnEnd += MakeIsSoulSetFalse;
+        if (!GameBoard.instance.soulSetCanMove)
+        {
+            isSoulSet = true;                                       // 영혼이 부여된 턴에는 이동 불가
+            if (moveRestrictionIcon == null) moveRestrictionIcon = Instantiate(effectIconPrefab, transform.position, Quaternion.identity);
+            moveRestrictionIcon.MoveRestrictionEffect();
+            if (pieceColor == GameBoard.PlayerColor.White)
+                GameBoard.instance.whiteController.OnMyTurnEnd += MakeIsSoulSetFalse;
+            else GameBoard.instance.blackController.OnMyTurnEnd += MakeIsSoulSetFalse;
+        }
 
         SetKeyword(Keyword.Type.Silence, 0);                    // 영혼 부여 시 침묵 초기화
 
