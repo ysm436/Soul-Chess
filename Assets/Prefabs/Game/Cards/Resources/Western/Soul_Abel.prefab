@@ -108,7 +108,7 @@ MonoBehaviour:
   description: "[\uC720\uC5B8] \uBB34\uC791\uC704 \uC801  \uAE30\uBB3C\uC744 \uCC98\uCE58\uD569\uB2C8\uB2E4. "
   EffectOnCardUsed: {fileID: -8131353371072324936}
   isInSelection: 0
-  pieceRestriction: 5
+  pieceRestriction: -1
   _AD: 2
   _HP: 2
   accessorySpriteList:
@@ -125,6 +125,7 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 53c29a361da777545bce942d76de44da, type: 3}
   InfusedPiece: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &-8131353371072324936
 MonoBehaviour:
   m_ObjectHideFlags: 0

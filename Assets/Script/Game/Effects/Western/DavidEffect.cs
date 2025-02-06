@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class DavidEffect : TargetingEffect
 {
-    [SerializeField] private int standardAD = 70;
+    [SerializeField] private int standardAD = 7;
 
     ChessPiece.PieceType targetPieceRestriction =
         ChessPiece.PieceType.Pawn |
@@ -17,10 +17,21 @@ public class DavidEffect : TargetingEffect
         ChessPiece.PieceType.Quene |
         ChessPiece.PieceType.King;
 
+    [SerializeField] private ChessPiece.PieceType additionalBuffPieceType;
 
     void Awake()
     {
-        Predicate<ChessPiece> condition = (ChessPiece piece) => piece.AD >= standardAD;
+        Predicate<ChessPiece> condition = (ChessPiece piece) =>
+        {
+            if (gameObject.GetComponent<David>().InfusedPiece.pieceType == additionalBuffPieceType)
+            {
+                return true;
+            }
+            else
+            {
+                return piece.AD >= standardAD;
+            }
+        };
         
         EffectTarget effectTarget = new EffectTarget(TargetType.Piece, targetPieceRestriction, true, false, condition);
         targetTypes.Add(effectTarget);

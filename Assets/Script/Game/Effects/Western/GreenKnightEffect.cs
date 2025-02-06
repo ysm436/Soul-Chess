@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GreenKnightEffect : TargetingEffect
 {
+    [SerializeField] private ChessPiece.PieceType additionalBuffPieceType;
+
     public override void EffectAction(PlayerController player)
     {
         GreenKnight greenKnightComponent = gameObject.GetComponent<GreenKnight>();
@@ -16,5 +18,12 @@ public class GreenKnightEffect : TargetingEffect
         {
             (target as ChessPiece).Attack(greenKnightComponent.InfusedPiece);
         }
+
+        if (greenKnightComponent.InfusedPiece.pieceType == additionalBuffPieceType)
+        {
+            greenKnightComponent.InfusedPiece.SetKeyword(Keyword.Type.Shield); //자신에게 보호막
+            greenKnightComponent.InfusedPiece.buff.AddBuffByKeyword(greenKnightComponent.cardName, Buff.BuffType.Shield);
+        }
+
     }
 }

@@ -8,6 +8,8 @@ public class Hell : SoulCard
 
     [HideInInspector] public SoulCard targetSoul = null;
 
+    [SerializeField] private ChessPiece.PieceType additionalBuffPieceType;
+
     protected override void Awake()
     {
         base.Awake();
@@ -17,11 +19,17 @@ public class Hell : SoulCard
     {
         if (targetSoul != null)
         {
-            InfusedPiece.AD += targetSoul.AD;
-            InfusedPiece.maxHP += targetSoul.HP;
+            int multiplier = 1;
+            if (InfusedPiece.pieceType == additionalBuffPieceType)
+            {
+                multiplier = 2;
+            }
 
-            InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, targetSoul.AD, true);
-            InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, targetSoul.HP, true);
+            InfusedPiece.AD += targetSoul.AD * multiplier; ;
+            InfusedPiece.maxHP += targetSoul.HP * multiplier;
+
+            InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.AD, targetSoul.AD * multiplier, true);
+            InfusedPiece.buff.AddBuffByValue(cardName, Buff.BuffType.HP, targetSoul.HP * multiplier, true);
             InfusedPiece.OnKilled += GetTargetSoulCard;
             InfusedPiece.OnSoulRemoved += RemoveEffect;
         }

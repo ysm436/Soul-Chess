@@ -103,7 +103,7 @@ MonoBehaviour:
   rarity: 2
   description: "\uC5F4\uC744 \uC120\uD0DD\uD569\uB2C8\uB2E4. \uADF8 \uC5F4\uC5D0
     \uC788\uB294 \uBAA8\uB4E0 \uC601\uD63C\uC774 \uAE43\uB4E0 \uC801 \uAE30\uBB3C\uC5D0\uAC8C
-    35\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    3\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -6734192282877653182}
   isInSelection: 0
 --- !u!114 &-6734192282877653182
@@ -127,4 +127,4 @@ MonoBehaviour:
     tileCoordinate: {x: 0, y: 0}
   isPositiveEffect: 0
   isNegativeEffect: 1
-  thunderDamage: 35
+  thunderDamage: 3

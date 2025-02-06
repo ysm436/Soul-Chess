@@ -129,7 +129,7 @@ MonoBehaviour:
     2\uBC30\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -748067917244196058}
   isInSelection: 0
-  pieceRestriction: 8
+  pieceRestriction: -1
   _AD: 2
   _HP: 8
   accessorySpriteList:

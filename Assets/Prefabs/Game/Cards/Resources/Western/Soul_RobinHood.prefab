@@ -99,7 +99,7 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uB85C\uBE48 \uD6C4\uB4DC"
-  _cost: 6
+  _cost: 3
   illustration: {fileID: 21300000, guid: 659f7a991affc534eb47d50bc7d1a03a, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
@@ -108,9 +108,9 @@ MonoBehaviour:
     \uB54C, \uADF8 \uC601\uD63C\uC744 \uB0B4 \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8533229200881966413}
   isInSelection: 0
-  pieceRestriction: 6
-  _AD: 50
-  _HP: 30
+  pieceRestriction: -1
+  _AD: 3
+  _HP: 4
   accessorySpriteList:
   - pieceType: 2
     pieceColor: 0

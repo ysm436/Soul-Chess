@@ -10,6 +10,8 @@ public class LadyOfTheLake : SoulCard
     public int increasedAD = 10;
     public int increasedHP = 10;
 
+    [SerializeField] private ChessPiece.PieceType additionalBuffPieceType;
+
     protected override void Awake()
     {
         base.Awake();
@@ -24,12 +26,18 @@ public class LadyOfTheLake : SoulCard
                 pieceList.Add(GameBoard.instance.gameData.pieceObjects[i]);
         }
 
-        int temp = SynchronizedRandom.Range(0, pieceList.Count);
-        pieceList[temp].AD += increasedAD;
-        pieceList[temp].maxHP += increasedHP;
+        int multiplier = 1;
+        if (InfusedPiece.pieceType == additionalBuffPieceType)
+        {
+            multiplier = 2;
+        }
 
-        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.AD, increasedAD, true);
-        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.HP, increasedHP, true);
+        int temp = SynchronizedRandom.Range(0, pieceList.Count);
+        pieceList[temp].AD += increasedAD * multiplier;
+        pieceList[temp].maxHP += increasedHP * multiplier;
+
+        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.AD, increasedAD * multiplier, true);
+        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.HP, increasedHP * multiplier, true);
     }
 
     public override void AddEffect()

@@ -104,7 +104,7 @@ MonoBehaviour:
     \uBCF4\uD638\uB9C9\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 2704465689171556815}
   isInSelection: 0
-  pieceRestriction: 4
+  pieceRestriction: -1
   _AD: 4
   _HP: 4
   accessorySpriteList:
