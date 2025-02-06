@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e7ebebe2262d243b78b7e4a809c003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 6543395396501225134, guid: 179658d71ad22a546bf183d6116eb4a6, type: 3}
   targetTypes: []
   isPositiveEffect: 1
   isNegativeEffect: 0

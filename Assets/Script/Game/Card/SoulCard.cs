@@ -67,7 +67,7 @@ public abstract class SoulCard : Card
         soulCardObject.ADText.text = AD.ToString();
         soulCardObject.HPText.text = HP.ToString();
 
-        //기물 제한 아이콘 생성 후 위치 정렬
+        /* //기물 제한 아이콘 생성 후 위치 정렬
         //만약 이미 활성화된 기물제한 아이콘이 있으면 생성X
         if (!GetComponentInChildren<SoulCardPieceRestriction>())
         {
@@ -107,7 +107,7 @@ public abstract class SoulCard : Card
                     }
                 }
             }
-        }
+        } */
         _infusion = new Infusion(pieceRestriction);
         _infusion.infuse += Infuse;
     }
@@ -115,7 +115,7 @@ public abstract class SoulCard : Card
 
     public void Infuse(ChessPiece targetPiece)
     {
-        Sprite accessorySprite = accessorySpriteList.FirstOrDefault(data => (data.pieceType == targetPiece.pieceType) && (data.pieceColor == targetPiece.pieceColor)).sprite;
+        Sprite accessorySprite = accessorySpriteList.FirstOrDefault(data => data.pieceColor == targetPiece.pieceColor).sprite;
 
         if (accessorySprite == null)
         {

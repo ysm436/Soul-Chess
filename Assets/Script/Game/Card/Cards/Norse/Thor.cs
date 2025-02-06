@@ -32,16 +32,8 @@ public class Thor : SoulCard
             attackDamage *= 2;
         }
 
-        objPiece.MinusHP(attackDamage);
-        if (objPiece.isAlive)
-        {
-            GameBoard.instance.chessBoard.AttackedAnimation(objPiece);
-        }
-        else
-        {
-            objPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
-            objPiece.MakeAttackedEffect();
-        }
+        Debug.Log("Thor: Soul Effect");
+        GameBoard.instance.chessBoard.DamageByCardEffect(GetComponent<ThorEffect>().effectPrefab, InfusedPiece, objPiece, attackDamage);
     }
 
     public override void AddEffect()

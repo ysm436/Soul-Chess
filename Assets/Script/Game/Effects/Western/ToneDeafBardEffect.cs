@@ -31,6 +31,7 @@ public class ToneDeafBardEffect : TargetingEffect
 
         foreach (var target in targets)
         {
+            GameBoard.instance.chessBoard.TileEffect(effectPrefab, target as ChessPiece);
             (target as ChessPiece).AD += changeAD;
             (target as ChessPiece).maxHP += changeHP;
 

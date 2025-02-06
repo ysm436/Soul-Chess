@@ -29,15 +29,29 @@ public class ExecutionEffect : TargetingEffect
 
     public override void EffectAction(PlayerController player)
     {
+        List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects;
+        ChessPiece kingPiece = null;
+
+        foreach (var chessPiece in pieceList)
+        {
+            if (chessPiece.pieceType == ChessPiece.PieceType.King && chessPiece.pieceColor == player.playerColor)
+                kingPiece = chessPiece;
+        }
+
+        if (kingPiece == null)
+            Debug.Log("Execution: No King Piece");
+
         foreach (var target in targets)
         {
             if ((target as ChessPiece).GetHP <= standardHP)
             {
-                (target as ChessPiece).SpellAttacked(insteadAD);
+                Debug.Log("Execution: insteadAD Attack");
+                GameBoard.instance.chessBoard.DamageByCardEffect(effectPrefab, kingPiece, target as ChessPiece, insteadAD);
             }
             else
             {
-                (target as ChessPiece).SpellAttacked(basicAD);
+                Debug.Log("Execution: basicAD Attack");
+                GameBoard.instance.chessBoard.DamageByCardEffect(effectPrefab, kingPiece, target as ChessPiece, basicAD);
             }
         }
     }
