@@ -23,8 +23,16 @@ public class Thor : SoulCard
             return;
 
         ChessPiece objPiece = enemyPieceList[SynchronizedRandom.Range(0, enemyPieceList.Count)];
-        
-        objPiece.MinusHP(InfusedPiece.AD);
+
+        int attackDamage = InfusedPiece.AD;
+
+        // 기절한 경우 2배의 피해
+        if (objPiece.GetKeyword(Keyword.Type.Stun) == 1)
+        {
+            attackDamage *= 2;
+        }
+
+        objPiece.MinusHP(attackDamage);
         if (objPiece.isAlive)
         {
             GameBoard.instance.chessBoard.AttackedAnimation(objPiece);

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ZeusEffect : Effect
 {
+    [SerializeField] private ChessPiece.PieceType additionalBuffPieceType;
+    [SerializeField] private int additionalAD;
+    [SerializeField] private int additionalHP;
+
+
     [SerializeField] private GameObject thunderCard;
     public override void EffectAction(PlayerController player)
     {
@@ -28,6 +33,14 @@ public class ZeusEffect : Effect
             {
                 Destroy(thunder);
             };
+        }
+
+        if (zeusComponent.InfusedPiece.pieceType == additionalBuffPieceType)
+        {
+            zeusComponent.InfusedPiece.maxHP += additionalAD;
+            zeusComponent.InfusedPiece.maxHP += additionalHP;
+            zeusComponent.InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.AD, additionalAD, true);
+            zeusComponent.InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.HP, additionalHP, true);
         }
     }
 }

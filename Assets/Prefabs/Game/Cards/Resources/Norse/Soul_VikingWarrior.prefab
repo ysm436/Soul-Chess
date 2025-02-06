@@ -105,12 +105,12 @@ MonoBehaviour:
   reigon: 1
   rarity: 0
   description: "\uD53C\uD574\uB97C \uBC1B\uC740 \uC0C1\uD0DC\uC774\uBA74, \uACF5\uACA9\uB825\uC774
-    20 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    3 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 3459992950709373579}
   isInSelection: 0
-  pieceRestriction: 1
-  _AD: 15
-  _HP: 25
+  pieceRestriction: -1
+  _AD: 2
+  _HP: 4
   accessorySpriteList:
   - pieceType: 1
     pieceColor: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 1c48a98cb2083e24db1cc04e2347ccd7, type: 3}
   InfusedPiece: {fileID: 0}
-  increasedAD: 20
+  increasedAD: 3
 --- !u!114 &3459992950709373579
 MonoBehaviour:
   m_ObjectHideFlags: 0

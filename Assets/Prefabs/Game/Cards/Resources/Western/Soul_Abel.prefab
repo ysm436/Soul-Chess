@@ -100,19 +100,17 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC544\uBCA8"
-  _cost: 4
+  _cost: 2
   illustration: {fileID: 21300000, guid: 498cdfc4304de2e4fb29e8a1c916c666, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 2
-  description: "[\uC720\uC5B8] \uC774 \uAE30\uBB3C\uC774 \uACF5\uACA9 \uBC1B\uC544
-    \uCC98\uCE58\uB410\uC744 \uB54C, \uC774 \uAE30\uBB3C\uC744 \uACF5\uACA9\uD55C
-    \uAE30\uBB3C\uC744 \uCC98\uCE58\uD569\uB2C8\uB2E4. "
+  description: "[\uC720\uC5B8] \uBB34\uC791\uC704 \uC801  \uAE30\uBB3C\uC744 \uCC98\uCE58\uD569\uB2C8\uB2E4. "
   EffectOnCardUsed: {fileID: -8131353371072324936}
   isInSelection: 0
-  pieceRestriction: 5
-  _AD: 40
-  _HP: 20
+  pieceRestriction: -1
+  _AD: 2
+  _HP: 2
   accessorySpriteList:
   - pieceType: 4
     pieceColor: 0
@@ -127,6 +125,7 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 53c29a361da777545bce942d76de44da, type: 3}
   InfusedPiece: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &-8131353371072324936
 MonoBehaviour:
   m_ObjectHideFlags: 0

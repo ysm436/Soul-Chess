@@ -99,17 +99,18 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC2E0\uC2DD-\uB0AB\uC804\uCC28"
-  _cost: 3
+  _cost: 2
   illustration: {fileID: 21300000, guid: 6170e472cdad6134994fd11e3cce4646, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 0
-  description: "[\uBCF4\uD638\uB9C9]"
+  description: "[\uBCF4\uD638\uB9C9]\n\uB8E9 \uAE30\uBB3C\uC5D0 \uAC15\uB9BC \uC2DC,
+    +0/+2\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 298669615360064573}
   isInSelection: 0
-  pieceRestriction: 8
-  _AD: 40
-  _HP: 40
+  pieceRestriction: -1
+  _AD: 4
+  _HP: 2
   accessorySpriteList:
   - pieceType: 8
     pieceColor: 0
@@ -130,3 +131,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9cd9384723f8d649969a81fa88d32f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  additionalBuffPieceType: 8
+  additionalHp: 2

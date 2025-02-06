@@ -7,7 +7,7 @@ public class Hephaestus : SoulCard
 {
     protected override int CardID => cardIdDict["헤파이스토스"];
     private PlayerController playerController;
-    private int soulDamage = 10;
+    private int soulDamage = 1;
 
     protected override void Awake()
     {

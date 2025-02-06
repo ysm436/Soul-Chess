@@ -99,19 +99,19 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uBE4C\uD5EC\uB984 \uD154"
-  _cost: 5
+  _cost: 3
   illustration: {fileID: 21300000, guid: 67b07a05c659fae43b562b38b48a0839, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 2
   rarity: 1
   description: "[\uAC15\uB9BC] \uBC29\uD5A5\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.
     \uADF8 \uBC29\uD5A5\uC5D0 \uC788\uB294 \uC601\uD63C\uC774 \uAE43\uB4E0 \uCCAB\uBC88\uC9F8
-    \uC801 \uAE30\uBB3C\uC5D0\uAC8C 60\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    \uC801 \uAE30\uBB3C\uC5D0\uAC8C 6\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -2526221254227195810}
   isInSelection: 0
-  pieceRestriction: 4
-  _AD: 40
-  _HP: 20
+  pieceRestriction: -1
+  _AD: 4
+  _HP: 2
   accessorySpriteList:
   - pieceType: 4
     pieceColor: 0
@@ -141,4 +141,4 @@ MonoBehaviour:
     tileCoordinate: {x: 0, y: 0}
   isPositiveEffect: 0
   isNegativeEffect: 1
-  damage: 60
+  damage: 6

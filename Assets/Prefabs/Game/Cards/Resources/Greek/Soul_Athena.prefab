@@ -108,6 +108,7 @@ MonoBehaviour:
     soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
+    isRevealed: 0
     deck: []
     hand: []
     deckPosition: {x: 0, y: 0}
@@ -115,17 +116,17 @@ MonoBehaviour:
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC544\uD14C\uB098"
-  _cost: 6
+  _cost: 3
   illustration: {fileID: 21300000, guid: cfdc417e80d57404e952f4e39124a431, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 2
-  description: "\uB0B4 \uB2E4\uB978 \uAE30\uBB3C\uB4E4\uC774 +10/+10\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
+  description: "\uB0B4 \uB2E4\uB978 \uAE30\uBB3C\uB4E4\uC774 +1/+1\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 4337335728533308788}
   isInSelection: 0
-  pieceRestriction: 2
-  _AD: 25
-  _HP: 25
+  pieceRestriction: -1
+  _AD: 2
+  _HP: 2
   accessorySpriteList:
   - pieceType: 2
     pieceColor: 0
@@ -134,6 +135,8 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: 2b1e7e62cd351014b9687d431ae09256, type: 3}
   InfusedPiece: {fileID: 0}
+  increasedAD: 1
+  increasedHP: 1
 --- !u!114 &4337335728533308788
 MonoBehaviour:
   m_ObjectHideFlags: 0
