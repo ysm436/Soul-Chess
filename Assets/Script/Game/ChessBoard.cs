@@ -101,6 +101,7 @@ public class ChessBoard : MonoBehaviour
         chessPiece.transform.position = destPos;
     }
 
+
     // 처치 성공 애니메이션
     public void KillAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
     {
@@ -138,6 +139,7 @@ public class ChessBoard : MonoBehaviour
         blocker.SetActive(false);
     }
 
+
     // 공격 후 처치 실패 애니메이션
     public void ForthBackPieceAnimation(ChessPiece srcPiece, ChessPiece dstPiece)
     {
@@ -157,13 +159,13 @@ public class ChessBoard : MonoBehaviour
         blocker.SetActive(false);
     }
 
+
     // 공격당하는 애니메이션
     public void AttackedAnimation(ChessPiece objPiece)
     {
         blocker.SetActive(true);
         StartCoroutine(GameBoard.instance.chessBoard.AttackedAnimationC(objPiece));
     }
-
 
     public IEnumerator AttackedAnimationC(ChessPiece dstPiece)
     {
@@ -177,6 +179,7 @@ public class ChessBoard : MonoBehaviour
         blocker.SetActive(false);
     }
 
+
     public void KillByCardEffect(GameObject projectilePrefab, ChessPiece srcPiece, ChessPiece dstPiece)
     {
         blocker.SetActive(true);
@@ -185,7 +188,7 @@ public class ChessBoard : MonoBehaviour
             volume.profile.TryGet(out colorAdjustments);
 
         //FadeIn
-        DOVirtual.Float(colorAdjustments.postExposure.value, -2f, 0.3f, (value) =>
+        DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
         {
             colorAdjustments.postExposure.Override(value);
         }).SetEase(Ease.InOutSine).OnComplete(() => {
@@ -196,6 +199,45 @@ public class ChessBoard : MonoBehaviour
                 dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
                 dstPiece.MakeAttackedEffect();
                 dstPiece.Kill();
+                Destroy(projectile);
+                blocker.SetActive(false);
+
+                //FadeOut
+                DOVirtual.Float(colorAdjustments.postExposure.value, 0f, 0.3f, (value) =>
+                {
+                    colorAdjustments.postExposure.Override(value);
+                }).SetEase(Ease.InOutSine);
+            });
+        });
+    }
+
+    public void DamageByCardEffect(GameObject projectilePrefab, ChessPiece srcPiece, ChessPiece dstPiece, int damage)
+    {
+        blocker.SetActive(true);
+
+        if (colorAdjustments == null)
+            volume.profile.TryGet(out colorAdjustments);
+
+        //FadeIn
+        DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
+        {
+            colorAdjustments.postExposure.Override(value);
+        }).SetEase(Ease.InOutSine).OnComplete(() => {
+            GameObject projectile = Instantiate(projectilePrefab);
+            projectile.transform.position = srcPiece.transform.position;
+            projectile.transform.DOMove(dstPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                dstPiece.MinusHP(damage);
+                if (dstPiece.isAlive)
+                {
+                    GameManager.instance.soundManager.PlaySFX("Attack");
+                    GameBoard.instance.chessBoard.AttackedAnimation(dstPiece);
+                }
+                else
+                {
+                    GameManager.instance.soundManager.PlaySFX("Destroy");
+                    dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+                    dstPiece.MakeAttackedEffect();
+                }
                 Destroy(projectile);
                 blocker.SetActive(false);
 

@@ -24,16 +24,7 @@ public class Thor : SoulCard
 
         ChessPiece objPiece = enemyPieceList[SynchronizedRandom.Range(0, enemyPieceList.Count)];
         
-        objPiece.MinusHP(InfusedPiece.AD);
-        if (objPiece.isAlive)
-        {
-            GameBoard.instance.chessBoard.AttackedAnimation(objPiece);
-        }
-        else
-        {
-            objPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
-            objPiece.MakeAttackedEffect();
-        }
+        GameBoard.instance.chessBoard.DamageByCardEffect(GetComponent<ThorEffect>().effectPrefab, InfusedPiece, objPiece, InfusedPiece.AD);
     }
 
     public override void AddEffect()
