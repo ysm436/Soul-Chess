@@ -25,11 +25,20 @@ public class BloodEagleEffect : TargetingEffect
 
     public override void EffectAction(PlayerController player)
     {
+        ChessPiece kingPiece = null;
+
+        foreach (var chessPiece in GameBoard.instance.gameData.pieceObjects)
+        {
+            if (chessPiece.pieceType == ChessPiece.PieceType.King && chessPiece.pieceColor == player.playerColor)
+                kingPiece = chessPiece;
+        }
+
+        if (kingPiece == null)
+            Debug.Log("BloodEagle: No King Piece");
+
         foreach (var target in targets)
         {
-            (target as ChessPiece).GetComponent<Animator>().SetTrigger("killedTrigger");
-            (target as ChessPiece).MakeAttackedEffect();
-            (target as ChessPiece).Kill();
+            GameBoard.instance.chessBoard.KillByCardEffect(effectPrefab, kingPiece, target as ChessPiece);
         }
 
         PlayerController playerController;

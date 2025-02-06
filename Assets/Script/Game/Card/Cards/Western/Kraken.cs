@@ -23,18 +23,8 @@ public class Kraken : SoulCard
         for (int i = 0; i < repeat; i++)
         {
             ChessPiece objPiece = targets[SynchronizedRandom.Range(0, targets.Count)];
-            
-            objPiece.MinusHP(damage);
-            if (objPiece.isAlive)
-            {
-                GameBoard.instance.chessBoard.AttackedAnimation(objPiece);
-            }
-            else
-            {
-                targets.Remove(objPiece);
-                objPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
-                objPiece.MakeAttackedEffect();
-            }
+            Debug.Log("Kraken: Soul Effect");
+            GameBoard.instance.chessBoard.DamageByCardEffect(GetComponent<KrakenEffect>().effectPrefab, InfusedPiece, objPiece, damage);
         }
 
         GameManager.instance.soundManager.PlaySFX("Water");

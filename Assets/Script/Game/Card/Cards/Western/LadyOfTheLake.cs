@@ -33,11 +33,15 @@ public class LadyOfTheLake : SoulCard
         }
 
         int temp = SynchronizedRandom.Range(0, pieceList.Count);
-        pieceList[temp].AD += increasedAD * multiplier;
-        pieceList[temp].maxHP += increasedHP * multiplier;
+        ChessPiece target = pieceList[temp];
+        GameBoard.instance.chessBoard.TileEffect(GetComponent<LadyOfTheLakeEffect>().effectPrefab, target);
+        Debug.Log("LadyOfTheLake: Soul Effect");
 
-        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.AD, increasedAD * multiplier, true);
-        pieceList[temp].buff.AddBuffByValue(cardName, Buff.BuffType.HP, increasedHP * multiplier, true);
+        target.AD += increasedAD * multiplier;
+        target.maxHP += increasedHP * multiplier;
+
+        target.buff.AddBuffByValue(cardName, Buff.BuffType.AD, increasedAD * multiplier, true);
+        target.buff.AddBuffByValue(cardName, Buff.BuffType.HP, increasedHP * multiplier, true);
     }
 
     public override void AddEffect()

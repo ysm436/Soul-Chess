@@ -494,9 +494,8 @@ public class TutorialManager : MonoBehaviour
         descriptionText.text =
             "당신의 기물에\n" +
             "영혼을 부여했습니다.\n" +
-            "해당 기물은 공격력이 15,\n" +
-            "체력이 25 증가했지만\n" +
-            "이동할 수 없습니다.\n" +
+            "해당 기물은 공격력이 2,\n" +
+            "체력이 4 증가했습니다.\n" +
             "다른 기물을 선택해 이동시키세요.";
         SetTextSize(6);
         isMoved = false;

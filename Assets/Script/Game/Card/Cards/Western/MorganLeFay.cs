@@ -28,7 +28,11 @@ public class MorganLeFay : SoulCard
         if (pieceList.Count > 0)
         {
             int temp = SynchronizedRandom.Range(0, pieceList.Count);
-            pieceList[temp].AddHP(pieceList[temp].maxHP - pieceList[temp].GetHP);
+
+            ChessPiece target = pieceList[temp];
+            Debug.Log("MorganLeFay: Soul Effect");
+            GameBoard.instance.chessBoard.TileEffect(gameObject.GetComponent<MorganLeFayEffect>().effectPrefab, target);
+            target.AddHP(target.maxHP - target.GetHP);
         }
     }
 

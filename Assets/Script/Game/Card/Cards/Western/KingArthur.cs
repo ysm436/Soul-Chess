@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class KingArthur : SoulCard
 {
-    protected override int CardID => Card.cardIdDict["아서왕"];
+    protected override int CardID => Card.cardIdDict["아서왕의 가호"];
 
     public int multipleAmount = 2;
 

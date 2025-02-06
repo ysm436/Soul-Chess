@@ -22,12 +22,10 @@ public class Abel : SoulCard
 
         if (enemyPieceList.Count == 0) return;
 
-        int randomIndex = Random.Range(0, enemyPieceList.Count);
+        int randomIndex = SynchronizedRandom.Range(0, enemyPieceList.Count);
         ChessPiece targetPiece = enemyPieceList[randomIndex];
-
-        targetPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
-        targetPiece.MakeAttackedEffect();
-        targetPiece.Kill();
+        Debug.Log("Abel: Soul Effect");
+        GameBoard.instance.chessBoard.KillByCardEffect(GetComponent<AbelEffect>().effectPrefab, InfusedPiece, targetPiece);
     }
 
 

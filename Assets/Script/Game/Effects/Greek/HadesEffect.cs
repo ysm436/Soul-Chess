@@ -25,11 +25,11 @@ public class HadesEffect : TargetingEffect
 
     public override void EffectAction(PlayerController player)
     {
+        Hades hadesComponent = GetComponent<Hades>();
+
         foreach (var target in targets)
         {
-            (target as ChessPiece).GetComponent<Animator>().SetTrigger("killedTrigger");
-            (target as ChessPiece).MakeAttackedEffect();
-            (target as ChessPiece).Kill();
+            GameBoard.instance.chessBoard.KillByCardEffect(effectPrefab, hadesComponent.InfusedPiece, target as ChessPiece);
         }
     }
 }

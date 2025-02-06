@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public Action OnOpponentTurnEnd;
 
     public ChessTimer chessTimer;
+    private bool tutorialFlag = false;
 
     [SerializeField] protected bool _isMyTurn;
     public virtual bool isMyTurn { get => _isMyTurn; }
@@ -52,6 +53,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+        if (SceneManager.GetActiveScene().name == "TutorialScene")
+        {
+            tutorialFlag = true;
+        }
     }
     private void Start()
     {
@@ -468,7 +473,8 @@ public class PlayerController : MonoBehaviour
     {
         _isMyTurn = true;
         OnMyTurnStart?.Invoke();
-        chessTimer.StartTimer();
+        if (tutorialFlag == false)
+            chessTimer.StartTimer();
     }
 
     public void OpponentTurnStart()
@@ -539,18 +545,19 @@ public class PlayerController : MonoBehaviour
         // 턴 종료 시 상대 코스트 회복
         if (playerColor == GameBoard.PlayerColor.White)
         {
-            if (GameBoard.instance.gameData.playerBlack.soulOrbs < 10)
+            if (GameBoard.instance.gameData.playerBlack.soulOrbs < 5)
                 GameBoard.instance.gameData.playerBlack.soulOrbs++;
             GameBoard.instance.gameData.playerBlack.soulEssence = GameBoard.instance.gameData.playerBlack.soulOrbs;
         }
         else
         {
-            if (GameBoard.instance.gameData.playerWhite.soulOrbs < 10)
+            if (GameBoard.instance.gameData.playerWhite.soulOrbs < 5)
                 GameBoard.instance.gameData.playerWhite.soulOrbs++;
             GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;
         }
-
-        chessTimer.StopTimer();
+        
+        if (tutorialFlag == false)
+            chessTimer.StopTimer();
     }
 
     public void OpponentTurnEnd()
