@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class SettingUI : MonoBehaviour
 {
-    public Image blocker; //UI 뒤 Raycast 안되게
-    public Button giveUpButton;
-    bool isEnabledSetting = false;
-    public Slider bgmVolume;
+    [SerializeField] private Image blocker; //UI 뒤 Raycast 안되게
+    [SerializeField] private Button giveUpButton;
+    private bool isEnabledSetting = false;
+    [SerializeField] private Slider bgmVolume;
+    [SerializeField] private Slider sfxVolume;
     private SoundManager soundManager;
 
     void Awake()
@@ -31,6 +32,7 @@ public class SettingUI : MonoBehaviour
 
         QuitSettingUI();
         bgmVolume.value = soundManager.bgmVolume;
+        sfxVolume.value = soundManager.sfxVolume;
     }
 
     void Update()
@@ -57,7 +59,7 @@ public class SettingUI : MonoBehaviour
 
     public void GiveUp()
     {
-        //항복 기능
+        gameObject.SetActive(false);
         Debug.Log("항복");
     }
 
@@ -65,5 +67,6 @@ public class SettingUI : MonoBehaviour
     {
         soundManager.bgmVolume = bgmVolume.value;
         soundManager.bgmPlayer.volume = bgmVolume.value;
+        soundManager.sfxVolume = sfxVolume.value;
     }
 }
