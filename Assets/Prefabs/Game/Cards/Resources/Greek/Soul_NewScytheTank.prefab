@@ -86,15 +86,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 0
+    playerColor: 1
     soulOrbs: 0
     soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
-    deck: []
-    hand: []
-    deckPosition: {x: 0, y: 0}
+    deck:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
@@ -107,6 +131,7 @@ MonoBehaviour:
   description: "[\uBCF4\uD638\uB9C9]\n\uB8E9 \uAE30\uBB3C\uC5D0 \uAC15\uB9BC \uC2DC,
     +0/+2\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 298669615360064573}
+  cardKeywords: 01000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 4
@@ -131,5 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9cd9384723f8d649969a81fa88d32f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}
   additionalBuffPieceType: 8
   additionalHp: 2

@@ -106,6 +106,7 @@ MonoBehaviour:
   rarity: 0
   description: "[\uAC15\uB9BC] \uCE74\uB4DC\uB97C \uD55C\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8401075993642383066}
+  cardKeywords: 06000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 1
@@ -136,3 +137,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bc8ec94e1d4654a9fca886ddf4f584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}

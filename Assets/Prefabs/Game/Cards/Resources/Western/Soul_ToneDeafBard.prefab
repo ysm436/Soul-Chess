@@ -112,6 +112,7 @@ MonoBehaviour:
   description: "[\uAC15\uB9BC] \uD558\uB098\uC758 \uAE30\uBB3C\uC5D0\uAC8C -2/+2\uC744
     \uBD80\uC5EC\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -5723978548355844231}
+  cardKeywords: 06000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 1

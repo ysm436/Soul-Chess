@@ -17,6 +17,8 @@ public class Keyword : Effect
         Stealth,        // 은신
         Silence,        // 침묵
         /* Rush */            // 돌진
+        Testament,       //유언
+        Infusion,        //강림
     }
 
     public static Type[] AllKeywords { get => Enum.GetValues(typeof(Type)).Cast<Type>().ToArray(); }

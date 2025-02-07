@@ -112,6 +112,7 @@ MonoBehaviour:
   description: "[\uC720\uC5B8] \uBB34\uC791\uC704 \uC801 \uAE30\uBB3C\uC5D0\uAC8C
     \uD53C\uD574\uB97C 1 \uC90D\uB2C8\uB2E4. 8\uBC88 \uBC18\uBCF5\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 5850359546616703673}
+  cardKeywords: 05000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 7

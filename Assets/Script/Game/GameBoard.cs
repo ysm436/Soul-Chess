@@ -183,25 +183,30 @@ public class GameBoard : MonoBehaviour
 
     Card showedCard = null;
     float cardSize = 1.5f;
+    [SerializeField] private CardUI cardUI;
     public void ShowCard(Card card)
     {
-        if (showedCard != null)
+        if (cardUI.gameObject.activeSelf)
             HideCard();
 
-        showedCard = Instantiate(card, cardBoard.position, Quaternion.identity);
-        showedCard.GetComponent<Collider2D>().enabled = false;
-        showedCard.GetComponent<SortingGroup>().sortingOrder = -1;
-        showedCard.transform.localScale = new Vector3(1f, 1f, 0f) * cardSize;
+        //showedCard = Instantiate(card, cardBoard.position, Quaternion.identity);
+        //showedCard.GetComponent<Collider2D>().enabled = false;
+        //showedCard.GetComponent<SortingGroup>().sortingOrder = -1;
+        //showedCard.transform.localScale = new Vector3(1f, 1f, 0f) * cardSize;
 
-        showedCard.FlipFront();
+        //showedCard.FlipFront();
+
+        cardUI.gameObject.SetActive(true);
+        cardUI.SetCardUI(card);
     }
 
     public void HideCard()
     {
-        if (showedCard == null)
+        if (!cardUI.gameObject.activeSelf)
             return;
 
-        Destroy(showedCard.gameObject);
+        cardUI.gameObject.SetActive(false);
+        //Destroy(showedCard.gameObject);
     }
 
     //기물 정보 표시
@@ -209,20 +214,29 @@ public class GameBoard : MonoBehaviour
     public bool isShowingPieceInfo = false;
     public void ShowPieceInfo(ChessPiece piece)
     {
-        if (showedPieceInfo != null)
+        if (isShowingPieceInfo)
             HidePieceInfo();
 
-        showedPieceInfo = Instantiate(pieceInfo, cardBoard.position, Quaternion.identity);
-        showedPieceInfo.EditDescription(piece);
+        //showedPieceInfo = Instantiate(pieceInfo, cardBoard.position, Quaternion.identity);
+        //showedPieceInfo.EditDescription(piece);
         isShowingPieceInfo = true;
+
+        cardUI.gameObject.SetActive(true);
+
+        if (piece.soul == null)
+            cardUI.SetCardUI(piece);
+        else
+            cardUI.SetCardUI(piece.soul);
     }
     public void HidePieceInfo()
     {
-        if (showedPieceInfo == null)
+        if (!isShowingPieceInfo)
             return;
 
-        Destroy(showedPieceInfo.gameObject);
+        //Destroy(showedPieceInfo.gameObject);
         isShowingPieceInfo = false;
+
+        cardUI.gameObject.SetActive(false);
     }
 
     //현재 턴 진행 중인 Enabled 플레이어 데이터 접근
