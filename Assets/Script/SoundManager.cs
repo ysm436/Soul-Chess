@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource bgmPlayer;
     public AudioSource sfxPlayer;
     public float bgmVolume { get; set; }
+    public float sfxVolume { get; set; }
 
     private Dictionary<string, AudioClip> bgmDictionary = new Dictionary<string, AudioClip>();
     private int num = 1;
@@ -28,6 +29,7 @@ public class SoundManager : MonoBehaviour
         bgmVolume = 0.7f;
 
         sfxPlayer = gameObject.AddComponent<AudioSource>();
+        sfxVolume = 0.7f;
 
         InitializeBGM();
         InitializeSFX();
@@ -116,7 +118,7 @@ public class SoundManager : MonoBehaviour
         bgmPlayer.Stop();
     }
 
-    public void PlaySFX(string name, int id = -1, float volume = 1.0f, float pitch = 1.0f, float startTime = 0f)
+    public void PlaySFX(string name, int id = -1, float volume = 1.4f, float pitch = 1.0f, float startTime = 0f)
     {
         if (!sfxDictionary.ContainsKey(name))
         {
@@ -135,6 +137,6 @@ public class SoundManager : MonoBehaviour
         
         sfxPlayer.pitch = pitch;
         sfxPlayer.time = startTime;
-        sfxPlayer.PlayOneShot(sfxDictionary[name], volume);
+        sfxPlayer.PlayOneShot(sfxDictionary[name], volume * sfxVolume);
     }
 }

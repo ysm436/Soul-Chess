@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
-using Photon.Realtime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PvELobbySceneUI : MonoBehaviour
@@ -74,6 +71,11 @@ public class PvELobbySceneUI : MonoBehaviour
         if (isReady)
         {
             startButton.gameObject.SetActive(true);
+            TextMeshProUGUI startButtonText = startButton.GetComponentInChildren<TextMeshProUGUI>();
+            DOVirtual.Float(1f, -0.1f, 0.5f, (value) => {
+                startButton.GetComponent<Image>().material.SetFloat("_FadeAmount", value);
+                startButtonText.alpha = 1.0f - Mathf.InverseLerp(-0.1f, 1.0f, value);
+            });
         }
     }
 
