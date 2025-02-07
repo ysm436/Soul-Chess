@@ -15,6 +15,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
     public PlayerController blackController;
     public SoulOrb mySoulOrb;
     public SoulOrb opponentSoulrOrb;
+    public SoulCost mySoulCost;
+    public SoulCost opponentSoulCost;
     public ChessTimer myTimer;
     public ChessTimer opponentTimer;
     public GameObject turnDisplay;
@@ -30,6 +32,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
         {
             mySoulOrb.playerColor = GameBoard.PlayerColor.White;
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.Black;
+            mySoulCost.playerColor = GameBoard.PlayerColor.White;
+            opponentSoulCost.playerColor = GameBoard.PlayerColor.Black;
             whiteController.soulOrb = mySoulOrb;
             blackController.soulOrb = opponentSoulrOrb;
 
@@ -43,6 +47,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
         {
             mySoulOrb.playerColor = GameBoard.PlayerColor.Black;
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.White;
+            mySoulCost.playerColor = GameBoard.PlayerColor.Black;
+            opponentSoulCost.playerColor = GameBoard.PlayerColor.White;
             blackController.soulOrb = mySoulOrb;
             whiteController.soulOrb = opponentSoulrOrb;
 
