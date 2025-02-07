@@ -10,13 +10,15 @@ public class MainSceneUI : MonoBehaviour
     [SerializeField] private Button deckBuildingButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private Button pveButton;
-
+    [SerializeField] private Button tutorialButton;
+    
     private void Start()
     {
         matchingButton.onClick.AddListener(GameManager.instance.LoadMatchingScene);
         deckBuildingButton.onClick.AddListener(GameManager.instance.LoadDeckBuildingScene);
         quitButton.onClick.AddListener(QuitGame);
         pveButton.onClick.AddListener(GameManager.instance.LoadPvELobbyScene);
+        tutorialButton.onClick.AddListener(GameManager.instance.LoadTutorialScene);
     }
 
     private void QuitGame()

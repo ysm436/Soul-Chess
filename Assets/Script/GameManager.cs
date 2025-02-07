@@ -53,12 +53,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Test Code
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            SceneManager.LoadScene("TutorialScene");
-            isHost = true;
-        }
     }
     public void LoadMatchingSceneFromLobbyScene()
     {
@@ -96,6 +90,12 @@ public class GameManager : MonoBehaviour
     public void LoadPvEGameScene()
     {
         SceneManager.LoadScene("PvEGameScene");
+    }
+
+    public void LoadTutorialScene()
+    {
+        SceneManager.LoadScene("TutorialScene");
+        isHost = true;
     }
 
     public void SaveDeckData()

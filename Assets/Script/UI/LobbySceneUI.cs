@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
-using Photon.Realtime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbySceneUI : MonoBehaviour
@@ -56,6 +53,7 @@ public class LobbySceneUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI SelectedDeckInfo;
     [SerializeField] private Transform CardListDisplay;
     [SerializeField] private GameObject CardInfoUIView; //이건 들어갈 scrollview
+    [SerializeField] private GameObject cautionUI;
 
     private void Awake()
     {
@@ -105,6 +103,11 @@ public class LobbySceneUI : MonoBehaviour
         if (isBlackReady && isWhiteReady && GameManager.instance.isHost)
         {
             startButton.gameObject.SetActive(true);
+            TextMeshProUGUI startButtonText = startButton.GetComponentInChildren<TextMeshProUGUI>();
+            DOVirtual.Float(1f, -0.1f, 0.5f, (value) => {
+                startButton.GetComponent<Image>().material.SetFloat("_FadeAmount", value);
+                startButtonText.alpha = 1.0f - Mathf.InverseLerp(-0.1f, 1.0f, value);
+            });
         }
     }
 
@@ -113,12 +116,17 @@ public class LobbySceneUI : MonoBehaviour
     {
         if (SelectedDeckIndex == -1)
         {
-            Debug.Log("선택된 덱이 없습니다.");
+            cautionUI.SetActive(true);
         }
         else
         {
             photonView.RPC("SetReady", RpcTarget.AllBuffered, GameManager.instance.isHost, !isReady);
         }
+    }
+
+    public void CloseCautionUI()
+    {
+        cautionUI.SetActive(false);
     }
 
     [PunRPC]
@@ -217,7 +225,16 @@ public class LobbySceneUI : MonoBehaviour
         if (SelectedDeckIndex == -1)
             return null;
 
-        return DeckDisplay.GetChild(SelectedDeckIndex).GetComponent<DeckSelectButton>();
+        DeckSelectButton selectedDeckButton = null;
+        for (int i = 0; i < DeckDisplay.childCount; i++)
+        {
+            selectedDeckButton = DeckDisplay.GetChild(i).GetComponent<DeckSelectButton>();
+            if (selectedDeckButton.deckIndex == SelectedDeckIndex)
+                break;
+        }
+        
+        Debug.Log(selectedDeckButton.deckIndex);
+        return selectedDeckButton;
     }
 
     public void CloseDeckButton()
