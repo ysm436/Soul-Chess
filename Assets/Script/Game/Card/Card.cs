@@ -42,6 +42,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
     public Effect EffectOnCardUsed;
 
+    public List<Keyword.Type> cardKeywords = new List<Keyword.Type>();
+
     public bool isFlipped { get; private set; }
 
     [HideInInspector] public bool isInSelection;

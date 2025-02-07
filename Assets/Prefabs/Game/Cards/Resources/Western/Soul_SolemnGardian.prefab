@@ -86,9 +86,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 0
-    soulOrbs: 10
-    soulEssence: 3
+    playerColor: 1
+    soulOrbs: 0
+    soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
@@ -96,9 +96,24 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     hand:
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -115,6 +130,7 @@ MonoBehaviour:
   rarity: 0
   description: "[\uBCF4\uD638\uB9C9]"
   EffectOnCardUsed: {fileID: 6638018782557807443}
+  cardKeywords: 01000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 1
@@ -139,3 +155,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94bc13c8481f1864cb57a910b259a03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}

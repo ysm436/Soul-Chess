@@ -107,6 +107,7 @@ MonoBehaviour:
   rarity: 2
   description: "[\uC720\uC5B8] \uBB34\uC791\uC704 \uC801  \uAE30\uBB3C\uC744 \uCC98\uCE58\uD569\uB2C8\uB2E4. "
   EffectOnCardUsed: {fileID: -8131353371072324936}
+  cardKeywords: 05000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 2

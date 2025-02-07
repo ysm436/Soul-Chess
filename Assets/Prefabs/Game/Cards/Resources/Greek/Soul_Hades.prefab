@@ -108,6 +108,7 @@ MonoBehaviour:
   description: "\uD53C\uD574\uB97C \uBC1B\uC740 \uAE30\uBB3C\uC744 \uD558\uB098 \uC120\uD0DD\uD574
     \uCC98\uCE58 \uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 5094418219447569930}
+  cardKeywords: 06000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 3

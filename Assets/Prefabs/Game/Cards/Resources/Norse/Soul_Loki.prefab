@@ -104,6 +104,7 @@ MonoBehaviour:
     \uAC00\uC7A5 \uB192\uC740 \uCE74\uB4DC\uC640 \uB0AE\uC740 \uCE74\uB4DC\uC758
     \uBE44\uC6A9\uC744 \uBC14\uAFC9\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 1598759761263525744}
+  cardKeywords: 06000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 2
@@ -134,3 +135,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c503f170e82f67949a006447b02cae09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}
