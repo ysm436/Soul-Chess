@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
-using Photon.Realtime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PvELobbySceneUI : MonoBehaviour
@@ -52,7 +49,7 @@ public class PvELobbySceneUI : MonoBehaviour
     [SerializeField] private Transform TrashCan;
     [SerializeField] private TextMeshProUGUI SelectedDeckInfo;
     [SerializeField] private Transform CardListDisplay;
-    [SerializeField] private GameObject CardInfoUIView; //�̰� �� scrollview
+    [SerializeField] private GameObject CardInfoUIView; //scrollview
 
     private void Awake()
     {
@@ -63,8 +60,6 @@ public class PvELobbySceneUI : MonoBehaviour
     bool isInitialzed = false;
     private void Start()
     {
-        //�� �������ּ��� ���̴� Ȱ��ȭ
-
         startButton.onClick.AddListener(() => GameManager.instance.LoadPvEGameScene());
         exitButton.onClick.AddListener(() => GameManager.instance.LoadMainScene());
     }
@@ -74,6 +69,11 @@ public class PvELobbySceneUI : MonoBehaviour
         if (isReady)
         {
             startButton.gameObject.SetActive(true);
+            TextMeshProUGUI startButtonText = startButton.GetComponentInChildren<TextMeshProUGUI>();
+            DOVirtual.Float(1f, -0.1f, 0.5f, (value) => {
+                startButton.GetComponent<Image>().material.SetFloat("_FadeAmount", value);
+                startButtonText.alpha = 1.0f - Mathf.InverseLerp(-0.1f, 1.0f, value);
+            });
         }
     }
 
@@ -142,10 +142,8 @@ public class PvELobbySceneUI : MonoBehaviour
             if (SelectedDeckIndex != -1)
             {
                 var deckSelectButton = GetSelectedDeckButton();
-                //���õǾ��ִ°� �ִٸ� ���̴� Ȱ��ȭ
                 deckSelectButton.ControlShader(true);
             }
-            //ī���� ���ٸ� ���⼭�� �߰��ؾ���
             ShowSelectedDeckCardList();
         }
     }
@@ -200,12 +198,10 @@ public class PvELobbySceneUI : MonoBehaviour
 
         if (SelectedDeckIndex == -1)
         {
-            //�� �������ּ��� ���̴� Ȱ��ȭ
             SelectedDeckInfo.text = "덱을 선택해 주세요.";
         }
         else
         {
-            //�� �������ּ��� ���̴� ��Ȱ��ȭ
             SelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckName + ">";
             GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
         }
@@ -221,18 +217,18 @@ public class PvELobbySceneUI : MonoBehaviour
         SetReady(false);
         if (isPlayerWhite)
         {
-            whiteReadyButtonText.text = "�غ�";
+            whiteReadyButtonText.text = "준비";
             whiteReadyButton.enabled = true;
             blackReadyButton.enabled = false;
-            blackReadyButtonText.text = "��ǻ��";
+            blackReadyButtonText.text = "컴퓨터";
             blackReadyButtonText.color = Color.black;
         }
         else
         {
-            blackReadyButtonText.text = "�غ�";
+            blackReadyButtonText.text = "준비";
             whiteReadyButton.enabled = false;
             blackReadyButton.enabled = true;
-            whiteReadyButtonText.text = "��ǻ��";
+            whiteReadyButtonText.text = "컴퓨터";
             whiteReadyButtonText.color = Color.black;
         }
     }

@@ -2,48 +2,60 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Photon.Pun.Demo.Cockpit;
 using UnityEngine;
 
-public class DavidEffect : TargetingEffect
+public class DavidEffect : Effect
 {
     [SerializeField] private int standardAD = 7;
-
-    ChessPiece.PieceType targetPieceRestriction =
-        ChessPiece.PieceType.Pawn |
-        ChessPiece.PieceType.Knight |
-        ChessPiece.PieceType.Bishop |
-        ChessPiece.PieceType.Rook |
-        ChessPiece.PieceType.Quene |
-        ChessPiece.PieceType.King;
-
-    [SerializeField] private ChessPiece.PieceType additionalBuffPieceType;
-
-    void Awake()
-    {
-        Predicate<ChessPiece> condition = (ChessPiece piece) =>
-        {
-            if (gameObject.GetComponent<David>().InfusedPiece.pieceType == additionalBuffPieceType)
-            {
-                return true;
-            }
-            else
-            {
-                return piece.AD >= standardAD;
-            }
-        };
-        
-        EffectTarget effectTarget = new EffectTarget(TargetType.Piece, targetPieceRestriction, true, false, condition);
-        targetTypes.Add(effectTarget);
-    }
+    private List<ChessPiece> targetList = new List<ChessPiece>();
+    private David davidComponent;
 
     public override void EffectAction(PlayerController player)
     {
-        foreach (var target in targets)
+        davidComponent = GetComponent<David>();
+
+        foreach (var sq in GameBoard.instance.gameData.boardSquares)
         {
-            (target as ChessPiece).GetComponent<Animator>().SetTrigger("killedTrigger");
-            (target as ChessPiece).MakeAttackedEffect();
-            (target as ChessPiece).Kill();
+            sq.OnClick = null;
+        }
+
+        foreach (var chesspiece in GameBoard.instance.gameData.pieceObjects)
+        {
+            if (chesspiece.pieceType != ChessPiece.PieceType.King && chesspiece.pieceColor != davidComponent.InfusedPiece.pieceColor && chesspiece.isAlive)
+            {
+                targetList.Add(chesspiece);
+            }
+        }
+
+        if (davidComponent.InfusedPiece.pieceType != ChessPiece.PieceType.King)
+        {
+            foreach (var target in targetList.ToList())
+            {
+                if (target.AD < 7)
+                {
+                    targetList.Remove(target);
+                }
+            }
+        }
+
+        foreach (var target in targetList)
+        {
+            BoardSquare targetBoardSquare = GameBoard.instance.GetBoardSquare(target.coordinate);
+            targetBoardSquare.isNegativeTargetable = true;
+            targetBoardSquare.OnClick = AttackEffect;
+        }
+    }
+
+    public void AttackEffect(Vector2Int targetCoordinate)
+    {
+        ChessPiece targetPiece = GameBoard.instance.gameData.GetPiece(targetCoordinate);
+
+        GameBoard.instance.chessBoard.KillByCardEffect(effectPrefab, davidComponent.InfusedPiece, targetPiece);
+
+        foreach (var sq in GameBoard.instance.gameData.boardSquares)
+        {
+            sq.isNegativeTargetable = false;
+            sq.OnClick = GameBoard.instance.myController.OnClickBoardSquare;
         }
     }
 }
