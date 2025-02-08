@@ -17,6 +17,8 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     public PlayerController blackController;
     public SoulOrb mySoulOrb;
     public SoulOrb opponentSoulOrb;
+    public SoulCost mySoulCost;
+    public SoulCost opponentSoulCost;
     public ChessTimer myTimer;
     public ChessTimer opponentTimer;
     public GameObject turnDisplay;
@@ -33,11 +35,15 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
         {
             mySoulOrb.playerColor = GameBoard.PlayerColor.White;
             opponentSoulOrb.playerColor = GameBoard.PlayerColor.Black;
+            mySoulCost.playerColor = GameBoard.PlayerColor.White;
+            opponentSoulCost.playerColor = GameBoard.PlayerColor.Black;
             whiteController.soulOrb = mySoulOrb;
             blackController.soulOrb = opponentSoulOrb;
             
             myTimer.playerColor = GameBoard.PlayerColor.White;
             opponentTimer.playerColor = GameBoard.PlayerColor.Black;
+            mySoulCost.playerColor = GameBoard.PlayerColor.Black;
+            opponentSoulCost.playerColor = GameBoard.PlayerColor.White;
             whiteController.chessTimer = myTimer;
             blackController.chessTimer = opponentTimer;
         }
