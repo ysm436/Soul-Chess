@@ -11,7 +11,8 @@ public class MainSceneUI : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button pveButton;
     [SerializeField] private Button creditButton;
-
+    [SerializeField] private Button tutorialButton;
+    
     private void Start()
     {
         matchingButton.onClick.AddListener(GameManager.instance.LoadMatchingScene);
@@ -19,6 +20,7 @@ public class MainSceneUI : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
         pveButton.onClick.AddListener(GameManager.instance.LoadPvELobbyScene);
         creditButton.onClick.AddListener(GameManager.instance.LoadCreditScene);
+        tutorialButton.onClick.AddListener(GameManager.instance.LoadTutorialScene);
     }
 
     private void QuitGame()

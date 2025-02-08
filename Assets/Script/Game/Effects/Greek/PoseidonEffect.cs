@@ -13,18 +13,8 @@ public class PoseidonEffect : Effect
         {
             if (pieceList[i] != poseidonComponent.InfusedPiece && pieceList[i].soul != null) //영혼 부여된 기물만 공격
             {
-                ChessPiece objPiece = pieceList[i];
-
-                objPiece.MinusHP(poseidonComponent.damageAmount);
-                if (objPiece.isAlive)
-                {
-                    GameBoard.instance.chessBoard.AttackedAnimation(objPiece);
-                }
-                else
-                {
-                    objPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
-                    objPiece.MakeAttackedEffect();
-                }
+                Debug.Log("Poseidon: Soul Effect");
+                GameBoard.instance.chessBoard.DamageByCardEffect(effectPrefab, poseidonComponent.InfusedPiece, pieceList[i], poseidonComponent.damageAmount);
             }
         }
     }

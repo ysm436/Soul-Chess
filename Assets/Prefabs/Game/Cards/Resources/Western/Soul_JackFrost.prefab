@@ -112,6 +112,7 @@ MonoBehaviour:
   description: "[\uAC15\uB9BC] \uC801 \uAE30\uBB3C\uC744 \uD558\uB098 \uC120\uD0DD\uD558\uC5EC
     \uAE30\uC808\uC2DC\uD0B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 5943837467758970341}
+  cardKeywords: 0600000002000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 2
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193cb7bc1d75f024f9fd4b2d72e3a1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}
   targetTypes:
   - targetType: 0
     targetPieceType: -1

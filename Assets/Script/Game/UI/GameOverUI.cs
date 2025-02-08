@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GameOverUI : MonoBehaviour
 {
+    [SerializeField] private GameObject blocker;
     public GameObject WinAnnounce;
     public GameObject DefeatedAnnounce;
     public GameObject SurrenderText;
@@ -26,12 +27,14 @@ public class GameOverUI : MonoBehaviour
     }
     public void OnSurrender()
     {
+        blocker.SetActive(true);
         ShowDefeated();
         photonView.RPC("ShowWin", RpcTarget.Others, true);
     }
     [PunRPC]
     public void ShowWin(bool isSurrender)
     {
+        blocker.SetActive(true);
         gameObject.SetActive(true);
         WinAnnounce.SetActive(true);
         if (isSurrender)
@@ -39,6 +42,7 @@ public class GameOverUI : MonoBehaviour
     }
     public void ShowDefeated()
     {
+        blocker.SetActive(true);
         gameObject.SetActive(true);
         DefeatedAnnounce.SetActive(true);
     }

@@ -18,10 +18,13 @@ public class Athena : SoulCard
     public override void AddEffect()
     {
         List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == InfusedPiece.pieceColor).ToList();
+        GameObject effectPrefab = GetComponent<AthenaEffect>().effectPrefab;
 
         targets.Remove(InfusedPiece);
         foreach (var target in targets)
         {
+            GameBoard.instance.chessBoard.TileEffect(effectPrefab, target);
+            
             target.maxHP += increasedHP;
             target.AD += increasedAD;
 

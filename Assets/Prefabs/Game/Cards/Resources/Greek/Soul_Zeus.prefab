@@ -104,6 +104,7 @@ MonoBehaviour:
     \uCE74\uB4DC\uB97C 3\uC7A5 \uAC00\uC838\uC635\uB2C8\uB2E4.\n\uD0B9 \uAE30\uBB3C\uC5D0
     \uAC15\uB9BC \uC2DC, +2/+2\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -2277148209843755556}
+  cardKeywords: 06000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 3
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d6b6925f4fa74d9d879c1c2776090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}
   additionalBuffPieceType: 32
   additionalAD: 2
   additionalHP: 2

@@ -254,7 +254,7 @@ public class ChessBoard : MonoBehaviour
     {
         GameObject tileEffectObj = Instantiate(tileEffectPrefab);
         tileEffectObj.transform.position = objPiece.transform.position;
-        tileEffectObj.transform.parent = effectCanvas.transform;
+        tileEffectObj.transform.SetParent(effectCanvas.transform, true);
 
         Image image = tileEffectObj.GetComponent<Image>();
 

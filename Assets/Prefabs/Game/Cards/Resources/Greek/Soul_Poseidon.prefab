@@ -140,6 +140,7 @@ MonoBehaviour:
   description: "[\uAC15\uB9BC] \uBAA8\uB4E0 \uC601\uD63C\uC774 \uAE43\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C
     2\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 558989280382440502}
+  cardKeywords: 06000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 5
@@ -165,3 +166,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c824daf0f6d56b4f85be59ed78e470a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 7587469071850677874, guid: 7d8e6d42380050c4688c3fc19d76e083, type: 3}

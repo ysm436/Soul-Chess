@@ -65,6 +65,7 @@ public class PlayerData
     {
         if (deck.Count <= 0)
         {
+            UpdateHandPosition();
             yield break;
         }
         else
@@ -91,6 +92,7 @@ public class PlayerData
 
             if (IsHandFull())
             {
+                UpdateHandPosition();
                 DestroyCard(card);
             }
             else

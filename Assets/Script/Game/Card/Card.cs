@@ -42,6 +42,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
     public Effect EffectOnCardUsed;
 
+    public List<Keyword.Type> cardKeywords = new List<Keyword.Type>();
+
     public bool isFlipped { get; private set; }
 
     [HideInInspector] public bool isInSelection;
@@ -234,11 +236,11 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         //{"페르세우스", 25},
         {"헤라클레스", 26},
         {"판도라의 상자", 27},
-        {"튀폰", 28},
+        //{"튀폰", 28},
         {"중기갑 보병", 29},
         {"생각뿐인 철학자", 30},
         {"신식-낫전차", 31},
-        {"아서왕", 32},
+        //{"아서왕의 가호", 32},
         {"녹색 기사", 33},
         {"멀린", 34},
         {"데비 존스", 35},
@@ -255,14 +257,14 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"음치 음유시인", 46},
         {"근엄한 경비병", 47},
         {"크라켄", 48},
-        {"아폴론", 49}
-        /*{"궁니르", 1000}, //서브 스펠카드
+        {"아폴론", 49},
+        //{"궁니르", 1000}, //서브 스펠카드
         //{"감반테인", 1001},
-        {"드라우프니르", 1002},
+        //{"드라우프니르", 1002},
         {"약탈자", 1014},
         {"천둥벼락", 1015},
-        {"메두사의 머리", 1025},
-        {"페가수스", 1026},
-        {"하데스의 투구", 1027}*/
+        //{"메두사의 머리", 1025},
+        //{"페가수스", 1026},
+        //{"하데스의 투구", 1027}
     };
 }

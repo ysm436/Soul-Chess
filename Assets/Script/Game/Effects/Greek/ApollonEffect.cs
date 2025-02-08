@@ -16,6 +16,8 @@ public class ApollonEffect : Effect
             ChessPiece objPiece = GameBoard.instance.gameData.GetPiece(tempPosition);
             if (objPiece != null && objPiece.pieceColor == player.playerColor)
             {
+                Debug.Log("Apollon: Soul Effect");
+                GameBoard.instance.chessBoard.TileEffect(effectPrefab, objPiece);
                 objPiece.SetKeyword(Keyword.Type.Shield);
                 objPiece.buff.AddBuffByKeyword(apollonComponent.cardName, Buff.BuffType.Shield);
             }
@@ -28,6 +30,8 @@ public class ApollonEffect : Effect
             ChessPiece objPiece = GameBoard.instance.gameData.GetPiece(tempPosition);
             if (objPiece != null && objPiece.pieceColor == player.playerColor)
             {
+                Debug.Log("Apollon: Soul Effect");
+                GameBoard.instance.chessBoard.TileEffect(effectPrefab, objPiece);
                 objPiece.SetKeyword(Keyword.Type.Shield);
                 objPiece.buff.AddBuffByKeyword(apollonComponent.cardName, Buff.BuffType.Shield);
             }

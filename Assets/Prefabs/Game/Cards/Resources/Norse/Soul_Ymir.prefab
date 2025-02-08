@@ -83,14 +83,17 @@ MonoBehaviour:
   coordinate: {x: 0, y: 0}
   owner:
     playerColor: 0
-    soulOrbs: 0
+    soulOrbs: 1
     soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
     deck: []
-    hand: []
-    deckPosition: {x: 0, y: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
@@ -103,6 +106,7 @@ MonoBehaviour:
   description: "[\uC720\uC5B8] \uB0B4 \uC190\uC774 \uAC00\uB4DD \uCC30 \uB54C\uAE4C\uC9C0
     \uCE74\uB4DC\uB97C \uBF51\uC2B5\uB2C8\uB2E4. "
   EffectOnCardUsed: {fileID: 2685390501361198484}
+  cardKeywords: 05000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 5
@@ -157,3 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4eddd0d71f27c44b57af546bf9fa0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}

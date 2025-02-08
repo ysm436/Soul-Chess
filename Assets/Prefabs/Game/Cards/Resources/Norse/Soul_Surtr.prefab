@@ -181,6 +181,7 @@ MonoBehaviour:
     1 \uC904\uC5B4\uB4ED\uB2C8\uB2E4.\r\n[\uAC15\uB9BC] \u2018\uBAA8\uB4E0\u2019
     \uCE74\uB4DC\uB97C \uD30C\uAD34\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -1006345869655507637}
+  cardKeywords: 06000000
   isInSelection: 0
   pieceRestriction: -1
   _AD: 11
@@ -237,3 +238,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d5738b90296614d81efecf988c0bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}

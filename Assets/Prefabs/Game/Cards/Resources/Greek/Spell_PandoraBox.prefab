@@ -87,15 +87,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 0
-    soulOrbs: 0
-    soulEssence: 0
+    playerColor: 1
+    soulOrbs: 6
+    soulEssence: 3
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
     deck: []
-    hand: []
-    deckPosition: {x: 0, y: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
@@ -122,4 +125,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab01159711b1e6149884f184402c0206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 6543395396501225134, guid: 179658d71ad22a546bf183d6116eb4a6, type: 3}
   changeADorHP: 1

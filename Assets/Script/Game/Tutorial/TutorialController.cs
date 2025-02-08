@@ -10,15 +10,18 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 {
     PhotonView photonView;
 
-    SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject turnChangeButton;
+    private SpriteRenderer turnChangeButtonSR;
+    private Material turnChangeButtonMaterial;
     public Sprite whiteButton;
     public Sprite blackButton;
     public PlayerController whiteController;
     public PlayerController blackController;
-    public TutorialButtonHighlight turnChangeButtonHighlight;
     public SoulOrb mySoulOrb;
     public SoulOrb opponentSoulrOrb;
-    public GameObject turn_display;
+    public SoulCost mySoulCost;
+    public SoulCost opponentSoulCost;
+    public GameObject turnDisplay;
 
     public TutorialManager tutorialManager;
 
@@ -32,12 +35,15 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
     {
         turn = 0;
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = whiteButton;
+        turnChangeButtonSR = turnChangeButton.GetComponent<SpriteRenderer>();
+        turnChangeButtonSR.sprite = whiteButton;
+        turnChangeButtonMaterial = turnChangeButton.GetComponent<Renderer>().material;
         if (GameManager.instance.isHost)
         {
             mySoulOrb.playerColor = GameBoard.PlayerColor.White;
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.Black;
+            mySoulCost.playerColor = GameBoard.PlayerColor.White;
+            opponentSoulCost.playerColor = GameBoard.PlayerColor.Black;
             whiteController.soulOrb = mySoulOrb;
             blackController.soulOrb = opponentSoulrOrb;
         }
@@ -45,6 +51,8 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
         {
             mySoulOrb.playerColor = GameBoard.PlayerColor.Black;
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.White;
+            mySoulCost.playerColor = GameBoard.PlayerColor.Black;
+            opponentSoulCost.playerColor = GameBoard.PlayerColor.White;
             blackController.soulOrb = mySoulOrb;
             whiteController.soulOrb = opponentSoulrOrb;
         }
@@ -53,16 +61,17 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
         blackController.enabled = false;
 
         if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
-            turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+            turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
         else
-            turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
         StartCoroutine("TurnDisplayOnOff");
+
     }
 
     public void EnableTurnChangeButton()
     {
         tutorialManager.isAllowingTurnEnd = true;
-        turnChangeButtonHighlight.gameObject.SetActive(true);
+        turnChangeButtonMaterial.SetFloat("_InnerOutlineAlpha", 0f);
     }
 
     void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
@@ -110,7 +119,7 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
         if (whiteController.enabled)
         {
 
-            spriteRenderer.sprite = blackButton;
+            turnChangeButtonSR.sprite = blackButton;
 
             whiteController.TurnEnd();
             blackController.OpponentTurnEnd();
@@ -119,9 +128,19 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
             blackController.enabled = true;
 
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
-                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.white;
+                TurnButtonText.text = "상대 턴";
+                turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            }
             else
-                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.white;
+                TurnButtonText.text = "턴 종료";
+                turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+            }
             StartCoroutine("TurnDisplayOnOff");
 
             blackController.TurnStart();
@@ -147,7 +166,7 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
         {
             tutorialManager.isAllowingTurnEnd = false;
 
-            spriteRenderer.sprite = whiteButton;
+            turnChangeButtonSR.sprite = whiteButton;
 
             blackController.TurnEnd();
             whiteController.OpponentTurnEnd();
@@ -156,9 +175,19 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
             whiteController.enabled = true;
 
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
-                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.black;
+                TurnButtonText.text = "턴 종료";
+                turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
+            }
             else
-                turn_display.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            {
+                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
+                TurnButtonText.color = Color.black;
+                TurnButtonText.text = "상대 턴";
+                turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
+            }
             StartCoroutine("TurnDisplayOnOff");
 
             whiteController.TurnStart();
@@ -167,14 +196,14 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
             whiteController.LocalDraw();
             blackController.OpponentDraw();
         }
-        turnChangeButtonHighlight.gameObject.SetActive(false);
+        turnChangeButtonMaterial.SetFloat("_InnerOutlineAlpha", 1f);
     }
 
     private IEnumerator TurnDisplayOnOff()
     {
-        turn_display.SetActive(true);
+        turnDisplay.SetActive(true);
         yield return new WaitForSeconds(1f);
-        turn_display.SetActive(false);
+        turnDisplay.SetActive(false);
     }
 
     private IEnumerator EnemyFirstRoutine()

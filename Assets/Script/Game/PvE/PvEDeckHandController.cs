@@ -56,7 +56,7 @@ public class PvEDeckHandController : MonoBehaviour
 
         player.Initialize();
 
-        //ÀÌ°Ô AIµ¦ »ı¼º°ú ÇÚµå »ı¼ºÀÎµí
+        //ì´ê²Œ AIë± ìƒì„±ê³¼ í•¸ë“œ ìƒì„±ì¸ë“¯
         InitializeRemote();
     }
     public void InitializeRemote()
@@ -102,8 +102,8 @@ public class PvEDeckHandController : MonoBehaviour
 
             if (card != null)
             {
-                //Á¦ÇÑ Ä«µå ¿¹¿ÜÃ³¸®
-                // ¾Æ¼­¿ÕÀÇ °¡È£,¿ÀµòÀÇ´« Ä«µå ¾ÆÁ÷ ¾ø´øµ¥
+                //ì œí•œ ì¹´ë“œ ì˜ˆì™¸ì²˜ë¦¬
+                // ì•„ì„œì™•ì˜ ê°€í˜¸,ì˜¤ë”˜ì˜ëˆˆ ì¹´ë“œ ì•„ì§ ì—†ë˜ë°
                 if (card is Hell || card is ToneDeafBard || card is WilhelmTell || card is JackFrost || card is Cain || card is GreenKnight || card is Cerberus 
                     || card is Hades || card is Zeus || card is Surtr)
                     continue;
@@ -127,11 +127,11 @@ public class PvEDeckHandController : MonoBehaviour
         }
 
 
-        // µ¦ Ãß°¡ÇÏ±â
+        // ë± ì¶”ê°€í•˜ê¸°
 
         List<int> computerDeck = new List<int>();
 
-        //½ÅÈ­ Ä«µå
+        //ì‹ í™” ì¹´ë“œ
         for (int i = 0; i < 3; i++)
         {
             int temp;
@@ -141,7 +141,7 @@ public class PvEDeckHandController : MonoBehaviour
 
             mythicalCards.RemoveAt(temp);
         }
-        //Àü¼³Ä«µå
+        //ì „ì„¤ì¹´ë“œ
         for (int i = 0; i < 9; i++)
         {
             int temp;
@@ -151,7 +151,7 @@ public class PvEDeckHandController : MonoBehaviour
 
             legendaryCards.RemoveAt(temp);
         }
-        //ÀÏ¹İÄ«µå
+        //ì¼ë°˜ì¹´ë“œ
         for (int i = 0; i < 6; i++)
         {
             int temp;
@@ -202,7 +202,7 @@ public class PvEDeckHandController : MonoBehaviour
     {
         yield return objCard.transform.DOLocalMoveX(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0.3f).WaitForCompletion();
         yield return objCard.transform.DOLocalMoveY(0, 0.7f).WaitForCompletion();
-        objCard.transform.localPosition = new Vector3(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UI¿¡ ¸Â°Ô ÁÂÇ¥¼öÁ¤
+        objCard.transform.localPosition = new Vector3(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UIì— ë§ê²Œ ì¢Œí‘œìˆ˜ì •
         if (objCard.cost <= GameBoard.instance.gameData.myPlayerData.soulEssence)
         {
             objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 1f);
@@ -243,7 +243,7 @@ public class PvEDeckHandController : MonoBehaviour
     {
         yield return objCard.transform.DOLocalMoveX(anchor_x - CARD_DISTANCE_IN_HAND * handIndex, 0.3f).WaitForCompletion();
         yield return objCard.transform.DOLocalMoveY(0, 0.8f).WaitForCompletion();
-        objCard.transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UI¿¡ ¸Â°Ô ÁÂÇ¥¼öÁ¤
+        objCard.transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UIì— ë§ê²Œ ì¢Œí‘œìˆ˜ì •
     }
 
 

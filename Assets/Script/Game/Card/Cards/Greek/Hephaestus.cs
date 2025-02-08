@@ -20,13 +20,16 @@ public class Hephaestus : SoulCard
             piece.soul != null).ToList();
 
         if (enemyPieceList.Count == 0)
+        {
+            Debug.Log("Hephaestus: No Target");
             return;
+        }
         
         foreach (var objPiece in enemyPieceList)
         {
-            objPiece.MinusHP(soulDamage);
+            Debug.Log("Hephaestus: Soul Effect");
+            GameBoard.instance.chessBoard.DamageByCardEffect(GetComponent<HephaestusEffect>().effectPrefab, InfusedPiece, objPiece, soulDamage);
         }
-
         GameManager.instance.soundManager.PlaySFX("Fire");
     }
 

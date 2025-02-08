@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public Action OnOpponentTurnEnd;
 
     public ChessTimer chessTimer;
+    private bool tutorialFlag = false;
 
     [SerializeField] protected bool _isMyTurn;
     public virtual bool isMyTurn { get => _isMyTurn; }
@@ -52,6 +53,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+        if (SceneManager.GetActiveScene().name == "TutorialScene")
+        {
+            tutorialFlag = true;
+        }
     }
     private void Start()
     {
@@ -138,6 +143,7 @@ public class PlayerController : MonoBehaviour
                         if (IsMovableCoordniate(coordinate))
                         {
                             chosenPiece.SelectedEffectOff();
+                            Debug.Log("Move to Attack");
                             photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
 
                             chosenPiece = null;
@@ -150,6 +156,7 @@ public class PlayerController : MonoBehaviour
                     chosenPiece.SelectedEffectOff();
                     if (IsMovableCoordniate(coordinate))
                     {
+                        Debug.Log("Move");
                         photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
                     }
                     chosenPiece = null;
@@ -175,11 +182,13 @@ public class PlayerController : MonoBehaviour
             ChessPiece dstPiece = GameBoard.instance.gameData.GetPiece(dst_coordinate);
             if (srcPiece.Attack(dstPiece))
             {
+                Debug.Log("kill" + dstPiece.name);
                 srcPiece.Move(dst_coordinate);
                 gameBoard.chessBoard.KillAnimation(srcPiece, dstPiece);
             }
             else
             {
+                Debug.Log("Can't kill" + dstPiece.name);
                 srcPiece.GetComponent<Animator>().SetTrigger("moveTrigger");
                 srcPiece.GetComponent<Animator>().SetBool("isReturning", true);
                 gameBoard.chessBoard.ForthBackPieceAnimation(srcPiece, dstPiece);
@@ -363,6 +372,7 @@ public class PlayerController : MonoBehaviour
             isInfusing = false;
         }
 
+        Debug.Log("Me: Using " + usingCard.name + " Card");
         if (usingCard is SoulCard)
         {
             GameManager.instance.soundManager.PlaySFX("SetSoul", usingCard.GetCardID, startTime: 0.5f);
@@ -400,6 +410,7 @@ public class PlayerController : MonoBehaviour
     public virtual void UseCardRemote(int cardIndex, Vector3 infusionTarget, Vector3[] targetArray = null)
     {
         Card card = gameBoard.gameData.opponentPlayerData.hand[cardIndex];
+        Debug.Log("Opponent: Using " + card.name + " Card and hand Index: " + cardIndex.ToString());
         GameBoard.instance.CurrentPlayerData().soulEssence -= card.cost;
 
         gameBoard.ShowCard(card);
@@ -468,7 +479,8 @@ public class PlayerController : MonoBehaviour
     {
         _isMyTurn = true;
         OnMyTurnStart?.Invoke();
-        chessTimer.StartTimer();
+        if (tutorialFlag == false)
+            chessTimer.StartTimer();
     }
 
     public void OpponentTurnStart()
@@ -539,18 +551,19 @@ public class PlayerController : MonoBehaviour
         // 턴 종료 시 상대 코스트 회복
         if (playerColor == GameBoard.PlayerColor.White)
         {
-            if (GameBoard.instance.gameData.playerBlack.soulOrbs < 10)
+            if (GameBoard.instance.gameData.playerBlack.soulOrbs < 5)
                 GameBoard.instance.gameData.playerBlack.soulOrbs++;
             GameBoard.instance.gameData.playerBlack.soulEssence = GameBoard.instance.gameData.playerBlack.soulOrbs;
         }
         else
         {
-            if (GameBoard.instance.gameData.playerWhite.soulOrbs < 10)
+            if (GameBoard.instance.gameData.playerWhite.soulOrbs < 5)
                 GameBoard.instance.gameData.playerWhite.soulOrbs++;
             GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;
         }
-
-        chessTimer.StopTimer();
+        
+        if (tutorialFlag == false)
+            chessTimer.StopTimer();
     }
 
     public void OpponentTurnEnd()
