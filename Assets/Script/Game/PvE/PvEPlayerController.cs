@@ -22,7 +22,7 @@ public class PvEPlayerController : PlayerController
             _isComputer = value;
             if (value)
             {
-                //computer ÄÚµåÃß°¡
+                //computer ì½”ë“œì¶”ê°€
                 OnMyTurnStart += () => StartCoroutine(ComputerAct());
             }
         }
@@ -84,25 +84,25 @@ public class PvEPlayerController : PlayerController
                 {
                     targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
-                    // Å¸°Ù È¿°ú°¡ ºÎÁ¤ÀûÀÎÁö ÆÄ¶ó¹ÌÅÍ Àü´Ş
+                    // íƒ€ê²Ÿ íš¨ê³¼ê°€ ë¶€ì •ì ì¸ì§€ íŒŒë¼ë¯¸í„° ì „ë‹¬
                     SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
                 }
             }
         }
-        else // ÀÌµ¿ °ü·Ã ÄÚµå
+        else // ì´ë™ ê´€ë ¨ ì½”ë“œ
         {
-            if (chosenPiece == null)// ¼±ÅÃµÈ (¾Æ±º)±â¹°ÀÌ ¾øÀ» ¶§
+            if (chosenPiece == null)// ì„ íƒëœ (ì•„êµ°)ê¸°ë¬¼ì´ ì—†ì„ ë•Œ
             {
                 if (targetPiece != null)
                 {
-                    if (IsMyPiece(targetPiece))// °í¸¥ ±â¹°ÀÌ ¾Æ±ºÀÏ¶§
+                    if (IsMyPiece(targetPiece))// ê³ ë¥¸ ê¸°ë¬¼ì´ ì•„êµ°ì¼ë•Œ
                         if (!isMoved || (targetPiece.moveCountInThisTurn > 0 && targetPiece.moveCountInThisTurn <= targetPiece.moveCount))
                         {
                             SetChosenPiece(targetPiece);
                         }
                 }
             }
-            else // ¼±ÅÃµÈ (¾Æ±º)±â¹°ÀÌ ÀÖÀ» ¶§
+            else // ì„ íƒëœ (ì•„êµ°)ê¸°ë¬¼ì´ ìˆì„ ë•Œ
             {
                 if (targetPiece != null)
                 {
@@ -112,12 +112,12 @@ public class PvEPlayerController : PlayerController
                         chosenPiece = null;
                         ClearMovableCoordniates();
                     }
-                    else if (IsMyPiece(targetPiece))// °í¸¥ ±â¹°ÀÌ ¾Æ±ºÀÏ¶§
+                    else if (IsMyPiece(targetPiece))// ê³ ë¥¸ ê¸°ë¬¼ì´ ì•„êµ°ì¼ë•Œ
                     {
                         chosenPiece.SelectedEffectOff();
                         SetChosenPiece(targetPiece);
                     }
-                    else// °í¸¥ ±â¹°ÀÌ ÀûÀÏ ¶§
+                    else// ê³ ë¥¸ ê¸°ë¬¼ì´ ì ì¼ ë•Œ
                     {
                         if (IsMovableCoordniate(coordinate))
                         {
@@ -129,7 +129,7 @@ public class PvEPlayerController : PlayerController
                         }
                     }
                 }
-                else // °í¸¥ Ä­ÀÌ ºóÄ­ÀÏ¶§
+                else // ê³ ë¥¸ ì¹¸ì´ ë¹ˆì¹¸ì¼ë•Œ
                 {
                     chosenPiece.SelectedEffectOff();
                     if (IsMovableCoordniate(coordinate))
@@ -218,7 +218,7 @@ public class PvEPlayerController : PlayerController
         foreach (var obj in targetableObjects)
             if (isTargetable)
             {
-                //Å¸°Ù È¿°ú°¡ ºÎÁ¤ÀûÀÎÁö Ã¼Å©
+                //íƒ€ê²Ÿ íš¨ê³¼ê°€ ë¶€ì •ì ì¸ì§€ ì²´í¬
                 if (isNegativeEffect)
                     GameBoard.instance.GetBoardSquare(obj.coordinate).isNegativeTargetable = true;
                 else
@@ -235,9 +235,9 @@ public class PvEPlayerController : PlayerController
 
         if (usingCard is SoulCard)
         {
-            if (!isInfusing) // ¼Ò¿ï Ä«µå¸¦ Ã³À½ ³ÂÀ» ¶§
+            if (!isInfusing) // ì†Œìš¸ ì¹´ë“œë¥¼ ì²˜ìŒ ëƒˆì„ ë•Œ
             {
-                if (!(usingCard as SoulCard).infusion.isAvailable(playerColor)) // Ä«µåÀÇ ±â¹° Á¦ÇÑÀ» ¸¸Á·ÇÏÁö ¸øÇÏ´Â °æ¿ì
+                if (!(usingCard as SoulCard).infusion.isAvailable(playerColor)) // ì¹´ë“œì˜ ê¸°ë¬¼ ì œí•œì„ ë§Œì¡±í•˜ì§€ ëª»í•˜ëŠ” ê²½ìš°
                 {
                     usingCard = null;
                     isUsingCard = false;
@@ -245,7 +245,7 @@ public class PvEPlayerController : PlayerController
                 }
                 else if (usingCard.EffectOnCardUsed is TargetingEffect)
                 {
-                    if (!(usingCard.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor)) // Ä«µåÀÇ È¿°ú ´ë»óÀÌ ¾ø´Â °æ¿ì
+                    if (!(usingCard.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor)) // ì¹´ë“œì˜ íš¨ê³¼ ëŒ€ìƒì´ ì—†ëŠ” ê²½ìš°
                     {
                         usingCard = null;
                         isUsingCard = false;
@@ -263,9 +263,9 @@ public class PvEPlayerController : PlayerController
                 isInfusing = true;
                 (usingCard as SoulCard).gameObject.SetActive(false);
                 targetingEffect = (usingCard as SoulCard).infusion;
-                ActiveTargeting(); // Ä«µå °­¸² ´ë»ó ¼±ÅÃ
+                ActiveTargeting(); // ì¹´ë“œ ê°•ë¦¼ ëŒ€ìƒ ì„ íƒ
             }
-            else // ¼Ò¿ï Ä«µå ³»°í -> °­¸² ´ë»ó ¼±ÅÃ ÈÄ
+            else // ì†Œìš¸ ì¹´ë“œ ë‚´ê³  -> ê°•ë¦¼ ëŒ€ìƒ ì„ íƒ í›„
             {
                 isInfusing = false;
 
@@ -277,7 +277,7 @@ public class PvEPlayerController : PlayerController
                         isUsingCard = false;
                         return false;
                     }
-                    //¿µÈ¥ Ä«µå´Â °­¸² ¼±ÅÃ ½ÃÁ¡ÀÌ ¿©±âÀÎµí
+                    //ì˜í˜¼ ì¹´ë“œëŠ” ê°•ë¦¼ ì„ íƒ ì‹œì ì´ ì—¬ê¸°ì¸ë“¯
                     (usingCard as SoulCard).gameObject.SetActive(false);
                     targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
                     ActiveTargeting();
@@ -304,7 +304,7 @@ public class PvEPlayerController : PlayerController
                 else
                     gameBoard.ShowCard(usingCard);
 
-                usingCard.gameObject.SetActive(false); //¸¶¹ı Ä«µå´Â ¿©±âÀÎµí?
+                usingCard.gameObject.SetActive(false); //ë§ˆë²• ì¹´ë“œëŠ” ì—¬ê¸°ì¸ë“¯?
                 targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
                 ActiveTargeting();
             }
@@ -322,7 +322,7 @@ public class PvEPlayerController : PlayerController
 
         targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
-        //Å¸°Ù È¿°ú°¡ ºÎÁ¤ÀûÀÎÁö ÆÄ¶ó¹ÌÅÍ Àü´Ş
+        //íƒ€ê²Ÿ íš¨ê³¼ê°€ ë¶€ì •ì ì¸ì§€ íŒŒë¼ë¯¸í„° ì „ë‹¬
         SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
     }
     public override void UseCardEffect()
@@ -417,9 +417,9 @@ public class PvEPlayerController : PlayerController
     public IEnumerator ComputerAct()
     {
         yield return new WaitForSeconds(4f);
-        //Ä«µå ¾²±â
+        //ì¹´ë“œ ì“°ê¸°
         yield return UseCardComputer();
-        //Ã¼½º ¸» ÀÌµ¿
+        //ì²´ìŠ¤ ë§ ì´ë™
         yield return MovePieceComputer();
         GetComponentInParent<PvELocalController>().TurnEnd();
     }
@@ -487,8 +487,11 @@ public class PvEPlayerController : PlayerController
                 //Debug.Log(targetableObjects.Count);
                 //Debug.Log(randNum);
 
-                OnClickBoardSquare(GetCardUseCoordinate());
-                yield return new WaitForSeconds(2f);
+                if (targetableObjects.Count > 0)
+                {
+                    OnClickBoardSquare(GetCardUseCoordinate());
+                    yield return new WaitForSeconds(2f);
+                }
                 if (targetableObjects.Count > 0)
                 {
                     OnClickBoardSquare(GetCardUseCoordinate());
@@ -655,7 +658,7 @@ public class PvEPlayerController : PlayerController
             //Debug.Log(t.Item2.gameObject.name + " " +t.Item2.coordinate +" to " + t.Item3 + " : " + t.Item1);
         }
 
-        //°¡ÁßÄ¡ °è»êÇÏ±â
+        //ê°€ì¤‘ì¹˜ ê³„ì‚°í•˜ê¸°
         if (AllMovableCoordinates.Count > 0)
         {
             Debug.Log(AllMovableCoordinates[0].Item2.coordinate);
@@ -670,8 +673,8 @@ public class PvEPlayerController : PlayerController
         }
     }
 
-    // »ó´ë¸»ÇÑÅ× ÆÄ±« ´çÇÏ´Â°¡ ( ÇØ´ç ¸»[myPiece]ÀÌ myCoord·Î ÀÌµ¿ÇßÀ» ¶§)
-    // Çö »óÅÂ º¸°í ½ÍÀ¸¸é myCoord ÇöÀç À§Ä¡ ³Ö±â
+    // ìƒëŒ€ë§í•œí…Œ íŒŒê´´ ë‹¹í•˜ëŠ”ê°€ ( í•´ë‹¹ ë§[myPiece]ì´ myCoordë¡œ ì´ë™í–ˆì„ ë•Œ)
+    // í˜„ ìƒíƒœ ë³´ê³  ì‹¶ìœ¼ë©´ myCoord í˜„ì¬ ìœ„ì¹˜ ë„£ê¸°
     private int CalculateDestoryablePieces(ChessPiece myPiece, Vector2Int myCoord)
     {
         int num = 0;
@@ -736,13 +739,13 @@ public class PvEPlayerController : PlayerController
     {
         if (card is SoulCard)
         {
-            if (!(card as SoulCard).infusion.isAvailable(playerColor)) // Ä«µåÀÇ ±â¹° Á¦ÇÑÀ» ¸¸Á·ÇÏÁö ¸øÇÏ´Â °æ¿ì
+            if (!(card as SoulCard).infusion.isAvailable(playerColor)) // ì¹´ë“œì˜ ê¸°ë¬¼ ì œí•œì„ ë§Œì¡±í•˜ì§€ ëª»í•˜ëŠ” ê²½ìš°
             {
                 return false;
             }
             else if (card.EffectOnCardUsed is TargetingEffect)
             {
-                if (!(card.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor)) // Ä«µåÀÇ È¿°ú ´ë»óÀÌ ¾ø´Â °æ¿ì
+                if (!(card.EffectOnCardUsed as TargetingEffect).isAvailable(playerColor)) // ì¹´ë“œì˜ íš¨ê³¼ ëŒ€ìƒì´ ì—†ëŠ” ê²½ìš°
                 {
                     return false;
                 }
