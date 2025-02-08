@@ -19,7 +19,6 @@ public class SoundManager : MonoBehaviour
     {
         { "수르트", "Fire" },
         { "제우스", "Electricity" },
-        { "포세이돈", "Water" },
         { "약탈선", "Water" },
     };
 
