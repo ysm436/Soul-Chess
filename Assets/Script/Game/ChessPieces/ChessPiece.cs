@@ -17,8 +17,8 @@ using static UnityEngine.Rendering.DebugUI;
 abstract public class ChessPiece : TargetableObject
 {
 
-    private int baseAD = 10;
-    private int baseHP = 10;
+    private int baseAD = 1;
+    private int baseHP = 1;
 
 
     protected GameData _chessData;
