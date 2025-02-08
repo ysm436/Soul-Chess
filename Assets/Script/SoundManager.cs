@@ -134,9 +134,15 @@ public class SoundManager : MonoBehaviour
                 name = elementSFXDictionary[cardName];
             }
         }
-        
-        sfxPlayer.pitch = pitch;
-        sfxPlayer.time = startTime;
-        sfxPlayer.PlayOneShot(sfxDictionary[name], volume * sfxVolume);
+        GameObject tempAudioObj = new GameObject("TempSFX");
+        AudioSource tempAudioSource = tempAudioObj.AddComponent<AudioSource>();
+
+        tempAudioSource.clip = sfxDictionary[name];
+        tempAudioSource.volume = volume * sfxVolume;
+        tempAudioSource.pitch = pitch;
+        tempAudioSource.time = startTime;
+        tempAudioSource.Play();
+
+        Destroy(tempAudioObj, tempAudioSource.clip.length / pitch);
     }
 }

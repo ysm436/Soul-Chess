@@ -16,7 +16,7 @@ public class DonQuixoteEffect : Effect
         
         if (donQuixoteComponent.InfusedPiece.pieceType == additionalBuffPieceType)
         {
-            donQuixoteComponent.InfusedPiece.maxHP += additionalAD;
+            donQuixoteComponent.InfusedPiece.AD += additionalAD;
             donQuixoteComponent.InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.AD, additionalAD, true);
         }
     }

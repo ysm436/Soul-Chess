@@ -105,6 +105,7 @@ MonoBehaviour:
     \uC788\uB294 \uBAA8\uB4E0 \uC601\uD63C\uC774 \uAE43\uB4E0 \uC801 \uAE30\uBB3C\uC5D0\uAC8C
     3\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -6734192282877653182}
+  cardKeywords: 
   isInSelection: 0
 --- !u!114 &-6734192282877653182
 MonoBehaviour:
@@ -118,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6a38d2e579b1c45ae04f110ee80324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 9019308059696499000, guid: 076b1622818910746857a0d976265f76, type: 3}
   targetTypes:
   - targetType: 1
     targetPieceType: 0

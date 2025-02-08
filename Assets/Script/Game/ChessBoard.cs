@@ -269,6 +269,61 @@ public class ChessBoard : MonoBehaviour
         });
     }
 
+    public void DamageByThunderEffect(GameObject thunderEffect, List<ChessPiece> targetList, int damage)
+    {
+        blocker.SetActive(true);
+
+        if (colorAdjustments == null)
+            volume.profile.TryGet(out colorAdjustments);
+
+        Sequence thunderSequence = DOTween.Sequence();
+
+        Tween tr1 = DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
+        {
+            colorAdjustments.postExposure.Override(value);
+        }).SetEase(Ease.InOutSine);
+        thunderSequence.Append(tr1);
+
+        Tween tr2(ChessPiece target)
+        {
+            GameManager.instance.soundManager.PlaySFX("Electricity");
+            GameObject thunderObj = Instantiate(thunderEffect);
+            thunderObj.transform.position = target.transform.position;
+
+            return DOVirtual.DelayedCall(0.3f, () => {
+                target.MinusHP(damage);
+                if (target.isAlive)
+                {
+                    GameManager.instance.soundManager.PlaySFX("Attack");
+                    GameBoard.instance.chessBoard.AttackedAnimation(target);
+                }
+                else
+                {
+                    GameManager.instance.soundManager.PlaySFX("Destroy");
+                    target.GetComponent<Animator>().SetTrigger("killedTrigger");
+                    target.MakeAttackedEffect();
+                }
+                DOVirtual.DelayedCall(0.2f, ()=> {
+                    Destroy(thunderObj);
+                });
+            });
+        }
+        targetList.Reverse();
+        foreach (var target in targetList)
+        {
+            thunderSequence.Append(tr2(target));
+            thunderSequence.Append(DOVirtual.DelayedCall(0.2f, () => {}));
+        }
+        
+        Tween tr3 = DOVirtual.Float(colorAdjustments.postExposure.value, 0f, 0.3f, (value) =>
+        {
+            colorAdjustments.postExposure.Override(value);
+        }).SetEase(Ease.InOutSine).OnComplete(() => {
+            blocker.SetActive(false);
+        });
+        thunderSequence.Append(tr3);
+    }
+
     public List<ChessPiece> GetAllPieces(GameBoard.PlayerColor color)
     {
         List<ChessPiece> chessPieces = new List<ChessPiece>();
