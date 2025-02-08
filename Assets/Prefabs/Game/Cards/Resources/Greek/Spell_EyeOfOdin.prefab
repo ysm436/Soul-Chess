@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4790434029302801295
+--- !u!1001 &4616442128809638412
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -52,9 +52,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: back
+      value: 
+      objectReference: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: cost
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: _cost
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: cardName
+      value: "\uAC10\uBC18\uD14C\uC778"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: description
+      value: "\uAC8C\uC784\uC774 \uB05D\uB0A0 \uB54C \uAE4C\uC9C0, \uC0C1\uB300\uC758
+        \uD328\uB97C \uBCFC \uC218 \uC788\uAC8C \uB429\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: EffectOnCardUsed
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Name
-      value: Spell_PandoraBox
+      value: Spell_EyeOfOdin
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
@@ -63,88 +88,62 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2447221406629581263}
+      addedObject: {fileID: -6669847047417469827}
     - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3380891434776651617}
+      addedObject: {fileID: 3336349818551597051}
   m_SourcePrefab: {fileID: 100100000, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
---- !u!1 &4247453139482488879 stripped
+--- !u!1 &4078594222576986540 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
-  m_PrefabInstance: {fileID: 4790434029302801295}
+  m_PrefabInstance: {fileID: 4616442128809638412}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2447221406629581263
+--- !u!114 &-6669847047417469827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247453139482488879}
+  m_GameObject: {fileID: 4078594222576986540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e76a0f36432ff3240a703a69381f99f9, type: 3}
+  m_Script: {fileID: 11500000, guid: a9376e354043dbe4d8411c795c81b409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 3
-    soulEssence: 3
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
-    deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    hand:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    deck: []
+    hand: []
     deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
-  cardName: "\uD310\uB3C4\uB77C\uC758 \uC0C1\uC790"
-  _cost: 3
-  illustration: {fileID: 21300000, guid: db766a880b3aef94ab5f570012516653, type: 3}
+  cardName: "\uC624\uB518\uC758 \uB208"
+  _cost: 5
+  illustration: {fileID: 21300000, guid: 715f8fac3f7c02c4aae352d9758b6846, type: 3}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
-  rarity: 1
-  description: "\uB0B4 \uBAA8\uB4E0 \uC601\uD63C\uC774 \uBD80\uC5EC\uB41C \uAE30\uBB3C\uC5D0\uAC8C
-    \uBB34\uC791\uC704\uB85C \uCCB4\uB825 \uD639\uC740 \uACF5\uACA9\uB825\uC744 1
-    \uBD80\uC5EC\uD569\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: -3380891434776651617}
+  rarity: 2
+  description: "\uAC8C\uC784\uC774 \uB05D\uB0A0 \uB54C \uAE4C\uC9C0, \uC0C1\uB300\uC758
+    \uD328\uB97C \uBCFC \uC218 \uC788\uAC8C \uB429\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: 3336349818551597051}
   isInSelection: 0
---- !u!114 &-3380891434776651617
+--- !u!114 &3336349818551597051
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247453139482488879}
+  m_GameObject: {fileID: 4078594222576986540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab01159711b1e6149884f184402c0206, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a08733092a89d2419947ea6ab1cecb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 6543395396501225134, guid: 179658d71ad22a546bf183d6116eb4a6, type: 3}
-  changeADorHP: 1
+  effectPrefab: {fileID: 0}
