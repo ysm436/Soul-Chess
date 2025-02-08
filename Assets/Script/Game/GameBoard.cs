@@ -91,7 +91,7 @@ public class GameBoard : MonoBehaviour
         gameData.BOARD_SIZE_HEIGHT = chessBoardSizeHeight;
         gameData.BOARD_SIZE_WIDTH = chessBoardSizeWidth;
         gameData.boardSquares = new BoardSquare[chessBoardSizeHeight, chessBoardSizeWidth];
-        chessBoardBG.sizeDelta = new Vector2((float)(chessBoardSizeHeight + 0.5), (float)(chessBoardSizeWidth + 0.5));
+        chessBoardBG.sizeDelta = new Vector2((float)(chessBoardSizeHeight + 0.4), (float)(chessBoardSizeWidth + 0.4));
 
         //체스 판 세팅
         chessBoard.SetBoardSquares(gameData);
