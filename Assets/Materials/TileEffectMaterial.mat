@@ -25,9 +25,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _ChromaticAberration_Opacity: 0
-    - _ColorIntensity: 10
-    - _HueShift: -110
-    - _IsCircular: 0
+    - _ColorIntensity: 20
+    - _HueShift: 86
     m_Colors: []
   m_BuildTextureStacks: []
