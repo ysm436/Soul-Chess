@@ -10,6 +10,7 @@ public class MainSceneUI : MonoBehaviour
     [SerializeField] private Button deckBuildingButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private Button pveButton;
+    [SerializeField] private Button creditButton;
     [SerializeField] private Button tutorialButton;
     
     private void Start()
@@ -18,6 +19,7 @@ public class MainSceneUI : MonoBehaviour
         deckBuildingButton.onClick.AddListener(GameManager.instance.LoadDeckBuildingScene);
         quitButton.onClick.AddListener(QuitGame);
         pveButton.onClick.AddListener(GameManager.instance.LoadPvELobbyScene);
+        creditButton.onClick.AddListener(GameManager.instance.LoadCreditScene);
         tutorialButton.onClick.AddListener(GameManager.instance.LoadTutorialScene);
     }
 

@@ -91,7 +91,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("PvEGameScene");
     }
-
+    public void LoadCreditScene()
+    {
+        SceneManager.LoadScene("CreditScene");
+    }
     public void LoadTutorialScene()
     {
         SceneManager.LoadScene("TutorialScene");
