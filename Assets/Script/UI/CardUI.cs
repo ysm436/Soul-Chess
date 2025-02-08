@@ -8,7 +8,6 @@ public class CardUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI cardName;
     [SerializeField] private TextMeshProUGUI cost;
-    [SerializeField] private TextMeshProUGUI type;
     [SerializeField] private TextMeshProUGUI ADText;
     [SerializeField] private TextMeshProUGUI HPText;
     [SerializeField] private TextMeshProUGUI description;
@@ -18,22 +17,26 @@ public class CardUI : MonoBehaviour
     [SerializeField] private GameObject[] cardFrames;
     [SerializeField] private GameObject[] cardKeywords;
     [SerializeField] private TextMeshProUGUI[] cardKeywordDescriptions;
+    [SerializeField] private GameObject spell;
+    [SerializeField] private GameObject soul;
 
     public void SetCardUI(Card card)
     {
         if (card is SoulCard)
         {
-            type.text = "영혼";
             AD.SetActive(true);
             HP.SetActive(true);
             ADText.text = card.GetComponent<SoulCard>().AD.ToString();
             HPText.text = card.GetComponent<SoulCard>().HP.ToString();
+            spell.SetActive(false);
+            soul.SetActive(true);
         }
         else
         {
-            type.text = "마법";
             AD.SetActive(false);
             HP.SetActive(false);
+            spell.SetActive(true);
+            soul.SetActive(false);
         }
 
         foreach (var cardFrame in cardFrames)
@@ -43,7 +46,6 @@ public class CardUI : MonoBehaviour
 
         cardFrames[(int)card.rarity].SetActive(true);
 
-        type.gameObject.SetActive(true);
         cardName.text = card.cardName;
         cost.text = card.cost.ToString();
         description.text = card.description;
@@ -59,7 +61,8 @@ public class CardUI : MonoBehaviour
 
     public void SetCardUI(ChessPiece piece)
     {
-        type.gameObject.SetActive(false);
+        spell.SetActive(false);
+        soul.SetActive(false);
         AD.SetActive(true);
         HP.SetActive(true);
         ADText.text = piece.AD.ToString();
