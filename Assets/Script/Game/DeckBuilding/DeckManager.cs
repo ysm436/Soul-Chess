@@ -327,7 +327,6 @@ public class DeckManager : MonoBehaviour
                 }
             }
         }
-
         if (loadedDeckRarities[2] == 3)
         {
             foreach (var cardDisplay in dbm.cardDisplayList)
@@ -339,6 +338,8 @@ public class DeckManager : MonoBehaviour
                 }
             }
         }
+        legendaryCountText.text = "전설 (" + loadedDeckRarities[1].ToString() + "/9)";
+        mythicalCountText.text = "신화 (" + loadedDeckRarities[2].ToString() + "/3)";
         cardCountText.text = "카드 : " + loadedDeckCardCount.ToString() + " / " + CARD_LIMIT.ToString();
     }
     private void DeckInfoSave()
