@@ -11,7 +11,15 @@ PrefabInstance:
     - target: {fileID: 275331416115565495, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a53e7809d0518e34084347c8a80565aa, type: 3}
+      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
+    - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.34375
+      objectReference: {fileID: 0}
+    - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.4570312
+      objectReference: {fileID: 0}
     - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -125,26 +133,51 @@ MonoBehaviour:
   coordinate: {x: 0, y: 0}
   owner:
     playerColor: 0
-    soulOrbs: 0
-    soulEssence: 0
+    soulOrbs: 1
+    soulEssence: 1
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
-    deck: []
-    hand: []
-    deckPosition: {x: 0, y: 0}
+    deck:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uD53C\uC758 \uB3C5\uC218\uB9AC"
   _cost: 3
-  illustration: {fileID: 21300000, guid: a6cc1c3e8b8bd084fad6ad83a8a0a0a2, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 813e9713dccce01478f043879c66e098, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 0
   description: "\uC601\uD63C\uC774 \uAE43\uB4E0 \uAE30\uBB3C\uC744 \uCC98\uCE58\uD569\uB2C8\uB2E4.
     \uCE74\uB4DC\uB97C \uD55C \uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8662909460837558927}
+  cardKeywords: 
   isInSelection: 0
 --- !u!114 &-8662909460837558927
 MonoBehaviour:

@@ -95,13 +95,14 @@ public class DisplayInfo : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     [SerializeField] private TextMeshProUGUI cardQunatityTMP;
     [SerializeField] private TextMeshProUGUI cardNameTMP;
     [SerializeField] private TextMeshProUGUI cardCostTMP;
-    [SerializeField] private TextMeshProUGUI cardTypeTMP;
+    [SerializeField] private Image typeIconImage;
     [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
     [SerializeField] private GameObject soulElementPrefab;
     [SerializeField] private TextMeshProUGUI cardHPTMP;
     [SerializeField] private TextMeshProUGUI cardADTMP;
 
     [SerializeField] private List<Sprite> cardFrameList;
+    [SerializeField] private List<Sprite> typeIconList;
     [SerializeField] private Image cardFrameImage;
     public Image illustrate;
     //public List<Image> chessPieceDisplayList;
@@ -125,9 +126,10 @@ public class DisplayInfo : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         {
             case Card.Type.Spell:
                 soulElementPrefab.SetActive(false);
-                cardTypeTMP.text = "마법";
+                typeIconImage.sprite = typeIconList[1];
                 break;
             case Card.Type.Soul:
+                typeIconImage.sprite = typeIconList[0];
                 break;
             default:
                 break;

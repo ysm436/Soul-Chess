@@ -11,7 +11,15 @@ PrefabInstance:
     - target: {fileID: 275331416115565495, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7b64479636d841b498df40d593c779f3, type: 3}
+      objectReference: {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
+    - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.34375
+      objectReference: {fileID: 0}
+    - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.4570312
+      objectReference: {fileID: 0}
     - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -101,13 +109,14 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uC544\uC11C\uC655\uC758 \uAC00\uD638"
   _cost: 3
-  illustration: {fileID: 21300000, guid: cc04fcb866ce84a4a96e619a69018cc0, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 1ed4b27de9821d34789df97cd847ff79, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 2
   description: "\uB0B4 \uB2E4\uC74C \uD134\uAE4C\uC9C0, \uB0B4 \uAE30\uBB3C\uB4E4\uC758
     \uACF5\uACA9\uB825\uC774 2\uBC30\uAC00 \uB429\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -3573390053045543029}
+  cardKeywords: 
   isInSelection: 0
 --- !u!114 &-3573390053045543029
 MonoBehaviour:

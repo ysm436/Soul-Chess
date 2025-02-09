@@ -53,13 +53,17 @@ PrefabInstance:
       value: Soul_MotherBear
       objectReference: {fileID: 0}
     - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.34375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.8320312
+      value: 3.4570312
       objectReference: {fileID: 0}
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a53e7809d0518e34084347c8a80565aa, type: 3}
+      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -110,12 +114,13 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uC5B4\uBBF8 \uACF0"
   _cost: 2
-  illustration: {fileID: 21300000, guid: aa61d750a0717f340ac591a4147ddb18, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 1b2153d89dd86394493e7e1f0c81d937, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 0
   description: 
   EffectOnCardUsed: {fileID: 0}
+  cardKeywords: 
   isInSelection: 0
   pieceRestriction: -1
   _AD: 2

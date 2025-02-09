@@ -52,10 +52,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soul_Mimir
       objectReference: {fileID: 0}
+    - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.34375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.4570312
+      objectReference: {fileID: 0}
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7b64479636d841b498df40d593c779f3, type: 3}
+      objectReference: {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -87,26 +95,51 @@ MonoBehaviour:
   coordinate: {x: 0, y: 0}
   owner:
     playerColor: 0
-    soulOrbs: 0
-    soulEssence: 0
+    soulOrbs: 1
+    soulEssence: 1
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
-    deck: []
-    hand: []
-    deckPosition: {x: 0, y: 0}
+    deck:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uBBF8\uBBF8\uB974"
   _cost: 4
-  illustration: {fileID: 21300000, guid: 9dfdb2ac9b5905148b4a6f6ee9889eff, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 1809bbb1753f8ef4a9b3c54c57fae2e8, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 1
   description: "\uC774 \uC601\uD63C\uC774 \uBD80\uC5EC\uB41C \uAE30\uBB3C\uC774 \uC0B4\uC544\uC788\uB294
     \uB3D9\uC548 \uB0B4 \uCE74\uB4DC\uC758 \uBE44\uC6A9\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -6232363627302796207}
+  cardKeywords: 
   isInSelection: 0
   pieceRestriction: -1
   _AD: 4
@@ -138,3 +171,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122dbd15cdefbca46b1d322ec0be073a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}

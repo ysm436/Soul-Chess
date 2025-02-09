@@ -96,8 +96,8 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uC544\uD3F4\uB860"
   _cost: 5
-  illustration: {fileID: 21300000, guid: ccdede182d821a64181f214e3cec29a0, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: f47064f116f8dd34f98448fe90563b1a, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 2
   description: "[\uBCF4\uD638\uB9C9]\n[\uAC15\uB9BC] \uC591 \uC606 \uB0B4 \uAE30\uBB3C\uC5D0\uAC8C

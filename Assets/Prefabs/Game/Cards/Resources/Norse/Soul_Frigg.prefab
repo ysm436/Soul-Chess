@@ -93,6 +93,14 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.newSize.y
       value: 2.8320312
       objectReference: {fileID: 0}
+    - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.34375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.4570312
+      objectReference: {fileID: 0}
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Size.x
       value: 1.953125
@@ -104,7 +112,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ee9a0a16c7ca8384580a849cf8cab189, type: 3}
+      objectReference: {fileID: 21300000, guid: a83755c6ea696f844bb7e83d5bff5900, type: 3}
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -187,12 +195,13 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uD504\uB9AC\uADF8"
   _cost: 4
-  illustration: {fileID: 21300000, guid: 55537df25b3b92242b3933733120a77d, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 651f9b376fd7a8645ab3bdce44e0f24c, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 2
   description: "\uC801 \uAE30\uBB3C\uC758 \uACF5\uACA9\uB825\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4"
   EffectOnCardUsed: {fileID: 1414403984435467240}
+  cardKeywords: 
   isInSelection: 0
   pieceRestriction: -1
   _AD: 3
@@ -218,3 +227,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ce6abe89987524fa6947fc91156f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}
