@@ -18,16 +18,7 @@ public class Kraken : SoulCard
 
     public void OnKilledEffect(ChessPiece chessPiece)
     {
-        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor != InfusedPiece.pieceColor).ToList();
-
-        for (int i = 0; i < repeat; i++)
-        {
-            ChessPiece objPiece = targets[SynchronizedRandom.Range(0, targets.Count)];
-            Debug.Log("Kraken: Soul Effect");
-            GameBoard.instance.chessBoard.DamageByCardEffect(GetComponent<KrakenEffect>().effectPrefab, InfusedPiece, objPiece, damage);
-        }
-
-        GameManager.instance.soundManager.PlaySFX("Water");
+        GameBoard.instance.chessBoard.DamageByKrakenEffect(GetComponent<KrakenEffect>().effectPrefab, InfusedPiece, repeat, damage);
     }
 
     public override void AddEffect()

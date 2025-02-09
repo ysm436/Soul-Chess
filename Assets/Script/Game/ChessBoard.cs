@@ -571,6 +571,53 @@ public class ChessBoard : MonoBehaviour
         titanomachiaSequence.Append(FadeOutTween());
     }
 
+    public void DamageByKrakenEffect(GameObject projectileEffect, ChessPiece srcPiece, int repeat, int damage)
+    {
+        Sequence krakenSequence = DOTween.Sequence();
+
+        krakenSequence.Append(FadeInTween());
+
+        Tween krakenKillEffect()
+        {
+            return DOVirtual.DelayedCall(0f, () => {
+                List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects.Where(piece =>
+                piece.pieceColor != srcPiece.pieceColor).ToList();
+
+                if (pieceList.Count != 0)
+                {
+                    Debug.Log(pieceList.Count());
+                    ChessPiece dstPiece = pieceList[SynchronizedRandom.Range(0, pieceList.Count())];
+                    GameManager.instance.soundManager.PlaySFX("Water");
+                    GameObject projectileObj = Instantiate(projectileEffect);
+                    projectileObj.transform.position = srcPiece.transform.position;
+                    projectileObj.transform.DOMove(dstPiece.transform.position, 0.4f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                        dstPiece.MinusHP(damage);
+                        if (dstPiece.isAlive)
+                        {
+                            GameManager.instance.soundManager.PlaySFX("Attack");
+                            GameBoard.instance.chessBoard.AttackedAnimation(dstPiece);
+                        }
+                        else
+                        {
+                            GameManager.instance.soundManager.PlaySFX("Destroy");
+                            dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+                            dstPiece.MakeAttackedEffect();
+                        }
+                        Destroy(projectileObj);
+                    });
+                }
+            });
+        };
+
+        for (int i = 0; i < repeat; i++)
+        {
+            krakenSequence.Append(krakenKillEffect());
+            krakenSequence.AppendInterval(0.5f);
+        }
+        
+        krakenSequence.Append(FadeOutTween());
+    }
+
     public List<ChessPiece> GetAllPieces(GameBoard.PlayerColor color)
     {
         List<ChessPiece> chessPieces = new List<ChessPiece>();
