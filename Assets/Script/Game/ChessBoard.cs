@@ -534,6 +534,43 @@ public class ChessBoard : MonoBehaviour
         return thorTween;
     }
 
+    public void KillByTitanomachiaEffect(GameObject projectileEffect, ChessPiece srcPiece, int repeat)
+    {
+        Sequence titanomachiaSequence = DOTween.Sequence();
+
+        titanomachiaSequence.Append(FadeInTween());
+
+        Tween titanoKillEffect()
+        {
+            return DOVirtual.DelayedCall(0f, () => {
+                List<ChessPiece> pieceList = GameBoard.instance.gameData.pieceObjects.Where(piece =>
+                piece.pieceType != ChessPiece.PieceType.King).ToList();
+
+                if (pieceList.Count != 0)
+                {
+                    ChessPiece dstPiece = pieceList[SynchronizedRandom.Range(0, pieceList.Count())];
+                    GameObject projectile = Instantiate(projectileEffect);
+                    projectile.transform.position = srcPiece.transform.position;
+                    projectile.transform.DOMove(dstPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                        GameManager.instance.soundManager.PlaySFX("Destroy");
+                        dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+                        dstPiece.MakeAttackedEffect();
+                        dstPiece.Kill();
+                        Destroy(projectile);
+                    });
+                }
+            });
+        };
+
+        for (int i = 0; i < repeat; i++)
+        {
+            titanomachiaSequence.Append(titanoKillEffect());
+            titanomachiaSequence.AppendInterval(0.2f);
+        }
+        
+        titanomachiaSequence.Append(FadeOutTween());
+    }
+
     public List<ChessPiece> GetAllPieces(GameBoard.PlayerColor color)
     {
         List<ChessPiece> chessPieces = new List<ChessPiece>();
