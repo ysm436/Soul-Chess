@@ -187,7 +187,7 @@ public class TutorialManager : MonoBehaviour
         float minX = 0f, minY = 0f, maxX = 0f, maxY = 0f;
         if (x != -1 && y != -1)
         {
-            float startX = 0.38f, startY = 0.107f;
+            float startX = 0.355f, startY = 0.107f;
             float distX = 0.056f, distY = 0.1f;
 
             startX += distX * x;
@@ -207,15 +207,15 @@ public class TutorialManager : MonoBehaviour
         {
             minX = 0.895f;
             minY = 0.45f;
-            maxX = 0.96f;
+            maxX = 0.99f;
             maxY = 0.55f;
         }
         else if (isCost)
         {
-            minX = 0.867f;
-            minY = 0.08f;
-            maxX = 0.99f;
-            maxY = 0.17f;
+            minX = 0.82f;
+            minY = 0.37f;
+            maxX = 0.9f;
+            maxY = 0.44f;
         }
         else if (isCard)
         {
@@ -369,8 +369,8 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);*/
 
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.21f, 0.63f);
-        anchors[1] = new Vector2(0.267f, 0.73f);
+        anchors[0] = new Vector2(0.215f, 0.66f);
+        anchors[1] = new Vector2(0.262f, 0.75f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         ShowCard(viking);
@@ -388,8 +388,8 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep6()
     {
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.08f, 0.63f);
-        anchors[1] = new Vector2(0.14f, 0.73f);
+        anchors[0] = new Vector2(0.085f, 0.66f);
+        anchors[1] = new Vector2(0.14f, 0.75f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
@@ -404,8 +404,8 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep7()
     {
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.08f, 0.24f);
-        anchors[1] = new Vector2(0.14f, 0.34f);
+        anchors[0] = new Vector2(0.080f, 0.22f);
+        anchors[1] = new Vector2(0.13f, 0.32f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
@@ -421,8 +421,8 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep8()
     {
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.21f, 0.24f);
-        anchors[1] = new Vector2(0.267f, 0.34f);
+        anchors[0] = new Vector2(0.215f, 0.22f);
+        anchors[1] = new Vector2(0.267f, 0.32f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
@@ -781,8 +781,8 @@ public class TutorialManager : MonoBehaviour
 
         //GameObject.Find("CancelButton").SetActive(false);
        
-        GameBoard.instance.gameData.GetPiece(coordinate).maxHP = 30;
-        GameBoard.instance.gameData.GetPiece(coordinate).AD = 0;
+        GameBoard.instance.gameData.GetPiece(coordinate).maxHP = 2;
+        GameBoard.instance.gameData.GetPiece(coordinate).AD = 2;
         descriptionText.text =
             "이제 턴을 종료하세요.";
         SetTextSize(1);
@@ -1049,14 +1049,22 @@ public class TutorialManager : MonoBehaviour
             {
                 if (targetPiece != null)
                 {
-                    if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
+                    if (chosenPiece == targetPiece)
                     {
+                        targetPiece.SelectedEffectOff();
+                        chosenPiece = null;
+                        ClearMovableCoordniates();
+                    }
+                    else if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
+                    {
+                        chosenPiece.SelectedEffectOff();
                         SetChosenPiece(targetPiece);
                     }
                     else// 고른 기물이 적일 때
                     {
                         if (IsMovableCoordniate(coordinate))
                         {
+                            chosenPiece.SelectedEffectOff();
                             //photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
                             MovePiece(chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
 
@@ -1067,8 +1075,12 @@ public class TutorialManager : MonoBehaviour
                 }
                 else // 고른 칸이 빈칸일때
                 {
+
+                    Debug.Log("Move to " + coordinate);
+                    chosenPiece.SelectedEffectOff();
                     if (IsMovableCoordniate(coordinate))
                     {
+
                         //photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
                         MovePiece(chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
                     }
@@ -1300,6 +1312,7 @@ public class TutorialManager : MonoBehaviour
 
     void SetChosenPiece(ChessPiece targetPiece)
     {
+        targetPiece.SelectedEffectOn();
         ClearMovableCoordniates();
 
         movableCoordinates.AddRange(targetPiece.GetMovableCoordinates());
@@ -1358,26 +1371,30 @@ public class TutorialManager : MonoBehaviour
 
         srcPiece.moveCountInThisTurn++;
         isMoved = true;
-        GameBoard gameBoard = GameBoard.instance;
+
+
         if (isAttack)
         {
             ChessPiece dstPiece = GameBoard.instance.gameData.GetPiece(dst_coordinate);
             if (srcPiece.Attack(dstPiece))
             {
+                Debug.Log("kill" + dstPiece.name);
                 srcPiece.Move(dst_coordinate);
-                gameBoard.chessBoard.KillAnimation(srcPiece, dstPiece);
+                GameBoard.instance.chessBoard.KillAnimation(srcPiece, dstPiece);
             }
             else
             {
+                Debug.Log("Can't kill" + dstPiece.name);
                 srcPiece.GetComponent<Animator>().SetTrigger("moveTrigger");
                 srcPiece.GetComponent<Animator>().SetBool("isReturning", true);
-                gameBoard.chessBoard.ForthBackPieceAnimation(srcPiece, dstPiece);
+                GameBoard.instance.chessBoard.ForthBackPieceAnimation(srcPiece, dstPiece);
             }
         }
         else
         {
             srcPiece.Move(dst_coordinate);
-            gameBoard.chessBoard.MovePieceAnimation(srcPiece);
+            GameManager.instance.soundManager.PlaySFX("Move", pitch: 2.0f);
+            GameBoard.instance.chessBoard.MovePieceAnimation(srcPiece);
         }
     }
 

@@ -25,7 +25,6 @@ public class TutorialGameOverUI : MonoBehaviour
     public void OnSurrender()
     {
         ShowDefeated();
-        ShowWin(true);
     }
     public void ShowWin(bool isSurrender)
     {
