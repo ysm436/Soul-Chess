@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Name
-      value: Spell_PandoraBox
+      value: Spell_Titanomachia
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8480252315183081039, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
@@ -63,17 +63,17 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2447221406629581263}
+      addedObject: {fileID: 4392609494411822540}
     - targetCorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3380891434776651617}
+      addedObject: {fileID: -8600045467750861128}
   m_SourcePrefab: {fileID: 100100000, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
 --- !u!1 &4247453139482488879 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8686025853277164448, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
   m_PrefabInstance: {fileID: 4790434029302801295}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2447221406629581263
+--- !u!114 &4392609494411822540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,59 +82,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 4247453139482488879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e76a0f36432ff3240a703a69381f99f9, type: 3}
+  m_Script: {fileID: 11500000, guid: c7090aedf8865e24a8ec799dc5755fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 3
-    soulEssence: 3
+    playerColor: 0
+    soulOrbs: 0
+    soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
-    deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    hand:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    deck: []
+    hand: []
     deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
-  cardName: "\uD310\uB3C4\uB77C\uC758 \uC0C1\uC790"
-  _cost: 3
-  illustration: {fileID: 21300000, guid: db766a880b3aef94ab5f570012516653, type: 3}
+  cardName: "\uD2F0\uD0C0\uB178\uB9C8\uD0A4\uC544"
+  _cost: 5
+  illustration: {fileID: 0}
   back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
   reigon: 0
   rarity: 1
-  description: "\uB0B4 \uBAA8\uB4E0 \uC601\uD63C\uC774 \uBD80\uC5EC\uB41C \uAE30\uBB3C\uC5D0\uAC8C
-    \uBB34\uC791\uC704\uB85C \uCCB4\uB825 \uD639\uC740 \uACF5\uACA9\uB825\uC744 1
-    \uBD80\uC5EC\uD569\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: -3380891434776651617}
+  description: "\uBB34\uC791\uC704 \uAE30\uBB3C\uC774 \uD30C\uAD34\uB429\uB2C8\uB2E4.
+    4\uBC88 \uBC18\uBCF5\uD569\uB2C8\uB2E4."
+  EffectOnCardUsed: {fileID: -8600045467750861128}
   isInSelection: 0
---- !u!114 &-3380891434776651617
+--- !u!114 &-8600045467750861128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,8 +118,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4247453139482488879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab01159711b1e6149884f184402c0206, type: 3}
+  m_Script: {fileID: 11500000, guid: 30cfc9288c56b7147b2eb2b0f96769e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 6543395396501225134, guid: 179658d71ad22a546bf183d6116eb4a6, type: 3}
-  changeADorHP: 1
+  effectPrefab: {fileID: 7587469071850677874, guid: 7d8e6d42380050c4688c3fc19d76e083, type: 3}
+  repeat: 4
