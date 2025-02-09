@@ -52,10 +52,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soul_PlunderShip
       objectReference: {fileID: 0}
+    - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.34375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.4570312
+      objectReference: {fileID: 0}
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a53e7809d0518e34084347c8a80565aa, type: 3}
+      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -86,9 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 0
-    soulEssence: 0
+    playerColor: 0
+    soulOrbs: 1
+    soulEssence: 1
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
@@ -124,8 +132,8 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uC57D\uD0C8\uC120"
   _cost: 2
-  illustration: {fileID: 21300000, guid: ef69d18e3edd9f847a94764b370b50a8, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 4c73f915a0706914cb8e15c0cb4731fa, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 0
   description: "[\uAC15\uB9BC] \uC57D\uD0C8\uAFBC \uCE74\uB4DC 3\uC7A5\uC744 \uB0B4

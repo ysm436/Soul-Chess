@@ -59,7 +59,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a53e7809d0518e34084347c8a80565aa, type: 3}
+      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -104,12 +104,13 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uC57D\uD0C8\uAFBC"
   _cost: 1
-  illustration: {fileID: 21300000, guid: 7de7e366b9e841048b5d37d1739b80d7, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 00ba334b479b8344285595a43c972c38, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 0
   description: 
   EffectOnCardUsed: {fileID: 4289914002319621180}
+  cardKeywords: 
   isInSelection: 0
   pieceRestriction: 1
   _AD: 1
@@ -134,3 +135,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee26e1c826e7e447b6f48fb5d746810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}

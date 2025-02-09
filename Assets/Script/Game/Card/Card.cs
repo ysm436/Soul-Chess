@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Photon.Pun.Demo.Cockpit;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -161,6 +162,11 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
     public void FlipFront()
     {
+        if (cardObject.ADCircle != null)
+        {
+            cardObject.ADCircle.SetActive(true);
+            cardObject.HPCircle.SetActive(true);
+        }
         cardObject.backSpriteRenderer.transform.localScale = new Vector3(0.8f, 0.8f, 1);
         cardObject.backSpriteRenderer.sortingOrder = -1;
         isFlipped = false;
@@ -168,6 +174,11 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     public void FlipBack()
     {
+        if (cardObject.ADCircle != null)
+        {
+            cardObject.ADCircle.SetActive(false);
+            cardObject.HPCircle.SetActive(false);
+        }
         cardObject.backSpriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         cardObject.backSpriteRenderer.sortingOrder = 1; //뒷면이 어떤 경우에도 완전히 카드 덮도록 정렬 순서 조정
         isFlipped = true;

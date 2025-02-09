@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 7b64479636d841b498df40d593c779f3, type: 3}
+    - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.953125
+      objectReference: {fileID: 0}
+    - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.8320312
+      objectReference: {fileID: 0}
     - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -101,12 +109,13 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uBA54\uB450\uC0AC\uC758 \uC2DC\uC120"
   _cost: 3
-  illustration: {fileID: 21300000, guid: 795d7cce0aa72114fb71cb01a603e0ab, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: dd51b277e84abb74a878ac8eb338735c, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 1
   description: "\uBAA8\uB4E0 \uC801 \uAE30\uBB3C\uC744 \uAE30\uC808\uC2DC\uD0B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 7928556142230166927}
+  cardKeywords: 
   isInSelection: 0
 --- !u!114 &7928556142230166927
 MonoBehaviour:

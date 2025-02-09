@@ -11,7 +11,15 @@ PrefabInstance:
     - target: {fileID: 275331416115565495, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7b64479636d841b498df40d593c779f3, type: 3}
+      objectReference: {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
+    - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.34375
+      objectReference: {fileID: 0}
+    - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.4570312
+      objectReference: {fileID: 0}
     - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -88,26 +96,51 @@ MonoBehaviour:
   coordinate: {x: 0, y: 0}
   owner:
     playerColor: 0
-    soulOrbs: 0
-    soulEssence: 0
+    soulOrbs: 1
+    soulEssence: 1
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
-    deck: []
-    hand: []
-    deckPosition: {x: 0, y: 0}
+    deck:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uD2F0\uD0C0\uB178\uB9C8\uD0A4\uC544"
   _cost: 5
-  illustration: {fileID: 0}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 61014502cb545bf46b14a7043df71466, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 1
   description: "\uBB34\uC791\uC704 \uAE30\uBB3C\uC774 \uD30C\uAD34\uB429\uB2C8\uB2E4.
     4\uBC88 \uBC18\uBCF5\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8600045467750861128}
+  cardKeywords: 
   isInSelection: 0
 --- !u!114 &-8600045467750861128
 MonoBehaviour:

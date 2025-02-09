@@ -118,8 +118,8 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uCE74\uC778"
   _cost: 4
-  illustration: {fileID: 21300000, guid: 24af63590f673774c80b734cc570143c, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 603667a4010a270468163eba7d9cb9fe, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 2
   rarity: 2
   description: "[\uAC15\uB9BC] \uC544\uAD70 \uAE30\uBB3C\uC758 \uC601\uD63C\uC744
