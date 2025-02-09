@@ -52,10 +52,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soul_HeavyArmoredInfantry
       objectReference: {fileID: 0}
+    - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.34375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012978402852111762, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.4570312
+      objectReference: {fileID: 0}
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a53e7809d0518e34084347c8a80565aa, type: 3}
+      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -97,35 +105,19 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     hand:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    deckPosition: {x: 7.6, y: -2.3}
+    deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uC911\uAE30\uAC11 \uBCF4\uBCD1"
   _cost: 1
-  illustration: {fileID: 21300000, guid: 9e060768d628e4d4cb6d037ecf3bbe87, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: a9a1963d012ee884caa667498251b0a2, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 0
   description: "[\uAC15\uB9BC] \uC591 \uC606 \uB0B4 \uAE30\uBB3C\uC5D0\uAC8C \uCCB4\uB825\uC744

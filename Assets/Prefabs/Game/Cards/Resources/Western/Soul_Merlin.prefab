@@ -96,13 +96,13 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uBA40\uB9B0"
   _cost: 4
-  illustration: {fileID: 21300000, guid: cd4413fca9c140e4ea3094cff10842ab, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 4ab6cb2c389c0774285be2093e2f197b, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 2
   rarity: 2
-  description: "\uC774 \uC601\uD63C\uC774 \uBD80\uC5EC\uB41C \uAE30\uBB3C\uC774 \uC0B4\uC544\uC788\uB294
-    \uB3D9\uC548 \uB0B4 \uB9C8\uBC95\uC758 \uBE44\uC6A9\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  description: "\uB0B4 \uB9C8\uBC95\uC758 \uBE44\uC6A9\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8211901857969220769}
+  cardKeywords: 
   isInSelection: 0
   pieceRestriction: -1
   _AD: 3
@@ -134,3 +134,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77aa773b7bb11e541b781d4ee79b63e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}

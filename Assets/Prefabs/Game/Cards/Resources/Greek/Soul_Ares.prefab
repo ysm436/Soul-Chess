@@ -96,13 +96,14 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uC544\uB808\uC2A4"
   _cost: 3
-  illustration: {fileID: 21300000, guid: 64d5d64e5620c6649b4b1d82fad4d6a9, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: cb9edb7b9bcb8c44683e24755c77e33d, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 2
   description: "\uAE30\uBB3C\uC774 \uCC98\uCE58\uB420 \uB54C \uB9C8\uB2E4, +1/+1\uB97C
     \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 3879541453782405440}
+  cardKeywords: 
   isInSelection: 0
   pieceRestriction: -1
   _AD: 2
@@ -129,3 +130,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be65c59c76e28234b8f226df7b946383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 0}

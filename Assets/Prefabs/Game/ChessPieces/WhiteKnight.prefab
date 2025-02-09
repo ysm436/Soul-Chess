@@ -106,11 +106,11 @@ MonoBehaviour:
   isRevivable: 0
   pieceType: 2
   pieceColor: 0
-  attackDamage: 10
+  attackDamage: 1
   moveDuration: 0.2
   AffectByHades: 0
   AffectByAbel: 0
-  _maxHP: 10
+  _maxHP: 1
   moveCountInThisTurn: 0
   accessoryPrefab: {fileID: 1089044075087322650, guid: 07ba29d40d13cee4aa1ca3b1f53c962e, type: 3}
   effectIcon: {fileID: 0}
@@ -149,3 +149,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  pieceMat: {fileID: 0}

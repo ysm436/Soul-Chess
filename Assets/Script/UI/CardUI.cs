@@ -8,7 +8,6 @@ public class CardUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI cardName;
     [SerializeField] private TextMeshProUGUI cost;
-    [SerializeField] private TextMeshProUGUI type;
     [SerializeField] private TextMeshProUGUI ADText;
     [SerializeField] private TextMeshProUGUI HPText;
     [SerializeField] private TextMeshProUGUI description;
@@ -18,22 +17,26 @@ public class CardUI : MonoBehaviour
     [SerializeField] private GameObject[] cardFrames;
     [SerializeField] private GameObject[] cardKeywords;
     [SerializeField] private TextMeshProUGUI[] cardKeywordDescriptions;
+    [SerializeField] private GameObject spell;
+    [SerializeField] private GameObject soul;
 
     public void SetCardUI(Card card)
     {
         if (card is SoulCard)
         {
-            type.text = "영혼";
             AD.SetActive(true);
             HP.SetActive(true);
             ADText.text = card.GetComponent<SoulCard>().AD.ToString();
             HPText.text = card.GetComponent<SoulCard>().HP.ToString();
+            spell.SetActive(false);
+            soul.SetActive(true);
         }
         else
         {
-            type.text = "마법";
             AD.SetActive(false);
             HP.SetActive(false);
+            spell.SetActive(true);
+            soul.SetActive(false);
         }
 
         foreach (var cardFrame in cardFrames)
@@ -43,7 +46,6 @@ public class CardUI : MonoBehaviour
 
         cardFrames[(int)card.rarity].SetActive(true);
 
-        type.gameObject.SetActive(true);
         cardName.text = card.cardName;
         cost.text = card.cost.ToString();
         description.text = card.description;
@@ -59,7 +61,8 @@ public class CardUI : MonoBehaviour
 
     public void SetCardUI(ChessPiece piece)
     {
-        type.gameObject.SetActive(false);
+        spell.SetActive(false);
+        soul.SetActive(false);
         AD.SetActive(true);
         HP.SetActive(true);
         ADText.text = piece.AD.ToString();
@@ -93,10 +96,10 @@ public class CardUI : MonoBehaviour
 
     public Dictionary<Keyword.Type, string> keywordDescription = new Dictionary<Keyword.Type, string>()
     {
-        { Keyword.Type.Infusion,"강림\n영혼을 부여할 때 발동됩니다."},
-        { Keyword.Type.Shield,"보호막\n이 기물은 피해를 한번 무시합니다."},
-        { Keyword.Type.Stun,"기절\n기절한 기물은 다음 턴이 올 때 까지 움직이지 못합니다."},
-        { Keyword.Type.Silence,"침묵\n기물의 특수 능력을 제거합니다."},
-        { Keyword.Type.Testament,"유언\n기물이 파괴될 때 발동됩니다."},
+        { Keyword.Type.Infusion,"강림\n영혼을 부여할 때\n발동됩니다."},
+        { Keyword.Type.Shield,"보호막\n이 기물은 피해를\n한번 무시합니다."},
+        { Keyword.Type.Stun,"기절\n기절한 기물은\n다음 턴이 올 때까지\n움직이지 못합니다."},
+        { Keyword.Type.Silence,"침묵\n기물의 특수 능력을\n제거합니다."},
+        { Keyword.Type.Testament,"유언\n기물이 파괴될 때\n발동됩니다."},
     };
 }

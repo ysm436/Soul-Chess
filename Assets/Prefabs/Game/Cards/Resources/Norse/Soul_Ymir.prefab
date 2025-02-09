@@ -99,8 +99,8 @@ MonoBehaviour:
   handIndex: -1
   cardName: "\uC774\uBBF8\uB974"
   _cost: 3
-  illustration: {fileID: 21300000, guid: 373b08c71aed75940b86e519a35b2062, type: 3}
-  back: {fileID: 21300000, guid: c51ecb5accd89e146870565d08ab7610, type: 3}
+  illustration: {fileID: 21300000, guid: 2e174daf43d144542b66a7e7b404e6fb, type: 3}
+  back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 2
   description: "[\uC720\uC5B8] \uB0B4 \uC190\uC774 \uAC00\uB4DD \uCC30 \uB54C\uAE4C\uC9C0
