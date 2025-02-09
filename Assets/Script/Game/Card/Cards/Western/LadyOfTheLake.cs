@@ -46,6 +46,7 @@ public class LadyOfTheLake : SoulCard
 
     public override void AddEffect()
     {
+        Debug.Log(player);
         player.OnMyTurnEnd += SoulEffect;
         InfusedPiece.OnSoulRemoved += RemoveEffect;
     }

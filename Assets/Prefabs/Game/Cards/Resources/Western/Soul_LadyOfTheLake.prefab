@@ -103,7 +103,7 @@ MonoBehaviour:
   description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C \uBB34\uC791\uC704 \uC544\uAD70
     \uAE30\uBB3C\uC5D0\uAC8C +1/+1\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4\n\uD038 \uAE30\uBB3C\uC5D0
     \uBD80\uC5EC \uC2DC, \uB300\uC2E0 +2/+2\uB97C \uBD80\uC5EC\uD569\uB2C8\uB2E4."
-  EffectOnCardUsed: {fileID: 0}
+  EffectOnCardUsed: {fileID: -7123187572071259608}
   cardKeywords: 
   isInSelection: 0
   pieceRestriction: -1

@@ -37,7 +37,7 @@ public class ZeusEffect : Effect
 
         if (zeusComponent.InfusedPiece.pieceType == additionalBuffPieceType)
         {
-            zeusComponent.InfusedPiece.maxHP += additionalAD;
+            zeusComponent.InfusedPiece.AD += additionalAD;
             zeusComponent.InfusedPiece.maxHP += additionalHP;
             zeusComponent.InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.AD, additionalAD, true);
             zeusComponent.InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.HP, additionalHP, true);

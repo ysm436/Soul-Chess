@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -179,6 +180,31 @@ public class ChessBoard : MonoBehaviour
         blocker.SetActive(false);
     }
 
+    public Tween FadeInTween()
+    {
+        blocker.SetActive(true);
+        if (colorAdjustments == null)
+            volume.profile.TryGet(out colorAdjustments);
+        Debug.Log("fadeIn");
+        return DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
+            {
+                colorAdjustments.postExposure.Override(value);
+            }).SetEase(Ease.InOutSine);
+    }
+
+    public Tween FadeOutTween()
+    {
+        if (colorAdjustments == null)
+            volume.profile.TryGet(out colorAdjustments);
+
+        Debug.Log("fadeOut");
+        return DOVirtual.Float(-1, 0f, 0.3f, (value) =>
+            {
+                colorAdjustments.postExposure.Override(value);
+            }).SetEase(Ease.InOutSine).OnComplete(() => {
+                blocker.SetActive(false);
+            });
+    }
 
     public void KillByCardEffect(GameObject projectilePrefab, ChessPiece srcPiece, ChessPiece dstPiece)
     {
@@ -194,6 +220,7 @@ public class ChessBoard : MonoBehaviour
         }).SetEase(Ease.InOutSine).OnComplete(() => {
             GameObject projectile = Instantiate(projectilePrefab);
             projectile.transform.position = srcPiece.transform.position;
+            projectile.SetActive(true);
             projectile.transform.DOMove(dstPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
                 GameManager.instance.soundManager.PlaySFX("Destroy");
                 dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
@@ -267,6 +294,244 @@ public class ChessBoard : MonoBehaviour
                 Destroy(tileEffectObj);
             });
         });
+    }
+
+    public void DamageByThunderEffect(GameObject thunderEffect, List<ChessPiece> targetList, int damage)
+    {
+        blocker.SetActive(true);
+        if (colorAdjustments == null)
+            volume.profile.TryGet(out colorAdjustments);
+
+        Sequence thunderSequence = DOTween.Sequence();
+
+        Tween tr1 = DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
+        {
+            colorAdjustments.postExposure.Override(value);
+        }).SetEase(Ease.InOutSine);
+        thunderSequence.Append(tr1);
+
+        Tween tr2(ChessPiece target)
+        {
+            GameManager.instance.soundManager.PlaySFX("Electricity");
+            GameObject thunderObj = Instantiate(thunderEffect);
+            thunderObj.transform.position = target.transform.position;
+
+            return DOVirtual.DelayedCall(0.3f, () => {
+                target.MinusHP(damage);
+                if (target.isAlive)
+                {
+                    GameManager.instance.soundManager.PlaySFX("Attack");
+                    GameBoard.instance.chessBoard.AttackedAnimation(target);
+                }
+                else
+                {
+                    GameManager.instance.soundManager.PlaySFX("Destroy");
+                    target.GetComponent<Animator>().SetTrigger("killedTrigger");
+                    target.MakeAttackedEffect();
+                }
+                DOVirtual.DelayedCall(0.2f, ()=> {
+                    Destroy(thunderObj);
+                });
+            });
+        }
+        targetList.Reverse();
+        foreach (var target in targetList)
+        {
+            thunderSequence.Append(tr2(target));
+            thunderSequence.Append(DOVirtual.DelayedCall(0.2f, () => {}));
+        }
+        
+        Tween tr3 = DOVirtual.Float(colorAdjustments.postExposure.value, 0f, 0.3f, (value) =>
+        {
+            colorAdjustments.postExposure.Override(value);
+        }).SetEase(Ease.InOutSine).OnComplete(() => {
+            blocker.SetActive(false);
+        });
+        thunderSequence.Append(tr3);
+    }
+
+    public void DamageByPoseidonEffect(GameObject poseidonEffect, ChessPiece srcPiece, List<ChessPiece> targetList, int damage)
+    {
+        blocker.SetActive(true);
+        if (colorAdjustments == null)
+            volume.profile.TryGet(out colorAdjustments);
+
+        GameObject effectParent = Instantiate(poseidonEffect.transform.GetChild(0).gameObject);
+        GameObject poseidonEffect1 = effectParent.transform.GetChild(0).gameObject;
+        GameObject poseidonEffect2 = effectParent.transform.GetChild(1).gameObject;
+        GameObject poseidonEffect3 = effectParent.transform.GetChild(2).gameObject;
+        GameObject projectile = poseidonEffect.transform.GetChild(1).gameObject;
+
+        Material effectMaterial = poseidonEffect1.GetComponent<Renderer>().sharedMaterial;
+
+        Sequence poseidonSequence = DOTween.Sequence();
+
+        Tween poseidonFadeIn = DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
+        {
+            colorAdjustments.postExposure.Override(value);
+            effectMaterial.SetFloat("_Alpha", 1 - Mathf.InverseLerp(-1f, 0f, value));
+        }).SetEase(Ease.InOutSine);
+        poseidonSequence.Append(poseidonFadeIn);
+
+        Tween peMove1 = poseidonEffect1.transform.DOLocalMoveX(-15, 5); // velocity = 3
+        Tween peMove2 = poseidonEffect2.transform.DOLocalMoveX(15, 5);
+        Tween peMove3 = poseidonEffect3.transform.DOLocalMoveX(-15, 5);
+        poseidonSequence.Join(peMove1);
+        poseidonSequence.Join(peMove2);
+        poseidonSequence.Join(peMove3);
+
+        Tween Sound = DOVirtual.DelayedCall(1.7f, () => {
+            GameManager.instance.soundManager.PlaySFX("Water");
+        });
+        poseidonSequence.Join(Sound);
+
+        Tween projectileMove(ChessPiece target)
+        {
+            return DOVirtual.DelayedCall(1.7f, () => {
+                GameObject projectileObj = Instantiate(projectile);
+                projectileObj.SetActive(true);
+                projectileObj.transform.position = srcPiece.transform.position;
+                projectileObj.transform.DOMove(target.transform.position, 0.5f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                    target.MinusHP(damage);
+                    if (target.isAlive)
+                    {
+                        GameManager.instance.soundManager.PlaySFX("Attack");
+                        GameBoard.instance.chessBoard.AttackedAnimation(target);
+                    }
+                    else
+                    {
+                        GameManager.instance.soundManager.PlaySFX("Destroy");
+                        target.GetComponent<Animator>().SetTrigger("killedTrigger");
+                        target.MakeAttackedEffect();
+                    }
+                    Destroy(projectileObj);
+                });
+            });
+        }
+        
+        foreach (var target in targetList)
+        {
+            poseidonSequence.Join(projectileMove(target));
+        }
+
+        Tween poseidonFadeOut = DOVirtual.DelayedCall(2.6f, () => {
+            DOVirtual.Float(colorAdjustments.postExposure.value, 0f, 0.3f, (value) =>
+            {
+                colorAdjustments.postExposure.Override(value);
+                effectMaterial.SetFloat("_Alpha", 1 - Mathf.InverseLerp(-1f, 0f, value));
+            }).SetEase(Ease.InOutSine).OnComplete(() => {
+                Destroy(effectParent);
+                blocker.SetActive(false);
+                poseidonSequence.Kill();
+            });
+        });
+        poseidonSequence.Join(poseidonFadeOut);
+    }
+
+    public Tween DamageByHephaestusEffect(GameObject hephaestusEffect, ChessPiece srcPiece, int damage)
+    {
+        Tween hepheastusTween = null;
+
+        hepheastusTween = DOVirtual.DelayedCall(0f, () => {
+            List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece =>
+                piece.soul != null).ToList();
+
+            if (enemyPieceList.Count == 0)
+            {
+                hepheastusTween.Kill();
+                Debug.Log("Hephaestus: No Target");
+                return;
+            }
+            Debug.Log(enemyPieceList.Count());
+
+            GameObject effectParent = Instantiate(hephaestusEffect.transform.GetChild(0).gameObject);
+            GameObject fireEffect = effectParent.transform.GetChild(0).gameObject;
+            GameObject fireEffect2 = effectParent.transform.GetChild(1).gameObject;
+
+            GameObject projectile = hephaestusEffect.transform.GetChild(1).gameObject;
+            Material effectMaterial = fireEffect.GetComponent<Renderer>().sharedMaterial;
+
+            DOVirtual.Float(0f, 1f, 0.3f, (value) =>
+            {
+                effectMaterial.SetFloat("_Alpha", value);
+            }).SetEase(Ease.InOutSine).OnComplete(() => {
+                GameManager.instance.soundManager.PlaySFX("Fire");
+                foreach (var target in enemyPieceList)
+                {
+                    GameObject projectileObj = Instantiate(projectile);
+                    projectileObj.SetActive(true);
+                    projectileObj.transform.position = srcPiece.transform.position;
+                    projectileObj.transform.DOMove(target.transform.position, 0.5f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                        target.MinusHP(damage);
+                        if (target.isAlive)
+                        {
+                            GameManager.instance.soundManager.PlaySFX("Attack");
+                            GameBoard.instance.chessBoard.AttackedAnimation(target);
+                        }
+                        else
+                        {
+                            GameManager.instance.soundManager.PlaySFX("Destroy");
+                            target.GetComponent<Animator>().SetTrigger("killedTrigger");
+                            target.MakeAttackedEffect();
+                        }
+                        Destroy(projectileObj);
+                    });
+                }
+
+                DOVirtual.DelayedCall(1f, () => {
+                    Destroy(effectParent);
+                    DOVirtual.Float(1f, 0f, 0.3f, (value) =>
+                    {
+                        effectMaterial.SetFloat("_Alpha", value);
+                    });
+                });
+            });
+        });
+
+        return hepheastusTween;
+    }
+
+    public Tween DamageByThorEffect(GameObject projectileEffect, ChessPiece srcPiece, int damage)
+    {
+        Tween thorTween = null;
+
+        thorTween = DOVirtual.DelayedCall(0f, () => {
+            List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece =>
+            piece.pieceColor != srcPiece.pieceColor && piece.soul != null).ToList(); //영혼 부여된 기물만 제거
+
+            if (enemyPieceList.Count == 0)
+            {
+                thorTween.Kill();
+                Debug.Log("Thor: No Target");
+                return;
+            }
+            ChessPiece dstPiece = enemyPieceList[SynchronizedRandom.Range(0, enemyPieceList.Count)];
+            // 기절한 경우 2배의 피해
+            if (dstPiece.GetKeyword(Keyword.Type.Stun) == 1)
+            {
+                damage *= 2;
+            }
+
+            GameObject projectile = Instantiate(projectileEffect);
+            projectile.transform.position = srcPiece.transform.position;
+            projectile.transform.DOMove(dstPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                dstPiece.MinusHP(damage);
+                if (dstPiece.isAlive)
+                {
+                    GameManager.instance.soundManager.PlaySFX("Attack");
+                    GameBoard.instance.chessBoard.AttackedAnimation(dstPiece);
+                }
+                else
+                {
+                    GameManager.instance.soundManager.PlaySFX("Destroy");
+                    dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+                    dstPiece.MakeAttackedEffect();
+                }
+                Destroy(projectile);
+            });
+        });
+
+        return thorTween;
     }
 
     public List<ChessPiece> GetAllPieces(GameBoard.PlayerColor color)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ThunderEffect : TargetingEffect
 {
-    [SerializeField] private int thunderDamage = 35;
+    [SerializeField] private int thunderDamage = 3;
     private void Awake()
     {
         if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
@@ -20,15 +20,26 @@ public class ThunderEffect : TargetingEffect
     public override void EffectAction(PlayerController player)
     {
         ChessPiece targetPiece;
+        List<ChessPiece> targetList = new List<ChessPiece>();
+
         foreach (var sq in GameBoard.instance.gameData.boardSquares)
         {
             if (sq.coordinate.x == targets[0].coordinate.x)
             {
                 targetPiece = GameBoard.instance.gameData.GetPiece(sq.coordinate);
                 if (targetPiece != null)
-                    if (targetPiece.soul != null && targetPiece.pieceColor != player.playerColor)
-                        targetPiece.SpellAttacked(thunderDamage);
+                    if (targetPiece.soul != null && targetPiece.pieceColor != player.playerColor && targetPiece.pieceType != ChessPiece.PieceType.King)
+                        targetList.Add(targetPiece);
             }
+        }
+
+        if (targetList.Count != 0)
+        {
+            GameBoard.instance.chessBoard.DamageByThunderEffect(effectPrefab, targetList, thunderDamage);
+        }
+        else
+        {
+            Debug.Log("Thunder: No Target");
         }
     }
 }
