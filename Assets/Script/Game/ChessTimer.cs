@@ -34,7 +34,7 @@ public class ChessTimer : MonoBehaviour
         set {
             if (value == GameBoard.PlayerColor.White)
             {
-                timerBG.color = Color.white;
+                timerBG.sprite = timerBGList[0];
                 foreach (var timerText in gameObject.GetComponentsInChildren<TextMeshPro>())
                 {
                     timerText.color = Color.black;
@@ -42,7 +42,7 @@ public class ChessTimer : MonoBehaviour
             }
             else
             {
-                timerBG.color = Color.black;
+                timerBG.sprite = timerBGList[1];
                 foreach (var timerText in gameObject.GetComponentsInChildren<TextMeshPro>())
                 {
                     timerText.color = Color.white;
@@ -54,6 +54,7 @@ public class ChessTimer : MonoBehaviour
     private bool chargeTime = false;
 
     [SerializeField] private SpriteRenderer timerBG;
+    [SerializeField] private List<Sprite> timerBGList;
     [SerializeField] private TextMeshPro timerMText;
     [SerializeField] private TextMeshPro timerSText;
 

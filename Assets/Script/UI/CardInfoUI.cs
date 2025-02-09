@@ -35,7 +35,7 @@ public class CardInfoUI : MonoBehaviour
         foreach (var cardRank in cardRankes)
             cardRank.SetActive(false);
 
-        for (int i = 0; i < (int)card.rarity; i++)
+        for (int i = 0; i <= (int)card.rarity; i++)
         {
             cardRankes[i].SetActive(true);
         }

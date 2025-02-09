@@ -337,6 +337,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerBG: {fileID: 62196064}
+  timerBGList:
+  - {fileID: 21300000, guid: 9334878868557ea4c984f81e26d25d6f, type: 3}
+  - {fileID: 21300000, guid: ceb88cc8a2317594ea339d2cb901c6cb, type: 3}
   timerMText: {fileID: 1891566044}
   timerSText: {fileID: 408938274}
 --- !u!212 &62196064
@@ -3723,6 +3726,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120104360}
     m_Modifications:
+    - target: {fileID: 2784014604323739439, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
+      propertyPath: cardFrames.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784014604323739439, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
+      propertyPath: cardFrames.Array.data[3]
+      value: 
+      objectReference: {fileID: 635282432}
     - target: {fileID: 3281843003976542766, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3803,6 +3814,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8080928811068931970, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a83755c6ea696f844bb7e83d5bff5900, type: 3}
     - target: {fileID: 8810189213856670233, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_Name
       value: CardUI
@@ -3832,6 +3847,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d992486ae6a0b439c5d6f504c8fdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &635282432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1614614420932363285, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
+  m_PrefabInstance: {fileID: 635282429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &651308627
 GameObject:
   m_ObjectHideFlags: 0
@@ -5906,6 +5926,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerBG: {fileID: 1128663026}
+  timerBGList:
+  - {fileID: 21300000, guid: 9334878868557ea4c984f81e26d25d6f, type: 3}
+  - {fileID: 21300000, guid: ceb88cc8a2317594ea339d2cb901c6cb, type: 3}
   timerMText: {fileID: 208762084}
   timerSText: {fileID: 1775649423}
 --- !u!212 &1128663026

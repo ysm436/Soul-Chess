@@ -778,6 +778,8 @@ MonoBehaviour:
   descriptionText: {fileID: 0}
   backSpriteRenderer: {fileID: 0}
   canUseEffectRenderer: {fileID: 0}
+  ADCircle: {fileID: 0}
+  HPCircle: {fileID: 0}
 --- !u!222 &1400208298636460439
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -824,9 +826,9 @@ MonoBehaviour:
   cardHPTMP: {fileID: 4124053984352010462}
   cardADTMP: {fileID: 3875723324031285508}
   cardFrameList:
-  - {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
-  - {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
   - {fileID: 21300000, guid: a83755c6ea696f844bb7e83d5bff5900, type: 3}
+  - {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
+  - {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
   typeIconList:
   - {fileID: 21300000, guid: f0da6ea2a6394674db5c8da9d74d6708, type: 3}
   - {fileID: 21300000, guid: d3c4cc7b653e0fc4d89e44cc7c09e750, type: 3}

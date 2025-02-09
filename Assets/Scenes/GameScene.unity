@@ -478,6 +478,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerBG: {fileID: 171825500}
+  timerBGList:
+  - {fileID: 21300000, guid: 9334878868557ea4c984f81e26d25d6f, type: 3}
+  - {fileID: 21300000, guid: ceb88cc8a2317594ea339d2cb901c6cb, type: 3}
   timerMText: {fileID: 1705079653}
   timerSText: {fileID: 1940939036}
 --- !u!212 &171825500
@@ -1572,6 +1575,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerBG: {fileID: 655953246}
+  timerBGList:
+  - {fileID: 21300000, guid: 9334878868557ea4c984f81e26d25d6f, type: 3}
+  - {fileID: 21300000, guid: ceb88cc8a2317594ea339d2cb901c6cb, type: 3}
   timerMText: {fileID: 935848542}
   timerSText: {fileID: 1972645177}
 --- !u!212 &655953246
