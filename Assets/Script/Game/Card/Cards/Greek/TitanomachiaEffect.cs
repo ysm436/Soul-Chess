@@ -10,14 +10,21 @@ public class TitanomachiaEffect : Effect
 
     public override void EffectAction(PlayerController player)
     {
-        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects;
+        List<ChessPiece> targets = new List<ChessPiece>();
 
         ChessPiece kingPiece = null;
 
         foreach (var chessPiece in GameBoard.instance.gameData.pieceObjects)
         {
-            if (chessPiece.pieceType == ChessPiece.PieceType.King && chessPiece.pieceColor == player.playerColor)
-                kingPiece = chessPiece;
+            if (chessPiece.pieceType == ChessPiece.PieceType.King)
+            {
+                if (chessPiece.pieceColor == player.playerColor)
+                    kingPiece = chessPiece;
+            }
+            else
+            {
+                targets.Add(chessPiece);
+            }
         }
 
         if (kingPiece == null)
