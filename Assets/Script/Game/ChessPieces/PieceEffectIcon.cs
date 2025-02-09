@@ -11,6 +11,8 @@ public class PieceEffectIcon : MonoBehaviour
     [SerializeField]
     List<Sprite> sprites;
     SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject[] effectObjects;
+
 
     void Awake()
     {
@@ -23,8 +25,7 @@ public class PieceEffectIcon : MonoBehaviour
         {
             if (/* (i != Keyword.Type.Defense) &&  */piece.GetKeyword(i) > 0)
             {
-                spriteRenderer.sprite = sprites[(int)i];
-                return;
+                effectObjects[(int)i].GetComponent<SpriteRenderer>().sprite = sprites[(int)i];
             }
         }
         spriteRenderer.sprite = null;
