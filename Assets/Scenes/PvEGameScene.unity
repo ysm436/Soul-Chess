@@ -628,6 +628,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1144766461}
     m_Modifications:
+    - target: {fileID: 543928485649004982, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0ea96408cf9251949aea04612b6181c8, type: 3}
     - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -679,6 +683,10 @@ PrefabInstance:
     - target: {fileID: 957088572025518792, guid: 6c164027602fd41459ade190044e02be, type: 3}
       propertyPath: m_SizeDelta.x
       value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 957088572025518792, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4935592771606389188, guid: 6c164027602fd41459ade190044e02be, type: 3}
       propertyPath: m_fontSize
@@ -3607,6 +3615,10 @@ PrefabInstance:
       propertyPath: playerColor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 543928485649004982, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0ea96408cf9251949aea04612b6181c8, type: 3}
     - target: {fileID: 691786838047155631, guid: 6c164027602fd41459ade190044e02be, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -3658,6 +3670,10 @@ PrefabInstance:
     - target: {fileID: 957088572025518792, guid: 6c164027602fd41459ade190044e02be, type: 3}
       propertyPath: m_SizeDelta.x
       value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 957088572025518792, guid: 6c164027602fd41459ade190044e02be, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4935592771606389188, guid: 6c164027602fd41459ade190044e02be, type: 3}
       propertyPath: m_text
