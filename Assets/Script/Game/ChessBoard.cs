@@ -479,6 +479,7 @@ public class ChessBoard : MonoBehaviour
                 }
 
                 DOVirtual.DelayedCall(1f, () => {
+                    Destroy(effectParent);
                     DOVirtual.Float(1f, 0f, 0.3f, (value) =>
                     {
                         effectMaterial.SetFloat("_Alpha", value);
