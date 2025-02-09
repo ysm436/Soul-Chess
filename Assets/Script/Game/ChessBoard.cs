@@ -565,7 +565,7 @@ public class ChessBoard : MonoBehaviour
         for (int i = 0; i < repeat; i++)
         {
             titanomachiaSequence.Append(titanoKillEffect());
-            titanomachiaSequence.AppendInterval(0.2f);
+            titanomachiaSequence.AppendInterval(0.8f);
         }
         
         titanomachiaSequence.Append(FadeOutTween());

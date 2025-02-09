@@ -162,6 +162,8 @@ public class GameBoard : MonoBehaviour
 
     IEnumerator KillPieceAnimationC(ChessPiece targetPiece)
     {
+        gameData.pieceObjects.Remove(targetPiece);
+        
         yield return new WaitForSeconds(1.5f);
         if (targetPiece.pieceColor == PlayerColor.White)
         {
@@ -176,8 +178,6 @@ public class GameBoard : MonoBehaviour
 
         targetPiece.effectIcon.RemoveIcon();
         targetPiece.DestroyMoveRestrictionIcon();
-        gameData.pieceObjects.Remove(targetPiece);
-
         targetPiece.transform.position = chessBoard.GetPositionUsingCoordinate(targetPiece.coordinate);
     }
 
