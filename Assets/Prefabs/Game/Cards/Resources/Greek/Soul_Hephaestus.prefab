@@ -103,6 +103,7 @@ MonoBehaviour:
   description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uC601\uD63C\uC774 \uAE43\uB4E0
     \uBAA8\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C 1 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -4965968554084867166}
+  cardKeywords: 
   isInSelection: 0
   pieceRestriction: -1
   _AD: 5
@@ -127,4 +128,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115b9f8281def314aac45bdfb45c3563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 7587469071850677874, guid: 7d8e6d42380050c4688c3fc19d76e083, type: 3}
+  effectPrefab: {fileID: 4547812702389787962, guid: b192733d56672b34f83e186bd9710499, type: 3}

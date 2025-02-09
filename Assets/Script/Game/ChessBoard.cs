@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -179,6 +180,31 @@ public class ChessBoard : MonoBehaviour
         blocker.SetActive(false);
     }
 
+    public Tween FadeInTween()
+    {
+        blocker.SetActive(true);
+        if (colorAdjustments == null)
+            volume.profile.TryGet(out colorAdjustments);
+        Debug.Log("fadeIn");
+        return DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
+            {
+                colorAdjustments.postExposure.Override(value);
+            }).SetEase(Ease.InOutSine);
+    }
+
+    public Tween FadeOutTween()
+    {
+        if (colorAdjustments == null)
+            volume.profile.TryGet(out colorAdjustments);
+
+        Debug.Log("fadeOut");
+        return DOVirtual.Float(-1, 0f, 0.3f, (value) =>
+            {
+                colorAdjustments.postExposure.Override(value);
+            }).SetEase(Ease.InOutSine).OnComplete(() => {
+                blocker.SetActive(false);
+            });
+    }
 
     public void KillByCardEffect(GameObject projectilePrefab, ChessPiece srcPiece, ChessPiece dstPiece)
     {
@@ -194,6 +220,7 @@ public class ChessBoard : MonoBehaviour
         }).SetEase(Ease.InOutSine).OnComplete(() => {
             GameObject projectile = Instantiate(projectilePrefab);
             projectile.transform.position = srcPiece.transform.position;
+            projectile.SetActive(true);
             projectile.transform.DOMove(dstPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
                 GameManager.instance.soundManager.PlaySFX("Destroy");
                 dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
@@ -339,12 +366,12 @@ public class ChessBoard : MonoBehaviour
 
         Sequence poseidonSequence = DOTween.Sequence();
 
-        Tween fadeIn = DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
+        Tween poseidonFadeIn = DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
         {
             colorAdjustments.postExposure.Override(value);
             effectMaterial.SetFloat("_Alpha", 1 - Mathf.InverseLerp(-1f, 0f, value));
         }).SetEase(Ease.InOutSine);
-        poseidonSequence.Append(fadeIn);
+        poseidonSequence.Append(poseidonFadeIn);
 
         Tween peMove1 = poseidonEffect1.transform.DOLocalMoveX(-15, 5); // velocity = 3
         Tween peMove2 = poseidonEffect2.transform.DOLocalMoveX(15, 5);
@@ -387,64 +414,123 @@ public class ChessBoard : MonoBehaviour
             poseidonSequence.Join(projectileMove(target));
         }
 
-        Tween fadeOut = DOVirtual.DelayedCall(2.6f, () => {
+        Tween poseidonFadeOut = DOVirtual.DelayedCall(2.6f, () => {
             DOVirtual.Float(colorAdjustments.postExposure.value, 0f, 0.3f, (value) =>
             {
                 colorAdjustments.postExposure.Override(value);
                 effectMaterial.SetFloat("_Alpha", 1 - Mathf.InverseLerp(-1f, 0f, value));
             }).SetEase(Ease.InOutSine).OnComplete(() => {
+                Destroy(effectParent);
                 blocker.SetActive(false);
                 poseidonSequence.Kill();
             });
         });
-        poseidonSequence.Join(fadeOut);
+        poseidonSequence.Join(poseidonFadeOut);
     }
 
-    public void DamageByHephaestusEffect(GameObject hephaestusEffect, ChessPiece srcPiece, List<ChessPiece> targetList, int damage)
+    public Tween DamageByHephaestusEffect(GameObject hephaestusEffect, ChessPiece srcPiece, int damage)
     {
-        GameObject effectPrefab = Instantiate(hephaestusEffect);
-        
-        GameObject fireEffect = effectPrefab.transform.GetChild(0).gameObject;
-        GameObject projectile = effectPrefab.transform.GetChild(1).gameObject;
+        Tween hepheastusTween = null;
 
-        Sequence HephaestusSequence = DOTween.Sequence();
-        Material effectMaterial = fireEffect.GetComponent<Renderer>().material;
+        hepheastusTween = DOVirtual.DelayedCall(0f, () => {
+            List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece =>
+                piece.soul != null).ToList();
 
-        Tween fadeIn = DOVirtual.Float(colorAdjustments.postExposure.value, -1f, 0.3f, (value) =>
-        {
-            effectMaterial.SetFloat("_Alpha", 1 - Mathf.InverseLerp(-1f, 0f, value));
-        }).SetEase(Ease.InOutSine);
-        HephaestusSequence.Append(fadeIn);
+            if (enemyPieceList.Count == 0)
+            {
+                hepheastusTween.Kill();
+                Debug.Log("Hephaestus: No Target");
+                return;
+            }
+            Debug.Log(enemyPieceList.Count());
 
-        Tween projectileMove(ChessPiece target)
-        {
-            projectile.transform.position = target.transform.position;
-            projectile.SetActive(true);
+            GameObject effectParent = Instantiate(hephaestusEffect.transform.GetChild(0).gameObject);
+            GameObject fireEffect = effectParent.transform.GetChild(0).gameObject;
+            GameObject fireEffect2 = effectParent.transform.GetChild(1).gameObject;
 
-            return DOVirtual.DelayedCall(0.3f, () => {
-                projectile.transform.position = srcPiece.transform.position;
-                projectile.transform.DOMove(target.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
-                    target.MinusHP(damage);
-                    if (target.isAlive)
+            GameObject projectile = hephaestusEffect.transform.GetChild(1).gameObject;
+            Material effectMaterial = fireEffect.GetComponent<Renderer>().sharedMaterial;
+
+            DOVirtual.Float(0f, 1f, 0.3f, (value) =>
+            {
+                effectMaterial.SetFloat("_Alpha", value);
+            }).SetEase(Ease.InOutSine).OnComplete(() => {
+                GameManager.instance.soundManager.PlaySFX("Fire");
+                foreach (var target in enemyPieceList)
+                {
+                    GameObject projectileObj = Instantiate(projectile);
+                    projectileObj.SetActive(true);
+                    projectileObj.transform.position = srcPiece.transform.position;
+                    projectileObj.transform.DOMove(target.transform.position, 0.5f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                        target.MinusHP(damage);
+                        if (target.isAlive)
+                        {
+                            GameManager.instance.soundManager.PlaySFX("Attack");
+                            GameBoard.instance.chessBoard.AttackedAnimation(target);
+                        }
+                        else
+                        {
+                            GameManager.instance.soundManager.PlaySFX("Destroy");
+                            target.GetComponent<Animator>().SetTrigger("killedTrigger");
+                            target.MakeAttackedEffect();
+                        }
+                        Destroy(projectileObj);
+                    });
+                }
+
+                DOVirtual.DelayedCall(1f, () => {
+                    DOVirtual.Float(1f, 0f, 0.3f, (value) =>
                     {
-                        GameManager.instance.soundManager.PlaySFX("Attack");
-                        GameBoard.instance.chessBoard.AttackedAnimation(target);
-                    }
-                    else
-                    {
-                        GameManager.instance.soundManager.PlaySFX("Destroy");
-                        target.GetComponent<Animator>().SetTrigger("killedTrigger");
-                        target.MakeAttackedEffect();
-                    }
-                    Destroy(projectile);
+                        effectMaterial.SetFloat("_Alpha", value);
+                    });
                 });
             });
-        }
+        });
 
-        foreach (var target in targetList)
-        {
-            HephaestusSequence.Join(projectileMove(target));
-        }
+        return hepheastusTween;
+    }
+
+    public Tween DamageByThorEffect(GameObject projectileEffect, ChessPiece srcPiece, int damage)
+    {
+        Tween thorTween = null;
+
+        thorTween = DOVirtual.DelayedCall(0f, () => {
+            List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece =>
+            piece.pieceColor != srcPiece.pieceColor && piece.soul != null).ToList(); //영혼 부여된 기물만 제거
+
+            if (enemyPieceList.Count == 0)
+            {
+                thorTween.Kill();
+                Debug.Log("Thor: No Target");
+                return;
+            }
+            ChessPiece dstPiece = enemyPieceList[SynchronizedRandom.Range(0, enemyPieceList.Count)];
+            // 기절한 경우 2배의 피해
+            if (dstPiece.GetKeyword(Keyword.Type.Stun) == 1)
+            {
+                damage *= 2;
+            }
+
+            GameObject projectile = Instantiate(projectileEffect);
+            projectile.transform.position = srcPiece.transform.position;
+            projectile.transform.DOMove(dstPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                dstPiece.MinusHP(damage);
+                if (dstPiece.isAlive)
+                {
+                    GameManager.instance.soundManager.PlaySFX("Attack");
+                    GameBoard.instance.chessBoard.AttackedAnimation(dstPiece);
+                }
+                else
+                {
+                    GameManager.instance.soundManager.PlaySFX("Destroy");
+                    dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+                    dstPiece.MakeAttackedEffect();
+                }
+                Destroy(projectile);
+            });
+        });
+
+        return thorTween;
     }
 
     public List<ChessPiece> GetAllPieces(GameBoard.PlayerColor color)

@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using System;
 using Photon.Pun;
-using Photon.Pun.Demo.Cockpit;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -42,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public Action OnOpponentDraw;
 
     public Action OnMyTurnEnd;
+    public event Func<Tween> OnMyTurnEndAnimation;
     public Action OnOpponentTurnEnd;
 
     public ChessTimer chessTimer;
@@ -547,23 +547,44 @@ public class PlayerController : MonoBehaviour
     public void TurnEnd()
     {
         GameManager.instance.soundManager.PlaySFX("Turn");
-        OnMyTurnEnd?.Invoke();
-        // 턴 종료 시 상대 코스트 회복
-        if (playerColor == GameBoard.PlayerColor.White)
+        Sequence sequence = DOTween.Sequence();
+        if (OnMyTurnEndAnimation != null)
         {
-            if (GameBoard.instance.gameData.playerBlack.soulOrbs < 5)
-                GameBoard.instance.gameData.playerBlack.soulOrbs++;
-            GameBoard.instance.gameData.playerBlack.soulEssence = GameBoard.instance.gameData.playerBlack.soulOrbs;
+            sequence.Append(GameBoard.instance.chessBoard.FadeInTween());
+            foreach (var effectAnim in OnMyTurnEndAnimation.GetInvocationList().Cast<Func<Tween>>().ToList())
+            {
+                if (effectAnim == null)
+                    continue;
+
+                Tween tween = effectAnim.Invoke();
+                sequence.Append(tween);
+                sequence.AppendInterval(1.5f);
+            }
+            sequence.Append(GameBoard.instance.chessBoard.FadeOutTween());
         }
-        else
-        {
-            if (GameBoard.instance.gameData.playerWhite.soulOrbs < 5)
-                GameBoard.instance.gameData.playerWhite.soulOrbs++;
-            GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;
-        }
-        
-        if (tutorialFlag == false)
-            chessTimer.StopTimer();
+
+        sequence.OnComplete(() => {
+            Debug.Log("Sequence Done");
+            OnMyTurnEnd?.Invoke();
+            // 턴 종료 시 상대 코스트 회복
+            if (playerColor == GameBoard.PlayerColor.White)
+            {
+                if (GameBoard.instance.gameData.playerBlack.soulOrbs < 5)
+                    GameBoard.instance.gameData.playerBlack.soulOrbs++;
+                GameBoard.instance.gameData.playerBlack.soulEssence = GameBoard.instance.gameData.playerBlack.soulOrbs;
+            }
+            else
+            {
+                if (GameBoard.instance.gameData.playerWhite.soulOrbs < 5)
+                    GameBoard.instance.gameData.playerWhite.soulOrbs++;
+                GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;
+            }
+            
+            if (tutorialFlag == false)
+                chessTimer.StopTimer();
+        });
+
+        sequence.Play();
     }
 
     public void OpponentTurnEnd()
