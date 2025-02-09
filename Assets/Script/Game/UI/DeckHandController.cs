@@ -116,6 +116,7 @@ public class DeckHandController : MonoBehaviour
 
         for (int i = 0; i < hand.Count; i++)
         {
+            Debug.Log(hand[i].cardName);
             hand[i].handIndex = i;
             hand[i].GetComponent<SortingGroup>().sortingOrder = i;
             hand[i].transform.SetParent(myHandTransform);

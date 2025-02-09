@@ -10,8 +10,6 @@ public class TitanomachiaEffect : Effect
 
     public override void EffectAction(PlayerController player)
     {
-        List<ChessPiece> targets = new List<ChessPiece>();
-
         ChessPiece kingPiece = null;
 
         foreach (var chessPiece in GameBoard.instance.gameData.pieceObjects)
@@ -21,20 +19,11 @@ public class TitanomachiaEffect : Effect
                 if (chessPiece.pieceColor == player.playerColor)
                     kingPiece = chessPiece;
             }
-            else
-            {
-                targets.Add(chessPiece);
-            }
         }
 
         if (kingPiece == null)
             Debug.Log("Titanomachia: No King Piece");
 
-        for (int i = 0; i < repeat; i++)
-        {
-            int randomIndex = SynchronizedRandom.Range(0, targets.Count);
-            ChessPiece target = targets[randomIndex];
-            GameBoard.instance.chessBoard.KillByCardEffect(effectPrefab, kingPiece, target);
-        }
+        GameBoard.instance.chessBoard.KillByTitanomachiaEffect(effectPrefab, kingPiece, repeat);
     }
 }
