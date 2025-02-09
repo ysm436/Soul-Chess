@@ -27,6 +27,10 @@ public class PieceEffectIcon : MonoBehaviour
             {
                 effectObjects[(int)i].GetComponent<SpriteRenderer>().sprite = sprites[(int)i];
             }
+            else
+            {
+                effectObjects[(int)i].GetComponent<SpriteRenderer>().sprite = null;
+            }
         }
         spriteRenderer.sprite = null;
     }
