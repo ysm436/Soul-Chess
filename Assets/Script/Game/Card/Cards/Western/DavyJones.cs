@@ -7,8 +7,8 @@ public class DavyJones : SoulCard
 {
     protected override int CardID => Card.cardIdDict["데비 존스"];
 
-    public int increasedAD = 10;
-    public int increasedHP = 10;
+    public int increasedAD = 1;
+    public int increasedHP = 1;
 
     protected override void Awake()
     {

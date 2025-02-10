@@ -31,18 +31,29 @@ public class DavidEffect : Effect
         {
             foreach (var target in targetList.ToList())
             {
-                if (target.AD < 7)
+                if (target.AD < standardAD)
                 {
                     targetList.Remove(target);
                 }
             }
         }
 
-        foreach (var target in targetList)
+        if (targetList.Count == 0)
         {
-            BoardSquare targetBoardSquare = GameBoard.instance.GetBoardSquare(target.coordinate);
-            targetBoardSquare.isNegativeTargetable = true;
-            targetBoardSquare.OnClick = AttackEffect;
+            foreach (var sq in GameBoard.instance.gameData.boardSquares)
+            {
+                sq.isNegativeTargetable = false;
+                sq.OnClick = GameBoard.instance.myController.OnClickBoardSquare;
+            }
+        }
+        else
+        {
+            foreach (var target in targetList)
+            {
+                BoardSquare targetBoardSquare = GameBoard.instance.GetBoardSquare(target.coordinate);
+                targetBoardSquare.isNegativeTargetable = true;
+                targetBoardSquare.OnClick = AttackEffect;
+            }
         }
     }
 

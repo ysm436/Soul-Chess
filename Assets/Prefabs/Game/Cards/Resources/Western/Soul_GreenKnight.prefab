@@ -112,8 +112,8 @@ MonoBehaviour:
   cardKeywords: 0600000001000000
   isInSelection: 0
   pieceRestriction: -1
-  _AD: 7
-  _HP: 2
+  _AD: 2
+  _HP: 7
   accessorySpriteList:
   - pieceType: 2
     pieceColor: 0

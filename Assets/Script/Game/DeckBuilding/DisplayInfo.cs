@@ -98,8 +98,8 @@ public class DisplayInfo : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     [SerializeField] private Image typeIconImage;
     [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
     [SerializeField] private GameObject soulElementPrefab;
-    [SerializeField] private TextMeshProUGUI cardHPTMP;
     [SerializeField] private TextMeshProUGUI cardADTMP;
+    [SerializeField] private TextMeshProUGUI cardHPTMP;
 
     [SerializeField] private List<Sprite> cardFrameList;
     [SerializeField] private List<Sprite> typeIconList;

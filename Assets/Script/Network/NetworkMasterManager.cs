@@ -182,6 +182,15 @@ public class NetworkMasterManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarningFormat("서버와의 연결이 끊어짐. 사유 : {0}", cause);
+
+        if (cause == DisconnectCause.ClientTimeout || cause == DisconnectCause.ServerTimeout)
+        {
+            if (SceneManager.GetActiveScene().name == "MatchingScene")
+            {
+                Debug.Log("매칭 씬에서 Timeout 발생 후 재연결 시도");
+                PhotonNetwork.Reconnect();
+            }
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)

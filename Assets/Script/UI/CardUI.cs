@@ -16,9 +16,11 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image illustration;
     [SerializeField] private GameObject[] cardFrames;
     [SerializeField] private GameObject[] cardKeywords;
+    [SerializeField] private TextMeshProUGUI[] cardKeywordTitle;
     [SerializeField] private TextMeshProUGUI[] cardKeywordDescriptions;
     [SerializeField] private GameObject spell;
     [SerializeField] private GameObject soul;
+    [SerializeField] private GameObject pieceImage;
 
     public void SetCardUI(Card card)
     {
@@ -43,6 +45,7 @@ public class CardUI : MonoBehaviour
             cardFrame.SetActive(false);
         foreach (var cardKeyword in cardKeywords)
             cardKeyword.SetActive(false);
+        pieceImage.SetActive(false);
 
         cardFrames[(int)card.rarity].SetActive(true);
 
@@ -55,6 +58,7 @@ public class CardUI : MonoBehaviour
         for (int i = 0; i < card.cardKeywords.Count; i++)
         {
             cardKeywords[i].SetActive(true);
+            cardKeywordTitle[i].text = keywordTitle[card.cardKeywords[i]];
             cardKeywordDescriptions[i].text = keywordDescription[card.cardKeywords[i]];
         }
     }
@@ -72,6 +76,7 @@ public class CardUI : MonoBehaviour
             cardFrame.SetActive(false);
         foreach (var cardKeyword in cardKeywords)
             cardKeyword.SetActive(false);
+        pieceImage.SetActive(true);
 
         cardFrames[cardFrames.Length - 1].SetActive(true);
 
@@ -81,7 +86,7 @@ public class CardUI : MonoBehaviour
             cardName.text = "블랙 " + pieceName[piece.pieceType];
         cost.text = "0";
         description.text = "";
-        illustration.sprite = piece.GetComponent<SpriteRenderer>().sprite;
+        pieceImage.GetComponent<Image>().sprite = piece.GetComponent<SpriteRenderer>().sprite;
     }
 
     public Dictionary<ChessPiece.PieceType, string> pieceName = new Dictionary<ChessPiece.PieceType, string>()
@@ -94,12 +99,20 @@ public class CardUI : MonoBehaviour
         { ChessPiece.PieceType.Rook , "룩"},
     };
 
+    public Dictionary<Keyword.Type, string> keywordTitle = new Dictionary<Keyword.Type, string>()
+    {
+        { Keyword.Type.Infusion,"강림"},
+        { Keyword.Type.Shield,"보호막"},
+        { Keyword.Type.Stun,"기절"},
+        { Keyword.Type.Silence,"침묵"},
+        { Keyword.Type.Testament,"유언"},
+    };
     public Dictionary<Keyword.Type, string> keywordDescription = new Dictionary<Keyword.Type, string>()
     {
-        { Keyword.Type.Infusion,"강림\n영혼을 부여할 때\n발동됩니다."},
-        { Keyword.Type.Shield,"보호막\n이 기물은 피해를\n한번 무시합니다."},
-        { Keyword.Type.Stun,"기절\n기절한 기물은\n다음 턴이 올 때까지\n움직이지 못합니다."},
-        { Keyword.Type.Silence,"침묵\n기물의 특수 능력을\n제거합니다."},
-        { Keyword.Type.Testament,"유언\n기물이 파괴될 때\n발동됩니다."},
+        { Keyword.Type.Infusion,"영혼을 부여할 때\n발동됩니다."},
+        { Keyword.Type.Shield,"이 기물은 피해를\n한번 무시합니다."},
+        { Keyword.Type.Stun,"기절 시 다음 턴까지\n움직이지 못합니다."},
+        { Keyword.Type.Silence,"기물의 특수 능력을\n제거합니다."},
+        { Keyword.Type.Testament,"기물이 파괴될 때\n발동됩니다."},
     };
 }

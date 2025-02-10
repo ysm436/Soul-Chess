@@ -91,25 +91,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 0
-    soulOrbs: 1
+    playerColor: 1
+    soulOrbs: 5
     soulEssence: 1
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
     deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -149,8 +137,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 681a72d67b7191c418bf6f39791de8bd, type: 3}
   InfusedPiece: {fileID: 0}
   player: {fileID: 0}
-  increasedAD: 10
-  increasedHP: 10
+  increasedAD: 1
+  increasedHP: 1
 --- !u!114 &-5580636979039151795
 MonoBehaviour:
   m_ObjectHideFlags: 0
