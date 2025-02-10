@@ -409,10 +409,11 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
-            "공격력: 이 영혼이 부여된 기물이\n" +
-            "공격 시 입히는\n" +
-            "피해량을 나타냅니다.";
-        SetTextSize(3);
+            "공격력: 이 영혼이 부여될 때\n" +
+            "추가되는 공격력을 의미합니다.\n" +
+            "다른 기물을 공격할 때\n" +
+            "공격력만큼 피해를 줍니다.";
+        SetTextSize(4);
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep8);
@@ -426,10 +427,11 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
-            "체력: 이 영혼이 부여된 기물이\n" +
-            "처치되기 전까지 받을 수 있는\n" +
-            "피해량을 나타냅니다.";
-        SetTextSize(3);
+            "체력: 이 영혼이 부여될 때\n" +
+            "추가되는 체력을 의미합니다.\n" +
+            "기물의 체력이 0이 될 경우\n" +
+            "해당 기물은 파괴됩니다.";
+        SetTextSize(4);
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep9);
