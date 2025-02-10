@@ -416,12 +416,31 @@ public class PvEPlayerController : PlayerController
     
     public IEnumerator ComputerAct()
     {
+        yield return CheckBlocker();
         yield return new WaitForSeconds(4f);
         //카드 쓰기
         yield return UseCardComputer();
+        yield return CheckBlocker();
         //체스 말 이동
         yield return MovePieceComputer();
         GetComponentInParent<PvELocalController>().TurnEnd();
+    }
+    
+    private IEnumerator CheckBlocker()
+    {
+        while (true)
+        {
+            if (GameBoard.instance.chessBoard.blocker.activeSelf)
+            {
+                Debug.Log("Blocker Exist");
+                yield return new WaitForSeconds(2f);
+                continue;
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 
     private IEnumerator UseCardComputer()
