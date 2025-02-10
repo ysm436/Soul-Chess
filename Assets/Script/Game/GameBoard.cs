@@ -139,7 +139,7 @@ public class GameBoard : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.soundManager.PlayBgm("GameScene");
+        //GameManager.instance.soundManager.PlayBgm("GameScene");
     }
     public bool isCardUsed(Vector3 cardPosition)
     {

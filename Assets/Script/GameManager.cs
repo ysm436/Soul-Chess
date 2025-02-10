@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     public void LoadDeckBuildingScene()
     {
         SceneManager.LoadScene("DeckBuildingScene");
-        soundManager.PlayBgm("DeckBuildingScene");
+        //soundManager.PlayBgm("DeckBuildingScene");
     }
     public void LoadMatchingScene()
     {
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     public void LoadLobbyScene()
     {
         SceneManager.LoadScene("LobbyScene");
-        soundManager.PlayBgm("LobbyScene");
+        //soundManager.PlayBgm("LobbyScene");
     }
     public void LoadGameScene()
     {
