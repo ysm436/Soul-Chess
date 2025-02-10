@@ -66,7 +66,7 @@ public class SettingUI : MonoBehaviour
     public void UpdateBgmVolume()
     {
         soundManager.bgmVolume = bgmVolume.value;
-        soundManager.bgmPlayer.volume = bgmVolume.value;
+        soundManager.bgmPlayer.volume = bgmVolume.value * 0.6f;
         soundManager.sfxVolume = sfxVolume.value;
     }
 }

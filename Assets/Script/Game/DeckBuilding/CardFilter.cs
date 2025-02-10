@@ -39,7 +39,6 @@ public class CardFilter : MonoBehaviour
     {
         if (searchtext != "")
         {
-            Debug.Log("??");
             searchSignal = true;
             searchIndexList.Clear();
         }

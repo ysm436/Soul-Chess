@@ -36,13 +36,13 @@ public class SoundManager : MonoBehaviour
 
     private void InitializeBGM()
     {
-        bgmDictionary.Add("MainScene", Resources.Load<AudioClip>("BGM/Teller of the Tales"));
-        bgmDictionary.Add("LobbyScene", Resources.Load<AudioClip>("BGM/Midnight Tale"));
-        bgmDictionary.Add("DeckBuildingScene", Resources.Load<AudioClip>("BGM/Folk Round"));
-        bgmDictionary.Add("GameScene1", Resources.Load<AudioClip>("BGM/Red Castle"));
-        bgmDictionary.Add("GameScene2", Resources.Load<AudioClip>("BGM/Into The Forest"));
-        bgmDictionary.Add("GameScene3", Resources.Load<AudioClip>("BGM/Master of the Feast"));
-        bgmDictionary.Add("GameScene4", Resources.Load<AudioClip>("BGM/NewGameBGM"));
+        bgmDictionary.Add("MainScene", Resources.Load<AudioClip>("BGM/Tavern Loop One"));
+        //bgmDictionary.Add("LobbyScene", Resources.Load<AudioClip>("BGM/Midnight Tale"));
+        //bgmDictionary.Add("DeckBuildingScene", Resources.Load<AudioClip>("BGM/Folk Round"));
+        //bgmDictionary.Add("GameScene1", Resources.Load<AudioClip>("BGM/Red Castle"));
+        //bgmDictionary.Add("GameScene2", Resources.Load<AudioClip>("BGM/Into The Forest"));
+        //bgmDictionary.Add("GameScene3", Resources.Load<AudioClip>("BGM/Master of the Feast"));
+        //bgmDictionary.Add("GameScene4", Resources.Load<AudioClip>("BGM/NewGameBGM"));
     }
 
     private void InitializeSFX()
@@ -69,7 +69,7 @@ public class SoundManager : MonoBehaviour
         else
         {
             bgmPlayer.loop = true;
-            bgmPlayer.volume = bgmVolume;
+            bgmPlayer.volume = bgmVolume * 0.6f;
             bgmPlayer.clip = bgmDictionary[name];
             bgmPlayer.Play();
         }

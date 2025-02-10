@@ -16,7 +16,17 @@ public class GreenKnightEffect : TargetingEffect
 
         foreach (var target in targets)
         {
-            (target as ChessPiece).Attack(greenKnightComponent.InfusedPiece);
+            if ((target as ChessPiece).Attack(greenKnightComponent.InfusedPiece))
+            {
+                (target as ChessPiece).Move(greenKnightComponent.InfusedPiece.coordinate);
+                GameBoard.instance.chessBoard.KillAnimation((target as ChessPiece), greenKnightComponent.InfusedPiece);
+            }
+            else
+            {
+                (target as ChessPiece).GetComponent<Animator>().SetTrigger("moveTrigger");
+                (target as ChessPiece).GetComponent<Animator>().SetBool("isReturning", true);
+                GameBoard.instance.chessBoard.ForthBackPieceAnimation((target as ChessPiece), greenKnightComponent.InfusedPiece);
+            }
         }
 
         if (greenKnightComponent.InfusedPiece.pieceType == additionalBuffPieceType)

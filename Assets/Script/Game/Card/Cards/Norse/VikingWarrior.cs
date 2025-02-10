@@ -8,7 +8,7 @@ public class VikingWarrior : SoulCard
 {
     protected override int CardID => Card.cardIdDict["바이킹 전사"];
     private bool increasedFlag;
-    public int increasedAD = 20;
+    public int increasedAD;
 
     protected override void Awake()
     {
@@ -45,7 +45,7 @@ public class VikingWarrior : SoulCard
         if (!increasedFlag && InfusedPiece.GetHP < InfusedPiece.maxHP)
         {
             increasedFlag = true;
-            InfusedPiece.AD += 20;
+            InfusedPiece.AD += increasedAD;
             InfusedPiece.buff.AddBuffByValue("바이킹 전사", Buff.BuffType.AD, increasedAD, true);
         }
     }

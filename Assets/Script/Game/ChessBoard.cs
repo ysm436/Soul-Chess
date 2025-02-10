@@ -551,7 +551,7 @@ public class ChessBoard : MonoBehaviour
                     ChessPiece dstPiece = pieceList[SynchronizedRandom.Range(0, pieceList.Count())];
                     GameObject projectile = Instantiate(projectileEffect);
                     projectile.transform.position = srcPiece.transform.position;
-                    projectile.transform.DOMove(dstPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                    projectile.transform.DOMove(dstPiece.transform.position, 0.3f).SetEase(Ease.InOutQuint).OnComplete(() => {
                         GameManager.instance.soundManager.PlaySFX("Destroy");
                         dstPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
                         dstPiece.MakeAttackedEffect();
@@ -565,7 +565,7 @@ public class ChessBoard : MonoBehaviour
         for (int i = 0; i < repeat; i++)
         {
             titanomachiaSequence.Append(titanoKillEffect());
-            titanomachiaSequence.AppendInterval(0.8f);
+            titanomachiaSequence.AppendInterval(0.5f);
         }
         
         titanomachiaSequence.Append(FadeOutTween());
@@ -574,6 +574,7 @@ public class ChessBoard : MonoBehaviour
     public void DamageByKrakenEffect(GameObject projectileEffect, ChessPiece srcPiece, int repeat, int damage)
     {
         Sequence krakenSequence = DOTween.Sequence();
+        Vector3 srcPosition = srcPiece.transform.position;
 
         krakenSequence.Append(FadeInTween());
 
@@ -589,8 +590,8 @@ public class ChessBoard : MonoBehaviour
                     ChessPiece dstPiece = pieceList[SynchronizedRandom.Range(0, pieceList.Count())];
                     GameManager.instance.soundManager.PlaySFX("Water");
                     GameObject projectileObj = Instantiate(projectileEffect);
-                    projectileObj.transform.position = srcPiece.transform.position;
-                    projectileObj.transform.DOMove(dstPiece.transform.position, 0.4f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                    projectileObj.transform.position = srcPosition;
+                    projectileObj.transform.DOMove(dstPiece.transform.position, 0.3f).SetEase(Ease.InOutQuint).OnComplete(() => {
                         dstPiece.MinusHP(damage);
                         if (dstPiece.isAlive)
                         {

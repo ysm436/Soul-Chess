@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ToneDeafBardEffect : TargetingEffect
 {
-    [SerializeField] private int changeAD = -20;
-    [SerializeField] private int changeHP = 20;
+    [SerializeField] private int changeAD;
+    [SerializeField] private int changeHP;
 
     ChessPiece.PieceType targetPieceRestriction =
         ChessPiece.PieceType.Pawn |

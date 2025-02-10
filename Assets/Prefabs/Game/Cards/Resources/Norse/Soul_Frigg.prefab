@@ -199,7 +199,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 2
-  description: "\uC801 \uAE30\uBB3C\uC758 \uACF5\uACA9\uB825\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4"
+  description: "\uC801 \uAE30\uBB3C\uC758 \uACF5\uACA9\uB825\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 1414403984435467240}
   cardKeywords: 
   isInSelection: 0

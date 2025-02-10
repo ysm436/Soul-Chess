@@ -9,8 +9,8 @@ public class Behemoth : SoulCard
     [HideInInspector] public PlayerController player = null;
     private int buffedAD = 0;
     private int buffedHP = 0;
-    public int increasedAD = 10;
-    public int increasedHP = 10;
+    public int increasedAD = 1;
+    public int increasedHP = 1;
 
     protected override void Awake()
     {
