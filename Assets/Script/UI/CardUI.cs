@@ -19,6 +19,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] cardKeywordDescriptions;
     [SerializeField] private GameObject spell;
     [SerializeField] private GameObject soul;
+    [SerializeField] private GameObject pieceImage;
 
     public void SetCardUI(Card card)
     {
@@ -43,6 +44,7 @@ public class CardUI : MonoBehaviour
             cardFrame.SetActive(false);
         foreach (var cardKeyword in cardKeywords)
             cardKeyword.SetActive(false);
+        pieceImage.SetActive(false);
 
         cardFrames[(int)card.rarity].SetActive(true);
 
@@ -72,6 +74,7 @@ public class CardUI : MonoBehaviour
             cardFrame.SetActive(false);
         foreach (var cardKeyword in cardKeywords)
             cardKeyword.SetActive(false);
+        pieceImage.SetActive(true);
 
         cardFrames[cardFrames.Length - 1].SetActive(true);
 
@@ -81,7 +84,7 @@ public class CardUI : MonoBehaviour
             cardName.text = "블랙 " + pieceName[piece.pieceType];
         cost.text = "0";
         description.text = "";
-        illustration.sprite = piece.GetComponent<SpriteRenderer>().sprite;
+        pieceImage.GetComponent<Image>().sprite = piece.GetComponent<SpriteRenderer>().sprite;
     }
 
     public Dictionary<ChessPiece.PieceType, string> pieceName = new Dictionary<ChessPiece.PieceType, string>()

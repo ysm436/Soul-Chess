@@ -11,14 +11,14 @@ PrefabInstance:
     - target: {fileID: 275331416115565495, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7b64479636d841b498df40d593c779f3, type: 3}
+      objectReference: {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
     - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.953125
+      value: 2.34375
       objectReference: {fileID: 0}
     - target: {fileID: 439741656404484995, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.8320312
+      value: 3.4570312
       objectReference: {fileID: 0}
     - target: {fileID: 8435954317591230228, guid: 9a701fc1c8dbfa443a6eedf0390be8dd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -96,14 +96,16 @@ MonoBehaviour:
   coordinate: {x: 0, y: 0}
   owner:
     playerColor: 0
-    soulOrbs: 0
-    soulEssence: 0
+    soulOrbs: 5
+    soulEssence: 5
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
     deck: []
-    hand: []
-    deckPosition: {x: 0, y: 0}
+    hand:
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1

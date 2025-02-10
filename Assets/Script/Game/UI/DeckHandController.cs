@@ -125,7 +125,9 @@ public class DeckHandController : MonoBehaviour
     }
     IEnumerator UpdateMyHandPositionAnimation(Card objCard, float anchor_x, int handIndex)
     {
+        if (objCard == null) yield break;
         yield return objCard.transform.DOLocalMoveX(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0.3f).WaitForCompletion();
+        if (objCard == null) yield break;
         yield return objCard.transform.DOLocalMoveY(0, 0.7f).WaitForCompletion();
         if (objCard != null)
         {
@@ -171,7 +173,9 @@ public class DeckHandController : MonoBehaviour
 
     IEnumerator UpdateOpponentHandPositionAnimation(Card objCard, float anchor_x, int handIndex)
     {
+        if (objCard == null) yield break;
         yield return objCard.transform.DOLocalMoveX(anchor_x - CARD_DISTANCE_IN_HAND * handIndex, 0.3f).WaitForCompletion();
+        if (objCard == null) yield break;
         yield return objCard.transform.DOLocalMoveY(0, 0.8f).WaitForCompletion();
         if (objCard != null)
         {
