@@ -15,7 +15,7 @@ public class DeckCountTextUI : MonoBehaviour
     private void OnMouseEnter()
     {
         deckCountText.gameObject.SetActive(true);
-        deckCountText.text = GameBoard.instance.gameData.myPlayerData.deck.Count.ToString() + " cards left";
+        deckCountText.text = GameBoard.instance.gameData.myPlayerData.deck.Count.ToString() + " Cards Left";
     }
 
     private void OnMouseExit()

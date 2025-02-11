@@ -306,6 +306,10 @@ abstract public class ChessPiece : TargetableObject
         {
             RemoveSoul();
 
+            if (GetComponent<King>())
+            {
+                GameBoard.instance.OnGameOver(this);
+            }
             isAlive = false;
             pieceObject.HPText.text = "0";
             GameBoard.instance.KillPiece(this);

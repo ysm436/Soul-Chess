@@ -131,9 +131,6 @@ public class GameBoard : MonoBehaviour
         gameData.myPlayerData.playerColor = myController.playerColor;
         gameData.opponentPlayerData.playerColor = opponentController.playerColor;
 
-        foreach (ChessPiece king in gameData.pieceObjects.Where(piece => piece.pieceType == ChessPiece.PieceType.King))
-            king.OnKilled += OnGameOver;
-
         synchronizedRandom.Init(GameManager.instance.isHost);
     }
 
@@ -168,11 +165,15 @@ public class GameBoard : MonoBehaviour
         if (targetPiece.pieceColor == PlayerColor.White)
         {
             gameData.whiteGraveyard.Add(targetPiece);
+            targetPiece.transform.GetChild(0).gameObject.SetActive(false);
+            targetPiece.transform.GetChild(1).gameObject.SetActive(false);
             targetPiece.coordinate = Vector2Int.right * (gameData.whiteGraveyard.Count - 1) + Vector2Int.down;
         }
         else
         {
             gameData.blackGraveyard.Add(targetPiece);
+            targetPiece.transform.GetChild(0).gameObject.SetActive(false);
+            targetPiece.transform.GetChild(1).gameObject.SetActive(false);
             targetPiece.coordinate = Vector2Int.right * (gameData.blackGraveyard.Count - 1) + Vector2Int.up * gameData.BOARD_SIZE_HEIGHT;
         }
 
@@ -263,7 +264,7 @@ public class GameBoard : MonoBehaviour
             return gameData.playerBlack;
     }
 
-    private void OnGameOver(ChessPiece killedKing)
+    public void OnGameOver(ChessPiece killedKing)
     {
         if (killedKing.pieceColor == playerColor)
             gameOverUI.OnDefeated();

@@ -112,7 +112,7 @@ MonoBehaviour:
   EffectOnCardUsed: {fileID: 4289914002319621180}
   cardKeywords: 
   isInSelection: 0
-  pieceRestriction: 1
+  pieceRestriction: -1
   _AD: 1
   _HP: 2
   accessorySpriteList:
