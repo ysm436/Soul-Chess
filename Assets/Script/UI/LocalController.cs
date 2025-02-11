@@ -22,6 +22,7 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     public ChessTimer myTimer;
     public ChessTimer opponentTimer;
     public GameObject turnDisplay;
+    [SerializeField] private GameObject turnCaution;
 
     private void Awake()
     {
@@ -80,7 +81,16 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
         if (GameBoard.instance.myController.TurnEndPossible)
             TurnEnd();
         else
+        {
             Debug.Log("Please Move Any Chess Piece at least Once");
+            turnCaution.SetActive(true);
+            Invoke("TurnEndCaution", 1f);
+        }
+    }
+
+    private void TurnEndCaution()
+    {
+        turnCaution.SetActive(false);
     }
 
     public void TurnEnd()

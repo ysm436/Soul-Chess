@@ -21,6 +21,7 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
     public ChessTimer opponentTimer;
     public GameObject turnDisplay;
     [SerializeField] private GameObject blocker;
+    [SerializeField] private GameObject turnCaution;
 
     private void Awake()
     {
@@ -86,7 +87,15 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
         if (GameBoard.instance.myController.TurnEndPossible)
             TurnEnd();
         else
+        {
             Debug.Log("Please Move Any Chess Piece at least Once");
+            turnCaution.SetActive(true);
+            Invoke("TurnEndCaution", 1f);
+        }
+    }
+    private void TurnEndCaution()
+    {
+        turnCaution.SetActive(false);
     }
 
     public void TurnEnd()
