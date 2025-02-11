@@ -200,17 +200,24 @@ public class PvEDeckHandController : MonoBehaviour
     }
     IEnumerator UpdateMyHandPositionAnimation(Card objCard, float anchor_x, int handIndex)
     {
+        if (objCard == null) yield break;
         yield return objCard.transform.DOLocalMoveX(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0.3f).WaitForCompletion();
+        if (objCard == null) yield break;
         yield return objCard.transform.DOLocalMoveY(0, 0.7f).WaitForCompletion();
-        objCard.transform.localPosition = new Vector3(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UI에 맞게 좌표수정
-        if (objCard.cost <= GameBoard.instance.gameData.myPlayerData.soulEssence)
+        if (objCard != null)
         {
-            objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 1f);
+            objCard.transform.localPosition = new Vector3(anchor_x + CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UI에 맞게 좌표수정
+            if (objCard.cost <= GameBoard.instance.gameData.myPlayerData.soulEssence)
+            {
+                objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_Alpha", 1f);
+            }
+            else
+            {
+                objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_Alpha", 0f);
+            }
         }
         else
-        {
-            objCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_OutlineAlpha", 0f);
-        }
+            Debug.Log("Hand Null");
     }
 
     public void UpdateOpponentHandPosition()
@@ -241,9 +248,16 @@ public class PvEDeckHandController : MonoBehaviour
 
     IEnumerator UpdateOpponentHandPositionAnimation(Card objCard, float anchor_x, int handIndex)
     {
+        if (objCard == null) yield break;
         yield return objCard.transform.DOLocalMoveX(anchor_x - CARD_DISTANCE_IN_HAND * handIndex, 0.3f).WaitForCompletion();
+        if (objCard == null) yield break;
         yield return objCard.transform.DOLocalMoveY(0, 0.8f).WaitForCompletion();
-        objCard.transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UI에 맞게 좌표수정
+        if (objCard != null)
+        {
+            objCard.transform.localPosition = new Vector3(anchor_x - CARD_DISTANCE_IN_HAND * handIndex, 0, -0.1f * handIndex); //UI에 맞게 좌표수정
+        }
+        else
+            Debug.Log("Hand Null");
     }
 
 

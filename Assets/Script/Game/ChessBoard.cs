@@ -613,7 +613,7 @@ public class ChessBoard : MonoBehaviour
         for (int i = 0; i < repeat; i++)
         {
             krakenSequence.Append(krakenKillEffect());
-            krakenSequence.AppendInterval(0.5f);
+            krakenSequence.AppendInterval(0.6f);
         }
         
         krakenSequence.Append(FadeOutTween());

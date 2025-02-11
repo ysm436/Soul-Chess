@@ -138,8 +138,7 @@ MonoBehaviour:
   reigon: 2
   rarity: 1
   description: "[\uAC15\uB9BC] \uACF5\uACA9\uB825\uC774 7 \uC774\uC0C1\uC778 \uC801
-    \uAE30\uBB3C \uD558\uB098\uB97C \uCC98\uCE58\uD569\uB2C8\uB2E4.\n\uD0B9 \uAE30\uBB3C\uC5D0
-    \uAC15\uB9BC \uC2DC, \uB300\uC2E0 \uC801 \uAE30\uBB3C \uD558\uB098\uB97C \uCC98\uCE58\uD569\uB2C8\uB2E4."
+    \uAE30\uBB3C \uD558\uB098\uB97C \uCC98\uCE58\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 2377348935909867065}
   cardKeywords: 06000000
   isInSelection: 0
