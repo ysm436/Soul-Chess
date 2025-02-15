@@ -6462,7 +6462,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.06, y: 6.03}
+    oldSize: {x: 13.82, y: 4.86}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6512,7 +6512,7 @@ SpriteRenderer:
   m_SortingLayerID: 2022297331
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bb97730a152b54b439530a3a75ff8988, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6b76987f164ecf4b9a80876b1e4227b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6532,8 +6532,8 @@ Transform:
   m_GameObject: {fileID: 1620590843}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.9, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.1982574, z: 0.1982574}
+  m_LocalPosition: {x: -4, y: -2.2, z: 0}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.1982574}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 607616081}
@@ -8112,9 +8112,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1695366252}
     m_Modifications:
+    - target: {fileID: 428735122301492716, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.4160156
+      objectReference: {fileID: 0}
     - target: {fileID: 3281843003976542766, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3281843003976542766, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_Pivot.y
@@ -8122,7 +8126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3281843003976542766, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3281843003976542766, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8130,7 +8134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3281843003976542766, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3281843003976542766, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_AnchorMin.y
@@ -8174,7 +8178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3281843003976542766, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -550
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3281843003976542766, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8192,6 +8196,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3316182519735519622, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.584961
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169980487482817541, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00012207031
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169980487482817541, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 39.362
+      objectReference: {fileID: 0}
     - target: {fileID: 8810189213856670233, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_Name
       value: CardUI
@@ -8199,6 +8215,10 @@ PrefabInstance:
     - target: {fileID: 8810189213856670233, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192966310089759620, guid: dbb32b9a03a60df44a1c89662717a44d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.9172363
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
