@@ -12,26 +12,47 @@ public class DeckBuildingSceneUI : MonoBehaviour
     [SerializeField] private Button newDeckButton;
     [SerializeField] private Button cancelButton;
     [SerializeField] private Button saveButton;
-    [SerializeField] public Button deckLoadButton;
-    [SerializeField] public GameObject deckListPanel;
-    [SerializeField] public GameObject createDeckPanel;
+    [SerializeField] public Button cancelQuitPanelButton;
+    [SerializeField] public Button quitInPanelButton;
+    [SerializeField] private GameObject deckListPanel;
+    [SerializeField] private GameObject createDeckPanel;
+    [SerializeField] private GameObject quitCautionPanel;
     public DeckManager deckManager;
     public bool debug = false;
 
     private void Awake()
     {
+        deckManager = createDeckPanel.GetComponent<DeckManager>();
+
         CancelButtonFunction();
-        quitButton.onClick.AddListener(GameManager.instance.LoadMainScene);
+        quitButton.onClick.AddListener(LoadMainSceneFunc);
         newDeckButton.onClick.AddListener(NewDeckButtonFunction);
         cancelButton.onClick.AddListener(CancelButtonFunction);
         saveButton.onClick.AddListener(SaveButtonFunction);
-
-        deckManager = createDeckPanel.GetComponent<DeckManager>();
+        cancelQuitPanelButton.onClick.AddListener(CancelQuitPanel);
+        quitInPanelButton.onClick.AddListener(QuitInPanelButton);
     }
 
-    private void LoadMainScene()
+    private void LoadMainSceneFunc()
     {
-        SceneManager.LoadScene("MainScene");
+        if (createDeckPanel.activeSelf)
+        {
+            quitCautionPanel.SetActive(true);
+        }
+        else
+        {
+            GameManager.instance.LoadMainScene();
+        }
+    }
+
+    private void CancelQuitPanel()
+    {
+        quitCautionPanel.SetActive(false);
+    }
+
+    private void QuitInPanelButton()
+    {
+        GameManager.instance.LoadMainScene();
     }
 
     private void CancelButtonFunction()
