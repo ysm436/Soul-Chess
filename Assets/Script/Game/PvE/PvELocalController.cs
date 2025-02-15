@@ -82,6 +82,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
 
     void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
         if (!GameBoard.instance.myController.enabled)
             return;
         if (GameBoard.instance.myController.TurnEndPossible)
@@ -102,6 +104,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
     {
         if ((GameBoard.instance.isWhiteTurn && whiteController.enabled) || (!GameBoard.instance.isWhiteTurn && blackController.enabled))
         {
+            GameBoard.instance.myController.CancelUseCard();
+            GameBoard.instance.cancelButton.Hide();
             OnTurnEndClicked();
         }
     }

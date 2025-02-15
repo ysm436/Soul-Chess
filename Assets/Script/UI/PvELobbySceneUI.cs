@@ -56,6 +56,7 @@ public class PvELobbySceneUI : MonoBehaviour
         photonView = GetComponent<PhotonView>();
         GameManager.instance.isHost = true;
         blackReadyButton.enabled = false;
+        blackReadyButton.GetComponent<Image>().enabled = false;
     }
     bool isInitialzed = false;
     private void Start()
@@ -219,6 +220,8 @@ public class PvELobbySceneUI : MonoBehaviour
         {
             whiteReadyButtonText.text = "준비";
             whiteReadyButton.enabled = true;
+            whiteReadyButton.GetComponent<Image>().enabled = true;
+            blackReadyButton.GetComponent<Image>().enabled = false;
             blackReadyButton.enabled = false;
             blackReadyButtonText.text = "컴퓨터";
             blackReadyButtonText.color = Color.black;
@@ -227,6 +230,8 @@ public class PvELobbySceneUI : MonoBehaviour
         {
             blackReadyButtonText.text = "준비";
             whiteReadyButton.enabled = false;
+            whiteReadyButton.GetComponent<Image>().enabled = false;
+            blackReadyButton.GetComponent<Image>().enabled = true;
             blackReadyButton.enabled = true;
             whiteReadyButtonText.text = "컴퓨터";
             whiteReadyButtonText.color = Color.black;

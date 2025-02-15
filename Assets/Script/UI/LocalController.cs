@@ -78,6 +78,8 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
         if (GameBoard.instance.myController.TurnEndPossible)
             TurnEnd();
         else
@@ -96,7 +98,11 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     public void TurnEnd()
     {
         if (GameBoard.instance.isActivePlayer)
+        {
+            GameBoard.instance.myController.CancelUseCard();
+            GameBoard.instance.cancelButton.Hide();
             photonView.RPC("OnTurnEndClicked", RpcTarget.All);
+        }
     }
 
     [PunRPC]

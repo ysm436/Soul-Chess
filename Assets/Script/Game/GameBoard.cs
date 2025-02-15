@@ -211,13 +211,14 @@ public class GameBoard : MonoBehaviour
     }
 
     //기물 정보 표시
-    PieceInfo showedPieceInfo = null;
+    ChessPiece showedPiece = null;
     public bool isShowingPieceInfo = false;
     public void ShowPieceInfo(ChessPiece piece)
     {
         if (isShowingPieceInfo)
             HidePieceInfo();
 
+        showedPiece = piece;
         //showedPieceInfo = Instantiate(pieceInfo, cardBoard.position, Quaternion.identity);
         //showedPieceInfo.EditDescription(piece);
         isShowingPieceInfo = true;
@@ -227,13 +228,18 @@ public class GameBoard : MonoBehaviour
         if (piece.soul == null)
             cardUI.SetCardUI(piece);
         else
+        {
+            StartCoroutine(piece.SetFadeAccessory(true));
             cardUI.SetCardUI(piece.soul);
+        }
     }
     public void HidePieceInfo()
     {
         if (!isShowingPieceInfo)
             return;
 
+        StartCoroutine(showedPiece.SetFadeAccessory(false));
+        showedPiece = null;
         //Destroy(showedPieceInfo.gameObject);
         isShowingPieceInfo = false;
 

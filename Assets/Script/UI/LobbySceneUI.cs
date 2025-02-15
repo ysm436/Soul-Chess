@@ -60,6 +60,8 @@ public class LobbySceneUI : MonoBehaviour
         photonView = GetComponent<PhotonView>();
         blackReadyButton.enabled = false;
         whiteReadyButton.enabled = false;
+        blackReadyButton.GetComponent<Image>().enabled = false;
+        whiteReadyButton.GetComponent<Image>().enabled = false;
     }
     bool isInitialzed = false;
     public void Init()
@@ -71,6 +73,7 @@ public class LobbySceneUI : MonoBehaviour
         {
             Debug.Log("is host");
             whiteReadyButton.enabled = true;
+            whiteReadyButton.GetComponent<Image>().enabled = true;
             myCardText.gameObject.SetActive(true);
             if (PhotonNetwork.CurrentRoom.PlayerCount <= 1)
             {
@@ -82,6 +85,7 @@ public class LobbySceneUI : MonoBehaviour
         {
             Debug.Log("is not host");
             blackReadyButton.enabled = true;
+            blackReadyButton.GetComponent<Image>().enabled = true;
             myCardText.anchoredPosition = new Vector3(-myCardText.anchoredPosition.x, myCardText.anchoredPosition.y);
             myCardText.gameObject.SetActive(true);
             if (PhotonNetwork.CurrentRoom.PlayerCount <= 1)

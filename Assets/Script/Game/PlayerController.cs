@@ -346,6 +346,8 @@ public class PlayerController : MonoBehaviour
     }
     public virtual void CancelUseCard()
     {
+        if (usingCard == null)
+            return;
         ClearTargetableObjects();
 
         GameBoard.instance.HideCard();
@@ -463,7 +465,7 @@ public class PlayerController : MonoBehaviour
         if (!(card is SoulCard))
             card.Destroy();
 
-        Invoke("HideRemoteUsedCard", 1.5f);
+        Invoke("HideRemoteUsedCard", 2f);
     }
     private void HideRemoteUsedCard()
     {
