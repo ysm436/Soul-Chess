@@ -55,7 +55,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
         cardObject.cardNameText.text = cardName;
         cardObject.costText.text = cost.ToString();
-        cardObject.spriteRenderer.sprite = illustration;
+        cardObject.illustration.sprite = illustration;
         cardObject.descriptionText.text = description;
         cardObject.backSpriteRenderer.sprite = back;
     }
