@@ -972,6 +972,10 @@ PrefabInstance:
       propertyPath: HPCircle
       value: 
       objectReference: {fileID: 4400087011069823492}
+    - target: {fileID: 699316848449856855, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
+      propertyPath: typeImage
+      value: 
+      objectReference: {fileID: 2517401516355074278}
     - target: {fileID: 1276941704583445816, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

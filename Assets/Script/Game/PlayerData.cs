@@ -63,8 +63,12 @@ public class PlayerData
 
     public IEnumerator DrawCardWithAnimation()
     {
+        GameObject blocker = GameBoard.instance.chessBoard.blocker;
+        blocker.SetActive(true);
+
         if (deck.Count <= 0)
         {
+            blocker.SetActive(false);
             UpdateHandPosition();
             yield break;
         }
@@ -93,7 +97,36 @@ public class PlayerData
             if (IsHandFull())
             {
                 UpdateHandPosition();
+                CardObject cardobj = card.GetComponent<CardObject>();
+                GameObject costCircle = cardobj.costText.transform.parent.gameObject;
+                Material frameMaterial = card.GetComponent<Renderer>().material;
+                Material illustMaterial = cardobj.illustration.GetComponent<Renderer>().material;
+                    
+                if (card is SoulCard)
+                {
+                    cardobj.ADCircle.SetActive(false);
+                    cardobj.HPCircle.SetActive(false);
+                }
+                cardobj.canUseEffectRenderer.gameObject.SetActive(false);
+                cardobj.backSpriteRenderer.gameObject.SetActive(false);
+                cardobj.typeImage.SetActive(false);
+                costCircle.SetActive(false);
+
+                yield return DOVirtual.Float(-0.1f, 1f, 0.5f, (value) => {
+                    frameMaterial.SetFloat("_FadeAmount", value);
+                    illustMaterial.SetFloat("_FadeAmount", value);
+                }).WaitForCompletion();
+
+                yield return DOVirtual.Float(1f, 0f, 0.8f, (value) => {
+                    cardobj.cardNameText.alpha = value;
+                    cardobj.descriptionText.alpha = value;
+                    
+                    float lerpedValue = Mathf.Lerp(0.5f, 1f, value);
+                    frameMaterial.SetFloat("_FadeBurnWidth", lerpedValue);
+                    illustMaterial.SetFloat("_FadeBurnWidth", lerpedValue);
+                }).SetEase(Ease.Linear).WaitForCompletion();
                 DestroyCard(card);
+                blocker.SetActive(false);
             }
             else
             {
@@ -108,6 +141,7 @@ public class PlayerData
                     card.transform.position = new Vector3(-5.85f, 7f, 0);
                 }
                 GetCard(card);
+                blocker.SetActive(false);
             }
         }
     }

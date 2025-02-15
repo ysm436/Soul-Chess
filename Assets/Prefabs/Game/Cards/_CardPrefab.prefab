@@ -145,7 +145,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 3c6a7eb8b34b6ad45917c0e4032446af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -248,12 +248,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardNameText: {fileID: 6790022253308629777}
   costText: {fileID: 2890987037114931955}
-  spriteRenderer: {fileID: 6665048331891296882}
+  illustration: {fileID: 6665048331891296882}
   descriptionText: {fileID: 2076236272955096686}
   backSpriteRenderer: {fileID: 3018793139727406675}
   canUseEffectRenderer: {fileID: 5823763045071059939}
   ADCircle: {fileID: 0}
   HPCircle: {fileID: 0}
+  typeImage: {fileID: 0}
 --- !u!1 &2307050580273995933
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +562,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 3c6a7eb8b34b6ad45917c0e4032446af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
