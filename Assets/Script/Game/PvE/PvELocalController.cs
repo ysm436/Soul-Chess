@@ -82,6 +82,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
 
     void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
         if (!GameBoard.instance.myController.enabled)
             return;
         if (GameBoard.instance.myController.TurnEndPossible)

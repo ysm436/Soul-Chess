@@ -78,6 +78,8 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
         if (GameBoard.instance.myController.TurnEndPossible)
             TurnEnd();
         else

@@ -70,6 +70,8 @@ public class BoardSquare : TargetableObject, IPointerEnterHandler, IPointerExitH
     }
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
         _onClick.Invoke(coordinate);
         if (GameBoard.instance.gameData.GetPiece(coordinate))
             GameBoard.instance.ShowPieceInfo(GameBoard.instance.gameData.GetPiece(coordinate));

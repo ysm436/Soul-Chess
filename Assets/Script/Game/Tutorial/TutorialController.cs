@@ -76,6 +76,8 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
     void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
         if (tutorialManager.isMoved)
             TurnEnd();
         else

@@ -7,6 +7,8 @@ public class CancelButton : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
         GameBoard.instance.myController.CancelUseCard();
         Hide();
     }
