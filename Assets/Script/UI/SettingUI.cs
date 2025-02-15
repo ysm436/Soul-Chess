@@ -47,10 +47,14 @@ public class SettingUI : MonoBehaviour
 
         blocker.gameObject.SetActive(isEnabledSetting);
         gameObject.SetActive(isEnabledSetting);
+
+        if (isEnabledSetting && SceneManager.GetActiveScene().name == "PvEGameScene")
+            Time.timeScale = 0;
     }
 
     public void QuitSettingUI()
     {
+        Time.timeScale = 1;
         isEnabledSetting = false;
         blocker.gameObject.SetActive(isEnabledSetting);
         gameObject.SetActive(isEnabledSetting);

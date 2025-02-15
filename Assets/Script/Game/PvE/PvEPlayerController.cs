@@ -419,7 +419,8 @@ public class PvEPlayerController : PlayerController
         yield return CheckBlocker();
         yield return new WaitForSeconds(4f);
         //카드 쓰기
-        yield return UseCardComputer();
+        if(GameBoard.instance.ComputerData().hand.Count > 0)
+            yield return UseCardComputer();
         yield return CheckBlocker();
         //체스 말 이동
         yield return MovePieceComputer();
