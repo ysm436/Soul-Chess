@@ -104,6 +104,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
     {
         if ((GameBoard.instance.isWhiteTurn && whiteController.enabled) || (!GameBoard.instance.isWhiteTurn && blackController.enabled))
         {
+            GameBoard.instance.myController.CancelUseCard();
+            GameBoard.instance.cancelButton.Hide();
             OnTurnEndClicked();
         }
     }

@@ -98,7 +98,11 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     public void TurnEnd()
     {
         if (GameBoard.instance.isActivePlayer)
+        {
+            GameBoard.instance.myController.CancelUseCard();
+            GameBoard.instance.cancelButton.Hide();
             photonView.RPC("OnTurnEndClicked", RpcTarget.All);
+        }
     }
 
     [PunRPC]

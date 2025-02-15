@@ -626,20 +626,23 @@ abstract public class ChessPiece : TargetableObject
 
     public IEnumerator SetFadeAccessory(bool fadeAway)
     {
-        if (fadeAway)
+        if (accessory != null)
         {
-            for (float i = 1f; i >= 0; i -= Time.deltaTime * 3)
+            if (fadeAway)
             {
-                accessory.color = new Color(1, 1, 1, i);
-                yield return null;
+                for (float i = 1f; i >= 0; i -= Time.deltaTime * 3)
+                {
+                    accessory.color = new Color(1, 1, 1, i);
+                    yield return null;
+                }
             }
-        }
-        else
-        {
-            for (float i = 0; i <= 1f; i += Time.deltaTime * 3)
+            else
             {
-                accessory.color = new Color(1, 1, 1, i);
-                yield return null;
+                for (float i = 0; i <= 1f; i += Time.deltaTime * 3)
+                {
+                    accessory.color = new Color(1, 1, 1, i);
+                    yield return null;
+                }
             }
         }
     }
