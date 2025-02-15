@@ -21,8 +21,8 @@ public class DeckManager : MonoBehaviour
     [SerializeField] private GameObject deckObj;
     [SerializeField] private TMP_InputField deckNameInputfield;
 
-    [SerializeField] public GameObject cautionPanel;
-    [SerializeField] public TextMeshProUGUI cautionText;
+    public GameObject cautionPanel;
+    public TextMeshProUGUI cautionText;
     [SerializeField] private TextMeshProUGUI cardCountText;
     [SerializeField] private Text legendaryCountText;
     [SerializeField] private Text mythicalCountText;
@@ -97,6 +97,7 @@ public class DeckManager : MonoBehaviour
             }
             else
             {
+                Destroy(cardInfo.gameObject);
                 cautionPanel.SetActive(true);
             }
         }
