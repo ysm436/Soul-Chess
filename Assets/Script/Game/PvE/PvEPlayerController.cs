@@ -502,10 +502,12 @@ public class PvEPlayerController : PlayerController
         {
             if (UseCard(card))
             {
+                gameBoard.ShowCard(card);
                 yield return new WaitForSeconds(3f);
                 //int randNum = UnityEngine.Random.Range(0, targetableObjects.Count);
                 //Debug.Log(targetableObjects.Count);
                 //Debug.Log(randNum);
+                gameBoard.HideCard();
 
                 if (targetableObjects.Count > 0)
                 {
