@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
@@ -622,6 +622,26 @@ abstract public class ChessPiece : TargetableObject
     public void SelectedEffectOff()
     {
         pieceMat.SetFloat("_OutlineAlpha", 0f);
+    }
+
+    public IEnumerator SetFadeAccessory(bool fadeAway)
+    {
+        if (fadeAway)
+        {
+            for (float i = 1f; i >= 0; i -= Time.deltaTime * 3)
+            {
+                accessory.color = new Color(1, 1, 1, i);
+                yield return null;
+            }
+        }
+        else
+        {
+            for (float i = 0; i <= 1f; i += Time.deltaTime * 3)
+            {
+                accessory.color = new Color(1, 1, 1, i);
+                yield return null;
+            }
+        }
     }
 
 
