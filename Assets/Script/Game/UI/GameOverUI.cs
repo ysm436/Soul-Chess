@@ -34,6 +34,7 @@ public class GameOverUI : MonoBehaviour
     [PunRPC]
     public void ShowWin(bool isSurrender)
     {
+        Time.timeScale = 0;
         blocker.SetActive(true);
         gameObject.SetActive(true);
         WinAnnounce.SetActive(true);
@@ -42,6 +43,7 @@ public class GameOverUI : MonoBehaviour
     }
     public void ShowDefeated()
     {
+        Time.timeScale = 0;
         blocker.SetActive(true);
         gameObject.SetActive(true);
         DefeatedAnnounce.SetActive(true);
@@ -49,6 +51,7 @@ public class GameOverUI : MonoBehaviour
     public void OnExit()
     {
         Destroy(GameBoard.instance.gameObject);
+        Time.timeScale = 1;
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "PvEGameScene")
         {
             GameManager.instance.LoadMainScene();

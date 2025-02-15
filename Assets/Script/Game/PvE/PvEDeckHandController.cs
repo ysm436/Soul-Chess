@@ -105,7 +105,7 @@ public class PvEDeckHandController : MonoBehaviour
                 //제한 카드 예외처리
                 // 아서왕의 가호,오딘의눈 카드 아직 없던데
                 if (card is Hell || card is ToneDeafBard || card is WilhelmTell || card is JackFrost || card is Cain || card is GreenKnight || card is Cerberus 
-                    || card is Hades || card is Zeus || card is Surtr || card is GraceOfKingArthur || card is EyeOfOdin || card is Cerberus)
+                    || card is Hades || card is Zeus || card is Surtr || card is GraceOfKingArthur || card is EyeOfOdin)
                     continue;
 
 
