@@ -23,6 +23,8 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     public ChessTimer opponentTimer;
     public GameObject turnDisplay;
     [SerializeField] private GameObject turnCaution;
+    public Graveyard myGraveyard;
+    public Graveyard opponentGraveyard;
 
     private void Awake()
     {
@@ -40,7 +42,9 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             opponentSoulCost.playerColor = GameBoard.PlayerColor.Black;
             whiteController.soulOrb = mySoulOrb;
             blackController.soulOrb = opponentSoulOrb;
-            
+            myGraveyard.playerColor = GameBoard.PlayerColor.White;
+            opponentGraveyard.playerColor = GameBoard.PlayerColor.Black;
+
             myTimer.playerColor = GameBoard.PlayerColor.White;
             opponentTimer.playerColor = GameBoard.PlayerColor.Black;
             whiteController.chessTimer = myTimer;
@@ -54,6 +58,8 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
             opponentSoulCost.playerColor = GameBoard.PlayerColor.White;
             blackController.soulOrb = mySoulOrb;
             whiteController.soulOrb = opponentSoulOrb;
+            myGraveyard.playerColor = GameBoard.PlayerColor.Black;
+            opponentGraveyard.playerColor = GameBoard.PlayerColor.White;
 
             myTimer.playerColor = GameBoard.PlayerColor.Black;
             opponentTimer.playerColor = GameBoard.PlayerColor.White;

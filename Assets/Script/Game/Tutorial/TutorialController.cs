@@ -22,6 +22,8 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
     public SoulCost mySoulCost;
     public SoulCost opponentSoulCost;
     public GameObject turnDisplay;
+    public Graveyard myGraveyard;
+    public Graveyard opponentGraveyard;
 
     public TutorialManager tutorialManager;
 
@@ -44,6 +46,8 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.Black;
             mySoulCost.playerColor = GameBoard.PlayerColor.White;
             opponentSoulCost.playerColor = GameBoard.PlayerColor.Black;
+            myGraveyard.playerColor = GameBoard.PlayerColor.White;
+            opponentGraveyard.playerColor = GameBoard.PlayerColor.Black;
             whiteController.soulOrb = mySoulOrb;
             blackController.soulOrb = opponentSoulrOrb;
         }
@@ -53,6 +57,8 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
             opponentSoulrOrb.playerColor = GameBoard.PlayerColor.White;
             mySoulCost.playerColor = GameBoard.PlayerColor.Black;
             opponentSoulCost.playerColor = GameBoard.PlayerColor.White;
+            myGraveyard.playerColor = GameBoard.PlayerColor.Black;
+            opponentGraveyard.playerColor = GameBoard.PlayerColor.White;
             blackController.soulOrb = mySoulOrb;
             whiteController.soulOrb = opponentSoulrOrb;
         }
