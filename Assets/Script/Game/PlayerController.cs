@@ -78,6 +78,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // 튜토리얼용 함수
+    public void SetInfusingFalse()
+    {
+        isInfusing = false;
+    }
+
     public virtual void OnClickBoardSquare(Vector2Int coordinate)
     {
         if (!GameBoard.instance.isActivePlayer && !GameBoard.instance.isDebugMode)

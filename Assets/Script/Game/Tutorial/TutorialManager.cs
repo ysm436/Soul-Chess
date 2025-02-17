@@ -453,13 +453,13 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep8_1()
     {
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.215f, 0.22f);
-        anchors[1] = new Vector2(0.267f, 0.32f);
+        anchors[0] = new Vector2(0.91f, 0.92f);
+        anchors[1] = new Vector2(0.955f, 0.99f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
             "여러 효과에 대해서는\n" +
-            "도움말을 참고하세요.";
+            "오른쪽 위 도움말을 참고하세요.";
         SetTextSize(2);
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -715,13 +715,22 @@ public class TutorialManager : MonoBehaviour
                 s.OnClick = DoNothing;
             }
         }
-        var whitePlayer = FindObjectOfType<PlayerController>();
-        whitePlayer.isUsingCard = false;
+        PlayerController[] players = FindObjectsOfType<PlayerController>();
+        foreach (PlayerController player in players)
+        {
+            if (player.playerColor == PlayerColor.White)
+            {
+                player.isUsingCard = false;
+                player.SetInfusingFalse();
+            }
+        }
+
         step = 18;
         OnClickBoardSquare(coordinate);
         descriptionText.text =
             "'음치 음유시인' 카드를 사용하세요.\n";
         SetTextSize(1);
+
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
             s.OnClick = DoNothing;
@@ -753,11 +762,14 @@ public class TutorialManager : MonoBehaviour
 
     private void ProcessStep20(Vector2Int coordinate)
     {
-        for (int i = 0; i < 7; i++)
+        ClearTargetableObjects();
+        for (int i = 0; i <= 7; i++)
         {
-            for (int j = 0; j < 7; j++)
+            for (int j = 0; j <= 7; j++)
             {
                 Vector2Int pos = new Vector2Int(i, j);
+
+                if (pos == coordinate) continue;
 
                 ChessPiece currentPiece = GameBoard.instance.gameData.GetPiece(pos);
 
