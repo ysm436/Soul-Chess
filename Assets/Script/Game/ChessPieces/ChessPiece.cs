@@ -45,6 +45,17 @@ abstract public class ChessPiece : TargetableObject
             else
                 attackDamage = value;
 
+            int soulAD = 0;
+            if (soul != null)
+                soulAD = soul.AD;
+
+            if (value < soulAD + 1)
+                pieceObject.ADText.faceColor = Color.red;
+            else if (value > soulAD + 1)
+                pieceObject.ADText.faceColor = Color.green;
+            else
+                pieceObject.ADText.faceColor = Color.white;
+
             pieceObject.ADText.text = attackDamage.ToString();
         }
         get { return attackDamage; }
@@ -87,31 +98,31 @@ abstract public class ChessPiece : TargetableObject
             value -= keywordDictionary[Keyword.Type.Defense];
         } */
 
-        _currentHP -= value;
+        currentHP -= value;
 
         if (AffectByHades) //하데스 능력을 받을 경우
         {
-            if (_currentHP <= 0)
+            if (currentHP <= 0)
             {
-                _currentHP = 1;
+                currentHP = 1;
             }
         }
 
-        if (_currentHP > 0)
-            pieceObject.HPText.text = _currentHP.ToString();
+        if (currentHP > 0)
+            pieceObject.HPText.text = currentHP.ToString();
         else
             Kill();
     }
 
     public void AddHP(int value)
     {
-        _currentHP += value;
-        if (_currentHP > maxHP) _currentHP = maxHP;
+        currentHP += value;
+        if (currentHP > maxHP) currentHP = maxHP;
 
-        pieceObject.HPText.text = _currentHP.ToString();
+        pieceObject.HPText.text = currentHP.ToString();
     }
 
-    public int GetHP { get => _currentHP; }
+    public int GetHP { get => currentHP; }
     /*public int HP 
     {
         set
@@ -125,18 +136,38 @@ abstract public class ChessPiece : TargetableObject
         get { return _currentHP; }
     }*/
     private int _currentHP;
+    public int currentHP
+    {
+        set
+        {
+            _currentHP = value;
+            int soulHP = 0;
+            if (soul != null)
+                soulHP = soul.HP;
+            if (value < maxHP)
+                pieceObject.HPText.faceColor = Color.red;
+            else if (maxHP > soulHP + 1)
+                pieceObject.HPText.faceColor = Color.green;
+            else
+                pieceObject.HPText.faceColor = Color.white;
+        }
+        get 
+        {
+            return _currentHP;
+        }
+    }
     public int maxHP
     {
         set
         {
-            if (value > _maxHP)
-                _currentHP += (value - _maxHP);
-            else
-                _currentHP = value < _currentHP ? value : _currentHP;
-
+            int pastMaxHP = _maxHP;
             _maxHP = value;
+            if (value > pastMaxHP)
+                currentHP += (value - pastMaxHP);
+            else
+                currentHP = value < currentHP ? value : currentHP;
 
-            pieceObject.HPText.text = _currentHP.ToString();
+            pieceObject.HPText.text = currentHP.ToString();
         }
         get
         {
