@@ -22,6 +22,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
     public GameObject turnDisplay;
     [SerializeField] private GameObject blocker;
     [SerializeField] private GameObject turnCaution;
+    public Graveyard myGraveyard;
+    public Graveyard opponentGraveyard;
 
     private void Awake()
     {
@@ -40,6 +42,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
 
             myTimer.playerColor = GameBoard.PlayerColor.White;
             opponentTimer.playerColor = GameBoard.PlayerColor.Black;
+            myGraveyard.playerColor = GameBoard.PlayerColor.White;
+            opponentGraveyard.playerColor = GameBoard.PlayerColor.Black;
             whiteController.chessTimer = myTimer;
             blackController.chessTimer = opponentTimer;
             ChangeComputerTurn(false);
@@ -55,6 +59,8 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
 
             myTimer.playerColor = GameBoard.PlayerColor.Black;
             opponentTimer.playerColor = GameBoard.PlayerColor.White;
+            myGraveyard.playerColor = GameBoard.PlayerColor.Black;
+            opponentGraveyard.playerColor = GameBoard.PlayerColor.White;
             blackController.chessTimer = myTimer;
             whiteController.chessTimer = opponentTimer;
             ChangeComputerTurn(true);

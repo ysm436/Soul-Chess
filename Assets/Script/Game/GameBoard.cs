@@ -165,21 +165,24 @@ public class GameBoard : MonoBehaviour
         if (targetPiece.pieceColor == PlayerColor.White)
         {
             gameData.whiteGraveyard.Add(targetPiece);
-            targetPiece.transform.GetChild(0).gameObject.SetActive(false);
-            targetPiece.transform.GetChild(1).gameObject.SetActive(false);
-            targetPiece.coordinate = Vector2Int.right * (gameData.whiteGraveyard.Count - 1) + Vector2Int.down;
+            myController.IncreaseGraveyard(PlayerColor.White);
+            //targetPiece.transform.GetChild(0).gameObject.SetActive(false);
+            //targetPiece.transform.GetChild(1).gameObject.SetActive(false);
+            //targetPiece.coordinate = Vector2Int.right * (gameData.whiteGraveyard.Count - 1) + Vector2Int.down;
         }
         else
         {
             gameData.blackGraveyard.Add(targetPiece);
-            targetPiece.transform.GetChild(0).gameObject.SetActive(false);
-            targetPiece.transform.GetChild(1).gameObject.SetActive(false);
-            targetPiece.coordinate = Vector2Int.right * (gameData.blackGraveyard.Count - 1) + Vector2Int.up * gameData.BOARD_SIZE_HEIGHT;
+            myController.IncreaseGraveyard(PlayerColor.Black);
+            //targetPiece.transform.GetChild(0).gameObject.SetActive(false);
+            //targetPiece.transform.GetChild(1).gameObject.SetActive(false);
+            //targetPiece.coordinate = Vector2Int.right * (gameData.blackGraveyard.Count - 1) + Vector2Int.up * gameData.BOARD_SIZE_HEIGHT;
         }
 
-        targetPiece.effectIcon.RemoveIcon();
-        targetPiece.DestroyMoveRestrictionIcon();
-        targetPiece.transform.position = chessBoard.GetPositionUsingCoordinate(targetPiece.coordinate);
+        targetPiece.gameObject.SetActive(false);
+        //targetPiece.effectIcon.RemoveIcon();
+        //targetPiece.DestroyMoveRestrictionIcon();
+        //targetPiece.transform.position = chessBoard.GetPositionUsingCoordinate(targetPiece.coordinate);
     }
 
     Card showedCard = null;

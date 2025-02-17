@@ -593,4 +593,22 @@ public class PlayerController : MonoBehaviour
     {
         OnOpponentTurnEnd?.Invoke();
     }
+
+    public virtual void IncreaseGraveyard(GameBoard.PlayerColor color)
+    {
+        if (SceneManager.GetActiveScene().name == "TutorialScene")
+        {
+            if (color == playerColor)
+                GetComponentInParent<TutorialController>().myGraveyard.IncreaseGraveyard();
+            else
+                GetComponentInParent<TutorialController>().opponentGraveyard.IncreaseGraveyard();
+        }
+        else
+        {
+            if (color == playerColor)
+                GetComponentInParent<LocalController>().myGraveyard.IncreaseGraveyard();
+            else
+                GetComponentInParent<LocalController>().opponentGraveyard.IncreaseGraveyard();
+        }
+    }
 }

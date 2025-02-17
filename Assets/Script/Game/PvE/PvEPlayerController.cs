@@ -620,6 +620,18 @@ public class PvEPlayerController : PlayerController
             }
         }
 
+        if (usingCard is UtgardaLoki)
+        {
+            for (int i = 0; i < targetableObjects.Count; i++)
+            {
+                if ((gameBoard.gameData.GetPiece(targetableObjects[i].coordinate).pieceType == ChessPiece.PieceType.King))
+                {
+                    int weight = targetablePieces[i].Item1 + 2000;
+                    targetablePieces.Add(new Tuple<int, Vector2Int>(weight, targetableObjects[i].coordinate));
+                }
+            }
+        }
+
         targetablePieces.Sort((a, b) => b.Item1.CompareTo(a.Item1));
 
         foreach (var t in targetablePieces)
@@ -785,5 +797,13 @@ public class PvEPlayerController : PlayerController
             }
         }
         return true;
+    }
+
+    public override void IncreaseGraveyard(GameBoard.PlayerColor color)
+    {
+        if(color == playerColor)
+            GetComponentInParent<PvELocalController>().myGraveyard.IncreaseGraveyard();
+        else
+            GetComponentInParent<PvELocalController>().opponentGraveyard.IncreaseGraveyard();
     }
 }
