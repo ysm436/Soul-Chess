@@ -516,7 +516,7 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep11(Vector2Int coordinate)
     {
         SetShadow(5, 1);
-
+        GameBoard.instance.HideExplainUI();
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
             if (s.coordinate == coordinate)
@@ -807,7 +807,7 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep21(Vector2Int coordinate)
     {
         ClearTargetableObjects();
-
+        GameBoard.instance.HideExplainUI();
         SetShadow(-1, -1, isTurnButton: true);
 
         foreach (var s in GameBoard.instance.gameData.boardSquares)
@@ -942,7 +942,7 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep27(Vector2Int coordinate)
     {
         SetShadow(1, 4);
-
+        GameBoard.instance.HideExplainUI();
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
             if (s.coordinate == coordinate)
@@ -1231,7 +1231,8 @@ public class TutorialManager : MonoBehaviour
                 isInfusing = true;
                 (usingCard as SoulCard).gameObject.SetActive(false);
                 targetingEffect = (usingCard as SoulCard).infusion;
-                ActiveTargeting(); // 카드 강림 대상 선택
+                GameBoard.instance.ShowExplainUI("영혼을 부여할 기물을 선택하세요.");
+                ActiveTargeting(true); // 카드 강림 대상 선택
             }
             else // 소울 카드 내고 -> 강림 대상 선택 후
             { 
@@ -1248,6 +1249,7 @@ public class TutorialManager : MonoBehaviour
                     //영혼 카드는 강림 선택 시점이 여기인듯
                     (usingCard as SoulCard).gameObject.SetActive(false);
                     targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
+                    GameBoard.instance.ShowExplainUI("효과를 적용할 대상을 선택하세요.");
                     ActiveTargeting();
                 }
                 else
@@ -1271,6 +1273,7 @@ public class TutorialManager : MonoBehaviour
 
                 usingCard.gameObject.SetActive(false); //마법 카드는 여기인듯?
                 targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
+                GameBoard.instance.ShowExplainUI("효과를 적용할 대상을 선택하세요.");
                 ActiveTargeting();
             }
             else
@@ -1349,14 +1352,14 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private void ActiveTargeting()
+    private void ActiveTargeting(bool infuseEffect = false)
     {
         ClearMovableCoordniates();
 
         targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
         //타겟 효과가 부정적인지 파라미터 전달
-        SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
+        SetTargetableObjects(true, targetingEffect.IsNegativeEffect, infuseEffect);
     }
 
     void SetChosenPiece(ChessPiece targetPiece)
@@ -1398,17 +1401,27 @@ public class TutorialManager : MonoBehaviour
             sq.isMovable = false;
         }
     }
-    void SetTargetableObjects(bool isTargetable, bool isNegativeEffect)
+    void SetTargetableObjects(bool isTargetable, bool isNegativeEffect, bool infuseEffect = false)
     {
-        foreach (var obj in targetableObjects)
-            if (isTargetable)
+        if (infuseEffect)
+        {
+            foreach (var obj in targetableObjects)
             {
-                //타겟 효과가 부정적인지 체크
-                if (isNegativeEffect)
-                    GameBoard.instance.GetBoardSquare(obj.coordinate).isNegativeTargetable = true;
-                else
-                    GameBoard.instance.GetBoardSquare(obj.coordinate).isPositiveTargetable = true;
+                GameBoard.instance.GetBoardSquare(obj.coordinate).isInfuseTargetable = true;
             }
+        }
+        else
+        {
+            foreach (var obj in targetableObjects)
+                if (isTargetable)
+                {
+                    //타겟 효과가 부정적인지 체크
+                    if (isNegativeEffect)
+                        GameBoard.instance.GetBoardSquare(obj.coordinate).isNegativeTargetable = true;
+                    else
+                        GameBoard.instance.GetBoardSquare(obj.coordinate).isPositiveTargetable = true;
+                }
+        }
     }
 
     public void MovePiece(int src_x, int src_y, int dst_x, int dst_y, bool isAttack)
