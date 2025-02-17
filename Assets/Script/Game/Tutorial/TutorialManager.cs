@@ -340,6 +340,19 @@ public class TutorialManager : MonoBehaviour
         SetTextSize(7);
         nextButton.SetActive(true);
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep3_1);
+    }
+
+    public void ProcessStep3_1()
+    {
+        SetShadow(-1, -1, isCard: true);
+
+        descriptionText.text =
+            "손패는 최대 8장까지\n" +
+            "가질 수 있습니다.";
+        SetTextSize(1);
+
+        nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep4);
     }
 
@@ -369,8 +382,8 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);*/
 
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.215f, 0.66f);
-        anchors[1] = new Vector2(0.262f, 0.75f);
+        anchors[0] = new Vector2(0.085f, 0.6f);
+        anchors[1] = new Vector2(0.14f, 0.675f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         ShowCard(viking);
@@ -434,7 +447,25 @@ public class TutorialManager : MonoBehaviour
         SetTextSize(4);
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep8_1);
+    }
+
+    private void ProcessStep8_1()
+    {
+        Vector2[] anchors = new Vector2[2];
+        anchors[0] = new Vector2(0.215f, 0.22f);
+        anchors[1] = new Vector2(0.267f, 0.32f);
+        SetShadow(-1, -1, isSpecific: true, anchors: anchors);
+
+        descriptionText.text =
+            "여러 효과에 대해서는\n" +
+            "도움말을 참고하세요.";
+        SetTextSize(2);
+
+        nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep9);
+
+
     }
 
     private void ProcessStep9()
@@ -544,6 +575,14 @@ public class TutorialManager : MonoBehaviour
 
     private void ProcessStep12_1(Vector2Int coordinate)
     {
+        foreach (var s in GameBoard.instance.gameData.boardSquares)
+        {
+            if (s.coordinate == coordinate)
+            {
+                s.OnClick = DoNothing;
+            }
+        }
+
         SetShadow(5, 3);
 
         OnClickBoardSquare(coordinate);
@@ -651,6 +690,14 @@ public class TutorialManager : MonoBehaviour
 
     private void ProcessStep17_1(Vector2Int coordinate)
     {
+        foreach (var s in GameBoard.instance.gameData.boardSquares)
+        {
+            if (s.coordinate == coordinate)
+            {
+                s.OnClick = DoNothing;
+            }
+        }
+
         SetShadow(1, 4);
 
         OnClickBoardSquare(coordinate);
@@ -686,7 +733,7 @@ public class TutorialManager : MonoBehaviour
         blockCardUse.SetActive(true);
         SetShadow(1, 4);
 
-        ShowCard(bard);
+        //ShowCard(bard);
         descriptionText.text =
             "기물에 영혼을 부여하세요.\n";
         SetTextSize(1);
