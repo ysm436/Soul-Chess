@@ -10,6 +10,7 @@ public class BoardSquareOutline : MonoBehaviour
         negative,
         movable,
         positive,
+        infusing,
         none
     };
     public List<Sprite> sprites;
@@ -23,5 +24,13 @@ public class BoardSquareOutline : MonoBehaviour
     public void changeOutline(TargetableStates states)
     {
         spriteRenderer.sprite = sprites[(int)states];
+        if ((int)states == 3)
+        {
+            GetComponent<Renderer>().material.SetFloat("_HsvShift", 284f);
+        }
+        else
+        {
+            GetComponent<Renderer>().material.SetFloat("_HsvShift", 0f);
+        }
     }
 }
