@@ -54,6 +54,21 @@ public class BoardSquare : TargetableObject, IPointerEnterHandler, IPointerExitH
         }
     }
 
+    public bool isInfuseTargetable
+    {
+        set
+        {
+            if (value)
+            {
+                outline.changeOutline(BoardSquareOutline.TargetableStates.infusing);
+            }
+            else
+            {
+                outline.changeOutline(BoardSquareOutline.TargetableStates.none);
+            }
+        }
+    }
+
     public Action<Vector2Int> OnClick
     {
         set

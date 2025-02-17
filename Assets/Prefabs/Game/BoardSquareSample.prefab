@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: c825a88ae4715ab419afdceba6de8d66, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -101,8 +101,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 610f7a920d7d20448aa4a6fc98ac4431, type: 3}
   - {fileID: 21300000, guid: 2bd9ac80e78d9d845a3b7e4bfc9a5fa9, type: 3}
   - {fileID: 21300000, guid: eb92e4dbe5518a349a15b21a3a4b76ea, type: 3}
+  - {fileID: 21300000, guid: eb92e4dbe5518a349a15b21a3a4b76ea, type: 3}
   - {fileID: 0}
-  spriteRenderer: {fileID: 7058170524394595659}
 --- !u!1 &5036848621774920484
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,5 +247,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d19f43ecf545742933b79855dec5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 5345173301977214206}
   coordinate: {x: 0, y: 0}
+  outline: {fileID: 5345173301977214206}

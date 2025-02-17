@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -247,6 +248,17 @@ public class GameBoard : MonoBehaviour
         isShowingPieceInfo = false;
 
         cardUI.gameObject.SetActive(false);
+    }
+
+    [SerializeField] private GameObject explainUI;    
+    public void ShowExplainUI(string explain)
+    {
+        explainUI.GetComponentInChildren<TextMeshProUGUI>().text = explain;
+        explainUI.SetActive(true);
+    }
+    public void HideExplainUI()
+    {
+        explainUI.SetActive(false);
     }
 
     //현재 턴 진행 중인 Enabled 플레이어 데이터 접근

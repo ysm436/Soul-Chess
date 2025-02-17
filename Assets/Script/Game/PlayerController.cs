@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
 
                 if (targetingEffect.SetTarget(target))
                 {
+                    gameBoard.HideExplainUI();
                     UseCardEffect();
                 }
                 else
@@ -112,55 +113,58 @@ public class PlayerController : MonoBehaviour
         }
         else // 이동 관련 코드
         {
-            if (chosenPiece == null)// 선택된 (아군)기물이 없을 때
+            if (!isMoved)
             {
-                if (targetPiece != null)
+                if (chosenPiece == null)// 선택된 (아군)기물이 없을 때
                 {
-                    if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
-                        if (!isMoved || (targetPiece.moveCountInThisTurn > 0 && targetPiece.moveCountInThisTurn <= targetPiece.moveCount))
-                        {
-                            SetChosenPiece(targetPiece);
-                        }
+                    if (targetPiece != null)
+                    {
+                        if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
+                            if (!isMoved || (targetPiece.moveCountInThisTurn > 0 && targetPiece.moveCountInThisTurn <= targetPiece.moveCount))
+                            {
+                                SetChosenPiece(targetPiece);
+                            }
+                    }
                 }
-            }
-            else // 선택된 (아군)기물이 있을 때
-            {
-                if (targetPiece != null)
+                else // 선택된 (아군)기물이 있을 때
                 {
-                    if (chosenPiece == targetPiece)
+                    if (targetPiece != null)
                     {
-                        targetPiece.SelectedEffectOff();
-                        chosenPiece = null;
-                        ClearMovableCoordniates();
-                    }
-                    else if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
-                    {
-                        chosenPiece.SelectedEffectOff();
-                        SetChosenPiece(targetPiece);
-                    }
-                    else// 고른 기물이 적일 때
-                    {
-                        if (IsMovableCoordniate(coordinate))
+                        if (chosenPiece == targetPiece)
                         {
-                            chosenPiece.SelectedEffectOff();
-                            Debug.Log("Move to Attack");
-                            photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
-
+                            targetPiece.SelectedEffectOff();
                             chosenPiece = null;
                             ClearMovableCoordniates();
                         }
+                        else if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
+                        {
+                            chosenPiece.SelectedEffectOff();
+                            SetChosenPiece(targetPiece);
+                        }
+                        else// 고른 기물이 적일 때
+                        {
+                            if (IsMovableCoordniate(coordinate))
+                            {
+                                chosenPiece.SelectedEffectOff();
+                                Debug.Log("Move to Attack");
+                                photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
+
+                                chosenPiece = null;
+                                ClearMovableCoordniates();
+                            }
+                        }
                     }
-                }
-                else // 고른 칸이 빈칸일때
-                {
-                    chosenPiece.SelectedEffectOff();
-                    if (IsMovableCoordniate(coordinate))
+                    else // 고른 칸이 빈칸일때
                     {
-                        Debug.Log("Move");
-                        photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
+                        chosenPiece.SelectedEffectOff();
+                        if (IsMovableCoordniate(coordinate))
+                        {
+                            Debug.Log("Move");
+                            photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
+                        }
+                        chosenPiece = null;
+                        ClearMovableCoordniates();
                     }
-                    chosenPiece = null;
-                    ClearMovableCoordniates();
                 }
             }
         }
@@ -240,17 +244,27 @@ public class PlayerController : MonoBehaviour
             sq.isMovable = false;
         }
     }
-    void SetTargetableObjects(bool isTargetable, bool isNegativeEffect)
+    void SetTargetableObjects(bool isTargetable, bool isNegativeEffect, bool infuseEffect = false)
     {
-        foreach (var obj in targetableObjects)
-            if (isTargetable)
+        if (infuseEffect)
+        {
+            foreach (var obj in targetableObjects)
             {
-                //타겟 효과가 부정적인지 체크
-                if (isNegativeEffect)
-                    GameBoard.instance.GetBoardSquare(obj.coordinate).isNegativeTargetable = true;
-                else
-                    GameBoard.instance.GetBoardSquare(obj.coordinate).isPositiveTargetable = true;
+                GameBoard.instance.GetBoardSquare(obj.coordinate).isInfuseTargetable = true;
             }
+        }
+        else
+        {
+            foreach (var obj in targetableObjects)
+                if (isTargetable)
+                {
+                    //타겟 효과가 부정적인지 체크
+                    if (isNegativeEffect)
+                        GameBoard.instance.GetBoardSquare(obj.coordinate).isNegativeTargetable = true;
+                    else
+                        GameBoard.instance.GetBoardSquare(obj.coordinate).isPositiveTargetable = true;
+                }
+        }
     }
     public virtual bool UseCard(Card card)
     {
@@ -285,7 +299,8 @@ public class PlayerController : MonoBehaviour
                 isInfusing = true;
                 (usingCard as SoulCard).gameObject.SetActive(false);
                 targetingEffect = (usingCard as SoulCard).infusion;
-                ActiveTargeting(); // 카드 강림 대상 선택
+                gameBoard.ShowExplainUI("영혼을 부여할 기물을 선택하세요.");
+                ActiveTargeting(true); // 카드 강림 대상 선택
             }
             else // 소울 카드 내고 -> 강림 대상 선택 후
             {
@@ -302,6 +317,7 @@ public class PlayerController : MonoBehaviour
                     //영혼 카드는 강림 선택 시점이 여기인듯
                     (usingCard as SoulCard).gameObject.SetActive(false);
                     targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
+                    gameBoard.ShowExplainUI("효과를 적용할 대상을 선택하세요.");
                     ActiveTargeting();
                 }
                 else
@@ -325,6 +341,7 @@ public class PlayerController : MonoBehaviour
 
                 usingCard.gameObject.SetActive(false); //마법 카드는 여기인듯?
                 targetingEffect = usingCard.EffectOnCardUsed as TargetingEffect;
+                gameBoard.ShowExplainUI("효과를 적용할 대상을 선택하세요.");
                 ActiveTargeting();
             }
             else
@@ -335,21 +352,22 @@ public class PlayerController : MonoBehaviour
 
         return true;
     }
-    private void ActiveTargeting()
+    private void ActiveTargeting(bool infuseEffect = false)
     {
         ClearMovableCoordniates();
 
         targetableObjects = targetingEffect.GetTargetType().GetTargetList(playerColor);
 
         //타겟 효과가 부정적인지 파라미터 전달
-        SetTargetableObjects(true, targetingEffect.IsNegativeEffect);
+        SetTargetableObjects(true, targetingEffect.IsNegativeEffect, infuseEffect);
     }
     public virtual void CancelUseCard()
     {
         if (usingCard == null)
             return;
         ClearTargetableObjects();
-
+        
+        gameBoard.HideExplainUI();
         GameBoard.instance.HideCard();
         usingCard.gameObject.SetActive(true);
         GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
@@ -427,7 +445,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(infusionTargetCoordinate);
 
             (card as SoulCard).infusion.SetTargetsByCoordinate(new Vector2Int[] { infusionTargetCoordinate }, new TargetingEffect.TargetType[] { TargetingEffect.TargetType.Piece });
-            gameBoard.gameData.boardSquares[infusionTargetCoordinate.x, infusionTargetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.movable);
+            gameBoard.gameData.boardSquares[infusionTargetCoordinate.x, infusionTargetCoordinate.y].outline.changeOutline(BoardSquareOutline.TargetableStates.infusing);
 
             (card as SoulCard).infusion.EffectAction(gameBoard.opponentController);
 
