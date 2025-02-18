@@ -251,6 +251,21 @@ abstract public class ChessPiece : TargetableObject
         GameBoard.instance.myController.OnMyTurnStart += () => moveCountInThisTurn = 0;
     }
 
+    public void SetChessInfo(ChessPiece piece)
+    {
+        SetSoul(piece.soul, piece.accessory.sprite);
+        AD = piece.AD;
+        AffectByAbel = piece.AffectByAbel;
+        AffectByHades = piece.AffectByHades;
+        maxHP = piece.maxHP;
+        currentHP = piece.currentHP;
+        moveCountInThisTurn = piece.moveCountInThisTurn;
+        moveCount = piece.moveCount;
+
+        pieceObject.HPText.text = _currentHP.ToString();
+        pieceObject.ADText.text = attackDamage.ToString();
+    }
+
     /// <summary>
     ///     해당 기물이 이동할 수 있는 좌표를 반환하는 함수 
     /// </summary>
