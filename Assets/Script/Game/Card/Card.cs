@@ -128,12 +128,12 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                 if (!TryUse())
                 {
                     //카드 원위치
-                    GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
+                    GameBoard.instance.gameData.myPlayerData.UpdateOneCardPosition(this);
                 }
             }
             else
             {
-                GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
+                GameBoard.instance.gameData.myPlayerData.UpdateOneCardPosition(this);
             }
 
             isDragging = false;

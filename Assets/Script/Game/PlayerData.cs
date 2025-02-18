@@ -272,4 +272,18 @@ public class PlayerData
     {
         targetPiece.SpellAttacked((damage + spellDamageIncrease) * spellDamageCoefficient);
     }
+
+    public void UpdateOneCardPosition(Card targetCard)
+    {
+        float anchor_x;
+
+        if (hand.Count == 0)
+            anchor_x = 0;
+        else if (hand.Count % 2 == 0)
+            anchor_x = -(hand.Count / 2f - 0.5f) * 0.5f;
+        else
+            anchor_x = -(hand.Count / 2f) * 0.5f;
+
+        targetCard.gameObject.transform.localPosition = new Vector3(anchor_x + 0.5f * targetCard.handIndex, 0, -0.1f * targetCard.handIndex);
+    }
 }
