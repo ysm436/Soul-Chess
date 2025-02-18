@@ -619,6 +619,42 @@ public class ChessBoard : MonoBehaviour
         krakenSequence.Append(FadeOutTween());
     }
 
+    public void CheckEffect(GameObject checkUI)
+    {
+        checkUI.SetActive(true);
+        if (colorAdjustments == null)
+            volume.profile.TryGet(out colorAdjustments);
+        
+        Color startColor = colorAdjustments.colorFilter.value;
+        Color targetColor = new Color(1f, 0.588f, 0.588f);
+        Color tempColor;
+        Color originStartColor = startColor;
+        Color originTargetColor = targetColor;
+
+        Sequence redFilterSeq = DOTween.Sequence();
+
+        Tween redFilter1 = DOTween.To(() => startColor, x => 
+        {
+            tempColor = x;
+            colorAdjustments.colorFilter.value = tempColor;
+        }, originTargetColor, 0.5f);
+
+        Tween redFilter2 = DOTween.To(() => targetColor, x => 
+            {
+                Debug.Log(x);
+                tempColor = x;
+                colorAdjustments.colorFilter.value = tempColor;
+            }, originStartColor, 0.5f);
+
+        Tween checkOff = DOVirtual.DelayedCall(0f, () => {
+                checkUI.SetActive(false);
+            });
+        
+        redFilterSeq.Append(redFilter1);
+        redFilterSeq.Append(redFilter2);
+        redFilterSeq.Append(checkOff);
+    }
+
     public List<ChessPiece> GetAllPieces(GameBoard.PlayerColor color)
     {
         List<ChessPiece> chessPieces = new List<ChessPiece>();

@@ -678,6 +678,23 @@ abstract public class ChessPiece : TargetableObject
         }
     }
 
+    public bool SearchCheck()
+    {
+        bool checkSignal = false;
+        List<Vector2Int> movableCoordinateList = GetMovableCoordinates();
+
+        foreach (var coordinate in movableCoordinateList)
+        {
+            ChessPiece target = GameBoard.instance.gameData.GetPiece(coordinate);
+            if (target != null && target.pieceType == PieceType.King && target.pieceColor != pieceColor)
+            {
+                if (target.GetKeyword(Keyword.Type.Shield) != 1 && target.GetHP <= AD && !target.isRevivable)
+                    checkSignal = true;
+            }
+        }
+        return checkSignal;
+    }
+
 
     [Flags]
     public enum PieceType

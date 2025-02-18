@@ -119,58 +119,55 @@ public class PlayerController : MonoBehaviour
         }
         else // 이동 관련 코드
         {
-            if (!isMoved)
+            if (chosenPiece == null)// 선택된 (아군)기물이 없을 때
             {
-                if (chosenPiece == null)// 선택된 (아군)기물이 없을 때
+                if (targetPiece != null)
                 {
-                    if (targetPiece != null)
-                    {
-                        if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
-                            if (!isMoved || (targetPiece.moveCountInThisTurn > 0 && targetPiece.moveCountInThisTurn <= targetPiece.moveCount))
-                            {
-                                SetChosenPiece(targetPiece);
-                            }
-                    }
-                }
-                else // 선택된 (아군)기물이 있을 때
-                {
-                    if (targetPiece != null)
-                    {
-                        if (chosenPiece == targetPiece)
+                    if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
+                        if (!isMoved || (targetPiece.moveCountInThisTurn > 0 && targetPiece.moveCountInThisTurn <= targetPiece.moveCount))
                         {
-                            targetPiece.SelectedEffectOff();
-                            chosenPiece = null;
-                            ClearMovableCoordniates();
-                        }
-                        else if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
-                        {
-                            chosenPiece.SelectedEffectOff();
                             SetChosenPiece(targetPiece);
                         }
-                        else// 고른 기물이 적일 때
-                        {
-                            if (IsMovableCoordniate(coordinate))
-                            {
-                                chosenPiece.SelectedEffectOff();
-                                Debug.Log("Move to Attack");
-                                photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
-
-                                chosenPiece = null;
-                                ClearMovableCoordniates();
-                            }
-                        }
-                    }
-                    else // 고른 칸이 빈칸일때
+                }
+            }
+            else // 선택된 (아군)기물이 있을 때
+            {
+                if (targetPiece != null)
+                {
+                    if (chosenPiece == targetPiece)
                     {
-                        chosenPiece.SelectedEffectOff();
-                        if (IsMovableCoordniate(coordinate))
-                        {
-                            Debug.Log("Move");
-                            photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
-                        }
+                        targetPiece.SelectedEffectOff();
                         chosenPiece = null;
                         ClearMovableCoordniates();
                     }
+                    else if (IsMyPiece(targetPiece))// 고른 기물이 아군일때
+                    {
+                        chosenPiece.SelectedEffectOff();
+                        SetChosenPiece(targetPiece);
+                    }
+                    else// 고른 기물이 적일 때
+                    {
+                        if (IsMovableCoordniate(coordinate))
+                        {
+                            chosenPiece.SelectedEffectOff();
+                            Debug.Log("Move to Attack");
+                            photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, true);
+
+                            chosenPiece = null;
+                            ClearMovableCoordniates();
+                        }
+                    }
+                }
+                else // 고른 칸이 빈칸일때
+                {
+                    chosenPiece.SelectedEffectOff();
+                    if (IsMovableCoordniate(coordinate))
+                    {
+                        Debug.Log("Move");
+                        photonView.RPC("MovePiece", RpcTarget.All, chosenPiece.coordinate.x, chosenPiece.coordinate.y, coordinate.x, coordinate.y, false);
+                    }
+                    chosenPiece = null;
+                    ClearMovableCoordniates();
                 }
             }
         }
@@ -210,6 +207,7 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.soundManager.PlaySFX("Move", pitch: 2.0f);
             gameBoard.chessBoard.MovePieceAnimation(srcPiece);
         }
+        gameBoard.FindCheck();
     }
     void SetChosenPiece(ChessPiece targetPiece)
     {
@@ -429,7 +427,7 @@ public class PlayerController : MonoBehaviour
 
 
         GameBoard.instance.HideCard();
-
+        gameBoard.FindCheck();
     }
 
     [PunRPC]
@@ -490,6 +488,7 @@ public class PlayerController : MonoBehaviour
             card.Destroy();
 
         Invoke("HideRemoteUsedCard", 2f);
+        gameBoard.FindCheck();
     }
     private void HideRemoteUsedCard()
     {

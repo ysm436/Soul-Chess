@@ -250,7 +250,7 @@ public class GameBoard : MonoBehaviour
         cardUI.gameObject.SetActive(false);
     }
 
-    [SerializeField] private GameObject explainUI;    
+    [SerializeField] private GameObject explainUI;  
     public void ShowExplainUI(string explain)
     {
         explainUI.GetComponentInChildren<TextMeshProUGUI>().text = explain;
@@ -259,6 +259,30 @@ public class GameBoard : MonoBehaviour
     public void HideExplainUI()
     {
         explainUI.SetActive(false);
+    }
+
+    [SerializeField] private GameObject checkUI;
+    private bool checkFlag = false;
+    public void FindCheck()
+    {
+        bool existCheck = false;
+
+        foreach (var piece in gameData.pieceObjects)
+        {
+            if (piece.SearchCheck())
+            {
+                existCheck = true;
+                if (checkFlag == false)
+                {
+                    chessBoard.CheckEffect(checkUI);
+                    checkFlag = true;
+                }
+                break;
+            }
+        }
+
+        if (!existCheck)
+            checkFlag = false;
     }
 
     //현재 턴 진행 중인 Enabled 플레이어 데이터 접근
