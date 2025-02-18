@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler
+public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
 {
     public static int discardCost = 2;
     [HideInInspector]
@@ -49,6 +49,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
     [HideInInspector] public bool isInSelection;
 
+    private bool isDragging;
+
     protected virtual void Awake()
     {
         cardObject = GetComponent<CardObject>();
@@ -62,7 +64,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection)
+        if (!GameBoard.instance.myController.isUsingCard && !isFlipped && !isInSelection && !isDragging)
             GameBoard.instance.ShowCard(this);
     }
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
@@ -73,6 +75,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         }
     }
 
+    /*// 카드 클릭 사용 방식
     private void OnMouseDown()
     {
         if (!isMine) return;
@@ -85,9 +88,10 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
                 GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
             }
         }
-    }
+    }*/
 
-    /*public void OnDrag(PointerEventData eventData)
+    // 카드 드래그 사용 방식
+    public void OnDrag(PointerEventData eventData)
     {
         if (!isMine) return;
 
@@ -97,7 +101,9 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
             transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
 
             GameBoard.instance.myHand.color = new Color(1, 1, 1, 0.6f);
-            GameBoard.instance.trashCan.gameObject.SetActive(true);
+            //GameBoard.instance.trashCan.gameObject.SetActive(true);
+
+            isDragging = true;
         }
     }
     public void OnEndDrag(PointerEventData eventData)
@@ -129,8 +135,10 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
             {
                 GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
             }
+
+            isDragging = false;
         }
-    }*/
+    }
 
     public void Destroy()
     {
