@@ -477,7 +477,7 @@ public class TutorialManager : MonoBehaviour
 
         RemoveShowCard();
         descriptionText.text =
-            "카드를 클릭해\n" +
+            "카드를 드래그해\n" +
             "사용할 수 있습니다.";
         SetTextSize(2);
         nextButton.gameObject.SetActive(false);
@@ -486,7 +486,7 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep10()
     {
         blockCardUse.SetActive(true);
-        GameObject.Find("CancelButton").SetActive(false);
+        //GameObject.Find("CancelButton").SetActive(false);
 
         SetShadow(4, 3);
         descriptionText.text =
@@ -728,8 +728,9 @@ public class TutorialManager : MonoBehaviour
         step = 18;
         OnClickBoardSquare(coordinate);
         descriptionText.text =
-            "'음치 음유시인' 카드를 사용하세요.\n";
-        SetTextSize(1);
+            "'음치 음유시인' 카드를\n" +
+            "드래그해 사용하세요.\n";
+        SetTextSize(2);
 
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {

@@ -374,7 +374,7 @@ public class PlayerController : MonoBehaviour
         gameBoard.HideExplainUI();
         GameBoard.instance.HideCard();
         usingCard.gameObject.SetActive(true);
-        GameBoard.instance.gameData.myPlayerData.UpdateHandPosition();
+        GameBoard.instance.gameData.myPlayerData.UpdateOneCardPosition(usingCard);
 
         isInfusing = false;
         usingCard = null;
