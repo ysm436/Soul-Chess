@@ -177,6 +177,7 @@ public class PvEPlayerController : PlayerController
             srcPiece.Move(dst_coordinate);
             gameBoard.chessBoard.MovePieceAnimation(srcPiece);
         }
+        gameBoard.FindCheck();
     }
     void SetChosenPiece(ChessPiece targetPiece)
     {
@@ -378,7 +379,7 @@ public class PvEPlayerController : PlayerController
 
 
         GameBoard.instance.HideCard();
-
+        gameBoard.FindCheck();
     }
 
     private void HideRemoteUsedCard()
