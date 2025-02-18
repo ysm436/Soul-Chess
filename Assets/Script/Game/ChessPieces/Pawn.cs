@@ -79,5 +79,10 @@ public class Pawn : ChessPiece
     {
         base.Move(targetCoordinate);
         isMoved = true;
+
+        if ((targetCoordinate.y == 7 && pieceColor == GameBoard.PlayerColor.White) || (targetCoordinate.y == 0 && pieceColor == GameBoard.PlayerColor.Black))
+        {
+            GameBoard.instance.Queening(this);
+        }
     }
 }

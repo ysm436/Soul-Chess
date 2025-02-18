@@ -186,6 +186,29 @@ public class GameBoard : MonoBehaviour
         //targetPiece.transform.position = chessBoard.GetPositionUsingCoordinate(targetPiece.coordinate);
     }
 
+    public void Queening(ChessPiece piece)
+    {
+        gameData.pieceObjects.Remove(piece);
+        piece.gameObject.SetActive(false);
+
+        GameObject pieceObj = null;
+        if (piece.pieceColor == GameBoard.PlayerColor.White)
+            pieceObj = Instantiate(whiteChessPieceList[3], chessPieceParent);
+        else
+            pieceObj = Instantiate(blackChessPieceList[3], chessPieceParent);
+
+        ChessPiece pieceComponent = pieceObj.GetComponent<ChessPiece>();
+
+        pieceComponent.coordinate = new Vector2Int(piece.coordinate.x, piece.coordinate.y);
+        gameData.TryAddPiece(pieceComponent);
+
+        pieceComponent.chessData = gameData;
+        pieceComponent.transform.position = chessBoard.GetPositionUsingCoordinate(pieceComponent.coordinate);
+
+
+        pieceComponent.SetChessInfo(piece);
+    }
+
     Card showedCard = null;
     float cardSize = 1.5f;
     [SerializeField] private CardUI cardUI;
