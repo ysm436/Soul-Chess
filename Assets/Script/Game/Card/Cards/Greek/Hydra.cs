@@ -8,6 +8,11 @@ public class Hydra : SoulCard
 
     [SerializeField] private int revivalCount = 8;
 
+    [Header("Head Accessory")]
+    [SerializeField] private Sprite twoHeadAccessory;
+    [SerializeField] private Sprite oneHeadAccessory;
+    [SerializeField] private Sprite noHeadAccessory;
+
     protected override void Awake()
     {
         base.Awake();
@@ -24,6 +29,19 @@ public class Hydra : SoulCard
             AddEffect();
             InfusedPiece.isRevivable = true;
             Debug.Log("부활");
+
+            if (revivalCount == 2)
+            {
+                InfusedPiece.SetAccessory(twoHeadAccessory);
+            }
+            else if (revivalCount == 1)
+            {
+                InfusedPiece.SetAccessory(oneHeadAccessory);
+            }
+            else if (revivalCount == 0)
+            {
+                InfusedPiece.SetAccessory(noHeadAccessory);
+            }
         }
     }
 
