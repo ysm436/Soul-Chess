@@ -136,7 +136,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 1
-  description: "[\uC720\uC5B8] 8\uBC88 \uBD80\uD65C\uD569\uB2C8\uB2E4.\r"
+  description: "[\uC720\uC5B8] 3\uBC88 \uBD80\uD65C\uD569\uB2C8\uB2E4.\r"
   EffectOnCardUsed: {fileID: -6056934168951126839}
   cardKeywords: 05000000
   isInSelection: 0
@@ -151,7 +151,10 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: d357ea4c862bf4d4ba9227177b5d16cd, type: 3}
   InfusedPiece: {fileID: 0}
-  revivalCount: 8
+  revivalCount: 3
+  twoHeadAccessory: {fileID: 21300000, guid: f31fe3df56e03e342867be5f7f7d41e6, type: 3}
+  oneHeadAccessory: {fileID: 21300000, guid: b41b42fe9bb515a44895e3b9d5d7a157, type: 3}
+  noHeadAccessory: {fileID: 21300000, guid: 7c1d725f240114a4688e4cbfc5ce90d8, type: 3}
 --- !u!114 &-6056934168951126839
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -385,13 +385,7 @@ abstract public class ChessPiece : TargetableObject
         soul.transform.localPosition = Vector3.zero;
         soul.gameObject.SetActive(false);
 
-        //악세서리 생성
-        if (accessory == null)
-        {
-            accessory = Instantiate(accessoryPrefab, this.transform.position, Quaternion.identity);
-            accessory.transform.SetParent(this.transform);
-            accessory.sprite = sprite;
-        }
+        SetAccessory(sprite);
 
         targetSoul.InfusedPiece = this;
 
@@ -430,6 +424,17 @@ abstract public class ChessPiece : TargetableObject
 
         Destroy(soul);
         soul = null;
+    }
+
+    public void SetAccessory(Sprite sprite)
+    {
+        //악세서리 생성
+        if (accessory == null)
+        {
+            accessory = Instantiate(accessoryPrefab, this.transform.position, Quaternion.identity);
+            accessory.transform.SetParent(this.transform);
+        }
+        accessory.sprite = sprite;
     }
 
     // n = 1: 활성화 / n = 0: 비활성화
