@@ -594,12 +594,14 @@ public class PlayerController : MonoBehaviour
             // 턴 종료 시 상대 코스트 회복
             if (playerColor == GameBoard.PlayerColor.White)
             {
+                GameBoard.instance.gameData.playerWhite.RemoveHandCardEffect();
                 if (GameBoard.instance.gameData.playerBlack.soulOrbs < 5)
                     GameBoard.instance.gameData.playerBlack.soulOrbs++;
                 GameBoard.instance.gameData.playerBlack.soulEssence = GameBoard.instance.gameData.playerBlack.soulOrbs;
             }
             else
             {
+                GameBoard.instance.gameData.playerBlack.RemoveHandCardEffect();
                 if (GameBoard.instance.gameData.playerWhite.soulOrbs < 5)
                     GameBoard.instance.gameData.playerWhite.soulOrbs++;
                 GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;
