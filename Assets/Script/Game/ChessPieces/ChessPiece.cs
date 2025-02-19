@@ -708,8 +708,8 @@ abstract public class ChessPiece : TargetableObject
             ChessPiece target = GameBoard.instance.gameData.GetPiece(coordinate);
             if (target != null && target.pieceType == PieceType.King && target.pieceColor != pieceColor)
             {
-                if (target.GetKeyword(Keyword.Type.Shield) != 1 && target.GetHP <= AD && !target.isRevivable)
-                    checkSignal = true;
+                /* if (target.GetKeyword(Keyword.Type.Shield) != 1 && target.GetHP <= AD && !target.isRevivable) */
+                checkSignal = true;
             }
         }
         return checkSignal;

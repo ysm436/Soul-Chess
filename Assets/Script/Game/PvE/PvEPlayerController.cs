@@ -828,4 +828,38 @@ public class PvEPlayerController : PlayerController
         else
             GetComponentInParent<PvELocalController>().opponentGraveyard.IncreaseGraveyard();
     }
+
+    public void PvERandomMovePiece()
+    {
+        if (GameBoard.instance.myController == this)
+        {
+            CancelUseCard();
+        }
+
+        List<ChessPiece> pieceList = GameBoard.instance.chessBoard.GetAllPieces(playerColor);
+        
+        while (true)
+        {
+            ChessPiece randomPiece = pieceList[SynchronizedRandom.Range(0, pieceList.Count())];
+            List<Vector2Int> movableList = randomPiece.GetMovableCoordinates();
+
+            if (movableList.Count() != 0)
+            {
+                Vector2Int toMoveCoordinate = movableList[SynchronizedRandom.Range(0, movableList.Count())];
+
+                OnClickBoardSquare(randomPiece.coordinate);
+                OnClickBoardSquare(toMoveCoordinate);
+                break;
+            }
+            else
+            {
+                pieceList.Remove(randomPiece);
+
+                if (pieceList.Count() == 0)
+                    break;
+            }
+        }
+
+        GetComponentInParent<PvELocalController>().TurnEnd();
+    }
 }

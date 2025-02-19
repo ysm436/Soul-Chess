@@ -112,12 +112,12 @@ public class PlayerData
                 cardobj.typeImage.SetActive(false);
                 costCircle.SetActive(false);
 
-                yield return DOVirtual.Float(-0.1f, 1f, 0.5f, (value) => {
+                yield return DOVirtual.Float(-0.1f, 1f, 0.4f, (value) => {
                     frameMaterial.SetFloat("_FadeAmount", value);
                     illustMaterial.SetFloat("_FadeAmount", value);
                 }).WaitForCompletion();
 
-                yield return DOVirtual.Float(1f, 0f, 0.8f, (value) => {
+                yield return DOVirtual.Float(1f, 0f, 0.4f, (value) => {
                     cardobj.cardNameText.alpha = value;
                     cardobj.descriptionText.alpha = value;
                     
@@ -285,5 +285,13 @@ public class PlayerData
             anchor_x = -(hand.Count / 2f) * 0.5f;
 
         targetCard.gameObject.transform.localPosition = new Vector3(anchor_x + 0.5f * targetCard.handIndex, 0, -0.1f * targetCard.handIndex);
+    }
+
+    public void RemoveHandCardEffect()
+    {
+        foreach (var card in hand)
+        {
+            card.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_Alpha", 0f);
+        }
     }
 }
