@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChessTimer : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class ChessTimer : MonoBehaviour
 
         set {
             _minute = value;
-            timerMText.text = _minute.ToString("D2");
+            timerMText.text = _minute.ToString();
         }
     }
     private int _second;
@@ -48,10 +49,10 @@ public class ChessTimer : MonoBehaviour
                     timerText.color = Color.white;
                 }
             }
+
+            _playercolor = value;
         }
     }
-
-    private bool chargeTime = false;
 
     [SerializeField] private SpriteRenderer timerBG;
     [SerializeField] private List<Sprite> timerBGList;
@@ -62,16 +63,14 @@ public class ChessTimer : MonoBehaviour
 
     private void Awake()
     {
-        minute = 15;
+        minute = 2;
         second = 0;
     }
 
     public void StartTimer()
     {
-        if (chargeTime)
-        {
-            second = 30;
-        }
+        minute = 2;
+        second = 0;
         timerCoroutine = StartCoroutine(TimerCoroutine());
     }
 
@@ -89,14 +88,33 @@ public class ChessTimer : MonoBehaviour
             {
                 if (minute == 0)
                 {
-                    if (!chargeTime)
+                    if (SceneManager.GetActiveScene().name == "PvEGameScene")
                     {
-                        second = 30;
-                        chargeTime = true;
+                        PvELocalController localControllerComponent = GetComponentInParent<PvELocalController>();
+                        PvEPlayerController playerController;
+                        if (playerColor == GameBoard.PlayerColor.White)
+                            playerController = localControllerComponent.whiteController as PvEPlayerController;
+                        else
+                            playerController = localControllerComponent.blackController as PvEPlayerController;
+
+                        if (playerController == GameBoard.instance.myController)
+                        {
+                            playerController.PvERandomMovePiece();
+                        }
                     }
                     else
                     {
-                        GetComponentInParent<LocalController>().TurnEnd();
+                        LocalController localControllerComponent = GetComponentInParent<LocalController>();
+                        PlayerController playerController;
+                        if (playerColor == GameBoard.PlayerColor.White)
+                            playerController = localControllerComponent.whiteController;
+                        else
+                            playerController = localControllerComponent.blackController;
+                        
+                        if (playerController == GameBoard.instance.myController)
+                        {
+                            playerController.RandomMovePiece();
+                        }
                     }
                 }
                 else
