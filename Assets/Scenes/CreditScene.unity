@@ -1250,8 +1250,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- 'folk round' by Kevin MacLeod\n- 'teller of tales' by Kevin MacLeod\n-
-    'midnight tales' by Kevin MacLeod\n- SFX by\_freesound_community\_from\_Pixabay\n-
+  m_text: "- 'Tavern Loop One' by Alexander Nakarada\n- SFX by\_freesound_community\_from\_Pixabay\n-
     SFX by\_Hasin Amanda\_from\_Pixabay\n- SFX by\_Luca Di Alessandro\_from\_Pixabay\n-
     SFX by\_Alice_soundz\_from\_Pixabay"
   m_isRightToLeft: 0
