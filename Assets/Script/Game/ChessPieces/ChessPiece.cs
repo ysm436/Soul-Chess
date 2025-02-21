@@ -675,21 +675,27 @@ abstract public class ChessPiece : TargetableObject
         pieceMat.SetFloat("_OutlineAlpha", 0f);
     }
 
+    bool isHovering = false;
     public IEnumerator SetFadeAccessory(bool fadeAway)
     {
+        isHovering = fadeAway;
         if (accessory != null)
         {
             if (fadeAway)
             {
+                yield return new WaitForSeconds(0.3f);
                 for (float i = 1f; i >= 0; i -= Time.deltaTime * 3)
                 {
-                    accessory.color = new Color(1, 1, 1, i);
-                    yield return null;
+                    if (isHovering)
+                    {
+                        accessory.color = new Color(1, 1, 1, i);
+                        yield return null;
+                    }
                 }
             }
             else
             {
-                for (float i = 0; i <= 1f; i += Time.deltaTime * 3)
+                for (float i = accessory.color.a; i <= 1f; i += Time.deltaTime * 3)
                 {
                     accessory.color = new Color(1, 1, 1, i);
                     yield return null;
