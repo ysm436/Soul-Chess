@@ -24,6 +24,7 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
     public GameObject turnDisplay;
     public Graveyard myGraveyard;
     public Graveyard opponentGraveyard;
+    public SettingUI settingUI;
 
     public TutorialManager tutorialManager;
 
@@ -72,6 +73,14 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
             turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
         StartCoroutine("TurnDisplayOnOff");
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingUI.ToggleSettingUI();
+        }
     }
 
     public void EnableTurnChangeButton()

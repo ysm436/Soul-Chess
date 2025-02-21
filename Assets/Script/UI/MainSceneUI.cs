@@ -12,6 +12,7 @@ public class MainSceneUI : MonoBehaviour
     [SerializeField] private Button pveButton;
     [SerializeField] private Button creditButton;
     [SerializeField] private Button tutorialButton;
+    [SerializeField] private SettingUI settingUI;
     
     private void Start()
     {
@@ -21,6 +22,14 @@ public class MainSceneUI : MonoBehaviour
         pveButton.onClick.AddListener(GameManager.instance.LoadPvELobbyScene);
         creditButton.onClick.AddListener(GameManager.instance.LoadCreditScene);
         tutorialButton.onClick.AddListener(GameManager.instance.LoadTutorialScene);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingUI.ToggleSettingUI();
+        }
     }
 
     private void QuitGame()

@@ -24,6 +24,7 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject turnCaution;
     public Graveyard myGraveyard;
     public Graveyard opponentGraveyard;
+    public SettingUI settingUI;
 
     private void Awake()
     {
@@ -86,6 +87,13 @@ public class PvELocalController : MonoBehaviour, IPointerClickHandler
         whiteController.chessTimer.StartTimer();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingUI.ToggleSettingUI();
+        }
+    }
     void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left)

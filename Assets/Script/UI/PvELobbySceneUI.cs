@@ -56,7 +56,7 @@ public class PvELobbySceneUI : MonoBehaviour
         photonView = GetComponent<PhotonView>();
         GameManager.instance.isHost = true;
         blackReadyButton.enabled = false;
-        blackReadyButton.GetComponent<Image>().enabled = false;
+        blackReadyButton.GetComponent<Image>().color = new Color(0.7f,0.7f,0.7f,0.7f);
     }
     bool isInitialzed = false;
     private void Start()
@@ -220,8 +220,8 @@ public class PvELobbySceneUI : MonoBehaviour
         {
             whiteReadyButtonText.text = "준비";
             whiteReadyButton.enabled = true;
-            whiteReadyButton.GetComponent<Image>().enabled = true;
-            blackReadyButton.GetComponent<Image>().enabled = false;
+            whiteReadyButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+            blackReadyButton.GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f, 0.7f);
             blackReadyButton.enabled = false;
             blackReadyButtonText.text = "컴퓨터";
             blackReadyButtonText.color = Color.black;
@@ -230,8 +230,8 @@ public class PvELobbySceneUI : MonoBehaviour
         {
             blackReadyButtonText.text = "준비";
             whiteReadyButton.enabled = false;
-            whiteReadyButton.GetComponent<Image>().enabled = false;
-            blackReadyButton.GetComponent<Image>().enabled = true;
+            whiteReadyButton.GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f, 0.7f);
+            blackReadyButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
             blackReadyButton.enabled = true;
             whiteReadyButtonText.text = "컴퓨터";
             whiteReadyButtonText.color = Color.black;
