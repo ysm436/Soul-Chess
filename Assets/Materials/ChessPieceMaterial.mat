@@ -191,7 +191,7 @@ Material:
     - _OutlinePixelWidth: 9.5
     - _OutlineTexXSpeed: 10
     - _OutlineTexYSpeed: 0
-    - _OutlineWidth: 0.015
+    - _OutlineWidth: 0.045
     - _OverlayBlend: 1
     - _OverlayGlow: 1
     - _OverlayTextureScrollXSpeed: 0.25

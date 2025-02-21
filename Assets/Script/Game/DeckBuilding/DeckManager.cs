@@ -97,6 +97,7 @@ public class DeckManager : MonoBehaviour
             }
             else
             {
+                targetCard.GetComponent<CanvasGroup>().blocksRaycasts = true;
                 Destroy(cardInfo.gameObject);
                 cautionPanel.SetActive(true);
             }
