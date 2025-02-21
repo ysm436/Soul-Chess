@@ -836,7 +836,14 @@ public class PvEPlayerController : PlayerController
             CancelUseCard();
         }
 
-        List<ChessPiece> pieceList = GameBoard.instance.chessBoard.GetAllPieces(playerColor);
+        if (chosenPiece != null)
+        {
+            chosenPiece.SelectedEffectOff();
+            chosenPiece = null;
+            ClearMovableCoordniates();
+        }
+
+        /* List<ChessPiece> pieceList = GameBoard.instance.chessBoard.GetAllPieces(playerColor);
         
         while (true)
         {
@@ -858,7 +865,7 @@ public class PvEPlayerController : PlayerController
                 if (pieceList.Count() == 0)
                     break;
             }
-        }
+        } */
 
         GetComponentInParent<PvELocalController>().TurnEnd();
     }
