@@ -50,6 +50,8 @@ public class SettingUI : MonoBehaviour
 
         if (isEnabledSetting && SceneManager.GetActiveScene().name == "PvEGameScene")
             Time.timeScale = 0;
+        else if (!isEnabledSetting && SceneManager.GetActiveScene().name == "PvEGameScene")
+            Time.timeScale = 1;
     }
 
     public void QuitSettingUI()

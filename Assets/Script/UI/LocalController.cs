@@ -25,6 +25,7 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject turnCaution;
     public Graveyard myGraveyard;
     public Graveyard opponentGraveyard;
+    public SettingUI settingUI;
 
     private void Awake()
     {
@@ -80,6 +81,14 @@ public class LocalController : MonoBehaviour, IPointerClickHandler
         StartCoroutine("TurnDisplayOnOff");
 
         whiteController.chessTimer.StartTimer();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingUI.ToggleSettingUI();
+        }
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
