@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 using DG.Tweening;
+using Unity.VisualScripting;
+using System.Linq;
 
 [Serializable]
 public class PlayerData
@@ -293,5 +295,35 @@ public class PlayerData
         {
             card.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_Alpha", 0f);
         }
+    }
+
+    public bool CheckAllCardUnAvailable()
+    {
+        bool unAvailableSignal = true;
+
+        foreach (var objCard in hand.ToList())
+        {
+            if (CheckCardUseAvailable(objCard))
+                unAvailableSignal = false;
+        }
+
+        return unAvailableSignal;
+    }
+
+    public bool CheckCardUseAvailable(Card objCard)
+    {
+        bool availableSignal = false;
+
+        if (objCard.cost <= soulEssence)
+        {
+            availableSignal = true;
+
+            if (objCard.EffectOnCardUsed is TargetingEffect effect && !effect.isAvailable(playerColor))
+            {
+                availableSignal = false;
+            }
+        }
+
+        return availableSignal;
     }
 }

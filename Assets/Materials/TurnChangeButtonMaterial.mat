@@ -12,8 +12,9 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - INNEROUTLINE_ON
   - OUTBASE8DIR_ON
+  - OUTBASE_ON
+  - OUTDIST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -165,15 +166,15 @@ Material:
     - _OffsetUvY: 0
     - _OnlyInnerOutline: 0
     - _OnlyOutline: 0
-    - _OutlineAlpha: 1
-    - _OutlineDistortAmount: 0.5
-    - _OutlineDistortTexXSpeed: 5
-    - _OutlineDistortTexYSpeed: 5
+    - _OutlineAlpha: 0
+    - _OutlineDistortAmount: 0.2
+    - _OutlineDistortTexXSpeed: 2
+    - _OutlineDistortTexYSpeed: 2
     - _OutlineGlow: 1
-    - _OutlinePixelWidth: 1
+    - _OutlinePixelWidth: -0.73
     - _OutlineTexXSpeed: 10
     - _OutlineTexYSpeed: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.1
     - _OverlayBlend: 1
     - _OverlayGlow: 1
     - _OverlayTextureScrollXSpeed: 0.25
@@ -240,7 +241,7 @@ Material:
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
     - _HologramStripeColor: {r: 0, g: 1, b: 1, a: 1}
     - _InnerOutlineColor: {r: 1, g: 1, b: 0, a: 1}
-    - _OutlineColor: {r: 1, g: 0.92549026, b: 0, a: 1}
+    - _OutlineColor: {r: 0.15686275, g: 1, b: 0, a: 1}
     - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}

@@ -48,7 +48,7 @@ public class ButtonHighlight : MonoBehaviour
                 percent = i;
                 if (isHovering)
                 {
-                    rectTransform.localScale = new Vector3(defaultSizeX * (1 + i *0.3f), defaultSizeY * (1 + i*0.3f), 1f);
+                    rectTransform.localScale = new Vector3(defaultSizeX * (1 + i * 0.12f), defaultSizeY * (1 + i* 0.12f), 1f);
                     yield return null;
                 }
             }
@@ -58,7 +58,7 @@ public class ButtonHighlight : MonoBehaviour
             for (float i = percent; i >= 0; i -= Time.deltaTime * 4)
             {
                 percent = i;
-                rectTransform.localScale = new Vector3(defaultSizeX * (1 + i * 0.3f), defaultSizeY * (1 + i * 0.3f), 1f);
+                rectTransform.localScale = new Vector3(defaultSizeX * (1 + i * 0.12f), defaultSizeY * (1 + i * 0.12f), 1f);
                 yield return null;
             }
         }
