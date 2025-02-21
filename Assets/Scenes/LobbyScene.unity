@@ -1107,6 +1107,8 @@ GameObject:
   - component: {fileID: 215382241}
   - component: {fileID: 215382240}
   - component: {fileID: 215382239}
+  - component: {fileID: 215382243}
+  - component: {fileID: 215382242}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -1216,6 +1218,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215382237}
   m_CullTransparentMesh: 1
+--- !u!114 &215382242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215382237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e88d27c1c6a2b4abc9088006a1d62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &215382243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215382237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &249038069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,6 +1389,8 @@ GameObject:
   - component: {fileID: 352697595}
   - component: {fileID: 352697594}
   - component: {fileID: 352697596}
+  - component: {fileID: 352697598}
+  - component: {fileID: 352697597}
   m_Layer: 5
   m_Name: BlackReadyButton
   m_TagString: Untagged
@@ -1483,6 +1512,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &352697597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352697592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+--- !u!114 &352697598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352697592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e88d27c1c6a2b4abc9088006a1d62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &373028846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,6 +1780,8 @@ GameObject:
   - component: {fileID: 454080347}
   - component: {fileID: 454080346}
   - component: {fileID: 454080345}
+  - component: {fileID: 454080349}
+  - component: {fileID: 454080348}
   m_Layer: 5
   m_Name: Confirm_Button
   m_TagString: Untagged
@@ -1847,6 +1903,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454080343}
   m_CullTransparentMesh: 1
+--- !u!114 &454080348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454080343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e88d27c1c6a2b4abc9088006a1d62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &454080349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454080343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1001 &488839525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2975,6 +3056,8 @@ GameObject:
   - component: {fileID: 873387453}
   - component: {fileID: 873387452}
   - component: {fileID: 873387451}
+  - component: {fileID: 873387455}
+  - component: {fileID: 873387454}
   m_Layer: 5
   m_Name: Deck_Button
   m_TagString: Untagged
@@ -3096,6 +3179,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873387449}
   m_CullTransparentMesh: 1
+--- !u!114 &873387454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873387449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+--- !u!114 &873387455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873387449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e88d27c1c6a2b4abc9088006a1d62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &878379739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5223,6 +5331,8 @@ GameObject:
   - component: {fileID: 1614471785}
   - component: {fileID: 1614471784}
   - component: {fileID: 1614471783}
+  - component: {fileID: 1614471787}
+  - component: {fileID: 1614471786}
   m_Layer: 5
   m_Name: WhiteReadyButton
   m_TagString: Untagged
@@ -5344,6 +5454,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614471781}
   m_CullTransparentMesh: 1
+--- !u!114 &1614471786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614471781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e88d27c1c6a2b4abc9088006a1d62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1614471787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614471781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &1623257282
 GameObject:
   m_ObjectHideFlags: 0
