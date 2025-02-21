@@ -1,34 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurnChangeButtonHighlight : MonoBehaviour
 {
     private PlayerController player;
+    [SerializeField] float buttonAlpha = 0.4f;
     public Material highlightMaterial;
-    private bool isVisible = false;
+    public TextMeshPro buttonText;
 
-    WaitForSeconds Wait = new WaitForSeconds(0.5f);
+    private bool isVisible = false;
+    WaitForSeconds Wait = new WaitForSeconds(0.7f);
 
     void Start()
     {
         highlightMaterial = GetComponent<Renderer>().material;
         isVisible = false;
         player = GameBoard.instance.myController;
-
-        highlightMaterial.SetFloat("_InnerOutlineAlpha", 0f);
-
-        if (player.playerColor == GameBoard.PlayerColor.Black)
-        {   
-            highlightMaterial.SetColor("_InnerOutlineColor", new Color(1, 1, 1, 1));
-            highlightMaterial.SetFloat("_InnerOutlineGlow", 2.5f);
-        }
-        else
-        {
-            highlightMaterial.SetColor("_InnerOutlineColor", new Color(1, 1, 0, 1));
-            highlightMaterial.SetFloat("_InnerOutlineGlow", 1f);
-        }
+        highlightMaterial.SetFloat("_OutlineAlpha", 0f);
 
         StartCoroutine(EnableHighlight());
     }
@@ -37,18 +28,37 @@ public class TurnChangeButtonHighlight : MonoBehaviour
     {
         while (true)
         {
-            if (!isVisible && player.TurnEndPossible && GameBoard.instance.isActivePlayer) 
+            if (player.TurnEndPossible && GameBoard.instance.isActivePlayer) 
             {
-                highlightMaterial.SetFloat("_InnerOutlineAlpha", 1f);
-                isVisible = true;
-            }
-            else
-            {
-                highlightMaterial.SetFloat("_InnerOutlineAlpha", 0f);
-                isVisible = false;
-            }
+                highlightMaterial.SetFloat("_OutlineAlpha", 1f);
+                buttonText.text = "턴 종료";
 
+                if (GameBoard.instance.gameData.myPlayerData.CheckAllCardUnAvailable())
+                {
+                    if (isVisible)
+                    {
+                        highlightMaterial.SetFloat("_Alpha", buttonAlpha);
+                        highlightMaterial.SetFloat("_OutlineAlpha", buttonAlpha);
+                        buttonText.alpha = buttonAlpha;
+                        isVisible = false;
+                    }
+                    else
+                    {
+                        highlightMaterial.SetFloat("_Alpha", 1f);
+                        highlightMaterial.SetFloat("_OutlineAlpha", 1f);
+                        buttonText.alpha = 1f;
+                        isVisible = true;
+                    }
+                }
+            }
             yield return Wait;
         }
+    }
+
+    public void DisableHighlight()
+    {
+        highlightMaterial.SetFloat("_Alpha", 1f);
+        buttonText.alpha = 1f;
+        highlightMaterial.SetFloat("_OutlineAlpha", 0f);
     }
 }
