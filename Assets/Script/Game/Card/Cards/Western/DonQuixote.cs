@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DonQuixote : SoulCard
 {
-    protected override int CardID => Card.cardIdDict["돈키호테"];
+    protected override int CardID => Card.cardIdDict["늙은 방랑기사"];
 
     public int standardAD;
     public int extraAD;

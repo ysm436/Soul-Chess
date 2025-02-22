@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MorganLeFay : SoulCard
 {
-    protected override int CardID => Card.cardIdDict["모르건 르 페이"];
+    protected override int CardID => Card.cardIdDict["음험한 마녀"];
 
     [HideInInspector] public PlayerController player = null;
 
@@ -32,7 +32,7 @@ public class MorganLeFay : SoulCard
             ChessPiece target = pieceList[temp];
             Debug.Log("MorganLeFay: Soul Effect");
             GameBoard.instance.chessBoard.TileEffect(gameObject.GetComponent<MorganLeFayEffect>().effectPrefab, target);
-            target.AddHP(target.maxHP - target.GetHP);
+            target.AddHP(2);
         }
     }
 

@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
+      objectReference: {fileID: 21300000, guid: efe1282834e2b9b47ad437cbb129e9a4, type: 3}
     - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: isPositiveEffect
       value: 1
@@ -132,7 +132,7 @@ MonoBehaviour:
   illustration: {fileID: 21300000, guid: c36f5a3de1a6b254d91cefd88dd639f7, type: 3}
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 2
-  rarity: 2
+  rarity: 1
   description: "[\uC720\uC5B8] \uBB34\uC791\uC704 \uC801  \uAE30\uBB3C\uC744 \uCC98\uCE58\uD569\uB2C8\uB2E4. "
   EffectOnCardUsed: {fileID: -8131353371072324936}
   cardKeywords: 05000000

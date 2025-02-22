@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
+      objectReference: {fileID: 21300000, guid: efe1282834e2b9b47ad437cbb129e9a4, type: 3}
     m_RemovedComponents:
     - {fileID: 4111012812990807176, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
     m_RemovedGameObjects: []
@@ -95,37 +95,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 0
-    soulEssence: 0
+    playerColor: 0
+    soulOrbs: 3
+    soulEssence: 3
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
-    deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    deck: []
     hand:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
@@ -138,7 +115,8 @@ MonoBehaviour:
   reigon: 2
   rarity: 1
   description: "[\uAC15\uB9BC] \uACF5\uACA9\uB825\uC774 7 \uC774\uC0C1\uC778 \uC801
-    \uAE30\uBB3C \uD558\uB098\uB97C \uCC98\uCE58\uD569\uB2C8\uB2E4."
+    \uAE30\uBB3C \uD558\uB098\uB97C \uCC98\uCE58\uD569\uB2C8\uB2E4.\n\uD0B9 \uAE30\uBB3C\uC5D0
+    \uAC15\uB9BC \uC2DC, \uCD94\uAC00\uC801\uC73C\uB85C +1/+1\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 2377348935909867065}
   cardKeywords: 06000000
   isInSelection: 0
@@ -172,4 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectPrefab: {fileID: 7587469071850677874, guid: 7d8e6d42380050c4688c3fc19d76e083, type: 3}
+  targetTypes: []
+  isPositiveEffect: 0
+  isNegativeEffect: 0
   standardAD: 7
+  additionalBuffPieceType: 32
+  additionalHp: 1
+  additionalAD: 1

@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
+      objectReference: {fileID: 21300000, guid: efe1282834e2b9b47ad437cbb129e9a4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -103,7 +103,7 @@ MonoBehaviour:
   illustration: {fileID: 21300000, guid: b9442f4a51987e04db56f7cc372aa40e, type: 3}
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 2
-  rarity: 2
+  rarity: 1
   description: "[\uBCF4\uD638\uB9C9]\n[\uAC15\uB9BC] \uAE30\uBB3C \uD558\uB098\uB97C
     \uC120\uD0DD\uD569\uB2C8\uB2E4. \uADF8 \uAE30\uBB3C\uC774 \uC774 \uAE30\uBB3C\uC744
     \uACF5\uACA9\uD569\uB2C8\uB2E4. \n\uB098\uC774\uD2B8 \uAE30\uBB3C\uC5D0 \uAC15\uB9BC
