@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
+      objectReference: {fileID: 21300000, guid: efe1282834e2b9b47ad437cbb129e9a4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -103,7 +103,7 @@ MonoBehaviour:
   illustration: {fileID: 21300000, guid: cb9edb7b9bcb8c44683e24755c77e33d, type: 3}
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
-  rarity: 2
+  rarity: 1
   description: "\uAE30\uBB3C\uC774 \uCC98\uCE58\uB420 \uB54C \uB9C8\uB2E4, +1/+1\uB97C
     \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 3879541453782405440}

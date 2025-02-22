@@ -28,7 +28,7 @@ public class ThunderEffect : TargetingEffect
             {
                 targetPiece = GameBoard.instance.gameData.GetPiece(sq.coordinate);
                 if (targetPiece != null)
-                    if (targetPiece.soul != null && targetPiece.pieceColor != player.playerColor && targetPiece.pieceType != ChessPiece.PieceType.King)
+                    if (targetPiece.soul != null && targetPiece.pieceColor != player.playerColor)
                         targetList.Add(targetPiece);
             }
         }

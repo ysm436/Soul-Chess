@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
+      objectReference: {fileID: 21300000, guid: efe1282834e2b9b47ad437cbb129e9a4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95,38 +95,22 @@ MonoBehaviour:
   coordinate: {x: 0, y: 0}
   owner:
     playerColor: 1
-    soulOrbs: 0
-    soulEssence: 0
+    soulOrbs: 5
+    soulEssence: 1
     maxHandCardCount: 8
     mulliganHandCount: 4
-    isRevealed: 0
+    isRevealed: 1
     deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     hand:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    deckPosition: {x: 7.6, y: -2.3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
@@ -136,13 +120,13 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 1
-  description: "[\uC720\uC5B8] 3\uBC88 \uBD80\uD65C\uD569\uB2C8\uB2E4.\r"
+  description: "[\uC720\uC5B8] 2\uBC88 \uBD80\uD65C\uD569\uB2C8\uB2E4.\r"
   EffectOnCardUsed: {fileID: -6056934168951126839}
   cardKeywords: 05000000
   isInSelection: 0
   pieceRestriction: -1
-  _AD: 2
-  _HP: 2
+  _AD: 3
+  _HP: 3
   accessorySpriteList:
   - pieceType: 4
     pieceColor: 0
@@ -151,7 +135,7 @@ MonoBehaviour:
     pieceColor: 1
     sprite: {fileID: 21300000, guid: d357ea4c862bf4d4ba9227177b5d16cd, type: 3}
   InfusedPiece: {fileID: 0}
-  revivalCount: 3
+  revivalCount: 2
   twoHeadAccessory: {fileID: 21300000, guid: f31fe3df56e03e342867be5f7f7d41e6, type: 3}
   oneHeadAccessory: {fileID: 21300000, guid: b41b42fe9bb515a44895e3b9d5d7a157, type: 3}
   noHeadAccessory: {fileID: 21300000, guid: 7c1d725f240114a4688e4cbfc5ce90d8, type: 3}

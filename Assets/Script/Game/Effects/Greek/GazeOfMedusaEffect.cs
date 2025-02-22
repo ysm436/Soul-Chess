@@ -9,7 +9,7 @@ public class GazeOfMedusaEffect : Effect
     public override void EffectAction(PlayerController player)
     {
         List<ChessPiece> pieces = GameBoard.instance.gameData.pieceObjects.Where(piece =>
-            piece.pieceColor != player.playerColor).ToList();
+            piece.pieceColor != player.playerColor && piece.soul != null).ToList();
 
         foreach (ChessPiece piece in pieces)
         {
