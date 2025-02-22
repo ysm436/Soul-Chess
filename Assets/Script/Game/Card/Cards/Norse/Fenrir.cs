@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Fenrir : SoulCard
 {
-    protected override int CardID => Card.cardIdDict["펜리르"];
+    protected override int CardID => Card.cardIdDict["광포한 바르그"];
 
     public int increasedAD = 20;
     public int increasedHP = 20;

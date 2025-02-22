@@ -39,5 +39,7 @@ public class SurtrEffect : Effect
                 }
             }
         }
+
+        gameObject.GetComponent<Surtr>().AddEffect();
     }
 }

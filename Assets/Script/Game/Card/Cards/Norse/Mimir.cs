@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Mimir : SoulCard
@@ -24,15 +25,18 @@ public class Mimir : SoulCard
 
         foreach (var card in playercolor.hand)
         {
-            if (card.cost < reductionCost)
+            if (card is SoulCard)
             {
-                cardCostDict.TryAdd(card, card.cost);
+                if (card.cost < reductionCost)
+                {
+                    cardCostDict.TryAdd(card, card.cost);
+                }
+                else
+                {
+                    card.cost -= reductionCost;
+                    cardCostDict.TryAdd(card, reductionCost);
+                }
             }
-            else
-            {
-                card.cost -= reductionCost;
-                cardCostDict.TryAdd(card, reductionCost);
-            } 
         }
         playercolor.OnGetCard += CardCostReduction;
         InfusedPiece.OnSoulRemoved += RemoveEffect;
@@ -57,14 +61,17 @@ public class Mimir : SoulCard
 
     public void CardCostReduction(Card card)
     {
-        if (card.cost < reductionCost)
+        if (card is SoulCard)
         {
-            cardCostDict.TryAdd(card, card.cost);
-        }
-        else
-        {
-            card.cost -= reductionCost;
-            cardCostDict.TryAdd(card, reductionCost);
+            if (card.cost < reductionCost)
+            {
+                cardCostDict.TryAdd(card, card.cost);
+            }
+            else
+            {
+                card.cost -= reductionCost;
+                cardCostDict.TryAdd(card, reductionCost);
+            }
         }
     }
 }

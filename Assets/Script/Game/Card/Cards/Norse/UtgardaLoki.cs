@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UtgardaLoki : SoulCard
 {
-    protected override int CardID => cardIdDict["우트가르다 로키"];
+    protected override int CardID => cardIdDict["오만한 주술사"];
 
     protected override void Awake()
     {
