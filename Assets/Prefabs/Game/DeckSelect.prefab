@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 150}
+  m_SizeDelta: {x: 240, y: 354}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7335934361533832222
 CanvasRenderer:
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e6b76987f164ecf4b9a80876b1e4227b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a82e2edacc6e0f48ad463475d4a1d1c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckname: {fileID: 1978030911679258417}
-  deck_index: 0
+  deckIndex: 0
 --- !u!1 &8664420557967000594
 GameObject:
   m_ObjectHideFlags: 0
