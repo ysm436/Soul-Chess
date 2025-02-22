@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Kraken : SoulCard
 {
-    protected override int CardID => Card.cardIdDict["크라켄"];
+    protected override int CardID => Card.cardIdDict["심해의 바다괴물"];
 
     public int repeat;
     public int damage;

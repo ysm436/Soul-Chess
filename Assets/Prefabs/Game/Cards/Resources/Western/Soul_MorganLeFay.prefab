@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
+      objectReference: {fileID: 21300000, guid: a83755c6ea696f844bb7e83d5bff5900, type: 3}
     - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: isPositiveEffect
       value: 1
@@ -109,14 +109,14 @@ MonoBehaviour:
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
-  cardName: "\uBAA8\uB974\uAC74 \uB974 \uD398\uC774"
+  cardName: "\uC74C\uD5D8\uD55C \uB9C8\uB140"
   _cost: 2
   illustration: {fileID: 21300000, guid: 9d1d3341168d5e34abed0caf982a4ed2, type: 3}
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 2
-  rarity: 2
+  rarity: 0
   description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uBB34\uC791\uC704 \uC544\uAD70
-    \uAE30\uBB3C\uC758 \uCCB4\uB825\uC744 \uBAA8\uB450 \uD68C\uBCF5\uC2DC\uD0B5\uB2C8\uB2E4."
+    \uAE30\uBB3C\uC758 \uCCB4\uB825\uC744 2 \uD68C\uBCF5\uC2DC\uD0B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 6973040188266450300}
   cardKeywords: 
   isInSelection: 0

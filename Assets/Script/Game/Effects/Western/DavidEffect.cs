@@ -12,8 +12,11 @@ public class DavidEffect : TargetingEffect
         ChessPiece.PieceType.Knight |
         ChessPiece.PieceType.Bishop |
         ChessPiece.PieceType.Rook |
-        ChessPiece.PieceType.Quene |
-        ChessPiece.PieceType.King;
+        ChessPiece.PieceType.Quene;
+
+    [SerializeField] private ChessPiece.PieceType additionalBuffPieceType;
+    [SerializeField] private int additionalHp;
+    [SerializeField] private int additionalAD;
 
     void Awake()
     {
@@ -25,6 +28,14 @@ public class DavidEffect : TargetingEffect
     public override void EffectAction(PlayerController player)
     {
         David davidComponent = GetComponent<David>();
+
+        if (davidComponent.InfusedPiece.pieceType == additionalBuffPieceType)
+        {
+            davidComponent.InfusedPiece.AD += additionalAD;
+            davidComponent.InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.AD, additionalAD, true); 
+            davidComponent.InfusedPiece.maxHP += additionalHp;
+            davidComponent.InfusedPiece.buff.AddBuffByValue(gameObject.GetComponent<SoulCard>().cardName, Buff.BuffType.HP, additionalHp, true);
+        }
 
         foreach (var target in targets)
         {

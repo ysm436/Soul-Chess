@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
+      objectReference: {fileID: 21300000, guid: a83755c6ea696f844bb7e83d5bff5900, type: 3}
     - target: {fileID: 7687191347765106377, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: isPositiveEffect
       value: 1
@@ -111,12 +111,12 @@ MonoBehaviour:
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
-  cardName: "\uB3C8\uD0A4\uD638\uD14C"
+  cardName: "\uB299\uC740 \uBC29\uB791\uAE30\uC0AC"
   _cost: 3
   illustration: {fileID: 21300000, guid: 906d850458c674c458b4fc17f2309e00, type: 3}
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 2
-  rarity: 1
+  rarity: 0
   description: "\uACF5\uACA9\uB825\uC774 6 \uC774\uC0C1\uC778 \uAE30\uBB3C\uC744
     \uACF5\uACA9\uD560 \uB54C 4\uC758 \uCD94\uAC00 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.\n\uB098\uC774\uD2B8
     \uAE30\uBB3C\uC5D0 \uAC15\uB9BC \uC2DC, +2/+0\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
@@ -125,7 +125,7 @@ MonoBehaviour:
   isInSelection: 0
   pieceRestriction: -1
   _AD: 3
-  _HP: 7
+  _HP: 5
   accessorySpriteList:
   - pieceType: 2
     pieceColor: 0

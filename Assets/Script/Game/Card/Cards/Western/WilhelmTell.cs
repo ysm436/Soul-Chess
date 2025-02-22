@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WilhelmTell : SoulCard
 {
-    protected override int CardID => cardIdDict["빌헬름 텔"];
+    protected override int CardID => cardIdDict["침착한 명사수"];
 
     private void OnInfused(ChessPiece piece)
     {
