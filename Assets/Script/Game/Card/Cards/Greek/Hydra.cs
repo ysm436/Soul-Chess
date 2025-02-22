@@ -6,7 +6,7 @@ public class Hydra : SoulCard
 {
     protected override int CardID => cardIdDict["히드라"];
 
-    [SerializeField] private int revivalCount = 8;
+    [SerializeField] private int revivalCount = 2;
 
     [Header("Head Accessory")]
     [SerializeField] private Sprite twoHeadAccessory;
@@ -30,17 +30,14 @@ public class Hydra : SoulCard
             InfusedPiece.isRevivable = true;
             Debug.Log("부활");
 
-            if (revivalCount == 2)
+            if (revivalCount == 1)
             {
                 InfusedPiece.SetAccessory(twoHeadAccessory);
-            }
-            else if (revivalCount == 1)
-            {
-                InfusedPiece.SetAccessory(oneHeadAccessory);
+
             }
             else if (revivalCount == 0)
             {
-                InfusedPiece.SetAccessory(noHeadAccessory);
+                InfusedPiece.SetAccessory(oneHeadAccessory);
             }
         }
     }

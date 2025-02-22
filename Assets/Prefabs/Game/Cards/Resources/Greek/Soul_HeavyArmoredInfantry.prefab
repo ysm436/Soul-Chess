@@ -94,18 +94,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 0
-    soulEssence: 0
+    playerColor: 0
+    soulOrbs: 5
+    soulEssence: 5
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
     deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -126,7 +121,10 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    deckPosition: {x: 7.6, y: -2.3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    deckPosition: {x: 0, y: 0}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
@@ -142,7 +140,7 @@ MonoBehaviour:
   cardKeywords: 06000000
   isInSelection: 0
   pieceRestriction: -1
-  _AD: 2
+  _AD: 0
   _HP: 2
   accessorySpriteList:
   - pieceType: 1

@@ -293,6 +293,7 @@ abstract public class ChessPiece : TargetableObject
         buff.TryRemoveSpecificBuff("", Buff.BuffType.Stealth);
 
         targetPiece.Attacked(this, attackDamage);
+        OnEndAttack?.Invoke(targetPiece);
 
         bool targetIsKilled = !targetPiece.isAlive;
         if (!targetPiece.isAlive)
@@ -300,7 +301,6 @@ abstract public class ChessPiece : TargetableObject
             OnKill?.Invoke(targetPiece);
         }
 
-        OnEndAttack?.Invoke(targetPiece);
 
         if (AffectByAbel) // 아벨 능력에 의해 죽었을 경우 위치 조정을 하지 않음
         {

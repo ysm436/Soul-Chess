@@ -5,8 +5,8 @@ using UnityEngine;
 public class Hercules : SoulCard
 {
     protected override int CardID => Card.cardIdDict["헤라클레스"];
-    [HideInInspector] public PlayerController playercontroller = null;
     public int multipleAD = 2;
+    private int multiplyCount = 0;
 
     protected override void Awake()
     {
@@ -14,36 +14,28 @@ public class Hercules : SoulCard
     }
 
     public override void AddEffect()
-    {
-        if (playercontroller == GameBoard.instance.CurrentPlayerController())
-        {
-            ADmultiply();
-        }
-        
-        playercontroller.OnMyTurnStart += ADmultiply;
-        playercontroller.OnMyTurnEnd += ADoriginate;
+    {   
+        InfusedPiece.OnAttacked += ADmultiply;
         InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
 
     public override void RemoveEffect()
     {
-        if (playercontroller == GameBoard.instance.CurrentPlayerController())
-        {
-            ADoriginate();
-        }
-
-        playercontroller.OnMyTurnStart -= ADmultiply;
-        playercontroller.OnMyTurnEnd -= ADoriginate;
-        InfusedPiece.OnSoulRemoved -= RemoveEffect;
+        ADoriginate();
+        InfusedPiece.OnAttacked -= ADmultiply;
     }
 
-    public void ADmultiply()
+    public void ADmultiply(ChessPiece chessPiece, int damage)
     {
         InfusedPiece.AD *= multipleAD;
+        multiplyCount += 1;
     }
 
     public void ADoriginate()
     {
-        InfusedPiece.AD /= multipleAD;
+        for (int i = 0; i < multiplyCount; i++)
+        {
+            InfusedPiece.AD /= multipleAD;
+        }
     }
 }

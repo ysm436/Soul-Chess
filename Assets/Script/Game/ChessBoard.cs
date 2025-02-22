@@ -641,7 +641,6 @@ public class ChessBoard : MonoBehaviour
 
         Tween redFilter2 = DOTween.To(() => targetColor, x => 
             {
-                Debug.Log(x);
                 tempColor = x;
                 colorAdjustments.colorFilter.value = tempColor;
             }, originStartColor, 0.5f);

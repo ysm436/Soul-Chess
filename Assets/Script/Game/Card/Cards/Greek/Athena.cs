@@ -17,7 +17,7 @@ public class Athena : SoulCard
 
     public override void AddEffect()
     {
-        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == InfusedPiece.pieceColor).ToList();
+        List<ChessPiece> targets = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == InfusedPiece.pieceColor && obj.soul != null).ToList();
         GameObject effectPrefab = GetComponent<AthenaEffect>().effectPrefab;
 
         targets.Remove(InfusedPiece);

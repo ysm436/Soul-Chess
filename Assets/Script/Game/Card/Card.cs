@@ -247,7 +247,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         {"하데스", 17},
         {"아레스", 18},
         {"어미 곰", 19},
-        {"헤파이스토스", 20},
+        {"고독한 대장장이", 20},
         {"포세이돈", 21},
         {"아테나", 22},
         {"히드라", 23},

@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e1799cfd35786a14388401417ca1cf8c, type: 3}
+      objectReference: {fileID: 21300000, guid: a83755c6ea696f844bb7e83d5bff5900, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -98,14 +98,14 @@ MonoBehaviour:
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
-  cardName: "\uD5E4\uD30C\uC774\uC2A4\uD1A0\uC2A4"
+  cardName: "\uACE0\uB3C5\uD55C \uB300\uC7A5\uC7A5\uC774"
   _cost: 5
   illustration: {fileID: 21300000, guid: df610ef4460695a4194177023d527dbe, type: 3}
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
-  rarity: 2
-  description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uC601\uD63C\uC774 \uAE43\uB4E0
-    \uBAA8\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C 1 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  rarity: 0
+  description: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uBB34\uC791\uC704 \uC544\uAD70
+    \uAE30\uBB3C\uC758 \uACF5\uACA9\uB825\uC744 1 \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -4965968554084867166}
   cardKeywords: 
   isInSelection: 0
@@ -132,4 +132,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115b9f8281def314aac45bdfb45c3563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 4547812702389787962, guid: b192733d56672b34f83e186bd9710499, type: 3}
+  effectPrefab: {fileID: 6543395396501225134, guid: 179658d71ad22a546bf183d6116eb4a6, type: 3}
