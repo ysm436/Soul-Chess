@@ -54,6 +54,7 @@ public class LobbySceneUI : MonoBehaviour
     [SerializeField] private Transform CardListDisplay;
     [SerializeField] private GameObject CardInfoUIView; //이건 들어갈 scrollview
     [SerializeField] private GameObject cautionUI;
+    public TextMeshProUGUI deckPanelSelectedDeckInfo;
 
     private void Awake()
     {

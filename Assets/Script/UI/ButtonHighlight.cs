@@ -40,26 +40,29 @@ public class ButtonHighlight : MonoBehaviour
     float percent = 0;
     private IEnumerator Highlight(bool on)
     {
-        isHovering = on;
-        if (on)
+        if (button.enabled)
         {
-            for (float i = percent; i <= 1f; i += Time.deltaTime * 4)
+            isHovering = on;
+            if (on)
             {
-                percent = i;
-                if (isHovering)
+                for (float i = percent; i <= 1f; i += Time.deltaTime * 5)
                 {
-                    rectTransform.localScale = new Vector3(defaultSizeX * (1 + i * 0.12f), defaultSizeY * (1 + i* 0.12f), 1f);
-                    yield return null;
+                    percent = i;
+                    if (isHovering)
+                    {
+                        rectTransform.localScale = new Vector3(defaultSizeX * (1 + i * 0.12f), defaultSizeY * (1 + i * 0.12f), 1f);
+                        yield return null;
+                    }
                 }
             }
-        }
-        else
-        {
-            for (float i = percent; i >= 0; i -= Time.deltaTime * 4)
+            else
             {
-                percent = i;
-                rectTransform.localScale = new Vector3(defaultSizeX * (1 + i * 0.12f), defaultSizeY * (1 + i * 0.12f), 1f);
-                yield return null;
+                for (float i = percent; i >= 0; i -= Time.deltaTime * 5)
+                {
+                    percent = i;
+                    rectTransform.localScale = new Vector3(defaultSizeX * (1 + i * 0.12f), defaultSizeY * (1 + i * 0.12f), 1f);
+                    yield return null;
+                }
             }
         }
     }

@@ -50,6 +50,8 @@ public class PvELobbySceneUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI SelectedDeckInfo;
     [SerializeField] private Transform CardListDisplay;
     [SerializeField] private GameObject CardInfoUIView; //scrollview
+    [SerializeField] private GameObject cautionUI;
+    public TextMeshProUGUI deckPanelSelectedDeckInfo;
 
     private void Awake()
     {
@@ -83,12 +85,17 @@ public class PvELobbySceneUI : MonoBehaviour
     {
         if (SelectedDeckIndex == -1)
         {
-            Debug.Log("선택된 덱이 없습니다.");
+            cautionUI.SetActive(true);
         }
         else
         {
             SetReady(!isReady);
         }
+    }
+
+    public void CloseCautionUI()
+    {
+        cautionUI.SetActive(false);
     }
 
     public void SetReady(bool ready)
@@ -205,6 +212,7 @@ public class PvELobbySceneUI : MonoBehaviour
         {
             SelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[SelectedDeckIndex].deckName + ">";
             GameManager.instance.selectedDeck = GameManager.instance.deckList[SelectedDeckIndex];
+            SetReady(true);
         }
     }
 

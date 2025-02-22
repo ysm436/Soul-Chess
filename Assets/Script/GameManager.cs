@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         FindAllCards();
+        soundManager.PlayBgm("MainScene");
     }
 
     // Update is called once per frame

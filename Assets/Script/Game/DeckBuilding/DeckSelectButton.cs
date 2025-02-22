@@ -21,6 +21,8 @@ public class DeckSelectButton : MonoBehaviour
 
             //ī���� ���ٸ� ���⼭�� �߰��ؾ���
             GetComponentInParent<PvELobbySceneUI>().ShowSelectedDeckCardList();
+
+            GetComponentInParent<PvELobbySceneUI>().deckPanelSelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[deckIndex].deckName + ">";
         }
         else
         {
@@ -35,6 +37,8 @@ public class DeckSelectButton : MonoBehaviour
 
             //ī���� ���ٸ� ���⼭�� �߰��ؾ���
             GetComponentInParent<LobbySceneUI>().ShowSelectedDeckCardList();
+
+            GetComponentInParent<LobbySceneUI>().deckPanelSelectedDeckInfo.text = "선택된 덱\n" + "<" + GameManager.instance.deckList[deckIndex].deckName + ">";
         }
     }
 
