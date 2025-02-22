@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: 7249511656965813670, guid: 83da4afed6fa4804094954017389ffc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d8342195592bcb9438d990807bdbe2a0, type: 3}
+      objectReference: {fileID: 21300000, guid: efe1282834e2b9b47ad437cbb129e9a4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 0
-    soulOrbs: 1
-    soulEssence: 1
+    playerColor: 1
+    soulOrbs: 0
+    soulEssence: 0
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   reigon: 1
   rarity: 1
   description: "\uC774 \uC601\uD63C\uC774 \uBD80\uC5EC\uB41C \uAE30\uBB3C\uC774 \uC0B4\uC544\uC788\uB294
-    \uB3D9\uC548 \uB0B4 \uCE74\uB4DC\uC758 \uBE44\uC6A9\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+    \uB3D9\uC548 \uB0B4 \uC601\uD63C \uCE74\uB4DC\uC758 \uBE44\uC6A9\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -6232363627302796207}
   cardKeywords: 
   isInSelection: 0

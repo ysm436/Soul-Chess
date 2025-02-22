@@ -128,16 +128,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
   owner:
-    playerColor: 1
-    soulOrbs: 0
-    soulEssence: 0
+    playerColor: 0
+    soulOrbs: 4
+    soulEssence: 4
     maxHandCardCount: 8
     mulliganHandCount: 4
     isRevealed: 0
     deck:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -160,12 +157,15 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     deckPosition: {x: 7.6, y: -2.3}
     spellDamageIncrease: 0
     spellDamageCoefficient: 1
   handIndex: -1
   cardName: "\uCC98\uD615"
-  _cost: 4
+  _cost: 2
   illustration: {fileID: 21300000, guid: e4dcfcf41de331440b9fcd70f9b3bc95, type: 3}
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
