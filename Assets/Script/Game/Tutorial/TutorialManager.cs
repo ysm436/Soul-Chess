@@ -16,6 +16,7 @@ using static GameBoard;
 
 public class TutorialManager : MonoBehaviour
 {
+    public CardUI cardUI;
     public GameObject cancelButton;
     public CutoutMaskUI cutoutMaskUI;
     public Transform myDeckTransform;
@@ -97,10 +98,9 @@ public class TutorialManager : MonoBehaviour
         if (!isInitalized)
         {
             descriptionText.text =
-                "Soul Chess에 오신 것을 환영합니다!\n" +
-                "당신은 선공 플레이어입니다.";
+                "Soul Chess에 오신 것을 환영합니다!";
 
-            SetTextSize(2);
+            SetTextSize(1);
             SetTextPosition(new Vector2(0.5f, 0.6f));
 
             blockCardUse.SetActive(true);
@@ -392,7 +392,7 @@ public class TutorialManager : MonoBehaviour
     public void ProcessStep3()
     {
         EnableShadow();
-        SetShadow(-1, -1, isCost: true);
+        SetShadow(-1, -1, isCard: true);
 
         ShowText();
         descriptionText.text =
@@ -408,7 +408,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ProcessStep3_1()
     {
-        SetShadow(-1, -1, isCard: true);
+        SetShadow(-1, -1, isCost: true);
 
         descriptionText.text =
             "코스트는 한 턴마다 최대치가 1씩 늘어나며\n" +
@@ -427,10 +427,9 @@ public class TutorialManager : MonoBehaviour
         descriptionText.text =
             "카드는 영혼 카드와 마법 카드로 구분됩니다.<line-height=130%>\n" +
             "영혼 카드는 자신의 기물에 영혼을 부여하는 카드입니다.<line-height=100%>\n" +
-            "영혼이 부여된 기물은 특수한 능력이 생기며 강해집니다.<line-height=130%>\n" +
-            "마법 카드는 영혼을 부여할 수 없습니다.<line-height=100%>\n" +
-            "하지만 강력한 효과를 가지고 있습니다.";
-        SetTextSize(5);
+            "영혼이 부여된 기물은 특수한 능력이 생기며 강해집니다.";
+            
+        SetTextSize(3);
         SetTextPosition(new Vector2(0.5f, 0.5f));
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -461,7 +460,7 @@ public class TutorialManager : MonoBehaviour
 
         Vector2[] anchors = new Vector2[2];
         anchors[0] = new Vector2(0.085f, 0.57f);
-        anchors[1] = new Vector2(0.13f, 0.655f);
+        anchors[1] = new Vector2(0.123f, 0.63f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         ShowCard(viking);
@@ -478,8 +477,8 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep6()
     {
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.085f, 0.65f);
-        anchors[1] = new Vector2(0.13f, 0.73f);
+        anchors[0] = new Vector2(0.085f, 0.62f);
+        anchors[1] = new Vector2(0.123f, 0.69f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
@@ -493,8 +492,8 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep7()
     {
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.080f, 0.22f);
-        anchors[1] = new Vector2(0.13f, 0.32f);
+        anchors[0] = new Vector2(0.085f, 0.3f);
+        anchors[1] = new Vector2(0.123f, 0.37f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
@@ -509,8 +508,8 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep8()
     {
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.215f, 0.22f);
-        anchors[1] = new Vector2(0.267f, 0.32f);
+        anchors[0] = new Vector2(0.185f, 0.3f);
+        anchors[1] = new Vector2(0.23f, 0.37f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
@@ -531,7 +530,7 @@ public class TutorialManager : MonoBehaviour
 
         RemoveShowCard();
         descriptionText.text =
-            "카드를 드래그해 사용할 수 있습니다.";
+            "카드를 위로 드래그해 사용할 수 있습니다.";
         SetTextSize(1);
         nextButton.gameObject.SetActive(false);
     }
@@ -545,9 +544,10 @@ public class TutorialManager : MonoBehaviour
 
         SetShadow(4, 3);
         descriptionText.text =
-            "영혼 카드 사용 는 영혼을 부여할 기물을 선택해야 합니다.<line-height=130%>\n" +
+            "영혼 카드는 영혼을 부여할 기물을\n" +
+            "선택해야 사용할 수 있습니다.<line-height=130%>\n" +
             "기물을 클릭해 영혼을 부여하세요.";
-        SetTextSize(2);
+        SetTextSize(3);
 
         SetTextPosition(new Vector2(0.5f, 0.78f));
 
@@ -578,8 +578,8 @@ public class TutorialManager : MonoBehaviour
         descriptionText.text =
             "당신의 기물에 영혼을 부여했습니다.<line-height=130%>\n" +
             "해당 기물은 공격력이 2, 체력이 4 증가했습니다.<line-height=100%>\n" +
-            "또한 영혼이 부여되어 기물 위에 영혼의 상징이 생겼습니다.<line-height=130%>\n" +
-            "한 기물에는 한 번에 하나의 영혼만 부여할 수 있습니다.";
+            "주의: 한 기물에는 한 번에\n" +
+            "하나의 영혼만 부여할 수 있습니다.";
         SetTextSize(4);
         isMoved = false;
         //OnClickBoardSquare(coordinate);
@@ -856,10 +856,9 @@ public class TutorialManager : MonoBehaviour
         descriptionText.text =
             "대괄호 [] 안에는 키워드가 존재합니다.\n" +
             "키워드 설명은 카드 옆에서 확인할 수 있습니다.<line-height=130%>\n" +
-            "[강림] 키워드는<line-height=100%>\n" +
-            "능력이 영혼 부여 직후 발동된다는 의미입니다.<line-height=130%>\n" +
+            "[강림]: 능력이 영혼 부여 직후 발동<line-height=130%>\n" +
             "능력을 사용할 기물을 선택하세요";
-        SetTextSize(5);
+        SetTextSize(4);
 
         SoulCard bardInstance = Instantiate(bard) as SoulCard;
 
@@ -876,6 +875,8 @@ public class TutorialManager : MonoBehaviour
                 s.OnClick = DoNothing;
             }
         }
+
+        ShowCard(bard);
     }
 
 
@@ -912,6 +913,8 @@ public class TutorialManager : MonoBehaviour
         anchors[0] = new Vector2(0.91f, 0.92f);
         anchors[1] = new Vector2(0.955f, 1f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
+
+        RemoveShowCard();
 
         FlipArrow();
 
@@ -1099,19 +1102,13 @@ public class TutorialManager : MonoBehaviour
 
     public void ShowCard(Card card)
     {
-        Transform cardBoard = GameObject.Find("CardBoard").transform;
-        float cardSize = 1.5f;
-        ShowingCard = Instantiate(card, cardBoard.position, Quaternion.identity);
-        ShowingCard.GetComponent<Collider2D>().enabled = false;
-        ShowingCard.GetComponent<SortingGroup>().sortingOrder = -1;
-        ShowingCard.transform.localScale = new Vector3(1f, 1f, 0f) * cardSize;
-
-        ShowingCard.FlipFront();
+        cardUI.gameObject.SetActive(true);
+        cardUI.SetCardUI(card);
     }
 
     public void RemoveShowCard()
     {
-        ShowingCard.Destroy();
+        cardUI.gameObject.SetActive(false);
     }
 
     public void ShowText()
@@ -1139,6 +1136,7 @@ public class TutorialManager : MonoBehaviour
 
     private void OnEndTutorial(ChessPiece piece)
     {
+        RemoveShadow();
         RemoveText();
         RemoveArrow();
     }
