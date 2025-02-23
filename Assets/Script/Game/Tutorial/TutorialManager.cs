@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
@@ -98,8 +99,9 @@ public class TutorialManager : MonoBehaviour
             descriptionText.text =
                 "Soul Chess에 오신 것을 환영합니다!\n" +
                 "당신은 선공 플레이어입니다.";
+
             SetTextSize(2);
-            SetTextPosition(new Vector2(0.5f, 0.7f));
+            SetTextPosition(new Vector2(0.5f, 0.6f));
 
             blockCardUse.SetActive(true);
             InitializeMyCards();
@@ -182,6 +184,8 @@ public class TutorialManager : MonoBehaviour
         bool isCost = false, bool isCard = false, bool isSpecific = false,
         params Vector2[] anchors)
     {
+        EnableArrow();
+
         float minX = 0f, minY = 0f, maxX = 0f, maxY = 0f;
         if (x != -1 && y != -1)
         {
@@ -233,30 +237,57 @@ public class TutorialManager : MonoBehaviour
 
             arrow.anchoredPosition = new Vector2(0f, 62f);
         }
-        transparent.anchorMin = new Vector2(minX, minY);
-        transparent.anchorMax = new Vector2(maxX, maxY);
-        transparent.offsetMin = Vector2.zero;
-        transparent.offsetMax = Vector2.zero;
+        //transparent.anchorMin = new Vector2(minX, minY);
+        //transparent.anchorMax = new Vector2(maxX, maxY);
+
+        Vector2 initialAnchorMin = transparent.anchorMin;
+        Vector2 initialAnchorMax = transparent.anchorMax;
+
+        DOTween.To(() => transparent.anchorMin,
+           x => transparent.anchorMin = x,
+           new Vector2(minX, minY),
+           0.3f)
+       .SetEase(Ease.OutQuad)
+       .From(initialAnchorMin);
+
+        DOTween.To(() => transparent.anchorMax,
+                   x => transparent.anchorMax = x,
+                   new Vector2(maxX, maxY),
+                   0.3f)
+               .SetEase(Ease.OutQuad)
+               .From(initialAnchorMax)
+               .OnComplete(() => {
+                   // 애니메이션이 끝난 후 offset을 강제로 0으로 설정
+                   transparent.offsetMin = Vector2.zero;
+                   transparent.offsetMax = Vector2.zero;
+               });
+        //transparent.offsetMin = Vector2.zero;
+        //transparent.offsetMax = Vector2.zero;
 
     }
 
     private void SetShadownToText()
     {
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(-1f, -1f);
-        anchors[1] = new Vector2(-1f, -1f);
+        anchors[0] = new Vector2(0.5f, 0.5f);
+        anchors[1] = new Vector2(0.5f, 0.5f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
+        RemoveArrow();
     }
 
     public void RemoveShadow()
     {
-        shadow.SetActive(false);
+        shadow.GetComponent<Image>().DOFade(0f, 0.3f)
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() => shadow.SetActive(false));
         RemoveArrow();
     }
 
     public void EnableShadow()
     {
         shadow.SetActive(true);
+        shadow.GetComponent<Image>().DOFade(0.8f, 0.3f)
+            .SetEase(Ease.OutQuad);
         EnableArrow();
     }
 
@@ -302,6 +333,9 @@ public class TutorialManager : MonoBehaviour
         descriptionText.text =
             "기물을 움직이기 위해서 선택해야 합니다.\n" +
             "당신의 기물을 클릭해 선택하세요.";
+        SetTextSize(2);
+
+        SetTextPosition(new Vector2(0.5f, 0.7f));
 
         nextButton.gameObject.SetActive(false);
     }
@@ -691,6 +725,7 @@ public class TutorialManager : MonoBehaviour
         descriptionText.text =
             "기물을 이동시키세요.";
         SetTextSize(1);
+        SetTextPosition(new Vector2(0.75f, 0.6f));
         nextButton.gameObject.SetActive(false);
 
         isMoved = false;
@@ -899,6 +934,7 @@ public class TutorialManager : MonoBehaviour
         descriptionText.text =
             "이제 턴을 종료하세요.";
         SetTextSize(1);
+        SetTextPosition(new Vector2(0.5f, 0.6f));
 
         nextButton.gameObject.SetActive(false);
 
@@ -960,7 +996,7 @@ public class TutorialManager : MonoBehaviour
         descriptionText.text =
             "덱에서 마법 카드를 뽑았습니다.<line-height=130%>\n" +
             "마법 카드는 영혼을 부여하지 않는 대신<line-height=100%>\n강력한 효과를 가지고 있습니다.";
-        SetTextSize(4);
+        SetTextSize(3);
 
         nextButton.gameObject.SetActive(true);
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -1079,18 +1115,24 @@ public class TutorialManager : MonoBehaviour
     public void ShowText()
     {
         textTransform.gameObject.SetActive(true);
+        textTransform.DOScale(Vector3.one, 0.3f)
+            .SetEase(Ease.OutQuad);
     }
 
     public void RemoveText()
     {
-        textTransform.gameObject.SetActive(false);
+        textTransform.DOScale(Vector3.zero, 0.3f)
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() => arrow.gameObject.SetActive(false));
     }
 
     public void SetTextPosition(Vector2 anchor)
     {
-        textTransform.anchorMin = anchor;
-        textTransform.anchorMax = anchor;
-        textTransform.anchoredPosition = Vector2.zero;
+        DOTween.To(() => textTransform.anchorMin, x => textTransform.anchorMin = x, anchor, 0.3f)
+            .SetEase(Ease.OutQuad);
+        DOTween.To(() => textTransform.anchorMax, x => textTransform.anchorMax = x, anchor, 0.3f)
+            .SetEase(Ease.OutQuad);
+
     }
 
     private void OnEndTutorial(ChessPiece piece)
@@ -1107,23 +1149,51 @@ public class TutorialManager : MonoBehaviour
     private void SetTextSize(int lineCount)
     {
         if (lineCount == 1) lineCount = 2;
-        textTransform.sizeDelta = new Vector2(textTransform.sizeDelta.x, lineCount * 30f);
+        //textTransform.sizeDelta = new Vector2(textTransform.sizeDelta.x, lineCount * 30f);
         RectTransform buttion = nextButton.GetComponent<RectTransform>();
-        buttion.anchoredPosition = new Vector2(buttion.anchoredPosition.x, -13f * lineCount + 7f);
+        //buttion.anchoredPosition = new Vector2(buttion.anchoredPosition.x, -13f * lineCount + 7f);
+
+        float textSizeDelay = 0.3f;
+
+        textTransform.DOSizeDelta(new Vector2(textTransform.sizeDelta.x, lineCount * 30f), textSizeDelay)
+            .SetEase(Ease.OutQuad);
+        buttion.DOAnchorPos(new Vector2(buttion.anchoredPosition.x, -13f * lineCount + 7f), textSizeDelay)
+            .SetEase(Ease.OutQuad);
+
+        descriptionText.color = new Color(descriptionText.color.r, descriptionText.color.g, descriptionText.color.b, 0f);
+        descriptionText.DOFade(1f, 0.3f)
+            .SetDelay(textSizeDelay - 0.1f);
     }
 
     public void RemoveArrow()
     {
-        arrow.gameObject.SetActive(false);
+        arrow.DOScale(Vector3.zero, 0.3f)
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() => arrow.gameObject.SetActive(false));
     }
 
     public void EnableArrow()
     {
         arrow.gameObject.SetActive(true);
+        arrow.DOScale(Vector3.one, 0.5f)
+            .SetEase(Ease.OutBack);
     }
 
     private void FlipArrow()
     {
+        if (DOTween.IsTweening(arrow))
+        {
+            arrow.DOKill();
+            if (arrow.localScale.y > 0f)
+            {
+                arrow.localScale = Vector3.one;
+            }
+            else
+            {
+                arrow.localScale = new Vector3(1f, -1f, 1f);
+            }
+        }
+
         arrow.anchoredPosition = new Vector2(arrow.anchoredPosition.x, -arrow.anchoredPosition.y);
         arrow.localScale = new Vector2(arrow.localScale.x, -arrow.localScale.y);
     }
