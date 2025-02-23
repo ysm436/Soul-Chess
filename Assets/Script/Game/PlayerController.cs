@@ -571,6 +571,9 @@ public class PlayerController : MonoBehaviour
 
     public void TurnEnd()
     {
+        if (tutorialFlag == false)
+            chessTimer.StopTimer();
+
         GameManager.instance.soundManager.PlaySFX("Turn");
         Sequence sequence = DOTween.Sequence();
         if (OnMyTurnEndAnimation != null)
@@ -606,9 +609,6 @@ public class PlayerController : MonoBehaviour
                     GameBoard.instance.gameData.playerWhite.soulOrbs++;
                 GameBoard.instance.gameData.playerWhite.soulEssence = GameBoard.instance.gameData.playerWhite.soulOrbs;
             }
-            
-            if (tutorialFlag == false)
-                chessTimer.StopTimer();
         });
 
         sequence.Play();

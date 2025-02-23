@@ -975,6 +975,14 @@ PrefabInstance:
       propertyPath: effectCanvas
       value: 
       objectReference: {fileID: 102362952}
+    - target: {fileID: 5739378138855264178, guid: c65f942ac20480445ad2c21134faa5ea, type: 3}
+      propertyPath: exhaustionCard
+      value: 
+      objectReference: {fileID: 5245901735913247124, guid: d94de8734d313fa4e8dc42ff7cda3e40, type: 3}
+    - target: {fileID: 5739378138855264178, guid: c65f942ac20480445ad2c21134faa5ea, type: 3}
+      propertyPath: exhaustionProjectile
+      value: 
+      objectReference: {fileID: 7587469071850677874, guid: 1cfcc96a69f33ff4dae6ddc917653114, type: 3}
     - target: {fileID: 7007506939373905152, guid: c65f942ac20480445ad2c21134faa5ea, type: 3}
       propertyPath: m_Enabled
       value: 0

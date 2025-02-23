@@ -45,7 +45,7 @@ public class ButtonHighlight : MonoBehaviour
             isHovering = on;
             if (on)
             {
-                for (float i = percent; i <= 1f; i += Time.deltaTime * 5)
+                for (float i = percent; i <= 1f; i += Time.unscaledDeltaTime * 5)
                 {
                     percent = i;
                     if (isHovering)
@@ -57,7 +57,7 @@ public class ButtonHighlight : MonoBehaviour
             }
             else
             {
-                for (float i = percent; i >= 0; i -= Time.deltaTime * 5)
+                for (float i = percent; i >= 0; i -= Time.unscaledDeltaTime * 5)
                 {
                     percent = i;
                     rectTransform.localScale = new Vector3(defaultSizeX * (1 + i * 0.12f), defaultSizeY * (1 + i * 0.12f), 1f);

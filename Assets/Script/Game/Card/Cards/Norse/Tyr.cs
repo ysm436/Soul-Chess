@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 
 public class Tyr : SoulCard
 {
@@ -11,18 +12,11 @@ public class Tyr : SoulCard
     {
         base.Awake();
     }
-
-    private void StunRandomPiece()
+    
+    private Tween StunRandomEnemyPiece()
     {
-        List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceColor != InfusedPiece.pieceColor).ToList();
-
-        if (enemyPieceList.Count == 0)
-            return;
-
-        ChessPiece objectPiece = enemyPieceList[SynchronizedRandom.Range(0, enemyPieceList.Count)];
-
-        objectPiece.SetKeyword(Keyword.Type.Stun);
-        objectPiece.buff.AddBuffByKeyword(cardName, Buff.BuffType.Stun);
+        Debug.Log("Tyr: Soul Effect");
+        return GameBoard.instance.chessBoard.StunByTyrEffect(GetComponent<TyrEffect>().effectPrefab, InfusedPiece);
     }
 
     public override void AddEffect()
@@ -32,7 +26,7 @@ public class Tyr : SoulCard
         else
             playerController = GameBoard.instance.blackController;
 
-        playerController.OnMyTurnEnd += StunRandomPiece;
+        playerController.OnMyTurnEndAnimation += StunRandomEnemyPiece;
         InfusedPiece.OnSoulRemoved += RemoveEffect;
         InfusedPiece.buff.AddBuffByDescription(cardName, Buff.BuffType.Description, "티르: 내 턴이 끝날 때, 무작위 적 기물 하나를 기절시킵니다.", true);
     }
@@ -44,7 +38,7 @@ public class Tyr : SoulCard
         else
             playerController = GameBoard.instance.blackController;
 
-        playerController.OnMyTurnEnd -= StunRandomPiece;
+        playerController.OnMyTurnEndAnimation -= StunRandomEnemyPiece;
         InfusedPiece.buff.TryRemoveSpecificBuff(cardName, Buff.BuffType.Description);
     }
 }

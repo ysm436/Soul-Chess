@@ -19,6 +19,9 @@ public class ChessBoard : MonoBehaviour
     public GameObject boardSquareSample;
 
     public GameObject blocker;
+    public GameObject exhaustionCard;
+    public GameObject exhaustionProjectile;
+
     public Canvas effectCanvas;
     [SerializeField] private Volume volume;
     private ColorAdjustments colorAdjustments;
@@ -652,6 +655,33 @@ public class ChessBoard : MonoBehaviour
         redFilterSeq.Append(redFilter1);
         redFilterSeq.Append(redFilter2);
         redFilterSeq.Append(checkOff);
+    }
+
+    public Tween StunByTyrEffect(GameObject projectileEffect, ChessPiece srcPiece)
+    {
+        Tween tyrTween = null;
+
+        tyrTween = DOVirtual.DelayedCall(0f, () => {
+            List<ChessPiece> enemyPieceList = GameBoard.instance.gameData.pieceObjects.Where(piece =>
+            piece.pieceColor != srcPiece.pieceColor).ToList();
+
+            if (enemyPieceList.Count == 0)
+            {
+                tyrTween.Kill();
+                Debug.Log("Tyr: No Target");
+                return;
+            }
+            ChessPiece dstPiece = enemyPieceList[SynchronizedRandom.Range(0, enemyPieceList.Count)];
+
+            GameObject projectile = Instantiate(projectileEffect);
+            projectile.transform.position = srcPiece.transform.position;
+            projectile.transform.DOMove(dstPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                dstPiece.SetKeyword(Keyword.Type.Stun);
+                Destroy(projectile);
+            });
+        });
+
+        return tyrTween;
     }
 
     public List<ChessPiece> GetAllPieces(GameBoard.PlayerColor color)
