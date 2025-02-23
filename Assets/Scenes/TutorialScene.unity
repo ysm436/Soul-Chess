@@ -1441,10 +1441,10 @@ RectTransform:
   - {fileID: 717566036}
   m_Father: {fileID: 98381205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -253, y: 0}
-  m_SizeDelta: {x: 300, y: 120}
+  m_AnchorMin: {x: 0.25, y: 0.5}
+  m_AnchorMax: {x: 0.25, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!210 &537089992
 SortingGroup:
@@ -2435,9 +2435,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Soul Chess\uC5D0\n\uC624\uC2E0 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4.
-    \n\uB2F9\uC2E0\uC740 \uC120\uACF5 \uD50C\uB808\uC774\uC5B4\uC785\uB2C8\uB2E4.
-    \n\uB2F9\uC2E0\uC758 \uAE30\uBB3C\uC744 \uB20C\uB7EC \uC120\uD0DD\uD558\uC138\uC694"
+  m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f9784ba752a91f14aa18acb46607fe1f, type: 2}
   m_sharedMaterial: {fileID: -4582998040332275355, guid: f9784ba752a91f14aa18acb46607fe1f, type: 2}
@@ -2464,8 +2462,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2476,7 +2474,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 20
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -3642,6 +3640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426b4184afec45b4091b79d707bbb693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cancelButton: {fileID: 1620590843}
   cutoutMaskUI: {fileID: 1225786305}
   myDeckTransform: {fileID: 1862527318}
   myHandTransform: {fileID: 485102653}
@@ -3661,6 +3660,7 @@ MonoBehaviour:
   gameOverUI: {fileID: 1549314013}
   viking: {fileID: -8247402589421994838, guid: 27838a571eb52e545b4daf45b0a83fce, type: 3}
   bard: {fileID: 7110689417389563972, guid: 1f4916a25b0a9f84aa86dd603fafc202, type: 3}
+  execution: {fileID: 4354718478632122283, guid: dc7cfa248f3e2994ab4c060628f9ed56, type: 3}
   isAllowingTurnEnd: 0
   cardMinAnchors: []
   cardMaxAnchors: []
@@ -4131,10 +4131,10 @@ RectTransform:
   - {fileID: 462512336}
   m_Father: {fileID: 717566036}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.75650007, y: 0}
-  m_AnchorMax: {x: 0.75650007, y: 0}
-  m_AnchoredPosition: {x: 0, y: -45}
-  m_SizeDelta: {x: 100, y: 40}
+  m_AnchorMin: {x: 0.8, y: 0}
+  m_AnchorMax: {x: 0.8, y: 0}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 120, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1095834598
 MonoBehaviour:
@@ -8330,7 +8330,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bd3b19d05b07d478d9a275ff35935d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonAlpha: 0.4
   highlightMaterial: {fileID: 0}
+  buttonText: {fileID: 0}
 --- !u!212 &1625407616
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9301,7 +9303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1799964736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11572,6 +11574,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 952344530}
   - {fileID: 892806373}
   - {fileID: 1862527318}
   - {fileID: 485102653}
@@ -11586,7 +11589,6 @@ SceneRoots:
   - {fileID: 1277356510}
   - {fileID: 557956404}
   - {fileID: 1715278511}
-  - {fileID: 952344530}
   - {fileID: 98381205}
   - {fileID: 2032256691}
   - {fileID: 1695366252}

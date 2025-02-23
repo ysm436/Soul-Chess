@@ -15,6 +15,7 @@ using static GameBoard;
 
 public class TutorialManager : MonoBehaviour
 {
+    public GameObject cancelButton;
     public CutoutMaskUI cutoutMaskUI;
     public Transform myDeckTransform;
     public Transform myHandTransform;
@@ -66,6 +67,7 @@ public class TutorialManager : MonoBehaviour
 
     public Card viking;
     public Card bard;
+    public Card execution;
 
     private Card ShowingCard;
 
@@ -89,38 +91,34 @@ public class TutorialManager : MonoBehaviour
         isAllowingTurnEnd = false;
     }
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         if (!isInitalized)
         {
+            descriptionText.text =
+                "Soul Chess에 오신 것을 환영합니다!\n" +
+                "당신은 선공 플레이어입니다.";
+            SetTextSize(2);
+            SetTextPosition(new Vector2(0.5f, 0.7f));
+
             blockCardUse.SetActive(true);
             InitializeMyCards();
             InitializeOpponentCards();
-            SetShadow(4, 1);
 
             foreach (var s in GameBoard.instance.gameData.boardSquares)
             {
-                if (s.coordinate == new Vector2Int(4, 1))
-                {
-                    s.OnClick = ProcessStep1;
-                }
-                else if (s.coordinate == new Vector2Int(4, 3))
-                {
-                    s.OnClick = ProcessStep2;
-                }
-                else
-                {
-                    s.OnClick = DoNothing;
-                }
+                s.OnClick = DoNothing;
             }
 
             foreach (ChessPiece king in GameBoard.instance.gameData.pieceObjects.Where(piece => piece.pieceType == ChessPiece.PieceType.King))
                 king.OnKilled += OnEndTutorial;
+
+            EnableShadow();
+            SetShadownToText();
+
+            nextButton.SetActive(true);
+            nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
+            nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep0);
 
             isInitalized = true;
         }
@@ -242,6 +240,14 @@ public class TutorialManager : MonoBehaviour
 
     }
 
+    private void SetShadownToText()
+    {
+        Vector2[] anchors = new Vector2[2];
+        anchors[0] = new Vector2(-1f, -1f);
+        anchors[1] = new Vector2(-1f, -1f);
+        SetShadow(-1, -1, isSpecific: true, anchors: anchors);
+    }
+
     public void RemoveShadow()
     {
         shadow.SetActive(false);
@@ -277,11 +283,38 @@ public class TutorialManager : MonoBehaviour
 
     }
 
+    private void ProcessStep0()
+    {
+        foreach (var s in GameBoard.instance.gameData.boardSquares)
+        {
+            if (s.coordinate == new Vector2Int(4, 1))
+            {
+                s.OnClick = ProcessStep1;
+            }
+            else
+            {
+                s.OnClick = DoNothing;
+            }
+        }
+
+        SetShadow(4, 1);
+
+        descriptionText.text =
+            "기물을 움직이기 위해서 선택해야 합니다.\n" +
+            "당신의 기물을 클릭해 선택하세요.";
+
+        nextButton.gameObject.SetActive(false);
+    }
+
     private void ProcessStep1(Vector2Int coordinate)
     {
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
-            if (s.coordinate == coordinate)
+            if (s.coordinate == new Vector2Int(4, 3))
+            {
+                s.OnClick = ProcessStep2;
+            }
+            else
             {
                 s.OnClick = DoNothing;
             }
@@ -289,8 +322,7 @@ public class TutorialManager : MonoBehaviour
         SetShadow(4, 3);
 
         descriptionText.text =
-            "자신의 기물을 선택 시\n" +
-            "이동할 수 있는 범위가 나타납니다.\n" +
+            "기물을 선택하면 이동할 수 있는 범위가 나타납니다.<line-height=130%>\n" +
             "타일을 클릭해 기물을 이동하세요.";
         SetTextSize(3);
 
@@ -309,10 +341,10 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isTurnButton: true);
 
         descriptionText.text =
-            "기물을 이동하여\n" +
-            "턴 종료 버튼이 활성화되었습니다.\n" +
-            "턴 종료 버튼을 눌러\n" +
-            "당신의 턴을 끝내세요.";
+            "기물을 이동하면 턴 종료 버튼이 활성화됩니다.\n" +
+            "상대에게 턴을 넘기기 위해서는 반드시\n" +
+            "턴 종료 버튼을 클릭해야 한다는 것을 잊지 마세요!<line-height=130%>\n" +
+            "턴 종료 버튼을 클릭해 당신의 턴을 끝내세요.";
         SetTextSize(4);
 
         OnClickBoardSquare(coordinate);
@@ -330,14 +362,11 @@ public class TutorialManager : MonoBehaviour
 
         ShowText();
         descriptionText.text =
-            "상대방의 턴이 종료되었습니다.\n" +
-            "내 턴 시작 시 내 덱에서\n" +
-            "카드를 1장 뽑아 손패로 가져오고,\n" +
-            "영혼 정수 최대치가\n" +
-            "1 늘어나며 충전됩니다.\n" +
-            "영혼 정수는\n" +
-            "카드를 사용하는데 소모됩니다.";
-        SetTextSize(7);
+            "턴이 시작되면 자신의 덱에서\n" +
+            "카드를 1장 뽑아 손패로 가져옵니다.\n" +
+            "손패에는 카드를 최대 8장까지 가지고 있을 수 있습니다.";
+        SetTextPosition(new Vector2(0.5f, 0.5f));
+        SetTextSize(3);
         nextButton.SetActive(true);
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep3_1);
@@ -348,9 +377,27 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isCard: true);
 
         descriptionText.text =
-            "손패는 최대 8장까지\n" +
-            "가질 수 있습니다.";
-        SetTextSize(1);
+            "코스트는 한 턴마다 최대치가 1씩 늘어나며\n" +
+            "매 턴 최대치까지 충전됩니다.\n" +
+            "코스트를 소모해 카드를 사용할 수 있습니다.";
+        SetTextSize(3);
+
+        nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep3_2);
+    }
+
+    public void ProcessStep3_2()
+    {
+        SetShadow(-1, -1, isCard: true);
+
+        descriptionText.text =
+            "카드는 영혼 카드와 마법 카드로 구분됩니다.<line-height=130%>\n" +
+            "영혼 카드는 자신의 기물에 영혼을 부여하는 카드입니다.<line-height=100%>\n" +
+            "영혼이 부여된 기물은 특수한 능력이 생기며 강해집니다.<line-height=130%>\n" +
+            "마법 카드는 영혼을 부여할 수 없습니다.<line-height=100%>\n" +
+            "하지만 강력한 효과를 가지고 있습니다.";
+        SetTextSize(5);
+        SetTextPosition(new Vector2(0.5f, 0.5f));
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep4);
@@ -361,13 +408,10 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isCard: true);
 
         descriptionText.text =
-            "카드의 정보를 보려면\n" +
-            "마우스를 카드 위에 올리세요.";
-        SetTextSize(2);
+            "마우스를 카드 위에 올려 카드의 정보를 확인하세요";
+        SetTextSize(1);
 
-        textTransform.anchorMin = new Vector2(0.5f, 0.5f);
-        textTransform.anchorMax = new Vector2(0.5f, 0.5f);
-        textTransform.anchoredPosition = Vector2.zero;
+        SetTextPosition(new Vector2(0.5f, 0.5f));
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep5);
@@ -382,17 +426,15 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);*/
 
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.085f, 0.6f);
-        anchors[1] = new Vector2(0.14f, 0.675f);
+        anchors[0] = new Vector2(0.085f, 0.57f);
+        anchors[1] = new Vector2(0.13f, 0.655f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         ShowCard(viking);
         descriptionText.text =
-            "이 카드는 영혼 카드입니다.\n" +
-            "영혼 카드를 사용해\n" +
-            "영혼을 부여하면\n" +
-            "아군 기물을 강화할 수 있습니다.";
-        SetTextSize(4);
+            "영혼/마법: 이 아이콘을 통해\n영혼 카드와 마법 카드를 구분할 수 있습니다.<line-height=130%>\n" +
+            "이 카드는 영혼 카드입니다.";
+        SetTextSize(3);
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep6);
@@ -401,13 +443,12 @@ public class TutorialManager : MonoBehaviour
     private void ProcessStep6()
     {
         Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.085f, 0.66f);
-        anchors[1] = new Vector2(0.14f, 0.75f);
+        anchors[0] = new Vector2(0.085f, 0.65f);
+        anchors[1] = new Vector2(0.13f, 0.73f);
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
-            "비용: 이 카드를 사용하기 위해\n" +
-            "필요한 영혼 정수의 양입니다.";
+            "비용: 이 카드를 사용하기 위해 필요한 코스트 양입니다.";
         SetTextSize(2);
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -422,11 +463,9 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
-            "공격력: 이 영혼이 부여될 때\n" +
-            "추가되는 공격력을 의미합니다.\n" +
-            "다른 기물을 공격할 때\n" +
-            "공격력만큼 피해를 줍니다.";
-        SetTextSize(4);
+            "공격력: 이 영혼이 부여되면 추가되는 공격력 수치입니다.<line-height=130%>\n" +
+            "다른 기물을 공격하면 공격력만큼 피해를 입힙니다.";
+        SetTextSize(3);
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep8);
@@ -440,32 +479,12 @@ public class TutorialManager : MonoBehaviour
         SetShadow(-1, -1, isSpecific: true, anchors: anchors);
 
         descriptionText.text =
-            "체력: 이 영혼이 부여될 때\n" +
-            "추가되는 체력을 의미합니다.\n" +
-            "기물의 체력이 0이 될 경우\n" +
-            "해당 기물은 파괴됩니다.";
-        SetTextSize(4);
-
-        nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep8_1);
-    }
-
-    private void ProcessStep8_1()
-    {
-        Vector2[] anchors = new Vector2[2];
-        anchors[0] = new Vector2(0.91f, 0.92f);
-        anchors[1] = new Vector2(0.955f, 0.99f);
-        SetShadow(-1, -1, isSpecific: true, anchors: anchors);
-
-        descriptionText.text =
-            "여러 효과에 대해서는\n" +
-            "오른쪽 위 도움말을 참고하세요.";
-        SetTextSize(2);
+            "체력: 이 영혼이 부여되면 추가되는 체력 수치입니다.<line-height=130%>\n" +
+            "기물의 체력이 0이 되면 기물이 파괴됩니다.";
+        SetTextSize(3);
 
         nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep9);
-
-
     }
 
     private void ProcessStep9()
@@ -477,28 +496,25 @@ public class TutorialManager : MonoBehaviour
 
         RemoveShowCard();
         descriptionText.text =
-            "카드를 드래그해\n" +
-            "사용할 수 있습니다.";
-        SetTextSize(2);
+            "카드를 드래그해 사용할 수 있습니다.";
+        SetTextSize(1);
         nextButton.gameObject.SetActive(false);
     }
 
     private void ProcessStep10()
     {
+        cancelButton.SetActive(false);
+
         blockCardUse.SetActive(true);
         //GameObject.Find("CancelButton").SetActive(false);
 
         SetShadow(4, 3);
         descriptionText.text =
-            "영혼 카드 사용 시,\n" +
-            "기물을 눌러 영혼을\n" +
-            "부여할 수 있습니다.\n" +
-            "기물을 눌러 영혼을 부여하세요.";
-        SetTextSize(4);
+            "영혼 카드 사용 는 영혼을 부여할 기물을 선택해야 합니다.<line-height=130%>\n" +
+            "기물을 클릭해 영혼을 부여하세요.";
+        SetTextSize(2);
 
-        textTransform.anchorMin = new Vector2(0.677f, 0.78f);
-        textTransform.anchorMax = new Vector2(0.677f, 0.78f);
-        textTransform.anchoredPosition = Vector2.zero;
+        SetTextPosition(new Vector2(0.5f, 0.78f));
 
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
@@ -515,7 +531,7 @@ public class TutorialManager : MonoBehaviour
 
     private void ProcessStep11(Vector2Int coordinate)
     {
-        SetShadow(5, 1);
+        SetShadow(4, 3);
         GameBoard.instance.HideExplainUI();
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
@@ -525,12 +541,11 @@ public class TutorialManager : MonoBehaviour
             }
         }
         descriptionText.text =
-            "당신의 기물에\n" +
-            "영혼을 부여했습니다.\n" +
-            "해당 기물은 공격력이 2,\n" +
-            "체력이 4 증가했습니다.\n" +
-            "다른 기물을 선택해 이동시키세요.";
-        SetTextSize(6);
+            "당신의 기물에 영혼을 부여했습니다.<line-height=130%>\n" +
+            "해당 기물은 공격력이 2, 체력이 4 증가했습니다.<line-height=100%>\n" +
+            "또한 영혼이 부여되어 기물 위에 영혼의 상징이 생겼습니다.<line-height=130%>\n" +
+            "한 기물에는 한 번에 하나의 영혼만 부여할 수 있습니다.";
+        SetTextSize(4);
         isMoved = false;
         //OnClickBoardSquare(coordinate);
 
@@ -551,11 +566,19 @@ public class TutorialManager : MonoBehaviour
 
         vikingInstance.Infuse(GameBoard.instance.gameData.GetPiece(coordinate));
 
-        ProcessStep12();
+        nextButton.gameObject.SetActive(true);
+        nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep12);
     }
 
     private void ProcessStep12()
     {
+        SetShadow(5, 1);
+        descriptionText.text = "다른 기물을 선택해 이동하세요.";
+        SetTextSize(1);
+
+        nextButton.gameObject.SetActive(false);
+
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
             if (s.coordinate == new Vector2Int(5, 1))
@@ -607,11 +630,9 @@ public class TutorialManager : MonoBehaviour
         }
 
         descriptionText.text =
-            "기물을 이동하여 턴 종료 버튼이\n" +
-            "활성화되었습니다.\n" +
-            "턴 종료 버튼을 눌러\n" +
-            "당신의 턴을 끝내세요.";
-        SetTextSize(4);
+            "턴 종료 버튼이 활성화되었습니다.<line-height=130%>\n" +
+            "턴 종료 버튼을 눌러 당신의 턴을 끝내세요.";
+        SetTextSize(2);
     }
 
     public void ProcessStep14()
@@ -660,6 +681,9 @@ public class TutorialManager : MonoBehaviour
 
     public void ProcessStep17()
     {
+        ShowText();
+        EnableShadow();
+
         UpdateMyHandPosition();
 
         SetShadow(5, 0);
@@ -728,9 +752,8 @@ public class TutorialManager : MonoBehaviour
         step = 18;
         OnClickBoardSquare(coordinate);
         descriptionText.text =
-            "'음치 음유시인' 카드를\n" +
-            "드래그해 사용하세요.\n";
-        SetTextSize(2);
+            "'음치 음유시인' 카드를 드래그해 사용하세요.\n";
+        SetTextSize(1);
 
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
@@ -743,10 +766,11 @@ public class TutorialManager : MonoBehaviour
         blockCardUse.SetActive(true);
         SetShadow(1, 4);
 
-        //ShowCard(bard);
+        ShowCard(bard);
         descriptionText.text =
-            "기물에 영혼을 부여하세요.\n";
-        SetTextSize(1);
+            "기물에 영혼을 부여해야 능력을 사용할 수 있습니다.<line-height=130%>\n" +
+            "영혼을 부여할 기물을 클릭하세요.";
+        SetTextSize(3);
 
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
@@ -794,11 +818,12 @@ public class TutorialManager : MonoBehaviour
         }
 
         descriptionText.text =
-            "강림 키워드는 영혼 부여 직후\n" +
-            "발동되는 효과를 의미합니다.\n" +
-            "효과의 대상이 될\n" +
-            "기물을 선택하세요.";
-        SetTextSize(4);
+            "대괄호 [] 안에는 키워드가 존재합니다.\n" +
+            "키워드 설명은 카드 옆에서 확인할 수 있습니다.<line-height=130%>\n" +
+            "[강림] 키워드는<line-height=100%>\n" +
+            "능력이 영혼 부여 직후 발동된다는 의미입니다.<line-height=130%>\n" +
+            "능력을 사용할 기물을 선택하세요";
+        SetTextSize(5);
 
         SoulCard bardInstance = Instantiate(bard) as SoulCard;
 
@@ -816,6 +841,7 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
+
 
     private void ProcessStep21(Vector2Int coordinate)
     {
@@ -841,13 +867,41 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        //GameObject.Find("CancelButton").SetActive(false);
+        cancelButton.SetActive(false);
        
         GameBoard.instance.gameData.GetPiece(coordinate).maxHP = 2;
         GameBoard.instance.gameData.GetPiece(coordinate).AD = 2;
+
+        Vector2[] anchors = new Vector2[2];
+        anchors[0] = new Vector2(0.91f, 0.92f);
+        anchors[1] = new Vector2(0.955f, 1f);
+        SetShadow(-1, -1, isSpecific: true, anchors: anchors);
+
+        FlipArrow();
+
+        descriptionText.text =
+            "도움말 버튼입니다.\n" +
+            "능력에 포함된 효과에 대한 설명을 확인할 수 있습니다.";
+        SetTextSize(2);
+
+        nextButton.gameObject.SetActive(true);
+        nextButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        nextButton.GetComponent<Button>().onClick.AddListener(ProcessStep21_1);
+
+    }
+
+    private void ProcessStep21_1()
+    {
+        SetShadow(-1, -1, isTurnButton: true);
+
+        FlipArrow();
+
         descriptionText.text =
             "이제 턴을 종료하세요.";
         SetTextSize(1);
+
+        nextButton.gameObject.SetActive(false);
+
         tutorialController.EnableTurnChangeButton();
     }
 
@@ -896,15 +950,16 @@ public class TutorialManager : MonoBehaviour
 
     public void ProcessStep24()
     {
+        EnableShadow();
+        ShowText();
+
         UpdateMyHandPosition();
 
         SetShadow(-1, -1, isCard: true);
 
         descriptionText.text =
-            "덱에서 마법 카드를 뽑았습니다.\n" +
-            "마법 카드는 영혼 부여가\n" +
-            "불가능한 대신\n" +
-            "강력한 효과를 가지고 있습니다.";
+            "덱에서 마법 카드를 뽑았습니다.<line-height=130%>\n" +
+            "마법 카드는 영혼을 부여하지 않는 대신<line-height=100%>\n강력한 효과를 가지고 있습니다.";
         SetTextSize(4);
 
         nextButton.gameObject.SetActive(true);
@@ -922,8 +977,7 @@ public class TutorialManager : MonoBehaviour
         whitePlayer.isUsingCard = false;
 
         descriptionText.text =
-            "처형 카드를 사용해\n" +
-            "적을 처치하세요.";
+            "'처형' 카드를 사용하세요.";
         SetTextSize(2);
     }
 
@@ -932,12 +986,12 @@ public class TutorialManager : MonoBehaviour
         blockCardUse.SetActive(true);
         SetShadow(3, 6);
 
+        ShowCard(execution);
+
         descriptionText.text =
-            "적을 처치하세요.";
+            "'처형' 카드의 효과를 사용할 대상을 선택하세요";
         SetTextSize(1);
-        textTransform.anchorMin = new Vector2(0.8f, 0.5f);
-        textTransform.anchorMax = new Vector2(0.8f, 0.5f);
-        textTransform.anchoredPosition = Vector2.zero;
+        SetTextPosition(new Vector2(0.5f, 0.3f));
 
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
@@ -965,11 +1019,11 @@ public class TutorialManager : MonoBehaviour
         }
         GameBoard.instance.gameData.GetPiece(coordinate).Kill();
 
+        RemoveShowCard();
+
         descriptionText.text =
-            "킹으로 가는 길이 열렸습니다!\n" +
-            "적의 킹을 처치하고\n" +
-            "게임에서 승리하세요!!";
-        SetTextSize(3);
+            "기물을 움직여 적의 킹을 처치하고 게임에서 승리하세요!!";
+        SetTextSize(1);
 
         ClearTargetableObjects();
 
@@ -1032,6 +1086,13 @@ public class TutorialManager : MonoBehaviour
         textTransform.gameObject.SetActive(false);
     }
 
+    public void SetTextPosition(Vector2 anchor)
+    {
+        textTransform.anchorMin = anchor;
+        textTransform.anchorMax = anchor;
+        textTransform.anchoredPosition = Vector2.zero;
+    }
+
     private void OnEndTutorial(ChessPiece piece)
     {
         RemoveText();
@@ -1059,6 +1120,12 @@ public class TutorialManager : MonoBehaviour
     public void EnableArrow()
     {
         arrow.gameObject.SetActive(true);
+    }
+
+    private void FlipArrow()
+    {
+        arrow.anchoredPosition = new Vector2(arrow.anchoredPosition.x, -arrow.anchoredPosition.y);
+        arrow.localScale = new Vector2(arrow.localScale.x, -arrow.localScale.y);
     }
 
     public void OnClickBoardSquare(Vector2Int coordinate)
