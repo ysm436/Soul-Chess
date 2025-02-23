@@ -19,6 +19,9 @@ public class ChessBoard : MonoBehaviour
     public GameObject boardSquareSample;
 
     public GameObject blocker;
+    public GameObject exhaustionCard;
+    public GameObject exhaustionProjectile;
+
     public Canvas effectCanvas;
     [SerializeField] private Volume volume;
     private ColorAdjustments colorAdjustments;

@@ -27,6 +27,8 @@ public class PlayerData
 
     public Vector2 deckPosition;
 
+    private int exhuastionDamage = 0;
+
     // 게임 시작시 호출
     public void Initialize()
     {
@@ -65,12 +67,117 @@ public class PlayerData
 
     public IEnumerator DrawCardWithAnimation()
     {
+        yield return new WaitForSeconds(0.5f);
+        yield return CheckBlocker();
+
         GameObject blocker = GameBoard.instance.chessBoard.blocker;
         blocker.SetActive(true);
 
         if (deck.Count <= 0)
         {
-            blocker.SetActive(false);
+            bool mySignal;
+            exhuastionDamage += 1;
+
+            if (playerColor == GameBoard.instance.playerColor)
+                mySignal = true;
+            else
+                mySignal = false;
+
+            GameObject exhaustionCard = UnityEngine.Object.Instantiate(GameBoard.instance.chessBoard.exhaustionCard);
+            CardObject exhaustionCardObj = exhaustionCard.GetComponent<CardObject>();
+            Material frameMaterial = exhaustionCard.GetComponent<Renderer>().material;
+            Material illustMaterial = exhaustionCardObj.illustration.GetComponent<Renderer>().material;
+            Material backMaterial = exhaustionCardObj.backSpriteRenderer.GetComponent<Renderer>().material;
+
+            // 탈진 카드 생성
+            if (mySignal)
+                exhaustionCard.transform.position = new Vector3(7.9f, -2.6f, 0);
+            else
+            {
+                exhaustionCard.transform.position = new Vector3(7.9f, 2.6f, 0);
+                exhaustionCard.transform.localEulerAngles = new Vector3(0, 0, 180);
+            }
+            exhaustionCard.transform.localScale = new Vector3(0.8f, 0.8f, 0);
+
+            // 페이드 효과
+            yield return DOVirtual.Float(1f, -0.1f, 0.7f, (value) => {
+                    frameMaterial.SetFloat("_FadeAmount", value);
+                    backMaterial.SetFloat("_FadeAmount", value);
+                }).WaitForCompletion();
+
+            // 덱에서 카드 꺼내는 효과
+            if (mySignal)
+            {
+                yield return exhaustionCard.transform.DOLocalMoveY(-7, 0.6f)
+                    .SetRelative()
+                    .SetEase(Ease.OutQuad)
+                    .OnComplete(() => {
+                        exhaustionCardObj.backSpriteRenderer.gameObject.SetActive(false);
+                    })
+                    .WaitForCompletion();
+            }
+            else
+            {
+                yield return exhaustionCard.transform.DOLocalMoveY(7, 0.6f)
+                    .SetRelative()
+                    .SetEase(Ease.OutQuad)
+                    .OnComplete(() => {
+                        exhaustionCardObj.backSpriteRenderer.gameObject.SetActive(false);
+                    })
+                    .WaitForCompletion();
+            }
+
+            yield return GameBoard.instance.chessBoard.FadeInTween().WaitForCompletion();
+            
+            // 카드 사용하는 것 처럼 띄우기
+            exhaustionCardObj.illustration.gameObject.SetActive(true);
+            exhaustionCardObj.cardNameText.gameObject.SetActive(true);
+            exhaustionCardObj.descriptionText.gameObject.SetActive(true);
+            exhaustionCardObj.descriptionText.text = "무작위 아군 기물에게 " + exhuastionDamage +"의 피해를 입힙니다.";
+            exhaustionCard.transform.localPosition = new Vector3(-5.8f, 0f, 0);
+            exhaustionCard.transform.localScale = new Vector3(1.5f, 1.5f, 0);
+            illustMaterial.SetFloat("_FadeAmount", -0.1f);
+            illustMaterial.SetFloat("_FadeBurnTransition", 0.5f);
+            frameMaterial.SetFloat("_FadeBurnTransition", 0.5f);
+
+            yield return new WaitForSeconds(1f);
+
+            // 카드 fadeOut
+            yield return DOVirtual.Float(-0.1f, 1f, 0.7f, (value) => {
+                    float lerpedValue = Mathf.InverseLerp(-0.1f, 1f, value);
+                    exhaustionCardObj.cardNameText.alpha = 1 - lerpedValue;
+                    exhaustionCardObj.descriptionText.alpha = 1 - lerpedValue;
+                    illustMaterial.SetFloat("_FadeAmount", value);
+                    frameMaterial.SetFloat("_FadeAmount", value);
+                });
+            
+            GameObject projectileObj = UnityEngine.Object.Instantiate(GameBoard.instance.chessBoard.exhaustionProjectile, exhaustionCard.transform);
+
+            // 이펙트 발사
+            yield return DOVirtual.DelayedCall(0.4f, () => {    
+                List<ChessPiece> targetList = GameBoard.instance.gameData.pieceObjects.Where(obj => obj.pieceColor == playerColor).ToList();
+                ChessPiece targetPiece = targetList[SynchronizedRandom.Range(0, targetList.Count())];
+
+                projectileObj.transform.DOMove(targetPiece.transform.position, 0.7f).SetEase(Ease.InOutQuint).OnComplete(() => {
+                    targetPiece.MinusHP(exhuastionDamage);
+                    if (targetPiece.isAlive)
+                    {
+                        GameManager.instance.soundManager.PlaySFX("Attack");
+                        GameBoard.instance.chessBoard.AttackedAnimation(targetPiece);
+                    }
+                    else
+                    {
+                        GameManager.instance.soundManager.PlaySFX("Destroy");
+                        targetPiece.GetComponent<Animator>().SetTrigger("killedTrigger");
+                        targetPiece.MakeAttackedEffect();
+                    }
+                    UnityEngine.Object.Destroy(projectileObj);
+                });
+            }).WaitForCompletion();
+
+            yield return new WaitForSeconds(0.8f);
+            yield return GameBoard.instance.chessBoard.FadeOutTween();
+
             UpdateHandPosition();
             yield break;
         }
@@ -144,6 +251,23 @@ public class PlayerData
                 }
                 GetCard(card);
                 blocker.SetActive(false);
+            }
+        }
+    }
+
+    private IEnumerator CheckBlocker()
+    {
+        while (true)
+        {
+            if (GameBoard.instance.chessBoard.blocker.activeSelf)
+            {
+                Debug.Log("Blocker Exist");
+                yield return new WaitForSeconds(0.5f);
+                continue;
+            }
+            else
+            {
+                break;
             }
         }
     }
