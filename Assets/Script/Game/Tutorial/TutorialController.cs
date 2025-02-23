@@ -122,12 +122,10 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
         {
             tutorialManager.ProcessStep3();
         }
-
         if (turn == 4)
         {
             tutorialManager.ProcessStep17();
         }
-
         if (turn == 6)
         {
             tutorialManager.ProcessStep24();
@@ -244,7 +242,9 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
         yield return new WaitForSeconds(0.5f);
 
-        tutorialManager.ProcessStep14();
+        //tutorialManager.ProcessStep14();
+
+        StartEnemySecondRoutine2();
     }
 
     public void StartEnemySecondRoutine2()
@@ -269,7 +269,9 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
         yield return new WaitForSeconds(routineDelay);
 
-        tutorialManager.ProcessStep16();
+        //tutorialManager.ProcessStep16();
+
+        OnTurnEndClicked();
     }
 
     private IEnumerator EnemyThirdRoutine1()
@@ -290,7 +292,9 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
         yield return new WaitForSeconds(routineDelay);
 
-        tutorialManager.ProcessStep22();
+        //tutorialManager.ProcessStep22();
+
+        StartEnemyThirdRoutine2();
     }
     public void StartEnemyThirdRoutine2()
     {
@@ -308,7 +312,9 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
         yield return new WaitForSeconds(routineDelay);
 
-        tutorialManager.ProcessStep23();
+        //tutorialManager.ProcessStep23();
+
+        OnTurnEndClicked();
     }
 
     private IEnumerator EnemyShowCardRoutine(Card card)
