@@ -49,6 +49,11 @@ public class Merlin : SoulCard
     {
         foreach (var card in objectData.hand)
         {
+            if (card is not SpellCard)
+            {
+                continue;
+            }
+
             if (cardCostDict.ContainsKey(card))
             {
                 card.cost += cardCostDict[card];

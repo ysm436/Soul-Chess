@@ -46,6 +46,11 @@ public class Mimir : SoulCard
     {
         foreach (var card in playercolor.hand)
         {
+            if (card is not SoulCard)
+            {
+                continue;
+            }
+
             if (cardCostDict.ContainsKey(card))
             {
                 card.cost += cardCostDict[card];
