@@ -648,7 +648,7 @@ public class ChessBoard : MonoBehaviour
                 colorAdjustments.colorFilter.value = tempColor;
             }, originStartColor, 0.5f);
 
-        Tween checkOff = DOVirtual.DelayedCall(0f, () => {
+        Tween checkOff = DOVirtual.DelayedCall(0.5f, () => {
                 checkUI.SetActive(false);
             });
         

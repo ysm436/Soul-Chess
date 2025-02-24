@@ -145,7 +145,7 @@ abstract public class ChessPiece : TargetableObject
             if (soul != null)
                 soulHP = soul.HP;
             if (value < maxHP)
-                pieceObject.HPText.faceColor = Color.red;
+                pieceObject.HPText.faceColor = Color.yellow;
             else if (maxHP > soulHP + 1)
                 pieceObject.HPText.faceColor = Color.green;
             else
