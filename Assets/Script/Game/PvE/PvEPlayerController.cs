@@ -242,6 +242,7 @@ public class PvEPlayerController : PlayerController
         if (thisPlayerData.soulEssence < card.cost)
             return false;
 
+        gameBoard.ShowCard(card);
         usingCard = card;
         isUsingCard = true;
 

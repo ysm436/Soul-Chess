@@ -275,6 +275,7 @@ public class PlayerController : MonoBehaviour
         if (GameBoard.instance.CurrentPlayerData().soulEssence < card.cost)
             return false;
 
+        gameBoard.ShowCard(card);
         usingCard = card;
         isUsingCard = true;
 
