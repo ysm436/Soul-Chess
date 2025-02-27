@@ -24,7 +24,9 @@ public class RobinHood : SoulCard
         if (targetPiece.soul != null && targetPiece.pieceColor != InfusedPiece.pieceColor)
         {
             targetSoul = Instantiate(targetPiece.soul);
+            targetSoul.Initialize();
             targetSoul.owner = owner;
+            targetSoul.cost = targetPiece.soul.originalCost;
             targetSoul.transform.Rotate(0, 0, -180);
             targetSoul.gameObject.SetActive(false);
             targetPiece.OnKilled += GetTargetSoulCard;
@@ -43,6 +45,7 @@ public class RobinHood : SoulCard
     {
         //OnKill이 상대 기물이 죽어서 RemoveSoul()된 이후 호출되어 OnKill로는 구현 불가
         InfusedPiece.OnStartAttack += EnableEffect;
+        InfusedPiece.OnSoulRemoved += RemoveEffect;
     }
     public override void RemoveEffect()
     {
