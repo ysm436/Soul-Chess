@@ -69,10 +69,12 @@ abstract public class ChessPiece : TargetableObject
 
     // 키워드 우선순위: 면역, 도발, 보호막, 방어력
     // isTauntAttack은 도발이 연쇄적으로 작동하지 않도록 함
-    public void MinusHP(int value/* , bool isTauntAttack = false */)
+    public bool MinusHP(int value/* , bool isTauntAttack = false */)
     {
+        bool hasDied = false;
+
         if (GetKeyword(Keyword.Type.Immunity) == 1)
-            return;
+            return hasDied;
 
         /* if (!isTauntAttack)
         {
@@ -88,7 +90,7 @@ abstract public class ChessPiece : TargetableObject
         {
             SetKeyword(Keyword.Type.Shield, 0);
             buff.TryRemoveSpecificBuff("", Buff.BuffType.Shield); //보호막 버프 제거
-            return;
+            return hasDied;
         }
 
         /* if (GetKeyword(Keyword.Type.Defense) > 0)
@@ -111,7 +113,13 @@ abstract public class ChessPiece : TargetableObject
         if (currentHP > 0)
             pieceObject.HPText.text = currentHP.ToString();
         else
+        {
             Kill();
+            hasDied = true;
+        }
+
+        // 죽었었는지 전달
+        return hasDied;
     }
 
     public void AddHP(int value)
@@ -293,11 +301,11 @@ abstract public class ChessPiece : TargetableObject
         SetKeyword(Keyword.Type.Stealth, 0);
         buff.TryRemoveSpecificBuff("", Buff.BuffType.Stealth);
 
-        targetPiece.Attacked(this, attackDamage);
+        bool hasKilled = targetPiece.Attacked(this, attackDamage);
         OnEndAttack?.Invoke(targetPiece);
 
         bool targetIsKilled = !targetPiece.isAlive;
-        if (!targetPiece.isAlive)
+        if (!targetPiece.isAlive || hasKilled)
         {
             OnKill?.Invoke(targetPiece);
         }
@@ -315,14 +323,16 @@ abstract public class ChessPiece : TargetableObject
     /// <summary>
     /// 
     /// </summary>
-    /// <returns> isAlive </returns>
+    /// <returns> hasDied (죽었었는지) </returns>
     public bool Attacked(ChessPiece chessPiece, int damage)
     {
         OnAttacked?.Invoke(chessPiece, damage);
 
-        MinusHP(damage);
+        bool hasDied = MinusHP(damage);     // 한 번이라도 죽었었는지 (부활한 경우도 true)
+
         OnAttackedAfter?.Invoke(chessPiece);
-        return isAlive;
+
+        return hasDied;
     }
     public bool SpellAttacked(int damage)
     {
