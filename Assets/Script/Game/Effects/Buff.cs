@@ -153,7 +153,7 @@ public class Buff : Effect
         }
     }
 
-    private bool FindBuff(string sourceName, BuffType buffType, out int index)
+    public bool FindBuff(string sourceName, BuffType buffType, out int index)
     {
         for (int i = 0; i < _buffList.Count; i++)
         {

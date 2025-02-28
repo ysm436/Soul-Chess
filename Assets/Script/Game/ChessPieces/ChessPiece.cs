@@ -199,6 +199,7 @@ abstract public class ChessPiece : TargetableObject
     public Action<ChessPiece> OnSpellAttacked;
     //public Action OnGetMovableCoordinate;
     public Action<Vector2Int> OnMove;
+    public Action<ChessPiece> OnSetSoul;
     public Action OnSoulRemoved;
 
     public Buff buff = null;
@@ -367,6 +368,8 @@ abstract public class ChessPiece : TargetableObject
     {
         if (soul != null)
             RemoveSoul();
+
+        OnSetSoul?.Invoke(this);
 
         if (!GameBoard.instance.soulSetCanMove)
         {
