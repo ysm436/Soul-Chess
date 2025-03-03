@@ -700,6 +700,7 @@ abstract public class ChessPiece : TargetableObject
                     accessory.color = new Color(1, 1, 1, i);
                     yield return null;
                 }
+                accessory.color = new Color(1, 1, 1, 1f);
             }
         }
     }
