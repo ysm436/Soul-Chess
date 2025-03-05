@@ -6,6 +6,8 @@ public class Hydra : SoulCard
 {
     protected override int CardID => cardIdDict["히드라"];
 
+    private string baseDescription = "";
+
     [SerializeField] private int revivalCount = 2;
 
     [Header("Head Accessory")]
@@ -16,6 +18,8 @@ public class Hydra : SoulCard
     protected override void Awake()
     {
         base.Awake();
+
+        baseDescription = description;
     }
 
     public void Revival(ChessPiece chessPiece)
@@ -39,6 +43,7 @@ public class Hydra : SoulCard
             {
                 InfusedPiece.SetAccessory(oneHeadAccessory);
             }
+            description = $"{baseDescription}\n({revivalCount}번 남음)";
         }
     }
 
@@ -51,6 +56,7 @@ public class Hydra : SoulCard
             if (buffInfo.sourceName == cardName && buffInfo.buffType == Buff.BuffType.Description) return;
         }
         InfusedPiece.buff.AddBuffByDescription(cardName, Buff.BuffType.Description, "히드라: 남은 부활 횟수 "+ revivalCount.ToString() +"번", true);
+        description = $"{baseDescription}\n({revivalCount}번 남음)";
         InfusedPiece.OnKilled += Revival;
         InfusedPiece.OnSoulRemoved += RemoveEffect;
     }

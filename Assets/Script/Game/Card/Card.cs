@@ -34,6 +34,7 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
     }
     [SerializeField]
     private int _cost;
+    public int originalCost { get; private set; }
     public Sprite illustration;
     public Sprite back;
     public Reigon reigon;
@@ -53,6 +54,11 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
 
     protected virtual void Awake()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         cardObject = GetComponent<CardObject>();
 
         cardObject.cardNameText.text = cardName;
@@ -60,6 +66,8 @@ public abstract class Card : TargetableObject, IPointerEnterHandler, IPointerExi
         cardObject.illustration.sprite = illustration;
         cardObject.descriptionText.text = description;
         cardObject.backSpriteRenderer.sprite = back;
+
+        originalCost = cost;
     }
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
