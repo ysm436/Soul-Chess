@@ -126,6 +126,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6665048331891296882, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ee49a200cb9a3d945aa0b8ad04f8612f, type: 3}
+    - target: {fileID: 6665048331891296882, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7a44cddb8c496734a92e52de9bbcbe12, type: 2}
@@ -145,6 +149,10 @@ PrefabInstance:
       propertyPath: m_fontColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7455761966933711259, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bcb94b1a9a785284ba42361f6c796a18, type: 3}
     - target: {fileID: 7455761966933711259, guid: 881fdce7cd923a0478a4313009ec0886, type: 3}
       propertyPath: m_Color.a
       value: 1

@@ -369,7 +369,7 @@ public class DeckManager : MonoBehaviour
             case 6: loadedDeckCosts[6] += 1; break;
             case 7: loadedDeckCosts[7] += 1; break;
             case 8: loadedDeckCosts[8] += 1; break;
-            default: loadedDeckCosts[9] += 1; break;
+            default: loadedDeckCosts[5] += 1; break;
         }
 
         switch (cardInfo.cardType)
@@ -431,7 +431,7 @@ public class DeckManager : MonoBehaviour
             case 6: loadedDeckCosts[6] -= 1; break;
             case 7: loadedDeckCosts[7] -= 1; break;
             case 8: loadedDeckCosts[8] -= 1; break;
-            default: loadedDeckCosts[9] -= 1; break;
+            default: loadedDeckCosts[5] -= 1; break;
         }
 
         switch (cardInfo.cardType)
