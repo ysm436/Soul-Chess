@@ -417,7 +417,7 @@ public class PlayerController : MonoBehaviour
         GameBoard.instance.CurrentPlayerData().soulEssence -= usingCard.cost;
 
         GameBoard.instance.gameData.myPlayerData.TryRemoveCardInHand(usingCard);
-
+        usingCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_Alpha", 0f);
         usingCard.EffectOnCardUsed?.EffectAction(this);
 
         if (!(usingCard is SoulCard))

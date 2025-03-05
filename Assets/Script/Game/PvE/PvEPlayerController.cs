@@ -364,7 +364,7 @@ public class PvEPlayerController : PlayerController
         }
 
         thisPlayerData.soulEssence -= usingCard.cost;
-        
+        usingCard.GetComponent<CardObject>().canUseEffectRenderer.material.SetFloat("_Alpha", 0f);
         thisPlayerData.TryRemoveCardInHand(usingCard);
 
         usingCard.EffectOnCardUsed?.EffectAction(this);
