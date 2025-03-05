@@ -14,4 +14,5 @@ public class CardObject : MonoBehaviour
     public GameObject ADCircle;
     public GameObject HPCircle;
     public GameObject typeImage;
+    public GameObject typeBackground;
 }
