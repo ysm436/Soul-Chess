@@ -137,8 +137,6 @@ public class PlayerData
             exhaustionCard.transform.localPosition = new Vector3(-5.8f, 0f, 0);
             exhaustionCard.transform.localScale = new Vector3(1.5f, 1.5f, 0);
             illustMaterial.SetFloat("_FadeAmount", -0.1f);
-            illustMaterial.SetFloat("_FadeBurnTransition", 0.5f);
-            frameMaterial.SetFloat("_FadeBurnTransition", 0.5f);
 
             yield return new WaitForSeconds(1f);
 
@@ -218,6 +216,7 @@ public class PlayerData
                 }
                 cardobj.canUseEffectRenderer.gameObject.SetActive(false);
                 cardobj.backSpriteRenderer.gameObject.SetActive(false);
+                cardobj.typeBackground.SetActive(false);
                 cardobj.typeImage.SetActive(false);
                 costCircle.SetActive(false);
 

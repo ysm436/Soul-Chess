@@ -256,6 +256,7 @@ MonoBehaviour:
   ADCircle: {fileID: 0}
   HPCircle: {fileID: 0}
   typeImage: {fileID: 0}
+  typeBackground: {fileID: 7812208884002613451}
 --- !u!1 &2307050580273995933
 GameObject:
   m_ObjectHideFlags: 0
