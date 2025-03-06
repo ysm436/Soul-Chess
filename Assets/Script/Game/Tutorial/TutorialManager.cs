@@ -1063,7 +1063,7 @@ public class TutorialManager : MonoBehaviour
         RemoveShowCard();
 
         descriptionText.text =
-            "기물을 움직여 적의 킹을 처치하고 게임에서 승리하세요!!";
+            "기물을 움직여 적의 킹을 처치하고 게임에서 승리하세요!";
         SetTextSize(1);
 
         ClearTargetableObjects();
