@@ -136,7 +136,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 0
-  description: "\uB8E9 \uAE30\uBB3C\uC5D0 \uAC15\uB9BC \uC2DC, [\uBCF4\uD638\uB9C9]\uC744
+  description: "\uB8E9 \uAE30\uBB3C\uC5D0 \uBD80\uC5EC\uD558\uBA74, \uBCF4\uD638\uB9C9\uC744
     \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 298669615360064573}
   cardKeywords: 01000000
@@ -166,4 +166,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectPrefab: {fileID: 0}
   additionalBuffPieceType: 8
-  additionalHp: 2

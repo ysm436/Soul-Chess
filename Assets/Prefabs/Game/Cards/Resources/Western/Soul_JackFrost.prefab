@@ -117,7 +117,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 2
   rarity: 1
-  description: "[\uAC15\uB9BC] \uC801 \uAE30\uBB3C\uC744 \uD558\uB098 \uC120\uD0DD\uD558\uC5EC
+  description: "[\uAC15\uB9BC] \uC801 \uAE30\uBB3C\uC744 \uD558\uB098 \uC120\uD0DD\uD574
     \uAE30\uC808\uC2DC\uD0B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 5943837467758970341}
   cardKeywords: 0600000002000000

@@ -127,8 +127,8 @@ MonoBehaviour:
   reigon: 2
   rarity: 1
   description: "[\uAC15\uB9BC] \uC544\uAD70 \uAE30\uBB3C\uC758 \uC601\uD63C\uC744
-    \uD761\uC218 \uD569\uB2C8\uB2E4. \uADF8 \uC601\uD63C\uC758 \uBE44\uC6A9\uC758
-    2\uBC30 \uB9CC\uD07C \uACF5\uACA9\uB825\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
+    \uD761\uC218\uD569\uB2C8\uB2E4. \uADF8 \uC601\uD63C\uC758 \uBE44\uC6A9\uC758
+    2\uBC30\uB9CC\uD07C \uACF5\uACA9\uB825\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 5302391099785664736}
   cardKeywords: 06000000
   isInSelection: 0

@@ -165,8 +165,8 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 2
-  description: "[\uAC15\uB9BC] \uBAA8\uB4E0 \uC601\uD63C\uC774 \uAE43\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C
-    2\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  description: "[\uAC15\uB9BC] \uBAA8\uB4E0 \uC601\uD63C\uC774 \uBD80\uC5EC\uB41C
+    \uAE30\uBB3C\uC5D0\uAC8C 2\uC758 \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: 558989280382440502}
   cardKeywords: 06000000
   isInSelection: 0

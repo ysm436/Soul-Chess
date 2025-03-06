@@ -129,7 +129,7 @@ MonoBehaviour:
   reigon: 0
   rarity: 2
   description: "[\uAC15\uB9BC] \u2018\uCC9C\uB465\uBCBC\uB77D\u2019 \uCE74\uB4DC\uB97C
-    3\uC7A5 \uC5BB\uC2B5\uB2C8\uB2E4.\n\uD0B9 \uAE30\uBB3C\uC5D0 \uAC15\uB9BC \uC2DC,
+    3\uC7A5 \uC5BB\uC2B5\uB2C8\uB2E4.\r\n\uD0B9 \uAE30\uBB3C\uC5D0 \uBD80\uC5EC\uD558\uBA74,
     +2/+2\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -2277148209843755556}
   cardKeywords: 06000000

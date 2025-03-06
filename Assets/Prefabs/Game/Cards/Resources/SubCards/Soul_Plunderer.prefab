@@ -108,7 +108,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 0
-  description: 
+  description: ...
   EffectOnCardUsed: {fileID: 4289914002319621180}
   cardKeywords: 
   isInSelection: 0

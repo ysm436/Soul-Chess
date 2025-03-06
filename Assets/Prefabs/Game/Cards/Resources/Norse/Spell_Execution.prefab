@@ -170,9 +170,9 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 0
-  description: "\uC601\uD63C\uC774 \uAE43\uB4E0 \uAE30\uBB3C\uC5D0\uAC8C 3 \uD53C\uD574\uB97C
-    \uC90D\uB2C8\uB2E4. \uAE30\uBB3C\uC758 \uCCB4\uB825\uC774 6 \uC774\uD558\uBA74,
-    6\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  description: "\uC601\uD63C\uC774 \uBD80\uC5EC\uB41C \uAE30\uBB3C\uC744 \uC120\uD0DD\uD574
+    3\uC758 \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4.\r\n\uAE30\uBB3C\uC758 \uCCB4\uB825\uC774
+    6 \uC774\uD558\uB77C\uBA74, 6\uC758 \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -3397328758503862818}
   cardKeywords: 
   isInSelection: 0

@@ -121,8 +121,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 1
-  description: "\uBB34\uC791\uC704 \uAE30\uBB3C\uC774 \uD30C\uAD34\uB429\uB2C8\uB2E4.
-    4\uBC88 \uBC18\uBCF5\uD569\uB2C8\uB2E4."
+  description: "\u2018\uBB34\uC791\uC704\u2019 \uAE30\uBB3C\uC744 4\uAC1C \uD30C\uAD34\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8600045467750861128}
   cardKeywords: 
   isInSelection: 0

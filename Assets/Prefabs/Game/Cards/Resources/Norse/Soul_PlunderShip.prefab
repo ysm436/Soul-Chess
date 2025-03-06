@@ -137,7 +137,7 @@ MonoBehaviour:
   reigon: 1
   rarity: 0
   description: "[\uAC15\uB9BC] \uC57D\uD0C8\uAFBC \uCE74\uB4DC 3\uC7A5\uC744 \uB0B4
-    \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
+    \uC190\uD328\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -4044531659550928085}
   cardKeywords: 06000000
   isInSelection: 0

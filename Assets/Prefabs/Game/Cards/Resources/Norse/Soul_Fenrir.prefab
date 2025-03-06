@@ -142,7 +142,7 @@ MonoBehaviour:
   reigon: 1
   rarity: 0
   description: "\uC774 \uAE30\uBB3C\uC774 \uACF5\uACA9\uD558\uC5EC \uC801 \uAE30\uBB3C\uC744
-    \uCC98\uCE58\uD560 \uB54C \uB9C8\uB2E4 +2/+2\uC744 \uC5BB\uC2B5\uB2C8\uB2E4"
+    \uCC98\uCE58\uD560 \uB54C\uB9C8\uB2E4 +2/+2\uC744 \uC5BB\uC2B5\uB2C8\uB2E4"
   EffectOnCardUsed: {fileID: -3866558103305100114}
   cardKeywords: 
   isInSelection: 0

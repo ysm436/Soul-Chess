@@ -133,7 +133,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 2
   rarity: 1
-  description: "[\uC720\uC5B8] \uBB34\uC791\uC704 \uC801  \uAE30\uBB3C\uC744 \uCC98\uCE58\uD569\uB2C8\uB2E4. "
+  description: "[\uC720\uC5B8] \uBB34\uC791\uC704 \uC801  \uAE30\uBB3C\uC744 \uCC98\uCE58\uD569\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8131353371072324936}
   cardKeywords: 05000000
   isInSelection: 0

@@ -136,8 +136,9 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 2
   rarity: 1
-  description: "\uC774 \uAE30\uBB3C\uC774 \uC801 \uAE30\uBB3C\uC744 \uCC98\uCE58\uD560
-    \uB54C, \uADF8 \uC601\uD63C\uC744 \uB0B4 \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
+  description: "\uC774 \uAE30\uBB3C\uC774 \uC601\uD63C\uC774 \uBD80\uC5EC\uB41C \uC801
+    \uAE30\uBB3C\uC744 \uCC98\uCE58\uD560 \uB54C, \uADF8 \uC601\uD63C\uC744 \uB0B4
+    \uC190\uC73C\uB85C \uAC00\uC838\uC635\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8533229200881966413}
   cardKeywords: 
   isInSelection: 0

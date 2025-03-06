@@ -136,7 +136,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 0
   rarity: 0
-  description: "[\uAC15\uB9BC] \uCE74\uB4DC\uB97C \uD55C\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
+  description: "[\uAC15\uB9BC] \uCE74\uB4DC\uB97C 1\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8401075993642383066}
   cardKeywords: 06000000
   isInSelection: 0
