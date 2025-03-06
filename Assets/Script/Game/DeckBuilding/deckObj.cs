@@ -14,6 +14,7 @@ public class deckObj : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private GameObject draggedDeckObj;
     private Vector2 initialMousePosition;
     private ScrollRect deckObjScroll;
+    private bool isDragging;
 
     private void Awake()
     {
@@ -22,7 +23,11 @@ public class deckObj : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void LoadDeck()
     {
-        GetComponentInParent<DeckBuildingSceneUI>().LoadDeckButtonFunction(deckIndex);
+        if (!isDragging)
+        {
+            GetComponentInParent<DeckBuildingSceneUI>().LoadDeckButtonFunction(deckIndex);
+        }
+
     }
 
 /*     public void OnPointerClick(PointerEventData eventData)
@@ -38,6 +43,7 @@ public class deckObj : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        isDragging = true;
         canvas = FindObjectOfType<Canvas>().transform;
         dbm = GetComponentInParent<DeckBuildingManager>();
 
@@ -69,6 +75,7 @@ public class deckObj : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         bool removeSignal = RectTransformUtility.RectangleContainsScreenPoint(dbm.cardDisplayArea.GetComponent<RectTransform>(), eventData.position);
 
         Destroy(draggedDeckObj);
+        isDragging = false;
         if (removeSignal)
         {
             GameManager.instance.deckList[deckIndex].index = -1;
