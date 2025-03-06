@@ -242,6 +242,8 @@ public class GameBoard : MonoBehaviour
     public bool isShowingPieceInfo = false;
     public void ShowPieceInfo(ChessPiece piece)
     {
+        if (myController.isUsingCard)
+            return;
         if (isShowingPieceInfo)
             HidePieceInfo();
 
@@ -262,6 +264,8 @@ public class GameBoard : MonoBehaviour
     }
     public void HidePieceInfo()
     {
+        if (myController.isUsingCard)
+            return;
         if (!isShowingPieceInfo)
             return;
 
