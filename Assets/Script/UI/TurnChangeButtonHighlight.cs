@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TurnChangeButtonHighlight : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class TurnChangeButtonHighlight : MonoBehaviour
     private bool isVisible = false;
     WaitForSeconds Wait = new WaitForSeconds(0.7f);
 
+    public bool tutorialFlag;
+
     void Start()
     {
         highlightMaterial = GetComponent<Renderer>().material;
@@ -21,7 +24,10 @@ public class TurnChangeButtonHighlight : MonoBehaviour
         player = GameBoard.instance.myController;
         highlightMaterial.SetFloat("_OutlineAlpha", 0f);
 
-        StartCoroutine(EnableHighlight());
+        if (SceneManager.GetActiveScene().name == "TutorialScene")
+            StartCoroutine(EnableHighlightForTutorial());
+        else
+            StartCoroutine(EnableHighlight());
     }
 
     public IEnumerator EnableHighlight()
@@ -60,5 +66,41 @@ public class TurnChangeButtonHighlight : MonoBehaviour
         highlightMaterial.SetFloat("_Alpha", 1f);
         buttonText.alpha = 1f;
         highlightMaterial.SetFloat("_OutlineAlpha", 0f);
+    }
+
+    public IEnumerator EnableHighlightForTutorial()
+    {
+        while (true)
+        {
+            if (tutorialFlag) 
+            {
+                highlightMaterial.SetFloat("_OutlineAlpha", 1f);
+                buttonText.text = "턴 종료";
+
+                if (isVisible)
+                {
+                    highlightMaterial.SetFloat("_Alpha", buttonAlpha);
+                    highlightMaterial.SetFloat("_OutlineAlpha", buttonAlpha);
+                    buttonText.alpha = buttonAlpha;
+                    isVisible = false;
+                }
+                else
+                {
+                    highlightMaterial.SetFloat("_Alpha", 1f);
+                    highlightMaterial.SetFloat("_OutlineAlpha", 1f);
+                    buttonText.alpha = 1f;
+                    isVisible = true;
+                }
+            }
+            yield return Wait;
+        }
+    }
+
+    public void DisableHighlightForTutorial()
+    {
+        highlightMaterial.SetFloat("_Alpha", 1f);
+        buttonText.alpha = 1f;
+        highlightMaterial.SetFloat("_OutlineAlpha", 0f);
+        tutorialFlag = false;
     }
 }
