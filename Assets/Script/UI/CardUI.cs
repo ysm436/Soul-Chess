@@ -110,7 +110,7 @@ public class CardUI : MonoBehaviour
     public Dictionary<Keyword.Type, string> keywordDescription = new Dictionary<Keyword.Type, string>()
     {
         { Keyword.Type.Infusion,"영혼을 부여할 때\n발동됩니다."},
-        { Keyword.Type.Shield,"이 기물은 피해를\n한번 무시합니다."},
+        { Keyword.Type.Shield,"이 기물은 피해를\n1번 무시합니다."},
         { Keyword.Type.Stun,"기절 시 다음 턴까지\n움직이지 못합니다."},
         { Keyword.Type.Silence,"기물의 특수 능력을\n제거합니다."},
         { Keyword.Type.Testament,"기물이 파괴될 때\n발동됩니다."},
