@@ -142,7 +142,7 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: 78d8df4d18c196b40aaa166934d9ebeb, type: 3}
   reigon: 1
   rarity: 0
-  description: "\uD06C\uC544\uC544\uC544\uC559"
+  description: "'\uD06C\uC544\uC544\uC544\uC559'"
   EffectOnCardUsed: {fileID: 0}
   cardKeywords: 
   isInSelection: 0

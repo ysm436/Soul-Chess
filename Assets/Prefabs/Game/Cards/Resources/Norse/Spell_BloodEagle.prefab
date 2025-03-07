@@ -173,7 +173,8 @@ MonoBehaviour:
   reigon: 1
   rarity: 0
   description: "\uC601\uD63C\uC774 \uBD80\uC5EC\uB41C \uAE30\uBB3C\uC744 \uC120\uD0DD\uD574
-    \uCC98\uCE58\uD569\uB2C8\uB2E4."
+    \uCC98\uCE58\uD569\uB2C8\uB2E4.\n\uB2E8, \uD0B9\uC740 \uC120\uD0DD\uD560 \uC218
+    \uC5C6\uC2B5\uB2C8\uB2E4."
   EffectOnCardUsed: {fileID: -8662909460837558927}
   cardKeywords: 
   isInSelection: 0
