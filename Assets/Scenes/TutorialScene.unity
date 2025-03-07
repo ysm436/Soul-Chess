@@ -8471,7 +8471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonAlpha: 0.4
   highlightMaterial: {fileID: 0}
-  buttonText: {fileID: 0}
+  buttonText: {fileID: 2080916232}
 --- !u!212 &1625407616
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8513,7 +8513,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d29a55eb319c80d4f97f14e2cb7fc557, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 454cf916c440f4349bef63da37efb32a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -11170,7 +11170,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD134 \uC885\uB8CC"
+  m_text: "\uB098\uC758 \uD134"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f9784ba752a91f14aa18acb46607fe1f, type: 2}
   m_sharedMaterial: {fileID: -4582998040332275355, guid: f9784ba752a91f14aa18acb46607fe1f, type: 2}

@@ -568,6 +568,7 @@ public class TutorialManager : MonoBehaviour
     {
         SetShadow(4, 3);
         GameBoard.instance.HideExplainUI();
+        GameBoard.instance.HideCard();
         foreach (var s in GameBoard.instance.gameData.boardSquares)
         {
             if (s.coordinate == coordinate)
@@ -842,6 +843,7 @@ public class TutorialManager : MonoBehaviour
                 }
             }
         }
+        GameBoard.instance.HideCard();
 
         SetShadow(4, 0);
 

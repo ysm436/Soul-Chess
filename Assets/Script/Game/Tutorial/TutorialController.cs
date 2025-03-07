@@ -12,6 +12,7 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] private GameObject turnChangeButton;
     private SpriteRenderer turnChangeButtonSR;
+    private TurnChangeButtonHighlight turnChangeButtonHighlight;
     private Material turnChangeButtonMaterial;
     public Sprite whiteButton;
     public Sprite blackButton;
@@ -39,8 +40,8 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
         turn = 0;
 
         turnChangeButtonSR = turnChangeButton.GetComponent<SpriteRenderer>();
-        turnChangeButtonSR.sprite = whiteButton;
-        turnChangeButtonMaterial = turnChangeButton.GetComponent<Renderer>().material;
+        turnChangeButtonHighlight = turnChangeButton.GetComponent<TurnChangeButtonHighlight>();
+
         if (GameManager.instance.isHost)
         {
             mySoulOrb.playerColor = GameBoard.PlayerColor.White;
@@ -62,6 +63,7 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
             opponentGraveyard.playerColor = GameBoard.PlayerColor.White;
             blackController.soulOrb = mySoulOrb;
             whiteController.soulOrb = opponentSoulrOrb;
+            turnChangeButtonHighlight.buttonText.text = "상대 턴";
         }
 
         whiteController.enabled = true;
@@ -86,7 +88,7 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
     public void EnableTurnChangeButton()
     {
         tutorialManager.isAllowingTurnEnd = true;
-        turnChangeButtonMaterial.SetFloat("_InnerOutlineAlpha", 0f);
+        turnChangeButtonHighlight.tutorialFlag = true;
     }
 
     void IPointerClickHandler.OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
@@ -133,8 +135,8 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
         if (whiteController.enabled)
         {
-
-            turnChangeButtonSR.sprite = blackButton;
+            turnChangeButtonSR.color = new Color(0.4f, 0.4f, 0.4f, 1);
+            turnChangeButtonHighlight.buttonText.color = Color.white;
 
             whiteController.TurnEnd();
             blackController.OpponentTurnEnd();
@@ -144,16 +146,14 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
             {
-                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
-                TurnButtonText.color = Color.white;
-                TurnButtonText.text = "상대 턴";
+                turnChangeButtonHighlight.buttonText.color = Color.white;
+                turnChangeButtonHighlight.buttonText.text = "상대 턴";
                 turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
             }
             else
             {
-                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
-                TurnButtonText.color = Color.white;
-                TurnButtonText.text = "턴 종료";
+                turnChangeButtonHighlight.buttonText.color = Color.white;
+                turnChangeButtonHighlight.buttonText.text = "나의 턴";
                 turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
             }
             StartCoroutine("TurnDisplayOnOff");
@@ -181,7 +181,8 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
         {
             tutorialManager.isAllowingTurnEnd = false;
 
-            turnChangeButtonSR.sprite = whiteButton;
+            turnChangeButtonSR.color = Color.white;
+            turnChangeButtonHighlight.buttonText.color = Color.black;
 
             blackController.TurnEnd();
             whiteController.OpponentTurnEnd();
@@ -191,16 +192,14 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
 
             if (GameBoard.instance.playerColor == GameBoard.PlayerColor.White)
             {
-                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
-                TurnButtonText.color = Color.black;
-                TurnButtonText.text = "턴 종료";
+                turnChangeButtonHighlight.buttonText.color = Color.black;
+                turnChangeButtonHighlight.buttonText.text = "나의 턴";
                 turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "당신의 턴";
             }
             else
             {
-                TextMeshPro TurnButtonText = turnChangeButton.GetComponentInChildren<TextMeshPro>();
-                TurnButtonText.color = Color.black;
-                TurnButtonText.text = "상대 턴";
+                turnChangeButtonHighlight.buttonText.color = Color.black;
+                turnChangeButtonHighlight.buttonText.text = "상대 턴";
                 turnDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "상대의 턴";
             }
             StartCoroutine("TurnDisplayOnOff");
@@ -211,7 +210,7 @@ public class TutorialController : MonoBehaviour, IPointerClickHandler
             whiteController.LocalDraw();
             blackController.OpponentDraw();
         }
-        turnChangeButtonMaterial.SetFloat("_InnerOutlineAlpha", 1f);
+        turnChangeButtonHighlight.DisableHighlightForTutorial();
     }
 
     private IEnumerator TurnDisplayOnOff()
